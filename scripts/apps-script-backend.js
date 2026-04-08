@@ -11,13 +11,13 @@
  *
  * SHEET COLUMNS:
  * A: Timestamp | B: Page URL | C: Article slug | D: Selected text
- * E: Comment type | F: Comment | G: Name | H: Affiliation | I: Email | J: Status
+ * E: Comment type | F: Comment | G: Name | H: Email | I: Status
  */
 
 function doPost(e) {
   try {
-    var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-    var data = JSON.parse(e.postData.contents);
+    var sheet = SpreadsheetApp.openById('1SGP2R8d57u3psP8BnGvbcok0TNzrfX0Gqf1hWERslMw').getActiveSheet();
+    var data = e.parameter;
 
     sheet.appendRow([
       new Date(),
@@ -27,7 +27,6 @@ function doPost(e) {
       data.commentType || "general",
       data.comment || "",
       data.name || "",
-      data.affiliation || "",
       data.email || "",
       "unreviewed"
     ]);

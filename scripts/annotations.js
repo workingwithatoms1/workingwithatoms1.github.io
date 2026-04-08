@@ -4,14 +4,8 @@
    Posts annotations to a Google Apps Script endpoint.
    ========================================================================== */
 
-const APPS_SCRIPT_URL = ''; // Set this to the deployed Google Apps Script web app URL
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwBxJoFlK2UhUmprySuuPFkVzySZB5UJO_fdFX4KG8sti0I7TPT-IC-rx9THrFQa-8C/exec'; // Set this to the deployed Google Apps Script web app URL
 
-const COMMENT_TYPES = [
-  { id: 'correction', label: 'Correction' },
-  { id: 'missing_info', label: 'Missing info' },
-  { id: 'reference', label: 'Reference' },
-  { id: 'general', label: 'General' },
-];
 
 let buttonEl = null;
 let popupEl = null;
@@ -51,7 +45,7 @@ function injectStyles() {
       z-index: 10001;
       width: 360px;
       max-width: calc(100vw - 32px);
-      background: #ecebf2;
+      background: #fff;
       box-shadow: 0 4px 20px rgba(0,0,0,0.12);
       font-family: 'DM Sans', sans-serif;
       font-size: 13px;
@@ -203,17 +197,12 @@ function createPopup() {
   popup.innerHTML = `
     <div class="ann-popup-inner">
       <div class="ann-quote" id="annQuote"></div>
-      <div class="ann-types" id="annTypes">
-        ${COMMENT_TYPES.map(t =>
-          `<button class="ann-type-tag" data-type="${t.id}">${t.label}</button>`
-        ).join('')}
-      </div>
       <textarea class="ann-textarea" id="annComment" placeholder="What should we know about this?"></textarea>
       <div class="ann-row">
         <input class="ann-input" id="annName" placeholder="Name (optional)">
-        <input class="ann-input" id="annAffiliation" placeholder="Affiliation (optional)">
+        <input class="ann-input" id="annEmail" placeholder="Email (optional)">
       </div>
-      <input class="ann-input" id="annEmail" placeholder="Email (optional)" style="width:100%;margin-bottom:0;">
+      <div style="font-size:10px;color:#999;margin-top:4px;">Your details are stored only to follow up on contributions. They will not be shared.</div>
       <div class="ann-actions">
         <button class="ann-btn" id="annCancel">Cancel</button>
         <button class="ann-btn ann-btn-submit" id="annSubmit" disabled>Submit</button>
@@ -282,19 +271,8 @@ function initAnnotations() {
   popupEl = createPopup();
   toastEl = createToast();
 
-  let selectedType = 'general';
   const containers = document.querySelectorAll('[data-annotatable="true"]');
   if (containers.length === 0) return;
-
-  // Type tag selection
-  popupEl.querySelectorAll('.ann-type-tag').forEach(tag => {
-    tag.addEventListener('click', (e) => {
-      e.stopPropagation();
-      popupEl.querySelectorAll('.ann-type-tag').forEach(t => t.classList.remove('active'));
-      tag.classList.add('active');
-      selectedType = tag.dataset.type;
-    });
-  });
 
   // Comment textarea enables submit
   const commentEl = popupEl.querySelector('#annComment');
@@ -320,20 +298,24 @@ function initAnnotations() {
       pageUrl: window.location.href,
       articleSlug: getArticleSlug(),
       selectedText: currentSelection || '',
-      commentType: selectedType,
+      commentType: 'general',
       comment: commentEl.value.trim(),
       name: popupEl.querySelector('#annName').value.trim(),
-      affiliation: popupEl.querySelector('#annAffiliation').value.trim(),
       email: popupEl.querySelector('#annEmail').value.trim(),
     };
 
     try {
       if (!APPS_SCRIPT_URL) throw new Error('Apps Script URL not configured');
-      const res = await fetch(APPS_SCRIPT_URL, {
+      // Use form submission to avoid CORS issues with Apps Script
+      const form = new FormData();
+      for (const [key, val] of Object.entries(payload)) {
+        form.append(key, val);
+      }
+      await fetch(APPS_SCRIPT_URL, {
         method: 'POST',
-        body: JSON.stringify(payload),
+        mode: 'no-cors',
+        body: form,
       });
-      if (!res.ok) throw new Error('Server error');
       showToast('Comment submitted. Thank you.');
     } catch (err) {
       showToast('Could not submit. Please try again.');
@@ -344,11 +326,7 @@ function initAnnotations() {
     submitBtn.disabled = true;
     commentEl.value = '';
     popupEl.querySelector('#annName').value = '';
-    popupEl.querySelector('#annAffiliation').value = '';
     popupEl.querySelector('#annEmail').value = '';
-    popupEl.querySelectorAll('.ann-type-tag').forEach(t => t.classList.remove('active'));
-    popupEl.querySelector('[data-type="general"]').classList.add('active');
-    selectedType = 'general';
     hidePopup();
     hideButton();
   });
@@ -400,9 +378,6 @@ function initAnnotations() {
     const commentInput = popupEl.querySelector('#annComment');
     commentInput.value = '';
     submitBtn.disabled = true;
-    popupEl.querySelectorAll('.ann-type-tag').forEach(t => t.classList.remove('active'));
-    popupEl.querySelector('[data-type="general"]').classList.add('active');
-    selectedType = 'general';
 
     // Show and position popup
     popupEl.style.display = 'block';
