@@ -241,15 +241,15 @@ const articleShell = (moduleSlug, articleSlug) => `<!DOCTYPE html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../styles/tokens.css">
-  <link rel="stylesheet" href="../styles/typography.css">
-  <link rel="stylesheet" href="../styles/layout.css">
-  <link rel="stylesheet" href="../styles/components.css">
+  <link rel="stylesheet" href="../../styles/tokens.css">
+  <link rel="stylesheet" href="../../styles/typography.css">
+  <link rel="stylesheet" href="../../styles/layout.css">
+  <link rel="stylesheet" href="../../styles/components.css">
 </head>
 <body>
   <script type="module">
-    import { renderArticlePage } from '../scripts/renderers/article-page.js';
-    renderArticlePage('${moduleSlug}', '${articleSlug}');
+    import { renderArticlePage } from '../../scripts/renderers/article-page.js';
+    renderArticlePage('${moduleSlug}', '${articleSlug}', '../../');
   </script>
 </body>
 </html>
@@ -302,9 +302,11 @@ for (const mod of modules) {
   fs.writeFileSync(path.join(dir, 'index.html'), sectionShell(mod.slug));
   stats.html++;
 
-  // Article page shells
+  // Article page shells (directory-based for clean URLs)
   for (const art of data.articles) {
-    fs.writeFileSync(path.join(dir, `${art.id}.html`), articleShell(mod.slug, art.id));
+    const artDir = path.join(dir, art.id);
+    fs.mkdirSync(artDir, { recursive: true });
+    fs.writeFileSync(path.join(artDir, 'index.html'), articleShell(mod.slug, art.id));
     stats.html++;
   }
 }

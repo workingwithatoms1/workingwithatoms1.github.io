@@ -169,7 +169,7 @@ function buildArticleContent(articleId) {
   const hasContent = art.body && art.body.length > 0;
 
   // Breadcrumb
-  let html = `<a href="./" class="article-breadcrumb">${mod.title} &mdash; ${art.number}</a>`;
+  let html = `<a href="../" class="article-breadcrumb">${mod.title} &mdash; ${art.number}</a>`;
 
   // Article card
   html += `<div class="article-card">`;
@@ -197,7 +197,10 @@ function buildArticleContent(articleId) {
       html += `
         <div class="article-refs">
           <div class="refs-label">Related Topics</div>
-          ${art.related.map(r => `<a href="${r.url}.html" class="ref-link">${r.title}</a>`).join('\n        ')}
+          ${art.related.map(r => {
+            const href = r.url.startsWith('../') ? r.url : `../${r.url}/`;
+            return `<a href="${href}" class="ref-link">${r.title}</a>`;
+          }).join('\n        ')}
         </div>
       `;
     }
@@ -229,7 +232,7 @@ function buildArticleContent(articleId) {
     html += '<div class="article-nav">';
     if (prev) {
       html += `
-        <a href="${prev.id}.html" class="article-nav-prev">
+        <a href="../${prev.id}/" class="article-nav-prev">
           <span class="article-nav-label">Previous</span>
           <span class="article-nav-title">${prev.title}</span>
         </a>
@@ -237,7 +240,7 @@ function buildArticleContent(articleId) {
     }
     if (next) {
       html += `
-        <a href="${next.id}.html" class="article-nav-next">
+        <a href="../${next.id}/" class="article-nav-next">
           <span class="article-nav-label">Next</span>
           <span class="article-nav-title">${next.title}</span>
         </a>
@@ -266,8 +269,8 @@ function setupNavigation(moduleId) {
     const href = link.getAttribute('href');
     if (!href) return;
 
-    // Only intercept simple same-directory .html links (not ../ or #)
-    const match = href.match(/^([a-z0-9-]+)\.html$/);
+    // Only intercept same-module article links (../slug/ pattern)
+    const match = href.match(/^\.\.\/([a-z0-9-]+)\/?$/);
     if (!match) return;
 
     const targetId = match[1];
