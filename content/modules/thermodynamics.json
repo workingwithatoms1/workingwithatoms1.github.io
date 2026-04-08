@@ -1,0 +1,3086 @@
+{
+  "module": {
+    "id": "thermodynamics",
+    "number": 5,
+    "title": "Thermodynamics",
+    "part": "I",
+    "partTitle": "Foundations",
+    "topic": "Thermodynamics",
+    "intro": "What drives change in the physical world, and how do we predict it? This module builds thermodynamics from physical intuition — starting with why we need it, through the laws that govern energy and entropy, to the practical tools that let materials scientists predict phase stability, reaction feasibility and alloy behaviour."
+  },
+  "articles": [
+    {
+      "id": "what-thermodynamics-is-for",
+      "number": "5.1",
+      "title": "What Thermodynamics Is For",
+      "description": "Why we need thermodynamics, what it can and cannot predict, and why Newton's laws aren't enough.",
+      "readingTime": "6 min",
+      "intro": "Why we need a theory of heat, work and equilibrium, and what it can actually tell us.",
+      "body": [
+        [
+          "h3",
+          "The problem of 10²² atoms"
+        ],
+        [
+          "p",
+          "A single cubic centimetre of copper contains roughly $8.5 \\times 10^{22}$ atoms. Each one obeys Newton's laws. In principle, if you knew the position and velocity of every atom, you could predict exactly what the copper would do next."
+        ],
+        [
+          "p",
+          "In practice, this is useless."
+        ],
+        [
+          "p",
+          "You cannot measure $10^{22}$ positions. You cannot solve $10^{22}$ coupled equations of motion. And even if you could, the answer would be a list of $10^{22}$ trajectories, not the thing you actually want to know: will the copper melt at this temperature? Will it oxidise in this atmosphere? Will zinc dissolve into it, and if so, how much?"
+        ],
+        [
+          "p",
+          "Thermodynamics exists because we need to predict the behaviour of matter without tracking every atom."
+        ],
+        [
+          "h3",
+          "What thermodynamics does"
+        ],
+        [
+          "p",
+          "It makes predictions about bulk matter using a small number of measurable quantities: temperature, pressure, composition, volume. It tells you which processes are possible and which are not. It tells you the direction of spontaneous change. It tells you the conditions under which two phases, or two components, can coexist in equilibrium."
+        ],
+        [
+          "p",
+          "What it does not tell you is how fast any of this happens. A diamond at room temperature and atmospheric pressure is thermodynamically unstable with respect to graphite. Thermodynamics predicts that every diamond should already be a lump of graphite. Kinetics explains why it is not. The two theories are complementary. Thermodynamics sets the destination; kinetics determines whether you arrive."
+        ],
+        [
+          "h3",
+          "A theory built on experience"
+        ],
+        [
+          "p",
+          "Thermodynamics is unusual among physical theories. It was not derived from a microscopic model. It was built upward from experimental observation, refined across the 18<sup>th</sup> and 19<sup>th</sup> centuries by engineers trying to make better steam engines, chemists trying to predict reactions, and physicists trying to understand heat. Its laws are empirical. No one has ever observed a violation of the second law of thermodynamics in a macroscopic system. That unbroken record, across every experiment ever conducted, is the entire basis for the theory."
+        ],
+        [
+          "p",
+          "This makes it both powerful and limited. Powerful, because the laws hold regardless of the microscopic details. They apply to gases, metals, polymers, plasmas, black holes. Limited, because thermodynamics tells you nothing about mechanism. It tells you that iron will oxidise in air. It does not tell you how the oxide layer grows, or what its structure looks like, or how fast it forms."
+        ],
+        [
+          "h3",
+          "Why materials scientists need it"
+        ],
+        [
+          "p",
+          "If you work with materials, you encounter thermodynamics constantly. Phase diagrams are thermodynamic maps. Alloy design is, in large part, an exercise in manipulating free energy curves. Corrosion, oxidation, solidification, precipitation: all are driven by thermodynamics (and modulated by kinetics)."
+        ],
+        [
+          "p",
+          "The Ellingham diagram that tells you whether aluminium can reduce titanium dioxide is a thermodynamic construction. The Pourbaix diagram that tells you whether a steel will corrode in seawater is another. The regular solution model that predicts miscibility gaps in binary alloys is pure thermodynamics."
+        ],
+        [
+          "p",
+          "This module builds the theory from the ground up. We start with the definitions (systems, states, equilibrium), then introduce the laws one at a time, then apply them to the problems materials scientists actually face: mixing, reactions, phase stability. By the end, you will be able to look at a free energy curve and read off a phase diagram."
+        ],
+        [
+          "problem",
+          "Diamond is thermodynamically unstable with respect to graphite at room temperature and pressure. Why does diamond exist at all? What does thermodynamics tell you, and what does it not tell you, about this situation?",
+          [
+            [
+              "p",
+              "Thermodynamics tells you that graphite has a lower Gibbs free energy than diamond at 298 K and 1 atm, so the transformation diamond $\\to$ graphite is spontaneous ($\\Delta G < 0$). What thermodynamics does not tell you is the rate. The transformation requires breaking and reforming every C-C bond in the structure, and the activation energy for this is enormous. At room temperature, the kinetic barrier is insurmountable. Diamond is metastable: thermodynamically unfavoured but kinetically trapped."
+            ]
+          ]
+        ]
+      ],
+      "related": [
+        {
+          "title": "Systems, Boundaries & State",
+          "url": "systems-boundaries-state"
+        },
+        {
+          "title": "Diffusion & Kinetics",
+          "url": "../diffusion/"
+        },
+        {
+          "title": "Phase Equilibria & Transformations",
+          "url": "../phase-transformations/"
+        }
+      ]
+    },
+    {
+      "id": "systems-boundaries-state",
+      "number": "5.2",
+      "title": "Systems, Boundaries & State",
+      "description": "Defining what we're measuring — systems, surroundings, state functions, and the meaning of equilibrium.",
+      "readingTime": "10 min",
+      "intro": "Before we can write down any law, we need to be precise about what we are talking about. Thermodynamics is a theory of systems, and the first step is to define one.",
+      "body": [
+        [
+          "h3",
+          "Drawing a boundary"
+        ],
+        [
+          "p",
+          "A thermodynamic system is whatever region of the universe we choose to analyse. Everything else is the surroundings. The boundary between them can be real (the walls of a crucible, the surface of a steel beam) or imaginary (a surface drawn around a region of gas in a flame). The choice is ours, and it matters: the same physical process can look very different depending on where you draw the line."
+        ],
+        [
+          "p",
+          "Consider a block of aluminium being anodised in a bath of sulphuric acid. If you draw the boundary around just the aluminium, the system is gaining oxygen and losing aluminium ions. If you draw it around the whole bath, the system is closed (nothing enters or leaves the beaker) and you are tracking an internal reaction. Same physics, different bookkeeping. The right choice of boundary simplifies the problem."
+        ],
+        [
+          "p",
+          "Systems come in three kinds, classified by what their boundaries allow through:"
+        ],
+        [
+          "ul",
+          [
+            "<strong>Open</strong> systems exchange both matter and energy with the surroundings. A molten steel ladle in a steelworks: heat radiates from the surface, oxygen and nitrogen dissolve from the atmosphere, slag-forming reactions add and remove species. Most industrial processes are open systems.",
+            "<strong>Closed</strong> systems exchange energy but not matter. A sealed glass ampoule containing a powder mixture, placed in a furnace: heat enters through the glass, driving a solid-state reaction inside, but no atoms enter or leave. Differential scanning calorimetry (DSC) experiments use sealed pans for exactly this reason.",
+            "<strong>Isolated</strong> systems exchange nothing at all. A perfect thermos flask, or more precisely, the entire universe. No real laboratory system is truly isolated, but the concept is essential as a theoretical limiting case. The second law is stated for isolated systems."
+          ]
+        ],
+        [
+          "h3",
+          "State and state functions"
+        ],
+        [
+          "p",
+          "The state of a system is specified by a set of macroscopic variables: temperature, pressure, volume, composition. If two systems have the same values of all their state variables, they are in the same thermodynamic state, regardless of their history."
+        ],
+        [
+          "p",
+          "This is a strong claim, and it is worth pausing on. Take a block of copper at 300 K and 1 atm. It might have arrived there by cooling from 1400 K (from the melt). Or by warming from 4 K (from a cryostat). Or by quenching from 800 K and then annealing. Thermodynamics says these are all the same state. The internal energy is the same. The entropy is the same. Every equilibrium property is the same. The path does not matter. Only the current values of the state variables matter."
+        ],
+        [
+          "p",
+          "There is a caveat that matters for materials scientists: the system must actually be in equilibrium. A quenched steel may have the same temperature and pressure as a slowly cooled one, but if it retains a metastable martensite structure, it is not in the same thermodynamic state. Its internal energy is higher. Its entropy is different. Thermodynamic state variables describe equilibrium states. Metastable states require additional variables (phase fractions, defect concentrations) to specify."
+        ],
+        [
+          "p",
+          "A quantity that depends only on the current state, not on how the system got there, is a <strong>state function</strong>. Internal energy $U$, entropy $S$, enthalpy $H$, free energy $G$, volume $V$, pressure $P$, temperature $T$: all state functions. You can calculate changes in these quantities between two states by any convenient path, real or hypothetical, and you will always get the same answer."
+        ],
+        [
+          "p",
+          "Heat and work are not state functions. The amount of work done on a gas depends on the path: compress it slowly along an isotherm and you get a different number than if you compress it rapidly and adiabatically to the same final state. Heat and work are <strong>path functions</strong>. They describe the process, not the state. This is why we write $\\delta Q$ and $\\delta W$ (inexact differentials) rather than $dQ$ and $dW$."
+        ],
+        [
+          "callout",
+          "Why this matters",
+          "If you want to calculate the enthalpy change for a reaction that is difficult to run directly, you can instead calculate it along a different path (using Hess's law, article 5.3). This only works because $H$ is a state function. You cannot do the same trick with heat or work: the heat absorbed along a hypothetical path is not the same as the heat absorbed along the real one."
+        ],
+        [
+          "h3",
+          "Intensive and extensive properties"
+        ],
+        [
+          "p",
+          "State functions come in two flavours. Some scale with the size of the system: double the amount of material and you double the value. These are <strong>extensive</strong> properties. Volume, mass, total energy, total entropy, total enthalpy."
+        ],
+        [
+          "p",
+          "Others are independent of system size. Temperature, pressure, density, chemical potential. These are <strong>intensive</strong> properties. You can cut a block of copper in half and each piece still has the same temperature, the same pressure, the same density."
+        ],
+        [
+          "p",
+          "The ratio of two extensive properties is always intensive. Density is mass divided by volume: both extensive, the ratio intensive. Molar entropy is total entropy divided by number of moles. Molar volume is total volume divided by moles. This is why materials scientists almost always work in molar quantities: $G$ in J/mol, $V_m$ in cm³/mol, $S$ in J/(mol$\\cdot$K). These describe the material itself, independent of how much you happen to have in front of you."
+        ],
+        [
+          "p",
+          "The distinction also tells you what can be equalised at equilibrium. When two systems are in thermal contact, the intensive quantity that equalises is temperature. When they are in mechanical contact, it is pressure. When they can exchange matter, it is chemical potential. Intensive quantities are the driving forces; extensive quantities are what flows in response."
+        ],
+        [
+          "h3",
+          "Equilibrium"
+        ],
+        [
+          "p",
+          "A system is in thermodynamic equilibrium when its state variables are not changing with time and there are no net flows of matter or energy within it. This is more demanding than it may seem."
+        ],
+        [
+          "p",
+          "A cup of coffee cooling toward room temperature is not in equilibrium, even though you can measure its temperature at any instant. It has a temperature gradient (hotter in the centre, cooler near the walls) and a net heat flow outward. A bar of steel at room temperature, with no temperature gradients and no ongoing reactions, is in equilibrium. A supersaturated solid solution of copper in aluminium, quenched from high temperature, is <em>not</em> in equilibrium, even though it sits quietly on the shelf. It has a thermodynamic driving force to precipitate Al₂Cu. It just cannot do so quickly at room temperature. Kinetics holds it in a metastable state."
+        ],
+        [
+          "p",
+          "True thermodynamic equilibrium requires three conditions simultaneously:"
+        ],
+        [
+          "ul",
+          [
+            "<strong>Thermal equilibrium</strong>: uniform temperature throughout the system. No net heat flow between any regions.",
+            "<strong>Mechanical equilibrium</strong>: uniform pressure (for a fluid) or balanced stresses (for a solid). No bulk material flow.",
+            "<strong>Chemical equilibrium</strong>: uniform chemical potential for every species. No net diffusion, no net reaction. We define chemical potential precisely in article 5.10; for now, think of it as the thermodynamic quantity that drives atoms to move from one place or phase to another."
+          ]
+        ],
+        [
+          "p",
+          "Thermodynamics makes its sharpest predictions about equilibrium states. Given a set of constraints (fixed $T$ and $P$, for example), it tells you which state the system will eventually reach. Whether the system actually reaches that state in any practical timescale is a question for kinetics."
+        ],
+        [
+          "h3",
+          "Processes and constraints"
+        ],
+        [
+          "p",
+          "When a system moves from one equilibrium state to another, it undergoes a <strong>process</strong>. Thermodynamics classifies processes by what is held constant:"
+        ],
+        [
+          "ul",
+          [
+            "<strong>Isothermal</strong>: constant temperature. A slow reaction in a furnace held at fixed $T$.",
+            "<strong>Isobaric</strong>: constant pressure. Almost any experiment done on a bench open to the atmosphere.",
+            "<strong>Isochoric</strong>: constant volume. A reaction in a sealed rigid vessel, such as a bomb calorimeter.",
+            "<strong>Adiabatic</strong>: no heat exchange with surroundings. A rapid compression (too fast for heat to escape), or a well-insulated system."
+          ]
+        ],
+        [
+          "p",
+          "These constraints are not just convenient labels. Each one picks out a different thermodynamic potential as the natural quantity to minimise at equilibrium. At constant $T$ and $P$ (the most common laboratory condition), the equilibrium state minimises the Gibbs free energy $G$. At constant $T$ and $V$, it minimises the Helmholtz free energy $F$. At constant $S$ and $V$, it minimises the internal energy $U$. At constant $S$ and $P$, it minimises the enthalpy $H$."
+        ],
+        [
+          "p",
+          "We will derive these results in article 5.9. The point for now: specifying the constraint specifies the problem, and specifying the problem tells you which quantity to calculate."
+        ],
+        [
+          "h3",
+          "Degrees of freedom"
+        ],
+        [
+          "p",
+          "How many state variables do you actually need to specify to pin down the state of a system? For a pure substance in a single phase, the answer is two. Pick any two of $T$, $P$, $V_m$ (molar volume) and the third is determined by the equation of state. For an ideal gas, that equation is $PV_m = RT$. For a real material, the relationship is more complex, but it exists."
+        ],
+        [
+          "p",
+          "For a mixture of $c$ components in a single phase, you need $c + 1$ variables: temperature, pressure, and $c - 1$ independent composition variables (the last composition is fixed by the requirement that mole fractions sum to one). For systems with multiple phases in equilibrium, the number of independent variables is reduced further. This counting is formalised in the Gibbs phase rule, which we will meet in article 5.14."
+        ],
+        [
+          "problem",
+          "You place a sealed steel container of nitrogen gas into a furnace at 800 K. Is the gas an open, closed, or isolated system? What are its degrees of freedom (how many state variables must you specify to define its state)?",
+          [
+            [
+              "p",
+              "The steel container prevents matter exchange but allows energy exchange (heat conducts through the walls). The gas is a <strong>closed</strong> system. It is a single-component ($c = 1$), single-phase ($p = 1$) system. The number of intensive degrees of freedom is $F = c - p + 2 = 1 - 1 + 2 = 2$. You need to specify two independent variables (e.g., $T$ and $P$, or $T$ and $V_m$) to fully define the state. Once the gas equilibrates, $T = 800$ K (set by the furnace), and if you know the amount of gas and the container volume, $P$ is determined by the equation of state."
+            ]
+          ]
+        ]
+      ],
+      "related": [
+        {
+          "title": "What Thermodynamics Is For",
+          "url": "what-thermodynamics-is-for"
+        },
+        {
+          "title": "Work, Heat & the First Law",
+          "url": "work-heat-first-law"
+        },
+        {
+          "title": "Chemical Potential",
+          "url": "chemical-potential"
+        }
+      ]
+    },
+    {
+      "id": "work-and-heat",
+      "number": "5.3",
+      "title": "Work & Heat",
+      "description": "PV work, heat, path dependence, heat capacity, and the Dulong-Petit law.",
+      "readingTime": "14 min",
+      "intro": "The two currencies of energy transfer between a system and its surroundings are work and heat. Both are path functions: the amount depends on how the process is carried out, not just the initial and final states. Understanding them precisely is essential before stating the first law.",
+      "body": [
+        [
+          "h3",
+          "Internal energy"
+        ],
+        [
+          "p",
+          "Every system has an internal energy $U$. This is the total energy of all the atoms and molecules inside the system: their kinetic energy (thermal motion, vibrations, rotations), their potential energy (chemical bonds, electrostatic interactions), and in principle their nuclear binding energy too, though that rarely changes in a materials science problem."
+        ],
+        [
+          "p",
+          "Internal energy does <em>not</em> include the kinetic energy of the system as a whole (a flying bullet is not thermodynamically hotter than a stationary one), or its gravitational potential energy. Those belong to mechanics. Internal energy is the energy that is <em>in</em> the material, at the atomic scale."
+        ],
+        [
+          "p",
+          "You cannot measure $U$ absolutely. You can only measure changes: $\\Delta U$. The first law tells you how."
+        ],
+        [
+          "h3",
+          "Work"
+        ],
+        [
+          "p",
+          "In mechanics, work is force times displacement. In thermodynamics, the most common form is pressure-volume (PV) work: a gas expanding against an external pressure, or being compressed by one."
+        ],
+        [
+          "p",
+          "Consider a gas in a cylinder with a piston. If the piston moves outward by a small displacement, the volume increases by $dV$ and the system loses energy (it pushes the piston against the external pressure). The work done on the system is:"
+        ],
+        [
+          "eq",
+          "\\delta W = -P_{\\text{ext}} \\, dV"
+        ],
+        [
+          "p",
+          "Consider a gas in a cylinder with a piston. The gas exerts a pressure $P$ on the piston. If the piston moves outward by a small displacement, the volume increases by $dV$. The gas loses energy (it pushes the piston outward), so the work done <em>on the system</em> is negative:"
+        ],
+        [
+          "eq",
+          "\\delta W = -P_{\\text{ext}} \\, dV"
+        ],
+        [
+          "eq",
+          "W = -\\int_{V_1}^{V_2} P_{\\text{ext}} \\, dV"
+        ],
+        [
+          "eq",
+          "W = -\\int_{V_1}^{V_2} P_{\\text{ext}} \\, dV"
+        ],
+        [
+          "p",
+          "On a PV diagram, the magnitude of the work is the area under the curve traced by the process. For an expansion ($dV > 0$), $W < 0$: the system loses energy to its surroundings. For a compression ($dV < 0$), $W > 0$: the surroundings do work on the system. Different paths between the same two states enclose different areas, which is the geometric expression of work being path-dependent."
+        ],
+        [
+          "p",
+          "For a <strong>reversible</strong> expansion, the system is always infinitesimally close to equilibrium, so $P_{\\text{ext}} = P$ (the system's own internal pressure) at every point. This gives the maximum work that can be extracted from the system. Any real, irreversible process extracts less, because part of the driving force is wasted as internal friction, turbulence or sound."
+        ],
+        [
+          "h3",
+          "Reversible vs irreversible work"
+        ],
+        [
+          "p",
+          "The distinction between reversible and irreversible work is not academic. It determines how much useful work you can extract from a process."
+        ],
+        [
+          "p",
+          "Suppose a gas at pressure $P_1$ expands to a final volume $V_2$ against a constant external pressure $P_{\\text{ext}} = P_2$ (the final equilibrium pressure). The work done on the system is $W = -P_2(V_2 - V_1)$, which is negative (the system gives up energy). On a PV diagram this is the area of a rectangle."
+        ],
+        [
+          "p",
+          "If instead the gas expands reversibly, the external pressure matches the gas pressure at every step. The work done on the system is $W = -\\int P \\, dV$, more negative than the irreversible case because the isotherm sits above the constant-pressure line everywhere except the endpoint. The system delivers more energy to the surroundings. Reversible expansion extracts the maximum possible work."
+        ],
+        [
+          "p",
+          "This asymmetry runs throughout thermodynamics: reversible processes set the theoretical limit, and real processes always fall short."
+        ],
+        [
+          "h3",
+          "Heat capacity"
+        ],
+        [
+          "p",
+          "Heat capacity is the amount of energy needed to raise the temperature of a system by one kelvin. Because heat is a path function, the value depends on the constraint:"
+        ],
+        [
+          "eq",
+          "C_V = \\left( \\frac{\\partial U}{\\partial T} \\right)_V \\qquad C_P = \\left( \\frac{\\partial H}{\\partial T} \\right)_P"
+        ],
+        [
+          "p",
+          "$C_V$ is the heat capacity at constant volume: all the energy goes into raising $U$. $C_P$ is the heat capacity at constant pressure: the system can expand, so some of the energy goes into PV work, and you need more heat for the same temperature rise. $C_P > C_V$ always."
+        ],
+        [
+          "p",
+          "For an ideal gas, $C_P - C_V = R = 8.314$ J/(mol·K). For a monatomic ideal gas, $C_V = \\frac{3}{2}R \\approx 12.5$ J/(mol·K) and $C_P = \\frac{5}{2}R \\approx 20.8$ J/(mol·K). The 40% difference is significant."
+        ],
+        [
+          "p",
+          "For solids, each atom vibrates in three directions, with kinetic and potential energy in each. The equipartition theorem gives $C_V = 3R \\approx 24.9$ J/(mol·K) per mole of atoms. This is the Dulong-Petit law. Copper: 24.4, aluminium: 24.2, iron: 25.1, gold: 25.4 J/(mol·K). The agreement at room temperature is striking."
+        ],
+        [
+          "p",
+          "For compounds, $C_V$ scales with the number of atoms per formula unit. Al\\u2082O\\u2083 has 5 atoms, so $C_V \\approx 5 \\times 3R \\approx 125$ J/(mol·K) at high temperature."
+        ],
+        [
+          "p",
+          "For solids, $C_P - C_V$ is tiny (about 0.5 J/(mol·K) for copper at 300 K, roughly 2% of $C_P$). The distinction is negligible and people write $C$ without specifying. For gases, you must always be clear about which one you mean."
+        ],
+        [
+          "h3",
+          "Other forms of work"
+        ],
+        [
+          "p",
+          "PV work is the most common form in classical thermodynamics, but it is not the only one. Electrical work ($\\delta W = E \\, dq$, where $E$ is the EMF and $dq$ is the charge transferred) matters for electrochemical cells and batteries. Surface work ($\\delta W = \\gamma \\, dA$) matters for nucleation, where creating new interface costs energy. Magnetic work ($\\delta W = B \\, dM$) matters for magnetic phase transitions. In each case, the first law still holds: $dU = \\delta Q + \\delta W$, with the appropriate work term."
+        ],
+        [
+          "p",
+          "For most of this module, we will work with PV work only. The extension to other work terms is straightforward: replace $P \\, dV$ with the appropriate generalised force times generalised displacement."
+        ],
+        [
+          "h3",
+          "Heat"
+        ],
+        [
+          "p",
+          "Heat is energy transferred between a system and its surroundings because of a temperature difference. If you put a cold block of steel into a furnace, energy flows from the furnace atmosphere into the steel. That transfer is heat."
+        ],
+        [
+          "p",
+          "Heat is also a path function. The amount of heat needed to take a system from state A to state B depends on how you do it. This is not obvious, so it is worth seeing why."
+        ],
+        [
+          "p",
+          "Take one mole of an ideal gas at 300 K and 1 atm, and raise its temperature to 400 K. If you do this at constant volume (sealed rigid container), the gas absorbs $Q_V = C_V \\Delta T$. If you do it at constant pressure (piston free to move), the gas absorbs $Q_P = C_P \\Delta T$. The final state is different (different volume and pressure), but the point is that $Q$ depends on the constraint. The same temperature change requires different amounts of heat depending on whether the system is free to expand."
+        ],
+        [
+          "problem",
+          "One mole of an ideal gas at 500 K expands isothermally and reversibly from 10 L to 30 L. Calculate the work done on the system.",
+          [
+            [
+              "p",
+              "For a reversible isothermal expansion, the work done on the system is:"
+            ],
+            [
+              "eq",
+              "W = -nRT \\ln\\frac{V_2}{V_1} = -1 \\times 8.314 \\times 500 \\times \\ln\\frac{30}{10}"
+            ],
+            [
+              "eq",
+              "W = -4157 \\times 1.099 = -4567 \\text{ J} \\approx -4.57 \\text{ kJ}"
+            ],
+            [
+              "p",
+              "The work is negative: the system loses 4.57 kJ of energy to the surroundings by pushing the piston outward. Since the gas is ideal and the process is isothermal, $\\Delta U = 0$. By the first law, $Q = -W = +4.57$ kJ: the system absorbs exactly this much heat from the reservoir to maintain its temperature."
+            ]
+          ]
+        ]
+      ],
+      "related": [
+        {
+          "title": "Systems, Boundaries & State",
+          "url": "systems-boundaries-state"
+        },
+        {
+          "title": "The First Law & Enthalpy",
+          "url": "first-law-enthalpy"
+        },
+        {
+          "title": "Entropy & the Second Law",
+          "url": "entropy-second-law"
+        }
+      ]
+    },
+    {
+      "id": "first-law-enthalpy",
+      "number": "5.4",
+      "title": "The First Law & Enthalpy",
+      "description": "Energy conservation, the enthalpy accounting framework, phase transitions, Hess's law, and Kirchhoff's law.",
+      "readingTime": "14 min",
+      "intro": "The first law of thermodynamics is a bookkeeping rule. Energy cannot be created or destroyed, only transferred between a system and its surroundings as heat or work. This article states the law, then builds the enthalpy framework that makes it practical for constant-pressure experiments.",
+      "body": [
+        [
+          "h3",
+          "The first law"
+        ],
+        [
+          "p",
+          "The first law ties these together. It states that the internal energy $U$ is a state function, and that its change for a closed system equals the sum of the heat and work entering the system:"
+        ],
+        [
+          "eq",
+          "dU = \\delta Q + \\delta W"
+        ],
+        [
+          "p",
+          "For a system having PV work done on it (compression, $dV < 0$, so $\\delta W = -P\\,dV > 0$):"
+        ],
+        [
+          "eq",
+          "dU = \\delta Q - P \\, dV"
+        ],
+        [
+          "p",
+          "This is energy conservation in thermodynamic language. Heat in ($\\delta Q$) plus work in ($\\delta W$) equals the change stored internally ($dU$). The first law does not tell you how the energy is split between heat and work. It only tells you that their sum determines $\\Delta U$."
+        ],
+        [
+          "callout",
+          "Sign convention",
+          "We define both $Q$ and $W$ as positive when energy enters the system: $Q > 0$ when heat flows in, $W > 0$ when work is done on the system. This gives $dU = \\delta Q + \\delta W$. Some textbooks (particularly older engineering texts) define $W$ as positive when the system does work on the surroundings, giving $dU = \\delta Q - \\delta W$. Be consistent, and always check which convention a source is using."
+        ],
+        [
+          "h3",
+          "Heat capacity"
+        ],
+        [
+          "p",
+          "Heat capacity is the amount of energy needed to raise the temperature of a system by one kelvin. It comes in two forms, depending on the constraint:"
+        ],
+        [
+          "eq",
+          "C_V = \\left( \\frac{\\partial U}{\\partial T} \\right)_V \\qquad C_P = \\left( \\frac{\\partial H}{\\partial T} \\right)_P"
+        ],
+        [
+          "p",
+          "$C_V$ is the heat capacity at constant volume. All the energy goes into raising $U$. $C_P$ is the heat capacity at constant pressure. The system can expand, so some of the energy goes into PV work against the atmosphere, and you need to supply more heat to achieve the same temperature rise. Consequently, $C_P > C_V$ always."
+        ],
+        [
+          "p",
+          "For an ideal gas, the difference is exactly $R$: $C_P - C_V = R = 8.314$ J/(mol·K). For a monatomic ideal gas, $C_V = \\frac{3}{2}R \\approx 12.5$ J/(mol·K) and $C_P = \\frac{5}{2}R \\approx 20.8$ J/(mol·K). The difference is substantial: roughly 40% of $C_V$."
+        ],
+        [
+          "p",
+          "For solids, the picture is different, and it is worth understanding why. Each atom in a crystal sits in a potential well created by its neighbours. It can vibrate in three independent directions ($x$, $y$, $z$). Each direction contributes one kinetic and one potential energy term, each worth $\\frac{1}{2}k_BT$ on average by the equipartition theorem. That gives $3 k_BT$ of thermal energy per atom, or $3RT$ per mole. The heat capacity is the derivative of this with respect to temperature:"
+        ],
+        [
+          "eq",
+          "C_V = 3R \\approx 24.9 \\text{ J/(mol}\\cdot\\text{K)}"
+        ],
+        [
+          "p",
+          "This is the Dulong-Petit law. It works well for most elemental solids near room temperature. Copper: 24.4, aluminium: 24.2, iron: 25.1, gold: 25.4 J/(mol·K). The agreement is striking."
+        ],
+        [
+          "p",
+          "For compounds, the molar heat capacity scales with the number of atoms per formula unit. Alumina (Al₂O₃) has 5 atoms per formula unit, so $C_V \\approx 5 \\times 3R \\approx 125$ J/(mol·K). The measured value at 298 K is 79 J/(mol·K), lower because some of the higher-frequency vibrational modes are not yet fully excited at room temperature (a quantum effect that Dulong-Petit, being a classical result, ignores). At high temperatures, it converges toward the $5 \\times 3R$ prediction."
+        ],
+        [
+          "p",
+          "The distinction between molar and specific heat capacity matters here. The molar heat capacity of lead (26.7 J/(mol·K)) is almost the same as aluminium's (24.2). But lead is much heavier: its molar mass is 207 g/mol versus 27 for aluminium. The <em>specific</em> heat capacity (per gram) is 0.13 J/(g·K) for lead and 0.90 for aluminium. Lead heats up fast. Aluminium takes much more energy per gram. The Dulong-Petit regularity is in the molar value, not the specific one. Per atom, all solids store about the same amount of thermal energy."
+        ],
+        [
+          "p",
+          "For solids, $C_P$ and $C_V$ are nearly equal because solids barely expand when heated. The PV term is tiny. For copper at 300 K, $C_P - C_V \\approx 0.5$ J/(mol·K), about 2% of $C_P$. For most practical purposes in solid-state materials science, the distinction is negligible and people simply write $C$."
+        ],
+        [
+          "p",
+          "For gases, this approximation fails. The difference $C_P - C_V = R$ is a substantial fraction of the total, and you must be careful about which one you use."
+        ],
+        [
+          "h3",
+          "Enthalpy: an accounting framework for constant pressure"
+        ],
+        [
+          "p",
+          "Here is the problem enthalpy solves. Most materials science experiments happen at constant pressure: you heat a sample in a furnace open to the atmosphere, you run a reaction in a crucible on a bench. Under these conditions, when you add heat, some of it increases the internal energy of the system and some of it does PV work (the system may expand slightly, pushing back the atmosphere). The total heat you supply is not $\\Delta U$. It is $\\Delta U + P \\Delta V$."
+        ],
+        [
+          "p",
+          "Enthalpy packages this up into a single quantity:"
+        ],
+        [
+          "eq",
+          "H = U + PV"
+        ],
+        [
+          "derivation",
+          "At constant pressure, the change in enthalpy equals the heat absorbed: $\\Delta H = Q_P$. This is the fundamental reason enthalpy is useful.",
+          [
+            [
+              "p",
+              "Start with the first law for a process at constant pressure:"
+            ],
+            [
+              "eq",
+              "dU = \\delta Q - P \\, dV"
+            ],
+            [
+              "p",
+              "Rearrange:"
+            ],
+            [
+              "eq",
+              "\\delta Q = dU + P \\, dV"
+            ],
+            [
+              "p",
+              "Since $P$ is constant, $P \\, dV = d(PV)$, so:"
+            ],
+            [
+              "eq",
+              "\\delta Q_P = dU + d(PV) = d(U + PV) = dH"
+            ],
+            [
+              "p",
+              "Therefore $\\Delta H = Q_P$: the enthalpy change is exactly the heat absorbed at constant pressure."
+            ]
+          ]
+        ],
+        [
+          "p",
+          "This is why enthalpy is the quantity measured by calorimeters, reported in databases, and used in almost all practical thermochemistry. When someone says \"the heat of formation of alumina is $-1676$ kJ/mol,\" they mean $\\Delta H_f^\\circ$. When you run a DSC experiment and see a melting peak, the area under the peak is $\\Delta H_{\\text{fus}}$."
+        ],
+        [
+          "h3",
+          "How big is the PV term?"
+        ],
+        [
+          "p",
+          "For a solid at atmospheric pressure, PV is very small. The molar volume of copper is about 7.1 cm³/mol, so $PV = (101325 \\text{ Pa})(7.1 \\times 10^{-6} \\text{ m}^3) \\approx 0.7$ J/mol. The internal energy of copper at room temperature is many kilojoules per mole. The PV term is less than 0.01% of $U$. For all practical purposes, $H \\approx U$ for a solid at atmospheric pressure."
+        ],
+        [
+          "p",
+          "For a gas, the situation is very different. One mole of ideal gas at 298 K has $PV = RT = 2479$ J/mol, about 2.5 kJ/mol. This is a significant fraction of the total energy. The distinction between $H$ and $U$ genuinely matters for gas-phase reactions, evaporation, and any process where the number of moles of gas changes."
+        ],
+        [
+          "p",
+          "This is why the convention in thermochemistry is to always report enthalpies. For solids, it barely differs from internal energy but is still the correct quantity for constant-pressure experiments. For gases, it accounts for the PV work automatically."
+        ],
+        [
+          "h3",
+          "Enthalpy of phase transitions"
+        ],
+        [
+          "p",
+          "When a material changes phase, it absorbs or releases heat at constant temperature and pressure. This is an enthalpy change. For melting:"
+        ],
+        [
+          "ul",
+          [
+            "Aluminium: $\\Delta H_{\\text{fus}} = 10.7$ kJ/mol at 933 K",
+            "Iron: $\\Delta H_{\\text{fus}} = 13.8$ kJ/mol at 1811 K",
+            "Copper: $\\Delta H_{\\text{fus}} = 13.3$ kJ/mol at 1358 K",
+            "Water (ice): $\\Delta H_{\\text{fus}} = 6.0$ kJ/mol at 273 K"
+          ]
+        ],
+        [
+          "p",
+          "These are real, measurable quantities. You can feel them: a metal ingot sitting at its melting point absorbs heat without its temperature rising until the entire sample has melted. All that energy goes into breaking the bonds that hold the solid together, not into raising the temperature. This is the latent heat, and it is an enthalpy."
+        ],
+        [
+          "p",
+          "Vaporisation enthalpies are much larger (aluminium: 294 kJ/mol, iron: 347 kJ/mol) because breaking free from a liquid into a gas requires overcoming all remaining intermolecular interactions and, for an ideal gas, doing $PV = RT$ of expansion work."
+        ],
+        [
+          "h3",
+          "Hess's law"
+        ],
+        [
+          "p",
+          "Enthalpy is a state function. The enthalpy change for a reaction therefore depends only on the initial and final states, not on the route taken. This result, known as Hess's law, emerges directly from that single fact."
+        ],
+        [
+          "p",
+          "Consider the formation of CO₂ from graphite and oxygen. You can measure the enthalpy change directly (burn graphite in pure oxygen, measure the heat released). Or you can go via an intermediate: first form CO, then oxidise CO to CO₂. Because $H$ depends only on state, the enthalpy change along the direct path must equal the sum of the enthalpy changes along the two-step path:"
+        ],
+        [
+          "widget",
+          "hess-diagram",
+          {
+            "reactants": "C + O₂",
+            "products": "CO₂",
+            "intermediate": "CO + ½O₂",
+            "direct": {
+              "label": "ΔH₁ = −393.5 kJ/mol"
+            },
+            "step1": {
+              "label": "ΔH₂ = −110.5"
+            },
+            "step2": {
+              "label": "ΔH₃ = −283.0"
+            },
+            "summary": "ΔH₁ = ΔH₂ + ΔH₃"
+          }
+        ],
+        [
+          "p",
+          "The numbers confirm it: $-110.5 + (-283.0) = -393.5$ kJ/mol. The route does not matter."
+        ],
+        [
+          "p",
+          "This makes a relatively small set of measured formation enthalpies (tabulated in databases like NIST-JANAF or SGTE) enormously powerful. By combining them, you can predict $\\Delta H$ for almost any reaction, including ones that have never been run in a calorimeter. The entire infrastructure of computational thermochemistry rests on this."
+        ],
+        [
+          "h3",
+          "Kirchhoff's law"
+        ],
+        [
+          "p",
+          "Hess's law gives you $\\Delta H$ at the temperature where it was measured. But reactions do not always occur at 298 K. If you need the enthalpy change at a different temperature, Kirchhoff's law provides the correction:"
+        ],
+        [
+          "eq",
+          "\\Delta H(T_2) = \\Delta H(T_1) + \\int_{T_1}^{T_2} \\Delta C_P \\, dT"
+        ],
+        [
+          "p",
+          "where $\\Delta C_P = \\sum C_P(\\text{products}) - \\sum C_P(\\text{reactants})$ is the difference in heat capacity between products and reactants."
+        ],
+        [
+          "derivation",
+          "Kirchhoff's law follows from the fact that $\\Delta H$ and $C_P$ are both state functions. The cycle below makes it visual: two routes from reactants at $T_1$ to products at $T_2$ must give the same total enthalpy change.",
+          [
+            [
+              "p",
+              "Write the enthalpy of each species at $T_2$ in terms of its value at $T_1$:"
+            ],
+            [
+              "eq",
+              "H_i(T_2) = H_i(T_1) + \\int_{T_1}^{T_2} C_{P,i} \\, dT"
+            ],
+            [
+              "p",
+              "The reaction enthalpy at $T_2$ is:"
+            ],
+            [
+              "eq",
+              "\\Delta H(T_2) = \\sum_\\text{products} H_i(T_2) - \\sum_\\text{reactants} H_i(T_2)"
+            ],
+            [
+              "p",
+              "Substitute the expression for $H_i(T_2)$:"
+            ],
+            [
+              "eq",
+              "\\Delta H(T_2) = \\sum_\\text{prod} \\left[ H_i(T_1) + \\int_{T_1}^{T_2} C_{P,i} \\, dT \\right] - \\sum_\\text{react} \\left[ H_i(T_1) + \\int_{T_1}^{T_2} C_{P,i} \\, dT \\right]"
+            ],
+            [
+              "p",
+              "Group the $T_1$ terms and the integral terms:"
+            ],
+            [
+              "eq",
+              "\\Delta H(T_2) = \\Delta H(T_1) + \\int_{T_1}^{T_2} \\left[ \\sum_\\text{prod} C_{P,i} - \\sum_\\text{react} C_{P,i} \\right] dT"
+            ],
+            [
+              "eq",
+              "\\Delta H(T_2) = \\Delta H(T_1) + \\int_{T_1}^{T_2} \\Delta C_P \\, dT"
+            ]
+          ]
+        ],
+        [
+          "p",
+          "The logic becomes clear from the cycle below. You can get from reactants at $T_1$ to products at $T_2$ by two routes. Go across at $T_1$ (use $\\Delta H(T_1)$) then heat the products up. Or heat the reactants first, then react at $T_2$ (use $\\Delta H(T_2)$). Because $H$ is a state function, both routes give the same total enthalpy change. The difference between $\\Delta H(T_1)$ and $\\Delta H(T_2)$ is just the difference in how much heat the reactants and products absorb between $T_1$ and $T_2$."
+        ],
+        [
+          "widget",
+          "kirchhoff-diagram",
+          {
+            "reactants": "Reactants",
+            "products": "Products",
+            "T1": "T₁",
+            "T2": "T₂",
+            "bottomLabel": "ΔH(T₁)",
+            "topLabel": "ΔH(T₂)",
+            "leftLabel": "∫Cₚ(react)dT",
+            "rightLabel": "∫Cₚ(prod)dT",
+            "summary": "ΔH(T₂) = ΔH(T₁) + ∫ΔCₚ dT"
+          }
+        ],
+        [
+          "p",
+          "If products and reactants have the same heat capacity ($\\Delta C_P = 0$), the vertical arrows are equal and $\\Delta H$ does not change with temperature. This is often roughly true for solid-state reactions where all phases have similar Dulong-Petit heat capacities. For reactions involving gases, where $C_P$ values differ more, the correction matters. For reactions spanning a phase transition (where $C_P$ changes discontinuously), you must integrate through the transition and include the latent heat."
+        ],
+        [
+          "problem",
+          "Using the formation enthalpies $\\Delta H_f^\\circ$(CO) = $-110.5$ kJ/mol and $\\Delta H_f^\\circ$(CO$_2$) = $-393.5$ kJ/mol, calculate $\\Delta H^\\circ$ for the water-gas shift reaction: CO + H$_2$O $\\to$ CO$_2$ + H$_2$. The formation enthalpy of liquid water is $-285.8$ kJ/mol.",
+          [
+            [
+              "p",
+              "By Hess's law:"
+            ],
+            [
+              "eq",
+              "\\Delta H^\\circ = \\sum \\Delta H_f^\\circ(\\text{products}) - \\sum \\Delta H_f^\\circ(\\text{reactants})"
+            ],
+            [
+              "eq",
+              "\\Delta H^\\circ = [-393.5 + 0] - [-110.5 + (-285.8)]"
+            ],
+            [
+              "eq",
+              "\\Delta H^\\circ = -393.5 - (-396.3) = +2.8 \\text{ kJ/mol}"
+            ],
+            [
+              "p",
+              "The reaction is very slightly endothermic. Note that $\\Delta H_f^\\circ$(H$_2$) = 0 by convention (it is an element in its standard state). The small $\\Delta H$ means the equilibrium is sensitive to temperature: a modest increase in $T$ shifts the equilibrium toward products (Le Chatelier)."
+            ]
+          ]
+        ]
+      ],
+      "related": [
+        {
+          "title": "Work & Heat",
+          "url": "work-and-heat"
+        },
+        {
+          "title": "The Carnot Cycle",
+          "url": "carnot-cycle"
+        },
+        {
+          "title": "Free Energy",
+          "url": "free-energy"
+        }
+      ]
+    },
+    {
+      "id": "carnot-cycle",
+      "number": "5.5",
+      "title": "The Carnot Cycle",
+      "description": "The theoretical maximum efficiency of heat engines, and why it matters.",
+      "readingTime": "12 min",
+      "intro": "The first law tells you that energy is conserved. It does not tell you how efficiently you can convert heat into work. That question was answered by Sadi Carnot in 1824, in a remarkable paper written before entropy, the second law, or even the first law had been formulated.",
+      "body": [
+        [
+          "callout",
+          "Sadi Carnot (1796-1832)",
+          "Carnot was the son of Lazare Carnot, a mathematician and military strategist who organised the French Revolutionary armies and later served as Napoleon's Minister of War. Sadi himself trained as a military engineer at the Ecole Polytechnique and spent much of his short career studying the efficiency of steam engines. His 1824 paper, <em>Reflections on the Motive Power of Fire</em>, established the theoretical maximum efficiency of any heat engine. He died of cholera at 36. His work was largely ignored until Clapeyron rediscovered it in the 1830s and Clausius and Thomson (Lord Kelvin) built the second law on its foundations in the 1850s."
+        ],
+        [
+          "p",
+          "Carnot considered an idealised engine operating between a hot reservoir at temperature $T_H$ and a cold reservoir at $T_C$. The engine executes a cycle of four reversible steps:"
+        ],
+        [
+          "ol",
+          [
+            "<strong>Isothermal expansion</strong> at $T_H$ (A to B): the gas absorbs heat $Q_H$ from the hot reservoir and expands. The internal energy of an ideal gas depends only on temperature, so all the heat absorbed goes into pushing the piston outward.",
+            "<strong>Adiabatic expansion</strong> (B to C): the gas continues to expand with no heat exchange. It cools from $T_H$ to $T_C$ as it does work at the expense of its own internal energy.",
+            "<strong>Isothermal compression</strong> at $T_C$ (C to D): the gas is compressed and rejects heat $Q_C$ to the cold reservoir.",
+            "<strong>Adiabatic compression</strong> (D to A): the gas is compressed with no heat exchange, warming from $T_C$ back to $T_H$."
+          ]
+        ],
+        [
+          "widget",
+          "carnot-cycle",
+          {}
+        ],
+        [
+          "p",
+          "The net work delivered to the surroundings in one cycle is the area enclosed by the cycle on the PV diagram (the shaded region above). The efficiency is the fraction of the heat input converted to useful work output:"
+        ],
+        [
+          "eq",
+          "\\eta = \\frac{W_{\\text{net}}}{Q_H} = 1 - \\frac{T_C}{T_H}"
+        ],
+        [
+          "derivation",
+          "The Carnot efficiency depends only on the temperatures of the two reservoirs. No engine operating between $T_H$ and $T_C$ can exceed this efficiency.",
+          [
+            [
+              "p",
+              "For the isothermal expansion at $T_H$: $Q_H = T_H \\Delta S$ (from the definition of entropy for a reversible isothermal process)."
+            ],
+            [
+              "p",
+              "For the isothermal compression at $T_C$: $Q_C = T_C \\Delta S$ (same $\\Delta S$ because the two adiabatic steps are isentropic, so the entropy gained in step 1 equals the entropy lost in step 3)."
+            ],
+            [
+              "p",
+              "The net work is:"
+            ],
+            [
+              "eq",
+              "W_{\\text{net}} = Q_H - Q_C = (T_H - T_C) \\Delta S"
+            ],
+            [
+              "p",
+              "So the efficiency is:"
+            ],
+            [
+              "eq",
+              "\\eta = \\frac{W_{\\text{net}}}{Q_H} = \\frac{(T_H - T_C) \\Delta S}{T_H \\Delta S} = 1 - \\frac{T_C}{T_H}"
+            ]
+          ]
+        ],
+        [
+          "h3",
+          "What the Carnot theorem proves"
+        ],
+        [
+          "p",
+          "Carnot's result is stronger than a formula for one particular engine. It is a theorem about <em>all</em> heat engines. No engine operating between two thermal reservoirs can have a higher efficiency than the Carnot efficiency. If such an engine existed, you could couple it to a Carnot engine running in reverse (as a heat pump) and the combination would transfer heat from cold to hot with no net work input, violating the second law."
+        ],
+        [
+          "p",
+          "This means the Carnot efficiency is a hard ceiling, set by the temperatures alone. The working fluid does not matter. The mechanism does not matter. Steam, gas, thermoelectric, photovoltaic: all are bound by the same limit. The only way to increase the theoretical efficiency is to raise $T_H$ or lower $T_C$."
+        ],
+        [
+          "h3",
+          "The connection to entropy"
+        ],
+        [
+          "p",
+          "Clausius used the Carnot cycle to define entropy. In a reversible cycle, the total entropy change is zero. For the Carnot cycle, the only heat transfers occur at $T_H$ and $T_C$:"
+        ],
+        [
+          "eq",
+          "\\oint \\frac{\\delta Q_{\\text{rev}}}{T} = \\frac{Q_H}{T_H} - \\frac{Q_C}{T_C} = 0"
+        ],
+        [
+          "p",
+          "This is not a coincidence. It holds for <em>any</em> reversible cycle, not just the Carnot cycle. Clausius proved that $\\oint \\delta Q_{\\text{rev}} / T = 0$ for all reversible cycles, which means $\\delta Q_{\\text{rev}} / T$ is an exact differential. That exact differential defines a state function: entropy. The Carnot cycle is where entropy was born."
+        ],
+        [
+          "h3",
+          "Real engines and materials implications"
+        ],
+        [
+          "p",
+          "A coal-fired power station operates with steam at about 550°C ($T_H = 823$ K) and condenses at about 30°C ($T_C = 303$ K). The Carnot limit is $\\eta = 1 - 303/823 = 63\\%$. Real stations achieve about 35-45%, because friction, irreversibilities, and practical constraints bring the efficiency well below the theoretical maximum. A gas turbine with $T_H = 1500$ K has a Carnot limit of 80%, which is why combined-cycle gas turbines are the most efficient thermal power plants."
+        ],
+        [
+          "p",
+          "The Carnot result also explains why refrigerators and heat pumps become less efficient as the temperature difference increases, and why cryogenic cooling is so energy-intensive. The closer $T_C$ is to $T_H$, the closer the efficiency approaches 100%. The further apart they are, the more work is wasted."
+        ],
+        [
+          "h3",
+          "Refrigerators and heat pumps"
+        ],
+        [
+          "p",
+          "A Carnot engine run in reverse is a refrigerator: it absorbs heat $Q_C$ from the cold reservoir and rejects heat $Q_H$ to the hot reservoir, consuming work $W$ in the process. The coefficient of performance (COP) is:"
+        ],
+        [
+          "eq",
+          "\\text{COP}_{\\text{cooling}} = \\frac{Q_C}{W} = \\frac{T_C}{T_H - T_C}"
+        ],
+        [
+          "p",
+          "A domestic refrigerator maintains $T_C \\approx 277$ K (4°C) in a room at $T_H \\approx 295$ K (22°C). The Carnot COP is $277 / (295 - 277) = 15.4$. Real fridges achieve COP 2 to 5: far below the Carnot limit, but the point is that moving heat from cold to hot is thermodynamically cheap when the temperature difference is small."
+        ],
+        [
+          "p",
+          "A heat pump uses the same cycle but the useful output is $Q_H$ (heating a building) rather than $Q_C$ (cooling a fridge). Its COP is $T_H / (T_H - T_C)$, which is always greater than 1: a heat pump delivers more heating energy than the electrical energy it consumes, because it is moving heat, not generating it. This is why heat pumps are the most efficient way to heat a building."
+        ],
+        [
+          "problem",
+          "A geothermal power plant operates between a hot reservoir at 150°C and rejects heat to a river at 15°C. What is the maximum theoretical efficiency? If the plant generates 5 MW of electrical power at 12% actual efficiency, how much heat must it extract from the geothermal source per second?",
+          [
+            [
+              "p",
+              "$T_H = 150 + 273 = 423$ K, $T_C = 15 + 273 = 288$ K."
+            ],
+            [
+              "eq",
+              "\\eta_{\\text{Carnot}} = 1 - \\frac{288}{423} = 0.319 = 31.9\\%"
+            ],
+            [
+              "p",
+              "At 12% actual efficiency, the heat input needed for 5 MW output:"
+            ],
+            [
+              "eq",
+              "Q_H = \\frac{W}{\\eta} = \\frac{5 \\times 10^6}{0.12} = 41.7 \\text{ MW}"
+            ],
+            [
+              "p",
+              "The plant extracts 41.7 MW of thermal energy from the ground and rejects 36.7 MW to the river. The low temperature of the hot source severely limits the Carnot ceiling. This is why geothermal plants have low efficiencies compared to fossil fuel plants."
+            ]
+          ]
+        ]
+      ],
+      "related": [
+        {
+          "title": "Work & Heat",
+          "url": "work-and-heat"
+        },
+        {
+          "title": "The First Law & Enthalpy",
+          "url": "first-law-enthalpy"
+        },
+        {
+          "title": "Entropy & the Second Law",
+          "url": "entropy-second-law"
+        }
+      ]
+    },
+    {
+      "id": "entropy-second-law",
+      "number": "5.6",
+      "title": "Entropy & the Second Law",
+      "description": "Why things happen in one direction, and what is really being maximised.",
+      "readingTime": "14 min",
+      "intro": "The first law tells you that energy is conserved. It does not tell you which direction a process will go. A hot block of iron will cool to room temperature, but a room-temperature block will never spontaneously heat up by drawing energy from the air. Both would conserve energy. Only one actually happens. The second law explains why.",
+      "body": [
+        [
+          "h3",
+          "The direction of spontaneous change"
+        ],
+        [
+          "p",
+          "Drop a lump of sugar into water. It dissolves. You never see dissolved sugar spontaneously reassemble into a cube. Release gas from a bottle into a vacuum. It expands to fill the space. It never spontaneously compresses itself back into the bottle. Place a hot ingot on a cold anvil. Heat flows from hot to cold until they reach the same temperature. Never the reverse."
+        ],
+        [
+          "p",
+          "The first law permits all of these processes to run backwards. Energy would be conserved in each case. Something else forbids the reverse direction. That something is the second law."
+        ],
+        [
+          "p",
+          "The second law has been stated in many equivalent forms over the past two centuries. Clausius (1854): heat cannot spontaneously flow from a colder body to a hotter one. Kelvin: no process can convert heat entirely into work with no other effect. These sound different but they are logically equivalent; if you could violate one, you could violate the other. The modern formulation, more general than either, is stated in terms of a quantity called entropy."
+        ],
+        [
+          "h3",
+          "Entropy: the classical definition"
+        ],
+        [
+          "p",
+          "Entropy is a state function, denoted $S$. For a reversible process, the change in entropy is defined as:"
+        ],
+        [
+          "eq",
+          "dS = \\frac{\\delta Q_{\\text{rev}}}{T}"
+        ],
+        [
+          "p",
+          "This says: when a system absorbs a small amount of heat reversibly at temperature $T$, its entropy increases by $\\delta Q_{\\text{rev}} / T$. The temperature in the denominator is critical. The same amount of heat produces a larger entropy change at low temperature than at high temperature. Adding 1 J of heat to a system at 10 K increases its entropy by 0.1 J/K. Adding the same 1 J at 1000 K increases it by only 0.001 J/K. Heating something that is already hot is, in this sense, thermodynamically less significant than heating something cold."
+        ],
+        [
+          "p",
+          "To calculate the entropy change for a finite process, integrate:"
+        ],
+        [
+          "eq",
+          "\\Delta S = \\int_1^2 \\frac{\\delta Q_{\\text{rev}}}{T}"
+        ],
+        [
+          "p",
+          "Because $S$ is a state function, $\\Delta S$ depends only on the initial and final states. The path does not matter. But to evaluate the integral you must choose a <em>reversible</em> path between those states. Any reversible path will give the same answer. An irreversible path gives a different (smaller) value of $\\int \\delta Q / T$, which is not equal to $\\Delta S$."
+        ],
+        [
+          "callout",
+          "Calculating entropy changes",
+          "For heating at constant pressure from $T_1$ to $T_2$: $\\Delta S = \\int_{T_1}^{T_2} C_P / T \\, dT$. If $C_P$ is roughly constant, this gives $\\Delta S \\approx C_P \\ln(T_2 / T_1)$. For a phase transition at temperature $T_{\\text{tr}}$: $\\Delta S_{\\text{tr}} = \\Delta H_{\\text{tr}} / T_{\\text{tr}}$."
+        ],
+        [
+          "h3",
+          "The second law"
+        ],
+        [
+          "p",
+          "The second law states: for any process in an isolated system, the total entropy either increases or stays the same."
+        ],
+        [
+          "eq",
+          "\\Delta S_{\\text{total}} \\geq 0"
+        ],
+        [
+          "p",
+          "Equality holds only for reversible processes. For any real, irreversible process, $\\Delta S_{\\text{total}} > 0$ strictly. The total entropy of the universe never decreases."
+        ],
+        [
+          "p",
+          "This does not mean the entropy of a system cannot decrease. You can freeze water, reducing its entropy. But to do so you must remove heat, and the entropy increase of the surroundings (which absorb that heat at a lower temperature) more than compensates. The total, system plus surroundings, always increases."
+        ],
+        [
+          "h3",
+          "Entropy production in real processes"
+        ],
+        [
+          "p",
+          "Every irreversible process produces entropy. Friction converts ordered kinetic energy into disordered thermal energy: entropy increases. Heat conduction across a finite temperature difference transfers energy from a body that loses relatively little entropy (hot, large $T$) to one that gains relatively more (cold, small $T$): net entropy increase. Mixing two different gases or dissolving a solute increases entropy because the number of accessible configurations increases."
+        ],
+        [
+          "p",
+          "The amount of entropy produced tells you how irreversible a process is. A reversible process produces zero entropy. A highly irreversible process (rapid quench, uncontrolled combustion, free expansion into vacuum) produces a lot. Engineers care about this because entropy production represents wasted potential to do work. Every joule of $T \\Delta S_{\\text{produced}}$ is energy that has been dissipated and can never be recovered."
+        ],
+        [
+          "h3",
+          "Real numbers: entropy of melting"
+        ],
+        [
+          "p",
+          "When aluminium melts at 933 K, it absorbs $\\Delta H_{\\text{fus}} = 10.7$ kJ/mol. The entropy of melting is:"
+        ],
+        [
+          "eq",
+          "\\Delta S_{\\text{fus}} = \\frac{\\Delta H_{\\text{fus}}}{T_m} = \\frac{10700}{933} = 11.5 \\text{ J/(mol}\\cdot\\text{K)}"
+        ],
+        [
+          "p",
+          "For iron at 1811 K: $\\Delta S_{\\text{fus}} = 13800 / 1811 = 7.6$ J/(mol$\\cdot$K). For water at 273 K: $\\Delta S_{\\text{fus}} = 6000 / 273 = 22.0$ J/(mol$\\cdot$K). Water has an unusually high entropy of melting because ice has an unusually rigid, open hydrogen-bonded structure. Metals, with their close-packed structures and relatively modest structural difference between solid and liquid, tend to have melting entropies in the range 8 to 14 J/(mol$\\cdot$K). This rough constancy is known as Richard's rule."
+        ],
+        [
+          "h3",
+          "The statistical picture"
+        ],
+        [
+          "p",
+          "The classical definition tells you how to calculate entropy changes. It does not tell you what entropy <em>is</em>. Statistical mechanics provides the answer. Boltzmann showed that the entropy of a macroscopic state is related to the number of microscopic arrangements (microstates) $\\Omega$ consistent with that macrostate:"
+        ],
+        [
+          "eq",
+          "S = k_B \\ln \\Omega"
+        ],
+        [
+          "p",
+          "$k_B$ is Boltzmann's constant, $1.381 \\times 10^{-23}$ J/K. A system with more microstates has higher entropy."
+        ],
+        [
+          "p",
+          "Consider a gas initially confined to one half of a box by a partition. Remove the partition. The gas expands to fill the whole box. No work was done. No heat was transferred. The internal energy has not changed. But the entropy has increased, because the number of spatial configurations available to each molecule has doubled. For $N$ molecules, the number of microstates increases by a factor of $2^N$. For one mole ($N = 6 \\times 10^{23}$), this is $2^{6 \\times 10^{23}}$, a number so large it is meaningless to write out. The entropy increase is:"
+        ],
+        [
+          "eq",
+          "\\Delta S = k_B \\ln 2^N = Nk_B \\ln 2 = R \\ln 2 \\approx 5.76 \\text{ J/(mol}\\cdot\\text{K)}"
+        ],
+        [
+          "p",
+          "The gas does not expand because of any force. There is no pressure difference in a free expansion into vacuum. It expands because there are overwhelmingly more microstates corresponding to \"gas fills the box\" than to \"gas stays in one half.\" The system explores configurations randomly, and by sheer weight of numbers ends up in the most probable macrostate."
+        ],
+        [
+          "widget",
+          "entropy-microstates",
+          {}
+        ],
+        [
+          "h3",
+          "Configurational entropy of mixing"
+        ],
+        [
+          "p",
+          "For materials scientists, the most important application of $S = k_B \\ln \\Omega$ is configurational entropy. Consider $N$ lattice sites occupied by $N_A$ atoms of type A and $N_B = N - N_A$ atoms of type B. The number of ways to arrange them is:"
+        ],
+        [
+          "eq",
+          "\\Omega = \\frac{N!}{N_A! \\, N_B!}"
+        ],
+        [
+          "p",
+          "Using Stirling's approximation ($\\ln N! \\approx N \\ln N - N$), the configurational entropy per mole is:"
+        ],
+        [
+          "eq",
+          "\\Delta S_{\\text{mix}} = -R \\left[ x_A \\ln x_A + x_B \\ln x_B \\right]"
+        ],
+        [
+          "p",
+          "where $x_A$ and $x_B$ are the mole fractions. This is always positive (since $\\ln x < 0$ for $x < 1$), which means mixing always increases entropy. At $x_A = x_B = 0.5$ (equimolar), $\\Delta S_{\\text{mix}} = R \\ln 2 \\approx 5.76$ J/(mol$\\cdot$K). At $x_A = 0.01$ (dilute), $\\Delta S_{\\text{mix}} \\approx 0.11$ J/(mol$\\cdot$K). Mixing entropy is largest for equimolar compositions and falls toward zero as one component becomes very dilute."
+        ],
+        [
+          "p",
+          "This configurational entropy is the thermodynamic driving force for solid solution formation. Even if the enthalpy of mixing is slightly positive (A and B atoms prefer their own kind), the $T \\Delta S_{\\text{mix}}$ term can overcome it at high enough temperature, stabilising the mixed phase. We will return to this competition in articles 5.10 and 5.11."
+        ],
+        [
+          "h3",
+          "Entropy is not disorder"
+        ],
+        [
+          "p",
+          "Entropy is often described as a measure of disorder. This analogy is at best imprecise and at worst misleading. A crystal of NaCl at 300 K is highly ordered and yet has a well-defined, substantial entropy (72.1 J/(mol$\\cdot$K)), because its atoms are vibrating and there are many microstates consistent with those vibrations. A supercooled glass is disordered but has lower entropy than the corresponding liquid at the same temperature, because the atoms are frozen in place and cannot explore configurations."
+        ],
+        [
+          "p",
+          "A better statement: entropy counts the number of microscopic arrangements compatible with the macroscopic state. High entropy means many arrangements. Low entropy means few. \"Disorder\" sometimes tracks this, but not always. When in doubt, count microstates, not mess."
+        ],
+        [
+          "h3",
+          "Implications for materials"
+        ],
+        [
+          "p",
+          "Melting increases entropy: a liquid has more accessible configurations than a solid. Mixing increases entropy: there are more ways to arrange A and B atoms on a shared lattice than to keep them separate. Dissolving a gas increases entropy: the molecules gain access to a much larger volume. Polymorphic transitions between crystal structures can increase or decrease entropy depending on the coordination and vibrational spectra of each phase."
+        ],
+        [
+          "p",
+          "All of these entropy changes compete with enthalpy changes. Melting costs energy ($\\Delta H > 0$) but gains entropy ($\\Delta S > 0$). At low temperature the enthalpy cost dominates and the solid is stable. At high temperature the $T\\Delta S$ gain wins and the liquid becomes stable. The crossover temperature is the melting point. This competition between enthalpy and entropy is the central theme of the next three articles, and it is the engine that drives all of materials thermodynamics."
+        ],
+        [
+          "problem",
+          "One mole of copper is heated from 300 K to 1000 K at constant pressure. Taking $C_P = 24.4$ J/(mol$\\cdot$K) as constant, calculate the entropy change.",
+          [
+            [
+              "eq",
+              "\\Delta S = \\int_{300}^{1000} \\frac{C_P}{T} \\, dT = C_P \\ln\\frac{T_2}{T_1}"
+            ],
+            [
+              "eq",
+              "\\Delta S = 24.4 \\times \\ln\\frac{1000}{300} = 24.4 \\times 1.204 = 29.4 \\text{ J/(mol}\\cdot\\text{K)}"
+            ],
+            [
+              "p",
+              "Note: $C_P$ is not truly constant over this range (it increases with temperature), so this is an approximation. A more accurate calculation would integrate the measured $C_P(T)$ data. The logarithmic dependence means that most of the entropy gain occurs at lower temperatures, where each joule of heat has a larger entropic effect."
+            ]
+          ]
+        ]
+      ],
+      "related": [
+        {
+          "title": "Work, Heat & the First Law",
+          "url": "work-heat-first-law"
+        },
+        {
+          "title": "Temperature & the Zeroth Law",
+          "url": "temperature-zeroth-law"
+        },
+        {
+          "title": "Free Energy",
+          "url": "free-energy"
+        }
+      ]
+    },
+    {
+      "id": "temperature-zeroth-law",
+      "number": "5.7",
+      "title": "Temperature & the Zeroth Law",
+      "description": "What temperature actually is — reframed as a consequence of entropy, not a primitive.",
+      "readingTime": "7 min",
+      "intro": "Everyone has an intuition for temperature. Hot things have more of it than cold things. But what is it, precisely? The answer comes from entropy, and it explains why heat flows the way it does.",
+      "body": [
+        [
+          "h3",
+          "The zeroth law"
+        ],
+        [
+          "p",
+          "The zeroth law states: if system A is in thermal equilibrium with system C, and system B is also in thermal equilibrium with system C, then A and B are in thermal equilibrium with each other."
+        ],
+        [
+          "p",
+          "This sounds trivially obvious. It is not. It is an empirical claim about the transitivity of thermal equilibrium, and it cannot be derived from the first or second laws. It was recognised as a necessary axiom only after those laws had already been numbered, which is why it got the awkward name \"zeroth.\""
+        ],
+        [
+          "p",
+          "The zeroth law guarantees that there exists a property, shared by all systems in mutual thermal equilibrium, that we can meaningfully call temperature. Without it, the concept of temperature would not be well-defined."
+        ],
+        [
+          "h3",
+          "Temperature from entropy"
+        ],
+        [
+          "p",
+          "The zeroth law tells us temperature exists. It does not tell us what it is. For that, consider two systems in thermal contact: they can exchange heat but not work or matter. The total energy is fixed (isolated combined system), so any heat gained by one is lost by the other."
+        ],
+        [
+          "p",
+          "The second law says the combined system will reach the state of maximum total entropy. If system 1 has entropy $S_1(U_1)$ and system 2 has entropy $S_2(U_2)$, with $U_1 + U_2 = U_{\\text{total}}$ fixed, then at equilibrium:"
+        ],
+        [
+          "eq",
+          "\\frac{\\partial S_1}{\\partial U_1} = \\frac{\\partial S_2}{\\partial U_2}"
+        ],
+        [
+          "p",
+          "The quantity that is equal at thermal equilibrium is $\\partial S / \\partial U$. We define temperature as:"
+        ],
+        [
+          "eq",
+          "\\frac{1}{T} = \\left( \\frac{\\partial S}{\\partial U} \\right)_{V, N}"
+        ],
+        [
+          "derivation",
+          "Temperature is the inverse of the rate at which entropy increases with energy. Systems with a steep $S(U)$ curve (where a little energy produces a big entropy change) have low temperature. Systems with a shallow curve have high temperature.",
+          [
+            [
+              "p",
+              "Consider a small energy transfer $\\delta U$ from system 2 to system 1. The change in total entropy is:"
+            ],
+            [
+              "eq",
+              "dS_{\\text{total}} = \\frac{\\partial S_1}{\\partial U_1} \\delta U - \\frac{\\partial S_2}{\\partial U_2} \\delta U = \\left( \\frac{1}{T_1} - \\frac{1}{T_2} \\right) \\delta U"
+            ],
+            [
+              "p",
+              "For this to be positive (spontaneous), we need $1/T_1 > 1/T_2$ when $\\delta U > 0$, i.e., $T_1 < T_2$. Energy flows from the hotter system to the colder one. This is not an assumption; it is a consequence of the second law and the definition of temperature."
+            ]
+          ]
+        ],
+        [
+          "h3",
+          "Why heat flows from hot to cold"
+        ],
+        [
+          "p",
+          "The derivation above gives us something valuable: a proof, not an assumption, that heat flows from hot to cold. It follows directly from the requirement that total entropy increases. The hot system (high $T$, shallow $S(U)$ curve) loses a small amount of entropy when it gives up energy. The cold system (low $T$, steep $S(U)$ curve) gains a larger amount of entropy when it receives that same energy. The total entropy increases. The process is spontaneous."
+        ],
+        [
+          "p",
+          "This also explains why the process stops at thermal equilibrium: when $T_1 = T_2$, the entropy gain and loss exactly cancel, $dS_{\\text{total}} = 0$, and there is no further driving force for heat transfer."
+        ],
+        [
+          "h3",
+          "Temperature scales"
+        ],
+        [
+          "p",
+          "The thermodynamic definition of temperature gives us an absolute scale. Since $S$ must increase with $U$ for any normal system (adding energy always increases the number of accessible microstates), $T$ is always positive. Absolute zero, $T = 0$ K, is the state where $\\partial S / \\partial U \\to \\infty$, meaning the system is in its ground state and has no further entropy to give up. We will return to this in the next article."
+        ],
+        [
+          "p",
+          "The kelvin scale is anchored to the triple point of water (273.16 K by the original definition, now redefined through the Boltzmann constant). Celsius simply shifts the zero: $T(°\\text{C}) = T(\\text{K}) - 273.15$. For thermodynamic calculations, always use kelvin. Expressions like $T \\Delta S$ and $k_B T$ are meaningless in Celsius."
+        ],
+        [
+          "h3",
+          "The thermal energy scale"
+        ],
+        [
+          "p",
+          "The quantity $k_BT$ sets the energy scale of thermal fluctuations. At 300 K, $k_BT \\approx 0.026$ eV, or about 2.5 kJ/mol in molar terms ($RT$). This is the yardstick against which all thermal processes are measured."
+        ],
+        [
+          "p",
+          "If a process has an energy barrier much larger than $k_BT$, it will not happen at that temperature. If the barrier is comparable to $k_BT$, it happens readily. Diffusion in solids has barriers of 0.5 to 3 eV per atom, which is why it requires temperatures of hundreds or thousands of kelvin. Bond vibrations in solids have energies of 0.01 to 0.05 eV, well within reach of room-temperature thermal energy, which is why the Dulong-Petit heat capacity works at 300 K. The Einstein and Debye models of heat capacity are built on exactly this comparison: vibrational modes with $h\\nu \\gg k_BT$ are frozen out and do not contribute to $C_V$."
+        ],
+        [
+          "p",
+          "At the melting point of iron (1811 K), $k_BT \\approx 0.156$ eV. At the surface of the sun (5778 K), $k_BT \\approx 0.5$ eV, enough to ionise some elements. The temperature of a system tells you how much energy is available for thermal processes, and that single number determines which processes are accessible."
+        ],
+        [
+          "problem",
+          "The activation energy for vacancy diffusion in copper is about 0.7 eV. At what temperature does $k_BT$ equal 10% of this barrier? What fraction of atoms have enough thermal energy to overcome the barrier at 300 K and at 1000 K?",
+          [
+            [
+              "p",
+              "$k_BT = 0.1 \\times 0.7 = 0.07$ eV when $T = 0.07 / (8.617 \\times 10^{-5}) = 812$ K."
+            ],
+            [
+              "p",
+              "The fraction of atoms with energy $\\geq E_a$ is approximately $\\exp(-E_a / k_BT)$:"
+            ],
+            [
+              "eq",
+              "\\text{At 300 K: } \\exp\\left(-\\frac{0.7}{0.02585}\\right) = \\exp(-27.1) = 1.8 \\times 10^{-12}"
+            ],
+            [
+              "eq",
+              "\\text{At 1000 K: } \\exp\\left(-\\frac{0.7}{0.08617}\\right) = \\exp(-8.12) = 3.0 \\times 10^{-4}"
+            ],
+            [
+              "p",
+              "At 300 K, essentially no atoms can diffuse. At 1000 K, about 1 in 3000 can. This is why diffusion in solids requires elevated temperatures."
+            ]
+          ]
+        ]
+      ],
+      "related": [
+        {
+          "title": "Entropy & the Second Law",
+          "url": "entropy-second-law"
+        },
+        {
+          "title": "The Third Law & Absolute Zero",
+          "url": "third-law-absolute-zero"
+        },
+        {
+          "title": "Free Energy",
+          "url": "free-energy"
+        }
+      ]
+    },
+    {
+      "id": "third-law-absolute-zero",
+      "number": "5.8",
+      "title": "The Third Law & Absolute Zero",
+      "description": "Can we reach zero? What happens to matter when we try?",
+      "readingTime": "6 min",
+      "intro": "The first and second laws define energy conservation and the direction of change. The third law sets the baseline: what happens to entropy as temperature approaches absolute zero.",
+      "body": [
+        [
+          "h3",
+          "The Nernst statement"
+        ],
+        [
+          "p",
+          "The third law, in its original form due to Nernst (1906), states that the entropy change for any reaction between perfect crystalline substances approaches zero as temperature approaches absolute zero:"
+        ],
+        [
+          "eq",
+          "\\lim_{T \\to 0} \\Delta S = 0"
+        ],
+        [
+          "p",
+          "Planck later strengthened this to an absolute statement: the entropy of a perfect crystal at absolute zero is exactly zero."
+        ],
+        [
+          "eq",
+          "S(T = 0) = 0 \\quad \\text{(perfect crystal)}"
+        ],
+        [
+          "p",
+          "This gives entropy an absolute value, not just a relative one. We can compute the entropy of any substance at any temperature by integrating the heat capacity from 0 K:"
+        ],
+        [
+          "eq",
+          "S(T) = \\int_0^T \\frac{C_P}{T'} \\, dT'"
+        ],
+        [
+          "p",
+          "with any phase transitions adding their own $\\Delta H / T_{\\text{transition}}$ terms along the way. This is how the standard molar entropies in thermodynamic tables are obtained: from careful calorimetric measurements down to very low temperatures."
+        ],
+        [
+          "callout",
+          "Standard entropies at 298 K",
+          "Some representative values: C(diamond) = 2.4, C(graphite) = 5.7, Al(s) = 28.3, Cu(s) = 33.2, Fe(s) = 27.3, Si(s) = 18.8, H₂O(l) = 69.9, N₂(g) = 191.6, CO₂(g) = 213.7 J/(mol$\\cdot$K). Gases have much higher entropy than solids because their molecules occupy far more spatial configurations. Diamond, with its rigid, tightly bonded structure, has the lowest entropy of any common substance."
+        ],
+        [
+          "p",
+          "The integral $\\int_0^T C_P / T \\, dT$ must be evaluated from experimental heat capacity data, measured down to temperatures where $C_P \\to 0$ (it approaches zero as $T^3$ in crystalline solids, following Debye's model). Near absolute zero, the measurements are extrapolated using the Debye $T^3$ law. Any phase transitions between 0 K and the temperature of interest add their latent heat contribution. The entire calculation rests on the third law setting the baseline at zero."
+        ],
+        [
+          "h3",
+          "Residual entropy"
+        ],
+        [
+          "p",
+          "Not all substances have zero entropy at 0 K. Ice is the classic example. In ordinary ice (ice Ih), each oxygen atom has two hydrogens close to it and two further away, but the positions of those hydrogens are not fully ordered even at 0 K. There are multiple configurations consistent with the ice rules, and the crystal freezes into one of them without selecting a unique ground state."
+        ],
+        [
+          "p",
+          "Pauling calculated the resulting residual entropy as $S_0 = R \\ln(3/2) \\approx 3.4$ J/(mol·K), in good agreement with experiment. This is not a violation of the third law. The third law applies to perfect crystals. Ice at 0 K is not a perfect crystal: it is a disordered hydrogen-bond network frozen in place."
+        ],
+        [
+          "p",
+          "Residual entropy also appears in some alloys. A random solid solution of A and B atoms on a lattice retains configurational entropy $-R[x \\ln x + (1-x) \\ln(1-x)]$ even at 0 K, because the atoms are randomly distributed and there is no driving force for ordering at such low temperatures. Whether this entropy is truly retained or eventually removed by ordering depends on kinetics, not thermodynamics."
+        ],
+        [
+          "h3",
+          "Unattainability of absolute zero"
+        ],
+        [
+          "p",
+          "A consequence of the third law (sometimes stated as the third law itself) is that absolute zero cannot be reached in a finite number of steps. Each cooling step removes entropy from the system, but as $T \\to 0$, the entropy approaches a fixed value, and each successive step removes less. You can get arbitrarily close, but never arrive."
+        ],
+        [
+          "p",
+          "Modern experiments have reached temperatures below 1 nanokelvin in ultracold atomic gases. But even these are not zero. The asymptotic approach to absolute zero is a fundamental feature of the theory, not a practical limitation."
+        ],
+        [
+          "h3",
+          "Why the third law matters for materials"
+        ],
+        [
+          "p",
+          "The third law gives us absolute entropies, which in turn give us absolute free energies. Without it, we could only calculate <em>changes</em> in free energy, never the free energy itself. With it, we can compare the stability of entirely different phases and compounds on a common scale. This is what makes thermodynamic databases (SGTE, CALPHAD) possible: every substance has a well-defined $G(T)$ curve anchored at 0 K, and we can compare them directly."
+        ],
+        [
+          "problem",
+          "The standard molar entropy of aluminium at 298 K is 28.3 J/(mol$\\cdot$K). Aluminium melts at 933 K with $\\Delta H_{\\text{fus}} = 10.7$ kJ/mol. Estimate the molar entropy of liquid aluminium at 933 K, assuming $C_P = 24.4$ J/(mol$\\cdot$K) for the solid (constant).",
+          [
+            [
+              "p",
+              "Entropy of solid Al at 933 K:"
+            ],
+            [
+              "eq",
+              "S_{\\text{solid}}(933) = S^\\circ(298) + C_P \\ln\\frac{933}{298} = 28.3 + 24.4 \\times 1.142 = 56.2 \\text{ J/(mol}\\cdot\\text{K)}"
+            ],
+            [
+              "p",
+              "Entropy of fusion:"
+            ],
+            [
+              "eq",
+              "\\Delta S_{\\text{fus}} = \\frac{\\Delta H_{\\text{fus}}}{T_m} = \\frac{10700}{933} = 11.5 \\text{ J/(mol}\\cdot\\text{K)}"
+            ],
+            [
+              "p",
+              "Total entropy of liquid Al at 933 K:"
+            ],
+            [
+              "eq",
+              "S_{\\text{liquid}}(933) = 56.2 + 11.5 = 67.7 \\text{ J/(mol}\\cdot\\text{K)}"
+            ]
+          ]
+        ]
+      ],
+      "related": [
+        {
+          "title": "Temperature & the Zeroth Law",
+          "url": "temperature-zeroth-law"
+        },
+        {
+          "title": "Free Energy",
+          "url": "free-energy"
+        },
+        {
+          "title": "Ellingham Diagrams",
+          "url": "ellingham-diagrams"
+        }
+      ]
+    },
+    {
+      "id": "free-energy",
+      "number": "5.9",
+      "title": "Free Energy — The Criterion for Change",
+      "description": "Turning 'entropy of the universe increases' into something you can calculate for a system on a bench.",
+      "readingTime": "10 min",
+      "intro": "The second law says that spontaneous processes increase the total entropy of the universe. This is true, but not very useful. You would need to track the entropy of everything: system, atmosphere, bench, walls. Free energy solves this problem by folding the surroundings into a single quantity that depends only on the system.",
+      "body": [
+        [
+          "h3",
+          "The problem with total entropy"
+        ],
+        [
+          "p",
+          "Suppose you want to know whether a reaction will proceed spontaneously at constant temperature and pressure (the usual laboratory conditions). The second law requires $\\Delta S_{\\text{total}} \\geq 0$, where:"
+        ],
+        [
+          "eq",
+          "\\Delta S_{\\text{total}} = \\Delta S_{\\text{system}} + \\Delta S_{\\text{surroundings}}"
+        ],
+        [
+          "p",
+          "You can measure $\\Delta S_{\\text{system}}$ from calorimetry. But $\\Delta S_{\\text{surroundings}}$ is harder. The surroundings are large, and you did not set out to study them. However, if the process occurs at constant $T$ and $P$, the surroundings gain or lose entropy in a simple way: they absorb heat $-Q_P = -\\Delta H_{\\text{system}}$ at temperature $T$, so:"
+        ],
+        [
+          "eq",
+          "\\Delta S_{\\text{surroundings}} = \\frac{-\\Delta H_{\\text{system}}}{T}"
+        ],
+        [
+          "h3",
+          "Gibbs free energy"
+        ],
+        [
+          "p",
+          "Substituting into the total entropy condition:"
+        ],
+        [
+          "eq",
+          "\\Delta S_{\\text{total}} = \\Delta S_{\\text{system}} - \\frac{\\Delta H_{\\text{system}}}{T} \\geq 0"
+        ],
+        [
+          "p",
+          "Multiply through by $-T$ (which flips the inequality):"
+        ],
+        [
+          "eq",
+          "\\Delta H_{\\text{system}} - T \\Delta S_{\\text{system}} \\leq 0"
+        ],
+        [
+          "p",
+          "The left-hand side is the change in a new quantity, the Gibbs free energy:"
+        ],
+        [
+          "eq",
+          "G = H - TS"
+        ],
+        [
+          "p",
+          "The criterion for spontaneous change at constant $T$ and $P$ is:"
+        ],
+        [
+          "eq",
+          "\\Delta G \\leq 0"
+        ],
+        [
+          "p",
+          "This is the single most important result in materials thermodynamics. A process at constant temperature and pressure is spontaneous if and only if it decreases the Gibbs free energy of the system. Equilibrium occurs when $G$ is at a minimum."
+        ],
+        [
+          "callout",
+          "Why this matters",
+          "The Gibbs free energy lets you determine spontaneity by looking at the system alone. You never need to calculate the entropy of the surroundings explicitly. This is why $G$ appears everywhere in materials science: phase diagrams, reaction equilibria, electrochemistry, alloy design."
+        ],
+        [
+          "h3",
+          "Helmholtz free energy"
+        ],
+        [
+          "p",
+          "If the process occurs at constant $T$ and $V$ instead (less common in practice, but important in simulation and statistical mechanics), the analogous quantity is the Helmholtz free energy:"
+        ],
+        [
+          "eq",
+          "F = U - TS"
+        ],
+        [
+          "p",
+          "The spontaneity criterion becomes $\\Delta F \\leq 0$ at constant $T$ and $V$. The derivation is identical to the Gibbs case but starts from $dU$ rather than $dH$."
+        ],
+        [
+          "p",
+          "In materials science, most experimental work is at constant pressure, so Gibbs free energy dominates. In computational work (molecular dynamics, density functional theory), where the simulation cell has a fixed volume, Helmholtz free energy is more natural."
+        ],
+        [
+          "h3",
+          "The competition between enthalpy and entropy"
+        ],
+        [
+          "p",
+          "The expression $G = H - TS$ makes the competition explicit. A process can be spontaneous ($\\Delta G < 0$) in two ways:"
+        ],
+        [
+          "ul",
+          [
+            "It can release energy ($\\Delta H < 0$, exothermic) even if entropy decreases, provided the energy release is large enough.",
+            "It can increase entropy ($\\Delta S > 0$) even if it costs energy, provided the entropy gain is large enough and the temperature is high enough."
+          ]
+        ],
+        [
+          "p",
+          "The temperature acts as a dial that controls the balance. At low $T$, the $H$ term dominates: stable phases are those with strong bonds and low energy. At high $T$, the $TS$ term dominates: stable phases are those with high entropy and many accessible configurations."
+        ],
+        [
+          "p",
+          "This is why metals melt at high temperature (the liquid has higher entropy), why alloys disorder above a critical temperature (the disordered solid solution has higher configurational entropy), and why gaseous reactions become more favourable at high temperature if they produce more moles of gas."
+        ],
+        [
+          "h3",
+          "G versus T: how to read a stability plot"
+        ],
+        [
+          "p",
+          "Since $G = H - TS$, a plot of $G$ against $T$ at constant $P$ is a line with slope $-S$ (more precisely, $(\\partial G / \\partial T)_P = -S$). Phases with higher entropy have steeper downward slopes. The liquid always has a steeper slope than the solid because $S_{\\text{liquid}} > S_{\\text{solid}}$."
+        ],
+        [
+          "p",
+          "At low temperatures, the solid line sits below the liquid line: $G_{\\text{solid}} < G_{\\text{liquid}}$, so the solid is stable. As temperature increases, the steeper liquid line catches up. At the melting point $T_m$, the two lines cross: $G_{\\text{solid}} = G_{\\text{liquid}}$, and the two phases coexist in equilibrium. Above $T_m$, the liquid line is lower, and the liquid is stable."
+        ],
+        [
+          "p",
+          "For aluminium: $\\Delta H_{\\text{fus}} = 10.7$ kJ/mol and $\\Delta S_{\\text{fus}} = 11.5$ J/(mol$\\cdot$K). At the melting point, $\\Delta G_{\\text{fus}} = \\Delta H - T_m \\Delta S = 0$, which gives $T_m = \\Delta H / \\Delta S = 10700 / 11.5 = 931$ K, close to the measured 933 K. The small discrepancy reflects the temperature dependence of $\\Delta H$ and $\\Delta S$ (Kirchhoff's law, article 5.3)."
+        ],
+        [
+          "p",
+          "At 900 K (below $T_m$): $\\Delta G_{\\text{fus}} = 10700 - 900 \\times 11.5 = +350$ J/mol. Positive: melting is not spontaneous. The solid is stable. At 1000 K (above $T_m$): $\\Delta G_{\\text{fus}} = 10700 - 1000 \\times 11.5 = -800$ J/mol. Negative: melting is spontaneous. The liquid is stable. The numbers are small (hundreds of J/mol), which is why undercooling and superheating are possible in practice: the driving force near $T_m$ is weak."
+        ],
+        [
+          "widget",
+          "g-vs-t",
+          {
+            "Tm": 933,
+            "dH": 10700,
+            "metal": "Al"
+          }
+        ],
+        [
+          "h3",
+          "Free energy and equilibrium constants"
+        ],
+        [
+          "p",
+          "For a chemical reaction, the standard Gibbs free energy change $\\Delta G^\\circ$ is related to the equilibrium constant $K$ by:"
+        ],
+        [
+          "eq",
+          "\\Delta G^\\circ = -RT \\ln K"
+        ],
+        [
+          "derivation",
+          "A large negative $\\Delta G^\\circ$ means a large $K$: the reaction strongly favours products at equilibrium. A positive $\\Delta G^\\circ$ means $K < 1$: the reaction favours reactants.",
+          [
+            [
+              "p",
+              "For a general reaction at temperature $T$, the actual free energy change depends on the activities of reactants and products:"
+            ],
+            [
+              "eq",
+              "\\Delta G = \\Delta G^\\circ + RT \\ln Q"
+            ],
+            [
+              "p",
+              "where $Q$ is the reaction quotient. At equilibrium, $\\Delta G = 0$ and $Q = K$, giving:"
+            ],
+            [
+              "eq",
+              "0 = \\Delta G^\\circ + RT \\ln K"
+            ],
+            [
+              "eq",
+              "\\Delta G^\\circ = -RT \\ln K"
+            ]
+          ]
+        ],
+        [
+          "p",
+          "This equation is the bridge between thermodynamic tables (which give you $\\Delta G^\\circ$) and practical chemistry (which asks: what are the equilibrium concentrations?). We will use it extensively in the articles on Ellingham diagrams and predominance diagrams."
+        ],
+        [
+          "problem",
+          "The standard free energy of formation of water vapour at 298 K is $\\Delta G_f^\\circ = -228.6$ kJ/mol. Calculate the equilibrium constant for the reaction 2H$_2$(g) + O$_2$(g) $\\to$ 2H$_2$O(g) at 298 K. Comment on the result.",
+          [
+            [
+              "eq",
+              "\\Delta G^\\circ = 2 \\times (-228.6) = -457.2 \\text{ kJ/mol}"
+            ],
+            [
+              "eq",
+              "K = \\exp\\left(-\\frac{\\Delta G^\\circ}{RT}\\right) = \\exp\\left(\\frac{457200}{8.314 \\times 298}\\right) = \\exp(184.5)"
+            ],
+            [
+              "p",
+              "$K \\approx 10^{80}$. This is an astronomically large number: the reaction overwhelmingly favours products at equilibrium. Thermodynamics says hydrogen and oxygen should react completely. The fact that a H$_2$/O$_2$ mixture can sit indefinitely at room temperature without reacting is entirely a kinetic effect (the activation energy is high). A spark provides the activation energy, and the reaction proceeds explosively."
+            ]
+          ]
+        ]
+      ],
+      "related": [
+        {
+          "title": "Entropy & the Second Law",
+          "url": "entropy-second-law"
+        },
+        {
+          "title": "Chemical Potential",
+          "url": "chemical-potential"
+        },
+        {
+          "title": "Ellingham Diagrams",
+          "url": "ellingham-diagrams"
+        }
+      ]
+    },
+    {
+      "id": "chemical-potential",
+      "number": "5.10",
+      "title": "Chemical Potential — What Atoms Want",
+      "description": "Why atoms move from here to there, and the condition that makes them stop.",
+      "readingTime": "12 min",
+      "intro": "Temperature tells you which direction heat flows: from high T to low T. Pressure tells you which direction material flows in a fluid: from high P to low P. Chemical potential is the analogous quantity for the flow of atoms or molecules between phases, between regions, or between chemical species. It is the single most important concept in the thermodynamics of mixtures.",
+      "body": [
+        [
+          "h3",
+          "Partial molar quantities"
+        ],
+        [
+          "p",
+          "In a pure substance, every mole is identical. The molar Gibbs free energy is simply $G_m = G / n$. In a mixture, this is no longer true. Adding one mole of ethanol to a litre of water changes the free energy of the mixture by a different amount than adding one mole of ethanol to a litre of ethanol. The contribution of each component depends on the composition."
+        ],
+        [
+          "p",
+          "The partial molar Gibbs free energy of component $i$ in a mixture is:"
+        ],
+        [
+          "eq",
+          "\\mu_i = \\left( \\frac{\\partial G}{\\partial n_i} \\right)_{T, P, n_{j \\neq i}}"
+        ],
+        [
+          "p",
+          "This is the chemical potential of species $i$. It tells you how much the total free energy of the mixture changes when you add an infinitesimal amount of $i$, holding everything else constant. It depends on temperature, pressure, and composition."
+        ],
+        [
+          "p",
+          "The concept of partial molar quantities applies to any extensive property, not just $G$. The partial molar volume $\\bar{V}_i = (\\partial V / \\partial n_i)_{T,P,n_j}$ tells you how the total volume changes when you add a mole of $i$. For an ideal solution, partial molar volumes equal the pure component values. For real solutions, they differ, sometimes significantly. Ethanol and water, for example, have a negative excess volume: mixing 50 mL of ethanol with 50 mL of water gives about 96 mL, not 100, because the molecules pack more efficiently together than apart."
+        ],
+        [
+          "h3",
+          "Why chemical potential matters"
+        ],
+        [
+          "p",
+          "Chemical potential is to mass transfer what temperature is to heat transfer. Atoms move spontaneously from regions of high $\\mu$ to regions of low $\\mu$, just as heat flows from high $T$ to low $T$. The system reaches equilibrium when $\\mu_i$ is the same everywhere for every species."
+        ],
+        [
+          "p",
+          "This is the condition for chemical equilibrium in a mixture:"
+        ],
+        [
+          "eq",
+          "\\mu_i^\\alpha = \\mu_i^\\beta = \\mu_i^\\gamma = \\ldots"
+        ],
+        [
+          "p",
+          "for every component $i$ across all phases $\\alpha, \\beta, \\gamma, \\ldots$. If $\\mu_{\\text{Cu}}$ is higher in the $\\alpha$ phase than in the $\\beta$ phase, copper atoms will diffuse from $\\alpha$ to $\\beta$ until the chemical potentials equalise. This is the thermodynamic driving force for diffusion, for phase transformations, and for chemical reactions."
+        ],
+        [
+          "h3",
+          "Chemical potential of an ideal gas"
+        ],
+        [
+          "p",
+          "For a pure ideal gas, the molar Gibbs free energy depends on pressure:"
+        ],
+        [
+          "eq",
+          "G_m(T, P) = G_m^\\circ(T) + RT \\ln \\frac{P}{P^\\circ}"
+        ],
+        [
+          "p",
+          "where $G_m^\\circ$ is the value at the standard pressure $P^\\circ = 1$ bar and $T$ is fixed. The logarithmic dependence on pressure comes from integrating $dG = V dP$ for an ideal gas ($V = RT/P$)."
+        ],
+        [
+          "derivation",
+          "The pressure dependence of $G$ follows from the fundamental relation $dG = VdP - SdT$. At constant $T$:",
+          [
+            [
+              "p",
+              "At constant temperature:"
+            ],
+            [
+              "eq",
+              "dG = V \\, dP = \\frac{RT}{P} \\, dP"
+            ],
+            [
+              "p",
+              "Integrate from $P^\\circ$ to $P$:"
+            ],
+            [
+              "eq",
+              "G(T, P) - G^\\circ(T) = RT \\int_{P^\\circ}^P \\frac{dP'}{P'} = RT \\ln \\frac{P}{P^\\circ}"
+            ]
+          ]
+        ],
+        [
+          "p",
+          "For an ideal gas mixture, each component behaves as if it alone occupies the volume at its own partial pressure $p_i = x_i P$. The chemical potential of component $i$ is:"
+        ],
+        [
+          "eq",
+          "\\mu_i = \\mu_i^\\circ(T) + RT \\ln \\frac{p_i}{P^\\circ}"
+        ],
+        [
+          "p",
+          "This is the starting point for all gas-phase equilibrium calculations. The chemical potential increases with partial pressure: a gas at high pressure has higher $\\mu$ than the same gas at low pressure, which is why gases expand spontaneously from high to low pressure."
+        ],
+        [
+          "h3",
+          "Chemical potential in condensed phases"
+        ],
+        [
+          "p",
+          "For solids and liquids, the pressure dependence of $\\mu$ is much weaker (because $V_m$ is small), and the composition dependence dominates. For an ideal solution:"
+        ],
+        [
+          "eq",
+          "\\mu_i = \\mu_i^*(T, P) + RT \\ln x_i"
+        ],
+        [
+          "p",
+          "where $\\mu_i^*$ is the chemical potential of pure $i$ at the same $T$ and $P$, and $x_i$ is its mole fraction. Since $x_i < 1$, $\\ln x_i < 0$, and $\\mu_i < \\mu_i^*$. Dissolving a substance in a mixture always lowers its chemical potential relative to the pure state. This is the fundamental thermodynamic reason why mixing tends to happen spontaneously."
+        ],
+        [
+          "p",
+          "For real (non-ideal) solutions, the mole fraction is replaced by the activity $a_i$, which we will define in the next article:"
+        ],
+        [
+          "eq",
+          "\\mu_i = \\mu_i^\\circ + RT \\ln a_i"
+        ],
+        [
+          "widget",
+          "tangent-construction",
+          {
+            "Omega": -10000,
+            "T": 1000
+          }
+        ],
+        [
+          "h3",
+          "The Gibbs-Duhem equation"
+        ],
+        [
+          "p",
+          "The chemical potentials of all components in a mixture are not independent. They are linked by the Gibbs-Duhem equation:"
+        ],
+        [
+          "eq",
+          "\\sum_i n_i \\, d\\mu_i = -S \\, dT + V \\, dP"
+        ],
+        [
+          "p",
+          "At constant $T$ and $P$, this reduces to:"
+        ],
+        [
+          "eq",
+          "\\sum_i x_i \\, d\\mu_i = 0"
+        ],
+        [
+          "p",
+          "If you increase the chemical potential of one component, the chemical potentials of the others must decrease to compensate. For a binary system ($i$ = A, B):"
+        ],
+        [
+          "eq",
+          "x_A \\, d\\mu_A + x_B \\, d\\mu_B = 0"
+        ],
+        [
+          "p",
+          "This is a powerful consistency check. If you measure or model $\\mu_A$ as a function of composition, the Gibbs-Duhem equation fixes $\\mu_B$. You cannot choose both independently. It also means that in practice, you only need to measure the activity of one component in a binary; the other is determined."
+        ],
+        [
+          "problem",
+          "In a binary A-B ideal solution, show that $\\mu_A$ decreases as $x_B$ increases. What is the physical interpretation?",
+          [
+            [
+              "p",
+              "For an ideal solution: $\\mu_A = \\mu_A^* + RT \\ln x_A = \\mu_A^* + RT \\ln(1 - x_B)$."
+            ],
+            [
+              "p",
+              "Since $0 < x_B < 1$, we have $0 < (1 - x_B) < 1$, so $\\ln(1 - x_B) < 0$, and $\\mu_A < \\mu_A^*$. As $x_B$ increases, $x_A$ decreases, $\\ln x_A$ becomes more negative, and $\\mu_A$ drops."
+            ],
+            [
+              "p",
+              "Physically: diluting A reduces its chemical potential. A atoms in a mixture are more \"content\" (lower $\\mu$) than in the pure state, because the mixture has higher configurational entropy. This is why mixing tends to be spontaneous. It is also why boiling points are elevated and freezing points are depressed in solutions: the lower $\\mu$ of the solvent stabilises the liquid phase."
+            ]
+          ]
+        ]
+      ],
+      "related": [
+        {
+          "title": "Free Energy",
+          "url": "free-energy"
+        },
+        {
+          "title": "Activity & Real Behaviour",
+          "url": "activity-real-behaviour"
+        },
+        {
+          "title": "Solutions & Mixing",
+          "url": "solutions-mixing"
+        }
+      ]
+    },
+    {
+      "id": "activity-real-behaviour",
+      "number": "5.11",
+      "title": "Activity & Real Behaviour",
+      "description": "Raoult's law, Henry's law, activity coefficients, and standard states — handling non-ideal reality.",
+      "readingTime": "12 min",
+      "intro": "In an ideal solution, the chemical potential of each component depends only on its mole fraction. Real solutions are not ideal. Atoms interact with each other, and those interactions change the thermodynamics. Activity is the quantity that accounts for this.",
+      "body": [
+        [
+          "h3",
+          "Why mole fraction is not enough"
+        ],
+        [
+          "p",
+          "The ideal solution expression $\\mu_i = \\mu_i^* + RT \\ln x_i$ assumes that an atom of species A does not care whether its neighbours are A atoms or B atoms. The energy of mixing is zero, and the only driving force for mixing is the configurational entropy gain. This is a reasonable approximation for some systems (Ge-Si, for example, where the atoms are almost the same size and have similar bonding), but it is badly wrong for most."
+        ],
+        [
+          "p",
+          "In a Cu-Ni alloy, copper and nickel atoms have different sizes and different electronic structures. Their interactions are not the same as Cu-Cu or Ni-Ni interactions. The enthalpy of mixing is nonzero, and the chemical potential depends on composition in a more complicated way than $RT \\ln x_i$."
+        ],
+        [
+          "p",
+          "Activity is the fix. We define the activity $a_i$ of component $i$ so that the chemical potential always takes the same mathematical form:"
+        ],
+        [
+          "eq",
+          "\\mu_i = \\mu_i^\\circ + RT \\ln a_i"
+        ],
+        [
+          "p",
+          "For an ideal solution, $a_i = x_i$. For a real solution, $a_i \\neq x_i$, and the ratio defines the activity coefficient:"
+        ],
+        [
+          "eq",
+          "a_i = \\gamma_i x_i"
+        ],
+        [
+          "p",
+          "The activity coefficient $\\gamma_i$ captures all the non-ideal behaviour. If $\\gamma_i > 1$, the component is more \"eager\" to escape the solution than ideal mixing would predict (positive deviation). If $\\gamma_i < 1$, it is less eager (negative deviation). If $\\gamma_i = 1$, the solution is ideal with respect to that component at that composition."
+        ],
+        [
+          "h3",
+          "Raoult's law"
+        ],
+        [
+          "p",
+          "In the limit where $x_i \\to 1$ (nearly pure $i$), the environment around an $i$ atom is almost entirely other $i$ atoms. The solution behaves ideally from $i$'s perspective, and $\\gamma_i \\to 1$. This limit is Raoult's law:"
+        ],
+        [
+          "eq",
+          "a_i \\to x_i \\quad \\text{as} \\quad x_i \\to 1"
+        ],
+        [
+          "p",
+          "Raoult's law is exact in the limit of a dilute solute in a solvent, from the solvent's point of view. If you dissolve a trace of tin in liquid copper, the activity of copper is essentially equal to its mole fraction. The copper atoms barely notice the tin."
+        ],
+        [
+          "h3",
+          "Henry's law"
+        ],
+        [
+          "p",
+          "In the opposite limit, $x_i \\to 0$ (trace amounts of $i$), every $i$ atom is surrounded entirely by the other component. The environment is consistent but different from pure $i$. In this limit, $\\gamma_i$ approaches a constant value $\\gamma_i^\\circ \\neq 1$, and:"
+        ],
+        [
+          "eq",
+          "a_i \\to \\gamma_i^\\circ \\, x_i \\quad \\text{as} \\quad x_i \\to 0"
+        ],
+        [
+          "p",
+          "This is Henry's law. The activity is proportional to $x_i$ but with a different proportionality constant. Henry's law constant $\\gamma_i^\\circ$ (or equivalently $k_H = \\gamma_i^\\circ P_i^*$ for gas solubility) is a measurable property of the dilute solution."
+        ],
+        [
+          "p",
+          "Henry's law is the foundation of dilute solution thermodynamics. In metallurgy, dissolved oxygen in liquid iron, nitrogen in liquid steel, and hydrogen in titanium all obey Henry's law at low concentrations. The Sievert's law for gas dissolution ($C \\propto \\sqrt{P}$) is a consequence of Henry's law applied to diatomic gases that dissociate on dissolving."
+        ],
+        [
+          "widget",
+          "activity-plot",
+          {}
+        ],
+        [
+          "h3",
+          "Standard states"
+        ],
+        [
+          "p",
+          "The choice of standard state determines the numerical value of $a_i$. There are two common conventions:"
+        ],
+        [
+          "ul",
+          [
+            "<strong>Raoultian standard state</strong>: pure component $i$ at the same $T$ and $P$. Then $\\mu_i^\\circ = \\mu_i^*$, $a_i = \\gamma_i x_i$, and $\\gamma_i \\to 1$ as $x_i \\to 1$. This is the standard choice for components present in large amounts (solvents, major alloying elements).",
+            "<strong>Henrian standard state</strong>: the hypothetical state of pure $i$ obeying Henry's law. Then $\\gamma_i \\to 1$ as $x_i \\to 0$, and activity equals mole fraction in the dilute limit. This is the natural choice for trace solutes (dissolved gases, impurities)."
+          ]
+        ],
+        [
+          "p",
+          "The two conventions assign different numerical values to $a_i$ for the same physical state, because they use different reference points. The chemical potential $\\mu_i$ itself is the same regardless of convention; only the split between $\\mu_i^\\circ$ and $RT \\ln a_i$ changes. Confusion about standard states is one of the most common sources of error in applied thermodynamics. Always check which convention a database or textbook is using."
+        ],
+        [
+          "h3",
+          "Measuring activities"
+        ],
+        [
+          "p",
+          "Activities can be measured in several ways:"
+        ],
+        [
+          "ul",
+          [
+            "From vapour pressure: $a_i = p_i / p_i^*$, where $p_i$ is the partial pressure over the solution and $p_i^*$ is the vapour pressure of pure $i$ at the same temperature. This works well for volatile components.",
+            "From electrochemical measurements: an electrochemical cell with electrodes in the solution and in the pure component gives an EMF directly related to $\\ln a_i$ through the Nernst equation.",
+            "From phase equilibrium: if two phases coexist, the equality of chemical potentials ($\\mu_i^\\alpha = \\mu_i^\\beta$) constrains the activities. Liquidus measurements in binary phase diagrams are essentially activity measurements.",
+            "From calorimetry: measuring the enthalpy of mixing gives $H^{\\text{excess}}$, from which activity coefficients can be derived via the Gibbs-Helmholtz equation."
+          ]
+        ],
+        [
+          "p",
+          "In practice, the CALPHAD method uses all of these data sources simultaneously, fitting model parameters to reproduce measured phase diagrams, enthalpies, and activities across entire composition and temperature ranges."
+        ],
+        [
+          "problem",
+          "In liquid Fe-Ni alloys at 1600°C, the activity coefficient of Ni follows approximately $\\ln \\gamma_{\\text{Ni}} = -1.3(1 - x_{\\text{Ni}})^2$ (Raoultian standard state). Calculate the activity of Ni in an alloy with $x_{\\text{Ni}} = 0.3$.",
+          [
+            [
+              "eq",
+              "\\ln \\gamma_{\\text{Ni}} = -1.3 \\times (1 - 0.3)^2 = -1.3 \\times 0.49 = -0.637"
+            ],
+            [
+              "eq",
+              "\\gamma_{\\text{Ni}} = e^{-0.637} = 0.529"
+            ],
+            [
+              "eq",
+              "a_{\\text{Ni}} = \\gamma_{\\text{Ni}} \\times x_{\\text{Ni}} = 0.529 \\times 0.3 = 0.159"
+            ],
+            [
+              "p",
+              "The activity (0.159) is about half the mole fraction (0.3). This is a negative deviation: $\\gamma < 1$, meaning Fe-Ni interactions are more favourable than Ni-Ni interactions. Ni is more stable in the iron solution than ideal mixing would predict. This is consistent with the strong compound-forming tendency of the Fe-Ni system (FeNi$_3$ is an ordered phase)."
+            ]
+          ]
+        ]
+      ],
+      "related": [
+        {
+          "title": "Chemical Potential",
+          "url": "chemical-potential"
+        },
+        {
+          "title": "Solutions & Mixing",
+          "url": "solutions-mixing"
+        },
+        {
+          "title": "The Regular Solution Model",
+          "url": "regular-solution-model"
+        }
+      ]
+    },
+    {
+      "id": "solutions-mixing",
+      "number": "5.12",
+      "title": "Solutions & Mixing",
+      "description": "What happens when you put two things together — ideal solutions, excess properties, and the meaning of mixing quantities.",
+      "readingTime": "12 min",
+      "intro": "When two pure substances are combined into a single phase, every thermodynamic property changes. The free energy of the mixture is not simply the sum of the free energies of the pure components. Understanding exactly how and why it differs is the foundation of alloy thermodynamics.",
+      "body": [
+        [
+          "h3",
+          "Mixing quantities"
+        ],
+        [
+          "p",
+          "For any extensive property $Y$ (free energy, enthalpy, entropy, volume), the mixing quantity $\\Delta Y_{\\text{mix}}$ is the difference between the value in the solution and the weighted sum of the pure component values:"
+        ],
+        [
+          "eq",
+          "\\Delta Y_{\\text{mix}} = Y_{\\text{solution}} - \\sum_i x_i Y_i^*"
+        ],
+        [
+          "p",
+          "where $Y_i^*$ is the molar value for pure $i$. The mixing quantity tells you what changes when you form the solution. For the Gibbs free energy of a binary A-B solution:"
+        ],
+        [
+          "eq",
+          "\\Delta G_{\\text{mix}} = G_{\\text{solution}} - (x_A G_A^* + x_B G_B^*)"
+        ],
+        [
+          "p",
+          "If $\\Delta G_{\\text{mix}} < 0$, the solution is more stable than the unmixed pure components, and mixing is spontaneous. If $\\Delta G_{\\text{mix}} > 0$ at some composition, the system prefers to separate into two phases at that composition."
+        ],
+        [
+          "h3",
+          "The ideal solution"
+        ],
+        [
+          "p",
+          "The ideal solution is the simplest model. It assumes that A-B interactions are identical to A-A and B-B interactions: the atoms do not care what their neighbours are. The only change on mixing is configurational entropy."
+        ],
+        [
+          "p",
+          "The mixing quantities for an ideal solution are:"
+        ],
+        [
+          "eq",
+          "\\Delta H_{\\text{mix}}^{\\text{ideal}} = 0"
+        ],
+        [
+          "eq",
+          "\\Delta S_{\\text{mix}}^{\\text{ideal}} = -R \\left[ x_A \\ln x_A + x_B \\ln x_B \\right]"
+        ],
+        [
+          "eq",
+          "\\Delta G_{\\text{mix}}^{\\text{ideal}} = RT \\left[ x_A \\ln x_A + x_B \\ln x_B \\right]"
+        ],
+        [
+          "p",
+          "The entropy of mixing is always positive (since $\\ln x < 0$ for $0 < x < 1$), so the free energy of mixing is always negative. An ideal solution is stable at all compositions and all temperatures. It never phase-separates."
+        ],
+        [
+          "p",
+          "At 1000 K and $x_A = x_B = 0.5$: $\\Delta G_{\\text{mix}}^{\\text{ideal}} = 1000 \\times 8.314 \\times (0.5 \\ln 0.5 + 0.5 \\ln 0.5) = -5.76$ kJ/mol. That is a significant stabilisation. Even weak chemical interactions have to overcome this entropic driving force to cause phase separation."
+        ],
+        [
+          "h3",
+          "Excess properties"
+        ],
+        [
+          "p",
+          "Real solutions differ from ideal ones. The difference is captured by excess properties:"
+        ],
+        [
+          "eq",
+          "\\Delta Y_{\\text{mix}} = \\Delta Y_{\\text{mix}}^{\\text{ideal}} + Y^{\\text{excess}}"
+        ],
+        [
+          "p",
+          "The excess free energy $G^{\\text{excess}}$ is the part of the mixing free energy that is not accounted for by ideal configurational entropy. It contains all the information about the actual atomic interactions."
+        ],
+        [
+          "eq",
+          "G^{\\text{excess}} = \\Delta G_{\\text{mix}} - RT \\left[ x_A \\ln x_A + x_B \\ln x_B \\right]"
+        ],
+        [
+          "p",
+          "The excess free energy is related to the activity coefficients:"
+        ],
+        [
+          "eq",
+          "G^{\\text{excess}} = RT \\left[ x_A \\ln \\gamma_A + x_B \\ln \\gamma_B \\right]"
+        ],
+        [
+          "p",
+          "If $G^{\\text{excess}} < 0$, A-B interactions are more favourable than the average of A-A and B-B: the solution is more stable than ideal (negative deviation, $\\gamma < 1$). If $G^{\\text{excess}} > 0$, A-B interactions are less favourable: the solution is less stable than ideal (positive deviation, $\\gamma > 1$), and at high enough $G^{\\text{excess}}$ the system may phase-separate."
+        ],
+        [
+          "h3",
+          "Enthalpy and entropy of mixing"
+        ],
+        [
+          "p",
+          "The excess free energy can be decomposed: $G^{\\text{excess}} = H^{\\text{excess}} - T S^{\\text{excess}}$. The excess enthalpy $H^{\\text{excess}} = \\Delta H_{\\text{mix}}$ (since the ideal enthalpy of mixing is zero). The excess entropy $S^{\\text{excess}}$ accounts for non-random arrangements (short-range order or clustering)."
+        ],
+        [
+          "p",
+          "Some real numbers for liquid alloys at approximately equimolar composition near their liquidus:"
+        ],
+        [
+          "ul",
+          [
+            "Cu-Ni: $\\Delta H_{\\text{mix}} \\approx +2$ kJ/mol (slightly endothermic, atoms weakly repel)",
+            "Cu-Zn: $\\Delta H_{\\text{mix}} \\approx -8$ kJ/mol (exothermic, strong compound-forming tendency)",
+            "Fe-Mn: $\\Delta H_{\\text{mix}} \\approx 0$ (nearly ideal)",
+            "Au-Si: $\\Delta H_{\\text{mix}} \\approx -15$ kJ/mol (very exothermic, deep eutectic)"
+          ]
+        ],
+        [
+          "p",
+          "The sign and magnitude of $\\Delta H_{\\text{mix}}$ determine the shape of the phase diagram. Strongly negative mixing enthalpies produce compound-forming systems with high melting intermediates. Positive mixing enthalpies produce miscibility gaps. Near-zero values produce simple lens-shaped diagrams with complete solid solubility."
+        ],
+        [
+          "widget",
+          "mixing-curves",
+          {}
+        ],
+        [
+          "h3",
+          "The tangent construction"
+        ],
+        [
+          "p",
+          "Given a curve of $G_{\\text{mix}}$ versus composition, the chemical potentials of A and B at any composition $x_B$ are found by drawing the tangent to the curve at that point. The intercepts of the tangent with the $x_B = 0$ and $x_B = 1$ axes give $\\mu_A$ and $\\mu_B$ respectively."
+        ],
+        [
+          "p",
+          "This geometric construction is not just a mathematical trick. It is how phase equilibrium is determined graphically. When two phases coexist (say, solid and liquid), the tangent lines to their respective $G(x)$ curves must be the same line (the common tangent). The points of tangency give the equilibrium compositions of the two phases. We will use this construction extensively in article 5.15."
+        ],
+        [
+          "h3",
+          "Why all this matters"
+        ],
+        [
+          "p",
+          "The thermodynamics of mixing is the foundation of everything that follows in this module. The regular solution model (article 5.13) gives $G^{\\text{excess}}$ a simple functional form that captures the essential physics. The common tangent construction (article 5.15) turns $G(x)$ curves into phase diagrams. Ellingham diagrams (article 5.16) are just $\\Delta G^\\circ$ versus $T$ for oxidation reactions. Every applied tool in materials thermodynamics rests on the concepts of mixing free energy, excess properties, and chemical potential."
+        ],
+        [
+          "problem",
+          "Calculate $\\Delta G_{\\text{mix}}$ for an ideal binary solution at $x_B = 0.3$ and $T = 1200$ K. Compare this to the thermal energy $RT$.",
+          [
+            [
+              "eq",
+              "\\Delta G_{\\text{mix}} = RT[x_A \\ln x_A + x_B \\ln x_B]"
+            ],
+            [
+              "eq",
+              "= 8.314 \\times 1200 \\times [0.7 \\ln 0.7 + 0.3 \\ln 0.3]"
+            ],
+            [
+              "eq",
+              "= 9977 \\times [0.7 \\times (-0.357) + 0.3 \\times (-1.204)]"
+            ],
+            [
+              "eq",
+              "= 9977 \\times [-0.250 + (-0.361)] = 9977 \\times (-0.611) = -6096 \\text{ J/mol}"
+            ],
+            [
+              "p",
+              "$RT = 9977$ J/mol. So $|\\Delta G_{\\text{mix}}| \\approx 0.61 \\times RT$. The entropic driving force for mixing is a substantial fraction of the thermal energy scale. An enthalpy of mixing would need to exceed about 6 kJ/mol (positive) to overcome this and cause phase separation at this temperature."
+            ]
+          ]
+        ]
+      ],
+      "related": [
+        {
+          "title": "Activity & Real Behaviour",
+          "url": "activity-real-behaviour"
+        },
+        {
+          "title": "The Regular Solution Model",
+          "url": "regular-solution-model"
+        },
+        {
+          "title": "From Free Energy to Phase Diagrams",
+          "url": "free-energy-to-phase-diagrams"
+        }
+      ]
+    },
+    {
+      "id": "regular-solution-model",
+      "number": "5.13",
+      "title": "The Regular Solution Model",
+      "description": "The simplest model that captures real alloy behaviour — and a slider that builds a phase diagram.",
+      "readingTime": "14 min",
+      "intro": "The ideal solution assumes atoms are indifferent to their neighbours. Real atoms are not. The regular solution model adds one parameter to capture this: an interaction energy that makes mixing either favourable or unfavourable. With that single parameter, the model predicts miscibility gaps, critical temperatures, and the onset of spinodal decomposition.",
+      "body": [
+        [
+          "h3",
+          "The model"
+        ],
+        [
+          "p",
+          "The regular solution model assumes that the excess enthalpy of mixing is proportional to $x_A x_B$:"
+        ],
+        [
+          "eq",
+          "\\Delta H_{\\text{mix}} = \\Omega \\, x_A x_B"
+        ],
+        [
+          "p",
+          "where $\\Omega$ is the interaction parameter, with units of J/mol. The excess entropy is assumed to be zero: atoms are randomly distributed on the lattice regardless of their interactions. This is the \"regular\" assumption: the enthalpy is non-ideal but the entropy is still ideal."
+        ],
+        [
+          "p",
+          "The total free energy of mixing is then:"
+        ],
+        [
+          "eq",
+          "\\Delta G_{\\text{mix}} = \\Omega \\, x_A x_B + RT \\left[ x_A \\ln x_A + x_B \\ln x_B \\right]"
+        ],
+        [
+          "p",
+          "The first term is the enthalpy of mixing (the interaction energy). The second is the ideal entropy contribution. The balance between them determines whether the solution is stable."
+        ],
+        [
+          "h3",
+          "What $\\Omega$ means physically"
+        ],
+        [
+          "p",
+          "The interaction parameter can be related to nearest-neighbour bond energies. If $\\varepsilon_{AA}$, $\\varepsilon_{BB}$ and $\\varepsilon_{AB}$ are the bond energies for each type of pair, and $z$ is the coordination number, then:"
+        ],
+        [
+          "eq",
+          "\\Omega = z N_A \\left[ \\varepsilon_{AB} - \\frac{1}{2}(\\varepsilon_{AA} + \\varepsilon_{BB}) \\right]"
+        ],
+        [
+          "p",
+          "If A-B bonds are weaker than the average of A-A and B-B bonds, $\\Omega > 0$ (endothermic mixing, atoms prefer their own kind). If A-B bonds are stronger, $\\Omega < 0$ (exothermic mixing, compound-forming tendency)."
+        ],
+        [
+          "p",
+          "Typical values: Cu-Ni has $\\Omega \\approx +12$ kJ/mol (mild positive, miscibility gap at low temperature). Au-Ni has $\\Omega \\approx +30$ kJ/mol (strong positive, wide miscibility gap). Cu-Zn has $\\Omega \\approx -30$ kJ/mol (strong negative, ordered compounds form)."
+        ],
+        [
+          "h3",
+          "The shape of the $G_{\\text{mix}}$ curve"
+        ],
+        [
+          "p",
+          "When $\\Omega = 0$, the $G_{\\text{mix}}$ curve is the familiar ideal-mixing parabola, concave up everywhere. The solution is stable at all compositions."
+        ],
+        [
+          "p",
+          "When $\\Omega > 0$, the positive enthalpy term pushes the centre of the curve upward. At low temperature (where the $TS$ term is weak), the curve develops two minima and a central hump: it becomes concave down in the middle and concave up at the edges. The solution is unstable at intermediate compositions and wants to separate into an A-rich phase and a B-rich phase."
+        ],
+        [
+          "p",
+          "The critical condition is found by setting $\\partial^2 \\Delta G_{\\text{mix}} / \\partial x^2 = 0$ at $x = 0.5$:"
+        ],
+        [
+          "derivation",
+          "The critical temperature for a symmetric miscibility gap is $T_c = \\Omega / 2R$. Below this temperature, the solution separates. Above it, entropy wins and the solution is stable.",
+          [
+            [
+              "p",
+              "At $x_B = 0.5$, the second derivative of $\\Delta G_{\\text{mix}}$ with respect to $x_B$ is:"
+            ],
+            [
+              "eq",
+              "\\frac{\\partial^2 \\Delta G_{\\text{mix}}}{\\partial x_B^2} = -2\\Omega + \\frac{RT}{x_A x_B}"
+            ],
+            [
+              "p",
+              "At $x_A = x_B = 0.5$:"
+            ],
+            [
+              "eq",
+              "\\frac{\\partial^2 \\Delta G_{\\text{mix}}}{\\partial x_B^2} = -2\\Omega + 4RT"
+            ],
+            [
+              "p",
+              "This equals zero when:"
+            ],
+            [
+              "eq",
+              "T_c = \\frac{\\Omega}{2R}"
+            ]
+          ]
+        ],
+        [
+          "p",
+          "For Cu-Ni ($\\Omega \\approx 12$ kJ/mol): $T_c = 12000 / (2 \\times 8.314) \\approx 720$ K. The experimental miscibility gap closes at about 630 K. The regular solution model overestimates somewhat (it neglects short-range order and the temperature dependence of $\\Omega$), but it captures the physics correctly."
+        ],
+        [
+          "h3",
+          "Spinodal decomposition"
+        ],
+        [
+          "p",
+          "Within the miscibility gap, there are two regimes. Between the spinodal points (where $\\partial^2 G / \\partial x^2 = 0$), the free energy curve is concave down. Any infinitesimal fluctuation in composition lowers the free energy, so decomposition proceeds spontaneously without nucleation. This is spinodal decomposition."
+        ],
+        [
+          "p",
+          "Between the spinodal and the binodal (the equilibrium phase boundary), the curve is concave up but the system is still metastable: it can lower its energy by decomposing, but it needs a finite composition fluctuation (a nucleus) to get over the energy barrier. This is nucleation and growth."
+        ],
+        [
+          "p",
+          "The distinction matters for microstructure. Spinodal decomposition produces a fine, interconnected two-phase structure with a characteristic wavelength. Nucleation and growth produces discrete precipitates in a matrix. Both are predicted by the shape of the $G(x)$ curve, which the regular solution model gives explicitly."
+        ],
+        [
+          "widget",
+          "regular-solution",
+          {}
+        ],
+        [
+          "h3",
+          "Limitations"
+        ],
+        [
+          "p",
+          "The regular solution model is symmetric: the $G_{\\text{mix}}$ curve is the same for $x_A$ and $x_B$. Real systems are rarely symmetric. The model also uses a single, composition-independent $\\Omega$, which is a significant simplification."
+        ],
+        [
+          "p",
+          "The CALPHAD approach extends this by writing $G^{\\text{excess}}$ as a Redlich-Kister polynomial:"
+        ],
+        [
+          "eq",
+          "G^{\\text{excess}} = x_A x_B \\sum_{n=0}^{N} L_n (x_A - x_B)^n"
+        ],
+        [
+          "p",
+          "The $L_0$ term is the regular solution. Higher-order terms ($L_1, L_2, \\ldots$) add asymmetry and composition dependence. These parameters are fitted to experimental data (phase boundaries, enthalpies of mixing, activity measurements) and stored in thermodynamic databases used by software like Thermo-Calc, FactSage, and Pandat. The regular solution model is the conceptual core of all of these tools."
+        ],
+        [
+          "problem",
+          "A binary alloy has $\\Omega = 20$ kJ/mol. Calculate the critical temperature $T_c$ for the miscibility gap. At 800 K, is the equimolar alloy stable as a single phase or does it phase-separate?",
+          [
+            [
+              "eq",
+              "T_c = \\frac{\\Omega}{2R} = \\frac{20000}{2 \\times 8.314} = 1203 \\text{ K}"
+            ],
+            [
+              "p",
+              "At 800 K ($T/T_c = 0.665$), we are below $T_c$, so the equimolar alloy is inside the miscibility gap and will phase-separate into an A-rich and a B-rich phase."
+            ],
+            [
+              "p",
+              "Check: $\\partial^2 \\Delta G_{\\text{mix}} / \\partial x^2$ at $x = 0.5$:"
+            ],
+            [
+              "eq",
+              "-2\\Omega + 4RT = -40000 + 4 \\times 8.314 \\times 800 = -40000 + 26605 = -13395 < 0"
+            ],
+            [
+              "p",
+              "The second derivative is negative: the free energy curve is concave down at $x = 0.5$. The alloy is not just metastable but actually inside the spinodal. It will decompose spontaneously without needing nucleation."
+            ]
+          ]
+        ]
+      ],
+      "related": [
+        {
+          "title": "Solutions & Mixing",
+          "url": "solutions-mixing"
+        },
+        {
+          "title": "Phase Equilibria & the Gibbs Phase Rule",
+          "url": "phase-equilibria-gibbs-phase-rule"
+        },
+        {
+          "title": "From Free Energy to Phase Diagrams",
+          "url": "free-energy-to-phase-diagrams"
+        }
+      ]
+    },
+    {
+      "id": "phase-equilibria-gibbs-phase-rule",
+      "number": "5.14",
+      "title": "Phase Equilibria & the Gibbs Phase Rule",
+      "description": "How many phases can coexist, and what fixes what.",
+      "readingTime": "10 min",
+      "intro": "A binary eutectic system can have liquid, solid A, and solid B all present simultaneously, but only at one specific temperature and composition. A pure substance can exist as solid, liquid, and gas together only at a single point in the PT diagram. These are not coincidences. The Gibbs phase rule tells you exactly how many variables you are free to choose when multiple phases coexist.",
+      "body": [
+        [
+          "h3",
+          "Phases, components, and degrees of freedom"
+        ],
+        [
+          "p",
+          "A <strong>phase</strong> is a physically distinct, homogeneous region of matter. Liquid water is one phase. Ice is another. Steam is a third. In a Cu-Zn alloy, the $\\alpha$ (FCC) solid solution is one phase, the $\\beta$ (BCC) phase is another, and the liquid is a third. Each phase has its own composition, structure, and properties."
+        ],
+        [
+          "p",
+          "A <strong>component</strong> is the minimum number of independent chemical species needed to describe the composition of every phase. For a Cu-Zn alloy, you need two components (Cu and Zn). For the water system, you need one (H₂O, since hydrogen and oxygen are always in 2:1 ratio). For a system where CaO and SiO₂ react to form CaSiO₃, you need two components (CaO and SiO₂), not three, because the compound's composition is determined by the other two."
+        ],
+        [
+          "p",
+          "The <strong>degrees of freedom</strong> $F$ (or variance) is the number of intensive variables you can independently change without changing the number of phases present."
+        ],
+        [
+          "h3",
+          "The phase rule"
+        ],
+        [
+          "p",
+          "Gibbs showed that:"
+        ],
+        [
+          "eq",
+          "F = C - P + 2"
+        ],
+        [
+          "p",
+          "where $C$ is the number of components, $P$ is the number of phases, and the 2 accounts for temperature and pressure."
+        ],
+        [
+          "derivation",
+          "The phase rule follows from counting equations and unknowns. Each phase in a $C$-component system is described by $C - 1$ independent composition variables plus $T$ and $P$, giving $P(C - 1) + 2$ total variables. The equilibrium conditions ($\\mu_i^\\alpha = \\mu_i^\\beta$ for each component between each pair of phases) provide $(P - 1)C$ equations. The degrees of freedom are the difference: $F = P(C-1) + 2 - (P-1)C = C - P + 2$.",
+          [
+            [
+              "p",
+              "Variables: each phase has $C - 1$ independent mole fractions, plus $T$ and $P$ shared by all phases. Total: $P(C-1) + 2$."
+            ],
+            [
+              "p",
+              "Constraints: for each of $C$ components, the chemical potential must be equal across all $P$ phases. That gives $(P-1)$ independent equations per component, so $(P-1)C$ total."
+            ],
+            [
+              "p",
+              "Degrees of freedom:"
+            ],
+            [
+              "eq",
+              "F = P(C-1) + 2 - (P-1)C = PC - P + 2 - PC + C = C - P + 2"
+            ]
+          ]
+        ],
+        [
+          "h3",
+          "What the phase rule tells you"
+        ],
+        [
+          "p",
+          "For a one-component system ($C = 1$):"
+        ],
+        [
+          "ul",
+          [
+            "One phase ($P = 1$): $F = 2$. You can vary both $T$ and $P$ freely. This is a region in the PT diagram.",
+            "Two phases ($P = 2$): $F = 1$. Fix $T$ and $P$ is determined (or vice versa). This is a line in the PT diagram (the melting curve, the boiling curve).",
+            "Three phases ($P = 3$): $F = 0$. No freedom at all. This is a single point: the triple point. For water, 273.16 K and 611.7 Pa."
+          ]
+        ],
+        [
+          "p",
+          "You cannot have four phases in equilibrium for a one-component system. $F$ would be $-1$, which is meaningless. The phase rule forbids it."
+        ],
+        [
+          "p",
+          "For a binary system ($C = 2$):"
+        ],
+        [
+          "ul",
+          [
+            "One phase: $F = 3$ ($T$, $P$, and composition). If pressure is fixed (as it usually is in metallurgy), $F = 2$: the familiar single-phase regions in a binary phase diagram.",
+            "Two phases: $F = 2$ at variable pressure, $F = 1$ at fixed pressure. On a temperature-composition diagram at 1 atm, two-phase regions are areas (not lines), but within them, specifying $T$ fixes both phase compositions.",
+            "Three phases: $F = 1$ at variable pressure, $F = 0$ at fixed pressure. This is a horizontal line on the phase diagram: a eutectic, peritectic, or eutectoid reaction at a single temperature."
+          ]
+        ],
+        [
+          "p",
+          "The phase rule does not tell you which phases are present or what their compositions are. It only tells you how many independent variables you have once you know the number of phases. The actual phase diagram must be determined experimentally or calculated from free energy models."
+        ],
+        [
+          "h3",
+          "Metastable equilibria"
+        ],
+        [
+          "p",
+          "The phase rule applies to true equilibrium. In practice, systems often fail to reach equilibrium. A supersaturated solid solution is a single phase with $F = 2$ (at fixed $P$), but it is not the equilibrium state. The phase rule correctly describes the metastable state (one phase, two degrees of freedom) but does not tell you that the system \"should\" decompose into two phases. Recognising the difference between stable and metastable equilibria is one of the key skills in applied materials thermodynamics."
+        ],
+        [
+          "problem",
+          "In the Fe-C binary phase diagram at 1 atm, the eutectoid reaction occurs at 727°C: austenite ($\\gamma$) $\\to$ ferrite ($\\alpha$) + cementite (Fe$_3$C). How many degrees of freedom does the system have at the eutectoid point?",
+          [
+            [
+              "p",
+              "$C = 2$ (Fe and C), $P = 3$ ($\\gamma$, $\\alpha$, Fe$_3$C). At fixed pressure:"
+            ],
+            [
+              "eq",
+              "F = C - P + 1 = 2 - 3 + 1 = 0"
+            ],
+            [
+              "p",
+              "Zero degrees of freedom. The temperature (727°C) and the compositions of all three phases are completely fixed. You cannot change any variable without losing one of the three phases. This is why the eutectoid appears as a single horizontal line on the phase diagram, not as a region."
+            ]
+          ]
+        ]
+      ],
+      "related": [
+        {
+          "title": "From Free Energy to Phase Diagrams",
+          "url": "free-energy-to-phase-diagrams"
+        },
+        {
+          "title": "The Regular Solution Model",
+          "url": "regular-solution-model"
+        },
+        {
+          "title": "Systems, Boundaries & State",
+          "url": "systems-boundaries-state"
+        }
+      ]
+    },
+    {
+      "id": "free-energy-to-phase-diagrams",
+      "number": "5.15",
+      "title": "From Free Energy to Phase Diagrams",
+      "description": "G-x curves, the common tangent construction, and how binary phase diagrams emerge from thermodynamics.",
+      "readingTime": "14 min",
+      "intro": "A phase diagram is a map of stability. At each temperature and composition, it tells you which phases are present at equilibrium. This article shows where that map comes from: a set of free energy curves, one for each phase, evaluated at each temperature. The common tangent construction converts these curves into the familiar boundaries of a phase diagram.",
+      "body": [
+        [
+          "h3",
+          "G-x curves for two phases"
+        ],
+        [
+          "p",
+          "Consider a binary A-B system with two possible phases: liquid (L) and solid ($\\alpha$). At a given temperature, each phase has its own Gibbs free energy as a function of composition:"
+        ],
+        [
+          "eq",
+          "G^L(x_B) = x_A G_A^{*,L} + x_B G_B^{*,L} + \\Delta G_{\\text{mix}}^L(x_B)"
+        ],
+        [
+          "eq",
+          "G^\\alpha(x_B) = x_A G_A^{*,\\alpha} + x_B G_B^{*,\\alpha} + \\Delta G_{\\text{mix}}^\\alpha(x_B)"
+        ],
+        [
+          "p",
+          "where $G_i^{*,\\phi}$ is the free energy of pure $i$ in phase $\\phi$. These are different for solid and liquid: $G_A^{*,L} \\neq G_A^{*,\\alpha}$ unless $T$ is exactly the melting point of pure A."
+        ],
+        [
+          "p",
+          "At a temperature above the melting points of both components, $G^L < G^\\alpha$ at all compositions: the liquid curve sits entirely below the solid curve, and the system is liquid everywhere. At a temperature below the melting points of both, the solid curve sits below the liquid. At intermediate temperatures, the curves cross, and both phases are stable over different composition ranges."
+        ],
+        [
+          "h3",
+          "The common tangent construction"
+        ],
+        [
+          "p",
+          "When two free energy curves overlap in composition space, the equilibrium state is found by the common tangent construction. Draw the line that is tangent to both curves simultaneously. The compositions at the two points of tangency are the equilibrium compositions of the two phases."
+        ],
+        [
+          "p",
+          "Why does this work? At equilibrium, the chemical potential of each component must be the same in both phases: $\\mu_A^L = \\mu_A^\\alpha$ and $\\mu_B^L = \\mu_B^\\alpha$. Recall from article 5.12 that the chemical potentials are given by the intercepts of the tangent to the $G(x)$ curve. If the tangent line is the same for both curves, both intercepts match, and both chemical potential conditions are satisfied simultaneously."
+        ],
+        [
+          "p",
+          "The region between the two tangent compositions is a two-phase region. At any overall composition in this range, the system separates into the two equilibrium phases."
+        ],
+        [
+          "h3",
+          "The lever rule"
+        ],
+        [
+          "p",
+          "If the overall composition $x_0$ falls in a two-phase region at temperature $T$, the system splits into two phases with compositions given by the phase boundaries (the tie line endpoints). The lever rule tells you how much of each phase is present."
+        ],
+        [
+          "p",
+          "Conservation of mass requires that the total amount of B in the system equals the sum of B in each phase:"
+        ],
+        [
+          "eq",
+          "x_0 = f^L x_B^L + f^S x_B^S"
+        ],
+        [
+          "p",
+          "where $f^L$ and $f^S = 1 - f^L$ are the mole fractions of liquid and solid. Solving:"
+        ],
+        [
+          "eq",
+          "f^L = \\frac{x_B^S - x_0}{x_B^S - x_B^L} \\qquad f^S = \\frac{x_0 - x_B^L}{x_B^S - x_B^L}"
+        ],
+        [
+          "p",
+          "The name comes from the analogy to a mechanical lever. Think of the tie line as a beam balanced at the overall composition. The \"weight\" of each phase is proportional to the length of the beam on the <em>opposite</em> side. An overall composition close to the solidus gives mostly solid. Close to the liquidus gives mostly liquid."
+        ],
+        [
+          "callout",
+          "Worked example",
+          "A Cu-Ni alloy with overall composition $x_{\\text{Ni}} = 0.50$ at 1500 K. From the phase diagram, the liquidus is at $x_{\\text{Ni}}^L = 0.38$ and the solidus at $x_{\\text{Ni}}^S = 0.58$. The fraction of solid is $f^S = (0.50 - 0.38) / (0.58 - 0.38) = 0.60$. The alloy is 60% solid, 40% liquid. The solid is Ni-rich (0.58); the liquid is Cu-rich (0.38)."
+        ],
+        [
+          "p",
+          "Drag the point on the diagram below into the two-phase region to see the tie line and phase fractions update live:"
+        ],
+        [
+          "widget",
+          "lever-rule",
+          {}
+        ],
+        [
+          "h3",
+          "Building a phase diagram temperature by temperature"
+        ],
+        [
+          "p",
+          "Repeat the common tangent construction at many temperatures. At each temperature, you get a pair of equilibrium compositions (or none, if one curve sits entirely below the other). Plot these compositions against temperature and you have a phase diagram."
+        ],
+        [
+          "p",
+          "For a simple lens-shaped system (complete solid solubility, e.g. Cu-Ni at high temperature):"
+        ],
+        [
+          "ol",
+          [
+            "Above the melting point of both components: liquid everywhere. Single-phase liquid region.",
+            "At high temperature: the liquid curve is lower than the solid over most of the composition range, but the solid curve is starting to come down on the component with the highest melting point. The common tangent touches near the pure-B side. A narrow two-phase (L + $\\alpha$) region appears.",
+            "At intermediate temperature: the two curves overlap more, the common tangent touches further from the edges, and the two-phase region widens.",
+            "Below the melting point of both: the solid curve sits entirely below the liquid. Single-phase solid."
+          ]
+        ],
+        [
+          "p",
+          "The upper boundary of the two-phase region (the locus of liquid compositions) is the liquidus. The lower boundary (the locus of solid compositions) is the solidus."
+        ],
+        [
+          "widget",
+          "common-tangent",
+          {}
+        ],
+        [
+          "h3",
+          "Eutectic systems"
+        ],
+        [
+          "p",
+          "If the solid phase has a positive mixing enthalpy ($\\Omega > 0$ for the solid), the solid $G(x)$ curve develops a hump at intermediate compositions, while the liquid curve (with its weaker interactions) remains smoothly concave. At some temperature, the common tangent from the A-rich solid to the B-rich solid passes through the liquid curve. Below this temperature, it is more favourable to form a mixture of two solids than a single solid solution."
+        ],
+        [
+          "p",
+          "The temperature at which three phases (liquid, $\\alpha$, $\\beta$) coexist is the eutectic temperature. The composition at which the liquid transforms directly into the two-solid mixture is the eutectic composition. On the phase diagram, this appears as a horizontal line connecting the three-phase compositions (a eutectic isotherm), with a V-shaped liquidus above it."
+        ],
+        [
+          "p",
+          "The Pb-Sn system is a classic eutectic. Lead and tin have limited solid solubility (positive $\\Omega$ in the solid). The eutectic is at 183°C and 61.9 wt% Sn. Below 183°C, the system consists of Pb-rich $\\alpha$ and Sn-rich $\\beta$. This is the basis of traditional solder."
+        ],
+        [
+          "h3",
+          "More complex systems"
+        ],
+        [
+          "p",
+          "The same logic extends to any number of phases. Add an intermediate compound (an ordered phase with its own $G(x)$ curve, typically with a deep minimum at its stoichiometric composition), and you get peritectic reactions and additional two-phase regions. Add a gas phase, and you can construct oxide stability diagrams."
+        ],
+        [
+          "p",
+          "In every case, the procedure is the same: write down $G(x)$ for each phase at each temperature, find the common tangents, and plot the tangent compositions against temperature. This is exactly what CALPHAD software does, using optimised Gibbs energy models for each phase, fitted to experimental data."
+        ],
+        [
+          "p",
+          "The conceptual point: a phase diagram is not a separate piece of information from the free energy curves. It is a different way of presenting the same information. If you understand $G(x)$ curves and the common tangent, you can read any phase diagram, predict the effect of changing temperature or composition, and understand why the boundaries are where they are."
+        ],
+        [
+          "problem",
+          "In a Cu-Ni alloy at 1500 K, the liquidus composition is $x_{\\text{Ni}}^L = 0.38$ and the solidus is $x_{\\text{Ni}}^S = 0.58$. An alloy with overall composition $x_{\\text{Ni}} = 0.45$ is cooled slowly through this temperature. What phases are present, what are their compositions, and what fraction of the alloy is solid?",
+          [
+            [
+              "p",
+              "At 1500 K, $x_0 = 0.45$ lies between $x^L = 0.38$ and $x^S = 0.58$. The alloy is in the two-phase (L + S) region. The liquid has composition $x_{\\text{Ni}} = 0.38$ and the solid has composition $x_{\\text{Ni}} = 0.58$."
+            ],
+            [
+              "p",
+              "By the lever rule:"
+            ],
+            [
+              "eq",
+              "f^S = \\frac{x_0 - x^L}{x^S - x^L} = \\frac{0.45 - 0.38}{0.58 - 0.38} = \\frac{0.07}{0.20} = 0.35"
+            ],
+            [
+              "p",
+              "The alloy is 35% solid and 65% liquid. The solid is Ni-enriched relative to the overall composition; the liquid is Cu-enriched. As cooling continues, both compositions shift along the solidus and liquidus curves, and the fraction of solid increases until the last liquid disappears at the solidus temperature for $x_0 = 0.45$."
+            ]
+          ]
+        ]
+      ],
+      "related": [
+        {
+          "title": "The Regular Solution Model",
+          "url": "regular-solution-model"
+        },
+        {
+          "title": "Phase Equilibria & the Gibbs Phase Rule",
+          "url": "phase-equilibria-gibbs-phase-rule"
+        },
+        {
+          "title": "Ellingham Diagrams",
+          "url": "ellingham-diagrams"
+        }
+      ]
+    },
+    {
+      "id": "ellingham-diagrams",
+      "number": "5.16",
+      "title": "Ellingham Diagrams",
+      "description": "Which oxides are stable? Reading these charts like a metallurgist.",
+      "readingTime": "12 min",
+      "intro": "If you heat a metal in air, will it oxidise? If so, can you reduce the oxide back to the metal using carbon? At what temperature? The Ellingham diagram answers all of these questions on a single chart. It is one of the most practically useful constructions in materials thermodynamics.",
+      "body": [
+        [
+          "h3",
+          "The idea"
+        ],
+        [
+          "p",
+          "Consider the oxidation of a metal M:"
+        ],
+        [
+          "eq",
+          "2\\text{M} + \\text{O}_2 \\to 2\\text{MO}"
+        ],
+        [
+          "p",
+          "The standard Gibbs free energy change for this reaction, $\\Delta G^\\circ$, tells you whether the oxide is stable at a given temperature. If $\\Delta G^\\circ < 0$, the oxide is thermodynamically favoured over the metal in the presence of oxygen at 1 atm. If $\\Delta G^\\circ > 0$, the metal is stable and the oxide will decompose."
+        ],
+        [
+          "p",
+          "An Ellingham diagram plots $\\Delta G^\\circ$ for the formation of various oxides against temperature, all normalised to consume one mole of O₂. By plotting all reactions on the same basis, you can compare them directly."
+        ],
+        [
+          "h3",
+          "Reading the diagram"
+        ],
+        [
+          "p",
+          "Each line on the Ellingham diagram represents one oxidation reaction. The lines are approximately straight because:"
+        ],
+        [
+          "eq",
+          "\\Delta G^\\circ = \\Delta H^\\circ - T \\Delta S^\\circ"
+        ],
+        [
+          "p",
+          "and both $\\Delta H^\\circ$ and $\\Delta S^\\circ$ are roughly constant with temperature (Kirchhoff corrections are small for most oxide reactions). The slope of each line is $-\\Delta S^\\circ$. Since the oxidation reaction consumes one mole of gas (O₂), $\\Delta S^\\circ$ is negative (loss of gas-phase entropy), and the lines slope upward. The more negative $\\Delta S^\\circ$ (more gas consumed), the steeper the upward slope."
+        ],
+        [
+          "p",
+          "Kinks in the lines occur at phase transitions of the metal or oxide. Melting increases the entropy of the metal, making $\\Delta S^\\circ$ more negative (the solid-to-liquid transition adds entropy to the reactant side), so the line becomes steeper. Boiling of the metal makes an even larger change."
+        ],
+        [
+          "p",
+          "The lower a line sits on the diagram, the more negative $\\Delta G^\\circ$ and the more stable the oxide. The oxides of calcium, magnesium and aluminium sit near the bottom: they are very stable and very difficult to reduce. The oxides of copper, nickel and iron sit higher: they are less stable and easier to reduce."
+        ],
+        [
+          "widget",
+          "ellingham-chart",
+          {}
+        ],
+        [
+          "h3",
+          "Which metal reduces which oxide?"
+        ],
+        [
+          "p",
+          "If metal A has a lower (more negative) $\\Delta G^\\circ$ line than metal B, then A can reduce the oxide of B. Aluminium sits below iron on the Ellingham diagram, so aluminium can reduce iron oxide:"
+        ],
+        [
+          "eq",
+          "2\\text{Al} + \\text{Fe}_2\\text{O}_3 \\to \\text{Al}_2\\text{O}_3 + 2\\text{Fe}"
+        ],
+        [
+          "p",
+          "This is the thermite reaction. It is violently exothermic because the difference in $\\Delta G^\\circ$ between Al₂O₃ and Fe₂O₃ is large (about $-800$ kJ per mole of O₂ at room temperature). The further apart two lines are on the Ellingham diagram, the larger the driving force for the reduction reaction."
+        ],
+        [
+          "h3",
+          "The carbon lines"
+        ],
+        [
+          "p",
+          "Carbon is the most important reducing agent in metallurgy. It appears on the Ellingham diagram as two reactions:"
+        ],
+        [
+          "eq",
+          "2\\text{C} + \\text{O}_2 \\to 2\\text{CO} \\qquad \\Delta G^\\circ = -221 - 0.175T \\text{ kJ}"
+        ],
+        [
+          "eq",
+          "\\text{C} + \\text{O}_2 \\to \\text{CO}_2 \\qquad \\Delta G^\\circ = -394 \\text{ kJ (nearly constant)}"
+        ],
+        [
+          "p",
+          "The CO₂ line is almost horizontal because one mole of gas is consumed and one is produced ($\\Delta S^\\circ \\approx 0$). The CO line slopes downward because one mole of gas is consumed but two are produced ($\\Delta S^\\circ > 0$, positive, unlike most oxidation reactions). The two lines cross at about 700°C."
+        ],
+        [
+          "p",
+          "Below 700°C, the CO₂ reaction is more favourable and carbon reduces oxides that sit above the CO₂ line. Above 700°C, the CO reaction takes over and carbon can reduce progressively more stable oxides as temperature increases. This is why smelting furnaces operate at high temperatures: the reducing power of carbon increases with temperature."
+        ],
+        [
+          "p",
+          "Iron oxide sits above the carbon lines above about 700°C, which is why iron smelting in a blast furnace works. Aluminium oxide sits below the carbon lines at all temperatures, which is why aluminium cannot be smelted from its ore using carbon. It must be reduced electrolytically (the Hall-Héroult process)."
+        ],
+        [
+          "h3",
+          "Oxygen partial pressure"
+        ],
+        [
+          "p",
+          "The Ellingham diagram also gives the equilibrium oxygen partial pressure for each reaction. Since $\\Delta G^\\circ = -RT \\ln K$ and for the reaction $2\\text{M} + \\text{O}_2 \\to 2\\text{MO}$, $K = 1/P_{\\text{O}_2}$ (activities of pure solids are 1), we have:"
+        ],
+        [
+          "eq",
+          "\\ln P_{\\text{O}_2} = \\frac{\\Delta G^\\circ}{RT}"
+        ],
+        [
+          "p",
+          "At any point on an Ellingham line, you can read off the $P_{\\text{O}_2}$ below which the metal is stable and above which the oxide is stable. For aluminium at 1000 K, $\\Delta G^\\circ \\approx -1000$ kJ/mol O₂, giving $P_{\\text{O}_2} \\approx 10^{-52}$ atm. This is an absurdly small number. It means aluminium oxide is stable in any environment that contains even a trace of oxygen. For copper at 1000 K, $\\Delta G^\\circ \\approx -200$ kJ, giving $P_{\\text{O}_2} \\approx 10^{-10}$ atm, which is achievable in a good vacuum or reducing atmosphere."
+        ],
+        [
+          "p",
+          "This is how metallurgists choose processing atmospheres. To prevent oxidation during heat treatment, you need $P_{\\text{O}_2}$ below the equilibrium value. For steel, a forming gas (N₂/H₂ mix) suffices. For titanium, even ultra-high vacuum may not be enough, which is why titanium processing uses argon atmospheres and avoids any oxygen exposure."
+        ],
+        [
+          "problem",
+          "The Ellingham line for aluminium oxidation is approximately $\\Delta G^\\circ = -1120 + 0.21T$ kJ per mol O$_2$. At 1000 K, what is the equilibrium oxygen partial pressure in atm?",
+          [
+            [
+              "eq",
+              "\\Delta G^\\circ(1000) = -1120 + 0.21 \\times 1000 = -910 \\text{ kJ/mol O}_2"
+            ],
+            [
+              "eq",
+              "\\ln P_{\\text{O}_2} = \\frac{\\Delta G^\\circ}{RT} = \\frac{-910000}{8.314 \\times 1000} = -109.4"
+            ],
+            [
+              "eq",
+              "P_{\\text{O}_2} = e^{-109.4} \\approx 10^{-47.5} \\text{ atm}"
+            ],
+            [
+              "p",
+              "This is an extraordinarily small number. Any detectable amount of oxygen will oxidise aluminium at 1000 K. Alumina is one of the most stable oxides, which is why aluminium is so difficult to produce from its ore and why the protective Al$_2$O$_3$ film on aluminium surfaces is so robust."
+            ]
+          ]
+        ]
+      ],
+      "related": [
+        {
+          "title": "Free Energy",
+          "url": "free-energy"
+        },
+        {
+          "title": "Predominance Diagrams",
+          "url": "predominance-diagrams"
+        },
+        {
+          "title": "From Free Energy to Phase Diagrams",
+          "url": "free-energy-to-phase-diagrams"
+        }
+      ]
+    },
+    {
+      "id": "predominance-diagrams",
+      "number": "5.17",
+      "title": "Predominance Diagrams",
+      "description": "Pourbaix diagrams and stability domains — thermodynamics meets electrochemistry.",
+      "readingTime": "12 min",
+      "intro": "An Ellingham diagram maps oxide stability against temperature. A predominance diagram maps stability against two variables simultaneously: typically oxygen partial pressure and temperature, or electrode potential and pH. These are the thermodynamic maps that corrosion engineers, hydrometallurgists, and electrochemists use every day.",
+      "body": [
+        [
+          "h3",
+          "Stability area diagrams"
+        ],
+        [
+          "p",
+          "A predominance diagram (also called a stability area diagram or Kellogg diagram) plots the regions where different compounds of a metal are stable as a function of two environmental variables. The most common axes are $\\log P_{\\text{O}_2}$ versus $\\log P_{\\text{S}_2}$ (for roasting of sulphide ores) or $\\log P_{\\text{O}_2}$ versus temperature (for high-temperature oxidation)."
+        ],
+        [
+          "p",
+          "Each boundary line on the diagram represents equilibrium between two adjacent phases. On one side of the line, one phase is stable; on the other side, the other is stable. The lines are calculated from the condition $\\Delta G = 0$ for the reaction converting one phase to the other. Inside each region, one phase has the lowest free energy."
+        ],
+        [
+          "p",
+          "For the Cu-O-S system, the predominance diagram at a given temperature shows regions of Cu (metal), Cu₂O, CuO, Cu₂S, and CuSO₄. A roasting engineer uses this to choose the atmosphere (oxygen and sulphur pressures) that converts copper sulphide ore to metallic copper without forming unwanted copper sulphate."
+        ],
+        [
+          "h3",
+          "Pourbaix diagrams"
+        ],
+        [
+          "p",
+          "The Pourbaix diagram (also called a potential-pH diagram) is the most widely used predominance diagram in materials science. It plots electrode potential $E$ against pH for a metal-water system at a fixed temperature (usually 25°C). The diagram shows which species (metal, oxide, hydroxide, dissolved ions) is thermodynamically stable at each combination of potential and pH."
+        ],
+        [
+          "p",
+          "The diagram contains three types of boundary:"
+        ],
+        [
+          "ul",
+          [
+            "<strong>Horizontal lines</strong>: pure electrochemical reactions (no H⁺ or OH⁻ involved). The equilibrium potential depends only on the activities of the metal species, not on pH.",
+            "<strong>Vertical lines</strong>: pure chemical reactions (no electron transfer). The equilibrium depends only on pH, not on potential. Dissolution of an oxide in acid, for example.",
+            "<strong>Sloping lines</strong>: reactions involving both electron transfer and H⁺/OH⁻. The slope is determined by the stoichiometry, following the Nernst equation."
+          ]
+        ],
+        [
+          "h3",
+          "Reading a Pourbaix diagram: iron"
+        ],
+        [
+          "p",
+          "The Pourbaix diagram for iron at 25°C is the most commonly cited example. At low pH and low potential, Fe²⁺ ions are stable: the iron dissolves as ferrous ions. This is active corrosion. At higher potential, Fe³⁺ becomes stable (ferric ions). At intermediate pH and higher potential, Fe₂O₃ (rust) or Fe₃O₄ (magnetite) form a stable solid on the surface. This is the passive region: the oxide film protects the metal from further corrosion. At high pH, soluble ferrate species can form, but these are rarely important in practice."
+        ],
+        [
+          "p",
+          "At the bottom of the diagram, at very negative potentials, metallic iron is stable regardless of pH. This is the immunity region: the metal is thermodynamically stable and does not corrode. Cathodic protection works by shifting the potential of a steel structure into this region (using sacrificial anodes or impressed current)."
+        ],
+        [
+          "p",
+          "The diagram also shows two dashed lines representing the stability limits of water:"
+        ],
+        [
+          "ul",
+          [
+            "The upper dashed line: above this, water is oxidised to O₂. $E = 1.23 - 0.059 \\times \\text{pH}$ V at 25°C.",
+            "The lower dashed line: below this, water is reduced to H₂. $E = -0.059 \\times \\text{pH}$ V at 25°C."
+          ]
+        ],
+        [
+          "p",
+          "These lines define the electrochemical window of water. Corrosion processes in aqueous environments must lie between them (unless the water itself is being electrolysed)."
+        ],
+        [
+          "widget",
+          "pourbaix-diagram",
+          {}
+        ],
+        [
+          "h3",
+          "Limitations"
+        ],
+        [
+          "p",
+          "Pourbaix diagrams are thermodynamic constructions. They tell you what is stable, not what actually happens in practice. Several limitations are worth noting:"
+        ],
+        [
+          "ul",
+          [
+            "They assume equilibrium. Real corrosion is a kinetic process. A metal may be thermodynamically unstable but corrode very slowly because the oxide film is protective (passivation). Aluminium in neutral water is a good example: the Pourbaix diagram says it should dissolve, but the Al₂O₃ film prevents it.",
+            "They are usually drawn for pure metals in pure water at 25°C and standard concentrations ($10^{-6}$ M dissolved species by convention). Real environments contain chlorides, sulphates, dissolved oxygen, biological organisms, and other complications.",
+            "They do not show kinetic information: corrosion rates, pitting susceptibility, or stress corrosion cracking.",
+            "Temperature effects are significant. A Pourbaix diagram at 25°C may not be relevant for a boiler operating at 250°C."
+          ]
+        ],
+        [
+          "p",
+          "Despite these limitations, Pourbaix diagrams are enormously useful as a first screening tool. They tell you whether corrosion is thermodynamically possible, what form it might take (active dissolution vs. passivation), and what conditions (potential, pH) might prevent it. The kinetic details come from experiments and more detailed models, but the Pourbaix diagram tells you where to look."
+        ],
+        [
+          "h3",
+          "Constructing predominance diagrams"
+        ],
+        [
+          "p",
+          "Every boundary on a predominance diagram comes from a single equilibrium calculation: set $\\Delta G = 0$ for the reaction between two adjacent phases and solve for the relationship between the axis variables. For a Pourbaix diagram, this means applying the Nernst equation:"
+        ],
+        [
+          "eq",
+          "E = E^\\circ - \\frac{RT}{nF} \\ln Q"
+        ],
+        [
+          "p",
+          "where $n$ is the number of electrons transferred, $F = 96485$ C/mol is Faraday's constant, and $Q$ is the reaction quotient. At 25°C, $RT/F = 0.02569$ V."
+        ],
+        [
+          "p",
+          "For more complex systems (ternary alloys, multiple gas species, high temperatures), the calculations become involved but the principle is the same. Software tools (FactSage, HSC Chemistry, Thermo-Calc) automate the construction of predominance diagrams for arbitrary systems using the same free energy databases that underlie CALPHAD phase diagrams. The thermodynamic framework is identical; only the choice of axes differs."
+        ],
+        [
+          "problem",
+          "On the Pourbaix diagram for iron at 25°C, the Fe/Fe$^{2+}$ boundary is at approximately $E = -0.62$ V (vs SHE), independent of pH. Explain why this boundary is horizontal, and calculate the equilibrium concentration of Fe$^{2+}$ if the potential is $-0.44$ V (the standard electrode potential for Fe).",
+          [
+            [
+              "p",
+              "The reaction Fe $\\to$ Fe$^{2+}$ + 2e$^-$ involves no H$^+$ or OH$^-$, so the equilibrium potential does not depend on pH. The boundary is horizontal."
+            ],
+            [
+              "p",
+              "The Nernst equation at 25°C:"
+            ],
+            [
+              "eq",
+              "E = E^\\circ + \\frac{0.0257}{2} \\ln [\\text{Fe}^{2+}]"
+            ],
+            [
+              "p",
+              "The boundary is drawn at $[\\text{Fe}^{2+}] = 10^{-6}$ M (the conventional threshold for \"significant corrosion\"):"
+            ],
+            [
+              "eq",
+              "E = -0.44 + \\frac{0.0257}{2} \\ln(10^{-6}) = -0.44 + 0.01285 \\times (-13.82) = -0.44 - 0.178 = -0.618 \\text{ V}"
+            ],
+            [
+              "p",
+              "This matches the $-0.62$ V boundary on the diagram. At $E = -0.44$ V (the standard potential), $[\\text{Fe}^{2+}] = 1$ M: the iron is actively corroding and dissolving at a high rate."
+            ]
+          ]
+        ]
+      ],
+      "related": [
+        {
+          "title": "Ellingham Diagrams",
+          "url": "ellingham-diagrams"
+        },
+        {
+          "title": "Free Energy",
+          "url": "free-energy"
+        },
+        {
+          "title": "Activity & Real Behaviour",
+          "url": "activity-real-behaviour"
+        }
+      ]
+    }
+  ]
+}

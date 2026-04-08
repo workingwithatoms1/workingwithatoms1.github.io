@@ -1,0 +1,123 @@
+{
+  "module": {
+    "id": "phase-transformations",
+    "number": 7,
+    "title": "Phase Equilibria & Transformations",
+    "part": "I",
+    "partTitle": "Foundations",
+    "topic": "Phase Transformations",
+    "intro": ""
+  },
+  "articles": [
+    {
+      "id": "unary-binary-phase-diagrams",
+      "number": "7.1",
+      "title": "Unary & Binary Phase Diagrams",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "the-lever-rule-phase-fractions",
+      "number": "7.2",
+      "title": "The Lever Rule & Phase Fractions",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "ternary-phase-diagrams",
+      "number": "7.3",
+      "title": "Ternary Phase Diagrams",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "gibbs-phase-rule",
+      "number": "7.4",
+      "title": "Gibbs Phase Rule",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "nucleation-homogeneous-heterogeneous",
+      "number": "7.5",
+      "title": "Nucleation (Homogeneous & Heterogeneous)",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "growth-kinetics",
+      "number": "7.6",
+      "title": "Growth Kinetics",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "solidification-microstructure",
+      "number": "7.7",
+      "title": "Solidification & Microstructure",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "spinodal-decomposition",
+      "number": "7.8",
+      "title": "Spinodal Decomposition",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "precipitation-age-hardening",
+      "number": "7.9",
+      "title": "Precipitation & Age Hardening",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "martensitic-transformations",
+      "number": "7.10",
+      "title": "Martensitic Transformations",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "order-disorder-transitions",
+      "number": "7.11",
+      "title": "Order-Disorder Transitions",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    }
+  ]
+}

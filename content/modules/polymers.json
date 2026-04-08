@@ -1,0 +1,83 @@
+{
+  "module": {
+    "id": "polymers",
+    "number": 13,
+    "title": "Polymers",
+    "part": "III",
+    "partTitle": "Material Classes",
+    "topic": "Polymers",
+    "intro": ""
+  },
+  "articles": [
+    {
+      "id": "polymer-chemistry-classification",
+      "number": "13.1",
+      "title": "Polymer Chemistry & Classification",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "molecular-weight-distributions",
+      "number": "13.2",
+      "title": "Molecular Weight & Distributions",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "chain-conformation-configuration",
+      "number": "13.3",
+      "title": "Chain Conformation & Configuration",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "crystallinity-in-polymers",
+      "number": "13.4",
+      "title": "Crystallinity in Polymers",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "viscoelasticity-mechanical-behaviour",
+      "number": "13.5",
+      "title": "Viscoelasticity & Mechanical Behaviour",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "glass-transition-melting",
+      "number": "13.6",
+      "title": "Glass Transition & Melting",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "polymer-processing",
+      "number": "13.7",
+      "title": "Polymer Processing",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    }
+  ]
+}

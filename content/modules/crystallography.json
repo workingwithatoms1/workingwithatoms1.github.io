@@ -1,0 +1,94 @@
+{
+  "module": {
+    "id": "crystallography",
+    "number": 3,
+    "title": "Crystallography",
+    "part": "I",
+    "partTitle": "Foundations",
+    "topic": "Crystallography",
+    "intro": "How atoms arrange themselves into repeating three-dimensional patterns. From the fourteen Bravais lattices to reciprocal space, this module builds the geometric language used throughout materials science."
+  },
+  "articles": [
+    {
+      "id": "crystal-systems",
+      "number": "3.1",
+      "title": "Crystal Systems & Bravais Lattices",
+      "description": "The seven crystal systems and fourteen ways to tile three-dimensional space.",
+      "readingTime": "8 min",
+      "intro": "There are precisely fourteen ways to arrange points in three-dimensional space such that every point sees an identical environment. These fourteen Bravais lattices, grouped into seven crystal systems, form the geometric foundation of all crystallography.",
+      "body": [
+        ["h3", "Why Lattices Matter"],
+        ["p", "A crystal is any solid whose atoms occupy positions that repeat periodically in three dimensions. Strip away the chemistry — ignore which element sits where — and what remains is a lattice: an infinite array of geometrically identical points. Every physical crystal, from a grain of table salt to a turbine-blade superalloy, maps onto one of these lattices. Understanding them is the first step toward understanding structure, and structure governs properties."],
+        ["p", "A lattice is defined by three translation vectors, <strong>a</strong>, <strong>b</strong> and <strong>c</strong>, and the angles between them, &alpha;, &beta; and &gamma;. Any point in the lattice can be reached by an integer combination of these vectors. The parallelepiped they span is the unit cell — the smallest box that, when stacked in all three directions, reconstructs the entire crystal."],
+
+        ["h3", "The Seven Crystal Systems"],
+        ["p", "The relationships between the six lattice parameters (three lengths, three angles) divide all possible lattices into seven crystal systems. These range from the highly constrained to the completely general:"],
+        ["p", "<strong>Cubic</strong> — all edges equal, all angles 90&deg;. The highest symmetry. Metals like copper, iron (at high temperature) and aluminium crystallise in cubic lattices."],
+        ["p", "<strong>Tetragonal</strong> — a square base (a&nbsp;=&nbsp;b) with a different height c. All angles remain 90&deg;. Tin and titanium dioxide are tetragonal."],
+        ["p", "<strong>Orthorhombic</strong> — three unequal edges, all angles still 90&deg;. Sulphur and cementite (Fe&#8323;C) belong here."],
+        ["p", "<strong>Hexagonal</strong> — a&nbsp;=&nbsp;b, &gamma;&nbsp;=&nbsp;120&deg;, with a perpendicular c axis. Zinc, magnesium and graphite adopt hexagonal structures."],
+        ["p", "<strong>Trigonal</strong> (rhombohedral) — all edges equal, all angles equal but not 90&deg;. Calcite and quartz (in one description) are trigonal."],
+        ["p", "<strong>Monoclinic</strong> — three unequal edges; one angle departs from 90&deg;. Gypsum and many minerals fall into this system."],
+        ["p", "<strong>Triclinic</strong> — no constraints at all. Three unequal edges, three unequal angles. The lowest symmetry. Some feldspars are triclinic."],
+
+        ["callout", "Key Concept", "The crystal system tells you the <em>shape</em> of the unit cell. It does not tell you how many atoms are inside it, or where they sit — that is the role of the basis. A lattice plus a basis gives a crystal structure."],
+
+        ["h3", "From Seven Systems to Fourteen Lattices"],
+        ["p", "Within each crystal system, there may be more than one way to place lattice points. Auguste Bravais showed in 1848 that when you allow lattice points not only at the corners of the unit cell but also at the centre of the cell body or the centres of its faces, you obtain exactly fourteen distinct lattices — no more, no fewer."],
+        ["p", "The four possible centering types are:"],
+        ["p", "<strong>P</strong> (primitive) — lattice points at the corners only. One lattice point per cell."],
+        ["p", "<strong>I</strong> (body-centred) — an additional point at the centre of the cell. Two lattice points per cell."],
+        ["p", "<strong>F</strong> (face-centred) — additional points at the centre of every face. Four lattice points per cell."],
+        ["p", "<strong>C</strong> (base-centred) — additional points at the centres of one pair of opposite faces. Two lattice points per cell."],
+        ["p", "Not every centering works in every crystal system. A face-centred tetragonal lattice, for instance, can always be redescribed as a body-centred tetragonal lattice with a smaller cell — so it is not counted separately. The fourteen that survive this redundancy test are the Bravais lattices."],
+
+        ["h3", "Coordination and Packing"],
+        ["p", "The coordination number — how many nearest neighbours surround each lattice point — differs between lattices and has direct physical consequences. In a body-centred cubic (BCC) lattice, each point has 8 nearest neighbours. In face-centred cubic (FCC), it has 12. The hexagonal close-packed (HCP) structure also gives 12."],
+        ["p", "Packing efficiency — the fraction of space filled when identical spheres are placed on every lattice point — varies accordingly. FCC and HCP both achieve approximately 74%, the theoretical maximum for equal spheres. BCC manages about 68%. Simple cubic, with a coordination number of just 6, packs only 52% of space. These differences in local geometry propagate upward into macroscopic properties: ductility, slip-system availability and thermal expansion all trace back, in part, to the underlying lattice."],
+
+        ["callout", "Worked Example", "The atomic radius of copper is 1.28&nbsp;&Aring;. Copper is FCC, so the face diagonal of the unit cell equals 4r. The lattice parameter is therefore a&nbsp;=&nbsp;4r&nbsp;/&nbsp;&radic;2&nbsp;=&nbsp;3.62&nbsp;&Aring;, and the packing fraction is (4&nbsp;&times;&nbsp;4&pi;r&sup3;/3)&nbsp;/&nbsp;a&sup3;&nbsp;&asymp;&nbsp;0.74."],
+
+        ["h3", "Seeing Lattices in Real Materials"],
+        ["p", "The Bravais lattice is an abstraction, but it maps directly onto real structures. Iron below 912&nbsp;&deg;C is BCC (&alpha;-Fe); above that temperature it transforms to FCC (&gamma;-Fe) — the same atoms, rearranged onto a different lattice, with dramatically different mechanical behaviour. Aluminium is FCC at all temperatures, which is part of why it is so formable. Titanium is HCP at room temperature (and therefore harder to deform in certain directions) but switches to BCC above 882&nbsp;&deg;C."],
+        ["p", "Knowing the lattice is the starting point for predicting slip systems, diffraction patterns, anisotropy and phase-transformation pathways. Everything that follows in crystallography — Miller indices, symmetry operations, reciprocal space — is built on these fourteen lattices."]
+      ],
+      "related": [
+        { "title": "Miller Indices", "url": "miller-indices" },
+        { "title": "Point Groups & Space Groups", "url": "point-groups" },
+        { "title": "Reciprocal Lattice", "url": "reciprocal-lattice" },
+        { "title": "Defects", "url": "../defects/" },
+        { "title": "Phase Transformations", "url": "../phase-transformations/" }
+      ]
+    },
+    {
+      "id": "miller-indices",
+      "number": "3.2",
+      "title": "Miller Indices & Crystallographic Directions",
+      "description": "A notation system for planes and directions inside crystals.",
+      "readingTime": "7 min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "point-groups",
+      "number": "3.3",
+      "title": "Point Groups & Space Groups",
+      "description": "Combining rotations, reflections and translations to classify crystal symmetry.",
+      "readingTime": "10 min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "reciprocal-lattice",
+      "number": "3.4",
+      "title": "Reciprocal Lattice & Diffraction Geometry",
+      "description": "The Fourier-space twin of the crystal lattice, and why it governs diffraction.",
+      "readingTime": "9 min",
+      "intro": "",
+      "body": [],
+      "related": []
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "module": {
+    "id": "composites",
+    "number": 14,
+    "title": "Composites",
+    "part": "III",
+    "partTitle": "Material Classes",
+    "topic": "Composites",
+    "intro": ""
+  },
+  "articles": [
+    {
+      "id": "types-of-composites",
+      "number": "14.1",
+      "title": "Types of Composites",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "rule-of-mixtures-bounds",
+      "number": "14.2",
+      "title": "Rule of Mixtures & Bounds",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "fibre-reinforced-composites",
+      "number": "14.3",
+      "title": "Fibre-Reinforced Composites",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "particle-short-fibre-composites",
+      "number": "14.4",
+      "title": "Particle & Short-Fibre Composites",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "laminate-theory",
+      "number": "14.5",
+      "title": "Laminate Theory",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "failure-mechanisms-damage-tolerance",
+      "number": "14.6",
+      "title": "Failure Mechanisms & Damage Tolerance",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "natural-bio-inspired-composites",
+      "number": "14.7",
+      "title": "Natural & Bio-Inspired Composites",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    }
+  ]
+}

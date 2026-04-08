@@ -1,0 +1,83 @@
+{
+  "module": {
+    "id": "characterisation",
+    "number": 15,
+    "title": "Characterisation Techniques",
+    "part": "IV",
+    "partTitle": "Practice",
+    "topic": "Characterisation",
+    "intro": ""
+  },
+  "articles": [
+    {
+      "id": "x-ray-diffraction-powder-single-crystal",
+      "number": "15.1",
+      "title": "X-ray Diffraction (Powder & Single-Crystal)",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "scanning-electron-microscopy-edx",
+      "number": "15.2",
+      "title": "Scanning Electron Microscopy & EDX",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "transmission-electron-microscopy",
+      "number": "15.3",
+      "title": "Transmission Electron Microscopy",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "spectroscopy-xps-raman-ftir",
+      "number": "15.4",
+      "title": "Spectroscopy (XPS, Raman, FTIR)",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "thermal-analysis-dsc-tga-dta",
+      "number": "15.5",
+      "title": "Thermal Analysis (DSC, TGA, DTA)",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "mechanical-testing-nanoindentation",
+      "number": "15.6",
+      "title": "Mechanical Testing & Nanoindentation",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "surface-interface-analysis",
+      "number": "15.7",
+      "title": "Surface & Interface Analysis",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    }
+  ]
+}

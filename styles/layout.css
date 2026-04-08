@@ -1,0 +1,95 @@
+/* ==========================================================================
+   Layout — Grid, sections, spacing, responsive
+   ========================================================================== */
+
+body {
+  background: var(--blue);
+  color: var(--white);
+  overflow-x: hidden;
+}
+
+/* --- Sections ----------------------------------------------------------- */
+
+.section {
+  padding: var(--space-3xl) var(--gutter);
+  position: relative;
+  z-index: var(--z-content);
+}
+
+/* --- Card grid ---------------------------------------------------------- */
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+/* --- Browse topics ------------------------------------------------------ */
+
+.topics {
+  padding: 80px var(--gutter) var(--space-3xl);
+  position: relative;
+  z-index: var(--z-content);
+}
+
+/* --- Article section ---------------------------------------------------- */
+
+.article-section {
+  position: relative;
+  padding: 0;
+  background: transparent;
+  overflow: hidden;
+  z-index: var(--z-content);
+}
+
+.article-inner {
+  position: relative;
+  z-index: 2;
+  padding: var(--space-3xl) var(--gutter) var(--space-3xl);
+}
+
+.article-body p,
+.article-callout {
+  max-width: 640px;
+}
+
+.article-intro {
+  max-width: 680px;
+}
+
+.article-card {
+  max-width: 900px;
+}
+
+/* --- Responsive (<=768px) ----------------------------------------------- */
+
+@media (max-width: 768px) {
+  nav { padding: 20px var(--gutter-mobile); }
+
+  .hero { padding: var(--gutter-mobile); }
+  .hero-date { right: var(--gutter-mobile); top: 80px; }
+
+  .section { padding: 80px var(--gutter-mobile); }
+
+  .cards {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .card { aspect-ratio: 1.2; }
+
+  .topics { padding: 60px var(--gutter-mobile) 80px; }
+  .topic-name { font-size: 24px; }
+
+  .featured-card { padding: var(--gutter-mobile); }
+
+  .article-inner { padding: 80px var(--gutter-mobile) 80px; }
+  .article-card { padding: 28px; }
+  .article-intro { font-size: 16px; }
+
+  footer {
+    padding: var(--gutter-mobile);
+    flex-direction: column;
+    gap: 12px;
+  }
+}

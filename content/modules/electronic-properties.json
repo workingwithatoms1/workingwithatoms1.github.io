@@ -1,0 +1,83 @@
+{
+  "module": {
+    "id": "electronic-properties",
+    "number": 9,
+    "title": "Electronic, Optical & Magnetic Properties",
+    "part": "II",
+    "partTitle": "Properties & Behaviour",
+    "topic": "Electronic Properties",
+    "intro": ""
+  },
+  "articles": [
+    {
+      "id": "free-electron-model-density-of-states",
+      "number": "9.1",
+      "title": "Free Electron Model & Density of States",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "band-theory-brillouin-zones",
+      "number": "9.2",
+      "title": "Band Theory & Brillouin Zones",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "semiconductors-intrinsic-extrinsic",
+      "number": "9.3",
+      "title": "Semiconductors (Intrinsic & Extrinsic)",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "dielectric-properties",
+      "number": "9.4",
+      "title": "Dielectric Properties",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "optical-properties-absorption-reflection-luminescence",
+      "number": "9.5",
+      "title": "Optical Properties (Absorption, Reflection, Luminescence)",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "magnetic-behaviour-dia-para-ferro-antiferro-ferri",
+      "number": "9.6",
+      "title": "Magnetic Behaviour (Dia-, Para-, Ferro-, Antiferro-, Ferri-)",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "superconductivity",
+      "number": "9.7",
+      "title": "Superconductivity",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    }
+  ]
+}

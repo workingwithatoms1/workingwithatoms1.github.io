@@ -1,0 +1,93 @@
+{
+  "module": {
+    "id": "mechanical-properties",
+    "number": 8,
+    "title": "Mechanical Properties",
+    "part": "II",
+    "partTitle": "Properties & Behaviour",
+    "topic": "Mechanical Properties",
+    "intro": ""
+  },
+  "articles": [
+    {
+      "id": "stress-strain-engineering-vs-true",
+      "number": "8.1",
+      "title": "Stress & Strain (Engineering vs True)",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "elasticity-elastic-moduli",
+      "number": "8.2",
+      "title": "Elasticity & Elastic Moduli",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "plastic-deformation-slip",
+      "number": "8.3",
+      "title": "Plastic Deformation & Slip",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "strengthening-mechanisms",
+      "number": "8.4",
+      "title": "Strengthening Mechanisms",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "fracture-mechanics-griffith-k-ic",
+      "number": "8.5",
+      "title": "Fracture Mechanics (Griffith, K_IC)",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "fatigue",
+      "number": "8.6",
+      "title": "Fatigue",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "creep-high-temperature-behaviour",
+      "number": "8.7",
+      "title": "Creep & High-Temperature Behaviour",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "hardness-indentation",
+      "number": "8.8",
+      "title": "Hardness & Indentation",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    }
+  ]
+}

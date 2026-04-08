@@ -1,0 +1,83 @@
+{
+  "module": {
+    "id": "bonding",
+    "number": 2,
+    "title": "Atomic Bonding & Structure",
+    "part": "I",
+    "partTitle": "Foundations",
+    "topic": "Bonding",
+    "intro": ""
+  },
+  "articles": [
+    {
+      "id": "atomic-structure-electron-configuration",
+      "number": "2.1",
+      "title": "Atomic Structure & Electron Configuration",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "ionic-bonding",
+      "number": "2.2",
+      "title": "Ionic Bonding",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "covalent-bonding",
+      "number": "2.3",
+      "title": "Covalent Bonding",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "metallic-bonding",
+      "number": "2.4",
+      "title": "Metallic Bonding",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "secondary-bonding-van-der-waals-hydrogen",
+      "number": "2.5",
+      "title": "Secondary Bonding (van der Waals, Hydrogen)",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "bond-energy-interatomic-spacing-force-curves",
+      "number": "2.6",
+      "title": "Bond Energy, Interatomic Spacing & Force Curves",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "mixed-bonding-character-paulings-rules",
+      "number": "2.7",
+      "title": "Mixed Bonding Character & Pauling's Rules",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    }
+  ]
+}

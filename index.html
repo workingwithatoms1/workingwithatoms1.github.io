@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Working with atoms. — Materials Science Wiki</title>
+
+  <link rel="stylesheet" href="styles/tokens.css">
+  <link rel="stylesheet" href="styles/typography.css">
+  <link rel="stylesheet" href="styles/layout.css">
+  <link rel="stylesheet" href="styles/components.css">
+</head>
+<body>
+
+  <!-- Fixed site background canvas (rendered once) -->
+  <canvas id="siteBgCanvas"></canvas>
+
+  <!-- Navigation -->
+  <nav>
+    <canvas class="nav-bg" id="navCanvas"></canvas>
+    <div class="logo">Working with atoms.</div>
+    <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    <ul class="nav-links">
+      <li><a href="#curriculum">Learn</a></li>
+      <li><a href="#">Phase Diagrams</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <canvas class="hero-canvas" id="heroCanvas"></canvas>
+    <div class="hero-content">
+      <h1 class="hero-title">Working<br>with atoms.</h1>
+      <p class="hero-subtitle">A materials science reference</p>
+    </div>
+  </section>
+
+  <!-- Curriculum -->
+  <section class="section" id="curriculum">
+
+    <!-- Part I — Foundations -->
+    <div class="featured-card">
+      <div class="part-header">
+        <span class="part-label">Part I</span>
+        <h2 class="part-title">Foundations</h2>
+      </div>
+      <div class="cards">
+        <a class="card" id="card-intro" href="introduction/">
+          <canvas></canvas>
+          <div class="card-number">01</div>
+          <div class="card-content">
+            <div class="card-tag">Foundations</div>
+            <div class="card-title">Introduction<br>&amp; Overview</div>
+          </div>
+        </a>
+        <a class="card" id="card-bonding" href="bonding/">
+          <canvas></canvas>
+          <div class="card-number">02</div>
+          <div class="card-content">
+            <div class="card-tag">Foundations</div>
+            <div class="card-title">Atomic Bonding<br>&amp; Structure</div>
+          </div>
+        </a>
+        <a class="card" id="card-crystallography" href="crystallography/">
+          <canvas></canvas>
+          <div class="card-number">03</div>
+          <div class="card-content">
+            <div class="card-tag">Foundations</div>
+            <div class="card-title">Crystallography</div>
+          </div>
+        </a>
+        <a class="card" id="card-defects" href="defects/">
+          <canvas></canvas>
+          <div class="card-number">04</div>
+          <div class="card-content">
+            <div class="card-tag">Foundations</div>
+            <div class="card-title">Defects</div>
+          </div>
+        </a>
+        <a class="card" id="card-thermo" href="thermodynamics/">
+          <canvas></canvas>
+          <div class="card-number">05</div>
+          <div class="card-content">
+            <div class="card-tag">Foundations</div>
+            <div class="card-title">Thermodynamics</div>
+          </div>
+        </a>
+        <a class="card" id="card-diffusion" href="diffusion/">
+          <canvas></canvas>
+          <div class="card-number">06</div>
+          <div class="card-content">
+            <div class="card-tag">Foundations</div>
+            <div class="card-title">Diffusion<br>&amp; Kinetics</div>
+          </div>
+        </a>
+        <a class="card" id="card-phase-trans" href="phase-transformations/">
+          <canvas></canvas>
+          <div class="card-number">07</div>
+          <div class="card-content">
+            <div class="card-tag">Foundations</div>
+            <div class="card-title">Phase Equilibria<br>&amp; Transformations</div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- Part II — Properties & Behaviour -->
+    <div class="featured-card">
+      <div class="part-header">
+        <span class="part-label">Part II</span>
+        <h2 class="part-title">Properties &amp; Behaviour</h2>
+      </div>
+      <div class="cards">
+        <a class="card" id="card-mechanical" href="mechanical-properties/">
+          <canvas></canvas>
+          <div class="card-number">01</div>
+          <div class="card-content">
+            <div class="card-tag">Properties</div>
+            <div class="card-title">Mechanical<br>Properties</div>
+          </div>
+        </a>
+        <a class="card" id="card-electronic" href="electronic-properties/">
+          <canvas></canvas>
+          <div class="card-number">02</div>
+          <div class="card-content">
+            <div class="card-tag">Properties</div>
+            <div class="card-title">Electronic, Optical<br>&amp; Magnetic</div>
+          </div>
+        </a>
+        <a class="card" id="card-electrochem" href="electrochemistry/">
+          <canvas></canvas>
+          <div class="card-number">03</div>
+          <div class="card-content">
+            <div class="card-tag">Properties</div>
+            <div class="card-title">Electrochemistry<br>&amp; Corrosion</div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- Part III — Material Classes -->
+    <div class="featured-card">
+      <div class="part-header">
+        <span class="part-label">Part III</span>
+        <h2 class="part-title">Material Classes</h2>
+      </div>
+      <div class="cards">
+        <a class="card" id="card-metals" href="metals/">
+          <canvas></canvas>
+          <div class="card-number">01</div>
+          <div class="card-content">
+            <div class="card-tag">Materials</div>
+            <div class="card-title">Metals<br>&amp; Alloys</div>
+          </div>
+        </a>
+        <a class="card" id="card-ceramics" href="ceramics/">
+          <canvas></canvas>
+          <div class="card-number">02</div>
+          <div class="card-content">
+            <div class="card-tag">Materials</div>
+            <div class="card-title">Ceramics<br>&amp; Glasses</div>
+          </div>
+        </a>
+        <a class="card" id="card-polymers" href="polymers/">
+          <canvas></canvas>
+          <div class="card-number">03</div>
+          <div class="card-content">
+            <div class="card-tag">Materials</div>
+            <div class="card-title">Polymers</div>
+          </div>
+        </a>
+        <a class="card" id="card-composites" href="composites/">
+          <canvas></canvas>
+          <div class="card-number">04</div>
+          <div class="card-content">
+            <div class="card-tag">Materials</div>
+            <div class="card-title">Composites</div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- Part IV — Practice -->
+    <div class="featured-card">
+      <div class="part-header">
+        <span class="part-label">Part IV</span>
+        <h2 class="part-title">Practice</h2>
+      </div>
+      <div class="cards">
+        <a class="card" id="card-characterisation" href="characterisation/">
+          <canvas></canvas>
+          <div class="card-number">01</div>
+          <div class="card-content">
+            <div class="card-tag">Practice</div>
+            <div class="card-title">Characterisation<br>Techniques</div>
+          </div>
+        </a>
+        <a class="card" id="card-manufacturing" href="manufacturing/">
+          <canvas></canvas>
+          <div class="card-number">02</div>
+          <div class="card-content">
+            <div class="card-tag">Practice</div>
+            <div class="card-title">Manufacturing</div>
+          </div>
+        </a>
+        <a class="card" id="card-computational" href="computational/">
+          <canvas></canvas>
+          <div class="card-number">03</div>
+          <div class="card-content">
+            <div class="card-tag">Practice</div>
+            <div class="card-title">Computational<br>Materials Science</div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- Supporting Modules -->
+    <div class="featured-card featured-card--supporting">
+      <div class="part-header">
+        <span class="part-label">Reference</span>
+        <h2 class="part-title">Supporting Modules</h2>
+      </div>
+      <div class="cards">
+        <a class="card" id="card-quantum" href="quantum-mechanics/">
+          <canvas></canvas>
+          <div class="card-number">01</div>
+          <div class="card-content">
+            <div class="card-tag">Supporting</div>
+            <div class="card-title">Quantum<br>Mechanics</div>
+          </div>
+        </a>
+        <a class="card" id="card-maths" href="mathematical-methods/">
+          <canvas></canvas>
+          <div class="card-number">02</div>
+          <div class="card-content">
+            <div class="card-tag">Supporting</div>
+            <div class="card-title">Mathematical<br>Methods</div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- Browse Topics -->
+  <section class="topics">
+    <div class="section-label">Browse</div>
+    <div class="topic-row"><span class="topic-name">Crystallography</span><span class="topic-count">128 articles</span></div>
+    <div class="topic-row"><span class="topic-name">Thermodynamics</span><span class="topic-count">94 articles</span></div>
+    <div class="topic-row"><span class="topic-name">Quantum Mechanics</span><span class="topic-count">76 articles</span></div>
+    <div class="topic-row"><span class="topic-name">Polymer Science</span><span class="topic-count">63 articles</span></div>
+    <div class="topic-row"><span class="topic-name">Nanomaterials</span><span class="topic-count">51 articles</span></div>
+    <div class="topic-row"><span class="topic-name">Metallurgy</span><span class="topic-count">112 articles</span></div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-logo">Working with atoms.</div>
+    <div>Materials science, explored.</div>
+  </footer>
+
+  <script type="module" src="scripts/main.js"></script>
+</body>
+</html>

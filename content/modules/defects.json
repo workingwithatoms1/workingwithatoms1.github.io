@@ -1,0 +1,53 @@
+{
+  "module": {
+    "id": "defects",
+    "number": 4,
+    "title": "Defects",
+    "part": "I",
+    "partTitle": "Foundations",
+    "topic": "Defects",
+    "intro": ""
+  },
+  "articles": [
+    {
+      "id": "point-defects-vacancies-interstitials-substitutional",
+      "number": "4.1",
+      "title": "Point Defects (Vacancies, Interstitials, Substitutional)",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "dislocations-edge-screw-mixed",
+      "number": "4.2",
+      "title": "Dislocations (Edge, Screw, Mixed)",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "planar-defects-grain-boundaries-stacking-faults-twins",
+      "number": "4.3",
+      "title": "Planar Defects (Grain Boundaries, Stacking Faults, Twins)",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "solid-solutions-hume-rothery-rules",
+      "number": "4.4",
+      "title": "Solid Solutions & Hume-Rothery Rules",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    }
+  ]
+}

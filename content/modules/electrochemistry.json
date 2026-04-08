@@ -1,0 +1,83 @@
+{
+  "module": {
+    "id": "electrochemistry",
+    "number": 10,
+    "title": "Electrochemistry & Corrosion",
+    "part": "II",
+    "partTitle": "Properties & Behaviour",
+    "topic": "Electrochemistry",
+    "intro": ""
+  },
+  "articles": [
+    {
+      "id": "electrochemical-cells-standard-potentials",
+      "number": "10.1",
+      "title": "Electrochemical Cells & Standard Potentials",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "the-nernst-equation",
+      "number": "10.2",
+      "title": "The Nernst Equation",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "electrode-kinetics-butler-volmer",
+      "number": "10.3",
+      "title": "Electrode Kinetics & Butler-Volmer",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "pourbaix-diagrams",
+      "number": "10.4",
+      "title": "Pourbaix Diagrams",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "types-of-corrosion",
+      "number": "10.5",
+      "title": "Types of Corrosion",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "corrosion-prevention-protection",
+      "number": "10.6",
+      "title": "Corrosion Prevention & Protection",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "batteries-fuel-cells-electrolysers",
+      "number": "10.7",
+      "title": "Batteries, Fuel Cells & Electrolysers",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    }
+  ]
+}

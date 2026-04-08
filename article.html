@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Geometry of Crystal Lattices — Working with atoms.</title>
+
+  <link rel="stylesheet" href="styles/tokens.css">
+  <link rel="stylesheet" href="styles/typography.css">
+  <link rel="stylesheet" href="styles/layout.css">
+  <link rel="stylesheet" href="styles/components.css">
+</head>
+<body>
+
+  <!-- Fixed site background canvas -->
+  <canvas id="siteBgCanvas"></canvas>
+
+  <!-- Navigation -->
+  <nav>
+    <canvas class="nav-bg" id="navCanvas"></canvas>
+    <a href="index.html" class="logo">Working with atoms.</a>
+    <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    <ul class="nav-links">
+      <li><a href="index.html#curriculum">Learn</a></li>
+      <li><a href="#">Phase Diagrams</a></li>
+    </ul>
+  </nav>
+
+  <!-- Article -->
+  <section class="article-section" id="articleSection">
+    <canvas class="article-bg-canvas" id="articleBgCanvas"></canvas>
+    <div class="article-inner">
+      <div class="article-breadcrumb">Crystallography &mdash; Fundamentals</div>
+      <div class="article-card">
+        <div class="article-header">
+          <span class="article-topic">Crystal Structures</span>
+          <span class="article-reading">8 min read</span>
+        </div>
+        <h2 class="article-title">The Geometry of Crystal Lattices</h2>
+        <p class="article-intro">How atoms arrange themselves into repeating three-dimensional patterns, and why these arrangements determine the physical properties of nearly every solid material we encounter.</p>
+        <div class="article-body">
+          <h3>Bravais Lattices</h3>
+          <p>In 1848, Auguste Bravais demonstrated that there are precisely fourteen distinct ways to arrange points in three-dimensional space such that the arrangement looks identical from every lattice point. These fourteen Bravais lattices form the foundation of crystallography and describe the translational symmetry of every crystalline material.</p>
+          <p>The lattices are grouped into seven crystal systems based on the relationships between their lattice parameters — the lengths of the unit cell edges and the angles between them. These systems range from the highly symmetric cubic system, where all edges are equal and all angles are right angles, to the triclinic system, where no edges are equal and no angles are constrained.</p>
+          <div class="article-callout">
+            <div class="callout-label">Key Concept</div>
+            <p>A unit cell is the smallest repeating unit that, when translated in all three spatial directions, reconstructs the entire crystal lattice. The choice of unit cell is not unique, but convention favours the cell that best reveals the symmetry of the structure.</p>
+          </div>
+          <h3>Coordination and Packing</h3>
+          <p>The coordination number of an atom in a crystal describes how many nearest neighbours surround it. In a face-centred cubic structure, each atom has twelve nearest neighbours, while in a body-centred cubic structure, each atom has eight. These differences in local geometry have profound consequences for material properties.</p>
+          <p>Packing efficiency — the fraction of space occupied by atoms — varies significantly between structures. The face-centred cubic and hexagonal close-packed structures achieve a packing efficiency of approximately 74%, the theoretical maximum for identical spheres. Body-centred cubic structures pack less efficiently at roughly 68%.</p>
+          <h3>Defects and Reality</h3>
+          <p>No real crystal is perfect. Point defects — vacancies, interstitials, and substitutional atoms — exist in every crystalline material. These imperfections, far from being mere flaws, are often responsible for the most useful properties of materials. The colour of gemstones, the conductivity of semiconductors, and the strength of structural alloys all depend on carefully controlled defects.</p>
+          <p>Extended defects such as dislocations and grain boundaries introduce additional complexity. A single dislocation can reduce the theoretical shear strength of a crystal by a factor of a thousand, which is precisely why metals are ductile rather than brittle. Understanding and manipulating these defects is central to modern materials engineering.</p>
+          <div class="article-refs">
+            <div class="refs-label">Related Topics</div>
+            <a href="#" class="ref-link">Miller Indices</a>
+            <a href="#" class="ref-link">X-ray Diffraction</a>
+            <a href="#" class="ref-link">Point Group Symmetry</a>
+            <a href="#" class="ref-link">Reciprocal Lattice</a>
+            <a href="#" class="ref-link">Phonons</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-logo">Working with atoms.</div>
+    <div>Materials science, explored.</div>
+  </footer>
+
+  <script type="module" src="scripts/main.js"></script>
+</body>
+</html>

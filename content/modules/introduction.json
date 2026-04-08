@@ -1,0 +1,63 @@
+{
+  "module": {
+    "id": "introduction",
+    "number": 1,
+    "title": "Introduction & Overview",
+    "part": "I",
+    "partTitle": "Foundations",
+    "topic": "Introduction",
+    "intro": ""
+  },
+  "articles": [
+    {
+      "id": "what-is-materials-science",
+      "number": "1.1",
+      "title": "What is Materials Science?",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "the-structure-property-processing-performance-tetrahedron",
+      "number": "1.2",
+      "title": "The Structure-Property-Processing-Performance Tetrahedron",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "length-scales-in-materials",
+      "number": "1.3",
+      "title": "Length Scales in Materials",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "classes-of-materials",
+      "number": "1.4",
+      "title": "Classes of Materials",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "materials-selection-design-thinking",
+      "number": "1.5",
+      "title": "Materials Selection & Design Thinking",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    }
+  ]
+}

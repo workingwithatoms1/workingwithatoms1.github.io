@@ -1,0 +1,83 @@
+{
+  "module": {
+    "id": "metals",
+    "number": 11,
+    "title": "Metals & Alloys",
+    "part": "III",
+    "partTitle": "Material Classes",
+    "topic": "Metals",
+    "intro": ""
+  },
+  "articles": [
+    {
+      "id": "structure-of-metals",
+      "number": "11.1",
+      "title": "Structure of Metals",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "alloy-design-principles",
+      "number": "11.2",
+      "title": "Alloy Design Principles",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "steels-cast-irons",
+      "number": "11.3",
+      "title": "Steels & Cast Irons",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "aluminium-alloys",
+      "number": "11.4",
+      "title": "Aluminium Alloys",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "titanium-alloys",
+      "number": "11.5",
+      "title": "Titanium Alloys",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "nickel-superalloys",
+      "number": "11.6",
+      "title": "Nickel Superalloys",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "shape-memory-alloys-intermetallics",
+      "number": "11.7",
+      "title": "Shape Memory Alloys & Intermetallics",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    }
+  ]
+}

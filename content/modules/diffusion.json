@@ -1,0 +1,83 @@
+{
+  "module": {
+    "id": "diffusion",
+    "number": 6,
+    "title": "Diffusion & Kinetics",
+    "part": "I",
+    "partTitle": "Foundations",
+    "topic": "Diffusion",
+    "intro": ""
+  },
+  "articles": [
+    {
+      "id": "ficks-first-second-laws",
+      "number": "6.1",
+      "title": "Fick's First & Second Laws",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "atomistic-mechanisms-of-diffusion",
+      "number": "6.2",
+      "title": "Atomistic Mechanisms of Diffusion",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "temperature-dependence-arrhenius-behaviour",
+      "number": "6.3",
+      "title": "Temperature Dependence & Arrhenius Behaviour",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "solutions-to-the-diffusion-equation",
+      "number": "6.4",
+      "title": "Solutions to the Diffusion Equation",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "the-kirkendall-effect",
+      "number": "6.5",
+      "title": "The Kirkendall Effect",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "reaction-kinetics-the-avrami-equation",
+      "number": "6.6",
+      "title": "Reaction Kinetics & the Avrami Equation",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "ttt-cct-diagrams",
+      "number": "6.7",
+      "title": "TTT & CCT Diagrams",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    }
+  ]
+}

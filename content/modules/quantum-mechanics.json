@@ -1,0 +1,73 @@
+{
+  "module": {
+    "id": "quantum-mechanics",
+    "number": 18,
+    "title": "Quantum Mechanics for Materials",
+    "part": "S",
+    "partTitle": "Supporting Modules",
+    "topic": "Quantum Mechanics",
+    "intro": ""
+  },
+  "articles": [
+    {
+      "id": "wave-particle-duality",
+      "number": "18.1",
+      "title": "Wave-Particle Duality",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "the-schrodinger-equation",
+      "number": "18.2",
+      "title": "The Schrodinger Equation",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "quantum-numbers-orbitals",
+      "number": "18.3",
+      "title": "Quantum Numbers & Orbitals",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "pauli-exclusion-electron-filling",
+      "number": "18.4",
+      "title": "Pauli Exclusion & Electron Filling",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "perturbation-theory-approximations",
+      "number": "18.5",
+      "title": "Perturbation Theory & Approximations",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "from-atoms-to-bonds-to-bands",
+      "number": "18.6",
+      "title": "From Atoms to Bonds to Bands",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    }
+  ]
+}

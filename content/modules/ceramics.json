@@ -1,0 +1,83 @@
+{
+  "module": {
+    "id": "ceramics",
+    "number": 12,
+    "title": "Ceramics & Glasses",
+    "part": "III",
+    "partTitle": "Material Classes",
+    "topic": "Ceramics",
+    "intro": ""
+  },
+  "articles": [
+    {
+      "id": "crystal-structures-of-ceramics",
+      "number": "12.1",
+      "title": "Crystal Structures of Ceramics",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "mechanical-behaviour-brittle-fracture",
+      "number": "12.2",
+      "title": "Mechanical Behaviour & Brittle Fracture",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "glass-formation-the-glass-transition",
+      "number": "12.3",
+      "title": "Glass Formation & the Glass Transition",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "functional-ceramics-piezoelectric-ferroelectric",
+      "number": "12.4",
+      "title": "Functional Ceramics (Piezoelectric, Ferroelectric)",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "refractories-structural-ceramics",
+      "number": "12.5",
+      "title": "Refractories & Structural Ceramics",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "cement-concrete-geopolymers",
+      "number": "12.6",
+      "title": "Cement, Concrete & Geopolymers",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "ceramic-processing",
+      "number": "12.7",
+      "title": "Ceramic Processing",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    }
+  ]
+}

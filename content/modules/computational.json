@@ -1,0 +1,73 @@
+{
+  "module": {
+    "id": "computational",
+    "number": 17,
+    "title": "Computational Materials Science",
+    "part": "IV",
+    "partTitle": "Practice",
+    "topic": "Computational",
+    "intro": ""
+  },
+  "articles": [
+    {
+      "id": "density-functional-theory",
+      "number": "17.1",
+      "title": "Density Functional Theory",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "molecular-dynamics",
+      "number": "17.2",
+      "title": "Molecular Dynamics",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "phase-field-modelling",
+      "number": "17.3",
+      "title": "Phase-Field Modelling",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "calphad-thermodynamic-databases",
+      "number": "17.4",
+      "title": "CALPHAD & Thermodynamic Databases",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "finite-element-methods",
+      "number": "17.5",
+      "title": "Finite Element Methods",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "machine-learning-in-materials-science",
+      "number": "17.6",
+      "title": "Machine Learning in Materials Science",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    }
+  ]
+}

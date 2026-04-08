@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Working with atoms. — Materials Science Wiki</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500&family=Lora:ital,wght@0,400;0,500;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue: #2a2f7c;
+    --blue-light: #4d5cf2;
+    --blue-dark: #2230c0;
+    --white: #f0f0f8;
+    --off-white: #d8d8e8;
+    --dark: #0a0a1a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--blue);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.5'/%3E%3C/svg%3E");
+    opacity: 0.18;
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-mode: luminosity;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise2'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise2)' opacity='0.6'/%3E%3C/svg%3E");
+    opacity: 0.1;
+    pointer-events: none;
+    z-index: 9998;
+    mix-blend-mode: luminosity;
+  }
+
+  .hero-canvas, .card canvas, .article-bg-canvas {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    filter: blur(0.3px);
+  }
+
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 40px;
+    z-index: 100;
+  }
+
+  .nav-bg {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  nav.scrolled .nav-bg { opacity: 1; }
+
+  .logo {
+    font-family: 'Instrument Serif', serif;
+    font-size: 28px;
+    letter-spacing: -0.3px;
+    color: var(--white);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  .nav-links a {
+    color: var(--off-white);
+    text-decoration: none;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+  }
+
+  .nav-links a:hover { opacity: 1; }
+
+  .hero {
+    position: relative;
+    height: 100vh;
+    min-height: 700px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 40px;
+    background: transparent;
+    overflow: hidden;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 10;
+    padding-bottom: 40px;
+  }
+
+  .hero-title {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(56px, 8vw, 120px);
+    font-weight: 400;
+    line-height: 0.9;
+    letter-spacing: 0.5px;
+    margin-bottom: 24px;
+  }
+
+  .hero-subtitle {
+    font-size: 14px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    opacity: 0.7;
+    max-width: 400px;
+    line-height: 1.6;
+  }
+
+  .hero-date {
+    position: absolute;
+    top: 100px;
+    right: 40px;
+    font-family: 'Instrument Serif', serif;
+    font-size: 18px;
+    opacity: 0.5;
+    z-index: 10;
+  }
+
+  .section {
+    padding: 120px 40px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0.4;
+    margin-bottom: 48px;
+  }
+
+  .featured-card {
+    background: #ecebf2;
+    padding: clamp(32px, 4vw, 60px);
+  }
+
+  .featured-card .section-label {
+    color: #1a1d3a;
+    opacity: 0.35;
+  }
+
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .card {
+    position: relative;
+    aspect-ratio: 1;
+    background: var(--blue);
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .card:hover { transform: scale(0.97); }
+
+  .card-content {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 24px;
+    z-index: 2;
+  }
+
+  .card-tag {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    opacity: 0.5;
+    margin-bottom: 8px;
+  }
+
+  .card-title {
+    font-family: 'Instrument Serif', serif;
+    font-size: 28px;
+    letter-spacing: -0.5px;
+    line-height: 1.1;
+  }
+
+  .card-number {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-family: 'Instrument Serif', serif;
+    font-size: 14px;
+    opacity: 0.4;
+  }
+
+  .topics { padding: 80px 40px 120px; position: relative; z-index: 1; }
+
+  .topic-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 28px 0;
+    border-bottom: 1px solid rgba(240,240,248,0.08);
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .topic-row:hover {
+    padding-left: 12px;
+    border-bottom-color: rgba(240,240,248,0.2);
+  }
+
+  .topic-row:first-child { border-top: 1px solid rgba(240,240,248,0.08); }
+
+  .topic-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 600;
+    letter-spacing: 0px;
+    transition: color 0.3s;
+  }
+
+  .topic-row:hover .topic-name { color: var(--blue-light); }
+
+  .topic-count { font-size: 12px; opacity: 0.3; letter-spacing: 1px; }
+
+  .article-section {
+    position: relative;
+    padding: 0;
+    background: transparent;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  .article-inner {
+    position: relative;
+    z-index: 2;
+    padding: 0 40px 120px;
+  }
+
+  .article-breadcrumb {
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    opacity: 0.4;
+    color: var(--white);
+    margin-bottom: 24px;
+  }
+
+  .article-card {
+    background: #ecebf2;
+    padding: clamp(40px, 5vw, 80px);
+    max-width: 900px;
+  }
+
+  .article-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+  }
+
+  .article-topic {
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--blue);
+    font-weight: 500;
+  }
+
+  .article-reading { font-size: 12px; color: #888; }
+
+  .article-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(32px, 4vw, 48px);
+    font-weight: 600;
+    color: #1a1d3a;
+    line-height: 1.15;
+    letter-spacing: -0.3px;
+    margin-bottom: 20px;
+  }
+
+  .article-intro {
+    font-family: 'Lora', serif;
+    font-size: 18px;
+    line-height: 1.65;
+    color: #3a3d5a;
+    margin-bottom: 48px;
+    max-width: 680px;
+  }
+
+  .article-body h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: #1a1d3a;
+    letter-spacing: 0px;
+    margin-bottom: 16px;
+    margin-top: 48px;
+  }
+
+  .article-body h3:first-child { margin-top: 0; }
+
+  .article-body p {
+    font-family: 'Lora', serif;
+    font-size: 16px;
+    line-height: 1.75;
+    color: #3a3d5a;
+    margin-bottom: 16px;
+    max-width: 640px;
+  }
+
+  .article-callout {
+    background: #e1e0e8;
+    padding: 28px 32px;
+    margin: 40px 0;
+    max-width: 640px;
+  }
+
+  .callout-label {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--blue);
+    font-weight: 500;
+    margin-bottom: 12px;
+  }
+
+  .article-callout p {
+    font-family: 'Lora', serif;
+    font-size: 15px;
+    line-height: 1.7;
+    color: #2a2d4a;
+    margin-bottom: 0;
+  }
+
+  .article-refs {
+    margin-top: 56px;
+    padding-top: 32px;
+    border-top: 1px solid #d8d6d0;
+  }
+
+  .refs-label {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #999;
+    margin-bottom: 16px;
+  }
+
+  .ref-link {
+    display: inline-block;
+    font-size: 13px;
+    color: var(--blue);
+    text-decoration: none;
+    padding: 6px 14px;
+    border: 1px solid #d0cec8;
+    margin-right: 8px;
+    margin-bottom: 8px;
+    transition: all 0.2s;
+  }
+
+  .ref-link:hover {
+    background: var(--blue);
+    color: var(--white);
+    border-color: var(--blue);
+  }
+
+  footer {
+    padding: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(240,240,248,0.06);
+    font-size: 12px;
+    opacity: 0.3;
+  }
+
+  .footer-logo { font-family: 'Instrument Serif', serif; font-size: 18px; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-content { animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both; }
+  .hero-date { animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.6s both; }
+  .card:nth-child(1) { animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both; }
+  .card:nth-child(2) { animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both; }
+  .card:nth-child(3) { animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both; }
+
+  @media (max-width: 768px) {
+    nav { padding: 20px 24px; }
+    .hero { padding: 24px; }
+    .hero-date { right: 24px; top: 80px; }
+    .section { padding: 80px 24px; }
+    .cards { grid-template-columns: 1fr; gap: 16px; }
+    .card { aspect-ratio: 1.2; }
+    .topics { padding: 60px 24px 80px; }
+    .topic-name { font-size: 24px; }
+    footer { padding: 24px; flex-direction: column; gap: 12px; }
+    .article-inner { padding: 0 24px 80px; }
+    .article-card { padding: 28px; }
+    .article-intro { font-size: 16px; }
+    .featured-card { padding: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<canvas id="siteBgCanvas" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas>
+
+<nav>
+  <canvas class="nav-bg" id="navCanvas"></canvas>
+  <div class="logo">Working with atoms.</div>
+  <ul class="nav-links">
+    <li><a href="#">Elements</a></li>
+    <li><a href="#">Structures</a></li>
+    <li><a href="#">Properties</a></li>
+    <li><a href="#">Learn</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <canvas class="hero-canvas" id="heroCanvas"></canvas>
+  <div class="hero-content">
+    <h1 class="hero-title">Working<br>with atoms.</h1>
+    <p class="hero-subtitle">A materials science reference</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="featured-card">
+    <div class="section-label">Featured Topics</div>
+    <div class="cards">
+      <div class="card" id="card0">
+        <canvas></canvas>
+        <div class="card-number">01</div>
+        <div class="card-content">
+          <div class="card-tag">Crystal Structures</div>
+          <div class="card-title">Lattice<br>Geometry</div>
+        </div>
+      </div>
+      <div class="card" id="card1">
+        <canvas></canvas>
+        <div class="card-number">02</div>
+        <div class="card-content">
+          <div class="card-tag">Bonding</div>
+          <div class="card-title">Molecular<br>Dynamics</div>
+        </div>
+      </div>
+      <div class="card" id="card2">
+        <canvas></canvas>
+        <div class="card-number">03</div>
+        <div class="card-content">
+          <div class="card-tag">Properties</div>
+          <div class="card-title">Phase<br>Transitions</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="topics">
+  <div class="section-label">Browse</div>
+  <div class="topic-row"><span class="topic-name">Crystallography</span><span class="topic-count">128 articles</span></div>
+  <div class="topic-row"><span class="topic-name">Thermodynamics</span><span class="topic-count">94 articles</span></div>
+  <div class="topic-row"><span class="topic-name">Quantum Mechanics</span><span class="topic-count">76 articles</span></div>
+  <div class="topic-row"><span class="topic-name">Polymer Science</span><span class="topic-count">63 articles</span></div>
+  <div class="topic-row"><span class="topic-name">Nanomaterials</span><span class="topic-count">51 articles</span></div>
+  <div class="topic-row"><span class="topic-name">Metallurgy</span><span class="topic-count">112 articles</span></div>
+</section>
+
+<section class="article-section" id="articleSection">
+  <canvas class="article-bg-canvas" id="articleBgCanvas"></canvas>
+  <div class="article-inner">
+    <div class="article-breadcrumb">Crystallography &mdash; Fundamentals</div>
+    <div class="article-card">
+      <div class="article-header">
+        <span class="article-topic">Crystal Structures</span>
+        <span class="article-reading">8 min read</span>
+      </div>
+      <h2 class="article-title">The Geometry of Crystal Lattices</h2>
+      <p class="article-intro">How atoms arrange themselves into repeating three-dimensional patterns, and why these arrangements determine the physical properties of nearly every solid material we encounter.</p>
+      <div class="article-body">
+        <h3>Bravais Lattices</h3>
+        <p>In 1848, Auguste Bravais demonstrated that there are precisely fourteen distinct ways to arrange points in three-dimensional space such that the arrangement looks identical from every lattice point. These fourteen Bravais lattices form the foundation of crystallography and describe the translational symmetry of every crystalline material.</p>
+        <p>The lattices are grouped into seven crystal systems based on the relationships between their lattice parameters — the lengths of the unit cell edges and the angles between them. These systems range from the highly symmetric cubic system, where all edges are equal and all angles are right angles, to the triclinic system, where no edges are equal and no angles are constrained.</p>
+        <div class="article-callout">
+          <div class="callout-label">Key Concept</div>
+          <p>A unit cell is the smallest repeating unit that, when translated in all three spatial directions, reconstructs the entire crystal lattice. The choice of unit cell is not unique, but convention favours the cell that best reveals the symmetry of the structure.</p>
+        </div>
+        <h3>Coordination and Packing</h3>
+        <p>The coordination number of an atom in a crystal describes how many nearest neighbours surround it. In a face-centred cubic structure, each atom has twelve nearest neighbours, while in a body-centred cubic structure, each atom has eight. These differences in local geometry have profound consequences for material properties.</p>
+        <p>Packing efficiency — the fraction of space occupied by atoms — varies significantly between structures. The face-centred cubic and hexagonal close-packed structures achieve a packing efficiency of approximately 74%, the theoretical maximum for identical spheres. Body-centred cubic structures pack less efficiently at roughly 68%.</p>
+        <h3>Defects and Reality</h3>
+        <p>No real crystal is perfect. Point defects — vacancies, interstitials, and substitutional atoms — exist in every crystalline material. These imperfections, far from being mere flaws, are often responsible for the most useful properties of materials. The colour of gemstones, the conductivity of semiconductors, and the strength of structural alloys all depend on carefully controlled defects.</p>
+        <p>Extended defects such as dislocations and grain boundaries introduce additional complexity. A single dislocation can reduce the theoretical shear strength of a crystal by a factor of a thousand, which is precisely why metals are ductile rather than brittle. Understanding and manipulating these defects is central to modern materials engineering.</p>
+        <div class="article-refs">
+          <div class="refs-label">Related Topics</div>
+          <a href="#" class="ref-link">Miller Indices</a>
+          <a href="#" class="ref-link">X-ray Diffraction</a>
+          <a href="#" class="ref-link">Point Group Symmetry</a>
+          <a href="#" class="ref-link">Reciprocal Lattice</a>
+          <a href="#" class="ref-link">Phonons</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">Working with atoms.</div>
+  <div>Materials science, explored.</div>
+</footer>
+
+<script>
+function hashNoise(x,y){let n=Math.sin(x*127.1+y*311.7)*43758.5453;return n-Math.floor(n)}
+function smoothNoise(x,y){const ix=Math.floor(x),iy=Math.floor(y),fx=x-ix,fy=y-iy,sx=fx*fx*(3-2*fx),sy=fy*fy*(3-2*fy),a=hashNoise(ix,iy),b=hashNoise(ix+1,iy),c=hashNoise(ix,iy+1),d=hashNoise(ix+1,iy+1);return a+(b-a)*sx+(c-a)*sy+(a-b-c+d)*sx*sy}
+
+function createHalftoneRenderer(canvas, config) {
+  const ctx = canvas.getContext('2d');
+  let w, h, dots = [], time = 0, animId, noiseCanvas, noiseCtx, speckleCanvas;
+
+  function resize() {
+    const rect = canvas.parentElement.getBoundingClientRect();
+    const dpr = Math.min(window.devicePixelRatio, 2);
+    w = rect.width; h = rect.height;
+    canvas.width = w * dpr; canvas.height = h * dpr;
+    canvas.style.width = w + 'px'; canvas.style.height = h + 'px';
+    ctx.scale(dpr, dpr);
+    noiseCanvas = document.createElement('canvas'); noiseCanvas.width = w; noiseCanvas.height = h;
+    noiseCtx = noiseCanvas.getContext('2d');
+    // Pre-render static grain
+    const grainData = noiseCtx.createImageData(w, h); const grd = grainData.data;
+    for (let i=0;i<grd.length;i+=4){const px=(i/4)%w,py=Math.floor((i/4)/w),n=hashNoise(px+77,py+33),v=n*60;grd[i]=v;grd[i+1]=v;grd[i+2]=v;grd[i+3]=45}
+    noiseCtx.putImageData(grainData,0,0);
+    speckleCanvas = document.createElement('canvas'); speckleCanvas.width = w; speckleCanvas.height = h;
+    const sCtx = speckleCanvas.getContext('2d');
+    sCtx.fillStyle = '#2a2f7c'; sCtx.fillRect(0, 0, w, h);
+    const sd = sCtx.getImageData(0, 0, w, h).data ? sCtx.getImageData(0, 0, w, h) : null;
+    if (sd) { const d = sd.data; const seed = 42;
+      for (let i = 0; i < d.length; i += 4) { const px = (i/4)%w, py = Math.floor((i/4)/w);
+        const n = hashNoise(px*0.5+seed, py*0.5+seed*0.3);
+        if (n > 0.75) { const b = 0.1+n*0.15; d[i]=Math.min(255,42+b*30); d[i+1]=Math.min(255,47+b*35); d[i+2]=Math.min(255,124+b*50); d[i+3]=255; }
+      } sCtx.putImageData(sd, 0, 0); }
+    dots = []; const sp = config.spacing || 12;
+    for (let x = 0; x < w+sp; x += sp) for (let y = 0; y < h+sp; y += sp) dots.push({x,y,baseX:x,baseY:y});
+  }
+
+  function draw() {
+    time += 0.0016;
+    ctx.drawImage(speckleCanvas, 0, 0, w, h);
+    ctx.fillStyle = 'rgba(255,255,255,0.9)';
+    for (const dot of dots) { const val = config.field(dot.baseX,dot.baseY,w,h,time);
+      if (val > 0.05) { const breathe = 1 + Math.sin(time * 0.4 + dot.baseX * 0.005 + dot.baseY * 0.007) * 0.08; const r = val*(config.maxRadius||4)*breathe; ctx.beginPath(); ctx.arc(dot.x,dot.y,r,0,Math.PI*2); ctx.fill(); } }
+    ctx.globalCompositeOperation='luminosity'; ctx.drawImage(noiseCanvas,0,0); ctx.globalCompositeOperation='source-over';
+    ctx.fillStyle='rgba(0,0,30,0.02)'; for(let sy=0;sy<h;sy+=3)ctx.fillRect(0,sy,w,1);
+    animId = requestAnimationFrame(draw);
+  }
+  resize(); draw();
+  window.addEventListener('resize', () => { cancelAnimationFrame(animId); resize(); draw(); });
+}
+
+createHalftoneRenderer(document.getElementById('heroCanvas'), { spacing:10, maxRadius:5,
+  field(x,y,w,h,t){
+    const nx = x/w, ny = y/h;
+
+    // Main curve: higher, wider, with 3D ribbon feel
+    const curveY = 0.32 + Math.sin(nx * 3 + t * 0.3) * 0.1;
+    const distToCurve = ny - curveY;
+    
+    // Asymmetric profile: sharp top edge, softer bottom = 3D lit surface
+    const topEdge = distToCurve < 0 ? Math.exp(-distToCurve * distToCurve * 80) : 0;
+    const bodyFall = distToCurve > 0 ? Math.exp(-distToCurve * distToCurve * 15) : 0;
+    const mainCurve = topEdge * 0.7 + bodyFall;
+    
+    // Perspective: narrows on left, widens on right
+    const perspScale = 0.4 + nx * 0.8;
+    const shaped = mainCurve * perspScale;
+
+    // Highlight strip along the top — gives the ribbon a lit crest
+    const highlight = Math.exp(-Math.pow(distToCurve + 0.02, 2) * 300) * 0.6;
+
+    // Secondary ribbon underneath, offset and fainter
+    const curve2Y = curveY + 0.14 + Math.sin(nx * 2.5 + t * 0.2 + 1) * 0.04;
+    const dist2 = ny - curve2Y;
+    const ribbon2 = Math.exp(-dist2 * dist2 * 25) * 0.3 * (0.3 + nx * 0.7);
+
+    // Scatter
+    const absDist = Math.abs(ny - curveY);
+    const scatter = Math.exp(-absDist * 4) * 0.15 * (Math.sin(x * 0.07 + y * 0.09 + t * 0.15) * 0.5 + 0.5);
+
+    // FCC modulation
+    const s = 30;
+    const g1 = Math.pow(Math.cos(x/s*Math.PI)*0.5+0.5, 0.3) * Math.pow(Math.cos(y/s*Math.PI)*0.5+0.5, 0.3);
+    const g2 = Math.pow(Math.cos((x+s/2)/s*Math.PI)*0.5+0.5, 0.3) * Math.pow(Math.cos((y+s/2)/s*Math.PI)*0.5+0.5, 0.3);
+    const fcc = 0.6 + Math.max(g1, g2) * 0.4;
+
+    // Text avoidance: fade dots near bottom-left title
+    const titleZoneX = 0.22, titleZoneY = 0.82;
+    const tdx = (nx - titleZoneX) / 0.28, tdy = (ny - titleZoneY) / 0.2;
+    const titleDist = Math.sqrt(tdx * tdx + tdy * tdy);
+    const textFade = Math.min(1, titleDist);
+
+    return Math.min(1, (shaped + highlight + ribbon2 + scatter)) * fcc * textFade * textFade;
+  }});
+
+createHalftoneRenderer(document.querySelector('#card0 canvas'), { spacing:8, maxRadius:3.5,
+  field(x,y,w,h,t){const gx=Math.sin(x*0.05+t)*0.5+0.5,gy=Math.sin(y*0.05+t*0.7)*0.5+0.5,grid=gx*gy,cx=(x/w-0.5),cy=(y/h-0.5),radial=1-Math.sqrt(cx*cx+cy*cy)*1.4;return grid*Math.max(0,radial)}});
+
+createHalftoneRenderer(document.querySelector('#card1 canvas'), { spacing:8, maxRadius:4,
+  field(x,y,w,h,t){const nx=x/w,ny=y/h,path=Math.sin(ny*6+t)*0.15+0.4,dist=Math.abs(nx-path),flow=Math.exp(-dist*dist*80),fade=ny*0.8+0.2;return flow*fade}});
+
+createHalftoneRenderer(document.querySelector('#card2 canvas'), { spacing:8, maxRadius:3.5,
+  field(x,y,w,h,t){const cx=0.6,cy=0.35,dx=x/w-cx,dy=y/h-cy,dist=Math.sqrt(dx*dx+dy*dy),angle=Math.atan2(dy,dx),rays=Math.pow(Math.abs(Math.sin(angle*6+t)),3),falloff=Math.exp(-dist*4),pulse=Math.sin(dist*20-t*3)*0.3+0.7;return rays*falloff*pulse}});
+
+createHalftoneRenderer(document.getElementById('articleBgCanvas'), { spacing:12, maxRadius:3,
+  field(x,y,w,h,t){const c1x=0.85,c1y=0.12,d1x=x/w-c1x,d1y=y/h-c1y,dist1=Math.sqrt(d1x*d1x+d1y*d1y),g1x=Math.sin(x*0.06+t*0.5)*0.5+0.5,g1y=Math.sin(y*0.06+t*0.3)*0.5+0.5,lattice1=g1x*g1y*Math.exp(-dist1*5)*0.6;const angle2=Math.atan2(y/h-0.45,x/w-0.92),dist2=Math.abs(Math.sin(angle2-0.7))*Math.sqrt(Math.pow(x/w-0.92,2)+Math.pow(y/h-0.45,2)),streak=Math.exp(-dist2*8)*0.4;const c3x=0.75,c3y=0.85,d3x=x/w-c3x,d3y=y/h-c3y,dist3=Math.sqrt(d3x*d3x+d3y*d3y),a3=Math.atan2(d3y,d3x),rays3=Math.pow(Math.abs(Math.sin(a3*4+t*0.3)),4),radial3=rays3*Math.exp(-dist3*6)*0.35;const c4x=0.95,c4y=0.55,d4x=x/w-c4x,d4y=y/h-c4y,dist4=Math.sqrt(d4x*d4x+d4y*d4y),cluster4=Math.exp(-dist4*8)*0.5;return Math.max(lattice1,streak,radial3,cluster4)}});
+
+// Nav background
+(function(){
+  const canvas=document.getElementById('navCanvas'),ctx=canvas.getContext('2d');
+  let w,h,fullH,speckleCanvas,noiseCanvas,noiseCtx,dots=[],navTime=0;
+  function resize(){
+    const rect=canvas.parentElement.getBoundingClientRect(),dpr=Math.min(window.devicePixelRatio,2);
+    w=rect.width;h=rect.height;fullH=w*0.6;
+    canvas.width=w*dpr;canvas.height=h*dpr;canvas.style.width=w+'px';canvas.style.height=h+'px';ctx.scale(dpr,dpr);
+    speckleCanvas=document.createElement('canvas');speckleCanvas.width=w;speckleCanvas.height=fullH;
+    const sCtx=speckleCanvas.getContext('2d');sCtx.fillStyle='#2a2f7c';sCtx.fillRect(0,0,w,fullH);
+    const sd=sCtx.getImageData(0,0,w,fullH),d=sd.data,seed=42;
+    for(let i=0;i<d.length;i+=4){const px=(i/4)%w,py=Math.floor((i/4)/w),n=hashNoise(px*0.5+seed,py*0.5+seed*0.3);if(n>0.75){const b=0.1+n*0.15;d[i]=Math.min(255,42+b*30);d[i+1]=Math.min(255,47+b*35);d[i+2]=Math.min(255,124+b*50);d[i+3]=255}}
+    sCtx.putImageData(sd,0,0);
+    noiseCanvas=document.createElement('canvas');noiseCanvas.width=w;noiseCanvas.height=h;noiseCtx=noiseCanvas.getContext('2d');
+    const ngd=noiseCtx.createImageData(w,h),nd=ngd.data;
+    for(let i=0;i<nd.length;i+=4){const px=(i/4)%w,py=Math.floor((i/4)/w),n=hashNoise(px+99,py+55),v=n*60;nd[i]=v;nd[i+1]=v;nd[i+2]=v;nd[i+3]=45}
+    noiseCtx.putImageData(ngd,0,0);
+    dots=[];const sp=10;for(let x=0;x<w+sp;x+=sp)for(let y=0;y<fullH+sp;y+=sp)dots.push({x,y});
+    draw();
+  }
+  function draw(){
+    navTime+=0.0016;
+    ctx.drawImage(speckleCanvas,0,0,w,h,0,0,w,h);
+    ctx.fillStyle='rgba(255,255,255,0.9)';
+    const logoZone={x:200,y:h*0.5,rx:220,ry:h*0.7},linksZone={x:w*0.75,y:h*0.5,rx:w*0.3,ry:h*0.7};
+    for(const dot of dots){
+      if(dot.y>h+10)continue;
+      const nx=dot.x/w, ny=dot.y/fullH;
+      const curveY=0.32+Math.sin(nx*3+navTime*0.3)*0.1, distToCurve=ny-curveY;
+      const topEdge=distToCurve<0?Math.exp(-distToCurve*distToCurve*80):0;
+      const bodyFall=distToCurve>0?Math.exp(-distToCurve*distToCurve*15):0;
+      const perspScale=0.4+nx*0.8, shaped=(topEdge*0.7+bodyFall)*perspScale;
+      const highlight=Math.exp(-Math.pow(distToCurve+0.02,2)*300)*0.6;
+      const curve2Y=curveY+0.14+Math.sin(nx*2.5+navTime*0.2+1)*0.04, dist2=ny-curve2Y;
+      const ribbon2=Math.exp(-dist2*dist2*25)*0.3*(0.3+nx*0.7);
+      const absDist=Math.abs(ny-curveY), scatter=Math.exp(-absDist*4)*0.15*(Math.sin(dot.x*0.07+dot.y*0.09+navTime*0.15)*0.5+0.5);
+      const s=30,g1=Math.pow(Math.cos(dot.x/s*Math.PI)*0.5+0.5,0.3)*Math.pow(Math.cos(dot.y/s*Math.PI)*0.5+0.5,0.3);
+      const g2=Math.pow(Math.cos((dot.x+s/2)/s*Math.PI)*0.5+0.5,0.3)*Math.pow(Math.cos((dot.y+s/2)/s*Math.PI)*0.5+0.5,0.3);
+      let val=Math.min(1,(shaped+highlight+ribbon2+scatter))*(0.6+Math.max(g1,g2)*0.4);
+      const logoDist=Math.sqrt(Math.pow((dot.x-logoZone.x)/logoZone.rx,2)+Math.pow((dot.y-logoZone.y)/logoZone.ry,2));
+      const linksDist=Math.sqrt(Math.pow((dot.x-linksZone.x)/linksZone.rx,2)+Math.pow((dot.y-linksZone.y)/linksZone.ry,2));
+      val*=Math.pow(Math.min(1,Math.min(logoDist,linksDist)),2);
+      if(val>0.05){const r=val*5;ctx.beginPath();ctx.arc(dot.x,dot.y,r,0,Math.PI*2);ctx.fill()}
+    }
+    ctx.globalCompositeOperation='luminosity';ctx.drawImage(noiseCanvas,0,0);ctx.globalCompositeOperation='source-over';
+    ctx.fillStyle='rgba(0,0,30,0.02)';for(let sy=0;sy<h;sy+=3)ctx.fillRect(0,sy,w,1);
+    requestAnimationFrame(draw);
+  }
+  resize();window.addEventListener('resize',resize);
+})();
+
+// Full-page speckled background
+(function(){
+  const canvas=document.getElementById('siteBgCanvas'),ctx=canvas.getContext('2d');
+  let w,h,speckleCanvas,noiseCanvas,noiseCtx;
+  function resize(){
+    const dpr=Math.min(window.devicePixelRatio,2);
+    w=window.innerWidth;h=window.innerHeight;
+    canvas.width=w*dpr;canvas.height=h*dpr;
+    canvas.style.width=w+'px';canvas.style.height=h+'px';
+    ctx.scale(dpr,dpr);
+    speckleCanvas=document.createElement('canvas');speckleCanvas.width=w;speckleCanvas.height=h;
+    const sCtx=speckleCanvas.getContext('2d');sCtx.fillStyle='#2a2f7c';sCtx.fillRect(0,0,w,h);
+    const sd=sCtx.getImageData(0,0,w,h),d=sd.data,seed=42;
+    for(let i=0;i<d.length;i+=4){const px=(i/4)%w,py=Math.floor((i/4)/w),n=hashNoise(px*0.5+seed,py*0.5+seed*0.3);
+      if(n>0.75){const b=0.1+n*0.15;d[i]=Math.min(255,42+b*30);d[i+1]=Math.min(255,47+b*35);d[i+2]=Math.min(255,124+b*50);d[i+3]=255}}
+    sCtx.putImageData(sd,0,0);
+    noiseCanvas=document.createElement('canvas');noiseCanvas.width=w;noiseCanvas.height=h;
+    noiseCtx=noiseCanvas.getContext('2d');
+    const gd=noiseCtx.createImageData(w,h),nd=gd.data;
+    for(let i=0;i<nd.length;i+=4){const px=(i/4)%w,py=Math.floor((i/4)/w),n=hashNoise(px+11,py+22),v=n*60;nd[i]=v;nd[i+1]=v;nd[i+2]=v;nd[i+3]=45}
+    noiseCtx.putImageData(gd,0,0);
+    draw();
+  }
+  function draw(){
+    ctx.drawImage(speckleCanvas,0,0,w,h);
+    ctx.globalCompositeOperation='luminosity';ctx.drawImage(noiseCanvas,0,0);ctx.globalCompositeOperation='source-over';
+    ctx.fillStyle='rgba(0,0,30,0.02)';for(let sy=0;sy<h;sy+=3)ctx.fillRect(0,sy,w,1);
+  }
+  resize();window.addEventListener('resize',resize);
+})();
+
+const navEl=document.querySelector('nav'),heroEl=document.querySelector('.hero');
+window.addEventListener('scroll',()=>{
+  const heroBottom=heroEl.offsetTop+heroEl.offsetHeight-80;
+  navEl.classList.toggle('scrolled',window.scrollY>heroBottom);
+},{passive:true});
+</script>
+</body>
+</html>

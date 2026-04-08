@@ -1,0 +1,73 @@
+{
+  "module": {
+    "id": "mathematical-methods",
+    "number": 19,
+    "title": "Mathematical Methods",
+    "part": "S",
+    "partTitle": "Supporting Modules",
+    "topic": "Mathematical Methods",
+    "intro": ""
+  },
+  "articles": [
+    {
+      "id": "vectors-tensors-matrix-algebra",
+      "number": "19.1",
+      "title": "Vectors, Tensors & Matrix Algebra",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "ordinary-partial-differential-equations",
+      "number": "19.2",
+      "title": "Ordinary & Partial Differential Equations",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "fourier-analysis",
+      "number": "19.3",
+      "title": "Fourier Analysis",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "statistical-mechanics-fundamentals",
+      "number": "19.4",
+      "title": "Statistical Mechanics Fundamentals",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "numerical-methods-discretisation",
+      "number": "19.5",
+      "title": "Numerical Methods & Discretisation",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "symmetry-group-theory",
+      "number": "19.6",
+      "title": "Symmetry & Group Theory",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    }
+  ]
+}

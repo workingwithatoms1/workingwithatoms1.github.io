@@ -1,0 +1,83 @@
+{
+  "module": {
+    "id": "manufacturing",
+    "number": 16,
+    "title": "Manufacturing",
+    "part": "IV",
+    "partTitle": "Practice",
+    "topic": "Manufacturing",
+    "intro": ""
+  },
+  "articles": [
+    {
+      "id": "casting-solidification-processing",
+      "number": "16.1",
+      "title": "Casting & Solidification Processing",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "deformation-processing-rolling-forging-extrusion",
+      "number": "16.2",
+      "title": "Deformation Processing (Rolling, Forging, Extrusion)",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "powder-metallurgy-sintering",
+      "number": "16.3",
+      "title": "Powder Metallurgy & Sintering",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "joining-welding-brazing-adhesives",
+      "number": "16.4",
+      "title": "Joining (Welding, Brazing, Adhesives)",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "additive-manufacturing",
+      "number": "16.5",
+      "title": "Additive Manufacturing",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "heat-treatment",
+      "number": "16.6",
+      "title": "Heat Treatment",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    },
+    {
+      "id": "surface-engineering-coatings",
+      "number": "16.7",
+      "title": "Surface Engineering & Coatings",
+      "description": "",
+      "readingTime": "— min",
+      "intro": "",
+      "body": [],
+      "related": []
+    }
+  ]
+}
