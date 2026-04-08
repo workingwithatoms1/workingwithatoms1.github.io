@@ -188,7 +188,7 @@ function buildArticleContent(articleId) {
 
     html += `
       <p class="article-intro">${art.intro}</p>
-      <div class="article-body">
+      <div class="article-body" data-annotatable="true">
         ${renderBody(mainBlocks)}
     `;
 
@@ -213,7 +213,7 @@ function buildArticleContent(articleId) {
     }
   } else {
     html += `
-      <div class="article-body">
+      <div class="article-body" data-annotatable="true">
         <div class="article-callout">
           <div class="callout-label">Under Development</div>
           <p>This article is currently being written. Check back soon.</p>
@@ -332,4 +332,7 @@ export async function renderArticlePage(moduleId, articleId, rootPath = '../') {
     maxRadius: 3,
     field: articleBgField
   });
+
+  // Initialise highlight-to-comment annotations
+  import('../annotations.js').then(m => m.initAnnotations());
 }
