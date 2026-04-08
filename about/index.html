@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — Working with atoms.</title>
+  <link rel="stylesheet" href="../styles/tokens.css">
+  <link rel="stylesheet" href="../styles/typography.css">
+  <link rel="stylesheet" href="../styles/layout.css">
+  <link rel="stylesheet" href="../styles/components.css">
+</head>
+<body>
+  <canvas id="siteBgCanvas"></canvas>
+
+  <nav>
+    <canvas class="nav-bg" id="navCanvas"></canvas>
+    <a href="../" class="logo">Working with atoms.</a>
+    <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    <ul class="nav-links">
+      <li><a href="../#curriculum">Learn</a></li>
+      <li><a href="#">Phase Diagrams</a></li>
+    </ul>
+  </nav>
+
+  <section class="article-section">
+    <canvas class="article-bg-canvas" id="articleBgCanvas"></canvas>
+    <div class="article-inner">
+      <a href="../" class="article-breadcrumb">Home</a>
+      <div class="article-card">
+        <h2 class="article-title">About this project</h2>
+        <div class="article-body">
+          <p>Working with atoms is a community project built by <strong>Jack Aspinall</strong>, with the aim of creating the most compelling, engaging and effective way to learn materials science.</p>
+          <p>The content is written to be rigorous but accessible, with interactive visualisations, worked examples and practice problems throughout. The goal is to go far beyond a simple wiki and use the full flexibility of a website to provide the best possible learning experience.</p>
+          <h3>Contributing</h3>
+          <p>This is an open project. If you would like to contribute content, suggest corrections, or help build interactive tools, the source code is available on <a href="https://github.com/workingwithatoms1/workingwithatoms1.github.io" style="color:var(--blue)">GitHub</a>.</p>
+          <h3>Contact</h3>
+          <p>For questions, suggestions or collaboration, reach out via the GitHub repository.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-logo">Working with atoms.</div>
+    <div><a href="./" style="color:inherit;text-decoration:none;">About</a></div>
+  </footer>
+
+  <script type="module" src="../scripts/main.js"></script>
+</body>
+</html>

@@ -70,7 +70,7 @@ export function createPageShell(rootPath = '../') {
   const footer = document.createElement('footer');
   footer.innerHTML = `
     <div class="footer-logo">Working with atoms.</div>
-    <div>Materials science, explored.</div>
+    <div><a href="${rootPath}about/" style="color:inherit;text-decoration:none;">About</a></div>
   `;
   body.appendChild(footer);
 
