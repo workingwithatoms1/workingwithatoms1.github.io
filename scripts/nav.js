@@ -139,12 +139,14 @@ export function initNav() {
     requestAnimationFrame(draw);
   }
 
-  // Scroll toggle
+  // Scroll toggle — on homepage, fade in after hero; on other pages, always show
   if (heroEl) {
     window.addEventListener('scroll', () => {
       const heroBottom = heroEl.offsetTop + heroEl.offsetHeight - 80;
       navEl.classList.toggle('scrolled', window.scrollY > heroBottom);
     }, { passive: true });
+  } else {
+    navEl.classList.add('scrolled');
   }
 
   resize();
