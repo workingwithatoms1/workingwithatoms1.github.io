@@ -239,7 +239,7 @@ const pageShell = (rootPath, initScript) => `<!DOCTYPE html>
     </ul>
   </nav>
   <main></main>
-  <footer>
+  <footer style="display:none">
     <div class="footer-logo">Working with atoms.</div>
     <div><a href="${rootPath}about/" style="color:inherit;text-decoration:none;">About</a></div>
   </footer>

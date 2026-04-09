@@ -320,6 +320,10 @@ export async function renderArticlePage(moduleId, articleId, rootPath = '../') {
   // Render the first article
   buildArticleContent(articleId);
 
+  // Show footer now that content is in place
+  const footer = document.querySelector('footer');
+  if (footer) footer.style.display = '';
+
   // Set initial history state so popstate works on back
   history.replaceState({ moduleId, articleId }, '');
 

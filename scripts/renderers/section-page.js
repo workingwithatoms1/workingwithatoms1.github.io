@@ -74,6 +74,10 @@ export async function renderSectionPage(moduleId, rootPath = '../') {
   section.appendChild(inner);
   main.appendChild(section);
 
+  // Show footer now that content is in place
+  const footer = document.querySelector('footer');
+  if (footer) footer.style.display = '';
+
   // Render any inline math in titles
   const hasInlineEq = section.querySelector('.inline-eq');
   if (hasInlineEq) {
