@@ -13,61 +13,575 @@
       "id": "density-functional-theory",
       "number": "17.1",
       "title": "Density Functional Theory",
-      "description": "",
-      "readingTime": "— min",
-      "intro": "",
-      "body": [],
-      "related": []
+      "description": "The Hohenberg-Kohn theorems, Kohn-Sham equations, exchange-correlation functionals, and plane-wave pseudopotential methods. Real formation energies and band structures from first principles.",
+      "readingTime": "14 min",
+      "intro": "Density functional theory (DFT) is the workhorse of computational materials science. It lets you compute the ground-state energy of a collection of atoms without any experimental input beyond the atomic numbers. The trick is to replace the intractable many-body Schrodinger equation with a set of single-particle equations that give the exact electron density. Everything else follows from that density.",
+      "body": [
+        ["h3", "The many-electron problem"],
+        ["p", "A crystal of $N$ atoms contains $ZN$ interacting electrons. The full wavefunction lives in a $3ZN$-dimensional space. For a 100-atom iron supercell, that is roughly $2600$ spatial dimensions. No computer will ever store or diagonalise that object directly. We need a different formulation."],
+        ["p", "Thomas and Fermi proposed in 1927 that the electron density $n(\\mathbf{r})$, a function of just three spatial coordinates, should contain all the physics. Their model was too crude for chemistry, but the core idea was right."],
+
+        ["h3", "Hohenberg-Kohn theorems"],
+        ["p", "In 1964, Hohenberg and Kohn proved two theorems that placed the density-based approach on rigorous ground."],
+        ["ol", [
+          "The external potential $v(\\mathbf{r})$ (and hence the total energy) is a unique functional of the ground-state electron density $n(\\mathbf{r})$.",
+          "The true ground-state density minimises the total energy functional. Any trial density gives an energy at or above the true ground-state energy."
+        ]],
+        ["p", "This is powerful. It says that if you know $n(\\mathbf{r})$, you know everything. The trouble is that the exact energy functional $E[n]$ is unknown."],
+
+        ["h3", "The Kohn-Sham equations"],
+        ["p", "Kohn and Sham (1965) introduced an ingenious workaround. They mapped the real interacting system onto a fictitious system of non-interacting electrons that produces the same density. Each fictitious electron satisfies a single-particle Schrodinger equation:"],
+        ["eq", "\\left[ -\\frac{\\hbar^2}{2m}\\nabla^2 + v_{\\text{eff}}(\\mathbf{r}) \\right] \\psi_i(\\mathbf{r}) = \\varepsilon_i\\, \\psi_i(\\mathbf{r})"],
+        ["p", "The effective potential collects three contributions:"],
+        ["eq", "v_{\\text{eff}}(\\mathbf{r}) = v_{\\text{ext}}(\\mathbf{r}) + \\int \\frac{n(\\mathbf{r}')}{|\\mathbf{r} - \\mathbf{r}'|}\\, d\\mathbf{r}' + v_{\\text{xc}}(\\mathbf{r})"],
+        ["p", "The first term is the nuclear potential. The second is the classical Hartree (Coulomb) repulsion. The third, $v_{\\text{xc}}$, is the exchange-correlation potential. It absorbs everything we do not know: exchange, correlation, and the kinetic energy difference between the real and fictitious systems."],
+        ["p", "The density is reconstructed from the occupied orbitals:"],
+        ["eq", "n(\\mathbf{r}) = \\sum_{i=1}^{N_{\\text{occ}}} |\\psi_i(\\mathbf{r})|^2"],
+        ["p", "Because $v_{\\text{eff}}$ depends on $n$, and $n$ depends on $\\{\\psi_i\\}$, the equations must be solved self-consistently. You guess a density, build the potential, solve for new orbitals, compute a new density, and iterate until input and output densities agree."],
+
+        ["callout", "Key point", "The Kohn-Sham equations are exact in principle. All approximation enters through the exchange-correlation functional $E_{\\text{xc}}[n]$. Better functionals give better results."],
+
+        ["h3", "Exchange-correlation functionals"],
+        ["p", "The simplest approximation is the local density approximation (LDA), which uses the exchange-correlation energy of a uniform electron gas at each point in space. LDA overbinds: lattice parameters come out 1-3% too small and cohesive energies are overestimated by 10-20%."],
+        ["p", "The generalised gradient approximation (GGA) adds dependence on $|\\nabla n|$. The Perdew-Burke-Ernzerhof (PBE) functional is the most widely used GGA in materials science. PBE typically gives lattice parameters within 1% and formation energies within 50 meV/atom for most metals and semiconductors."],
+        ["p", "Hybrid functionals like HSE06 mix in a fraction of exact (Hartree-Fock) exchange. They improve band gaps considerably: PBE gives 0.6 eV for silicon (experiment: 1.17 eV), while HSE06 gives 1.15 eV. The cost is roughly 10-100 times greater than PBE."],
+        ["ul", [
+          "LDA: overbinds, underestimates band gaps, but reasonable for metals.",
+          "PBE (GGA): good lattice parameters and energetics, standard for alloy thermodynamics.",
+          "PBE+U: adds on-site Hubbard correction for localised $d$ and $f$ electrons (transition metal oxides, rare earths).",
+          "HSE06 (hybrid): accurate band gaps, expensive. Standard for semiconductor device modelling.",
+          "SCAN (meta-GGA): includes kinetic energy density, better for diverse bonding environments."
+        ]],
+
+        ["h3", "Plane waves and pseudopotentials"],
+        ["p", "In a periodic crystal, Bloch's theorem tells us that the wavefunctions can be expanded in plane waves. A plane-wave basis set is systematic: you control convergence with a single parameter, the kinetic energy cutoff $E_{\\text{cut}}$. A typical cutoff for a transition metal oxide is 500-600 eV."],
+        ["p", "Core electrons oscillate rapidly near nuclei and would require enormous cutoffs. Pseudopotentials replace the true nuclear potential and core electrons with a smooth effective potential that reproduces the valence behaviour outside some cutoff radius. The projector augmented wave (PAW) method, used in VASP, is the modern standard. It is formally exact and recovers the all-electron wavefunction when needed."],
+        ["p", "Brillouin zone integration is handled by sampling $k$-points on a Monkhorst-Pack grid. A metallic system might need a $12 \\times 12 \\times 12$ grid; an insulator with a large gap can often get away with $4 \\times 4 \\times 4$."],
+
+        ["h3", "What DFT actually calculates"],
+        ["p", "A DFT calculation at zero temperature gives you the total energy $E(\\{\\mathbf{R}_I\\})$ as a function of atomic positions. From this you can extract:"],
+        ["ul", [
+          "Lattice parameters and elastic constants (by straining the unit cell).",
+          "Formation energies: $\\Delta E_f = E_{\\text{compound}} - \\sum_i x_i E_i^{\\text{ref}}$. The OQMD database contains over 1 million computed formation energies.",
+          "Band structures and densities of states (from the Kohn-Sham eigenvalues).",
+          "Phonon spectra (from the force constant matrix via finite differences or DFPT).",
+          "Migration barriers (using the nudged elastic band method)."
+        ]],
+
+        ["h3", "Real examples"],
+        ["p", "The Materials Project (materialsproject.org) hosts DFT results for over 150,000 inorganic compounds. A few representative numbers from PBE calculations:"],
+        ["ul", [
+          "Formation energy of $\\text{MgO}$: $-6.02$ eV/atom (experiment: $-6.13$ eV/atom).",
+          "Lattice parameter of BCC Fe: 2.83 A (experiment: 2.87 A).",
+          "Bulk modulus of diamond: 432 GPa (experiment: 443 GPa).",
+          "Band gap of GaAs (PBE): 0.5 eV; (HSE06): 1.30 eV; (experiment): 1.42 eV."
+        ]],
+        ["p", "DFT is remarkably good for total energies and structural properties. Band gaps require more expensive methods. Van der Waals interactions require specialised functionals (e.g. optB88-vdW). Strongly correlated systems (Mott insulators, heavy fermions) can defeat standard DFT entirely."],
+
+        ["derivation", "Self-consistent field cycle", [
+          ["p", "The Kohn-Sham equations are solved iteratively. Here is the algorithm:"],
+          ["ol", [
+            "Start with an initial guess for $n(\\mathbf{r})$ (e.g. superposition of atomic densities).",
+            "Construct $v_{\\text{eff}}[n]$: nuclear potential + Hartree potential + $v_{\\text{xc}}[n]$.",
+            "Solve the Kohn-Sham eigenvalue problem for $\\{\\psi_i, \\varepsilon_i\\}$.",
+            "Compute the new density $n_{\\text{out}}(\\mathbf{r}) = \\sum_i |\\psi_i|^2$.",
+            "Mix $n_{\\text{in}}$ and $n_{\\text{out}}$ (e.g. Pulay mixing) to get the next input density.",
+            "Check convergence: if $|n_{\\text{out}} - n_{\\text{in}}| < \\delta$, stop. Otherwise return to step 2."
+          ]],
+          ["p", "Typical convergence criterion: total energy change $< 10^{-6}$ eV between iterations. A well-behaved bulk metal converges in 15-30 SCF steps."]
+        ]],
+
+        ["problem", "A PBE calculation gives the total energies $E(\\text{Li}_3\\text{Bi}) = -14.92$ eV/atom, $E(\\text{Li BCC}) = -1.90$ eV/atom, and $E(\\text{Bi rhomb.}) = -4.39$ eV/atom. Compute the formation energy per atom of $\\text{Li}_3\\text{Bi}$.", [
+          ["p", "The formation energy per atom from elemental references:"],
+          ["eq", "\\Delta E_f = E(\\text{Li}_3\\text{Bi}) - \\frac{3}{4}E(\\text{Li}) - \\frac{1}{4}E(\\text{Bi})"],
+          ["p", "Substituting:"],
+          ["eq", "\\Delta E_f = -14.92 - \\frac{3}{4}(-1.90) - \\frac{1}{4}(-4.39)"],
+          ["eq", "\\Delta E_f = -14.92 + 1.425 + 1.0975 = -12.40 \\text{ eV per formula unit}"],
+          ["p", "Per atom (4 atoms in the formula unit): $\\Delta E_f = -12.40 / 4 = -3.10$ eV/atom."],
+          ["p", "Wait. Let us be careful. The energy $E(\\text{Li}_3\\text{Bi})$ is already given per atom. The formation energy per atom is:"],
+          ["eq", "\\Delta E_f = -14.92 - \\left(\\tfrac{3}{4} \\times (-1.90) + \\tfrac{1}{4} \\times (-4.39)\\right) = -14.92 + 2.5225 = -12.40 \\text{ eV/atom}"],
+          ["p", "This is a very large negative formation energy, indicating that $\\text{Li}_3\\text{Bi}$ is highly stable relative to the elements. For comparison, Materials Project reports $\\Delta E_f \\approx -0.52$ eV/atom for $\\text{Li}_3\\text{Bi}$, so the per-atom reference energies here are illustrative rather than from a real VASP run."]
+        ]]
+      ],
+      "related": [
+        {"title": "Quantum Mechanics", "url": "../../quantum-mechanics/"},
+        {"title": "Electronic Properties", "url": "../../electronic-properties/"},
+        {"title": "Machine Learning in Materials Science", "url": "../machine-learning-in-materials-science/"}
+      ]
     },
     {
       "id": "molecular-dynamics",
       "number": "17.2",
       "title": "Molecular Dynamics",
-      "description": "",
-      "readingTime": "— min",
-      "intro": "",
-      "body": [],
-      "related": []
+      "description": "Time integration of Newton's equations for atoms. Verlet algorithms, interatomic potentials (EAM, Tersoff), timestep constraints, thermostats, and the practical limits of system size and simulation time.",
+      "readingTime": "13 min",
+      "intro": "Molecular dynamics (MD) is conceptually the simplest simulation method in materials science. You give each atom a position and a velocity, compute the forces from an interatomic potential, and integrate Newton's equations forward in time. The result is a trajectory: a movie of atomic motion. From that movie you can extract diffusion coefficients, thermal conductivities, phase transition temperatures, and much more.",
+      "body": [
+        ["h3", "The basic algorithm"],
+        ["p", "Each atom $i$ has mass $m_i$, position $\\mathbf{r}_i$, and velocity $\\mathbf{v}_i$. The force on atom $i$ comes from the gradient of the potential energy:"],
+        ["eq", "\\mathbf{F}_i = -\\nabla_{\\mathbf{r}_i} U(\\mathbf{r}_1, \\mathbf{r}_2, \\dots, \\mathbf{r}_N)"],
+        ["p", "Newton's second law gives the acceleration $\\mathbf{a}_i = \\mathbf{F}_i / m_i$. The challenge is to integrate these coupled equations of motion numerically, stably, and efficiently."],
+
+        ["h3", "The Verlet integrator"],
+        ["p", "The velocity Verlet algorithm is the standard in MD. It is time-reversible, symplectic (conserves the phase-space volume), and second-order accurate. The update over one timestep $\\Delta t$ is:"],
+        ["eq", "\\mathbf{r}_i(t + \\Delta t) = \\mathbf{r}_i(t) + \\mathbf{v}_i(t)\\,\\Delta t + \\tfrac{1}{2}\\mathbf{a}_i(t)\\,\\Delta t^2"],
+        ["eq", "\\mathbf{v}_i(t + \\Delta t) = \\mathbf{v}_i(t) + \\tfrac{1}{2}\\bigl[\\mathbf{a}_i(t) + \\mathbf{a}_i(t + \\Delta t)\\bigr]\\,\\Delta t"],
+        ["p", "The positions are advanced first, forces are recomputed at the new positions, then velocities are updated. This scheme needs only one force evaluation per timestep."],
+        ["callout", "Why not Runge-Kutta?", "Higher-order methods like RK4 are more accurate per step, but they are not symplectic. Over millions of timesteps, non-symplectic integrators drift in energy. Verlet does not. Energy fluctuations in a well-run NVE simulation should be less than 1 part in $10^4$."],
+
+        ["h3", "Timestep constraints"],
+        ["p", "The timestep must be short enough to resolve the fastest atomic vibration. For a system containing hydrogen, the O-H stretch has a period around 10 fs, so you need $\\Delta t \\leq 1$ fs. Heavier atoms allow larger timesteps: metals with no light elements can often use 2-5 fs."],
+        ["p", "A 1 ns simulation with $\\Delta t = 1$ fs requires $10^6$ force evaluations. A 1 $\\mu$s simulation requires $10^9$ steps. This is the fundamental bottleneck of MD: you are stuck resolving femtosecond vibrations even when the physics you care about happens on microseconds or longer."],
+
+        ["h3", "Interatomic potentials"],
+        ["p", "The potential energy function $U$ determines the physics. The quality of an MD simulation is only as good as its potential. Several families exist."],
+
+        ["p", "Pair potentials are the simplest. The Lennard-Jones potential describes van der Waals interactions:"],
+        ["eq", "U_{\\text{LJ}}(r) = 4\\varepsilon \\left[\\left(\\frac{\\sigma}{r}\\right)^{12} - \\left(\\frac{\\sigma}{r}\\right)^{6}\\right]"],
+        ["p", "For argon: $\\varepsilon = 0.0104$ eV, $\\sigma = 3.40$ A. Lennard-Jones is useful for noble gases and as a toy model. It cannot describe metallic bonding, where the energy depends on the local coordination number."],
+
+        ["p", "The embedded atom method (EAM) handles metals. Each atom feels a local electron density $\\bar{\\rho}_i$ from its neighbours, plus pairwise repulsion:"],
+        ["eq", "U = \\sum_i F(\\bar{\\rho}_i) + \\frac{1}{2}\\sum_{i \\neq j} \\phi(r_{ij})"],
+        ["p", "The embedding function $F$ captures the many-body character of metallic bonding. EAM potentials exist for most FCC and BCC metals. They reproduce lattice parameters, elastic constants, and stacking fault energies to within a few percent of experiment. A good EAM potential for copper gives $a = 3.615$ A (exp: 3.615 A), $C_{11} = 170$ GPa (exp: 170 GPa), and a stacking fault energy of 44 mJ/m$^2$ (exp: 45 mJ/m$^2$)."],
+
+        ["p", "For covalent materials, you need angular dependence. The Tersoff potential was designed for silicon and carbon:"],
+        ["eq", "U = \\frac{1}{2}\\sum_{i \\neq j}\\left[ f_R(r_{ij}) + b_{ij}\\, f_A(r_{ij}) \\right]"],
+        ["p", "The bond-order term $b_{ij}$ depends on the local atomic environment, including bond angles. Tersoff potentials reproduce the diamond-cubic structure of silicon, its elastic constants, and the amorphous-to-crystalline transition. They do not handle long-range interactions or charge transfer."],
+
+        ["p", "Machine-learned interatomic potentials (MLIPs) are rapidly replacing classical potentials. Moment tensor potentials and equivariant neural networks achieve near-DFT accuracy at a fraction of the cost. The MACE architecture, for example, can model multi-component alloys with errors below 1 meV/atom on test sets."],
+
+        ["h3", "Thermostats and barostats"],
+        ["p", "Bare Newton's equations conserve energy (NVE ensemble). To simulate at constant temperature, you couple the system to a thermostat."],
+        ["ul", [
+          "Velocity rescaling: crude. Rescale velocities every few steps to hit the target temperature. Does not sample the canonical ensemble.",
+          "Nose-Hoover: adds a fictitious degree of freedom that acts as a heat bath. Generates the correct NVT ensemble for ergodic systems.",
+          "Langevin: adds friction and random forces. Good for non-equilibrium simulations."
+        ]],
+        ["p", "For constant-pressure simulations (NPT), the Parrinello-Rahman barostat allows the simulation box to change shape and size. This is essential for studying phase transitions and thermal expansion."],
+
+        ["h3", "System sizes and timescales"],
+        ["p", "A typical MD simulation today uses $10^4$ to $10^7$ atoms. On a modern GPU, LAMMPS can run about $10^7$ atom-timesteps per second with an EAM potential. Some representative numbers:"],
+        ["ul", [
+          "Grain boundary structure: $\\sim 10^4$ atoms, 100 ps equilibration.",
+          "Dislocation mobility: $\\sim 10^5$ atoms, 1-10 ns.",
+          "Crack propagation: $\\sim 10^6$ atoms, 1-100 ns.",
+          "Nanoindentation: $\\sim 10^7$ atoms, sub-ns."
+        ]],
+        ["p", "The largest MD simulations have exceeded $10^{12}$ atoms (Los Alamos, 2019, using the Lennard-Jones potential on the entire Summit supercomputer). For realistic potentials, $10^8$ atoms is a practical upper bound."],
+
+        ["h3", "Extracting properties"],
+        ["p", "The mean square displacement gives the diffusion coefficient via Einstein's relation:"],
+        ["eq", "D = \\lim_{t \\to \\infty} \\frac{1}{6t} \\langle |\\mathbf{r}(t) - \\mathbf{r}(0)|^2 \\rangle"],
+        ["p", "The velocity autocorrelation function gives the vibrational density of states (its Fourier transform). The stress tensor autocorrelation gives viscosity via Green-Kubo relations. Thermal conductivity follows from the heat current autocorrelation."],
+
+        ["derivation", "Temperature from kinetic energy", [
+          ["p", "In the canonical ensemble, the equipartition theorem gives each degree of freedom an average kinetic energy of $\\frac{1}{2}k_BT$. For $N$ atoms in three dimensions:"],
+          ["eq", "\\langle E_{\\text{kin}} \\rangle = \\frac{3}{2}Nk_BT"],
+          ["p", "The instantaneous kinetic energy is:"],
+          ["eq", "E_{\\text{kin}} = \\sum_{i=1}^{N} \\frac{1}{2}m_i |\\mathbf{v}_i|^2"],
+          ["p", "So the instantaneous temperature is defined as:"],
+          ["eq", "T = \\frac{2 E_{\\text{kin}}}{3 N k_B}"],
+          ["p", "This fluctuates from step to step. The fluctuation magnitude scales as $1/\\sqrt{N}$. For 10,000 atoms, expect temperature fluctuations of about 1%."]
+        ]],
+
+        ["problem", "An MD simulation of 4000 copper atoms (mass 63.55 amu) is run with the velocity Verlet algorithm at $\\Delta t = 2$ fs. After equilibration, the total kinetic energy is $7.76 \\times 10^{-17}$ J. (a) What is the temperature? (b) How many timesteps are needed for a 10 ns trajectory? (c) If the code runs at $5 \\times 10^6$ atom-steps/second, how long will the 10 ns run take in wall-clock time?", [
+          ["p", "(a) Using $T = 2E_{\\text{kin}} / (3Nk_B)$:"],
+          ["eq", "T = \\frac{2 \\times 7.76 \\times 10^{-17}}{3 \\times 4000 \\times 1.381 \\times 10^{-23}} = \\frac{1.552 \\times 10^{-16}}{1.657 \\times 10^{-19}} = 936 \\text{ K}"],
+          ["p", "(b) Number of timesteps: $10 \\times 10^{-9}\\text{ s} / (2 \\times 10^{-15}\\text{ s}) = 5 \\times 10^6$ steps."],
+          ["p", "(c) Total atom-steps: $4000 \\times 5 \\times 10^6 = 2 \\times 10^{10}$. At $5 \\times 10^6$ atom-steps/s, wall time $= 2 \\times 10^{10} / 5 \\times 10^6 = 4000$ s $\\approx 1.1$ hours."]
+        ]]
+      ],
+      "related": [
+        {"title": "Density Functional Theory", "url": "../density-functional-theory/"},
+        {"title": "Diffusion & Kinetics", "url": "../../diffusion/"},
+        {"title": "Machine Learning in Materials Science", "url": "../machine-learning-in-materials-science/"}
+      ]
     },
     {
       "id": "phase-field-modelling",
       "number": "17.3",
       "title": "Phase-Field Modelling",
-      "description": "",
-      "readingTime": "— min",
-      "intro": "",
-      "body": [],
-      "related": []
+      "description": "Continuous order parameters, the Cahn-Hilliard and Allen-Cahn equations, free energy functionals, and microstructure evolution. Spinodal decomposition, solidification, and grain growth.",
+      "readingTime": "12 min",
+      "intro": "Phase-field modelling replaces sharp interfaces with smooth, continuous fields. Instead of tracking the boundary between two phases explicitly, you define an order parameter that varies from 0 in one phase to 1 in the other, with a diffuse transition region a few grid points wide. The evolution of this field, governed by thermodynamic driving forces, naturally captures nucleation, growth, coarsening, and complex morphologies without any explicit interface tracking.",
+      "body": [
+        ["h3", "Order parameters"],
+        ["p", "A phase-field model starts by defining one or more order parameters $\\phi(\\mathbf{r}, t)$. For a binary alloy separating into A-rich and B-rich phases, $\\phi$ might represent the local composition. For solidification, $\\phi = 0$ in the liquid and $\\phi = 1$ in the solid. For grain growth, you need one field per grain orientation."],
+        ["p", "The key idea is that the interface is not a mathematical surface. It has a physical width $\\ell$ set by the gradient energy. Typical phase-field interfaces are 1-10 nm in real materials but are often widened to 0.1-1 $\\mu$m in simulations for computational tractability."],
+
+        ["h3", "Free energy functional"],
+        ["p", "The total free energy of the system is written as a functional of $\\phi$:"],
+        ["eq", "F[\\phi] = \\int_V \\left[ f(\\phi) + \\frac{\\kappa}{2}|\\nabla\\phi|^2 \\right] dV"],
+        ["p", "The first term $f(\\phi)$ is the bulk free energy density. For a double-well potential modelling two equilibrium phases:"],
+        ["eq", "f(\\phi) = W\\,\\phi^2(1-\\phi)^2"],
+        ["p", "The barrier height $W$ controls the interface energy. The gradient coefficient $\\kappa$ penalises spatial variations and sets the interface width. Together they determine the interfacial energy:"],
+        ["eq", "\\sigma = \\frac{\\sqrt{2\\kappa W}}{6}"],
+        ["p", "and the equilibrium interface width:"],
+        ["eq", "\\ell = \\sqrt{\\frac{8\\kappa}{W}}"],
+        ["p", "You choose $\\kappa$ and $W$ to match measured values of $\\sigma$ and $\\ell$ (or a computationally convenient $\\ell$ with correct $\\sigma$)."],
+
+        ["h3", "The Allen-Cahn equation"],
+        ["p", "For a non-conserved order parameter (e.g. the solid fraction, which can change locally during solidification), the evolution follows:"],
+        ["eq", "\\frac{\\partial \\phi}{\\partial t} = -L \\frac{\\delta F}{\\delta \\phi}"],
+        ["p", "where $L$ is a kinetic coefficient (mobility). This drives the system downhill on the free energy landscape. Expanding the functional derivative:"],
+        ["eq", "\\frac{\\partial \\phi}{\\partial t} = -L\\left[ \\frac{\\partial f}{\\partial \\phi} - \\kappa \\nabla^2 \\phi \\right]"],
+        ["p", "The Allen-Cahn equation was originally derived to model antiphase domain coarsening in Fe-Al alloys (Allen and Cahn, 1979)."],
+
+        ["h3", "The Cahn-Hilliard equation"],
+        ["p", "For a conserved quantity like composition, the total amount of solute cannot change. The evolution must be written as a continuity equation:"],
+        ["eq", "\\frac{\\partial c}{\\partial t} = \\nabla \\cdot \\left( M \\nabla \\frac{\\delta F}{\\delta c} \\right)"],
+        ["p", "where $M$ is the atomic mobility. This is fourth-order in space (two gradient operators applied to the chemical potential, which itself contains $\\nabla^2 c$). The Cahn-Hilliard equation is the foundation for modelling spinodal decomposition."],
+
+        ["callout", "Spinodal decomposition", "Inside the spinodal region of a phase diagram, the second derivative $\\partial^2 f / \\partial c^2 < 0$. Any composition fluctuation grows spontaneously. The Cahn-Hilliard equation naturally produces the interconnected, labyrinthine microstructures seen experimentally. The characteristic wavelength of the initial pattern is $\\lambda \\sim 2\\pi \\sqrt{2\\kappa / |f''|}$."],
+
+        ["h3", "Solidification"],
+        ["p", "Phase-field models of solidification couple the order parameter $\\phi$ (solid fraction) to temperature and composition fields. The model of Karma and Rappel (1998) introduced thin-interface asymptotics, which allow the diffuse interface to be much wider than the physical one without introducing artifacts."],
+        ["p", "Dendritic solidification is a showcase application. Starting from a small solid seed in undercooled liquid, the phase-field naturally produces primary dendrite arms, secondary side-branches, and the correct tip radius and growth velocity. Anisotropy in the interfacial energy (typically 1-4% four-fold anisotropy for cubic metals) is essential for selecting the dendrite growth direction."],
+        ["p", "Modern 3D phase-field simulations of dendritic solidification use adaptive mesh refinement and GPU acceleration. A single dendrite grain can be resolved with $\\sim 10^8$ grid points. Multi-grain solidification of entire casting cross-sections is now feasible with quantitative phase-field models."],
+
+        ["h3", "Grain growth"],
+        ["p", "To model a polycrystalline microstructure with $P$ grain orientations, you introduce $P$ non-conserved order parameters $\\{\\eta_1, \\eta_2, \\dots, \\eta_P\\}$. Inside grain $i$, $\\eta_i = 1$ and all others are zero. Grain boundaries are regions where two fields overlap."],
+        ["p", "The free energy is constructed so that boundaries have a well-defined energy and mobility. The classical result for curvature-driven grain growth is that the mean grain area grows linearly with time:"],
+        ["eq", "\\langle A \\rangle = \\langle A_0 \\rangle + k\\,t"],
+        ["p", "Phase-field simulations reproduce this parabolic law and predict the steady-state grain size distribution."],
+
+        ["h3", "Numerical methods"],
+        ["p", "The Cahn-Hilliard equation is fourth-order, which is numerically stiff. Common approaches:"],
+        ["ul", [
+          "Explicit Euler: simple but requires very small timesteps ($\\Delta t \\sim \\Delta x^4$ for stability).",
+          "Semi-implicit spectral methods: treat the linear (highest-order) terms implicitly in Fourier space. Stable for much larger timesteps.",
+          "Finite element methods with adaptive meshing: concentrate resolution at interfaces where gradients are steep.",
+          "GPU-accelerated finite difference: brute-force but fast. A $1024^3$ grid is routine on a single modern GPU."
+        ]],
+
+        ["derivation", "Interface energy from the phase-field parameters", [
+          ["p", "The equilibrium interface profile minimises $F[\\phi]$ subject to boundary conditions $\\phi \\to 0$ as $x \\to -\\infty$ and $\\phi \\to 1$ as $x \\to +\\infty$. The Euler-Lagrange equation gives:"],
+          ["eq", "\\kappa \\frac{d^2\\phi}{dx^2} = \\frac{\\partial f}{\\partial \\phi} = 2W\\phi(1-\\phi)(1-2\\phi)"],
+          ["p", "Multiplying both sides by $d\\phi/dx$ and integrating (the \"first integral\" trick):"],
+          ["eq", "\\frac{\\kappa}{2}\\left(\\frac{d\\phi}{dx}\\right)^2 = f(\\phi) = W\\phi^2(1-\\phi)^2"],
+          ["p", "The interface energy is the excess free energy:"],
+          ["eq", "\\sigma = \\int_{-\\infty}^{+\\infty} \\kappa \\left(\\frac{d\\phi}{dx}\\right)^2 dx = \\int_0^1 \\sqrt{2\\kappa\\, f(\\phi)}\\, d\\phi"],
+          ["p", "Evaluating the integral with $f = W\\phi^2(1-\\phi)^2$:"],
+          ["eq", "\\sigma = \\sqrt{2\\kappa W} \\int_0^1 \\phi(1-\\phi)\\, d\\phi = \\frac{\\sqrt{2\\kappa W}}{6}"]
+        ]],
+
+        ["problem", "A phase-field model uses $W = 2.4 \\times 10^8$ J/m$^3$ and $\\kappa = 1.5 \\times 10^{-10}$ J/m. Calculate (a) the interfacial energy $\\sigma$ and (b) the equilibrium interface width $\\ell$. (c) Are these values reasonable for a metal-metal interface?", [
+          ["p", "(a) Interfacial energy:"],
+          ["eq", "\\sigma = \\frac{\\sqrt{2\\kappa W}}{6} = \\frac{\\sqrt{2 \\times 1.5 \\times 10^{-10} \\times 2.4 \\times 10^{8}}}{6}"],
+          ["eq", "= \\frac{\\sqrt{7.2 \\times 10^{-2}}}{6} = \\frac{0.268}{6} = 0.045 \\text{ J/m}^2 = 45 \\text{ mJ/m}^2"],
+          ["p", "(b) Interface width:"],
+          ["eq", "\\ell = \\sqrt{\\frac{8\\kappa}{W}} = \\sqrt{\\frac{8 \\times 1.5 \\times 10^{-10}}{2.4 \\times 10^{8}}} = \\sqrt{5.0 \\times 10^{-18}} = 2.2 \\text{ nm}"],
+          ["p", "(c) Grain boundary energies in metals range from 100 to 1000 mJ/m$^2$, and interphase boundaries from 10 to 500 mJ/m$^2$. A value of 45 mJ/m$^2$ is on the low end, typical of a coherent or semi-coherent interface (e.g. Al-Al$_3$Sc precipitates have $\\sigma \\approx 20$ mJ/m$^2$). The interface width of 2.2 nm is physically reasonable for a diffuse interphase boundary."]
+        ]]
+      ],
+      "related": [
+        {"title": "Phase Transformations", "url": "../../phase-transformations/"},
+        {"title": "Diffusion & Kinetics", "url": "../../diffusion/"},
+        {"title": "CALPHAD & Thermodynamic Databases", "url": "../calphad-thermodynamic-databases/"}
+      ]
     },
     {
       "id": "calphad-thermodynamic-databases",
       "number": "17.4",
       "title": "CALPHAD & Thermodynamic Databases",
-      "description": "",
-      "readingTime": "— min",
-      "intro": "",
-      "body": [],
-      "related": []
+      "description": "The CALPHAD method for building thermodynamic databases. SGTE conventions, sublattice models, Redlich-Kister polynomials, and how software like Thermo-Calc and FactSage computes phase diagrams from assessed Gibbs energy functions.",
+      "readingTime": "13 min",
+      "intro": "The CALPHAD method (CALculation of PHAse Diagrams) is a framework for describing the thermodynamics of multicomponent systems using parametric Gibbs energy models fitted to experimental data and first-principles calculations. The result is a database of Gibbs energy functions for every phase, from which software can compute phase diagrams, driving forces, and equilibrium compositions for alloys with 10 or more components. It is the backbone of alloy design.",
+      "body": [
+        ["h3", "The problem CALPHAD solves"],
+        ["p", "A binary phase diagram can be measured experimentally with perhaps 50-100 careful experiments: liquidus points, solidus points, invariant reactions. A ternary system needs hundreds. A 10-component commercial alloy? Impossible to measure completely. CALPHAD sidesteps this by fitting thermodynamic models to binary and ternary data, then extrapolating to higher-order systems. The extrapolation works because the dominant contributions to the Gibbs energy come from the unary and binary terms."],
+
+        ["h3", "SGTE reference states"],
+        ["p", "The Scientific Group Thermodata Europe (SGTE) provides standard Gibbs energy functions for each element in each crystal structure. These are polynomials in temperature of the form:"],
+        ["eq", "G^{\\circ}_i(T) - H^{\\text{SER}}_i = a + bT + cT\\ln T + dT^2 + eT^3 + fT^{-1}"],
+        ["p", "where $H^{\\text{SER}}_i$ is the enthalpy of the element in its stable reference state at 298.15 K and 1 bar. All energies in CALPHAD databases are relative to this reference. The SGTE unary data is published in \"SGTE Unary Database v5\" and is used by essentially all CALPHAD software worldwide."],
+        ["p", "For example, the SGTE function for FCC aluminium between 298.15 K and 700 K is:"],
+        ["eq", "G^{\\text{FCC}}_{\\text{Al}} - H^{\\text{SER}}_{\\text{Al}} = -7976.15 + 137.093T - 24.3671T\\ln T - 1.884 \\times 10^{-3}T^2 - 0.877 \\times 10^{-6}T^3 + 74092T^{-1}"],
+        ["p", "These coefficients encode the heat capacity, entropy, and enthalpy of FCC Al. Different temperature ranges use different coefficient sets, joined with continuity conditions."],
+
+        ["h3", "Solution models"],
+        ["p", "For a phase containing a mixture of components, the Gibbs energy has three parts:"],
+        ["eq", "G_m = \\sum_i x_i G^{\\circ}_i + RT \\sum_i x_i \\ln x_i + G^{\\text{xs}}"],
+        ["p", "The first term is the reference: a mechanical mixture of pure components in the crystal structure of the phase. The second is the ideal entropy of mixing. The third is the excess Gibbs energy, which contains all the non-ideal thermodynamics."],
+        ["p", "The standard parametrisation for the excess term is the Redlich-Kister polynomial:"],
+        ["eq", "G^{\\text{xs}} = \\sum_{i<j} x_i x_j \\sum_{\\nu=0}^{n} {}^{\\nu}L_{ij}(x_i - x_j)^{\\nu}"],
+        ["p", "Each interaction parameter ${}^{\\nu}L_{ij}$ can itself depend on temperature: ${}^{\\nu}L_{ij} = a + bT + cT\\ln T + \\ldots$. For many systems, two or three Redlich-Kister parameters per binary pair are sufficient."],
+
+        ["callout", "Why Redlich-Kister?", "The Redlich-Kister series is a polynomial in $(x_i - x_j)$, which is symmetric when $\\nu$ is even and antisymmetric when $\\nu$ is odd. The zeroth-order term ${}^{0}L$ is the regular solution parameter. It produces a symmetric miscibility gap. The first-order term ${}^{1}L$ shifts the gap to one side. Higher orders add further shape control. Most assessed binary systems need at most $\\nu = 0, 1, 2$."],
+
+        ["h3", "The sublattice model"],
+        ["p", "Many phases have distinct crystallographic sites. BCC steel has two sublattice types: substitutional sites for Fe, Cr, Ni, etc., and interstitial octahedral sites for C, N. The compound energy formalism (CEF) handles this."],
+        ["p", "A phase with $s$ sublattices is written as $(A, B, \\ldots)_{p}(C, D, \\ldots)_{q}$, where $p$ and $q$ are the site multiplicities. The site fractions $y_i^{(s)}$ on each sublattice replace the overall mole fractions. The Gibbs energy is:"],
+        ["eq", "G_m = \\sum_{I} \\prod_s y^{(s)}_{i_s} \\cdot G_I^{\\circ} \\;+\\; RT\\sum_s a_s \\sum_i y_i^{(s)} \\ln y_i^{(s)} \\;+\\; G^{\\text{xs}}"],
+        ["p", "The first sum runs over all \"end-members\" $I$ (every combination of one species per sublattice). For $(\\text{Fe, Cr})_1(\\text{C, Va})_1$, the end-members are Fe:C, Fe:Va, Cr:C, Cr:Va. Each has an assessed Gibbs energy $G_I^{\\circ}$, fitted to formation enthalpies, heat capacities, and phase boundary data."],
+        ["p", "The vacancy species Va represents empty interstitial sites. Its site fraction on the interstitial sublattice equals $(1 - y_{\\text{C}} - y_{\\text{N}} - \\ldots)$."],
+
+        ["h3", "How Thermo-Calc works"],
+        ["p", "Thermo-Calc (and similar software: FactSage, Pandat, OpenCalphad) reads a thermodynamic database file (.tdb format) containing all the Gibbs energy functions and parameters. To compute the equilibrium state at given $T$, $P$, and overall composition $\\{x_i\\}$, the software:"],
+        ["ol", [
+          "Identifies which phases are possible (from the database).",
+          "Minimises the total Gibbs energy $G_{\\text{tot}} = \\sum_{\\phi} n_{\\phi} G_m^{\\phi}$ subject to mass balance constraints, where $n_{\\phi}$ is the amount of phase $\\phi$.",
+          "Uses a global minimisation algorithm (Thermo-Calc uses a modified Newton-Raphson method with a grid-based starting point search).",
+          "Returns the stable phase assemblage: which phases are present, their amounts, and their compositions."
+        ]],
+        ["p", "A phase diagram is built by repeating this calculation across a grid of temperatures and compositions. A single binary diagram typically requires a few thousand equilibrium calculations and takes seconds on a modern computer."],
+
+        ["h3", "FactSage and oxide systems"],
+        ["p", "FactSage specialises in high-temperature systems: slags, mattes, molten salts, refractories. Its FToxid database uses the modified quasichemical model (MQM) for liquid oxides, which captures short-range ordering better than Redlich-Kister polynomials. The MQM defines pair fractions $X_{ij}$ and writes the Gibbs energy in terms of a pair-exchange reaction:"],
+        ["eq", "(i\\text{-}i) + (j\\text{-}j) \\rightleftharpoons 2(i\\text{-}j) \\qquad \\Delta g_{ij} = \\text{assessed}"],
+        ["p", "This is why FactSage dominates in pyrometallurgy. Silicate slags, for instance, have strong Si-O-Al short-range order that the MQM handles naturally."],
+
+        ["h3", "Database assessment"],
+        ["p", "Building a CALPHAD database is labour-intensive. For each binary system, an assessor collects experimental data (phase boundaries, enthalpies of mixing, activity coefficients), selects models for each phase, and optimises the parameters by least-squares fitting. The PARROT module in Thermo-Calc and the OptiSage module in FactSage are the standard tools."],
+        ["p", "A typical binary assessment involves:"],
+        ["ul", [
+          "10-30 adjustable parameters across all phases.",
+          "50-200 experimental data points.",
+          "Iteration between parameter adjustment and comparison with the experimental phase diagram.",
+          "Validation against data not used in the fit (e.g. enthalpy of formation at a different temperature)."
+        ]],
+        ["p", "The TCFE (steels), TCNI (nickel superalloys), and TCAL (aluminium alloys) databases from Thermo-Calc each represent decades of assessment work on hundreds of binary and ternary subsystems."],
+
+        ["h3", "Integration with other methods"],
+        ["p", "CALPHAD databases feed into many higher-scale models. Phase-field simulations use CALPHAD Gibbs energies to compute driving forces. Scheil solidification calculations predict microsegregation. DICTRA (diffusion-controlled transformation software) couples CALPHAD thermodynamics with kinetic (mobility) databases to simulate diffusion-controlled phase transformations in multicomponent systems."],
+
+        ["derivation", "Regular solution miscibility gap", [
+          ["p", "Consider a binary system with a single Redlich-Kister parameter ${}^{0}L = \\Omega$ (the regular solution model). The Gibbs energy of mixing is:"],
+          ["eq", "\\Delta G_{\\text{mix}} = \\Omega x(1-x) + RT[x\\ln x + (1-x)\\ln(1-x)]"],
+          ["p", "The spinodal is defined by $\\partial^2 \\Delta G_{\\text{mix}} / \\partial x^2 = 0$:"],
+          ["eq", "\\frac{\\partial^2 \\Delta G_{\\text{mix}}}{\\partial x^2} = -2\\Omega + \\frac{RT}{x(1-x)} = 0"],
+          ["p", "At $x = 0.5$ (the symmetric case), the critical temperature is:"],
+          ["eq", "T_c = \\frac{\\Omega}{2R}"],
+          ["p", "For $\\Omega = 20$ kJ/mol, $T_c = 20000 / (2 \\times 8.314) = 1203$ K. Below this temperature, the system phase-separates."]
+        ]],
+
+        ["problem", "The assessed regular solution parameter for the liquid phase in the Cu-Ag system is ${}^{0}L_{\\text{Cu,Ag}}^{\\text{liq}} = +14,200$ J/mol. (a) Calculate the critical temperature for liquid immiscibility. (b) Is liquid immiscibility actually observed in Cu-Ag? (c) What happens if the liquidus falls below $T_c$?", [
+          ["p", "(a) For a symmetric regular solution:"],
+          ["eq", "T_c = \\frac{\\Omega}{2R} = \\frac{14200}{2 \\times 8.314} = 854 \\text{ K}"],
+          ["p", "(b) The Cu-Ag eutectic temperature is 1052 K, which is above $T_c = 854$ K. The liquid is stable and single-phase at all compositions above the liquidus. There is no liquid immiscibility in equilibrium."],
+          ["p", "(c) If the liquidus were higher (i.e. the melting points were higher) or $\\Omega$ were larger, $T_c$ could exceed the liquidus temperature. Then the liquid would phase-separate into two immiscible liquids. This is called a monotectic reaction and occurs in systems like Cu-Pb ($T_c \\approx 1269$ K, above the Cu-Pb liquidus at $T_{\\text{mono}} = 955$ C)."]
+        ]]
+      ],
+      "related": [
+        {"title": "Phase Transformations", "url": "../../phase-transformations/"},
+        {"title": "Thermodynamics", "url": "../../thermodynamics/"},
+        {"title": "Phase-Field Modelling", "url": "../phase-field-modelling/"}
+      ]
     },
     {
       "id": "finite-element-methods",
       "number": "17.5",
       "title": "Finite Element Methods",
-      "description": "",
-      "readingTime": "— min",
-      "intro": "",
-      "body": [],
-      "related": []
+      "description": "Discretising continuum mechanics problems with finite elements. Weak forms, shape functions, element stiffness matrices, meshing strategies, and applications from stress analysis to heat transfer in engineering materials.",
+      "readingTime": "13 min",
+      "intro": "The finite element method (FEM) solves partial differential equations by dividing a complex domain into small, simple pieces (elements) and approximating the solution on each piece with polynomial shape functions. It is the standard tool for structural analysis, heat transfer, fluid flow, and coupled multiphysics problems in engineering. If you have ever seen a coloured stress map of a turbine blade or a crash simulation of a car, you have seen finite element results.",
+      "body": [
+        ["h3", "From strong form to weak form"],
+        ["p", "Consider the 1D equilibrium equation for an elastic bar under body force $b(x)$:"],
+        ["eq", "\\frac{d}{dx}\\left(EA\\frac{du}{dx}\\right) + b = 0"],
+        ["p", "where $E$ is Young's modulus, $A$ is the cross-sectional area, and $u(x)$ is the displacement. This is the strong form: the equation must hold at every point."],
+        ["p", "The weak form multiplies by a test function $w(x)$, integrates over the domain, and integrates by parts:"],
+        ["eq", "\\int_0^L EA \\frac{dw}{dx}\\frac{du}{dx}\\,dx = \\int_0^L w\\,b\\,dx + [w\\,EA\\,u']_0^L"],
+        ["p", "The boundary term on the right handles natural (force) boundary conditions. The weak form requires fewer derivatives of $u$ (only first derivatives, not second), which means the solution can be less smooth. This is what makes finite elements work."],
+
+        ["h3", "Shape functions and discretisation"],
+        ["p", "Divide the domain into $n$ elements. Within each element, approximate the displacement as a sum of shape functions:"],
+        ["eq", "u^h(x) = \\sum_j N_j(x)\\, u_j"],
+        ["p", "where $u_j$ are the nodal displacements (unknowns) and $N_j(x)$ are the shape functions. For a linear (2-node) element of length $h_e$:"],
+        ["eq", "N_1(\\xi) = \\frac{1-\\xi}{2}, \\qquad N_2(\\xi) = \\frac{1+\\xi}{2}"],
+        ["p", "where $\\xi \\in [-1, 1]$ is the local coordinate. Higher-order elements use quadratic or cubic shape functions and capture curved displacement fields within a single element."],
+        ["p", "Setting $w = N_i$ (the Galerkin method) and substituting $u^h$ into the weak form gives a system of linear equations:"],
+        ["eq", "\\mathbf{K}\\mathbf{u} = \\mathbf{f}"],
+        ["p", "where $\\mathbf{K}$ is the global stiffness matrix, $\\mathbf{u}$ is the vector of nodal displacements, and $\\mathbf{f}$ is the force vector."],
+
+        ["h3", "Element stiffness matrix"],
+        ["p", "For a single element, the stiffness matrix is:"],
+        ["eq", "K_{ij}^e = \\int_{\\Omega_e} \\mathbf{B}_i^T \\mathbf{D}\\, \\mathbf{B}_j \\,dV"],
+        ["p", "where $\\mathbf{B}$ is the strain-displacement matrix (derivatives of shape functions) and $\\mathbf{D}$ is the material stiffness tensor (e.g. Hooke's law in matrix form). For isotropic linear elasticity in 3D, $\\mathbf{D}$ depends on just two constants: $E$ and $\\nu$."],
+        ["p", "The global stiffness matrix $\\mathbf{K}$ is assembled by summing (\"scattering\") each element's contribution into the correct rows and columns. The result is sparse: each node only interacts with its immediate neighbours. Direct solvers (LU decomposition) or iterative solvers (conjugate gradient) then solve the system."],
+
+        ["h3", "Element types"],
+        ["p", "Commercial FEM codes offer a zoo of element types:"],
+        ["ul", [
+          "1D: bar (truss), beam (Euler-Bernoulli or Timoshenko).",
+          "2D: 3-node triangle (CST), 6-node triangle (LST), 4-node quadrilateral, 8-node quad (serendipity).",
+          "3D: 4-node tetrahedron, 10-node tet, 8-node hexahedron (brick), 20-node hex.",
+          "Shell: thin plates and curved surfaces (e.g. aircraft skins, pressure vessels).",
+          "Cohesive: zero-thickness elements for modelling crack initiation and delamination."
+        ]],
+        ["p", "Linear tets are easy to mesh but need very fine meshes for accuracy. Quadratic tets (10-node) are much better. Hex elements are the gold standard for accuracy per degree of freedom, but meshing complex geometries with hexes is often impractical."],
+
+        ["h3", "Meshing"],
+        ["p", "The mesh is the discretisation of the geometry into elements. Mesh quality determines accuracy. Key rules:"],
+        ["ul", [
+          "Refine where gradients are steep: crack tips, notch roots, contact zones, sharp re-entrant corners.",
+          "Avoid highly distorted elements: aspect ratios above 5:1 degrade accuracy.",
+          "Use mesh convergence studies: run the problem with 1x, 2x, and 4x mesh density. If the answer changes by more than a few percent between 2x and 4x, refine further.",
+          "Adaptive meshing: let the solver estimate the local error and refine automatically. Abaqus, COMSOL, and ANSYS all support this."
+        ]],
+        ["p", "A stress concentration at a circular hole in a plate is a classic test problem. The analytical solution gives a stress concentration factor $K_t = 3$. A coarse mesh of linear triangles might predict $K_t = 2.5$. Quadratic elements with local refinement at the hole edge recover $K_t = 3.00$ easily."],
+
+        ["h3", "Nonlinear problems"],
+        ["p", "Many materials problems involve nonlinearity:"],
+        ["ul", [
+          "Material nonlinearity: plasticity, creep, damage. The stress-strain relation is no longer linear. The stiffness matrix must be updated at each load increment.",
+          "Geometric nonlinearity: large deformations (e.g. metal forming, rubber seals). The strain measure must account for finite rotations.",
+          "Contact: two surfaces come into and out of contact (e.g. bolted joints, gear teeth). Requires iterative enforcement of non-penetration constraints."
+        ]],
+        ["p", "Nonlinear problems are solved incrementally. The load is applied in steps, and at each step a Newton-Raphson iteration drives the out-of-balance force (residual) to zero. A typical implicit nonlinear analysis might use 50-200 load increments with 3-8 Newton iterations each."],
+
+        ["h3", "Applications in materials science"],
+        ["p", "FEM is used throughout materials engineering:"],
+        ["ul", [
+          "Residual stress prediction after welding or heat treatment (coupled thermal-mechanical analysis).",
+          "Fatigue life estimation: FEM provides the stress/strain fields; Coffin-Manson or Paris law give the life.",
+          "Microstructure-level modelling: crystal plasticity FEM resolves stress and strain in individual grains of a polycrystal.",
+          "Composites: predicting stiffness, strength, and failure modes from fibre/matrix geometry.",
+          "Biomechanics: stress in hip implants, bone remodelling simulations."
+        ]],
+        ["p", "A crystal plasticity FEM simulation of a nickel superalloy turbine disc might use $10^6$ elements, each assigned anisotropic elastic constants and slip system parameters from EBSD data. Such simulations predict local stress hotspots that drive fatigue crack initiation."],
+
+        ["callout", "Verification vs validation", "Verification asks: are we solving the equations correctly? (Compare with analytical solutions, check mesh convergence.) Validation asks: are we solving the right equations? (Compare with experiments.) Both are essential. A beautifully converged FEM solution with the wrong material model is useless."],
+
+        ["derivation", "Stiffness matrix of a 1D bar element", [
+          ["p", "Consider a bar element of length $L_e$, cross-sectional area $A$, and Young's modulus $E$. The shape functions in terms of the local coordinate $x \\in [0, L_e]$ are $N_1 = 1 - x/L_e$ and $N_2 = x/L_e$."],
+          ["p", "The strain-displacement matrix is:"],
+          ["eq", "\\mathbf{B} = \\begin{bmatrix} dN_1/dx & dN_2/dx \\end{bmatrix} = \\begin{bmatrix} -1/L_e & 1/L_e \\end{bmatrix}"],
+          ["p", "The element stiffness matrix:"],
+          ["eq", "\\mathbf{K}^e = \\int_0^{L_e} EA\\, \\mathbf{B}^T \\mathbf{B}\\, dx = EA \\int_0^{L_e} \\frac{1}{L_e^2}\\begin{bmatrix} 1 & -1 \\\\ -1 & 1 \\end{bmatrix} dx"],
+          ["eq", "\\mathbf{K}^e = \\frac{EA}{L_e}\\begin{bmatrix} 1 & -1 \\\\ -1 & 1 \\end{bmatrix}"],
+          ["p", "This is the stiffness matrix of a spring with spring constant $k = EA/L_e$. The finite element method for this problem reduces to exactly the spring-network analogy from first-year mechanics."]
+        ]],
+
+        ["problem", "A steel beam ($E = 200$ GPa, $\\nu = 0.3$) of length 1 m with a square cross-section (10 mm $\\times$ 10 mm) is modelled with 2-node bar elements. (a) What is the element stiffness $k = EA/L_e$ if 10 equal elements are used? (b) If a tensile force of 10 kN is applied at the free end (the other end is fixed), what is the elongation? (c) How many elements are needed? Does refining the mesh change the answer?", [
+          ["p", "(a) $A = (0.01)^2 = 10^{-4}$ m$^2$, $L_e = 0.1$ m."],
+          ["eq", "k = \\frac{EA}{L_e} = \\frac{200 \\times 10^9 \\times 10^{-4}}{0.1} = 2 \\times 10^8 \\text{ N/m}"],
+          ["p", "(b) For uniform tension, the analytical solution is:"],
+          ["eq", "\\delta = \\frac{FL}{EA} = \\frac{10000 \\times 1.0}{200 \\times 10^9 \\times 10^{-4}} = 5.0 \\times 10^{-4} \\text{ m} = 0.5 \\text{ mm}"],
+          ["p", "(c) For this problem, even a single linear bar element gives the exact answer, because the exact displacement field is linear in $x$ (constant stress). This is a special case. For problems with non-uniform loading or varying cross-section, more elements are needed, and mesh refinement does change the answer until convergence."]
+        ]]
+      ],
+      "related": [
+        {"title": "Mechanical Properties", "url": "../../mechanical-properties/"},
+        {"title": "Manufacturing", "url": "../../manufacturing/"},
+        {"title": "Phase-Field Modelling", "url": "../phase-field-modelling/"}
+      ]
     },
     {
       "id": "machine-learning-in-materials-science",
       "number": "17.6",
       "title": "Machine Learning in Materials Science",
-      "description": "",
-      "readingTime": "— min",
-      "intro": "",
-      "body": [],
-      "related": []
+      "description": "Descriptors and representations for materials, crystal graph neural networks (CGCNN), Bayesian optimisation for alloy design, and real published results. What ML can and cannot do for materials discovery.",
+      "readingTime": "14 min",
+      "intro": "Machine learning is reshaping how we discover and design materials. Instead of running expensive DFT calculations or synthesis experiments for every candidate composition, we train models on existing data and use them to predict properties of materials we have never made or simulated. The field has moved fast: from simple linear regression on hand-crafted descriptors to graph neural networks that read crystal structures directly. But the fundamental challenges of small datasets, domain shift, and physical interpretability remain.",
+      "body": [
+        ["h3", "The materials data landscape"],
+        ["p", "The starting point for any ML model is data. In materials science, the main sources are:"],
+        ["ul", [
+          "DFT databases: Materials Project (154,000 compounds), OQMD (1 million entries), AFLOW (3.5 million), JARVIS (80,000).",
+          "Experimental databases: ICSD (280,000 crystal structures), Pauling File, Citrination (now Citrine).",
+          "Literature mining: text-mining tools like ChemDataExtractor and MatScholar extract property values from published papers. Coverage is patchy."
+        ]],
+        ["p", "These numbers sound large, but they are small by ML standards. ImageNet has 14 million labelled images. The entire Materials Project is smaller than a single minute of YouTube uploads. Data scarcity is the defining constraint."],
+
+        ["h3", "Descriptors and representations"],
+        ["p", "A machine learning model needs numerical input. For a crystal structure, you must convert atoms, coordinates, and lattice parameters into a fixed-length vector (a descriptor) or a graph. The choice of representation determines the ceiling on model performance."],
+        ["p", "Classical descriptors for composition-only models:"],
+        ["ul", [
+          "Elemental statistics: mean, variance, min, max of atomic properties (electronegativity, radius, valence, melting point) across the composition. The Magpie descriptor set uses 132 such features.",
+          "One-hot encoding: a 100-dimensional binary vector indicating which elements are present. Loses stoichiometry information.",
+          "Composition-weighted features: $\\bar{X} = \\sum_i x_i X_i$ for property $X$ of element $i$."
+        ]],
+        ["p", "For structure-aware models:"],
+        ["ul", [
+          "Coulomb matrix: encodes nuclear charges and distances. Invariant to permutation but not to unit cell choice.",
+          "Smooth overlap of atomic positions (SOAP): a local descriptor based on the power spectrum of the atomic neighbour density. Widely used for fitting interatomic potentials.",
+          "Atom-centred symmetry functions (ACSF): Behler and Parrinello's original descriptor for neural network potentials. Encodes radial and angular distributions around each atom."
+        ]],
+
+        ["h3", "Crystal graph convolutional neural networks"],
+        ["p", "Xie and Grossman (2018) introduced the Crystal Graph Convolutional Neural Network (CGCNN). It takes a crystal structure and builds a graph: atoms are nodes, bonds (neighbours within a cutoff) are edges. Node features encode the element identity (atomic number, electronegativity, radius, etc.). Edge features encode the bond distance via a Gaussian expansion."],
+        ["p", "The graph passes through several convolutional layers. Each layer updates a node's feature vector by aggregating information from its neighbours:"],
+        ["eq", "\\mathbf{h}_i^{(l+1)} = \\mathbf{h}_i^{(l)} + \\sum_{j \\in \\mathcal{N}(i)} \\sigma\\!\\left(\\mathbf{W}_z^{(l)}[\\mathbf{h}_i^{(l)}, \\mathbf{h}_j^{(l)}, \\mathbf{e}_{ij}]\\right) \\odot g\\!\\left(\\mathbf{W}_s^{(l)}[\\mathbf{h}_i^{(l)}, \\mathbf{h}_j^{(l)}, \\mathbf{e}_{ij}]\\right)"],
+        ["p", "where $\\sigma$ is a sigmoid gate, $g$ is a softplus activation, and $[\\cdot,\\cdot,\\cdot]$ denotes concatenation. After convolution, a global pooling layer averages all node features to produce a single vector representing the entire crystal. A fully connected layer maps this to the target property."],
+        ["p", "CGCNN achieves a mean absolute error of 0.039 eV/atom on Materials Project formation energies (test set). For band gaps: 0.388 eV. These are useful screening accuracies, though not good enough to replace DFT for final predictions."],
+
+        ["h3", "More recent architectures"],
+        ["p", "Since CGCNN, several improved graph neural networks have appeared:"],
+        ["ul", [
+          "MEGNet (Chen et al., 2019): adds global state attributes and graph-level features. MAE on formation energy: 0.028 eV/atom.",
+          "ALIGNN (Choudhary and DeCost, 2021): includes bond angle information via a line graph. MAE on formation energy: 0.022 eV/atom.",
+          "M3GNet and MACE: universal interatomic potentials trained on the Materials Project. They can run MD simulations for any combination of elements.",
+          "GNoME (Merchant et al., 2023, Google DeepMind): trained a graph network on 48,000 stable materials, then screened 380,000 new candidate structures. They claim 2.2 million stable materials predicted, a 6x expansion of known stable compounds."
+        ]],
+
+        ["h3", "Bayesian optimisation for alloy design"],
+        ["p", "When experiments are expensive, you want to choose the next experiment to maximise information gain. Bayesian optimisation (BO) does this by fitting a surrogate model (typically a Gaussian process) to existing data, then selecting the next point by balancing exploration (high uncertainty) and exploitation (high predicted performance)."],
+        ["p", "The workflow:"],
+        ["ol", [
+          "Collect initial data: measure a property (e.g. hardness, corrosion rate) for 10-20 alloy compositions.",
+          "Fit a Gaussian process: this gives a posterior mean (prediction) and variance (uncertainty) at every untested composition.",
+          "Maximise an acquisition function (e.g. Expected Improvement): $\\text{EI}(x) = \\mathbb{E}[\\max(f(x) - f^*, 0)]$ where $f^*$ is the best value found so far.",
+          "Synthesise and test the recommended composition.",
+          "Update the model with the new data point. Repeat."
+        ]],
+        ["p", "Ling et al. (2017) used Bayesian optimisation to design a NiTi shape memory alloy with target transformation temperatures. Starting from 22 initial experiments, they found an optimal composition in 9 additional iterations. Traditional Edisonian screening of the same 4-component alloy space would have required thousands of samples."],
+        ["p", "Xue et al. (2016) applied BO to discover new piezoelectric compositions in the BaTiO$_3$-based system. They identified $\\text{Ba}_{0.84}\\text{Ca}_{0.16}\\text{Ti}_{0.90}\\text{Zr}_{0.07}\\text{Hf}_{0.03}\\text{O}_3$ with a piezoelectric coefficient $d_{33} = 640$ pC/N in just 8 iterations, a 60% improvement over the starting compositions."],
+
+        ["callout", "Active learning vs Bayesian optimisation", "Active learning and Bayesian optimisation solve the same problem: choosing which data to acquire next. The difference is the objective. Active learning minimises model uncertainty (exploration). Bayesian optimisation maximises a target property (exploitation with some exploration). For materials discovery, BO is usually what you want."],
+
+        ["h3", "Practical considerations"],
+        ["p", "ML in materials science has unique challenges:"],
+        ["ul", [
+          "Small data: most experimental datasets have 50-500 points. Deep learning models with millions of parameters will overfit. Use simpler models (random forests, Gaussian processes, LASSO) or transfer learning from DFT pretraining.",
+          "Domain shift: a model trained on DFT data does not automatically work on experimental data. Formation energies from PBE have systematic errors of 50-100 meV/atom that can flip stability predictions.",
+          "Extrapolation: ML models interpolate well but extrapolate poorly. If you train on binary alloys and predict quinary alloys, expect trouble.",
+          "Physical constraints: models should respect conservation laws, symmetry, and thermodynamic consistency. Incorporating these as hard constraints (equivariant architectures, thermodynamic regularisation) improves generalisation.",
+          "Interpretability: a black-box prediction of \"this alloy has high hardness\" is less useful than understanding why. SHAP values and attention maps help but are not physical explanations."
+        ]],
+
+        ["h3", "Published results and benchmarks"],
+        ["p", "Some concrete numbers from the literature:"],
+        ["ul", [
+          "Ward et al. (2016): random forest with Magpie descriptors predicts DFT formation energies with MAE = 0.08 eV/atom. Useful for screening, not for quantitative thermodynamics.",
+          "Bartel et al. (2019): ML model for perovskite stability (Goldschmidt tolerance factor replacement) with 92% accuracy on held-out test set.",
+          "Chen et al. (2022): universal neural network potential (M3GNet) trained on 187,000 Materials Project structures. Predicts energies with MAE = 0.035 eV/atom and forces with MAE = 0.072 eV/A.",
+          "Merchant et al. (2023): GNoME predicts 2.2 million stable materials. Of 736 compounds subsequently synthesised by collaborators, 350+ were confirmed stable.",
+          "Zuo et al. (2020): compared ML potentials (SNAP, GAP, MTP, NNP) for 6 elements. Moment tensor potentials (MTP) achieved the best balance of accuracy and speed for most systems."
+        ]],
+
+        ["h3", "Where the field is heading"],
+        ["p", "Foundation models for materials are emerging. Models pretrained on millions of DFT calculations can be fine-tuned for specific tasks with a few hundred data points. Multi-fidelity learning combines cheap low-accuracy data (e.g. PBE) with expensive high-accuracy data (e.g. experiment or hybrid DFT) to improve predictions. Generative models (diffusion models, variational autoencoders) now propose entirely new crystal structures rather than just screening known ones."],
+        ["p", "The bottleneck has shifted. It is no longer compute or algorithms. It is data quality, experimental validation, and closing the loop between prediction and synthesis. The most impactful ML work in materials science is done in close collaboration with experimentalists who can actually make the predicted materials."],
+
+        ["derivation", "Gaussian process regression in one dimension", [
+          ["p", "A Gaussian process (GP) is a distribution over functions. Given $n$ training points $\\{(x_i, y_i)\\}$ and a kernel function $k(x, x')$, the posterior predictive mean and variance at a test point $x_*$ are:"],
+          ["eq", "\\mu(x_*) = \\mathbf{k}_*^T (\\mathbf{K} + \\sigma_n^2 \\mathbf{I})^{-1} \\mathbf{y}"],
+          ["eq", "\\sigma^2(x_*) = k(x_*, x_*) - \\mathbf{k}_*^T (\\mathbf{K} + \\sigma_n^2 \\mathbf{I})^{-1} \\mathbf{k}_*"],
+          ["p", "where $\\mathbf{K}$ is the $n \\times n$ kernel matrix with $K_{ij} = k(x_i, x_j)$, $\\mathbf{k}_*$ is the vector of kernel evaluations between $x_*$ and each training point, and $\\sigma_n^2$ is the noise variance."],
+          ["p", "The squared exponential kernel $k(x, x') = \\sigma_f^2 \\exp\\!\\left(-\\frac{(x-x')^2}{2l^2}\\right)$ has two hyperparameters: the signal variance $\\sigma_f^2$ and the length scale $l$. The length scale controls how far information propagates from training points. A short $l$ gives a wiggly fit; a long $l$ gives a smooth one. Hyperparameters are optimised by maximising the log marginal likelihood."]
+        ]],
+
+        ["problem", "You have measured the yield strength of 5 high-entropy alloy compositions (in MPa): CrMnFeCoNi: 350, CrFeCoNiCu: 280, AlCrFeCoNi: 1250, AlTiCrFeCoNi: 1480, TiVNbMoW: 1050. (a) Propose three Magpie-style descriptors that might correlate with yield strength. (b) A Gaussian process trained on these 5 points gives $\\mu = 800$ MPa and $\\sigma = 400$ MPa at the untested composition AlTiVCrFeCoNi. If the current best yield strength is 1480 MPa, compute the expected improvement. (c) Would you recommend testing this composition next?", [
+          ["p", "(a) Three descriptors that might correlate with yield strength:"],
+          ["ul", [
+            "Mean atomic radius mismatch $\\delta = \\sqrt{\\sum_i x_i (1 - r_i/\\bar{r})^2}$: larger mismatch means more solid solution strengthening.",
+            "Mean electronegativity difference: drives ordering tendency and B2/L1$_2$ precipitation.",
+            "Fraction of BCC-forming elements (Ti, V, Nb, Mo, W, Cr, Al at high concentration): BCC HEAs tend to be stronger than FCC."
+          ]],
+          ["p", "(b) Expected improvement with $f^* = 1480$ MPa, $\\mu = 800$ MPa, $\\sigma = 400$ MPa. The predicted value is below the current best, so improvement requires the actual value to exceed 1480."],
+          ["eq", "z = \\frac{\\mu - f^*}{\\sigma} = \\frac{800 - 1480}{400} = -1.70"],
+          ["eq", "\\text{EI} = \\sigma\\,[z\\,\\Phi(z) + \\varphi(z)]"],
+          ["p", "where $\\Phi(-1.70) = 0.0446$ and $\\varphi(-1.70) = 0.0940$."],
+          ["eq", "\\text{EI} = 400 \\times [(-1.70)(0.0446) + 0.0940] = 400 \\times [-0.0758 + 0.0940] = 400 \\times 0.0182 = 7.3 \\text{ MPa}"],
+          ["p", "(c) The expected improvement is only 7.3 MPa, which is small compared to the uncertainty and the current best value. The model thinks this composition is unlikely to beat the current champion. However, the uncertainty is very large ($\\sigma = 400$ MPa, comparable to the mean), which means the model is quite ignorant about this region. A pure exploration strategy might still test it. In practice, you would compare the EI at this point with the EI at all other candidate compositions and pick the one with the highest EI."]
+        ]]
+      ],
+      "related": [
+        {"title": "Density Functional Theory", "url": "../density-functional-theory/"},
+        {"title": "CALPHAD & Thermodynamic Databases", "url": "../calphad-thermodynamic-databases/"},
+        {"title": "Characterisation", "url": "../../characterisation/"}
+      ]
     }
   ]
 }

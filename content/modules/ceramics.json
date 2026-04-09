@@ -6,78 +6,520 @@
     "part": "III",
     "partTitle": "Material Classes",
     "topic": "Ceramics",
-    "intro": ""
+    "intro": "Ceramics are compounds held together by ionic and covalent bonds. That combination gives them extraordinary hardness, high melting points, and chemical stability, but also brittleness. This module covers their crystal structures, mechanical behaviour, glass-forming ability, functional properties, and the processing routes used to shape them."
   },
   "articles": [
     {
       "id": "crystal-structures-of-ceramics",
       "number": "12.1",
       "title": "Crystal Structures of Ceramics",
-      "description": "",
-      "readingTime": "— min",
-      "intro": "",
-      "body": [],
-      "related": []
+      "description": "Rocksalt, fluorite, perovskite and spinel structures, with radius ratio rules and real lattice parameters.",
+      "readingTime": "12 min",
+      "intro": "Ceramic crystal structures are built from cations and anions packed together according to charge balance and geometry. A handful of structure types account for the vast majority of engineering ceramics.",
+      "body": [
+        ["h3", "Why structure matters"],
+        ["p", "The properties of a ceramic follow directly from its crystal structure. MgO and NaCl share the same rocksalt structure, but MgO melts at 2852 °C while NaCl melts at 801 °C. The difference is the charge: Mg$^{2+}$O$^{2-}$ versus Na$^{+}$Cl$^{-}$. Doubling the ionic charges quadruples the lattice energy. Structure determines which slip systems exist, which directions are stiff, and whether the material is an insulator, an ionic conductor, or a ferroelectric."],
+        ["p", "Most ceramic structures can be understood as a close-packed anion sublattice with cations occupying some fraction of the tetrahedral or octahedral interstitial sites. The key question is always: which sites, and how many?"],
+        ["h3", "Radius ratio rules"],
+        ["p", "The coordination of a cation by anions depends on their relative sizes. The radius ratio $r_c/r_a$ (cation radius divided by anion radius) sets a geometric lower limit for each coordination number. Below this limit, the anions would overlap, destabilising the structure."],
+        ["ul", [
+          "$r_c/r_a < 0.155$: linear coordination (CN = 2)",
+          "$0.155 < r_c/r_a < 0.225$: trigonal coordination (CN = 3)",
+          "$0.225 < r_c/r_a < 0.414$: tetrahedral coordination (CN = 4)",
+          "$0.414 < r_c/r_a < 0.732$: octahedral coordination (CN = 6)",
+          "$0.732 < r_c/r_a < 1.0$: cubic coordination (CN = 8)"
+        ]],
+        ["p", "These rules are approximate. They work well for highly ionic compounds but break down when covalent bonding introduces directional preferences. SiC is tetrahedrally coordinated despite a radius ratio that predicts octahedral, because the sp$^3$ hybrid bonds insist on 109.5° angles."],
+        ["h3", "The rocksalt structure (NaCl type)"],
+        ["p", "The rocksalt structure has an FCC anion sublattice with cations occupying all octahedral sites. Each ion is 6-coordinated. The stoichiometry is 1:1 (AX). The unit cell contains 4 formula units."],
+        ["p", "Examples: NaCl ($a = 5.640$ A), MgO ($a = 4.212$ A), TiN ($a = 4.242$ A), FeO ($a = 4.326$ A). MgO is one of the most important refractory oxides. TiN is a hard coating (2000 HV) used on cutting tools. FeO (wustite) is always non-stoichiometric, with composition Fe$_{0.95}$O, because some Fe$^{2+}$ sites are vacant and charge-balanced by Fe$^{3+}$."],
+        ["callout", "Non-stoichiometry in rocksalt", "Many transition-metal monoxides with the rocksalt structure are non-stoichiometric. FeO, for example, always has a deficit of iron. The missing Fe$^{2+}$ ions are compensated by Fe$^{3+}$ on neighbouring sites plus cation vacancies. This gives FeO its high ionic conductivity and makes it an important intermediate in iron smelting."],
+        ["h3", "The fluorite structure (CaF$_2$ type)"],
+        ["p", "In fluorite, cations form an FCC sublattice and anions occupy all tetrahedral sites. The cation is 8-coordinated (cubic), the anion 4-coordinated (tetrahedral). The stoichiometry is AX$_2$. The unit cell contains 4 formula units."],
+        ["p", "Examples: CaF$_2$ ($a = 5.463$ A), ZrO$_2$ (cubic, stabilised, $a \\approx 5.13$ A), UO$_2$ ($a = 5.470$ A), CeO$_2$ ($a = 5.411$ A). Cubic zirconia does not exist at room temperature in pure ZrO$_2$. Adding 8 mol% Y$_2$O$_3$ stabilises the cubic fluorite phase and simultaneously creates oxygen vacancies for charge compensation. This is the basis of solid oxide fuel cell electrolytes and oxygen sensors."],
+        ["p", "The anti-fluorite structure swaps cations and anions: anions on the FCC sites, cations in tetrahedral holes. Li$_2$O has this structure."],
+        ["h3", "The perovskite structure (ABX$_3$)"],
+        ["p", "Perovskite is the most versatile ceramic structure. The general formula is ABX$_3$, where A is a large cation (often alkaline earth or rare earth), B is a smaller cation (often a transition metal), and X is usually oxygen. In the ideal cubic form, A sits at the corners, B at the body centre, and X at the face centres. Equivalently, B is octahedrally coordinated by 6 oxygens, and A sits in a 12-coordinated cuboctahedral cavity."],
+        ["p", "The stability of the cubic structure is measured by the Goldschmidt tolerance factor:"],
+        ["eq", "t = \\frac{r_A + r_X}{\\sqrt{2}(r_B + r_X)}"],
+        ["p", "When $t = 1$, the ions fit the cubic structure perfectly. When $0.8 < t < 1$, the structure forms but the octahedra tilt to fill space. Below 0.8, perovskite is unstable and other structures form."],
+        ["p", "Examples: SrTiO$_3$ ($t = 1.00$, cubic, $a = 3.905$ A), BaTiO$_3$ ($t = 1.06$, tetragonal below 120 °C), CaTiO$_3$ ($t = 0.97$, orthorhombic). BaTiO$_3$ is the prototypical ferroelectric. The slight displacement of Ti$^{4+}$ from the centre of its oxygen octahedron produces a spontaneous polarisation."],
+        ["h3", "The spinel structure (AB$_2$X$_4$)"],
+        ["p", "Spinel is named after MgAl$_2$O$_4$. The anions (O$^{2-}$) form a cubic close-packed array. In a normal spinel, the A$^{2+}$ cations occupy 1/8 of the tetrahedral sites and the B$^{3+}$ cations occupy 1/2 of the octahedral sites. In an inverse spinel, half the B cations swap onto tetrahedral sites and the A cations move to octahedral sites. The formula for an inverse spinel is B(AB)O$_4$."],
+        ["p", "The degree of inversion $\\lambda$ ranges from 0 (normal) to 1 (fully inverse). It depends on crystal field stabilisation energy, ionic size, and electrostatic site preferences. MgAl$_2$O$_4$ is a normal spinel ($\\lambda = 0$, $a = 8.083$ A). Fe$_3$O$_4$ (magnetite) is an inverse spinel: Fe$^{3+}$[Fe$^{2+}$Fe$^{3+}$]O$_4$. The mixed valence on octahedral sites gives magnetite its high electrical conductivity compared to other oxides."],
+        ["p", "Ferrites used in transformer cores and permanent magnets are spinels. By substituting different cations (Mn, Ni, Zn, Co) onto the two sublattices, the magnetic properties can be tuned over a wide range. MnFe$_2$O$_4$ is a soft ferrite for power electronics. CoFe$_2$O$_4$ is a hard ferrite with high coercivity."],
+        ["h3", "Other important structures"],
+        ["p", "Several other structures appear frequently. The corundum structure ($\\alpha$-Al$_2$O$_3$, $a = 4.759$ A, $c = 12.991$ A) has HCP oxygen with Al$^{3+}$ in 2/3 of the octahedral sites. It is the basis of sapphire, ruby, and alumina refractories. The wurtzite structure (ZnO, AlN, GaN) has HCP anions with cations in half the tetrahedral sites. It gives these materials their piezoelectric properties."],
+        ["p", "The rutile structure (TiO$_2$, $a = 4.594$ A, $c = 2.959$ A) has a body-centred tetragonal arrangement of Ti$^{4+}$ ions, each octahedrally coordinated by oxygen. Rutile has an extremely high refractive index (2.61) and is the most widely used white pigment."],
+        ["derivation", "For MgO with $r_{\\text{Mg}^{2+}} = 0.72$ A and $r_{\\text{O}^{2-}} = 1.40$ A, predict the coordination and verify the lattice parameter.", [
+          ["p", "The radius ratio is $r_c/r_a = 0.72/1.40 = 0.514$, which lies in the octahedral range (0.414 to 0.732). This correctly predicts the rocksalt structure with CN = 6."],
+          ["p", "In rocksalt, the cations and anions touch along the $\\langle 100 \\rangle$ direction. The lattice parameter is:"],
+          ["eq", "a = 2(r_c + r_a) = 2(0.72 + 1.40) = 4.24 \\text{ A}"],
+          ["p", "The experimental value is 4.212 A, within 1%. The small discrepancy arises because Shannon radii are empirical averages, not exact for every compound."]
+        ]],
+        ["problem", "Yttria-stabilised zirconia (YSZ) contains 8 mol% Y$_2$O$_3$ in ZrO$_2$. Each Y$^{3+}$ replaces a Zr$^{4+}$. How many oxygen vacancies per unit cell are created, and why does this make YSZ an ionic conductor?", [
+          ["p", "Each Y$^{3+}$ has one fewer positive charge than the Zr$^{4+}$ it replaces. For every two Y$^{3+}$ ions substituted, one O$^{2-}$ vacancy must form to maintain charge neutrality. The defect reaction in Kroger-Vink notation is:"],
+          ["eq", "\\text{Y}_2\\text{O}_3 \\xrightarrow{\\text{ZrO}_2} 2\\text{Y}'_{\\text{Zr}} + \\text{V}^{\\bullet\\bullet}_{\\text{O}} + 3\\text{O}^\\times_{\\text{O}}"],
+          ["p", "The fluorite unit cell of ZrO$_2$ contains 4 cation sites and 8 anion sites. With 8 mol% Y$_2$O$_3$, approximately 0.64 of the 4 cation sites are occupied by Y$^{3+}$, creating roughly 0.32 oxygen vacancies per unit cell. These vacancies are mobile above about 600 °C. Oxide ions hop between vacant and occupied oxygen sites, giving YSZ an ionic conductivity of roughly 0.1 S/cm at 1000 °C. This is why YSZ is the electrolyte in solid oxide fuel cells."]
+        ]],
+        ["related", []]
+      ],
+      "related": [
+        {
+          "title": "Functional Ceramics (Piezoelectric, Ferroelectric)",
+          "url": "functional-ceramics-piezoelectric-ferroelectric"
+        },
+        {
+          "title": "Refractories & Structural Ceramics",
+          "url": "refractories-structural-ceramics"
+        },
+        {
+          "title": "Crystallography",
+          "url": "../crystallography/"
+        }
+      ]
     },
     {
       "id": "mechanical-behaviour-brittle-fracture",
       "number": "12.2",
       "title": "Mechanical Behaviour & Brittle Fracture",
-      "description": "",
-      "readingTime": "— min",
-      "intro": "",
-      "body": [],
-      "related": []
+      "description": "Why ceramics are hard but brittle, the Griffith criterion, Weibull statistics, and toughening mechanisms.",
+      "readingTime": "14 min",
+      "intro": "Ceramics are strong in compression but weak in tension. A block of alumina can support 3 GPa in compression but fractures at 300 MPa in tension. Understanding this asymmetry requires thinking about cracks.",
+      "body": [
+        ["h3", "Why ceramics are brittle"],
+        ["p", "In metals, a crack tip concentrates stress, but dislocations nucleate and glide to relieve that stress. The plastic zone around the crack tip blunts it. Energy is absorbed. The crack has to work hard to advance."],
+        ["p", "In ceramics, dislocation motion is extremely difficult. The Peierls-Nabarro stress for dislocation glide depends on the width of the dislocation core, which depends on the bonding. Ionic and covalent bonds are directional and strong. The energy penalty for displacing atoms from their equilibrium positions is high. In Al$_2$O$_3$, the critical resolved shear stress for basal slip is about 130 MPa at 25 °C but drops to 1 MPa at 1500 °C. At room temperature, the stress needed to move dislocations exceeds the stress needed to break bonds at a crack tip. The material fractures before it yields."],
+        ["p", "This is not a minor quantitative difference. The fracture toughness $K_{IC}$ of soda-lime glass is about 0.7 MPa$\\sqrt{\\text{m}}$. For alumina, 3 to 5 MPa$\\sqrt{\\text{m}}$. For silicon nitride, 5 to 8 MPa$\\sqrt{\\text{m}}$. Compare these with mild steel at 50 MPa$\\sqrt{\\text{m}}$ or a tough titanium alloy at 100 MPa$\\sqrt{\\text{m}}$."],
+        ["h3", "The Griffith criterion"],
+        ["p", "A. A. Griffith, working at the Royal Aircraft Establishment in 1920, asked a simple question: when does a crack grow? His answer was an energy balance. A crack of half-length $a$ in an infinite plate under uniform tensile stress $\\sigma$ releases elastic strain energy but creates new surface. The crack extends when the energy released exceeds the energy needed to create the new surface."],
+        ["p", "For a through-thickness crack of length $2a$ in a plate of thickness $t$ under plane stress:"],
+        ["eq", "\\text{Strain energy released} = \\frac{\\pi \\sigma^2 a^2 t}{E}"],
+        ["eq", "\\text{Surface energy created} = 2(2a t)\\gamma_s = 4at\\gamma_s"],
+        ["p", "Setting $d/da$(energy released) $= d/da$(surface energy) gives the Griffith criterion:"],
+        ["eq", "\\sigma_f = \\sqrt{\\frac{2E\\gamma_s}{\\pi a}}"],
+        ["p", "For glass, $E = 70$ GPa and $\\gamma_s \\approx 0.5$ J/m$^2$. A flaw of length $2a = 100$ $\\mu$m gives $\\sigma_f \\approx 30$ MPa. This is close to the measured tensile strength of ordinary window glass. Griffith tested this by measuring the strength of glass fibres of different diameters (which contained different flaw sizes) and confirmed the $1/\\sqrt{a}$ dependence."],
+        ["callout", "Griffith's insight", "The theoretical strength of glass (about $E/10 \\approx 7$ GPa) is 200 times higher than its measured tensile strength. The difference is entirely due to surface flaws. Freshly drawn glass fibres, free of surface damage, approach the theoretical strength. This is why optical fibres are coated immediately after drawing."],
+        ["h3", "Fracture toughness and the stress intensity factor"],
+        ["p", "Irwin reformulated Griffith's energy approach in terms of the stress field at the crack tip. The stress intensity factor $K_I$ describes the magnitude of the stress singularity ahead of a Mode I (opening) crack:"],
+        ["eq", "K_I = Y \\sigma \\sqrt{\\pi a}"],
+        ["p", "where $Y$ is a geometry factor (1.0 for an edge crack in a semi-infinite plate, 1.12 for a surface crack, etc.). The crack propagates when $K_I$ reaches a critical value $K_{IC}$, the fracture toughness."],
+        ["p", "Representative $K_{IC}$ values for ceramics: soda-lime glass 0.7, porcelain 1.0, Al$_2$O$_3$ 3.5, SiC 3.5, Si$_3$N$_4$ 6, ZrO$_2$ (transformation-toughened) 8 to 15, all in MPa$\\sqrt{\\text{m}}$."],
+        ["h3", "Weibull statistics"],
+        ["p", "Because ceramics fail from pre-existing flaws, their strength is statistical. Larger specimens contain larger flaws and fail at lower stresses. The distribution of strengths is described by the Weibull distribution:"],
+        ["eq", "P_f(\\sigma) = 1 - \\exp\\left[-\\left(\\frac{\\sigma}{\\sigma_0}\\right)^m\\right]"],
+        ["p", "where $P_f$ is the probability of failure at stress $\\sigma$, $\\sigma_0$ is the characteristic strength (the stress at which 63.2% of specimens fail), and $m$ is the Weibull modulus. A high $m$ means a narrow distribution (consistent strength). Metals typically have $m > 30$. Engineering ceramics have $m$ between 5 and 20. Traditional pottery can have $m$ as low as 3."],
+        ["p", "The Weibull modulus also introduces a size effect. The probability of survival for a specimen of volume $V$ scales as:"],
+        ["eq", "P_s = \\exp\\left[-\\frac{V}{V_0}\\left(\\frac{\\sigma}{\\sigma_0}\\right)^m\\right]"],
+        ["p", "A ceramic beam twice the volume has a lower median strength. This is not a flaw in the material; it is a consequence of flaw statistics. Design with ceramics must account for this volume effect."],
+        ["h3", "Toughening mechanisms"],
+        ["p", "The brittleness of ceramics is not absolute. Several strategies increase $K_{IC}$ by adding energy-absorbing processes in the wake or ahead of the crack:"],
+        ["ul", [
+          "<strong>Transformation toughening</strong>: In partially stabilised zirconia (PSZ), metastable tetragonal ZrO$_2$ particles transform to monoclinic under the stress field at the crack tip. The transformation involves a 4% volume expansion that creates compressive stresses opposing crack opening. This raises $K_{IC}$ from 3 to 15 MPa$\\sqrt{\\text{m}}$. PSZ is tough enough for hip joint replacements and ceramic knives.",
+          "<strong>Crack deflection</strong>: Elongated grains (as in self-reinforced Si$_3$N$_4$) force the crack to follow a tortuous path, increasing the effective crack area and absorbing more energy.",
+          "<strong>Fibre/whisker bridging</strong>: SiC whiskers or fibres in an Al$_2$O$_3$ matrix bridge the crack faces. The whiskers must pull out or fracture, dissipating energy. SiC-whisker-reinforced Al$_2$O$_3$ reaches $K_{IC} \\approx 8$ MPa$\\sqrt{\\text{m}}$.",
+          "<strong>Microcrack toughening</strong>: Thermal expansion anisotropy in coarse-grained Al$_2$O$_3$ creates microcracks on cooling from the sintering temperature. These microcracks dilate in the stress field ahead of the main crack, shielding its tip."
+        ]],
+        ["h3", "Hardness"],
+        ["p", "Ceramics are among the hardest known materials. Diamond (purely covalent) has a Vickers hardness of about 10000 HV. Cubic boron nitride: 4500 HV. SiC: 2500 HV. Al$_2$O$_3$: 2000 HV. WC (in cemented carbide): 1800 HV. Hardness in ceramics correlates with bond strength, short bond length, and high coordination. The directional covalent bonds that make dislocation motion so difficult are exactly what make the material hard."],
+        ["p", "Indentation testing of ceramics often produces radial cracks emanating from the corners of the indent. The lengths of these cracks can be used to estimate $K_{IC}$ from a single indentation, a technique widely used for screening but less reliable than standardised fracture toughness tests."],
+        ["derivation", "Derive the Griffith fracture stress for a penny-shaped internal crack of radius $a$ in a bulk specimen under uniaxial tension $\\sigma$.", [
+          ["p", "For a penny-shaped crack, the strain energy release rate is:"],
+          ["eq", "G = \\frac{2(1 - \\nu^2)\\sigma^2 a}{E}"],
+          ["p", "The surface energy cost of extending the crack by $da$ is $d(\\pi a^2 \\cdot 2\\gamma_s)/da = 4\\pi a \\gamma_s$. Wait, more carefully: the crack area is $\\pi a^2$ and it has two faces, so total surface energy is $2\\pi a^2 \\gamma_s$. The energy release rate per unit crack front length $G$ must equal $2\\gamma_s$ at fracture:"],
+          ["eq", "\\frac{2(1 - \\nu^2)\\sigma_f^2 a}{E} = 2\\gamma_s"],
+          ["p", "Solving for $\\sigma_f$:"],
+          ["eq", "\\sigma_f = \\sqrt{\\frac{E\\gamma_s}{(1-\\nu^2)a}}"],
+          ["p", "For glass with $E = 70$ GPa, $\\gamma_s = 0.5$ J/m$^2$, $\\nu = 0.22$, and $a = 50$ $\\mu$m: $\\sigma_f = \\sqrt{70 \\times 10^9 \\times 0.5/(0.952 \\times 50 \\times 10^{-6})} \\approx 27$ MPa. This is the right order of magnitude for bulk glass."]
+        ]],
+        ["problem", "An alumina beam ($E = 380$ GPa, $K_{IC} = 3.5$ MPa$\\sqrt{\\text{m}}$) is loaded in 4-point bending. Non-destructive testing reveals a surface crack of depth 200 $\\mu$m. What is the maximum tensile stress the beam can sustain? Take $Y = 1.12$.", [
+          ["p", "The crack will propagate when $K_I = K_{IC}$:"],
+          ["eq", "K_{IC} = Y\\sigma_f\\sqrt{\\pi a}"],
+          ["eq", "\\sigma_f = \\frac{K_{IC}}{Y\\sqrt{\\pi a}} = \\frac{3.5}{1.12 \\times \\sqrt{\\pi \\times 200 \\times 10^{-6}}}"],
+          ["eq", "\\sigma_f = \\frac{3.5}{1.12 \\times 0.02507} = \\frac{3.5}{0.02808} = 125 \\text{ MPa}"],
+          ["p", "The beam will fracture at about 125 MPa tensile stress. For comparison, the compressive strength of the same alumina is 2 to 3 GPa. This 20:1 asymmetry between compressive and tensile strength is characteristic of ceramics and is why they are preferentially loaded in compression."]
+        ]]
+      ],
+      "related": [
+        {
+          "title": "Crystal Structures of Ceramics",
+          "url": "crystal-structures-of-ceramics"
+        },
+        {
+          "title": "Ceramic Processing",
+          "url": "ceramic-processing"
+        },
+        {
+          "title": "Mechanical Properties",
+          "url": "../mechanical-properties/"
+        }
+      ]
     },
     {
       "id": "glass-formation-the-glass-transition",
       "number": "12.3",
       "title": "Glass Formation & the Glass Transition",
-      "description": "",
-      "readingTime": "— min",
-      "intro": "",
-      "body": [],
-      "related": []
+      "description": "How liquids avoid crystallisation, the glass transition temperature, the Kauzmann paradox, and Angell's fragility concept.",
+      "readingTime": "14 min",
+      "intro": "A glass is a solid that has the structure of a liquid. It forms when a melt is cooled fast enough that the atoms cannot rearrange into a crystal. Understanding when and why this happens requires thinking about viscosity, entropy, and thermodynamic paradoxes.",
+      "body": [
+        ["h3", "What is a glass?"],
+        ["p", "Cool a liquid slowly enough and it will crystallise at its melting point $T_m$. The enthalpy drops discontinuously, the volume contracts sharply, and the disordered liquid becomes an ordered crystal. But if you cool the liquid fast enough, crystallisation can be avoided. The liquid becomes increasingly viscous. At some temperature below $T_m$, molecular rearrangements become so slow that the structure is effectively frozen. The material is now a glass."],
+        ["p", "The glass has the short-range order of a liquid but no long-range periodicity. X-ray diffraction from a glass produces broad humps, not sharp Bragg peaks. In silicate glasses, each Si is still tetrahedrally coordinated by four oxygens (short-range order is preserved), but the arrangement of tetrahedra lacks the regular periodicity of quartz."],
+        ["p", "The critical cooling rate for glass formation varies enormously. SiO$_2$ forms a glass at cooling rates below 1 K/s. Soda-lime-silica glass (window glass) needs about 0.1 K/s. Metallic glasses require $10^5$ to $10^6$ K/s for conventional alloys, though bulk metallic glass formers like Zr$_{41}$Ti$_{14}$Cu$_{12.5}$Ni$_{10}$Be$_{22.5}$ (Vitreloy 1) can be cast at just 1 K/s."],
+        ["h3", "The glass transition temperature"],
+        ["p", "The glass transition temperature $T_g$ is not a sharp thermodynamic transition like melting. It is a kinetic crossover. As the liquid is cooled below $T_m$, its viscosity rises. At $T_g$, the structural relaxation time exceeds the experimental timescale. The conventional definition sets $T_g$ where the viscosity reaches $10^{12}$ Pa$\\cdot$s (the point at which the material behaves as a solid on a timescale of minutes)."],
+        ["p", "Below $T_g$, the volume, enthalpy, and entropy of the glass are all higher than the corresponding crystal at the same temperature. The glass is thermodynamically metastable. Given enough time (geological time, in the case of silica glass), it would crystallise."],
+        ["p", "Some typical values: SiO$_2$, $T_g = 1200$ °C; soda-lime glass, $T_g = 550$ °C; borosilicate (Pyrex), $T_g = 560$ °C; polystyrene, $T_g = 100$ °C; Se, $T_g = 31$ °C."],
+        ["p", "$T_g$ depends on cooling rate. Cool faster and $T_g$ shifts upward because the structure freezes at a higher temperature. A glass cooled at 1000 K/s has a higher fictive temperature (and slightly lower density) than one cooled at 1 K/s."],
+        ["h3", "Zachariasen's rules for glass formation"],
+        ["p", "In 1932, Zachariasen proposed structural rules for oxide glass formation. An oxide glass forms a continuous random network if:"],
+        ["ol", [
+          "Each oxygen is linked to no more than two glass-forming cations.",
+          "The coordination number of the glass-forming cation is small (3 or 4).",
+          "Oxygen polyhedra share corners, not edges or faces.",
+          "At least three corners of each polyhedron are shared."
+        ]],
+        ["p", "These rules correctly identify SiO$_2$, B$_2$O$_3$, GeO$_2$, and P$_2$O$_5$ as glass formers. Cations that satisfy these rules are called <strong>network formers</strong>. Cations like Na$^+$ and Ca$^{2+}$ that break up the network (by providing non-bridging oxygens) are <strong>network modifiers</strong>. Al$^{3+}$ acts as an <strong>intermediate</strong>: it can substitute for Si$^{4+}$ in tetrahedral sites if a charge-compensating cation is available."],
+        ["h3", "The Kauzmann paradox"],
+        ["p", "In 1948, Walter Kauzmann noticed something troubling. If you extrapolate the entropy of the supercooled liquid below $T_g$, it crosses the entropy of the crystal at a temperature $T_K$, the Kauzmann temperature. Below $T_K$, the disordered liquid would have lower entropy than the ordered crystal. This is thermodynamic nonsense."],
+        ["p", "For most glass formers, $T_K$ lies 10 to 50 K below $T_g$. For example, for o-terphenyl, $T_g = 246$ K and $T_K = 204$ K. The liquid never actually reaches $T_K$ because $T_g$ intervenes first: the structure freezes before the entropy crisis occurs."],
+        ["p", "Several resolutions have been proposed. The most widely accepted is that the extrapolation is invalid: as the liquid approaches $T_K$, its heat capacity would change in a way that prevents the entropy crossover. An alternative view is that an ideal glass transition (a true thermodynamic transition to an amorphous ground state) occurs at or near $T_K$. The debate is not fully resolved, but the Kauzmann paradox remains one of the central motivating problems in glass science."],
+        ["callout", "The Kauzmann paradox in one sentence", "If the entropy of a supercooled liquid is extrapolated linearly below $T_g$, it would fall below the crystal entropy at the Kauzmann temperature $T_K$. Nature avoids this impossibility because the glass transition intervenes first."],
+        ["h3", "Angell's fragility"],
+        ["p", "Not all glass-forming liquids behave the same way near $T_g$. Angell classified them using a plot of log viscosity against $T_g/T$ (the Angell plot). All liquids have $\\eta = 10^{12}$ Pa$\\cdot$s at $T_g$ by definition, and all approach a common high-temperature viscosity of about $10^{-5}$ Pa$\\cdot$s. The question is what happens in between."],
+        ["p", "<strong>Strong</strong> liquids (like SiO$_2$) follow an Arrhenius temperature dependence:"],
+        ["eq", "\\eta = \\eta_0 \\exp\\left(\\frac{E_a}{RT}\\right)"],
+        ["p", "Their Angell plot is a straight line. The activation energy for viscous flow is constant. The structure changes gradually and smoothly with temperature."],
+        ["p", "<strong>Fragile</strong> liquids (like o-terphenyl, some metallic glass formers) show a strongly non-Arrhenius viscosity. Near $T_g$, the viscosity rises steeply. The structure changes cooperatively, with large groups of atoms rearranging together. The Vogel-Fulcher-Tammann (VFT) equation fits fragile liquids well:"],
+        ["eq", "\\eta = \\eta_0 \\exp\\left(\\frac{B}{T - T_0}\\right)"],
+        ["p", "where $T_0$ is the VFT temperature, typically close to $T_K$. The fragility index $m$ is defined as the slope of the Angell plot at $T_g$:"],
+        ["eq", "m = \\left. \\frac{d \\log_{10} \\eta}{d(T_g / T)} \\right|_{T = T_g}"],
+        ["p", "Strong liquids have $m \\approx 20$ (SiO$_2$: $m = 20$). Fragile liquids have $m > 100$ (o-terphenyl: $m = 81$; some polymers: $m > 150$). Most oxide glasses fall between 20 and 60. The fragility correlates with how dramatically the liquid's properties change near $T_g$ and has practical consequences for processing: fragile liquids have a narrow working range between the softening point and the low-viscosity forming temperature."],
+        ["h3", "Network modifier effects"],
+        ["p", "Adding Na$_2$O to SiO$_2$ breaks Si-O-Si bridges. Each Na$_2$O creates two non-bridging oxygens (NBOs). This depolymerises the network, reduces $T_g$ (from 1200 °C to about 475 °C at 33 mol% Na$_2$O), lowers viscosity, and reduces chemical durability. Adding CaO provides some network modification but also improves durability because Ca$^{2+}$ cross-links the structure."],
+        ["p", "Soda-lime glass (roughly 72% SiO$_2$, 14% Na$_2$O, 10% CaO, 4% MgO by weight) is the single most produced glass on Earth. About 75 million tonnes per year. Its composition is a compromise: enough modifier to lower $T_g$ and viscosity for easy forming, enough network connectivity for adequate durability and strength."],
+        ["derivation", "Estimate the number of non-bridging oxygens per silicon atom in a glass of composition 70 mol% SiO$_2$, 20 mol% Na$_2$O, 10 mol% CaO.", [
+          ["p", "Each SiO$_2$ provides 4 bridging oxygens when fully polymerised. Each Na$_2$O provides one O$^{2-}$ that becomes a non-bridging oxygen on a Si tetrahedron (it breaks one Si-O-Si bridge, creating two NBOs). Each CaO does the same."],
+          ["p", "Per 100 mol of glass: 70 mol SiO$_2$, 20 mol Na$_2$O, 10 mol CaO. Total NBOs created = $2 \\times 20 + 2 \\times 10 = 60$. (Each mole of R$_2$O or RO creates 2 NBOs.) Number of Si atoms = 70."],
+          ["eq", "\\text{NBO/Si} = \\frac{60}{70} = 0.86"],
+          ["p", "Since each Si has 4 oxygens, and NBO/Si = 0.86, on average each Si tetrahedron has 0.86 non-bridging oxygens and 3.14 bridging oxygens. This glass is still well-connected. At NBO/Si = 4, you would have isolated SiO$_4^{4-}$ tetrahedra and the glass could not form a network."]
+        ]],
+        ["problem", "A metallic glass former has $T_g = 625$ K and $T_m = 950$ K. The reduced glass transition temperature is defined as $T_{rg} = T_g/T_m$. Calculate $T_{rg}$ and comment on the glass-forming ability. What cooling rate would you roughly expect?", [
+          ["p", "The reduced glass transition temperature is:"],
+          ["eq", "T_{rg} = \\frac{T_g}{T_m} = \\frac{625}{950} = 0.658"],
+          ["p", "Turnbull proposed that good glass-forming ability correlates with $T_{rg} > 2/3 \\approx 0.667$. This alloy is close to but slightly below that threshold. It is a moderate glass former. You would expect a critical cooling rate on the order of $10^1$ to $10^2$ K/s, sufficient for casting rods of a few mm diameter. The best bulk metallic glass formers (Vitreloy-type, $T_{rg} \\approx 0.67$) can be cast at about 1 K/s into centimetre-scale sections. Conventional metallic glasses with $T_{rg} < 0.6$ require melt spinning at $10^5$ K/s or faster."]
+        ]]
+      ],
+      "related": [
+        {
+          "title": "Crystal Structures of Ceramics",
+          "url": "crystal-structures-of-ceramics"
+        },
+        {
+          "title": "Ceramic Processing",
+          "url": "ceramic-processing"
+        },
+        {
+          "title": "Phase Equilibria & Transformations",
+          "url": "../phase-transformations/"
+        }
+      ]
     },
     {
       "id": "functional-ceramics-piezoelectric-ferroelectric",
       "number": "12.4",
       "title": "Functional Ceramics (Piezoelectric, Ferroelectric)",
-      "description": "",
-      "readingTime": "— min",
-      "intro": "",
-      "body": [],
-      "related": []
+      "description": "Piezoelectricity, ferroelectricity, BaTiO3, PZT, and practical piezoelectric coefficients.",
+      "readingTime": "13 min",
+      "intro": "Some ceramics do more than sit there and resist heat. They convert mechanical stress into voltage, switch their polarisation with an electric field, and change shape on command. These functional ceramics underpin sensors, actuators, capacitors, and medical ultrasound.",
+      "body": [
+        ["h3", "Piezoelectricity"],
+        ["p", "A piezoelectric material develops a surface charge when mechanically stressed (the direct effect) and deforms when an electric field is applied (the converse effect). The effect exists only in crystals that lack a centre of symmetry. Of the 32 crystallographic point groups, 21 are non-centrosymmetric, and 20 of those are piezoelectric (the cubic class 432 is the exception)."],
+        ["p", "The relationship between stress and polarisation is linear for small signals:"],
+        ["eq", "P_i = d_{ijk} \\sigma_{jk}"],
+        ["p", "where $d_{ijk}$ is the piezoelectric charge coefficient (units: C/N or equivalently m/V). The most commonly quoted coefficient is $d_{33}$, which gives the polarisation along the poling direction per unit stress applied along the same direction."],
+        ["p", "Quartz ($\\alpha$-SiO$_2$) is naturally piezoelectric with $d_{11} = 2.3$ pC/N. This is small but extremely stable, which is why quartz is used for frequency standards. Every quartz watch and every microprocessor clock uses a 32.768 kHz tuning-fork resonator cut from a quartz crystal."],
+        ["h3", "Ferroelectricity"],
+        ["p", "A ferroelectric is a subclass of piezoelectric in which the crystal has a spontaneous electric polarisation that can be reversed by an applied electric field. The name is by analogy with ferromagnetism: replace magnetic moment with electric dipole, and the phenomenology is similar. There are domains, domain walls, hysteresis loops, and a Curie temperature above which the spontaneous polarisation vanishes."],
+        ["p", "Barium titanate (BaTiO$_3$) is the prototypical ferroelectric. Above 120 °C (its Curie temperature $T_C$), BaTiO$_3$ has the ideal cubic perovskite structure and is paraelectric. Below 120 °C, the Ti$^{4+}$ ion shifts about 0.1 A off-centre within its oxygen octahedron. This breaks the cubic symmetry (the structure becomes tetragonal, $c/a = 1.010$) and produces a spontaneous polarisation of $P_s = 0.26$ C/m$^2$ along the $c$-axis."],
+        ["p", "BaTiO$_3$ undergoes further transitions on cooling: tetragonal to orthorhombic at 5 °C, orthorhombic to rhombohedral at $-90$ °C. Each transition shifts the direction of the spontaneous polarisation."],
+        ["h3", "PZT and engineered piezoelectrics"],
+        ["p", "Lead zirconate titanate, Pb(Zr$_x$Ti$_{1-x}$)O$_3$ (PZT), is the workhorse of the piezoelectric industry. It is a perovskite solid solution between PbZrO$_3$ (antiferroelectric) and PbTiO$_3$ (ferroelectric). At the morphotropic phase boundary (MPB) near $x = 0.52$, the tetragonal and rhombohedral phases coexist, and the piezoelectric coefficients are maximised."],
+        ["p", "At the MPB, PZT has $d_{33} \\approx 300$ to $600$ pC/N, depending on composition and doping. Soft PZTs (donor-doped, e.g., with La$^{3+}$ on the Pb site) have higher $d_{33}$ (up to 600 pC/N) but lower mechanical quality factor. Hard PZTs (acceptor-doped, e.g., with Fe$^{3+}$ on the Ti/Zr site) have lower $d_{33}$ (200 to 300 pC/N) but are more stable under high drive levels. Soft PZTs are used in sensors and actuators. Hard PZTs are used in ultrasonic transducers and sonar."],
+        ["p", "The electromechanical coupling coefficient $k$ measures the efficiency of converting electrical energy to mechanical energy (or vice versa):"],
+        ["eq", "k^2 = \\frac{\\text{mechanical energy stored}}{\\text{electrical energy input}}"],
+        ["p", "For PZT at the MPB, $k_{33} \\approx 0.70$, meaning about 50% of the input electrical energy is converted to mechanical energy ($k^2 = 0.49$). For quartz, $k \\approx 0.1$."],
+        ["callout", "Why the morphotropic phase boundary matters", "At the MPB in PZT, the free energy surface is nearly flat between the tetragonal and rhombohedral phases. Small perturbations from stress or electric field can rotate the polarisation through a large angle with very little energy cost. This is why $d_{33}$ peaks at the MPB. The same principle has driven the search for MPBs in lead-free alternatives."],
+        ["h3", "Poling"],
+        ["p", "A polycrystalline ferroelectric ceramic, as sintered, has randomly oriented domains. The net polarisation is zero. To make it piezoelectric, it must be poled: a strong DC electric field (1 to 3 kV/mm) is applied at elevated temperature (just below $T_C$) to align the domains. After the field is removed and the material cooled, a remanent polarisation $P_r$ persists. The ceramic is now macroscopically piezoelectric."],
+        ["p", "The poling process produces a polarisation-electric field ($P$-$E$) hysteresis loop, analogous to the $B$-$H$ loop in ferromagnets. The key parameters are: remanent polarisation $P_r$, coercive field $E_c$ (the field needed to zero the polarisation), and saturation polarisation $P_s$."],
+        ["p", "For PZT-5A (a common soft composition): $P_r = 0.30$ C/m$^2$, $E_c = 1.2$ kV/mm. For BaTiO$_3$: $P_r = 0.22$ C/m$^2$, $E_c = 0.5$ kV/mm."],
+        ["h3", "Lead-free alternatives"],
+        ["p", "PZT dominates the market, but the lead content (about 60 wt% PbO) is a growing environmental concern. The EU RoHS directive currently exempts piezoelectric ceramics, but the exemption is under review. Significant effort has gone into lead-free replacements."],
+        ["p", "The most promising families are: (K,Na)NbO$_3$ (KNN), which has $d_{33}$ up to 490 pC/N in textured ceramics; (Bi$_{0.5}$Na$_{0.5}$)TiO$_3$-BaTiO$_3$ (BNT-BT); and Ba(Zr,Ti)O$_3$-(Ba,Ca)TiO$_3$ (BZT-BCT), which reaches $d_{33} = 620$ pC/N but has a low $T_C$ of 93 °C. None yet matches PZT across the full range of properties (high $d_{33}$, high $T_C$, high $k$, and ageing stability), but the gap is closing."],
+        ["h3", "Dielectric ceramics"],
+        ["p", "Below the Curie temperature, ferroelectrics have extremely high dielectric constants. BaTiO$_3$ has $\\varepsilon_r \\approx 1500$ at room temperature and peaks at about 10000 near $T_C$. This is why BaTiO$_3$ is the basis of multilayer ceramic capacitors (MLCCs). A single smartphone contains 600 to 1000 MLCCs. Global production exceeds 3 trillion units per year."],
+        ["p", "Each MLCC consists of alternating layers of BaTiO$_3$-based dielectric (down to 0.5 $\\mu$m thick) and Ni electrode. The capacitance per unit volume scales as $\\varepsilon_r / d$, where $d$ is the dielectric layer thickness. Thinner layers and higher $\\varepsilon_r$ mean more capacitance in less space."],
+        ["derivation", "A PZT actuator disc has $d_{33} = 400$ pC/N, thickness $t = 1$ mm, and is subjected to an applied voltage $V = 150$ V. Calculate the free strain.", [
+          ["p", "The converse piezoelectric effect gives the strain produced by an applied electric field:"],
+          ["eq", "S_3 = d_{33} E_3"],
+          ["p", "The electric field across the disc is:"],
+          ["eq", "E_3 = \\frac{V}{t} = \\frac{150}{1 \\times 10^{-3}} = 1.5 \\times 10^5 \\text{ V/m}"],
+          ["p", "The free strain is:"],
+          ["eq", "S_3 = 400 \\times 10^{-12} \\times 1.5 \\times 10^5 = 6.0 \\times 10^{-5}"],
+          ["p", "This is 60 $\\mu$strain, or a displacement of 60 nm for a 1 mm disc. Piezoelectric actuators are used for nanometre-precision positioning in scanning probe microscopes and semiconductor lithography stages. To get larger displacements, actuators are stacked: 100 layers of 100 $\\mu$m each, driven at 150 V, give about 6 $\\mu$m total displacement."]
+        ]],
+        ["problem", "A BaTiO$_3$ single crystal has $P_s = 0.26$ C/m$^2$ and $T_C = 120$ °C (393 K). Using the Landau theory approximation $P_s \\propto (T_C - T)^{1/2}$ near $T_C$, estimate the spontaneous polarisation at 25 °C.", [
+          ["p", "The Landau theory for a second-order ferroelectric transition gives:"],
+          ["eq", "P_s(T) = P_s(0) \\sqrt{\\frac{T_C - T}{T_C - T_{\\text{ref}}}}"],
+          ["p", "We are given $P_s = 0.26$ C/m$^2$ at some reference temperature. Taking the reference as close to 0 K (where $P_s$ saturates), a simpler approach: the $(T_C - T)^{1/2}$ dependence strictly applies near $T_C$. At $T = 25$ °C $= 298$ K:"],
+          ["eq", "P_s(298) \\propto (393 - 298)^{1/2} = (95)^{1/2} = 9.75"],
+          ["p", "At $T$ just below $T_C$, say $T = 119$ °C $= 392$ K: $P_s \\propto (1)^{1/2} = 1$. The ratio is 9.75. If $P_s$ at 119 °C is small (approaching zero), then at 25 °C, $P_s$ is 9.75 times whatever the just-below-$T_C$ value is. The experimental value of 0.26 C/m$^2$ at 25 °C is consistent with this. The key point: $P_s$ rises steeply below $T_C$ and saturates at lower temperatures. The Landau $(T_C - T)^{1/2}$ form is most accurate within about 20 K of the transition."]
+        ]]
+      ],
+      "related": [
+        {
+          "title": "Crystal Structures of Ceramics",
+          "url": "crystal-structures-of-ceramics"
+        },
+        {
+          "title": "Electronic Properties",
+          "url": "../electronic-properties/"
+        },
+        {
+          "title": "Ceramic Processing",
+          "url": "ceramic-processing"
+        }
+      ]
     },
     {
       "id": "refractories-structural-ceramics",
       "number": "12.5",
       "title": "Refractories & Structural Ceramics",
-      "description": "",
-      "readingTime": "— min",
-      "intro": "",
-      "body": [],
-      "related": []
+      "description": "High-temperature oxide and non-oxide ceramics for structural and refractory applications.",
+      "readingTime": "12 min",
+      "intro": "A refractory is a material that retains its strength at high temperature. A structural ceramic is one that carries load. Many ceramics do both. Alumina, silicon carbide, silicon nitride, and zirconia are the workhorses.",
+      "body": [
+        ["h3", "Alumina (Al$_2$O$_3$)"],
+        ["p", "Alumina is the most widely used structural ceramic. The stable phase ($\\alpha$-Al$_2$O$_3$, corundum) melts at 2072 °C, has a hardness of 2000 HV, a Young's modulus of 380 GPa, and a flexural strength of 300 to 600 MPa depending on grain size and purity. It is chemically inert in most environments, resists oxidation (it is already fully oxidised), and has good thermal conductivity for an oxide (30 W/(m$\\cdot$K) at room temperature)."],
+        ["p", "Alumina is used for cutting tool inserts (Al$_2$O$_3$-TiC composites), hip joint ball heads, spark plug insulators, furnace tubes, and substrate materials for electronic packaging. The global market for alumina ceramics exceeds $5 billion per year."],
+        ["p", "The mechanical properties depend strongly on grain size. The Griffith-type flaw size scales with grain size. Reducing the grain size from 20 $\\mu$m to 2 $\\mu$m roughly doubles the flexural strength. Sub-micron aluminas with strengths above 600 MPa are produced by careful powder processing and sintering."],
+        ["h3", "Silicon carbide (SiC)"],
+        ["p", "SiC has a hardness second only to diamond and cubic boron nitride among common engineering materials (2500 HV). It retains its strength to very high temperatures: flexural strength of 400 to 600 MPa at 1400 °C. It has excellent thermal conductivity (120 W/(m$\\cdot$K) for single crystals, 60 to 120 for polycrystals) and good thermal shock resistance."],
+        ["p", "SiC exists in many polytypes. The cubic form ($\\beta$-SiC, 3C) is stable below about 1700 °C. Above that, the hexagonal polytypes ($\\alpha$-SiC: 4H, 6H, 15R) are stable. All polytypes are built from the same Si-C bilayer, stacked in different sequences. The bonding is about 88% covalent, which explains the extreme hardness and the difficulty of sintering."],
+        ["p", "Sintering pure SiC requires temperatures above 2100 °C and sintering aids. Boron and carbon (0.5 wt% each) are the standard additives for pressureless sintering. Alternatively, liquid-phase sintering with Al$_2$O$_3$-Y$_2$O$_3$ additives allows sintering at 1850 °C but leaves an intergranular glassy phase that limits high-temperature strength."],
+        ["p", "Applications: kiln furniture, heat exchangers, mechanical seals, diesel particulate filters, armour plates, and increasingly as a wide-bandgap semiconductor (4H-SiC, $E_g = 3.26$ eV) for high-power electronics."],
+        ["h3", "Silicon nitride (Si$_3$N$_4$)"],
+        ["p", "Silicon nitride combines high strength (700 to 1000 MPa flexural strength) with good fracture toughness (5 to 8 MPa$\\sqrt{\\text{m}}$) and excellent thermal shock resistance. Its thermal expansion coefficient is low ($3.0 \\times 10^{-6}$ K$^{-1}$), close to that of silicon, and its thermal conductivity is moderate (20 to 30 W/(m$\\cdot$K))."],
+        ["p", "The toughness of Si$_3$N$_4$ comes from its microstructure. During sintering, equiaxed $\\alpha$-Si$_3$N$_4$ transforms to elongated $\\beta$-Si$_3$N$_4$ grains. These acicular grains interlock and force cracks to deflect, bridge, and pull out, absorbing energy. The result is a ceramic that fails more gracefully than alumina."],
+        ["p", "Si$_3$N$_4$ cannot be sintered without additives because it decomposes above 1900 °C. Additions of MgO, Y$_2$O$_3$, or Al$_2$O$_3$ form an intergranular liquid at the sintering temperature (1700 to 1800 °C), enabling densification by liquid-phase sintering. The residual glass phase limits creep resistance above about 1200 °C."],
+        ["p", "Applications: turbocharger rotors, ball bearings (Si$_3$N$_4$ hybrid bearings in aircraft engines run at 2 million DN), hot-section engine components, and cutting tools for machining cast iron at high speed."],
+        ["h3", "Zirconia (ZrO$_2$)"],
+        ["p", "Pure ZrO$_2$ exists in three polymorphs: monoclinic (up to 1170 °C), tetragonal (1170 to 2370 °C), and cubic (above 2370 °C, melting at 2715 °C). The tetragonal-to-monoclinic transition involves a 4% volume increase that cracks the material during cooling. Pure zirconia is useless as a structural ceramic."],
+        ["p", "Adding stabilisers changes everything. 3 mol% Y$_2$O$_3$ (3Y-TZP, tetragonal zirconia polycrystal) retains the tetragonal phase at room temperature in a metastable state. When a crack tip stress field triggers the tetragonal-to-monoclinic transformation, the 4% expansion creates compressive stresses that resist crack opening. This is transformation toughening. 3Y-TZP has $K_{IC} = 8$ to $12$ MPa$\\sqrt{\\text{m}}$ and flexural strengths of 900 to 1200 MPa."],
+        ["p", "Applications: dental crowns and bridges, hip joint femoral heads, oxygen sensors, thermal barrier coatings (7 wt% YSZ, applied by electron-beam physical vapour deposition to jet engine turbine blades, reducing metal temperatures by up to 170 °C)."],
+        ["h3", "Refractories"],
+        ["p", "Refractories line furnaces, kilns, ladles, and reactors. They must resist high temperature, chemical attack, thermal shock, and erosion. The choice of refractory depends on whether the environment is acidic, basic, or neutral."],
+        ["ul", [
+          "<strong>Acidic refractories</strong>: silica (SiO$_2$) bricks, used in coke ovens and glass furnaces. Service temperature up to 1700 °C. Attacked by basic slags.",
+          "<strong>Basic refractories</strong>: magnesia (MgO) and magnesia-chromite (MgO-Cr$_2$O$_3$) bricks, used in steelmaking converters and cement kilns. Resist basic slags. MgO melts at 2852 °C, the highest of any common oxide.",
+          "<strong>Neutral refractories</strong>: alumina and chromite, used where both acid and basic conditions occur.",
+          "<strong>Carbon-containing refractories</strong>: MgO-C bricks (MgO with 5 to 20 wt% graphite flake) dominate steelmaking ladle linings. The graphite provides thermal shock resistance and prevents slag penetration by being non-wetting."
+        ]],
+        ["p", "Thermal shock resistance is often the limiting factor. A simple figure of merit is:"],
+        ["eq", "R = \\frac{\\sigma_f (1 - \\nu)}{E \\alpha}"],
+        ["p", "where $\\sigma_f$ is the fracture strength, $\\nu$ is Poisson's ratio, $E$ is Young's modulus, and $\\alpha$ is the thermal expansion coefficient. Si$_3$N$_4$ scores well because of its low $\\alpha$ and high $\\sigma_f$. SiC also scores well. Al$_2$O$_3$ is moderate. MgO is poor (high $\\alpha$, $13.5 \\times 10^{-6}$ K$^{-1}$), which is why MgO bricks are pre-heated slowly."],
+        ["problem", "A furnace lining made of MgO brick ($E = 300$ GPa, $\\alpha = 13.5 \\times 10^{-6}$ K$^{-1}$, $\\nu = 0.18$, $\\sigma_f = 100$ MPa) is heated from 20 °C. If the surface is heated instantaneously while the interior remains cold, what temperature difference will cause fracture?", [
+          ["p", "The thermal stress from a constrained surface is:"],
+          ["eq", "\\sigma = \\frac{E \\alpha \\Delta T}{1 - \\nu}"],
+          ["p", "Setting $\\sigma = \\sigma_f$:"],
+          ["eq", "\\Delta T = \\frac{\\sigma_f (1 - \\nu)}{E \\alpha} = \\frac{100 \\times 10^6 \\times 0.82}{300 \\times 10^9 \\times 13.5 \\times 10^{-6}}"],
+          ["eq", "\\Delta T = \\frac{8.2 \\times 10^7}{4.05 \\times 10^6} = 20 \\text{ °C}"],
+          ["p", "A temperature difference of only 20 °C across the brick is enough to initiate cracking. This is why MgO refractories must be heated gradually: typical heat-up rates for a steelmaking vessel are 20 to 50 °C per hour."]
+        ]]
+      ],
+      "related": [
+        {
+          "title": "Mechanical Behaviour & Brittle Fracture",
+          "url": "mechanical-behaviour-brittle-fracture"
+        },
+        {
+          "title": "Crystal Structures of Ceramics",
+          "url": "crystal-structures-of-ceramics"
+        },
+        {
+          "title": "Ceramic Processing",
+          "url": "ceramic-processing"
+        }
+      ]
     },
     {
       "id": "cement-concrete-geopolymers",
       "number": "12.6",
       "title": "Cement, Concrete & Geopolymers",
-      "description": "",
-      "readingTime": "— min",
-      "intro": "",
-      "body": [],
-      "related": []
+      "description": "Portland cement hydration, C-S-H gel, concrete mix design, and geopolymer alternatives.",
+      "readingTime": "14 min",
+      "intro": "Concrete is the most produced material on Earth by mass: roughly 30 billion tonnes per year. It is also responsible for about 8% of global CO$_2$ emissions. Understanding its chemistry is essential for any materials scientist.",
+      "body": [
+        ["h3", "Portland cement"],
+        ["p", "Portland cement is made by heating a mixture of limestone (CaCO$_3$) and clay (aluminosilicates) to about 1450 °C in a rotary kiln. The calcium carbonate decomposes to CaO and CO$_2$. The CaO reacts with the silica, alumina, and iron oxide from the clay to form a mixture of calcium silicate and aluminate phases called clinker. The clinker is ground with about 5 wt% gypsum (CaSO$_4 \\cdot 2$H$_2$O) to produce cement powder."],
+        ["p", "Cement chemists use a shorthand notation: C = CaO, S = SiO$_2$, A = Al$_2$O$_3$, F = Fe$_2$O$_3$, H = H$_2$O, $\\bar{\\text{S}}$ = SO$_3$. The four main clinker phases are:"],
+        ["ul", [
+          "<strong>Alite</strong> (C$_3$S, tricalcium silicate): 50 to 70 wt% of clinker. Responsible for early strength. Reacts with water within hours.",
+          "<strong>Belite</strong> (C$_2$S, dicalcium silicate): 15 to 30 wt%. Reacts more slowly (days to weeks). Contributes to long-term strength.",
+          "<strong>Aluminate</strong> (C$_3$A, tricalcium aluminate): 5 to 10 wt%. Reacts very rapidly. Gypsum is added to control this reaction and prevent flash set.",
+          "<strong>Ferrite</strong> (C$_4$AF, tetracalcium aluminoferrite): 5 to 15 wt%. Slow to react. Gives cement its grey colour."
+        ]],
+        ["h3", "Hydration of C$_3$S"],
+        ["p", "The hydration of alite is the most important reaction in concrete. When C$_3$S contacts water, it dissolves and reprecipitates as calcium silicate hydrate (C-S-H) and calcium hydroxide (portlandite, CH):"],
+        ["eq", "2\\text{C}_3\\text{S} + 6\\text{H} \\to \\text{C}_3\\text{S}_2\\text{H}_3 + 3\\text{CH}"],
+        ["p", "This is a simplified stoichiometry. Real C-S-H has a variable Ca/Si ratio (0.8 to 2.0, typically about 1.7) and water content. C-S-H is not a well-defined crystal. It is a disordered, nanostructured gel with a layered structure resembling the mineral tobermorite (14 A). Each layer consists of a CaO sheet flanked by silicate chains, with water and additional Ca$^{2+}$ in the interlayer."],
+        ["p", "The reaction is exothermic. The heat of hydration of C$_3$S is about 500 J/g. In large concrete pours (dams, foundations), this heat can raise the internal temperature by 50 to 70 °C, creating thermal gradients that cause cracking."],
+        ["callout", "C-S-H: the glue of concrete", "C-S-H gel makes up 50 to 60% of fully hydrated cement paste by volume. It is the phase responsible for essentially all of the strength. Its nanoscale porosity (gel pores, 1 to 10 nm) and the van der Waals forces between C-S-H layers control the cohesion. The strength of concrete is the strength of C-S-H."],
+        ["h3", "Setting and strength development"],
+        ["p", "Cement hydration proceeds in stages. In the first minutes, C$_3$A reacts rapidly with water and gypsum to form ettringite (C$_6$A$\\bar{\\text{S}}_3$H$_{32}$), a needle-like crystal that coats the C$_3$A grains and slows the reaction. This is the induction period: the paste is workable for 1 to 3 hours."],
+        ["p", "After the induction period, C$_3$S begins to hydrate rapidly. The paste sets (becomes rigid) at about 3 to 6 hours. Strength develops as C-S-H fills the space between cement grains. Typical compressive strength development for a standard OPC concrete (water/cement ratio 0.5):"],
+        ["ul", [
+          "1 day: 10 to 15 MPa",
+          "3 days: 20 to 25 MPa",
+          "7 days: 30 to 35 MPa",
+          "28 days: 40 to 50 MPa (the standard design strength)",
+          "1 year: 50 to 60 MPa"
+        ]],
+        ["p", "The 28-day strength is the conventional design value. High-performance concrete (with silica fume, low water/cement ratio, and superplasticisers) reaches 80 to 120 MPa at 28 days. Ultra-high-performance concrete (UHPC), with steel fibres and no coarse aggregate, can exceed 150 MPa."],
+        ["h3", "Water/cement ratio"],
+        ["p", "The single most important parameter in concrete mix design is the water/cement ratio ($w/c$). The minimum amount of water needed to fully hydrate cement is about $w/c = 0.23$ (by mass). In practice, additional water is needed for workability. A $w/c$ of 0.40 to 0.50 is typical."],
+        ["p", "Excess water beyond what is consumed by hydration remains as capillary pores. More water means more pores, which means lower strength, higher permeability, and reduced durability. The relationship between $w/c$ and compressive strength was established empirically by Abrams in 1918:"],
+        ["eq", "f_c = \\frac{K_1}{K_2^{w/c}}"],
+        ["p", "where $K_1$ and $K_2$ are empirical constants. For typical OPC at 28 days, reducing $w/c$ from 0.60 to 0.40 roughly doubles the compressive strength from 30 to 60 MPa."],
+        ["h3", "Supplementary cementitious materials"],
+        ["p", "Replacing part of the Portland cement with supplementary cementitious materials (SCMs) reduces CO$_2$ emissions and often improves durability. Common SCMs include:"],
+        ["ul", [
+          "<strong>Ground granulated blast furnace slag (GGBS)</strong>: a by-product of iron smelting. Glassy CaO-SiO$_2$-Al$_2$O$_3$. Replacement levels up to 70%. Slower early strength but higher ultimate strength and much better resistance to chloride and sulphate attack.",
+          "<strong>Fly ash</strong>: a by-product of coal combustion. Glassy SiO$_2$-Al$_2$O$_3$ spheres. Replacement levels up to 30%. Improves workability and long-term durability.",
+          "<strong>Silica fume</strong>: amorphous SiO$_2$ particles, 0.1 to 0.3 $\\mu$m diameter. By-product of silicon production. Replacement levels 5 to 10%. Fills pores, reacts with portlandite to form additional C-S-H (pozzolanic reaction), and greatly reduces permeability. Essential for high-performance concrete."
+        ]],
+        ["h3", "Geopolymers"],
+        ["p", "Geopolymers are an alternative to Portland cement. They are made by activating an aluminosilicate source (fly ash, metakaolin, or blast furnace slag) with an alkaline solution (typically NaOH or Na$_2$SiO$_3$). The product is an amorphous three-dimensional network of AlO$_4$ and SiO$_4$ tetrahedra linked by shared oxygens, with alkali cations balancing the charge on the aluminium sites."],
+        ["p", "The geopolymerisation reaction can be summarised as dissolution of the aluminosilicate source in the alkaline medium, followed by polycondensation:"],
+        ["eq", "\\text{Si}_2\\text{O}_5\\text{Al}_2\\text{O}_2 + 4\\text{NaOH} + 3\\text{H}_2\\text{O} \\to \\text{Na}_2[\\text{Al}_2\\text{Si}_2\\text{O}_8] \\cdot 4\\text{H}_2\\text{O}"],
+        ["p", "Geopolymer concrete can reach 40 to 80 MPa compressive strength. It has excellent fire resistance (no explosive spalling, retains 80% strength at 600 °C versus 20% for OPC concrete) and good acid resistance. The CO$_2$ savings depend on the source materials: fly-ash-based geopolymers can reduce embodied CO$_2$ by 40 to 80% relative to OPC."],
+        ["p", "Barriers to adoption include the need for alkaline activators (NaOH production has its own energy cost), variability in fly ash composition between sources, the need for heat curing at 60 to 80 °C for fly-ash-based systems, and the lack of established standards."],
+        ["h3", "The CO$_2$ problem"],
+        ["p", "Producing one tonne of Portland cement clinker releases roughly 0.8 tonnes of CO$_2$: about 0.53 tonnes from the calcination of limestone (CaCO$_3 \\to$ CaO $+$ CO$_2$) and 0.27 tonnes from burning fuel to reach 1450 °C. Global cement production is about 4.1 billion tonnes per year, making cement responsible for roughly 2.7 billion tonnes of CO$_2$ annually."],
+        ["p", "Decarbonisation strategies include: higher SCM replacement (reducing clinker factor from the current average of 0.73 to below 0.60), alternative clinker chemistries (belite-ye'elimite-ferrite clinker, which can be produced at 1250 °C), carbon capture at the kiln, and geopolymers. No single solution is sufficient. The International Energy Agency's roadmap calls for all of these in combination to reach net-zero cement by 2050."],
+        ["derivation", "A concrete mix uses 350 kg/m$^3$ of cement and a $w/c$ ratio of 0.45. Calculate the volume of water, and estimate the 28-day compressive strength using Abrams' rule with $K_1 = 97$ MPa and $K_2 = 7.7$.", [
+          ["p", "Water content: $w = 0.45 \\times 350 = 157.5$ kg/m$^3$, which is 157.5 litres per cubic metre."],
+          ["p", "The 28-day compressive strength from Abrams' rule:"],
+          ["eq", "f_c = \\frac{K_1}{K_2^{w/c}} = \\frac{97}{7.7^{0.45}}"],
+          ["p", "Calculate $7.7^{0.45}$: $\\ln(7.7) = 2.041$, so $0.45 \\times 2.041 = 0.918$, and $e^{0.918} = 2.505$."],
+          ["eq", "f_c = \\frac{97}{2.505} = 38.7 \\text{ MPa}"],
+          ["p", "This is a reasonable estimate for a standard OPC concrete at 28 days. In practice, the actual strength depends on aggregate type, curing conditions, and cement composition, but the $w/c$ ratio is the dominant variable."]
+        ]],
+        ["problem", "You replace 25% of the Portland cement in a mix with fly ash (by mass). The original mix has 400 kg/m$^3$ cement and $w/c = 0.40$. Assuming the fly ash has no immediate hydraulic activity and a density of 2200 kg/m$^3$ (compared to 3150 kg/m$^3$ for cement), what happens to the effective $w/c$ ratio and the 7-day strength?", [
+          ["p", "The new mix has 300 kg/m$^3$ cement and 100 kg/m$^3$ fly ash. The water content is unchanged: $w = 0.40 \\times 400 = 160$ kg/m$^3$."],
+          ["p", "If fly ash contributes no early strength, the effective $w/c$ ratio for early strength purposes is water divided by cement only:"],
+          ["eq", "w/c_{\\text{eff}} = \\frac{160}{300} = 0.533"],
+          ["p", "The 7-day strength will be lower than the original mix (roughly 25 to 35% lower, depending on the fly ash reactivity and fineness). At 28 days the strength gap narrows because the fly ash pozzolanic reaction begins to contribute (fly ash reacts with the portlandite produced by cement hydration to form additional C-S-H). By 90 days, the fly-ash-blended concrete may match or exceed the OPC-only concrete in strength and will have significantly better durability due to reduced permeability and chloride diffusivity."]
+        ]]
+      ],
+      "related": [
+        {
+          "title": "Crystal Structures of Ceramics",
+          "url": "crystal-structures-of-ceramics"
+        },
+        {
+          "title": "Refractories & Structural Ceramics",
+          "url": "refractories-structural-ceramics"
+        },
+        {
+          "title": "Ceramic Processing",
+          "url": "ceramic-processing"
+        }
+      ]
     },
     {
       "id": "ceramic-processing",
       "number": "12.7",
       "title": "Ceramic Processing",
-      "description": "",
-      "readingTime": "— min",
-      "intro": "",
-      "body": [],
-      "related": []
+      "description": "Powder synthesis, forming, sintering, and the densification mechanisms that make or break a ceramic component.",
+      "readingTime": "13 min",
+      "intro": "You cannot cast or forge a ceramic. The melting points are too high and the materials are too brittle. Instead, ceramics are made from powders: shape the powder, then heat it until the particles fuse together. Every step matters.",
+      "body": [
+        ["h3", "Powder preparation"],
+        ["p", "The properties of the final ceramic are largely determined before sintering begins. Powder particle size, size distribution, purity, and morphology control everything downstream. A 1 $\\mu$m alumina powder sinters to full density at 1600 °C. A 10 $\\mu$m powder of the same purity needs 1750 °C, and the resulting grain size is larger, giving lower strength."],
+        ["p", "Ceramic powders are produced by several routes:"],
+        ["ul", [
+          "<strong>Solid-state reaction</strong>: the most traditional route. Grind and mix oxide powders, calcine at high temperature, then mill again. Produces coarse powders (1 to 10 $\\mu$m) with broad size distributions. Used for BaTiO$_3$, ferrites, and most traditional ceramics.",
+          "<strong>Co-precipitation</strong>: dissolve metal salts in solution, precipitate as hydroxides or carbonates by adding a base, filter, dry, and calcine. Gives sub-micron powders with good chemical homogeneity. Used for YSZ, doped ceria, and many functional ceramics.",
+          "<strong>Sol-gel</strong>: hydrolyse metal alkoxides (e.g., tetraethyl orthosilicate, TEOS, for SiO$_2$) to form a gel, then dry and calcine. Produces extremely fine, high-purity powders. Also used for thin-film deposition.",
+          "<strong>Spray drying</strong>: atomise a slurry of fine powder into a hot gas stream. The droplets dry into spherical granules (50 to 200 $\\mu$m) that flow well into dies. Almost all pressed ceramics use spray-dried granules."
+        ]],
+        ["h3", "Forming"],
+        ["p", "The green body (unfired compact) must have the right shape, uniform density, and no large pores or cracks. Several forming methods are available:"],
+        ["ul", [
+          "<strong>Uniaxial pressing</strong>: powder is compacted in a rigid die at 50 to 300 MPa. Fast and cheap. Die-wall friction creates density gradients: the top of the compact is denser than the bottom. Used for simple shapes (discs, tiles, spark plugs).",
+          "<strong>Isostatic pressing</strong>: powder in a rubber mould is compressed uniformly by a pressurised fluid (cold isostatic pressing, CIP, at 100 to 400 MPa). Eliminates density gradients. Used for complex shapes and large components.",
+          "<strong>Slip casting</strong>: a suspension (slip) of ceramic powder in water is poured into a porous plaster mould. Water is drawn into the plaster by capillary action, depositing a solid layer on the mould surface. Used for complex shapes: sanitaryware, crucibles, and traditional pottery. Thick sections can take hours to build up.",
+          "<strong>Tape casting</strong>: a thin layer of ceramic slurry (with binders and plasticisers in an organic solvent) is cast onto a moving carrier film using a doctor blade. The dried tape (50 to 500 $\\mu$m thick) is cut and stacked to make multilayer packages. This is how MLCC dielectrics and solid oxide fuel cell electrolytes are made.",
+          "<strong>Injection moulding</strong>: ceramic powder (50 to 65 vol%) is mixed with a thermoplastic binder and injection-moulded like a plastic part. After moulding, the binder is removed (debinding) and the part is sintered. Complex shapes at high volume: turbocharger rotors, watch cases, orthodontic brackets."
+        ]],
+        ["h3", "Sintering"],
+        ["p", "Sintering is the process by which a powder compact densifies at high temperature without melting. The driving force is the reduction of surface energy. A compact of 1 $\\mu$m particles has a surface area of roughly 6 m$^2$/g. Replacing those free surfaces with grain boundaries reduces the total energy of the system."],
+        ["p", "Sintering proceeds in three stages:"],
+        ["ol", [
+          "<strong>Initial stage</strong>: necks form between touching particles. The compact shrinks by 2 to 3%. Porosity decreases from about 40% to 30%. Mechanisms: surface diffusion and grain-boundary diffusion.",
+          "<strong>Intermediate stage</strong>: pores form an interconnected tubular network along grain edges. Grain-boundary diffusion and lattice diffusion drive densification. Porosity decreases from 30% to about 5%. Most of the shrinkage occurs here (10 to 15% linear shrinkage).",
+          "<strong>Final stage</strong>: pores pinch off into isolated, roughly spherical voids at grain corners. Further densification requires lattice diffusion or movement of grain boundaries past pores. Achieving less than 1% porosity is difficult and often requires extended hold times, pressure, or sintering aids."
+        ]],
+        ["p", "The sintering rate depends exponentially on temperature (through the diffusion coefficient) and inversely on particle size. The initial-stage neck growth rate for two spherical particles of radius $r$ follows:"],
+        ["eq", "\\left(\\frac{x}{r}\\right)^n = \\frac{Bt}{r^m}"],
+        ["p", "where $x$ is the neck radius, $t$ is time, and $n$ and $m$ are exponents that depend on the dominant diffusion mechanism: $n = 5$, $m = 3$ for volume diffusion; $n = 6$, $m = 4$ for grain-boundary diffusion; $n = 7$, $m = 4$ for surface diffusion (which does not produce shrinkage)."],
+        ["callout", "Surface diffusion vs. grain-boundary diffusion", "Surface diffusion moves atoms from the particle surface to the neck but does not bring the particle centres closer together. It coarsens the microstructure without densifying it. Grain-boundary diffusion moves atoms from the grain boundary to the neck, causing the particles to approach. For densification, you want grain-boundary and lattice diffusion to dominate. This is why sintering temperature must be high enough to activate these mechanisms."],
+        ["h3", "Grain growth"],
+        ["p", "During sintering, grains grow. Normal grain growth follows:"],
+        ["eq", "\\bar{d}^2 - \\bar{d}_0^2 = Kt"],
+        ["p", "where $\\bar{d}$ is the mean grain diameter, $\\bar{d}_0$ is the initial size, $K$ is a rate constant (Arrhenius temperature dependence), and $t$ is time. Larger grains grow at the expense of smaller ones (Ostwald ripening of grain structure). Since strength scales as $d^{-1/2}$ (Griffith-type flaw scaling), grain growth reduces strength."],
+        ["p", "Controlling grain growth is essential. Common strategies: rapid sintering (high temperature, short time), sintering aids that pin grain boundaries (SiC in Si$_3$N$_4$, MgO in Al$_2$O$_3$), and two-step sintering (a brief excursion to high temperature to activate densification, followed by a lower hold temperature where grain-boundary migration is suppressed but diffusion continues)."],
+        ["p", "Adding 250 ppm MgO to alumina is the classic example. MgO segregates to grain boundaries, reducing the grain-boundary mobility. Without MgO, alumina sintered at 1600 °C develops abnormal grain growth (a few grains reach 100 $\\mu$m while others remain at 2 $\\mu$m). With MgO, the grain size stays uniform at 3 to 5 $\\mu$m. This is the Lucalox process, developed by GE in 1961, and still used to make translucent alumina for high-pressure sodium lamp envelopes."],
+        ["h3", "Pressure-assisted sintering"],
+        ["p", "When pressureless sintering cannot achieve full density, external pressure helps. Hot pressing (HP) applies uniaxial pressure (20 to 50 MPa) at temperature in a graphite die. Hot isostatic pressing (HIP) uses gas pressure (100 to 200 MPa) in an autoclave. Spark plasma sintering (SPS, also called field-assisted sintering) passes a pulsed DC current through the die and powder, achieving rapid heating rates (100 to 600 °C/min) and sintering times of minutes rather than hours."],
+        ["p", "SPS has become the method of choice for transparent ceramics. Transparent polycrystalline alumina (for armour windows), Nd:YAG (for solid-state lasers), and transparent MgAl$_2$O$_4$ spinel (for infrared windows) are all produced by SPS or HIP, achieving sub-micron grain sizes and porosity below 0.01%."],
+        ["derivation", "For two spherical alumina particles of radius $r = 0.5$ $\\mu$m sintering by grain-boundary diffusion ($n = 6$, $m = 4$), estimate the neck size ratio $x/r$ after 1 hour at 1600 °C. Take $B = 2 \\times 10^{-20}$ m$^4$/s at this temperature.", [
+          ["p", "The sintering equation is:"],
+          ["eq", "\\left(\\frac{x}{r}\\right)^6 = \\frac{Bt}{r^4}"],
+          ["p", "Substituting $B = 2 \\times 10^{-20}$ m$^4$/s, $t = 3600$ s, $r = 0.5 \\times 10^{-6}$ m:"],
+          ["eq", "\\left(\\frac{x}{r}\\right)^6 = \\frac{2 \\times 10^{-20} \\times 3600}{(0.5 \\times 10^{-6})^4} = \\frac{7.2 \\times 10^{-17}}{6.25 \\times 10^{-26}} = 1.15 \\times 10^{9}"],
+          ["p", "Taking the sixth root: $(x/r) = (1.15 \\times 10^9)^{1/6}$. Now $10^{9/6} = 10^{1.5} = 31.6$, and $1.15^{1/6} \\approx 1.024$, so $x/r \\approx 32.3$. This is unphysical ($x/r$ cannot exceed 1); the initial-stage model has broken down, meaning that after 1 hour at 1600 °C, these sub-micron particles are well past the initial stage of sintering. The necks have fully developed and the compact is in the intermediate or final stage. This illustrates why sub-micron powders sinter so much faster than coarse powders."]
+        ]],
+        ["problem", "You sinter a batch of alumina at 1550 °C for 4 hours and measure a grain size of 4 $\\mu$m. The activation energy for grain growth in alumina is 480 kJ/mol. If you increase the temperature to 1650 °C and sinter for the same time, what grain size do you expect? Assume the initial grain size is negligible.", [
+          ["p", "If $\\bar{d}_0$ is negligible, then $\\bar{d}^2 = Kt$ and $K = K_0 \\exp(-Q/RT)$."],
+          ["p", "At 1550 °C (1823 K): $\\bar{d}^2 = K_0 t \\exp(-Q/RT_1)$, giving $16 = K_0 t \\exp(-480000/(8.314 \\times 1823))$."],
+          ["p", "At 1650 °C (1923 K): $\\bar{d}^2 = K_0 t \\exp(-Q/RT_2)$."],
+          ["p", "The ratio:"],
+          ["eq", "\\frac{\\bar{d}_2^2}{\\bar{d}_1^2} = \\exp\\left(\\frac{Q}{R}\\left(\\frac{1}{T_1} - \\frac{1}{T_2}\\right)\\right)"],
+          ["eq", "= \\exp\\left(\\frac{480000}{8.314}\\left(\\frac{1}{1823} - \\frac{1}{1923}\\right)\\right)"],
+          ["p", "Calculate the bracket: $1/1823 - 1/1923 = (1923 - 1823)/(1823 \\times 1923) = 100/3,503,829 = 2.854 \\times 10^{-5}$ K$^{-1}$."],
+          ["eq", "\\frac{\\bar{d}_2^2}{16} = \\exp(57740 \\times 2.854 \\times 10^{-5}) = \\exp(1.648) = 5.20"],
+          ["eq", "\\bar{d}_2^2 = 83.1 \\quad \\Rightarrow \\quad \\bar{d}_2 = 9.1 \\text{ } \\mu\\text{m}"],
+          ["p", "A 100 °C increase more than doubles the grain size (from 4 to 9 $\\mu$m). This is why precise temperature control during sintering matters: overshoot by 50 °C and you lose strength."]
+        ]]
+      ],
+      "related": [
+        {
+          "title": "Crystal Structures of Ceramics",
+          "url": "crystal-structures-of-ceramics"
+        },
+        {
+          "title": "Mechanical Behaviour & Brittle Fracture",
+          "url": "mechanical-behaviour-brittle-fracture"
+        },
+        {
+          "title": "Manufacturing",
+          "url": "../manufacturing/"
+        }
+      ]
     }
   ]
 }

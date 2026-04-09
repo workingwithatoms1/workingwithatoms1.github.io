@@ -6,78 +6,514 @@
     "part": "II",
     "partTitle": "Properties & Behaviour",
     "topic": "Electronic Properties",
-    "intro": ""
+    "intro": "How electrons determine whether a material conducts, insulates, absorbs light or responds to a magnetic field. This module builds from the free electron gas through band theory to the functional properties that make semiconductors, dielectrics, optical materials, magnets and superconductors work."
   },
   "articles": [
     {
       "id": "free-electron-model-density-of-states",
       "number": "9.1",
       "title": "Free Electron Model & Density of States",
-      "description": "",
-      "readingTime": "— min",
-      "intro": "",
-      "body": [],
-      "related": []
+      "description": "The Drude and Sommerfeld models of metals, the Fermi energy, and counting quantum states.",
+      "readingTime": "14 min",
+      "intro": "Metals conduct electricity. The simplest explanation is that some electrons are free to move. The free electron model takes this idea seriously, treats the conduction electrons as a gas, and gets a surprising amount right.",
+      "body": [
+        ["h3", "The Drude model"],
+        ["p", "Paul Drude proposed in 1900 that a metal contains a gas of classical electrons bouncing off ion cores. Between collisions, the electrons move freely. An applied electric field $\\mathbf{E}$ accelerates them, and collisions (every $\\tau$ seconds on average) randomise their velocities. The steady-state drift velocity is:"],
+        ["eq", "\\mathbf{v}_d = -\\frac{e\\tau}{m_e}\\mathbf{E}"],
+        ["p", "The current density $\\mathbf{J} = -ne\\mathbf{v}_d$ gives Ohm's law in microscopic form:"],
+        ["eq", "\\mathbf{J} = \\frac{ne^2\\tau}{m_e}\\mathbf{E} = \\sigma\\mathbf{E}"],
+        ["p", "where $n$ is the electron density, $e$ the electron charge, $m_e$ the electron mass, and $\\sigma$ the electrical conductivity. For copper, $n = 8.5 \\times 10^{28}$ m$^{-3}$ (one electron per atom). The measured resistivity at 300 K is $\\rho = 1/\\sigma = 1.7 \\times 10^{-8}$ $\\Omega$m, which gives $\\tau \\approx 2.5 \\times 10^{-14}$ s. The mean free path $\\ell = v\\tau$ depends on what velocity you use, and here the Drude model runs into trouble."],
+        ["p", "If the electrons were a classical gas at 300 K, their thermal velocity would be $v_{\\text{th}} = \\sqrt{3k_BT/m_e} \\approx 1.2 \\times 10^5$ m/s, giving $\\ell \\approx 3$ nm, roughly one lattice spacing. This is self-consistent. But the model also predicts an electronic heat capacity of $\\frac{3}{2}nk_B$ per unit volume, which is about 100 times larger than the measured value. Classical electrons carry far too much thermal energy."],
+        ["callout", "What Drude gets right", "Electrical conductivity, the Wiedemann-Franz law ($\\kappa/\\sigma T \\approx$ const.), and the Hall effect all emerge from Drude's model with reasonable numerical accuracy. The model fails for heat capacity, magnetic susceptibility, and the temperature dependence of resistivity. Fixing these failures requires quantum mechanics."],
+
+        ["h3", "The Sommerfeld model"],
+        ["p", "Arnold Sommerfeld fixed the heat capacity problem in 1928 by treating the electrons as quantum-mechanical fermions obeying the Pauli exclusion principle. The electrons still move freely (no periodic potential), but no two can occupy the same quantum state."],
+        ["p", "Place $N$ free electrons in a cubic box of side $L$ with periodic boundary conditions. The allowed wavevectors are:"],
+        ["eq", "\\mathbf{k} = \\frac{2\\pi}{L}(n_x, n_y, n_z), \\qquad n_x, n_y, n_z = 0, \\pm 1, \\pm 2, \\ldots"],
+        ["p", "Each state has energy $E = \\hbar^2 k^2 / 2m_e$. At zero temperature, electrons fill the states from the bottom up. The energy of the highest occupied state is the Fermi energy $E_F$:"],
+        ["eq", "E_F = \\frac{\\hbar^2}{2m_e}\\left(\\frac{3\\pi^2 N}{V}\\right)^{2/3} = \\frac{\\hbar^2}{2m_e}(3\\pi^2 n)^{2/3}"],
+        ["p", "For copper ($n = 8.5 \\times 10^{28}$ m$^{-3}$), $E_F = 7.0$ eV. This corresponds to a Fermi temperature $T_F = E_F/k_B = 81{,}000$ K. At room temperature, $T/T_F \\approx 0.004$. The electron gas is deeply degenerate: thermal energy barely disturbs the Fermi sea."],
+
+        ["h3", "The Fermi-Dirac distribution"],
+        ["p", "At finite temperature, the occupation probability of a state with energy $E$ is:"],
+        ["eq", "f(E) = \\frac{1}{\\exp\\left(\\frac{E - \\mu}{k_BT}\\right) + 1}"],
+        ["p", "where $\\mu$ is the chemical potential (equal to $E_F$ at $T = 0$, and very close to it at room temperature). At $T = 0$, $f(E)$ is a step function: 1 below $E_F$, 0 above. At finite temperature, the step is smeared over a width of order $k_BT$. Only electrons within $\\sim k_BT$ of the Fermi level participate in thermal processes. At 300 K, $k_BT = 0.026$ eV, a thin shell compared to $E_F = 7$ eV."],
+
+        ["h3", "Density of states"],
+        ["p", "The density of states $g(E)$ counts the number of one-electron states per unit energy per unit volume. For free electrons in three dimensions:"],
+        ["eq", "g(E) = \\frac{1}{2\\pi^2}\\left(\\frac{2m_e}{\\hbar^2}\\right)^{3/2} E^{1/2}"],
+        ["p", "This grows as $\\sqrt{E}$: more states are available at higher energy because the surface area of the constant-energy sphere in $k$-space grows as $k^2 \\propto E$."],
+        ["derivation", "The free-electron density of states in 3D: $g(E) \\propto E^{1/2}$.", [
+          ["p", "In $k$-space, the volume per allowed state is $(2\\pi/L)^3 = (2\\pi)^3/V$. Each state holds 2 electrons (spin up and spin down). The number of states with $|\\mathbf{k}| < k$ is:"],
+          ["eq", "N(k) = 2 \\times \\frac{\\frac{4}{3}\\pi k^3}{(2\\pi)^3/V} = \\frac{Vk^3}{3\\pi^2}"],
+          ["p", "Using $E = \\hbar^2 k^2/2m_e$, so $k = (2m_eE/\\hbar^2)^{1/2}$:"],
+          ["eq", "N(E) = \\frac{V}{3\\pi^2}\\left(\\frac{2m_eE}{\\hbar^2}\\right)^{3/2}"],
+          ["p", "The density of states per unit volume is $g(E) = (1/V)\\,dN/dE$:"],
+          ["eq", "g(E) = \\frac{1}{2\\pi^2}\\left(\\frac{2m_e}{\\hbar^2}\\right)^{3/2} E^{1/2}"]
+        ]],
+
+        ["h3", "Electronic heat capacity"],
+        ["p", "Only electrons within $\\sim k_BT$ of $E_F$ can absorb thermal energy. The fraction of electrons that are thermally excited is of order $T/T_F$. Each absorbs energy of order $k_BT$. The electronic heat capacity per unit volume is therefore:"],
+        ["eq", "C_e = \\frac{\\pi^2}{3}g(E_F)k_B^2 T = \\gamma T"],
+        ["p", "This is linear in $T$, not constant as Drude predicted. The coefficient $\\gamma$ is the Sommerfeld coefficient. For copper, $\\gamma = 0.70$ mJ/(mol$\\cdot$K$^2$). At 300 K, $C_e \\approx 0.21$ J/(mol$\\cdot$K), which is tiny compared to the lattice heat capacity of $3R \\approx 25$ J/(mol$\\cdot$K). At low temperatures (below ~10 K), the lattice contribution drops as $T^3$ while the electronic contribution drops only as $T$, so the electronic term dominates. Plotting $C/T$ versus $T^2$ at low temperature gives a straight line whose intercept is $\\gamma$."],
+        ["callout", "Measuring the Sommerfeld coefficient", "In the low-temperature limit, $C = \\gamma T + \\beta T^3$, where $\\gamma T$ is electronic and $\\beta T^3$ is the Debye lattice contribution. A plot of $C/T$ vs $T^2$ gives a straight line with intercept $\\gamma$ and slope $\\beta$. For copper: $\\gamma = 0.70$ mJ/(mol$\\cdot$K$^2$), $\\beta = 0.0465$ mJ/(mol$\\cdot$K$^4$). Deviations from the free-electron prediction of $\\gamma$ reveal the effects of electron-phonon coupling and band structure."],
+
+        ["h3", "Electrical and thermal conductivity"],
+        ["p", "The Sommerfeld model corrects Drude's mean free path. The relevant velocity is not the thermal velocity but the Fermi velocity $v_F = \\hbar k_F/m_e$. For copper, $v_F = 1.57 \\times 10^6$ m/s, roughly 10 times the classical thermal velocity. The mean free path becomes $\\ell = v_F \\tau \\approx 40$ nm, spanning about 100 lattice spacings. Electrons at the Fermi level travel ballistically over distances much larger than the interatomic spacing. Their scattering is from impurities, phonons and grain boundaries, not from the regular lattice."],
+        ["p", "The electrical conductivity remains $\\sigma = ne^2\\tau/m_e$ (same as Drude). The thermal conductivity is $\\kappa = C_e v_F \\ell / 3 = (\\pi^2/3)(n k_B^2 T \\tau / m_e)$. The ratio gives the Wiedemann-Franz law:"],
+        ["eq", "\\frac{\\kappa}{\\sigma T} = \\frac{\\pi^2}{3}\\left(\\frac{k_B}{e}\\right)^2 = L_0 = 2.44 \\times 10^{-8} \\text{ W}\\Omega\\text{/K}^2"],
+        ["p", "The Lorenz number $L_0$ is a universal constant, independent of material. Experimental values for most metals at room temperature agree to within 10%. This is one of the triumphs of the Sommerfeld model: the quantum corrections to $C_e$ and $v_F$ cancel in the ratio."],
+
+        ["h3", "Limitations of the free electron model"],
+        ["p", "The free electron model cannot explain why some materials are insulators. Every element should be a metal in this picture. It cannot explain why the Hall coefficient of some metals has the wrong sign (aluminium, for instance, behaves as if the current carriers are positive). It says nothing about optical properties beyond the plasma frequency. These failures all point in the same direction: we must account for the periodic potential of the ion cores. That is the subject of band theory."],
+
+        ["problem", "Silver has one conduction electron per atom, atomic mass 107.87 g/mol, density 10.49 g/cm$^3$, and a measured resistivity of $1.59 \\times 10^{-8}$ $\\Omega$m at 300 K. Calculate the free electron density, the Fermi energy, the Fermi velocity, the relaxation time $\\tau$, and the mean free path.", [
+          ["p", "Electron density: $n = \\rho_{\\text{mass}} N_A / M = (10.49 \\times 10^6)(6.022 \\times 10^{23}) / 107.87 = 5.86 \\times 10^{28}$ m$^{-3}$."],
+          ["p", "Fermi energy: $E_F = (\\hbar^2/2m_e)(3\\pi^2 n)^{2/3}$."],
+          ["eq", "E_F = \\frac{(1.055 \\times 10^{-34})^2}{2(9.109 \\times 10^{-31})}(3\\pi^2 \\times 5.86 \\times 10^{28})^{2/3} = 5.49 \\text{ eV}"],
+          ["p", "Fermi velocity: $v_F = \\sqrt{2E_F/m_e} = \\sqrt{2 \\times 5.49 \\times 1.602 \\times 10^{-19}/9.109 \\times 10^{-31}} = 1.39 \\times 10^6$ m/s."],
+          ["p", "Relaxation time: $\\tau = m_e/(ne^2\\rho) = 9.109 \\times 10^{-31}/(5.86 \\times 10^{28} \\times (1.602 \\times 10^{-19})^2 \\times 1.59 \\times 10^{-8}) = 3.8 \\times 10^{-14}$ s."],
+          ["p", "Mean free path: $\\ell = v_F \\tau = 1.39 \\times 10^6 \\times 3.8 \\times 10^{-14} = 53$ nm, roughly 130 lattice spacings."]
+        ]]
+      ],
+      "related": [
+        { "title": "Band Theory & Brillouin Zones", "url": "band-theory-brillouin-zones" },
+        { "title": "Quantum Mechanics", "url": "../quantum-mechanics/" },
+        { "title": "Bonding", "url": "../bonding/" }
+      ]
     },
     {
       "id": "band-theory-brillouin-zones",
       "number": "9.2",
       "title": "Band Theory & Brillouin Zones",
-      "description": "",
-      "readingTime": "— min",
-      "intro": "",
-      "body": [],
-      "related": []
+      "description": "How a periodic potential opens energy gaps and splits the free electron parabola into bands.",
+      "readingTime": "16 min",
+      "intro": "Free electrons in a uniform potential give a single parabolic band. Real crystals have a periodic potential from the ion cores. That periodicity opens gaps in the energy spectrum, and those gaps determine whether a material is a metal, semiconductor or insulator.",
+      "body": [
+        ["h3", "The periodic potential"],
+        ["p", "In a crystal, every electron moves through a potential that repeats with the periodicity of the lattice: $V(\\mathbf{r} + \\mathbf{R}) = V(\\mathbf{r})$ for any lattice vector $\\mathbf{R}$. The Schrodinger equation for an electron in this potential is:"],
+        ["eq", "\\left[-\\frac{\\hbar^2}{2m_e}\\nabla^2 + V(\\mathbf{r})\\right]\\psi(\\mathbf{r}) = E\\psi(\\mathbf{r})"],
+        ["p", "Felix Bloch showed in 1928 that the solutions have a specific form. Because the potential is periodic, the wavefunctions must be too (up to a phase factor)."],
+
+        ["h3", "Bloch's theorem"],
+        ["p", "The eigenstates of an electron in a periodic potential are Bloch waves:"],
+        ["eq", "\\psi_{n\\mathbf{k}}(\\mathbf{r}) = e^{i\\mathbf{k}\\cdot\\mathbf{r}}\\,u_{n\\mathbf{k}}(\\mathbf{r})"],
+        ["p", "where $u_{n\\mathbf{k}}(\\mathbf{r})$ has the periodicity of the lattice and $n$ is the band index. The wavevector $\\mathbf{k}$ labels the state within a band. The energy $E_n(\\mathbf{k})$ is the band structure: the relationship between energy and wavevector for each band."],
+        ["p", "A free electron has $E = \\hbar^2 k^2 / 2m_e$, a single parabola. The periodic potential splits this parabola into separate bands, with gaps at certain values of $\\mathbf{k}$."],
+
+        ["h3", "The nearly free electron model"],
+        ["p", "Start from free electrons and treat the periodic potential as a weak perturbation. For a one-dimensional lattice with period $a$, the potential can be written as a Fourier series:"],
+        ["eq", "V(x) = \\sum_G V_G\\, e^{iGx}"],
+        ["p", "where $G = 2\\pi n/a$ are the reciprocal lattice vectors. The free electron parabola $E = \\hbar^2 k^2/2m_e$ is modified wherever two free-electron branches cross, which happens at $k = G/2 = n\\pi/a$, the Brillouin zone boundaries."],
+        ["p", "At $k = \\pi/a$, the free electron states at $k$ and $k - 2\\pi/a$ are degenerate. The periodic potential mixes them, splitting the degeneracy and opening a gap of magnitude:"],
+        ["eq", "E_g = 2|V_G|"],
+        ["p", "The states at the bottom of the gap are bonding combinations (electron density concentrated on the ions); the states at the top are antibonding (electron density between the ions). This is exactly analogous to the bonding-antibonding splitting in molecular orbital theory."],
+
+        ["h3", "Brillouin zones"],
+        ["p", "The first Brillouin zone is the Wigner-Seitz cell of the reciprocal lattice: the region of $k$-space closer to the origin than to any other reciprocal lattice point. In one dimension, it is the interval $-\\pi/a < k \\leq \\pi/a$. In three dimensions, the shape depends on the crystal structure."],
+        ["p", "For FCC crystals, the first Brillouin zone is a truncated octahedron. For BCC, it is a regular rhombic dodecahedron. High-symmetry points have standard labels: $\\Gamma$ (the zone centre, $\\mathbf{k} = 0$), $X$ (face centre), $L$ (body corner), $K$ (edge midpoint)."],
+        ["p", "Band structures are conventionally plotted along paths connecting these high-symmetry points. The band structure of copper, for instance, shows a broad $sp$ band that closely follows the free-electron parabola, crossed by narrow $d$ bands near the Fermi level. This hybridisation between $s$ and $d$ states gives copper its colour (article 9.5)."],
+        ["callout", "Why zone boundaries matter", "Band gaps open at zone boundaries because the electron's de Broglie wavelength matches the lattice spacing, creating standing waves. The two possible standing waves (peaks on ions vs peaks between ions) have different potential energies. The energy splitting is the band gap. A larger Fourier component $V_G$ of the potential means a larger gap."],
+
+        ["h3", "The tight-binding model"],
+        ["p", "The nearly free electron approach starts from free electrons and adds a weak potential. The tight-binding approach starts from isolated atoms and allows their wavefunctions to overlap. Both converge to the same band structure; they are complementary limits."],
+        ["p", "Consider a row of atoms separated by $a$, each with an atomic orbital $\\phi(x)$ of energy $E_0$. When the atoms are brought together, the orbitals overlap. The energy of a Bloch state built from these orbitals is:"],
+        ["eq", "E(k) = E_0 - \\alpha - 2\\beta\\cos(ka)"],
+        ["p", "where $\\alpha$ is the shift due to the potential of neighbouring atoms and $\\beta$ is the overlap (hopping) integral between nearest neighbours. The bandwidth is $4\\beta$. Strongly overlapping orbitals (large $\\beta$) give wide bands. Core levels barely overlap, so they form narrow bands or remain atomic-like."],
+        ["p", "The $3d$ band of nickel is about 5 eV wide. The $4s$ band is about 10 eV wide. The $1s$ core level has a bandwidth of essentially zero. These widths directly reflect the spatial extent of the orbitals."],
+
+        ["h3", "Metals, semiconductors and insulators"],
+        ["p", "The distinction comes down to band filling. Each band holds $2N$ electrons, where $N$ is the number of unit cells (factor of 2 from spin). If a band is partially filled, the material is a metal: electrons near the Fermi level can easily be excited into empty states just above. If all bands are either completely full or completely empty, the material is an insulator: a finite energy (the band gap $E_g$) is needed to promote an electron from the top of the highest filled band (valence band) to the bottom of the lowest empty band (conduction band)."],
+        ["p", "Semiconductors are insulators with small gaps. Silicon has $E_g = 1.12$ eV; diamond has $E_g = 5.47$ eV. The dividing line between semiconductor and insulator is a matter of convention, usually placed around 3-4 eV."],
+        ["p", "This picture explains why monovalent metals (Na, Cu, Ag) are always metallic: one electron per atom half-fills one band. Divalent elements (Mg, Ca, Be) could be insulators if the first band were completely full, but in practice the bands overlap in energy, so some electrons spill into the second band. Band overlap makes divalent metals metallic. Group IV elements (C, Si, Ge, Sn) have 4 valence electrons filling 2 bands exactly; whether they conduct depends on the size of the gap between the second and third bands."],
+
+        ["h3", "Effective mass"],
+        ["p", "Near a band extremum, the energy can be expanded as:"],
+        ["eq", "E(k) \\approx E_0 + \\frac{\\hbar^2(k - k_0)^2}{2m^*}"],
+        ["p", "The effective mass $m^*$ absorbs the effect of the periodic potential. At the bottom of a band (positive curvature), $m^*$ is positive. At the top of a band (negative curvature), $m^*$ is negative, which is equivalent to a positively charged particle, a hole. This is why some metals have positive Hall coefficients: the current carriers behave as positively charged holes near the top of a band."],
+        ["p", "In silicon, the electron effective mass near the conduction band minimum is $m^*_e = 0.26\\,m_e$ (light direction) to $0.64\\,m_e$ (heavy direction), depending on the valley. The hole effective mass near the valence band maximum is $m^*_{hh} = 0.49\\,m_e$ (heavy hole) and $m^*_{lh} = 0.16\\,m_e$ (light hole). These numbers control carrier mobility and device performance."],
+
+        ["derivation", "The effective mass is the inverse curvature of the band: $1/m^* = (1/\\hbar^2)\\,d^2E/dk^2$.", [
+          ["p", "An electron in a Bloch state responds to an external force $F$ according to $\\hbar\\,dk/dt = F$. Its group velocity is $v = (1/\\hbar)\\,dE/dk$. The acceleration is:"],
+          ["eq", "\\frac{dv}{dt} = \\frac{1}{\\hbar}\\frac{d^2E}{dk^2}\\frac{dk}{dt} = \\frac{1}{\\hbar^2}\\frac{d^2E}{dk^2}F"],
+          ["p", "Comparing with Newton's second law $F = m^* a$:"],
+          ["eq", "\\frac{1}{m^*} = \\frac{1}{\\hbar^2}\\frac{d^2E}{dk^2}"],
+          ["p", "At a band minimum, $d^2E/dk^2 > 0$, so $m^* > 0$. At a band maximum, $d^2E/dk^2 < 0$, so $m^* < 0$. The periodic potential can make electrons behave as if they are heavier or lighter than free electrons."]
+        ]],
+
+        ["problem", "In the nearly free electron model for a 1D lattice with period $a = 3.0$ &Aring;, the first Fourier component of the potential is $V_1 = 1.5$ eV. Calculate (a) the wavevector at the first Brillouin zone boundary, (b) the free electron energy at this wavevector, and (c) the band gap and the energies of the states just below and just above the gap.", [
+          ["p", "(a) The first zone boundary is at $k = \\pi/a = \\pi/(3.0 \\times 10^{-10}) = 1.047 \\times 10^{10}$ m$^{-1}$."],
+          ["p", "(b) Free electron energy: $E = \\hbar^2 k^2/2m_e = (1.055 \\times 10^{-34})^2(1.047 \\times 10^{10})^2/(2 \\times 9.109 \\times 10^{-31}) = 6.71 \\times 10^{-19}$ J $= 4.19$ eV."],
+          ["p", "(c) The band gap is $E_g = 2|V_1| = 3.0$ eV."],
+          ["p", "The state at the top of the first band has energy $E_1 = 4.19 - 1.5 = 2.69$ eV."],
+          ["p", "The state at the bottom of the second band has energy $E_2 = 4.19 + 1.5 = 5.69$ eV."]
+        ]]
+      ],
+      "related": [
+        { "title": "Free Electron Model & Density of States", "url": "free-electron-model-density-of-states" },
+        { "title": "Semiconductors (Intrinsic & Extrinsic)", "url": "semiconductors-intrinsic-extrinsic" },
+        { "title": "Crystallography", "url": "../crystallography/" }
+      ]
     },
     {
       "id": "semiconductors-intrinsic-extrinsic",
       "number": "9.3",
       "title": "Semiconductors (Intrinsic & Extrinsic)",
-      "description": "",
-      "readingTime": "— min",
-      "intro": "",
-      "body": [],
-      "related": []
+      "description": "Thermal excitation across band gaps, doping, carrier concentrations, and the p-n junction.",
+      "readingTime": "16 min",
+      "intro": "A semiconductor is an insulator with a gap small enough that thermal excitation or deliberate impurities can populate the conduction band. This sensitivity to doping is what makes semiconductor electronics possible.",
+      "body": [
+        ["h3", "Intrinsic semiconductors"],
+        ["p", "In a pure semiconductor at $T = 0$, the valence band is full and the conduction band is empty. No conduction. At finite temperature, thermal energy promotes some electrons across the gap. Each excitation creates one electron in the conduction band and one hole in the valence band. The material conducts, weakly, through both carriers."],
+        ["p", "The intrinsic carrier concentration $n_i$ depends exponentially on the band gap and temperature:"],
+        ["eq", "n_i = \\sqrt{N_c N_v}\\,\\exp\\left(-\\frac{E_g}{2k_BT}\\right)"],
+        ["p", "where $N_c$ and $N_v$ are the effective densities of states in the conduction and valence bands. For silicon at 300 K: $E_g = 1.12$ eV, $N_c = 2.8 \\times 10^{25}$ m$^{-3}$, $N_v = 1.04 \\times 10^{25}$ m$^{-3}$, giving $n_i = 1.5 \\times 10^{16}$ m$^{-3}$. This is about $10^{12}$ times smaller than the electron density in copper. Pure silicon at room temperature is a very poor conductor."],
+        ["p", "For germanium ($E_g = 0.66$ eV), $n_i = 2.4 \\times 10^{19}$ m$^{-3}$ at 300 K, about 1600 times higher than silicon. For GaAs ($E_g = 1.42$ eV), $n_i = 1.8 \\times 10^{12}$ m$^{-3}$. The exponential dependence on $E_g$ produces enormous differences from modest changes in gap."],
+
+        ["h3", "Carrier statistics"],
+        ["p", "The electron concentration in the conduction band is:"],
+        ["eq", "n = N_c \\exp\\left(-\\frac{E_c - E_F}{k_BT}\\right)"],
+        ["p", "and the hole concentration in the valence band is:"],
+        ["eq", "p = N_v \\exp\\left(-\\frac{E_F - E_v}{k_BT}\\right)"],
+        ["p", "The product is independent of the Fermi level:"],
+        ["eq", "np = n_i^2 = N_c N_v \\exp\\left(-\\frac{E_g}{k_BT}\\right)"],
+        ["p", "This is the law of mass action for semiconductors. It holds for both intrinsic and extrinsic material. Adding donors increases $n$ but decreases $p$ so that $np$ remains constant. In an intrinsic semiconductor, $n = p = n_i$ and the Fermi level sits near the middle of the gap."],
+
+        ["h3", "Extrinsic semiconductors: doping"],
+        ["p", "The power of semiconductors comes from doping: substituting a tiny fraction of atoms with impurities that donate or accept electrons."],
+        ["p", "Silicon has 4 valence electrons. Substitute one Si atom in a million with phosphorus (5 valence electrons). Four of P's electrons form bonds with the Si neighbours. The fifth is loosely bound to the P$^+$ core, with a binding energy of only:"],
+        ["eq", "E_d \\approx \\frac{m_e^*}{m_e \\epsilon_r^2} \\times 13.6 \\text{ eV} \\approx \\frac{0.26}{(11.7)^2} \\times 13.6 \\approx 0.026 \\text{ eV}"],
+        ["p", "where $\\epsilon_r = 11.7$ is the dielectric constant of Si and $m_e^* = 0.26\\,m_e$. This tiny binding energy means the donor electron is thermally ionised at room temperature ($k_BT = 0.026$ eV). Phosphorus is an n-type dopant: it supplies electrons to the conduction band."],
+        ["p", "Boron has 3 valence electrons. Substituting B for Si leaves one bond unsatisfied. A neighbouring electron can fill this bond, leaving behind a hole. Boron is a p-type dopant. The acceptor level sits about 0.045 eV above the valence band edge in silicon."],
+        ["callout", "Dopant concentrations in practice", "A typical doping level of $10^{22}$ m$^{-3}$ (about 1 part per million) in silicon gives a carrier concentration 6 orders of magnitude higher than intrinsic. The resistivity drops from about 2300 $\\Omega$m (intrinsic) to about 0.04 $\\Omega$m. Heavy doping ($10^{25}$ m$^{-3}$, about 0.1%) gives near-metallic conductivity. The precision required in controlling dopant concentrations is why semiconductor fabrication demands extraordinary cleanliness."],
+
+        ["h3", "Carrier mobility and conductivity"],
+        ["p", "The conductivity of a semiconductor depends on both the carrier concentration and the carrier mobility:"],
+        ["eq", "\\sigma = ne\\mu_e + pe\\mu_h"],
+        ["p", "where $\\mu_e$ and $\\mu_h$ are the electron and hole mobilities. Mobility is the drift velocity per unit electric field: $\\mu = e\\tau/m^*$. In silicon at 300 K, $\\mu_e \\approx 0.14$ m$^2$/(V$\\cdot$s) and $\\mu_h \\approx 0.045$ m$^2$/(V$\\cdot$s). Electrons are more mobile than holes because their effective mass is lower."],
+        ["p", "GaAs has $\\mu_e \\approx 0.85$ m$^2$/(V$\\cdot$s), about 6 times higher than silicon, because the conduction band minimum has a very light effective mass ($m^* = 0.067\\,m_e$). This is why GaAs is used for high-frequency and high-speed electronics."],
+
+        ["h3", "Temperature dependence of conductivity"],
+        ["p", "In an intrinsic semiconductor, $\\sigma$ increases with temperature because the carrier concentration grows exponentially. A plot of $\\ln\\sigma$ versus $1/T$ gives a straight line with slope $-E_g/2k_B$."],
+        ["p", "In a doped semiconductor, the behaviour is more complex. At low temperature, carriers freeze out onto the dopant levels. In a middle range (the extrinsic regime), all dopants are ionised and $n$ is roughly constant; conductivity decreases with temperature as mobility drops (phonon scattering increases). At high temperature, intrinsic carriers overwhelm the dopant contribution and $\\sigma$ rises again."],
+
+        ["h3", "The p-n junction"],
+        ["p", "Bring p-type and n-type silicon into contact. Electrons from the n side diffuse into the p side; holes from the p side diffuse into the n side. They recombine, leaving behind a depletion region: immobile ionised donors on the n side (positive charge) and ionised acceptors on the p side (negative charge). This space charge creates a built-in electric field that opposes further diffusion."],
+        ["p", "The built-in voltage across the junction is:"],
+        ["eq", "V_{bi} = \\frac{k_BT}{e}\\ln\\left(\\frac{N_A N_D}{n_i^2}\\right)"],
+        ["p", "For a silicon junction with $N_A = N_D = 10^{22}$ m$^{-3}$ at 300 K: $V_{bi} = 0.026 \\times \\ln(10^{22} \\times 10^{22}/(1.5 \\times 10^{16})^2) = 0.72$ V."],
+        ["p", "Apply a forward bias (positive to p side): the barrier is reduced, current flows exponentially. Apply a reverse bias: the barrier is increased, only a tiny leakage current flows. This rectifying behaviour is the basis of the diode:"],
+        ["eq", "I = I_0\\left[\\exp\\left(\\frac{eV}{k_BT}\\right) - 1\\right]"],
+
+        ["derivation", "The intrinsic Fermi level lies near mid-gap: $E_F = (E_c + E_v)/2 + (k_BT/2)\\ln(N_v/N_c)$.", [
+          ["p", "Setting $n = p$ for an intrinsic semiconductor:"],
+          ["eq", "N_c \\exp\\left(-\\frac{E_c - E_F}{k_BT}\\right) = N_v \\exp\\left(-\\frac{E_F - E_v}{k_BT}\\right)"],
+          ["p", "Taking logarithms:"],
+          ["eq", "\\ln N_c - \\frac{E_c - E_F}{k_BT} = \\ln N_v - \\frac{E_F - E_v}{k_BT}"],
+          ["p", "Solving for $E_F$:"],
+          ["eq", "E_F = \\frac{E_c + E_v}{2} + \\frac{k_BT}{2}\\ln\\frac{N_v}{N_c}"],
+          ["p", "At 300 K, the second term is small (a few meV for Si), so $E_F$ sits very close to the middle of the gap."]
+        ]],
+
+        ["problem", "A silicon sample is doped with $10^{22}$ m$^{-3}$ phosphorus atoms. At 300 K, calculate the electron and hole concentrations, the position of the Fermi level relative to the conduction band edge, and the conductivity. Use $n_i = 1.5 \\times 10^{16}$ m$^{-3}$, $\\mu_e = 0.14$ m$^2$/(V$\\cdot$s), $\\mu_h = 0.045$ m$^2$/(V$\\cdot$s), $N_c = 2.8 \\times 10^{25}$ m$^{-3}$.", [
+          ["p", "At room temperature, all donors are ionised: $n \\approx N_D = 10^{22}$ m$^{-3}$."],
+          ["p", "From the law of mass action: $p = n_i^2/n = (1.5 \\times 10^{16})^2/10^{22} = 2.25 \\times 10^{10}$ m$^{-3}$. The hole concentration is negligible."],
+          ["p", "Fermi level: $E_c - E_F = k_BT \\ln(N_c/n) = 0.026 \\ln(2.8 \\times 10^{25}/10^{22}) = 0.026 \\times 7.94 = 0.206$ eV below the conduction band edge."],
+          ["p", "Conductivity: $\\sigma \\approx ne\\mu_e = 10^{22} \\times 1.602 \\times 10^{-19} \\times 0.14 = 224$ S/m (or $\\rho = 4.5 \\times 10^{-3}$ $\\Omega$m)."]
+        ]]
+      ],
+      "related": [
+        { "title": "Band Theory & Brillouin Zones", "url": "band-theory-brillouin-zones" },
+        { "title": "Dielectric Properties", "url": "dielectric-properties" },
+        { "title": "Optical Properties", "url": "optical-properties-absorption-reflection-luminescence" }
+      ]
     },
     {
       "id": "dielectric-properties",
       "number": "9.4",
       "title": "Dielectric Properties",
-      "description": "",
-      "readingTime": "— min",
-      "intro": "",
-      "body": [],
-      "related": []
+      "description": "Polarisation mechanisms, dielectric constants, piezoelectricity and ferroelectricity.",
+      "readingTime": "14 min",
+      "intro": "A dielectric is an insulator viewed from the perspective of its response to an electric field. Instead of conducting, it polarises. The mechanisms of polarisation, and the materials that exploit them, underpin capacitors, piezoelectric sensors, ferroelectric memories and much of modern electronics.",
+      "body": [
+        ["h3", "Polarisation and the dielectric constant"],
+        ["p", "Apply an electric field $\\mathbf{E}$ to an insulating material. Positive charges shift slightly in the direction of the field; negative charges shift against it. The material develops a dipole moment per unit volume, the polarisation $\\mathbf{P}$:"],
+        ["eq", "\\mathbf{P} = \\epsilon_0 \\chi_e \\mathbf{E}"],
+        ["p", "where $\\chi_e$ is the electric susceptibility. The total electric displacement is:"],
+        ["eq", "\\mathbf{D} = \\epsilon_0 \\mathbf{E} + \\mathbf{P} = \\epsilon_0 \\epsilon_r \\mathbf{E}"],
+        ["p", "where $\\epsilon_r = 1 + \\chi_e$ is the relative permittivity (dielectric constant). Some values: vacuum 1, air 1.0006, polyethylene 2.3, glass 5-10, silicon 11.7, water 80, BaTiO$_3$ up to 5000 (near its Curie temperature). These span four orders of magnitude, reflecting fundamentally different polarisation mechanisms."],
+
+        ["h3", "Polarisation mechanisms"],
+        ["p", "There are four main mechanisms, each dominant in a different frequency range:"],
+        ["p", "<strong>Electronic polarisation.</strong> The electron cloud of each atom shifts relative to the nucleus. Fast (responds up to $\\sim 10^{15}$ Hz, UV frequencies). Present in all materials. Contributes $\\epsilon_r \\approx 2$-$5$ for most simple dielectrics. For purely electronic polarisation, $\\epsilon_r = n^2$ where $n$ is the refractive index. Diamond: $n = 2.42$, $\\epsilon_r = 5.9$."],
+        ["p", "<strong>Ionic polarisation.</strong> In ionic crystals, cations and anions shift in opposite directions. Slower (up to $\\sim 10^{13}$ Hz, infrared). NaCl has $\\epsilon_r = 5.9$, of which about 3.4 comes from ionic and 2.3 from electronic polarisation."],
+        ["p", "<strong>Dipolar (orientational) polarisation.</strong> Permanent dipoles (e.g. H$_2$O molecules) rotate toward the field direction. Even slower (up to $\\sim 10^{10}$ Hz, microwave). This is why water has $\\epsilon_r = 80$: each molecule has a permanent dipole of 1.85 D, and at room temperature most can rotate in response to the field. Ice has $\\epsilon_r \\approx 3$ because the molecules are locked in place."],
+        ["p", "<strong>Space-charge (interfacial) polarisation.</strong> Mobile charges pile up at internal boundaries (grain boundaries, interfaces). Slowest (up to $\\sim 10^{3}$ Hz). Important in polycrystalline ceramics and composites."],
+
+        ["h3", "Frequency dependence and dielectric loss"],
+        ["p", "As frequency increases, each mechanism drops out when the polarisation can no longer follow the oscillating field. At each drop-out, $\\epsilon_r$ decreases and energy is absorbed. The dielectric constant becomes complex:"],
+        ["eq", "\\epsilon_r(\\omega) = \\epsilon_r'(\\omega) - i\\epsilon_r''(\\omega)"],
+        ["p", "The real part $\\epsilon_r'$ is the energy stored per cycle; the imaginary part $\\epsilon_r''$ is the energy dissipated. The loss tangent $\\tan\\delta = \\epsilon_r''/\\epsilon_r'$ measures how lossy the material is. Low-loss dielectrics for capacitors need $\\tan\\delta < 10^{-3}$. Alumina ($\\tan\\delta \\approx 10^{-4}$ at 1 MHz) is commonly used. Lossy dielectrics are useful in microwave heating: water's large $\\epsilon_r''$ at 2.45 GHz is why microwave ovens work."],
+        ["callout", "The Clausius-Mossotti relation", "The macroscopic dielectric constant $\\epsilon_r$ is related to the atomic polarisability $\\alpha$ by: $(\\epsilon_r - 1)/(\\epsilon_r + 2) = n\\alpha/(3\\epsilon_0)$, where $n$ is the number density of polarisable units. This connects a bulk measurement to a microscopic property and works well for non-polar materials with electronic and ionic polarisation."],
+
+        ["h3", "Dielectric breakdown"],
+        ["p", "Every dielectric has a maximum field it can sustain. Beyond this breakdown strength, the material suddenly conducts, often catastrophically (arcing, melting, permanent damage). Breakdown strengths: air 3 MV/m, polyethylene 20 MV/m, mica 100-200 MV/m, SiO$_2$ (thin film) 500-1000 MV/m."],
+        ["p", "Three mechanisms cause breakdown. Intrinsic (electronic) breakdown occurs when field-accelerated electrons gain enough energy to ionise atoms, triggering an avalanche. Thermal breakdown occurs when dielectric losses heat the material faster than it can dissipate heat. Discharge breakdown occurs when partial discharges in voids or cracks erode the material over time."],
+
+        ["h3", "Piezoelectricity"],
+        ["p", "Some crystals develop a polarisation when mechanically stressed. Conversely, they deform when an electric field is applied. This is piezoelectricity, and it requires the absence of a centre of symmetry in the crystal structure (20 of the 32 point groups qualify)."],
+        ["p", "Quartz is the classic piezoelectric. The direct effect produces a voltage when the crystal is compressed, used in pressure sensors and lighters. The converse effect deforms the crystal under an applied voltage, used in ultrasonic transducers and quartz oscillators. The frequency stability of quartz ($\\Delta f/f \\sim 10^{-6}$) is why every digital watch uses a quartz crystal vibrating at 32,768 Hz."],
+        ["p", "Modern piezoelectric ceramics based on PZT (lead zirconate titanate, Pb(Zr$_x$Ti$_{1-x}$)O$_3$) have piezoelectric coefficients ($d_{33}$) of 200-600 pC/N, roughly 100 times larger than quartz (2.3 pC/N). They are used in actuators, sonar, medical ultrasound and fuel injectors."],
+
+        ["h3", "Ferroelectricity"],
+        ["p", "A ferroelectric has a spontaneous polarisation that can be switched by an applied field. This is a subset of pyroelectric crystals (which have spontaneous polarisation but not necessarily switchable). BaTiO$_3$ is the prototypical ferroelectric."],
+        ["p", "Above 120 degrees C (the Curie temperature $T_C$), BaTiO$_3$ has the cubic perovskite structure with no net polarisation. Below $T_C$, the Ti$^{4+}$ ion shifts off-centre by about 0.1 &Aring;, breaking the inversion symmetry and producing a spontaneous polarisation of $P_s = 0.26$ C/m$^2$."],
+        ["p", "The polarisation-field ($P$-$E$) curve of a ferroelectric is a hysteresis loop, analogous to the $B$-$H$ loop of a ferromagnet. The coercive field $E_c$ is the field needed to switch the polarisation. Applications include non-volatile memory (FeRAM), where a binary bit is stored as the polarisation direction, and multilayer ceramic capacitors (MLCCs), which exploit the enormous $\\epsilon_r$ near $T_C$."],
+        ["p", "Above $T_C$, the dielectric constant follows a Curie-Weiss law:"],
+        ["eq", "\\epsilon_r = \\frac{C}{T - T_C}"],
+        ["p", "For BaTiO$_3$, $C \\approx 1.5 \\times 10^5$ K. At $T_C + 10$ K, $\\epsilon_r \\approx 15{,}000$."],
+
+        ["derivation", "The Clausius-Mossotti relation: $(\\epsilon_r - 1)/(\\epsilon_r + 2) = n\\alpha/(3\\epsilon_0)$.", [
+          ["p", "An atom in a dielectric sees not the applied field $\\mathbf{E}$ but a local field $\\mathbf{E}_{\\text{loc}}$ enhanced by the polarisation of surrounding atoms. For a cubic arrangement, Lorentz showed:"],
+          ["eq", "\\mathbf{E}_{\\text{loc}} = \\mathbf{E} + \\frac{\\mathbf{P}}{3\\epsilon_0}"],
+          ["p", "The polarisation is $\\mathbf{P} = n\\alpha \\mathbf{E}_{\\text{loc}}$, where $\\alpha$ is the polarisability per atom. Substituting:"],
+          ["eq", "\\mathbf{P} = n\\alpha\\left(\\mathbf{E} + \\frac{\\mathbf{P}}{3\\epsilon_0}\\right)"],
+          ["p", "Solving for $\\mathbf{P}$ and using $\\mathbf{P} = \\epsilon_0(\\epsilon_r - 1)\\mathbf{E}$:"],
+          ["eq", "\\frac{\\epsilon_r - 1}{\\epsilon_r + 2} = \\frac{n\\alpha}{3\\epsilon_0}"]
+        ]],
+
+        ["problem", "A parallel-plate capacitor uses a BaTiO$_3$ ceramic dielectric ($\\epsilon_r = 3000$, breakdown strength = 10 MV/m, thickness = 10 $\\mu$m, area = 1 cm$^2$). Calculate the capacitance, the maximum voltage, and the energy stored at maximum voltage.", [
+          ["p", "Capacitance: $C = \\epsilon_0 \\epsilon_r A / d = (8.854 \\times 10^{-12})(3000)(10^{-4})/(10^{-5}) = 265$ nF."],
+          ["p", "Maximum voltage: $V_{\\text{max}} = E_{\\text{bd}} \\times d = 10^7 \\times 10^{-5} = 100$ V."],
+          ["p", "Energy: $U = \\frac{1}{2}CV^2 = \\frac{1}{2}(265 \\times 10^{-9})(100)^2 = 1.33$ mJ."],
+          ["p", "This is a realistic multilayer ceramic capacitor (MLCC). In practice, thousands of such layers are stacked in parallel to give capacitances of 1-100 $\\mu$F in a package a few millimetres across."]
+        ]]
+      ],
+      "related": [
+        { "title": "Semiconductors (Intrinsic & Extrinsic)", "url": "semiconductors-intrinsic-extrinsic" },
+        { "title": "Optical Properties", "url": "optical-properties-absorption-reflection-luminescence" },
+        { "title": "Crystallography", "url": "../crystallography/" }
+      ]
     },
     {
       "id": "optical-properties-absorption-reflection-luminescence",
       "number": "9.5",
       "title": "Optical Properties (Absorption, Reflection, Luminescence)",
-      "description": "",
-      "readingTime": "— min",
-      "intro": "",
-      "body": [],
-      "related": []
+      "description": "Why materials have colour, what determines transparency, and how light is absorbed, reflected and emitted.",
+      "readingTime": "15 min",
+      "intro": "The colour of copper, the transparency of glass, the glow of a phosphor: all are consequences of how electrons interact with photons. Optical properties connect directly to electronic structure.",
+      "body": [
+        ["h3", "Light and matter"],
+        ["p", "When light strikes a material, three things can happen: some is reflected, some is absorbed, and some is transmitted. Conservation of energy demands:"],
+        ["eq", "R + A + T = 1"],
+        ["p", "where $R$, $A$ and $T$ are the fractions reflected, absorbed and transmitted. Which dominates depends on the electronic structure and the photon energy $E = h\\nu = hc/\\lambda$. Visible light spans 1.65 eV (red, 750 nm) to 3.1 eV (violet, 400 nm)."],
+
+        ["h3", "Metals: free electron optics"],
+        ["p", "Metals are opaque because free electrons absorb photons at all visible frequencies. The absorbed energy is re-radiated almost immediately, giving high reflectivity. Silver reflects over 95% of visible light, which is why it makes good mirrors. Aluminium reflects about 90%."],
+        ["p", "The free electron model predicts a plasma frequency:"],
+        ["eq", "\\omega_p = \\sqrt{\\frac{ne^2}{\\epsilon_0 m_e}}"],
+        ["p", "Below $\\omega_p$, the metal reflects. Above $\\omega_p$, it becomes transparent. For aluminium, $\\omega_p$ corresponds to a photon energy of about 15 eV (deep UV). Below this, aluminium is reflective. For most metals, $\\omega_p$ is in the UV, so they reflect all visible light and appear shiny."],
+        ["p", "Colour in metals arises from interband transitions. Copper appears reddish because the $3d \\to 4s$ interband transition absorbs photons above about 2.1 eV (green and blue light). Red and orange light ($E < 2.1$ eV) is reflected but the higher-energy visible light is not. Gold absorbs above about 2.4 eV for similar reasons, giving its yellow colour. Silver has no interband transitions in the visible range, so it reflects all colours equally and appears white."],
+
+        ["h3", "Insulators and semiconductors: band gap absorption"],
+        ["p", "An insulator or semiconductor absorbs a photon only if its energy exceeds the band gap, promoting an electron from the valence band to the conduction band. For $E_{\\text{photon}} < E_g$, the material is transparent."],
+        ["p", "Diamond ($E_g = 5.47$ eV) is transparent to all visible light (max 3.1 eV). Silicon ($E_g = 1.12$ eV) absorbs all visible photons and appears dark grey. GaAs ($E_g = 1.42$ eV) also absorbs the entire visible spectrum. CdS ($E_g = 2.42$ eV) absorbs blue and violet light but transmits red, orange, yellow and green, appearing yellow-orange."],
+        ["p", "Window glass (amorphous SiO$_2$) has a band gap of about 9 eV, far above the visible range, so it is transparent. The slight green tint in thick float glass comes from Fe$^{2+}$ impurities, which introduce absorption bands within the gap."],
+        ["callout", "Direct vs indirect gaps", "In a direct-gap semiconductor (GaAs, CdTe, GaN), the conduction band minimum and valence band maximum are at the same $k$. Photon absorption is a vertical transition in the band diagram and occurs strongly. In an indirect-gap semiconductor (Si, Ge), the extrema are at different $k$, and a phonon must supply the missing momentum. Absorption is weaker and requires a thicker layer. This is why GaAs solar cells can be thin (a few $\\mu$m) while silicon cells need 100-300 $\\mu$m."],
+
+        ["h3", "Absorption coefficient and Beer-Lambert law"],
+        ["p", "The intensity of light passing through an absorbing medium decays exponentially:"],
+        ["eq", "I(x) = I_0 \\exp(-\\alpha x)"],
+        ["p", "where $\\alpha$ is the absorption coefficient (units m$^{-1}$) and $x$ is the thickness. For silicon at $\\lambda = 500$ nm (green light), $\\alpha \\approx 10^5$ m$^{-1}$, so 90% of the light is absorbed within 23 $\\mu$m. At $\\lambda = 1000$ nm (near-infrared, just above the band gap), $\\alpha$ drops to about $10^3$ m$^{-1}$ and the penetration depth rises to 2.3 mm. This wavelength dependence shapes the design of photodetectors and solar cells."],
+
+        ["h3", "Refraction and dispersion"],
+        ["p", "The refractive index $n$ is the ratio of the speed of light in vacuum to its speed in the material: $n = c/v$. It is related to the dielectric constant and magnetic permeability by $n = \\sqrt{\\epsilon_r \\mu_r}$, and for non-magnetic materials, $n \\approx \\sqrt{\\epsilon_r}$. Some values: air 1.0003, water 1.33, glass 1.5, diamond 2.42, silicon 3.5, GaAs 3.3."],
+        ["p", "Dispersion is the variation of $n$ with wavelength. It arises because $\\epsilon_r$ is frequency-dependent. Near an absorption edge, $n$ changes rapidly. This is why prisms separate white light into colours and why lenses have chromatic aberration. In optical fibres (silica glass), dispersion is minimised near $\\lambda = 1.3$ $\\mu$m, which is one reason telecommunications use infrared."],
+        ["p", "The reflectivity at normal incidence on a surface is:"],
+        ["eq", "R = \\left(\\frac{n - 1}{n + 1}\\right)^2"],
+        ["p", "For glass ($n = 1.5$): $R = 4\\%$ per surface. For silicon ($n = 3.5$): $R = 31\\%$. For diamond ($n = 2.42$): $R = 17\\%$. Anti-reflection coatings on camera lenses exploit thin-film interference to reduce $R$ below 1%."],
+
+        ["h3", "Luminescence"],
+        ["p", "Luminescence is the emission of light from a material that is not simply thermal radiation. An electron is excited to a high-energy state (by a photon, an electron beam, an electric field, or a chemical reaction) and then returns to the ground state by emitting a photon."],
+        ["p", "<strong>Photoluminescence</strong> (excitation by light): a photon is absorbed, the excited electron relaxes non-radiatively to the bottom of the conduction band (or an intermediate state), and then recombines with a hole, emitting a photon of lower energy than the absorbed one. The energy difference is the Stokes shift. Fluorescent minerals (e.g. ruby, where Cr$^{3+}$ in Al$_2$O$_3$ emits at 694 nm) and phosphors in fluorescent lamps use this mechanism."],
+        ["p", "<strong>Electroluminescence</strong> (excitation by electric field): the basis of light-emitting diodes (LEDs). In a forward-biased p-n junction, electrons and holes recombine across the band gap, emitting photons with energy $\\approx E_g$. GaN-based LEDs ($E_g \\approx 3.4$ eV) emit UV/blue light. InGaN alloys cover blue to green. Red LEDs use AlGaInP ($E_g \\approx 1.9$ eV). White LEDs combine a blue GaN LED with a yellow Ce:YAG phosphor."],
+        ["p", "<strong>Cathodoluminescence</strong> (excitation by electrons): used in electron microscopy and old CRT screens. The high-energy electron beam excites many electron-hole pairs, which recombine radiatively."],
+
+        ["h3", "Lasers"],
+        ["p", "A laser (light amplification by stimulated emission of radiation) requires population inversion: more electrons in an excited state than in the ground state. A photon passing through the inverted medium stimulates the emission of a second, identical photon, which in turn stimulates more. The result is a coherent, monochromatic beam."],
+        ["p", "Common laser materials: ruby (Cr$^{3+}$ in Al$_2$O$_3$, 694 nm, the first laser, 1960), Nd:YAG (Nd$^{3+}$ in Y$_3$Al$_5$O$_{12}$, 1064 nm, ubiquitous in industry), GaAs/AlGaAs semiconductor diode lasers (780-980 nm, used in fibre optics and laser pointers), and CO$_2$ gas lasers (10.6 $\\mu$m, used for cutting steel up to 20 mm thick)."],
+
+        ["derivation", "The Fresnel equation for reflectivity at normal incidence: $R = [(n-1)/(n+1)]^2$.", [
+          ["p", "At normal incidence, the boundary conditions require continuity of the tangential components of $\\mathbf{E}$ and $\\mathbf{H}$ across the interface. For a wave going from vacuum ($n_1 = 1$) into a medium ($n_2 = n$):"],
+          ["eq", "E_i + E_r = E_t"],
+          ["eq", "\\frac{E_i - E_r}{1} = \\frac{E_t}{n} \\quad \\text{(from } H = nE/\\mu_0 c \\text{)}"],
+          ["p", "Solving: $E_r/E_i = (1 - n)/(1 + n)$. The reflectivity is the ratio of reflected to incident intensity:"],
+          ["eq", "R = \\left|\\frac{E_r}{E_i}\\right|^2 = \\left(\\frac{n - 1}{n + 1}\\right)^2"]
+        ]],
+
+        ["problem", "A thin film of CdS ($E_g = 2.42$ eV) is used as a window layer in a CdTe solar cell. (a) What is the longest wavelength of light that CdS absorbs? (b) What colour does CdS appear? (c) If the absorption coefficient at 500 nm is $\\alpha = 5 \\times 10^6$ m$^{-1}$, what thickness absorbs 90% of the light at this wavelength?", [
+          ["p", "(a) Longest absorbed wavelength: $\\lambda = hc/E_g = (6.626 \\times 10^{-34})(3 \\times 10^8)/(2.42 \\times 1.602 \\times 10^{-19}) = 512$ nm (green)."],
+          ["p", "(b) CdS absorbs blue and violet ($\\lambda < 512$ nm) but transmits green, yellow, orange and red. It appears yellow-orange."],
+          ["p", "(c) From Beer-Lambert: $0.10 = \\exp(-\\alpha x)$, so $x = \\ln(10)/\\alpha = 2.303/(5 \\times 10^6) = 0.46$ $\\mu$m. A film less than half a micrometre thick absorbs 90% of the 500 nm light."]
+        ]]
+      ],
+      "related": [
+        { "title": "Band Theory & Brillouin Zones", "url": "band-theory-brillouin-zones" },
+        { "title": "Dielectric Properties", "url": "dielectric-properties" },
+        { "title": "Semiconductors (Intrinsic & Extrinsic)", "url": "semiconductors-intrinsic-extrinsic" }
+      ]
     },
     {
       "id": "magnetic-behaviour-dia-para-ferro-antiferro-ferri",
       "number": "9.6",
       "title": "Magnetic Behaviour (Dia-, Para-, Ferro-, Antiferro-, Ferri-)",
-      "description": "",
-      "readingTime": "— min",
-      "intro": "",
-      "body": [],
-      "related": []
+      "description": "How materials respond to magnetic fields, from universal diamagnetism to cooperative ordering in magnets.",
+      "readingTime": "16 min",
+      "intro": "Every material responds to a magnetic field. Most respond weakly. A few respond strongly and remember the field after it is removed. The differences trace back to the arrangement of electron spins and whether they talk to each other.",
+      "body": [
+        ["h3", "Magnetic fields and magnetisation"],
+        ["p", "An applied magnetic field $\\mathbf{H}$ (units A/m) induces a magnetisation $\\mathbf{M}$ (magnetic moment per unit volume, also A/m) in a material. The total magnetic flux density is:"],
+        ["eq", "\\mathbf{B} = \\mu_0(\\mathbf{H} + \\mathbf{M}) = \\mu_0 \\mu_r \\mathbf{H}"],
+        ["p", "where $\\mu_0 = 4\\pi \\times 10^{-7}$ T$\\cdot$m/A is the permeability of free space and $\\mu_r = 1 + \\chi_m$ is the relative permeability. The magnetic susceptibility $\\chi_m = M/H$ characterises the material's response. The sign and magnitude of $\\chi_m$ define the five classes of magnetic behaviour."],
+
+        ["h3", "Diamagnetism"],
+        ["p", "All materials are diamagnetic. An applied field induces a small magnetisation that opposes the field ($\\chi_m < 0$). The mechanism is Lenz's law at the atomic level: the field changes the orbital motion of electrons, inducing a current that opposes the change. The effect is tiny: $\\chi_m \\sim -10^{-5}$."],
+        ["p", "Some values: copper $-9.6 \\times 10^{-6}$, gold $-3.4 \\times 10^{-5}$, bismuth $-1.7 \\times 10^{-4}$ (the strongest elemental diamagnet), water $-9.0 \\times 10^{-6}$, diamond $-2.2 \\times 10^{-5}$. Superconductors are perfect diamagnets ($\\chi_m = -1$); they expel all magnetic flux (the Meissner effect, article 9.7)."],
+        ["p", "Diamagnetism is temperature-independent and present in all materials, but it is so weak that it is masked by any other magnetic behaviour. Only materials with no unpaired electrons are purely diamagnetic."],
+
+        ["h3", "Paramagnetism"],
+        ["p", "Materials with unpaired electron spins have permanent atomic magnetic moments. In the absence of a field, thermal fluctuations randomise the moments. An applied field partially aligns them, giving a small positive magnetisation ($\\chi_m > 0$, typically $10^{-5}$ to $10^{-3}$)."],
+        ["p", "The susceptibility follows the Curie law:"],
+        ["eq", "\\chi_m = \\frac{C}{T}"],
+        ["p", "where $C$ is the Curie constant, proportional to the square of the atomic moment and the number of magnetic atoms per unit volume. Paramagnetic susceptibility decreases with temperature because thermal energy increasingly disorders the moments."],
+        ["p", "Examples: aluminium ($\\chi_m = 2.2 \\times 10^{-5}$), platinum ($2.6 \\times 10^{-4}$), liquid oxygen ($3.4 \\times 10^{-3}$, which is why liquid O$_2$ is attracted to a magnet). Most transition metal salts are paramagnetic: FeSO$_4$, CuSO$_4$, MnCl$_2$."],
+        ["callout", "The Bohr magneton", "The magnetic moment of an electron spin is $\\mu_B = e\\hbar/2m_e = 9.274 \\times 10^{-24}$ J/T. This is the natural unit for atomic magnetism. A single unpaired electron contributes roughly $1\\mu_B$ to the moment. Iron in the metallic state has a moment of $2.22\\mu_B$ per atom."],
+
+        ["h3", "Ferromagnetism"],
+        ["p", "In a ferromagnet, atomic moments align spontaneously below the Curie temperature $T_C$, even without an applied field. This alignment is not caused by the magnetic dipole interaction (which is far too weak) but by the quantum-mechanical exchange interaction, a consequence of the Pauli principle and the Coulomb interaction between electrons."],
+        ["p", "Only three elements are ferromagnetic at room temperature: iron ($T_C = 1043$ K, moment $2.22\\mu_B$/atom), cobalt ($T_C = 1388$ K, $1.72\\mu_B$), and nickel ($T_C = 627$ K, $0.606\\mu_B$). Gadolinium is ferromagnetic below 293 K, just below room temperature."],
+        ["p", "Above $T_C$, a ferromagnet becomes paramagnetic. The susceptibility follows the Curie-Weiss law:"],
+        ["eq", "\\chi_m = \\frac{C}{T - T_C}"],
+
+        ["h3", "Domains and hysteresis"],
+        ["p", "A bulk ferromagnet is divided into domains, regions where the magnetisation is uniform. Adjacent domains are magnetised in different directions, separated by domain walls (typically 10-100 nm thick, containing 100-1000 atomic layers over which the spin direction gradually rotates)."],
+        ["p", "Why domains? A single-domain sample would have a large external magnetic field (demagnetising field), costing magnetostatic energy. Splitting into domains with opposing magnetisations reduces this energy, at the cost of domain wall energy. The equilibrium domain structure minimises the total."],
+        ["p", "Applying a field moves domain walls (domains aligned with the field grow at the expense of others) and rotates magnetisation within domains. The resulting $B$-$H$ (or $M$-$H$) curve is a hysteresis loop. Key parameters:"],
+        ["ul", [
+          "<strong>Saturation magnetisation</strong> $M_s$: the magnetisation when all domains are aligned. For iron, $\\mu_0 M_s = 2.15$ T.",
+          "<strong>Remanence</strong> $M_r$ (or $B_r$): the magnetisation remaining when the field is removed.",
+          "<strong>Coercivity</strong> $H_c$: the reverse field required to demagnetise the material.",
+          "<strong>Energy product</strong> $(BH)_{\\text{max}}$: a figure of merit for permanent magnets (article 9.6)."
+        ]],
+        ["p", "Soft magnets (low $H_c$, easy to magnetise and demagnetise) are used in transformer cores. Silicon steel ($H_c \\approx 40$ A/m) and ferrites ($H_c \\approx 10$ A/m) are standard. Hard magnets (high $H_c$, retain magnetisation) are used in permanent magnets. Nd$_2$Fe$_{14}$B has $H_c \\approx 10^6$ A/m and $(BH)_{\\text{max}} \\approx 400$ kJ/m$^3$, the strongest permanent magnet available."],
+
+        ["h3", "Antiferromagnetism"],
+        ["p", "In an antiferromagnet, neighbouring spins align antiparallel. The net magnetisation is zero. The ordering occurs below the Neel temperature $T_N$. Above $T_N$, the material is paramagnetic."],
+        ["p", "The classic example is MnO ($T_N = 116$ K). Chromium is antiferromagnetic below $T_N = 311$ K, one of the few elemental antiferromagnets. NiO ($T_N = 523$ K) and $\\alpha$-Fe$_2$O$_3$ (hematite, $T_N = 948$ K) are other examples."],
+        ["p", "Antiferromagnetism is detected by a kink in the susceptibility at $T_N$ and confirmed by neutron diffraction, which (unlike X-ray diffraction) is sensitive to spin ordering and reveals the magnetic unit cell."],
+
+        ["h3", "Ferrimagnetism"],
+        ["p", "A ferrimagnet has two sublattices with antiparallel alignment, but the moments on the two sublattices are unequal. There is a net magnetisation, as in a ferromagnet, but the mechanism involves antiferromagnetic coupling between inequivalent sites."],
+        ["p", "Magnetite, Fe$_3$O$_4$, is the oldest known magnetic material. It has the inverse spinel structure. Fe$^{3+}$ ions occupy both tetrahedral and octahedral sites; Fe$^{2+}$ ions occupy octahedral sites only. The tetrahedral and octahedral sublattices are antiparallel. The Fe$^{3+}$ moments cancel, and the net moment comes from the Fe$^{2+}$ ions ($4\\mu_B$ per formula unit). $T_C = 858$ K."],
+        ["p", "Ferrites (general formula MFe$_2$O$_4$, where M = Mn, Ni, Zn, etc.) are ferrimagnetic ceramics widely used in high-frequency applications because they are electrically insulating (unlike metallic ferromagnets, which suffer from eddy current losses)."],
+
+        ["derivation", "The exchange energy between neighbouring spins is $E = -2J\\mathbf{S}_1 \\cdot \\mathbf{S}_2$, where $J$ is the exchange integral.", [
+          ["p", "Consider two electrons on neighbouring atoms. The Pauli principle requires the total wavefunction (spatial $\\times$ spin) to be antisymmetric. If the spatial part is symmetric (electrons likely between the atoms, bonding), the spin part must be antisymmetric (antiparallel, singlet). If the spatial part is antisymmetric (antibonding), spins must be parallel (triplet)."],
+          ["p", "The energy difference between these configurations is the exchange energy:"],
+          ["eq", "E_{\\text{singlet}} - E_{\\text{triplet}} = 2J"],
+          ["p", "If $J > 0$, parallel alignment (ferromagnetism) is favoured. If $J < 0$, antiparallel alignment (antiferromagnetism) is favoured. For 3$d$ transition metals, $J$ depends on the ratio of interatomic distance to the radius of the $3d$ orbital. The Bethe-Slater curve shows that Fe, Co and Ni have positive $J$ (ferromagnetic) while Cr and Mn have negative $J$ (antiferromagnetic)."]
+        ]],
+
+        ["problem", "Iron has a BCC structure with $a = 2.867$ &Aring; and a magnetic moment of $2.22\\mu_B$ per atom. Calculate the saturation magnetisation $M_s$ in A/m and the saturation flux density $\\mu_0 M_s$ in tesla.", [
+          ["p", "BCC has 2 atoms per unit cell. Volume per cell: $(2.867 \\times 10^{-10})^3 = 2.359 \\times 10^{-29}$ m$^3$."],
+          ["p", "Number density: $n = 2/V = 2/(2.359 \\times 10^{-29}) = 8.48 \\times 10^{28}$ m$^{-3}$."],
+          ["p", "Saturation magnetisation:"],
+          ["eq", "M_s = n \\times 2.22\\mu_B = 8.48 \\times 10^{28} \\times 2.22 \\times 9.274 \\times 10^{-24} = 1.75 \\times 10^6 \\text{ A/m}"],
+          ["p", "$\\mu_0 M_s = 4\\pi \\times 10^{-7} \\times 1.75 \\times 10^6 = 2.20$ T. This agrees well with the measured value of 2.15 T."]
+        ]]
+      ],
+      "related": [
+        { "title": "Free Electron Model & Density of States", "url": "free-electron-model-density-of-states" },
+        { "title": "Superconductivity", "url": "superconductivity" },
+        { "title": "Crystallography", "url": "../crystallography/" }
+      ]
     },
     {
       "id": "superconductivity",
       "number": "9.7",
       "title": "Superconductivity",
-      "description": "",
-      "readingTime": "— min",
-      "intro": "",
-      "body": [],
-      "related": []
+      "description": "Zero resistance, the Meissner effect, Cooper pairs, and the materials that superconduct.",
+      "readingTime": "15 min",
+      "intro": "Below a critical temperature, certain materials lose all electrical resistance and expel magnetic fields completely. Superconductivity is a macroscopic quantum phenomenon with no classical analogue, and its applications range from MRI magnets to particle accelerators.",
+      "body": [
+        ["h3", "Zero resistance"],
+        ["p", "Heike Kamerlingh Onnes discovered superconductivity in 1911 while measuring the resistivity of mercury at low temperatures. Below 4.15 K, the resistance dropped to zero, not merely to a small value, but to zero within the precision of any measurement ever made. A current set flowing in a superconducting loop persists for years with no detectable decay. The upper bound on the resistivity of a superconductor is $\\rho < 10^{-25}$ $\\Omega$m, at least 17 orders of magnitude below copper at room temperature."],
+        ["p", "This is not simply very good conductivity. A perfect classical conductor (zero scattering) would have zero resistance, but it would not be a superconductor. The distinction lies in the magnetic properties."],
+
+        ["h3", "The Meissner effect"],
+        ["p", "In 1933, Meissner and Ochsenfeld showed that a superconductor is not merely a perfect conductor but a perfect diamagnet. When a material is cooled through $T_c$ in a magnetic field, it expels the field from its interior. The internal flux density becomes $B = 0$. This is the Meissner effect."],
+        ["p", "A perfect conductor would trap whatever flux was present when the resistance vanished. A superconductor actively expels it. This means $\\mathbf{M} = -\\mathbf{H}$ inside the material, giving $\\chi_m = -1$ and $\\mu_r = 0$. The field penetrates only a thin surface layer of thickness $\\lambda$ (the London penetration depth), typically 20-200 nm. For niobium, $\\lambda = 39$ nm."],
+        ["p", "The Meissner effect is what allows a superconductor to levitate above a magnet (or a magnet above a superconductor). The expelled field creates a repulsive force that supports the weight."],
+
+        ["h3", "Critical temperature, field and current"],
+        ["p", "Superconductivity is destroyed by raising the temperature above $T_c$, applying a magnetic field above $H_c$, or passing a current above $J_c$. These three critical parameters define the boundary of the superconducting state."],
+        ["p", "The critical field depends on temperature approximately as:"],
+        ["eq", "H_c(T) = H_c(0)\\left[1 - \\left(\\frac{T}{T_c}\\right)^2\\right]"],
+        ["p", "Some critical temperatures and fields (at $T = 0$): aluminium $T_c = 1.18$ K, $\\mu_0 H_c = 10.5$ mT; lead $T_c = 7.2$ K, $\\mu_0 H_c = 80$ mT; niobium $T_c = 9.25$ K, $\\mu_0 H_c = 206$ mT. These are all Type I superconductors with low critical fields, which limits their practical use."],
+
+        ["h3", "Type I and Type II superconductors"],
+        ["p", "Type I superconductors (most pure elemental superconductors) show a sharp transition at $H_c$: below $H_c$ they are perfectly diamagnetic, above $H_c$ they are normal. The critical fields are too low for practical applications."],
+        ["p", "Type II superconductors have two critical fields. Below $H_{c1}$, the Meissner effect is complete. Between $H_{c1}$ and $H_{c2}$, magnetic flux penetrates in quantised vortices (flux lines), each carrying one flux quantum $\\Phi_0 = h/2e = 2.07 \\times 10^{-15}$ Wb. The material remains superconducting around the vortices. Above $H_{c2}$, superconductivity is destroyed."],
+        ["p", "The upper critical field $H_{c2}$ can be very large. Nb$_3$Sn has $\\mu_0 H_{c2} = 24$ T; NbTi has $\\mu_0 H_{c2} = 15$ T. These materials are used for MRI magnets (operating at 1.5-3 T) and particle accelerator dipoles (up to 8 T in the LHC). All practical superconducting magnets use Type II materials."],
+        ["callout", "Flux quantisation", "In the mixed state of a Type II superconductor, each vortex carries exactly one flux quantum $\\Phi_0 = h/2e = 2.07 \\times 10^{-15}$ Wb. The factor of $2e$ (not $e$) in the denominator was the first direct evidence that superconducting carriers are pairs of electrons, not single electrons. Abrikosov predicted the vortex lattice in 1957 and received the Nobel Prize for it in 2003."],
+
+        ["h3", "BCS theory"],
+        ["p", "Bardeen, Cooper and Schrieffer explained conventional superconductivity in 1957. The central idea: at low temperatures, electrons form bound pairs (Cooper pairs) mediated by the lattice."],
+        ["p", "The mechanism: an electron moving through the lattice attracts nearby positive ions, creating a local region of enhanced positive charge. A second electron is attracted to this region. The net effect is an attractive interaction between the two electrons, mediated by a virtual phonon. At low enough temperature, this attraction overcomes the Coulomb repulsion, and the electrons bind into a pair with zero total momentum and zero total spin (a singlet state)."],
+        ["p", "Cooper pairs are bosons (integer spin). Unlike fermions, they can all occupy the same quantum state. The condensation of all pairs into a single macroscopic quantum state is what produces zero resistance: scattering a single pair out of the condensate costs a finite energy $2\\Delta$ (the superconducting gap), and at low temperature no thermal excitation can supply it."],
+        ["p", "BCS theory predicts:"],
+        ["ul", [
+          "The energy gap at $T = 0$: $2\\Delta(0) = 3.53\\,k_BT_c$. For niobium: $2\\Delta = 3.05$ meV.",
+          "The isotope effect: $T_c \\propto M^{-1/2}$, where $M$ is the isotopic mass, confirming the role of phonons.",
+          "The exponential decrease of electronic specific heat below $T_c$: $C_e \\propto \\exp(-\\Delta/k_BT)$.",
+          "The coherence length $\\xi$: the spatial extent of a Cooper pair. For aluminium, $\\xi \\approx 1600$ nm; for niobium, $\\xi \\approx 38$ nm."
+        ]],
+
+        ["h3", "High-temperature superconductors"],
+        ["p", "In 1986, Bednorz and Muller discovered superconductivity at 35 K in the ceramic La$_{2-x}$Ba$_x$CuO$_4$, far above any previously known $T_c$. Within a year, YBa$_2$Cu$_3$O$_{7-\\delta}$ (YBCO) was found with $T_c = 93$ K, above the boiling point of liquid nitrogen (77 K). This transformed practical superconductivity: liquid nitrogen costs about as much as milk, while liquid helium costs 100 times more."],
+        ["p", "Other high-$T_c$ cuprates followed: Bi$_2$Sr$_2$Ca$_2$Cu$_3$O$_{10}$ ($T_c = 110$ K), HgBa$_2$Ca$_2$Cu$_3$O$_8$ ($T_c = 133$ K, the highest at ambient pressure). All are layered copper-oxide compounds. Superconductivity occurs in the CuO$_2$ planes."],
+        ["p", "The mechanism of high-$T_c$ superconductivity is not fully understood. BCS phonon-mediated pairing predicts a maximum $T_c$ of about 30-40 K. Something else must be at work in the cuprates; magnetic fluctuations are a leading candidate but the question remains open."],
+        ["p", "In 2015, hydrogen sulphide (H$_3$S) under 155 GPa pressure was found to superconduct at 203 K. In 2020, carbonaceous sulphur hydride reached 288 K (15 degrees C) at 267 GPa. Room-temperature superconductivity exists, but only at pressures approaching those in Earth's core."],
+
+        ["h3", "Applications"],
+        ["p", "MRI magnets use NbTi wire wound into solenoids carrying persistent currents, producing stable 1.5-3 T fields. Over 50,000 MRI scanners are in clinical use worldwide. The Large Hadron Collider at CERN uses 1232 dipole magnets wound with NbTi cable, cooled to 1.9 K by superfluid helium, operating at 8.3 T."],
+        ["p", "Superconducting quantum interference devices (SQUIDs) measure magnetic fields with sensitivity of $10^{-15}$ T, a billion times more sensitive than the Earth's field ($5 \\times 10^{-5}$ T). They are used in magnetoencephalography (mapping brain activity) and geophysical surveying."],
+        ["p", "High-$T_c$ superconductors are used in power cables, fault current limiters, and maglev trains (the Shanghai Transrapid uses conventional electromagnets, but the Japanese SCMaglev uses superconducting coils). YBCO-coated conductors can carry over 100 A in a tape 4 mm wide and 0.1 mm thick."],
+
+        ["derivation", "The London equation: $\\nabla^2 \\mathbf{B} = \\mathbf{B}/\\lambda^2$, showing exponential decay of the field inside a superconductor.", [
+          ["p", "Fritz and Heinz London proposed in 1935 that the supercurrent density is proportional to the vector potential:"],
+          ["eq", "\\mathbf{J}_s = -\\frac{n_s e^2}{m_e}\\mathbf{A}"],
+          ["p", "where $n_s$ is the density of superconducting electrons. Taking the curl and using Ampere's law ($\\nabla \\times \\mathbf{B} = \\mu_0 \\mathbf{J}$):"],
+          ["eq", "\\nabla \\times \\mathbf{J}_s = -\\frac{n_s e^2}{m_e}\\mathbf{B}"],
+          ["p", "Combined with $\\nabla \\times \\mathbf{B} = \\mu_0 \\mathbf{J}_s$, this gives:"],
+          ["eq", "\\nabla^2 \\mathbf{B} = \\frac{\\mathbf{B}}{\\lambda^2}, \\qquad \\lambda = \\sqrt{\\frac{m_e}{\\mu_0 n_s e^2}}"],
+          ["p", "The solution for a semi-infinite superconductor is $B(x) = B_0 \\exp(-x/\\lambda)$. The field decays exponentially over the penetration depth $\\lambda$. For niobium ($n_s \\approx 2.5 \\times 10^{28}$ m$^{-3}$), $\\lambda \\approx 39$ nm."]
+        ]],
+
+        ["problem", "A Type II superconductor has $T_c = 90$ K and $\\mu_0 H_{c2}(0) = 100$ T. (a) Estimate $\\mu_0 H_{c2}$ at 77 K (liquid nitrogen). (b) The flux quantum is $\\Phi_0 = 2.07 \\times 10^{-15}$ Wb. In the mixed state at an applied field of 5 T, estimate the spacing between vortices, assuming they form a triangular lattice.", [
+          ["p", "(a) Using $H_{c2}(T) \\approx H_{c2}(0)[1 - (T/T_c)^2]$:"],
+          ["eq", "\\mu_0 H_{c2}(77) = 100 \\times \\left[1 - \\left(\\frac{77}{90}\\right)^2\\right] = 100 \\times [1 - 0.732] = 26.8 \\text{ T}"],
+          ["p", "(b) In a triangular lattice, each vortex occupies an area $A = \\Phi_0/B$:"],
+          ["eq", "A = \\frac{2.07 \\times 10^{-15}}{5} = 4.14 \\times 10^{-16} \\text{ m}^2"],
+          ["p", "For a triangular lattice with spacing $d$: $A = (\\sqrt{3}/2)d^2$, so $d = \\sqrt{2A/\\sqrt{3}} = \\sqrt{2 \\times 4.14 \\times 10^{-16}/1.732} = 21.8$ nm."],
+          ["p", "The vortex spacing is about 22 nm, much larger than the coherence length (typically 1-3 nm for high-$T_c$ materials) but small enough that the vortices form a dense lattice visible by magnetic force microscopy or neutron diffraction."]
+        ]]
+      ],
+      "related": [
+        { "title": "Magnetic Behaviour", "url": "magnetic-behaviour-dia-para-ferro-antiferro-ferri" },
+        { "title": "Free Electron Model & Density of States", "url": "free-electron-model-density-of-states" },
+        { "title": "Quantum Mechanics", "url": "../quantum-mechanics/" }
+      ]
     }
   ]
 }

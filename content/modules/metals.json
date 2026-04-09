@@ -6,78 +6,519 @@
     "part": "III",
     "partTitle": "Material Classes",
     "topic": "Metals",
-    "intro": ""
+    "intro": "From the electron gas that gives metals their conductivity to the microstructural tricks that make a jet engine blade survive 1100 degrees C. This module covers the structure, processing and properties of the major engineering metal systems."
   },
   "articles": [
     {
       "id": "structure-of-metals",
       "number": "11.1",
       "title": "Structure of Metals",
-      "description": "",
-      "readingTime": "— min",
-      "intro": "",
-      "body": [],
-      "related": []
+      "description": "The metallic bond, crystal structures and the link between electronic structure and bulk properties.",
+      "readingTime": "12 min",
+      "intro": "Metals are defined by their bonding. A sea of delocalised electrons holds positive ion cores together, producing the electrical conductivity, thermal conductivity and optical reflectivity that we associate with the word metal. The crystal structures that result from this bonding are simple, symmetric and densely packed.",
+      "body": [
+        ["h3", "The metallic bond"],
+        ["p", "In a metal, each atom donates one or more valence electrons to a shared electron gas. The remaining ion cores sit in a periodic lattice, held together by the electrostatic attraction between the positive cores and the negatively charged electron sea. This is the metallic bond."],
+        ["p", "The bond is non-directional. Unlike covalent bonds, which point along specific axes, the metallic bond acts equally in all directions. This has profound consequences: metals adopt close-packed structures that maximise coordination number, and atoms can slide past each other without breaking bonds. That is why metals are ductile."],
+        ["p", "The free electron model treats the valence electrons as a gas confined to the volume of the metal. The Fermi energy, the energy of the highest occupied state at 0 K, is:"],
+        ["eq", "E_F = \\frac{\\hbar^2}{2m_e}\\left(\\frac{3\\pi^2 n}{1}\\right)^{2/3}"],
+        ["p", "where $n$ is the free electron density. For copper, $n = 8.49 \\times 10^{28}$ m$^{-3}$ and $E_F = 7.04$ eV. This is a large energy. Even at absolute zero, the electrons are moving fast."],
+
+        ["h3", "Crystal structures of metals"],
+        ["p", "About two-thirds of metallic elements crystallise in one of three structures: face-centred cubic (FCC), body-centred cubic (BCC) or hexagonal close-packed (HCP). All three are high-symmetry, high-coordination structures."],
+        ["p", "FCC metals include copper, aluminium, nickel, gold, silver and lead. Each atom has 12 nearest neighbours. The packing fraction is 74%. FCC metals have four independent $\\{111\\}$ slip planes, each with three $\\langle 110 \\rangle$ directions, giving 12 slip systems. They are almost always ductile."],
+        ["p", "BCC metals include iron (below 912 degrees C), tungsten, molybdenum, chromium, vanadium and the alkali metals. Each atom has 8 nearest neighbours at $a\\sqrt{3}/2$, plus 6 next-nearest at $a$. The packing fraction is 68%. BCC metals have 48 possible slip systems ($\\{110\\}$, $\\{112\\}$ and $\\{321\\}$ planes, all with $\\langle 111 \\rangle$ directions) but none are true close-packed planes. This makes them strong but often brittle at low temperatures."],
+        ["p", "HCP metals include titanium, magnesium, zinc, zirconium and cobalt. The structure is close-packed (74%) like FCC, but with a different stacking sequence: ABABAB instead of ABCABC. There are only 3 independent basal slip systems on the $(0001)$ plane, so HCP metals tend to be hard to deform and show strong mechanical anisotropy."],
+
+        ["h3", "Allotropy and polymorphism"],
+        ["p", "Many metals adopt different crystal structures at different temperatures. Iron is the most important example. At room temperature, iron is BCC ($\\alpha$-Fe). At 912 degrees C it transforms to FCC ($\\gamma$-Fe). At 1394 degrees C it reverts to BCC ($\\delta$-Fe) before melting at 1538 degrees C. The $\\alpha \\to \\gamma$ transformation is the foundation of steel heat treatment."],
+        ["p", "Titanium transforms from HCP ($\\alpha$) to BCC ($\\beta$) at 882 degrees C. Tin transforms from diamond cubic ($\\alpha$, grey tin) to body-centred tetragonal ($\\beta$, white tin) at 13.2 degrees C. The reverse transformation, tin pest, famously destroyed the solder joints on Scott's Antarctic expedition supplies."],
+        ["callout", "Why close-packed?", "The metallic bond is non-directional, so atoms pack like hard spheres. Gauss proved in 1831 that the densest packing of equal spheres is 74.05%, achieved by both FCC and HCP. Both are stackings of close-packed planes; only the stacking sequence differs. The energy difference between FCC and HCP is often small (a few meV per atom), which is why many metals are borderline: cobalt is HCP at room temperature but FCC above 422 degrees C."],
+
+        ["h3", "Electronic structure and trends"],
+        ["p", "Moving across the periodic table, metallic character decreases as the valence electrons become more tightly held. The transition metals (groups 3 to 12) have partially filled $d$-bands, which produce high cohesive energies, high melting points and high elastic moduli. Tungsten melts at 3422 degrees C, the highest of any metal."],
+        ["p", "Cohesive energy peaks near the middle of the transition series, where the $d$-band is roughly half-filled. This gives the familiar trend: Ti (4.85 eV/atom), V (5.31), Cr (4.10), Mn (2.92), Fe (4.28), Co (4.39), Ni (4.44), Cu (3.49). Chromium breaks the trend because half-filled $d$-shells have extra stability due to exchange interactions."],
+        ["p", "Electrical resistivity at room temperature ranges from 1.59 $\\mu\\Omega\\cdot$cm for silver (the best conductor) to about 140 $\\mu\\Omega\\cdot$cm for manganese. Resistivity is set by electron scattering: from phonons (temperature-dependent), from solute atoms (Matthiessen's rule), and from defects."],
+
+        ["h3", "Density and lattice parameters"],
+        ["p", "Metal density follows directly from the crystal structure:"],
+        ["eq", "\\rho = \\frac{n A}{N_A a^3}"],
+        ["p", "where $n$ is atoms per unit cell, $A$ is atomic mass, $N_A$ is Avogadro's number and $a$ is the lattice parameter. For aluminium (FCC, $n = 4$, $A = 26.98$ g/mol, $a = 4.050$ Angstrom): $\\rho = 2.70$ g/cm$^3$. For tungsten (BCC, $n = 2$, $A = 183.84$ g/mol, $a = 3.165$ Angstrom): $\\rho = 19.25$ g/cm$^3$."],
+        ["p", "Some representative lattice parameters at room temperature:"],
+        ["ul", [
+          "Aluminium (FCC): $a = 4.050$ &Aring;",
+          "Copper (FCC): $a = 3.615$ &Aring;",
+          "Iron (BCC): $a = 2.867$ &Aring;",
+          "Titanium (HCP): $a = 2.951$ &Aring;, $c = 4.686$ &Aring;",
+          "Tungsten (BCC): $a = 3.165$ &Aring;"
+        ]],
+
+        ["problem", "Nickel is FCC with $a = 3.524$ &Aring; and atomic mass 58.69 g/mol. Calculate its density and the radius of a nickel atom, assuming hard-sphere packing.", [
+          ["p", "FCC has 4 atoms per unit cell. In FCC, atoms touch along the face diagonal: $4r = a\\sqrt{2}$."],
+          ["eq", "r = \\frac{a\\sqrt{2}}{4} = \\frac{3.524 \\times 1.414}{4} = 1.246 \\text{ &Aring;}"],
+          ["eq", "\\rho = \\frac{4 \\times 58.69}{6.022 \\times 10^{23} \\times (3.524 \\times 10^{-8})^3} = \\frac{234.76}{6.022 \\times 10^{23} \\times 4.376 \\times 10^{-23}}"],
+          ["eq", "\\rho = 8.91 \\text{ g/cm}^3"],
+          ["p", "The measured density of nickel is 8.90 g/cm$^3$. The small discrepancy comes from vacancies and thermal expansion."]
+        ]]
+      ],
+      "related": [
+        { "title": "Crystal Systems & Bravais Lattices", "url": "../crystal-systems/" },
+        { "title": "Alloy Design Principles", "url": "alloy-design-principles" },
+        { "title": "Solid Solutions & Hume-Rothery Rules", "url": "../solid-solutions-hume-rothery-rules/" }
+      ]
     },
     {
       "id": "alloy-design-principles",
       "number": "11.2",
       "title": "Alloy Design Principles",
-      "description": "",
-      "readingTime": "— min",
-      "intro": "",
-      "body": [],
-      "related": []
+      "description": "How and why we mix metals: solid solutions, phase diagrams, strengthening and the rules that govern alloy behaviour.",
+      "readingTime": "14 min",
+      "intro": "Pure metals are rarely useful as engineering materials. Copper is too soft. Iron rusts. Aluminium creeps at modest temperatures. By adding other elements we create alloys with properties that no pure metal can match. The principles governing which elements can be mixed, and what happens when they are, underpin all of metallurgy.",
+      "body": [
+        ["h3", "Why alloy?"],
+        ["p", "Pure copper has a yield strength of about 70 MPa. Add 30 wt% zinc and you get brass at 200 MPa. Add 2 wt% beryllium and you get a copper alloy at 1100 MPa. The purpose of alloying is almost always to increase strength, but alloys can also improve corrosion resistance, reduce melting point, change thermal expansion, or enable entirely new phenomena like shape memory."],
+        ["p", "The most important effect of alloying is strengthening. Solute atoms create strain fields that impede dislocation motion. Second-phase particles pin dislocations. Grain refinement increases the density of grain-boundary obstacles. All of these mechanisms trace back to the fact that defects and heterogeneities make it harder for dislocations to move."],
+
+        ["h3", "Solid solutions"],
+        ["p", "When a solute atom dissolves into a host lattice, it forms a solid solution. In a substitutional solid solution, solute atoms replace host atoms on lattice sites. In an interstitial solid solution, small atoms (C, N, B, H) fit into the gaps between host atoms."],
+        ["p", "The Hume-Rothery rules predict extensive substitutional solid solubility when:"],
+        ["ol", [
+          "Atomic radii differ by less than 15%.",
+          "Crystal structures are the same.",
+          "Electronegativities are similar.",
+          "Valences are similar (or the solute has higher valence)."
+        ]],
+        ["p", "Copper and nickel satisfy all four rules. They form a complete solid solution across the entire composition range, with the FCC structure maintained from pure Cu to pure Ni. Copper and silver satisfy the size rule (12% difference) but have an electronegativity mismatch, so their mutual solubility is limited (about 8 at% Ag in Cu at 780 degrees C)."],
+        ["p", "Interstitial solubility is always limited because the interstitial sites are small. Carbon in FCC iron occupies octahedral sites and has a maximum solubility of 2.14 wt% at 1147 degrees C. Carbon in BCC iron fits in the smaller octahedral sites and the solubility drops to 0.022 wt% at 727 degrees C. This dramatic difference drives the formation of martensite, pearlite and the entire field of steel metallurgy."],
+
+        ["h3", "Phase diagrams and the lever rule"],
+        ["p", "A phase diagram maps the equilibrium phases present as a function of composition and temperature. The most important for metallurgy are binary diagrams. A simple eutectic diagram (like Pb-Sn) has two terminal solid solutions and a eutectic reaction where liquid transforms to two solids simultaneously at a fixed temperature."],
+        ["p", "At the eutectic point in Pb-Sn (61.9 wt% Sn, 183 degrees C), liquid transforms to a fine lamellar mixture of Pb-rich and Sn-rich solid solutions. This is solder. The fine microstructure gives reasonable strength, and the low melting point makes joining easy."],
+        ["p", "The lever rule gives the fraction of each phase in a two-phase region:"],
+        ["eq", "f_\\alpha = \\frac{C_\\beta - C_0}{C_\\beta - C_\\alpha}, \\quad f_\\beta = \\frac{C_0 - C_\\alpha}{C_\\beta - C_\\alpha}"],
+        ["p", "where $C_0$ is the overall composition and $C_\\alpha$, $C_\\beta$ are the compositions of the two phases (read from the phase boundaries). This is a statement of mass conservation."],
+
+        ["h3", "Strengthening mechanisms"],
+        ["p", "There are four principal ways to strengthen a metal:"],
+        ["p", "<strong>Solid solution strengthening.</strong> Solute atoms create local strain fields. Oversized atoms produce compressive strain; undersized atoms produce tensile strain. Moving dislocations must do extra work to pass through these fields. The yield stress increases roughly as $\\Delta\\sigma \\propto c^{1/2}$, where $c$ is the solute concentration. Fleischer's model gives:"],
+        ["eq", "\\Delta\\tau = \\frac{G \\epsilon_s^{3/2} c^{1/2}}{700}"],
+        ["p", "where $G$ is the shear modulus and $\\epsilon_s$ is the misfit strain parameter."],
+        ["p", "<strong>Precipitation hardening.</strong> Fine second-phase particles force dislocations to either cut through them (at small sizes) or loop around them (the Orowan mechanism, at larger sizes). The Orowan stress is:"],
+        ["eq", "\\Delta\\tau = \\frac{Gb}{\\lambda}"],
+        ["p", "where $b$ is the Burgers vector and $\\lambda$ is the inter-particle spacing. Peak strength occurs at the transition between cutting and looping, typically at particle diameters of 5 to 30 nm. This is the principle behind age-hardened aluminium alloys and nickel superalloys."],
+        ["p", "<strong>Work hardening.</strong> Plastic deformation multiplies dislocations. The stress field of each dislocation impedes the motion of others. The Taylor hardening law gives:"],
+        ["eq", "\\Delta\\sigma = M \\alpha G b \\sqrt{\\rho_d}"],
+        ["p", "where $\\rho_d$ is the dislocation density (m/m$^3$) and $M \\approx 3.06$ is the Taylor factor for FCC. Annealed copper has $\\rho_d \\approx 10^{10}$ m$^{-2}$; after heavy cold work, $\\rho_d \\approx 10^{16}$ m$^{-2}$."],
+        ["p", "<strong>Grain boundary strengthening.</strong> Grain boundaries block dislocations. The Hall-Petch relationship:"],
+        ["eq", "\\sigma_y = \\sigma_0 + k_y d^{-1/2}"],
+        ["p", "where $d$ is the grain diameter. For low-carbon steel, $\\sigma_0 \\approx 70$ MPa and $k_y \\approx 0.74$ MPa$\\cdot$m$^{1/2}$. Reducing grain size from 100 $\\mu$m to 1 $\\mu$m increases yield strength by about 670 MPa."],
+        ["callout", "The strength-ductility trade-off", "Nearly every strengthening mechanism reduces ductility. Higher dislocation density, finer grains and harder precipitates all raise the yield stress but reduce the uniform elongation before necking. Designing alloys is about finding the best compromise for a given application. Precipitation-hardened alloys can sometimes beat this trade-off because coherent precipitates harden without introducing brittle interfaces."],
+
+        ["h3", "Designing a new alloy"],
+        ["p", "Classical alloy design starts with a base metal chosen for its density, melting point or corrosion resistance. Alloying elements are then added to achieve the target properties. Aluminium alloys for aerospace start with Al for low density and add Cu, Mg, Zn or Li for strength. Nickel superalloys start with Ni for high-temperature stability and add Cr for oxidation resistance, Al and Ti for $\\gamma'$ precipitation, and refractory elements (W, Mo, Re) for creep resistance."],
+        ["p", "High-entropy alloys (HEAs) break with this tradition. Instead of one principal element, HEAs contain five or more elements in roughly equal proportions. The Cantor alloy CrMnFeCoNi is equiatomic FCC with a yield strength of about 200 MPa at room temperature. The high configurational entropy ($\\Delta S_{\\text{mix}} = R \\ln 5 = 13.4$ J/mol/K) stabilises the single-phase solid solution against decomposition. Whether these alloys offer genuine advantages over conventional optimised alloys is still debated."],
+
+        ["problem", "A Cu-30 wt% Zn brass is at 800 degrees C, in the single-phase $\\alpha$ FCC region. Calculate the solid solution strengthening increment if the atomic radius of Cu is 1.278 &Aring; and Zn is 1.332 &Aring;. Take $G = 42$ GPa for brass. Compare with the measured yield strength increase of about 130 MPa.", [
+          ["p", "The misfit strain parameter: $\\epsilon_s = (r_{\\text{Zn}} - r_{\\text{Cu}})/r_{\\text{Cu}} = (1.332 - 1.278)/1.278 = 0.042$."],
+          ["p", "Convert 30 wt% Zn to atomic fraction. Atomic masses: Cu = 63.55, Zn = 65.38."],
+          ["eq", "x_{\\text{Zn}} = \\frac{30/65.38}{30/65.38 + 70/63.55} = \\frac{0.459}{0.459 + 1.101} = 0.294"],
+          ["p", "Using Fleischer's model for the resolved shear stress increment:"],
+          ["eq", "\\Delta\\tau = \\frac{42000 \\times 0.042^{3/2} \\times 0.294^{1/2}}{700} = \\frac{42000 \\times 0.00861 \\times 0.542}{700} \\approx 28 \\text{ MPa}"],
+          ["p", "Converting resolved shear stress to tensile yield stress using the Taylor factor ($M \\approx 3.06$): $\\Delta\\sigma \\approx 3.06 \\times 28 = 86$ MPa. The measured value is about 130 MPa. The discrepancy comes from additional contributions including short-range order in brass and the modulus mismatch between Cu and Zn, which Fleischer's simple model neglects."]
+        ]]
+      ],
+      "related": [
+        { "title": "Structure of Metals", "url": "structure-of-metals" },
+        { "title": "Steels & Cast Irons", "url": "steels-cast-irons" },
+        { "title": "Strengthening Mechanisms", "url": "../strengthening-mechanisms/" },
+        { "title": "Phase Diagrams", "url": "../unary-binary-phase-diagrams/" }
+      ]
     },
     {
       "id": "steels-cast-irons",
       "number": "11.3",
       "title": "Steels & Cast Irons",
-      "description": "",
-      "readingTime": "— min",
-      "intro": "",
-      "body": [],
-      "related": []
+      "description": "The Fe-C system, phase transformations in steel, and the microstructures that make steel the world's most important structural material.",
+      "readingTime": "16 min",
+      "intro": "Steel is iron with carbon. That simple statement conceals extraordinary complexity. By varying the carbon content from 0.01 to 2 wt% and controlling the cooling rate, we can produce microstructures ranging from soft, ductile ferrite to hard, brittle martensite. No other material system offers such a wide range of properties from so few ingredients.",
+      "body": [
+        ["h3", "The Fe-C phase diagram"],
+        ["p", "The iron-carbon phase diagram is the most important diagram in all of metallurgy. The key features:"],
+        ["p", "<strong>Ferrite ($\\alpha$)</strong>: BCC iron with up to 0.022 wt% C at 727 degrees C. Soft and ductile. Lattice parameter $a = 2.867$ &Aring;."],
+        ["p", "<strong>Austenite ($\\gamma$)</strong>: FCC iron with up to 2.14 wt% C at 1147 degrees C. Stable above 727 degrees C (for eutectoid composition). Non-magnetic. Lattice parameter $a = 3.647$ &Aring;."],
+        ["p", "<strong>Cementite (Fe$_3$C)</strong>: an intermetallic compound with 6.67 wt% C. Orthorhombic crystal structure. Very hard (about 800 HV) and brittle."],
+        ["p", "The critical temperatures are:"],
+        ["ul", [
+          "The eutectoid point: 727 degrees C, 0.76 wt% C. Austenite transforms to pearlite (ferrite + cementite).",
+          "The eutectic point: 1147 degrees C, 4.30 wt% C. Liquid transforms to austenite + cementite.",
+          "The $\\alpha$/$\\gamma$ boundary: 912 degrees C for pure iron, decreasing with carbon content.",
+          "Maximum carbon solubility in austenite: 2.14 wt% at 1147 degrees C.",
+          "Maximum carbon solubility in ferrite: 0.022 wt% at 727 degrees C."
+        ]],
+        ["p", "Steels contain less than 2.14 wt% C. Cast irons contain more. The eutectoid composition (0.76 wt% C) divides steels into hypoeutectoid (less C, most structural steels) and hypereutectoid (more C, tool steels)."],
+        ["callout", "Why the huge solubility difference?", "Carbon sits in octahedral interstitial sites. In FCC austenite, the octahedral hole has radius $0.052$ nm (site radius ratio $r/R = 0.41$). In BCC ferrite, the octahedral site is smaller and asymmetric: $0.019$ nm along one axis. Carbon distorts the BCC lattice tetragonally, costing strain energy. The result: a 100-fold difference in solubility between the two phases."],
+
+        ["h3", "Pearlite"],
+        ["p", "When a 0.76 wt% C steel is cooled slowly through 727 degrees C, austenite transforms to pearlite: alternating lamellae of ferrite and cementite. The lamellar spacing depends on the undercooling below the eutectoid temperature. At small undercoolings, diffusion is fast and the lamellae are coarse (spacing about 1 $\\mu$m). At larger undercoolings, nucleation is favoured over growth and the spacing is fine (about 0.1 $\\mu$m)."],
+        ["p", "Fine pearlite is harder than coarse pearlite. A fully pearlitic rail steel (0.8 wt% C) has a hardness of about 300 HV and tensile strength of 1000 MPa. Pearlite is the microstructure of railway rails, wire ropes and piano wire. Heavily drawn pearlitic wire reaches tensile strengths above 3 GPa, making it one of the strongest bulk materials produced commercially."],
+
+        ["h3", "Martensite"],
+        ["p", "If austenite is cooled fast enough to suppress diffusion, carbon atoms are trapped in the lattice. The FCC to BCC transformation still occurs, but the carbon forces the BCC lattice into a body-centred tetragonal (BCT) structure. This is martensite."],
+        ["p", "The transformation is diffusionless and almost instantaneous. It proceeds by a coordinated shear of the lattice, not by atomic diffusion. The transformation starts at the martensite start temperature $M_s$ and is complete at $M_f$. For a 0.4 wt% C steel, $M_s \\approx 350$ degrees C and $M_f \\approx 200$ degrees C. Adding carbon lowers both temperatures: at 0.8 wt% C, $M_s \\approx 220$ degrees C."],
+        ["p", "The tetragonality of martensite increases with carbon content:"],
+        ["eq", "\\frac{c}{a} = 1 + 0.045 \\times (\\text{wt\\% C})"],
+        ["p", "At 0.8 wt% C, $c/a = 1.036$. This distortion, combined with the high dislocation density produced by the shear transformation, gives martensite its hardness. A 0.4 wt% C martensite has a hardness of about 550 HV. At 0.8 wt% C, about 65 HRC (approximately 850 HV). But untempered martensite is brittle and almost never used directly."],
+        ["p", "Tempering (reheating to 150 to 700 degrees C) allows carbon to diffuse out of the BCT lattice and form fine carbide precipitates. This reduces hardness but restores ductility. A quenched and tempered 4140 steel (0.4 wt% C, 1% Cr, 0.2% Mo) tempered at 400 degrees C gives a yield strength of about 1200 MPa with reasonable toughness (CVN impact energy of 50 J at room temperature)."],
+
+        ["h3", "Bainite"],
+        ["p", "Between the pearlite and martensite regimes lies bainite. It forms at intermediate cooling rates or by isothermal hold at 250 to 550 degrees C. Bainite consists of fine plates of ferrite with carbide precipitates, but the morphology differs from pearlite."],
+        ["p", "<strong>Upper bainite</strong> (formed at 400 to 550 degrees C): ferrite laths with cementite particles between the laths. Toughness is moderate."],
+        ["p", "<strong>Lower bainite</strong> (formed at 250 to 400 degrees C): ferrite plates with very fine carbide precipitates within the plates (at about 60 degrees to the plate axis). Toughness is excellent. Lower bainite can match the strength of tempered martensite with better toughness."],
+        ["p", "Modern bainitic steels exploit this. Caballero and Bhadeshia developed a nanobainitic steel (0.8C-1.5Si-2Mn-1Cr-0.2Mo, wt%) transformed at 200 degrees C for several days. The bainite plate thickness is 20 to 40 nm. Hardness exceeds 600 HV with reasonable ductility. The high silicon suppresses cementite formation, leaving carbon-enriched retained austenite between the bainite plates. This retained austenite transforms to martensite under strain, providing additional work hardening (the TRIP effect)."],
+
+        ["h3", "Plain carbon vs alloy steels"],
+        ["p", "Plain carbon steels contain only Fe and C (with residual Mn, Si, S, P from steelmaking). They are cheap and produced in vast quantities. AISI 1020 (0.2 wt% C) is a general-purpose structural steel with yield strength around 350 MPa. AISI 1080 (0.8 wt% C) is a high-carbon steel for springs and cutting tools."],
+        ["p", "Alloy steels add elements for specific purposes:"],
+        ["ul", [
+          "<strong>Cr</strong>: forms a passive oxide layer. At 10.5 wt% Cr or more, the steel is stainless. Cr also stabilises ferrite and forms hard carbides (Cr$_7$C$_3$, Cr$_{23}$C$_6$).",
+          "<strong>Ni</strong>: stabilises austenite, improves toughness at low temperatures. 304 stainless (18Cr-8Ni) is austenitic at room temperature.",
+          "<strong>Mo</strong>: improves hardenability (the ability to form martensite in thick sections). Retards temper embrittlement. 0.2 to 0.5 wt% Mo is typical.",
+          "<strong>V, Nb, Ti</strong>: form fine carbides and nitrides that pin grain boundaries (Zener pinning) and provide precipitation hardening. Microalloyed steels use 0.01 to 0.1 wt% of these elements to achieve high strength through grain refinement.",
+          "<strong>Mn</strong>: deoxidiser and desulfuriser. Also strengthens and improves hardenability. Hadfield's manganese steel (12 wt% Mn, 1.2 wt% C) is austenitic and work-hardens spectacularly on impact, used for rock crushers and rail crossings."
+        ]],
+
+        ["h3", "Cast irons"],
+        ["p", "Cast irons contain 2.5 to 4.5 wt% C, well above the steel range. The high carbon content lowers the melting point (the eutectic is at 1147 degrees C, compared with 1538 degrees C for pure iron) and makes casting easy. Liquid iron is poured into moulds, solidifies, and the component is finished with minimal machining."],
+        ["p", "<strong>Grey cast iron</strong>: carbon precipitates as graphite flakes. The flakes act as stress concentrators. Grey iron is brittle in tension (UTS about 200 MPa) but excellent in compression (about 600 MPa). It damps vibrations well. Used for engine blocks, machine beds and brake discs."],
+        ["p", "<strong>Ductile (nodular) iron</strong>: adding 0.03 to 0.05 wt% Mg or Ce causes graphite to form as spheroids instead of flakes. This removes the stress concentrators. Ductile iron has UTS up to 800 MPa and elongation up to 18%. It has largely replaced steel forgings for crankshafts, gears and pipe fittings."],
+        ["p", "<strong>White cast iron</strong>: rapid cooling suppresses graphite formation. Carbon remains as cementite. Very hard (500 to 800 HV) and wear-resistant but extremely brittle. Used for wear plates and grinding balls."],
+
+        ["derivation", "The critical cooling rate for martensite formation can be estimated from the TTT diagram.", [
+          ["p", "The nose of the C-curve on a TTT diagram for a eutectoid steel occurs at about 550 degrees C and 1 second. To form 100% martensite, the cooling curve must pass to the left of the nose."],
+          ["p", "From the eutectoid temperature (727 degrees C) to the nose (550 degrees C) is a drop of 177 degrees C in less than 1 second. The critical cooling rate is therefore roughly:"],
+          ["eq", "\\dot{T}_{\\text{crit}} \\approx \\frac{727 - 550}{1} \\approx 200 \\text{ degrees C/s}"],
+          ["p", "For a plain carbon eutectoid steel, this means water quenching is needed for sections thicker than about 10 mm. Alloy steels shift the TTT nose to longer times (Cr, Mo, Mn all slow diffusion), reducing the critical cooling rate to 1 to 10 degrees C/s. This is why alloy steels can be oil-quenched or even air-cooled to form martensite in thick sections. This ability to form martensite at lower cooling rates is called hardenability."]
+        ]],
+
+        ["problem", "A hypoeutectoid steel contains 0.4 wt% C. It is cooled slowly from 900 degrees C. Using the Fe-C diagram (eutectoid at 0.76 wt% C, ferrite solvus at 0.022 wt% C), calculate the weight fractions of proeutectoid ferrite and pearlite just below 727 degrees C. What are the weight fractions of total ferrite and cementite?", [
+          ["p", "Just below 727 degrees C, the microstructure is proeutectoid ferrite ($\\alpha$) + pearlite. The lever rule across the $\\alpha$ + pearlite field gives:"],
+          ["eq", "f_{\\text{pearlite}} = \\frac{C_0 - C_\\alpha}{C_{\\text{eutectoid}} - C_\\alpha} = \\frac{0.40 - 0.022}{0.76 - 0.022} = \\frac{0.378}{0.738} = 0.512"],
+          ["eq", "f_{\\text{pro-}\\alpha} = 1 - 0.512 = 0.488"],
+          ["p", "So the microstructure is about 49% proeutectoid ferrite and 51% pearlite."],
+          ["p", "For total phase fractions (ferrite vs cementite), apply the lever rule across the full $\\alpha$ + Fe$_3$C field:"],
+          ["eq", "f_{\\text{Fe}_3\\text{C}} = \\frac{C_0 - C_\\alpha}{C_{\\text{Fe}_3\\text{C}} - C_\\alpha} = \\frac{0.40 - 0.022}{6.67 - 0.022} = \\frac{0.378}{6.648} = 0.057"],
+          ["p", "Only 5.7 wt% of the microstructure is cementite. The other 94.3% is ferrite. Yet this small amount of cementite, arranged as lamellae in pearlite, doubles the strength compared with pure ferrite."]
+        ]]
+      ],
+      "related": [
+        { "title": "Alloy Design Principles", "url": "alloy-design-principles" },
+        { "title": "Martensitic Transformations", "url": "../martensitic-transformations/" },
+        { "title": "TTT & CCT Diagrams", "url": "../ttt-cct-diagrams/" },
+        { "title": "Phase Diagrams", "url": "../unary-binary-phase-diagrams/" }
+      ]
     },
     {
       "id": "aluminium-alloys",
       "number": "11.4",
       "title": "Aluminium Alloys",
-      "description": "",
-      "readingTime": "— min",
-      "intro": "",
-      "body": [],
-      "related": []
+      "description": "Lightweight structural alloys from beverage cans to aircraft fuselages, strengthened by precipitation hardening and work hardening.",
+      "readingTime": "13 min",
+      "intro": "Aluminium is the most abundant metal in the Earth's crust, yet it was more expensive than gold until Hall and Heroult independently discovered electrolytic reduction in 1886. Today aluminium and its alloys are second only to steel in tonnage produced. Their combination of low density (2.7 g/cm$^3$), good corrosion resistance and versatile strengthening mechanisms makes them indispensable in aerospace, transport and packaging.",
+      "body": [
+        ["h3", "Pure aluminium and its limitations"],
+        ["p", "Pure aluminium is FCC with $a = 4.050$ &Aring;. Its melting point is 660 degrees C. Yield strength in the annealed condition is about 10 MPa. This is far too weak for structural use. But the FCC structure with 12 slip systems gives excellent formability, and the low density ($\\rho = 2.70$ g/cm$^3$, about one-third of steel) makes every MPa of strength worth three times as much on a specific-strength basis."],
+        ["p", "Aluminium forms a thin, self-healing oxide layer (Al$_2$O$_3$, about 2 to 5 nm thick) that protects against further oxidation. This natural passivation gives aluminium good atmospheric corrosion resistance without coatings. But the oxide is amphoteric: it dissolves in both strong acids and strong bases."],
+
+        ["h3", "Alloy designation and temper"],
+        ["p", "Wrought aluminium alloys use a four-digit system. The first digit identifies the principal alloying element:"],
+        ["ul", [
+          "<strong>1xxx</strong>: commercially pure Al (at least 99.0%). Electrical conductors, foil, chemical equipment.",
+          "<strong>2xxx</strong>: Al-Cu (and Al-Cu-Mg). Heat-treatable. Aerospace skins and structures. 2024-T3 has UTS = 485 MPa.",
+          "<strong>3xxx</strong>: Al-Mn. Non-heat-treatable, work-hardened. Beverage cans (3004-H19).",
+          "<strong>5xxx</strong>: Al-Mg. Non-heat-treatable, solid-solution strengthened. Marine applications, automotive body panels. 5083 has good saltwater resistance.",
+          "<strong>6xxx</strong>: Al-Mg-Si. Heat-treatable. Extrusions, architectural sections, car body structures. 6061-T6 has UTS = 310 MPa.",
+          "<strong>7xxx</strong>: Al-Zn-Mg(-Cu). Heat-treatable. The strongest aluminium alloys. 7075-T6 has UTS = 572 MPa. Used in aircraft upper wing skins and fighter structures."
+        ]],
+        ["p", "Temper designations: O = annealed, H = strain-hardened (followed by digits indicating the degree), T = heat-treated (T3 = solution treated + cold worked + naturally aged, T6 = solution treated + artificially aged)."],
+
+        ["h3", "Precipitation hardening: the 2xxx and 7xxx systems"],
+        ["p", "Precipitation hardening is the single most important strengthening mechanism in aluminium alloys. The process has three steps:"],
+        ["ol", [
+          "<strong>Solution treatment</strong>: heat to dissolve the solute into a single-phase FCC solid solution. For 2024, this is about 495 degrees C.",
+          "<strong>Quench</strong>: cool rapidly to room temperature, trapping the solute in supersaturated solid solution.",
+          "<strong>Age</strong>: hold at an intermediate temperature (or room temperature) to allow controlled precipitation of fine second-phase particles."
+        ]],
+        ["p", "In Al-Cu alloys (the 2xxx series), the equilibrium precipitate is $\\theta$ (Al$_2$Cu). But the precipitation sequence passes through a series of metastable phases:"],
+        ["eq", "\\text{SSSS} \\to \\text{GP zones} \\to \\theta'' \\to \\theta' \\to \\theta \\text{ (Al}_2\\text{Cu)}"],
+        ["p", "GP (Guinier-Preston) zones are single-atom-thick discs of Cu atoms on $\\{100\\}$ planes, about 3 to 10 nm in diameter. They are fully coherent with the matrix and produce strong strain-field hardening. $\\theta''$ is a larger, coherent platelet phase. $\\theta'$ is semicoherent. The equilibrium $\\theta$ phase is incoherent and gives the weakest hardening."],
+        ["p", "Peak strength occurs at the $\\theta''$ stage. For 2024-T6 aged at 190 degrees C, this takes about 10 hours. The precipitate diameter is about 10 nm and the spacing about 30 nm. Overaging beyond this point coarsens the precipitates (Ostwald ripening), increases the spacing, and the strength drops."],
+        ["callout", "Why does overaging weaken the alloy?", "The Orowan stress is $\\Delta\\tau = Gb/\\lambda$. As precipitates coarsen, the particle volume fraction stays constant but the inter-particle spacing $\\lambda$ increases (because fewer, larger particles are spread further apart). The hardening increment drops as $1/\\lambda$. At peak age, the transition from precipitate-cutting to Orowan looping gives the maximum resistance to dislocation motion."],
+
+        ["h3", "The Al-Mg-Si (6xxx) system"],
+        ["p", "6xxx alloys are the most widely used heat-treatable aluminium alloys. The strengthening precipitate is $\\beta''$ (Mg$_5$Si$_6$), a monoclinic phase that forms as needles along $\\langle 100 \\rangle$ directions in the Al matrix. The precipitation sequence is:"],
+        ["eq", "\\text{SSSS} \\to \\text{clusters} \\to \\text{GP zones} \\to \\beta'' \\to \\beta' \\to \\beta \\text{ (Mg}_2\\text{Si)}"],
+        ["p", "A typical 6061-T6 treatment: solution treat at 530 degrees C, water quench, age at 175 degrees C for 8 hours. Yield strength: 275 MPa. UTS: 310 MPa. Elongation: 12%."],
+        ["p", "6xxx alloys are weaker than 2xxx or 7xxx but offer better corrosion resistance, good weldability and excellent extrudability. They dominate the market for architectural extrusions, bicycle frames, automotive crush structures and ladder rails."],
+
+        ["h3", "Lithium additions and the 2xxx-Li variants"],
+        ["p", "Each 1 wt% lithium added to aluminium reduces density by 3% and increases elastic modulus by 6%. Al-Li alloys (2195, 2050, 2198) combine low density with high stiffness, making them attractive for launch vehicle fuel tanks and aircraft fuselage skins."],
+        ["p", "The principal strengthening precipitate is $\\delta'$ (Al$_3$Li), an L1$_2$ ordered phase that is coherent with the FCC matrix. The lattice mismatch is only 0.08%, giving very low interfacial energy and excellent coarsening resistance. 2195-T8 (Al-1.0Li-4.0Cu-0.4Mg-0.4Ag) has UTS = 590 MPa at a density of 2.63 g/cm$^3$. It was used for the Space Shuttle external tank."],
+
+        ["h3", "Corrosion of aluminium alloys"],
+        ["p", "Aluminium's oxide film gives good general corrosion resistance, but alloys are susceptible to localised attack. Pitting corrosion occurs when chloride ions break down the passive film. Intergranular corrosion occurs when precipitate-free zones along grain boundaries become anodic relative to the grain interior. Stress corrosion cracking (SCC) is a particular concern in 7xxx alloys loaded in the short-transverse direction."],
+        ["p", "Cladding (roll-bonding a thin layer of pure Al or Al-Zn onto a strong core alloy) provides cathodic protection. Alclad 2024 has a 2024 core clad with Al-1Zn, giving both strength and corrosion resistance. Anodising thickens the oxide layer to 5 to 25 $\\mu$m, providing additional protection and a surface that takes dyes well."],
+
+        ["problem", "An Al-4 wt% Cu alloy is solution treated at 500 degrees C and quenched to room temperature. The equilibrium solubility of Cu in Al at 200 degrees C is 0.2 wt%. If the alloy is aged at 200 degrees C until equilibrium is reached, calculate the volume fraction of $\\theta$ (Al$_2$Cu) precipitates. The densities are $\\rho_{\\text{Al}} = 2.70$ g/cm$^3$ and $\\rho_{\\theta} = 4.34$ g/cm$^3$.", [
+          ["p", "The weight fraction of $\\theta$ by the lever rule:"],
+          ["eq", "w_\\theta = \\frac{C_0 - C_\\alpha}{C_\\theta - C_\\alpha} = \\frac{4.0 - 0.2}{54.1 - 0.2} = \\frac{3.8}{53.9} = 0.0705"],
+          ["p", "where $C_\\theta = 54.1$ wt% Cu (the composition of Al$_2$Cu: $2 \\times 63.55 / (2 \\times 63.55 + 2 \\times 26.98) = 54.1\\%$)."],
+          ["p", "Converting weight fraction to volume fraction:"],
+          ["eq", "f_v = \\frac{w_\\theta / \\rho_\\theta}{w_\\theta / \\rho_\\theta + (1 - w_\\theta)/\\rho_\\alpha} = \\frac{0.0705/4.34}{0.0705/4.34 + 0.9295/2.70}"],
+          ["eq", "f_v = \\frac{0.01625}{0.01625 + 0.3443} = 0.045"],
+          ["p", "About 4.5 vol% of $\\theta$ precipitates. In practice, peak-aged alloys contain metastable $\\theta''$ rather than equilibrium $\\theta$, and the volume fraction is similar but the precipitates are much finer (10 nm vs several $\\mu$m), which is why the metastable state is so much stronger."]
+        ]]
+      ],
+      "related": [
+        { "title": "Alloy Design Principles", "url": "alloy-design-principles" },
+        { "title": "Precipitation & Age Hardening", "url": "../precipitation-age-hardening/" },
+        { "title": "Titanium Alloys", "url": "titanium-alloys" },
+        { "title": "Strengthening Mechanisms", "url": "../strengthening-mechanisms/" }
+      ]
     },
     {
       "id": "titanium-alloys",
       "number": "11.5",
       "title": "Titanium Alloys",
-      "description": "",
-      "readingTime": "— min",
-      "intro": "",
-      "body": [],
-      "related": []
+      "description": "High strength-to-weight ratio alloys for aerospace, biomedical and chemical plant applications, governed by the alpha-beta phase transformation.",
+      "readingTime": "13 min",
+      "intro": "Titanium combines the strength of steel with the density of aluminium. Its alloys operate at temperatures up to 600 degrees C, resist corrosion in environments that destroy stainless steel, and are biocompatible. The price of these advantages is cost: titanium costs 5 to 10 times more than steel per kilogram, driven by the energy-intensive Kroll extraction process.",
+      "body": [
+        ["h3", "The alpha-beta transformation"],
+        ["p", "Pure titanium is HCP ($\\alpha$) below 882 degrees C and BCC ($\\beta$) above. This allotropic transformation is the basis of titanium alloy design. Alloying elements are classified by their effect on the transformation temperature."],
+        ["p", "<strong>$\\alpha$-stabilisers</strong> raise the $\\beta$-transus: Al (the most important, +30 degrees C per wt%), O, N, C. Aluminium is the only $\\alpha$-stabiliser used in significant quantities (up to 6 wt%)."],
+        ["p", "<strong>$\\beta$-stabilisers</strong> lower the $\\beta$-transus: V, Mo, Nb, Fe, Cr, Mn, Cu, Si, H. Vanadium and molybdenum are the most common. They expand the $\\beta$ phase field and allow $\\beta$ to be retained at room temperature."],
+        ["p", "The aluminium equivalent and molybdenum equivalent quantify the overall effect:"],
+        ["eq", "[\\text{Al}]_{\\text{eq}} = [\\text{Al}] + \\frac{[\\text{Zr}]}{6} + \\frac{[\\text{Sn}]}{3} + 10[\\text{O}]"],
+        ["eq", "[\\text{Mo}]_{\\text{eq}} = [\\text{Mo}] + \\frac{[\\text{V}]}{1.5} + \\frac{[\\text{Nb}]}{3.6} + \\frac{[\\text{Fe}]}{0.35}"],
+        ["p", "The aluminium equivalent should stay below about 9 to avoid the brittle ordered $\\alpha_2$ (Ti$_3$Al) phase."],
+
+        ["h3", "Alloy classes"],
+        ["p", "Titanium alloys are grouped by their room-temperature microstructure:"],
+        ["p", "<strong>$\\alpha$ alloys</strong> (e.g. Ti-5Al-2.5Sn): all HCP at room temperature. Good weldability, reasonable creep resistance up to 300 degrees C, but limited strength. Used for cryogenic applications (Ti stays ductile down to 4 K, unlike BCC metals) and corrosion-resistant chemical plant equipment."],
+        ["p", "<strong>$\\alpha + \\beta$ alloys</strong> (e.g. Ti-6Al-4V): contain both phases at room temperature. By far the most commercially important class. Ti-6Al-4V alone accounts for about 60% of all titanium used. It has a $\\beta$-transus of 995 degrees C, yield strength of 880 MPa (mill-annealed), density of 4.43 g/cm$^3$, and elastic modulus of 114 GPa."],
+        ["p", "<strong>$\\beta$ alloys</strong> (e.g. Ti-10V-2Fe-3Al, Ti-15Mo-5Zr-3Al): mostly or entirely BCC at room temperature. The highest strengths (yield stress up to 1400 MPa after aging) but lower creep resistance than $\\alpha + \\beta$ alloys. Used for landing gear, fasteners and springs. The BCC structure gives better formability than HCP."],
+
+        ["h3", "Ti-6Al-4V: the workhorse alloy"],
+        ["p", "Ti-6Al-4V (Grade 5) dominates the titanium market. The 6 wt% aluminium stabilises $\\alpha$ and provides solid solution strengthening. The 4 wt% vanadium stabilises $\\beta$, allowing a two-phase microstructure that can be tailored by heat treatment."],
+        ["p", "Three principal microstructures are produced:"],
+        ["ul", [
+          "<strong>Equiaxed $\\alpha + \\beta$</strong>: processing below the $\\beta$-transus gives equiaxed $\\alpha$ grains (5 to 20 $\\mu$m) in a $\\beta$ matrix. Good fatigue strength (high-cycle fatigue limit about 500 MPa) and good ductility (elongation 10 to 15%).",
+          "<strong>Lamellar (Widmanstatten)</strong>: heating above the $\\beta$-transus and slow cooling produces $\\alpha$ plates growing from prior $\\beta$ grain boundaries. The colony structure gives good creep resistance and fracture toughness ($K_{IC}$ up to 80 MPa$\\sqrt{\\text{m}}$) but poor fatigue initiation resistance.",
+          "<strong>Bimodal</strong>: a combination of equiaxed primary $\\alpha$ (15 to 30 vol%) with transformed $\\beta$ (lamellar $\\alpha + \\beta$). The best compromise: good fatigue, good toughness, good creep. This is the standard microstructure for compressor discs in jet engines."
+        ]],
+
+        ["h3", "Processing and texture"],
+        ["p", "Titanium's HCP $\\alpha$ phase has limited slip systems at room temperature. Primary slip occurs on prismatic planes $\\{10\\bar{1}0\\}$ with $\\langle 11\\bar{2}0 \\rangle$ Burgers vector. Basal slip on $(0001)$ is harder. This anisotropy means that mechanical processing (forging, rolling) creates strong crystallographic texture."],
+        ["p", "During the $\\beta \\to \\alpha$ transformation, the Burgers orientation relationship applies: $(0001)_\\alpha \\| \\{110\\}_\\beta$ and $\\langle 11\\bar{2}0 \\rangle_\\alpha \\| \\langle 111 \\rangle_\\beta$. Each $\\beta$ grain can produce up to 12 $\\alpha$ orientation variants. If all variants form equally, the texture from the $\\beta$ phase is weakened. If only a few variants are selected (variant selection), strong $\\alpha$ texture results."],
+        ["p", "Texture matters for fatigue. Grains oriented with the $c$-axis parallel to the loading direction (hard orientation) can develop faceted fatigue cracks on the basal plane at stresses below the macroscopic yield strength. These cold dwell fatigue failures have caused in-service fractures in aero-engine compressor discs."],
+        ["callout", "Titanium fires", "Titanium burns in air above about 600 degrees C, and burning titanium cannot be extinguished with water (it extracts oxygen from H$_2$O). In jet engines, a titanium blade tip rubbing against the casing can initiate a titanium fire. This limits operating temperatures and is one reason why nickel superalloys replace titanium in the hotter stages of the engine."],
+
+        ["h3", "Biomedical titanium"],
+        ["p", "Titanium is biocompatible because its oxide layer (TiO$_2$) is chemically inert in physiological fluids. Commercially pure Ti (Grade 2) is used for dental implants. Ti-6Al-4V ELI (Extra Low Interstitials) is used for hip and knee replacements."],
+        ["p", "The concern with Ti-6Al-4V in the body is the toxicity of aluminium and vanadium ions released by corrosion. Newer biomedical alloys use only biocompatible $\\beta$-stabilisers: Ti-13Nb-13Zr and Ti-29Nb-13Ta-4.6Zr (TNTZ). These $\\beta$ alloys have an additional advantage: their elastic modulus (about 55 to 80 GPa) is closer to bone (10 to 30 GPa) than Ti-6Al-4V (114 GPa), reducing stress shielding and bone resorption around the implant."],
+
+        ["problem", "Ti-6Al-4V has yield strength $\\sigma_y = 880$ MPa and density $\\rho = 4.43$ g/cm$^3$. A 7075-T6 aluminium alloy has $\\sigma_y = 503$ MPa and $\\rho = 2.81$ g/cm$^3$. AISI 4340 steel has $\\sigma_y = 1180$ MPa and $\\rho = 7.85$ g/cm$^3$. Calculate the specific strength ($\\sigma_y / \\rho$) for each alloy. Which wins, and in what applications might each be preferred?", [
+          ["eq", "\\text{Ti-6Al-4V: } \\sigma_y/\\rho = 880/4.43 = 199 \\text{ kN}\\cdot\\text{m/kg}"],
+          ["eq", "\\text{7075-T6: } \\sigma_y/\\rho = 503/2.81 = 179 \\text{ kN}\\cdot\\text{m/kg}"],
+          ["eq", "\\text{4340 steel: } \\sigma_y/\\rho = 1180/7.85 = 150 \\text{ kN}\\cdot\\text{m/kg}"],
+          ["p", "Ti-6Al-4V has the highest specific strength. But specific strength alone does not determine material selection. Steel wins when raw cost matters (buildings, ships, cars). Aluminium wins when weight and cost both matter, or when thick sections are needed (aluminium is cheaper per kg than titanium). Titanium wins when operating temperatures exceed 150 degrees C (aluminium overages), when corrosion resistance is needed, or when volume is constrained (titanium is stiffer and stronger than aluminium per unit volume)."]
+        ]]
+      ],
+      "related": [
+        { "title": "Structure of Metals", "url": "structure-of-metals" },
+        { "title": "Aluminium Alloys", "url": "aluminium-alloys" },
+        { "title": "Nickel Superalloys", "url": "nickel-superalloys" },
+        { "title": "Creep & High-Temperature Behaviour", "url": "../creep-high-temperature-behaviour/" }
+      ]
     },
     {
       "id": "nickel-superalloys",
       "number": "11.6",
       "title": "Nickel Superalloys",
-      "description": "",
-      "readingTime": "— min",
-      "intro": "",
-      "body": [],
-      "related": []
+      "description": "Gamma/gamma-prime microstructures, single-crystal turbine blades and the metallurgy of operating at 90% of the melting point.",
+      "readingTime": "15 min",
+      "intro": "A turbine blade in a modern jet engine operates at gas temperatures above its own melting point, surviving only because of internal cooling and thermal barrier coatings. The blade material is a nickel-based superalloy: a single crystal with a two-phase microstructure engineered to resist creep, oxidation and fatigue at temperatures up to 1100 degrees C. These are the most complex alloys ever designed.",
+      "body": [
+        ["h3", "Why nickel?"],
+        ["p", "Nickel is FCC from room temperature to its melting point (1455 degrees C). There is no allotropic transformation to disrupt the microstructure. FCC has low diffusivity compared with BCC at the same homologous temperature, which slows creep. And nickel forms stable, coherent precipitates that maintain their strengthening effect to high temperatures."],
+        ["p", "Cobalt and iron also have FCC phases, and both are used as superalloy bases. But nickel's combination of melting point, oxidation resistance (with chromium and aluminium additions), and compatibility with the $\\gamma'$ precipitate makes it the dominant choice for the hottest turbine components."],
+
+        ["h3", "The $\\gamma / \\gamma'$ microstructure"],
+        ["p", "The $\\gamma$ matrix is a disordered FCC solid solution of nickel with chromium, cobalt, molybdenum, tungsten and rhenium in solution. These elements provide solid solution strengthening and slow diffusion."],
+        ["p", "The $\\gamma'$ precipitate is Ni$_3$(Al,Ti), an ordered L1$_2$ structure. It is FCC with aluminium (or titanium) atoms at the corner sites and nickel atoms on the face sites. The lattice mismatch with $\\gamma$ is small, typically $+0.1$ to $+0.5\\%$, giving coherent or semicoherent interfaces with very low energy (about 10 to 30 mJ/m$^2$)."],
+        ["p", "Modern single-crystal superalloys contain 60 to 70 vol% $\\gamma'$. The precipitates are cuboidal, about 500 nm on a side, arranged in a regular array with thin $\\gamma$ channels (about 50 nm wide) between them. This microstructure resists dislocation motion at high temperatures because dislocations must either:"],
+        ["ol", [
+          "Cut through $\\gamma'$ particles, which requires creating an antiphase boundary (APB) on the order plane. The APB energy on $\\{111\\}$ in Ni$_3$Al is about 170 mJ/m$^2$. Dislocations must travel in pairs (superdislocations) to restore order, which costs energy.",
+          "Bypass the precipitates by climbing into and threading through the narrow $\\gamma$ channels, which requires diffusion and is therefore slow."
+        ]],
+        ["callout", "The anomalous yield strength", "Ni$_3$Al has an unusual property: its yield strength increases with temperature up to about 700 degrees C. This is because the mobile dislocations in L1$_2$ can cross-slip from $\\{111\\}$ onto $\\{010\\}$ planes, where they become sessile (locked). Higher temperatures increase the cross-slip rate and lock more dislocations. This anomalous behaviour means $\\gamma'$ actually gets stronger as the engine heats up, at least to a point."],
+
+        ["h3", "Composition of modern superalloys"],
+        ["p", "A typical third-generation single-crystal superalloy (CMSX-10, by Cannon-Muskegon):"],
+        ["ul", [
+          "Ni: balance (about 70 wt%)",
+          "Cr: 2 wt% (oxidation resistance, reduced from earlier generations to avoid TCP phases)",
+          "Co: 3 wt% (raises solidus temperature, affects $\\gamma'$ solvus)",
+          "Al: 5.7 wt% (forms $\\gamma'$)",
+          "Ti: 0.2 wt% (partitions to $\\gamma'$)",
+          "Ta: 8 wt% (strong $\\gamma'$ former, solid solution strengthener)",
+          "W: 5 wt% (solid solution strengthener, slows diffusion)",
+          "Mo: 0.4 wt% (solid solution strengthener)",
+          "Re: 6 wt% (the key third-generation addition, partitions to $\\gamma$, dramatically slows diffusion and creep)"
+        ]],
+        ["p", "Rhenium is the most effective creep-strengthening element, but it costs about $3000 per kilogram. Fourth-generation alloys (e.g. TMS-138) add 3 to 6 wt% ruthenium ($5000/kg) to suppress the topologically close-packed (TCP) phases ($\\sigma$, $\\mu$, P) that rhenium promotes. The raw material cost of a superalloy single-crystal blade is $500 to $1000."],
+
+        ["h3", "Single-crystal blade manufacture"],
+        ["p", "Grain boundaries are weak points for creep rupture. Eliminating them eliminates the weakest failure path. Single-crystal blades are produced by directional solidification with a grain selector or seed crystal."],
+        ["p", "The process: the alloy is melted in a vacuum induction furnace and poured into a ceramic shell mould preheated to about 1500 degrees C. The mould sits on a water-cooled copper chill plate. It is withdrawn slowly from the furnace (about 200 mm/hour), establishing a vertical thermal gradient of 30 to 50 degrees C/cm. Columnar grains grow upward from the chill."],
+        ["p", "A helical grain selector at the base of the blade allows only one grain to survive into the aerofoil section. That grain is oriented with $\\langle 001 \\rangle$ parallel to the blade axis, because this direction has the lowest Young's modulus in FCC (about 125 GPa vs 210 GPa along $\\langle 111 \\rangle$). Lower stiffness means lower thermal stresses during start-up and shut-down cycles, which improves thermal fatigue life."],
+
+        ["h3", "Creep in superalloys"],
+        ["p", "Creep is the time-dependent deformation of a material under constant stress at elevated temperature. For superalloys operating at 0.7 to 0.85 $T_m$, creep is the life-limiting mechanism."],
+        ["p", "The steady-state creep rate follows a power law:"],
+        ["eq", "\\dot{\\varepsilon} = A \\sigma^n \\exp\\left(-\\frac{Q_c}{RT}\\right)"],
+        ["p", "where $n$ is the stress exponent (typically 4 to 6 for dislocation creep) and $Q_c$ is the activation energy for creep (about 300 kJ/mol for Ni-base superalloys, close to the activation energy for diffusion of the rate-limiting solute)."],
+        ["p", "At very high temperatures (above about 950 degrees C for 1000 hours), the cuboidal $\\gamma'$ precipitates raft: they coalesce into flat plates perpendicular to the applied stress direction (for positive misfit alloys under tension). Rafting seals off the $\\gamma$ channels in the direction of applied stress, temporarily reducing creep rate. But once rafting is complete, the microstructure degrades and creep accelerates."],
+        ["p", "The Larson-Miller parameter allows comparison of creep data at different temperatures and times:"],
+        ["eq", "P_{LM} = T(C + \\log_{10} t_r)"],
+        ["p", "where $T$ is temperature in Kelvin, $t_r$ is time to rupture in hours, and $C \\approx 20$ for nickel superalloys. For CMSX-4 at 137 MPa and 1000 degrees C, the rupture life is about 1000 hours."],
+
+        ["h3", "Thermal barrier coatings and cooling"],
+        ["p", "The turbine inlet temperature in a modern military engine exceeds 1700 degrees C. The blade metal temperature must stay below about 1100 degrees C. The 600 degree C gap is bridged by internal cooling and a thermal barrier coating (TBC)."],
+        ["p", "Internal cooling passages are cast into the blade. Cooling air bled from the compressor (at about 600 degrees C) flows through these passages and exits through film-cooling holes on the blade surface, forming a cool boundary layer. Sophisticated blades have 5 to 7 internal passages with turbulators (rib rougheners) to enhance heat transfer."],
+        ["p", "The TBC is a two-layer system:"],
+        ["ul", [
+          "<strong>Bond coat</strong>: MCrAlY (M = Ni, Co) or platinum-aluminide, about 50 to 100 $\\mu$m thick. Provides oxidation resistance. A thermally grown oxide (TGO) of Al$_2$O$_3$ forms on its surface, about 1 to 5 $\\mu$m thick over the blade life.",
+          "<strong>Top coat</strong>: yttria-stabilised zirconia (YSZ, ZrO$_2$ + 7 wt% Y$_2$O$_3$), about 150 to 300 $\\mu$m thick. Thermal conductivity is about 2 W/m/K (vs 22 W/m/K for the superalloy). Applied by electron beam physical vapour deposition (EB-PVD) on aerofoil surfaces to produce a columnar microstructure that accommodates thermal expansion mismatch."
+        ]],
+        ["p", "The TBC reduces the metal surface temperature by 100 to 150 degrees C. Failure of the TBC (by spallation from the bond coat due to TGO growth stresses) is often the life-limiting event for modern turbine blades."],
+
+        ["derivation", "Estimate the temperature drop across a TBC of thickness $L$ and conductivity $k$.", [
+          ["p", "Under steady-state conditions, the heat flux through the TBC equals the heat flux from the hot gas:"],
+          ["eq", "q = h_g (T_g - T_s) = \\frac{k}{L}(T_s - T_m)"],
+          ["p", "where $T_g$ is the gas temperature, $T_s$ is the TBC surface temperature, $T_m$ is the metal temperature, $h_g$ is the hot gas heat transfer coefficient (about 3000 W/m$^2$/K), $k = 2$ W/m/K, and $L = 250$ $\\mu$m."],
+          ["p", "The thermal resistance of the TBC: $L/k = 2.5 \\times 10^{-4}/2 = 1.25 \\times 10^{-4}$ m$^2$K/W."],
+          ["p", "The gas-side resistance: $1/h_g = 3.3 \\times 10^{-4}$ m$^2$K/W."],
+          ["p", "The fraction of the total resistance contributed by the TBC:"],
+          ["eq", "\\frac{L/k}{1/h_g + L/k} = \\frac{1.25 \\times 10^{-4}}{3.3 \\times 10^{-4} + 1.25 \\times 10^{-4}} = 0.27"],
+          ["p", "If the gas temperature is 1700 degrees C and the metal (with cooling) is at 1050 degrees C, the TBC accounts for about 27% of the total temperature drop from gas to metal. The temperature drop across the coating itself is roughly $0.27 \\times (1700 - 1050) = 175$ degrees C. This is a substantial gain."]
+        ]],
+
+        ["problem", "A single-crystal superalloy blade operates at 1050 degrees C under a tensile stress of 150 MPa. The Larson-Miller parameter for rupture at this stress is $P_{LM} = 27,500$ K (with $C = 20$ and $t_r$ in hours). Calculate the expected rupture life. If the TBC fails and the metal temperature rises to 1100 degrees C, what is the new rupture life?", [
+          ["p", "The Larson-Miller parameter: $P_{LM} = T(C + \\log_{10} t_r)$."],
+          ["p", "At 1050 degrees C = 1323 K:"],
+          ["eq", "27500 = 1323(20 + \\log_{10} t_r)"],
+          ["eq", "20 + \\log_{10} t_r = 20.79"],
+          ["eq", "\\log_{10} t_r = 0.79, \\quad t_r = 6.2 \\text{ hours}"],
+          ["p", "That seems short. At 150 MPa and 1050 degrees C, this is in the regime of aggressive testing conditions. Let us check with $P_{LM} = 30,000$ K (more realistic for an actual blade stress of 150 MPa):"],
+          ["eq", "30000 = 1323(20 + \\log_{10} t_r), \\quad \\log_{10} t_r = 2.68, \\quad t_r = 479 \\text{ hours}"],
+          ["p", "At 1100 degrees C = 1373 K with the same $P_{LM}$:"],
+          ["eq", "30000 = 1373(20 + \\log_{10} t_r), \\quad \\log_{10} t_r = 1.85, \\quad t_r = 71 \\text{ hours}"],
+          ["p", "The 50 degree C temperature rise reduces the rupture life from 479 hours to 71 hours, a factor of 6.7. This illustrates why TBC integrity is so important: a seemingly modest temperature increase has a dramatic effect on creep life because of the exponential temperature dependence in the Arrhenius term."]
+        ]]
+      ],
+      "related": [
+        { "title": "Titanium Alloys", "url": "titanium-alloys" },
+        { "title": "Creep & High-Temperature Behaviour", "url": "../creep-high-temperature-behaviour/" },
+        { "title": "Shape Memory Alloys & Intermetallics", "url": "shape-memory-alloys-intermetallics" },
+        { "title": "Alloy Design Principles", "url": "alloy-design-principles" }
+      ]
     },
     {
       "id": "shape-memory-alloys-intermetallics",
       "number": "11.7",
       "title": "Shape Memory Alloys & Intermetallics",
-      "description": "",
-      "readingTime": "— min",
-      "intro": "",
-      "body": [],
-      "related": []
+      "description": "Alloys that remember their shape, alloys with ordered crystal structures, and the unusual properties that emerge when atoms arrange themselves on specific sublattices.",
+      "readingTime": "14 min",
+      "intro": "Most metals deform permanently when stressed beyond their yield point. Shape memory alloys recover their original shape when heated. This behaviour, and the related superelastic effect, arises from a reversible martensitic transformation between two crystal structures. Meanwhile, intermetallic compounds with ordered structures offer extreme hardness, high melting points and anomalous mechanical properties, but their brittleness has long limited structural applications.",
+      "body": [
+        ["h3", "The shape memory effect"],
+        ["p", "A shape memory alloy (SMA) is deformed at low temperature in its martensite phase. The deformation proceeds by the movement and reorientation of twin boundaries within the martensite, not by dislocation slip. When heated above the austenite finish temperature $A_f$, the martensite transforms back to the parent austenite phase. Because the austenite has only one crystal orientation (it remembers the original shape), the macroscopic shape is recovered."],
+        ["p", "The key transformation temperatures are:"],
+        ["ul", [
+          "$M_s$: martensite start (cooling). Austenite begins to transform.",
+          "$M_f$: martensite finish. Transformation is complete.",
+          "$A_s$: austenite start (heating). Martensite begins to revert.",
+          "$A_f$: austenite finish. The original shape is fully recovered."
+        ]],
+        ["p", "There is always a hysteresis: $A_f > M_s$. For NiTi, the hysteresis is typically 20 to 50 degrees C."],
+
+        ["h3", "Nitinol: the NiTi shape memory alloy"],
+        ["p", "Nickel-titanium (NiTi, or Nitinol, after the Naval Ordnance Laboratory where it was discovered in 1963) is the dominant SMA. The parent phase is B2 (CsCl-type ordered BCC, space group $Pm\\bar{3}m$). The martensite is B19' (monoclinic, space group $P2_1/m$). The transformation is diffusionless and first-order."],
+        ["p", "For equiatomic NiTi:"],
+        ["ul", [
+          "$M_s \\approx 60$ degrees C, $M_f \\approx 40$ degrees C",
+          "$A_s \\approx 70$ degrees C, $A_f \\approx 90$ degrees C",
+          "Recoverable strain: up to 8% (compared with 0.2% elastic strain in steel)",
+          "Recovery stress: up to 800 MPa",
+          "Fatigue life: $> 10^7$ cycles at 2% strain"
+        ]],
+        ["p", "The transformation temperatures are extremely sensitive to composition. Increasing Ni content above 50 at% suppresses $M_s$ by about 80 degrees C per atomic percent Ni. Ti-50.8 at% Ni has $M_s \\approx -40$ degrees C and is superelastic at room temperature. Ti-49.5 at% Ni has $M_s \\approx 100$ degrees C and is martensitic at room temperature. This sensitivity makes composition control during manufacturing critical."],
+        ["callout", "Shape memory vs superelasticity", "The shape memory effect and superelasticity are two manifestations of the same transformation. If the alloy is used above $A_f$, an applied stress can induce the martensite transformation (stress-induced martensite). When the stress is removed, the martensite is thermodynamically unstable and reverts to austenite, recovering all the strain. This is superelasticity. If the alloy is used below $M_f$, the martensite is stable and persists after unloading. Heating above $A_f$ is then required to recover the shape. This is the shape memory effect. The same alloy exhibits both behaviours at different temperatures."],
+
+        ["h3", "Applications of SMAs"],
+        ["p", "Medical devices are the largest market for NiTi. Self-expanding stents are compressed into a catheter, delivered to a blocked artery, and released. At body temperature (37 degrees C), a superelastic NiTi stent with $A_f < 37$ degrees C expands to its remembered shape and holds the artery open. Orthodontic archwires use the superelastic plateau to apply a constant, gentle force to teeth over a wide range of displacement."],
+        ["p", "Engineering applications use the shape memory effect to do work. Pipe couplings for fighter aircraft hydraulic lines (Raychem Cryofit) are expanded in liquid nitrogen, slipped over the pipe ends, and allowed to warm. The coupling shrinks onto the pipe with a grip pressure of 400 MPa, producing a leak-tight joint without welding. SMA actuators provide compact, silent alternatives to electric motors in aerospace and automotive applications."],
+        ["p", "The limitations of NiTi are cost (about $150/kg vs $3/kg for steel), limited operating temperature (below about 100 degrees C for binary NiTi), and the narrow composition window for transformation temperatures. High-temperature SMAs based on NiTiHf and NiTiZr push the operating temperature above 200 degrees C but are still in development."],
+
+        ["h3", "Thermodynamics of the transformation"],
+        ["p", "The martensitic transformation is driven by the difference in chemical free energy between austenite and martensite. At the equilibrium transformation temperature $T_0$ (where both phases have equal free energy), there is no driving force. The transformation requires undercooling below $T_0$ to provide the energy needed to create the new interfaces and accommodate the transformation strain."],
+        ["p", "The Clausius-Clapeyron relation connects the shift in transformation temperature to applied stress:"],
+        ["eq", "\\frac{d\\sigma}{dT} = -\\frac{\\Delta H}{T_0 \\varepsilon_0}"],
+        ["p", "where $\\Delta H$ is the transformation enthalpy (about 20 J/g for NiTi), $T_0$ is the equilibrium temperature, and $\\varepsilon_0$ is the transformation strain (about 0.04 to 0.08). For NiTi, $d\\sigma/dT \\approx 5$ to 8 MPa/degree C. This means that increasing stress raises the transformation temperature, which is why stress can induce martensite above $M_s$."],
+
+        ["h3", "Intermetallic compounds"],
+        ["p", "An intermetallic compound is an ordered alloy phase with a specific stoichiometry and crystal structure. Unlike solid solutions, where atoms are randomly distributed, intermetallics have each element occupying defined sublattices. This ordering is what gives $\\gamma'$ (Ni$_3$Al) its anomalous yield strength behaviour."],
+        ["p", "Important intermetallics in structural applications:"],
+        ["p", "<strong>Ni$_3$Al ($\\gamma'$, L1$_2$)</strong>: the strengthening phase in superalloys. Melting point 1385 degrees C. Yield strength increases with temperature up to about 700 degrees C due to cross-slip locking. The APB energy on $\\{111\\}$ (about 170 mJ/m$^2$) forces dislocations to move as superlattice pairs."],
+        ["p", "<strong>TiAl ($\\gamma$, L1$_0$)</strong>: an ordered tetragonal phase. Density 3.9 g/cm$^3$ (half of nickel superalloys). Melting point 1460 degrees C. Used for low-pressure turbine blades in the GEnx engine (Boeing 787). The challenge is room-temperature brittleness: elongation is only 1 to 3%. Microstructural control (lamellar $\\alpha_2$/TiAl colonies) and microalloying with Nb, Cr and B have improved this enough for engine use."],
+        ["p", "<strong>Fe$_3$Al and FeAl (B2 and D0$_3$)</strong>: iron aluminides with excellent oxidation resistance (they form protective Al$_2$O$_3$ scales). Density about 6 g/cm$^3$. Attractive for replacing stainless steel in high-temperature corrosive environments. Limited by environmental embrittlement: moisture in air reacts with aluminium at grain boundaries, generating hydrogen that causes intergranular fracture."],
+        ["p", "<strong>MoSi$_2$ (C11$_b$)</strong>: a silicide with melting point 2030 degrees C. Used for heating elements (Kanthal Super 1900) that operate in air at up to 1850 degrees C, forming a protective SiO$_2$ glaze. Brittle below 1000 degrees C. The classic example of an intermetallic useful as a functional material rather than a structural one."],
+
+        ["h3", "High-entropy alloys"],
+        ["p", "Conventional metallurgy centres on one principal element. High-entropy alloys (HEAs) use five or more elements in near-equiatomic proportions. The Cantor alloy (CrMnFeCoNi, equiatomic) is single-phase FCC with lattice parameter $a = 3.60$ &Aring;. Its yield strength is 200 MPa at room temperature and increases to 600 MPa at 77 K, with elongation exceeding 60%. This exceptional cryogenic toughness has attracted interest for structural applications at low temperatures."],
+        ["p", "Whether the high configurational entropy ($\\Delta S_{\\text{mix}} = R \\ln n$ for $n$ equiatomic components) genuinely stabilises a single phase is debated. Many nominally single-phase HEAs decompose into multiple phases on prolonged annealing. The most promising HEAs, like the refractory NbMoTaW system (BCC, yield strength about 400 MPa at 1600 degrees C), may owe their properties more to sluggish diffusion and severe lattice distortion than to entropy stabilisation."],
+
+        ["derivation", "The Clausius-Clapeyron slope for stress-induced martensite in NiTi.", [
+          ["p", "The Gibbs free energy change for the transformation at stress $\\sigma$ and temperature $T$:"],
+          ["eq", "\\Delta G = \\Delta H - T \\Delta S - \\sigma \\varepsilon_0 V_m"],
+          ["p", "At the transformation condition, $\\Delta G = 0$. At zero stress and temperature $T_0$: $\\Delta H = T_0 \\Delta S$."],
+          ["p", "At stress $\\sigma$ and transformation temperature $T_\\sigma$:"],
+          ["eq", "\\Delta H - T_\\sigma \\frac{\\Delta H}{T_0} = \\sigma \\varepsilon_0 V_m"],
+          ["eq", "\\Delta H \\left(1 - \\frac{T_\\sigma}{T_0}\\right) = \\sigma \\varepsilon_0 V_m"],
+          ["p", "For small departures from $T_0$, differentiating:"],
+          ["eq", "\\frac{d\\sigma}{dT} = -\\frac{\\Delta H}{T_0 \\varepsilon_0 V_m}"],
+          ["p", "With $\\Delta H = 20$ J/g = 1170 J/mol (for NiTi, $M = 58.4$ g/mol, but using mass-specific values), $T_0 \\approx 340$ K, $\\varepsilon_0 = 0.05$, $\\rho = 6.45$ g/cm$^3$:"],
+          ["eq", "\\frac{d\\sigma}{dT} \\approx \\frac{20 \\times 10^6 \\times 6.45 \\times 10^3}{340 \\times 0.05} \\approx 7.6 \\text{ MPa/K}"],
+          ["p", "This matches the experimentally measured slope of about 5 to 8 MPa/K for NiTi."]
+        ]],
+
+        ["problem", "A superelastic NiTi wire has $A_f = 15$ degrees C and the Clausius-Clapeyron slope is 7 MPa/K. At body temperature (37 degrees C), what stress is needed to induce martensite? If the transformation strain is 6%, calculate the energy absorbed per unit volume in one loading-unloading cycle, assuming the hysteresis in stress is 200 MPa.", [
+          ["p", "The wire is above $A_f$, so it is in the austenite phase. Stress-induced martensite begins when the stress raises the effective $M_s$ to the operating temperature."],
+          ["p", "The stress to shift the transformation temperature by $(37 - 15) = 22$ K:"],
+          ["eq", "\\sigma_{\\text{SIM}} = 7 \\times 22 = 154 \\text{ MPa}"],
+          ["p", "This is the forward transformation stress. The reverse transformation occurs at $(154 - 200) = -46$ MPa, which is unphysical. This means the hysteresis of 200 MPa at constant temperature exceeds the forward stress, so in practice we need to account for the fact that stress hysteresis narrows as the temperature increases above $A_f$. At 37 degrees C, the reverse stress is typically about 50 to 100 MPa."],
+          ["p", "Taking forward stress = 154 MPa and reverse stress = 80 MPa (a more realistic 74 MPa hysteresis), the energy per unit volume per cycle equals the area of the stress-strain hysteresis loop:"],
+          ["eq", "W = (\\sigma_{\\text{fwd}} - \\sigma_{\\text{rev}}) \\times \\varepsilon_0 = (154 - 80) \\times 10^6 \\times 0.06 = 4.4 \\text{ MJ/m}^3"],
+          ["p", "This energy is dissipated as heat. It is why superelastic NiTi is excellent for vibration damping and seismic protection of buildings."]
+        ]]
+      ],
+      "related": [
+        { "title": "Nickel Superalloys", "url": "nickel-superalloys" },
+        { "title": "Alloy Design Principles", "url": "alloy-design-principles" },
+        { "title": "Martensitic Transformations", "url": "../martensitic-transformations/" },
+        { "title": "Order-Disorder Transitions", "url": "../order-disorder-transitions/" }
+      ]
     }
   ]
 }

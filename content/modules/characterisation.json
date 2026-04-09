@@ -6,78 +6,460 @@
     "part": "IV",
     "partTitle": "Practice",
     "topic": "Characterisation",
-    "intro": ""
+    "intro": "How we interrogate materials to learn what they are and how they behave. From X-ray diffraction to nanoindentation, this module covers the physical principles behind the instruments that populate every materials science laboratory."
   },
   "articles": [
     {
       "id": "x-ray-diffraction-powder-single-crystal",
       "number": "15.1",
       "title": "X-ray Diffraction (Powder & Single-Crystal)",
-      "description": "",
-      "readingTime": "— min",
-      "intro": "",
-      "body": [],
-      "related": []
+      "description": "Using Bragg's law and powder patterns to determine crystal structures, lattice parameters and phase fractions.",
+      "readingTime": "14 min",
+      "intro": "X-ray diffraction is the most widely used structural characterisation technique in materials science. A powder diffractogram is a fingerprint of the crystal structure. Understanding how to read that fingerprint starts with Bragg's law and ends with Rietveld refinement.",
+      "body": [
+        ["h3", "The physics of X-ray diffraction"],
+        ["p", "X-rays are electromagnetic radiation with wavelengths of 0.5 to 2.5 angstroms, comparable to interatomic spacings. When an X-ray beam hits a crystal, each atom scatters a small fraction of the incident radiation in all directions. Most of the scattered waves cancel. But for certain angles, waves scattered from parallel planes of atoms arrive in phase and reinforce. The result is a sharp diffracted beam."],
+        ["p", "The condition for constructive interference is Bragg's law:"],
+        ["eq", "n\\lambda = 2d_{hkl}\\sin\\theta"],
+        ["p", "where $\\lambda$ is the X-ray wavelength, $d_{hkl}$ is the spacing between $(hkl)$ planes, $\\theta$ is the angle between the incident beam and the planes, and $n$ is an integer. For Cu K$\\alpha$ radiation ($\\lambda = 1.5406$ angstroms, the laboratory workhorse), planes with spacings from about 0.8 to 10 angstroms produce diffraction peaks in the accessible $2\\theta$ range of 10 to 160 degrees."],
+        ["callout", "Why copper?", "Cu K$\\alpha$ radiation is the most common laboratory X-ray source because copper anodes are efficient, the wavelength (1.5406 angstroms) is well matched to interatomic spacings in most materials, and the K$\\alpha_1$/K$\\alpha_2$ doublet is narrow. For iron-containing samples, Co K$\\alpha$ ($\\lambda = 1.7903$ angstroms) is preferred because iron strongly absorbs copper X-rays, producing high background fluorescence."],
+
+        ["h3", "Powder diffraction"],
+        ["p", "A single crystal produces discrete diffraction spots. A powder, being a collection of millions of randomly oriented crystallites, produces cones of diffraction at each Bragg angle. A detector scanning in $2\\theta$ intersects these cones and records intensity as a function of angle. The result is a powder diffractogram: a plot of intensity versus $2\\theta$."],
+        ["p", "Each peak in the pattern corresponds to a set of $(hkl)$ planes satisfying Bragg's law. The peak positions give the lattice parameters. The peak intensities depend on the atoms in the unit cell (through the structure factor). The peak widths carry information about crystallite size and microstrain."],
+
+        ["h3", "The structure factor"],
+        ["p", "Not all planes produce visible reflections. The structure factor $F_{hkl}$ determines the amplitude of the diffracted beam from a given set of planes:"],
+        ["eq", "F_{hkl} = \\sum_j f_j \\exp\\left[2\\pi i(hx_j + ky_j + lz_j)\\right]"],
+        ["p", "where $f_j$ is the atomic scattering factor of atom $j$ at fractional coordinates $(x_j, y_j, z_j)$. The measured intensity is proportional to $|F_{hkl}|^2$. When $F_{hkl} = 0$, the reflection is systematically absent."],
+        ["p", "For BCC, the body-centre atom at $(1/2, 1/2, 1/2)$ causes $F_{hkl} = 0$ whenever $h + k + l$ is odd. For FCC, reflections vanish unless $h$, $k$, $l$ are all odd or all even. These systematic absences are the signature of the lattice type and are the first thing to check when indexing a pattern."],
+
+        ["h3", "Reading a real diffractogram"],
+        ["p", "Consider the powder pattern of silicon (diamond cubic, $a = 5.431$ angstroms, space group $Fd\\bar{3}m$). The first five peaks appear at:"],
+        ["ul", [
+          "$(111)$: $2\\theta = 28.44°$, $d = 3.136$ angstroms",
+          "$(220)$: $2\\theta = 47.30°$, $d = 1.920$ angstroms",
+          "$(311)$: $2\\theta = 56.12°$, $d = 1.638$ angstroms",
+          "$(400)$: $2\\theta = 69.13°$, $d = 1.358$ angstroms",
+          "$(331)$: $2\\theta = 76.38°$, $d = 1.246$ angstroms"
+        ]],
+        ["p", "Notice that $(200)$ is missing. In the diamond structure, the two-atom basis causes additional absences beyond the FCC condition. The $(200)$ structure factor is zero because the atom at $(1/4, 1/4, 1/4)$ scatters exactly out of phase with the atom at the origin for this reflection. This is a structure absence, not a lattice absence."],
+
+        ["h3", "Peak broadening and the Scherrer equation"],
+        ["p", "An infinitely large, perfect crystal would produce infinitely sharp diffraction peaks. Real peaks have finite width from two main sources: small crystallite size and microstrain (variations in $d$-spacing from dislocations or compositional gradients)."],
+        ["p", "The Scherrer equation estimates crystallite size from peak broadening:"],
+        ["eq", "\\tau = \\frac{K\\lambda}{\\beta\\cos\\theta}"],
+        ["p", "where $\\tau$ is the mean crystallite dimension, $K$ is a shape factor (typically 0.9), $\\lambda$ is the wavelength, $\\beta$ is the peak width (full width at half maximum, FWHM) in radians after subtracting instrumental broadening, and $\\theta$ is the Bragg angle. A peak with FWHM of 0.2 degrees at $2\\theta = 40°$ from Cu K$\\alpha$ gives $\\tau \\approx 45$ nm. The equation is reliable for crystallites below about 100 nm. Above that, the broadening becomes too small to measure accurately against instrumental contributions."],
+
+        ["h3", "Rietveld refinement"],
+        ["p", "Rietveld refinement is a method for extracting detailed structural information from a powder pattern by fitting a calculated pattern to the observed data. You start with a structural model (space group, approximate atom positions, lattice parameters) and refine the parameters to minimise the difference between calculated and measured intensities across the entire $2\\theta$ range."],
+        ["p", "The refinement adjusts: lattice parameters, atom positions, thermal displacement parameters, site occupancies, peak profile parameters, and background. The quality of the fit is assessed by residuals such as $R_{wp}$ (weighted profile R-factor):"],
+        ["eq", "R_{wp} = \\left[\\frac{\\sum w_i(y_{i,\\text{obs}} - y_{i,\\text{calc}})^2}{\\sum w_i \\, y_{i,\\text{obs}}^2}\\right]^{1/2}"],
+        ["p", "An $R_{wp}$ below 10% is generally considered a good fit. The goodness-of-fit $\\chi^2 = (R_{wp}/R_{\\text{exp}})^2$ should approach 1 for a statistically ideal fit. In practice, values of 1 to 3 are typical for good refinements."],
+        ["callout", "Rietveld is not ab initio", "Rietveld refinement requires a starting structural model. It cannot determine an unknown structure from scratch. For that, you need indexing (to find the unit cell), space group determination (from systematic absences), and structure solution (by direct methods or charge flipping). Rietveld is the final step: refining a known or proposed structure against the data."],
+
+        ["h3", "Single-crystal diffraction"],
+        ["p", "When a suitable single crystal is available (typically 0.1 to 0.5 mm), single-crystal diffraction provides far more information than powder data. Each reflection is measured individually, giving a complete three-dimensional map of reciprocal space. This allows full structure determination: atom positions, bond lengths, thermal ellipsoids, and sometimes electron density maps."],
+        ["p", "Modern single-crystal diffractometers use area detectors (CCD or CMOS) and can collect a complete dataset in hours. Synchrotron sources reduce this to minutes. The technique is the gold standard for crystal structure determination, provided the crystal is available. Many materials (metals, ceramics, thin films) are polycrystalline and must rely on powder methods."],
+
+        ["derivation", "Bragg's law from path difference geometry", [
+          ["p", "Consider two parallel rays hitting adjacent planes separated by distance $d$. The lower ray travels an extra distance equal to twice the perpendicular distance from the upper plane to the point of reflection on the lower plane."],
+          ["p", "From trigonometry, this path difference is $2d\\sin\\theta$, where $\\theta$ is the angle of incidence measured from the plane surface (not the normal). For constructive interference, this must equal an integer number of wavelengths:"],
+          ["eq", "n\\lambda = 2d\\sin\\theta"],
+          ["p", "Setting $n = 1$ and using the Miller indices to label planes, higher-order reflections ($n = 2$ from $(100)$) are equivalent to first-order reflections from $(200)$."]
+        ]],
+
+        ["problem", "A powder pattern of aluminium (FCC, $a = 4.0496$ angstroms) is collected with Cu K$\\alpha$ radiation ($\\lambda = 1.5406$ angstroms). Predict the $2\\theta$ positions of the first three allowed reflections. Why is the $(100)$ peak absent?", [
+          ["p", "FCC systematic absences: only reflections with $h, k, l$ all odd or all even are allowed. So $(100)$ is absent (mixed indices). The first three allowed reflections are $(111)$, $(200)$, and $(220)$."],
+          ["eq", "d_{111} = \\frac{4.0496}{\\sqrt{3}} = 2.338 \\text{ angstroms} \\quad \\Rightarrow \\quad 2\\theta = 2\\arcsin\\frac{1.5406}{2 \\times 2.338} = 38.47°"],
+          ["eq", "d_{200} = \\frac{4.0496}{2} = 2.025 \\text{ angstroms} \\quad \\Rightarrow \\quad 2\\theta = 2\\arcsin\\frac{1.5406}{2 \\times 2.025} = 44.74°"],
+          ["eq", "d_{220} = \\frac{4.0496}{\\sqrt{8}} = 1.432 \\text{ angstroms} \\quad \\Rightarrow \\quad 2\\theta = 2\\arcsin\\frac{1.5406}{2 \\times 1.432} = 65.13°"],
+          ["p", "The $(100)$ reflection is absent because in an FCC lattice the face-centre atoms scatter out of phase with the corner atoms for any reflection where $h$, $k$, $l$ are not all odd or all even. The destructive interference is complete."]
+        ]]
+      ],
+      "related": [
+        { "title": "Reciprocal Lattice & Diffraction", "url": "../crystallography/reciprocal-lattice" },
+        { "title": "Crystal Systems & Bravais Lattices", "url": "../crystallography/crystal-systems" },
+        { "title": "Transmission Electron Microscopy", "url": "transmission-electron-microscopy" }
+      ]
     },
     {
       "id": "scanning-electron-microscopy-edx",
       "number": "15.2",
       "title": "Scanning Electron Microscopy & EDX",
-      "description": "",
-      "readingTime": "— min",
-      "intro": "",
-      "body": [],
-      "related": []
+      "description": "Imaging surfaces with electrons and measuring composition with characteristic X-rays.",
+      "readingTime": "13 min",
+      "intro": "The scanning electron microscope produces images of surfaces with resolution down to a few nanometres and depths of field that optical microscopes cannot match. Coupled with energy-dispersive X-ray spectroscopy, it gives both morphology and composition from the same region.",
+      "body": [
+        ["h3", "Electron-matter interactions"],
+        ["p", "When a focused beam of electrons (typically 1 to 30 keV) hits a solid, several things happen simultaneously. The electrons scatter elastically from atomic nuclei (changing direction without losing much energy) and inelastically from atomic electrons (losing energy to the solid). These interactions produce a cascade of signals, each carrying different information about the specimen."],
+        ["p", "The interaction volume is pear-shaped, extending about 1 to 5 micrometres into the specimen depending on accelerating voltage and atomic number. Higher voltages and lighter elements give larger interaction volumes. The signals generated within this volume include:"],
+        ["ul", [
+          "<strong>Secondary electrons (SE)</strong>: low-energy electrons (below 50 eV) ejected from the outer shells of specimen atoms. Escape depth about 1 to 10 nm. Provide topographic contrast.",
+          "<strong>Backscattered electrons (BSE)</strong>: primary electrons that have been elastically scattered back out of the specimen. Energy close to the beam energy. Escape depth about 100 nm to 1 micrometre. Provide compositional (atomic number) contrast.",
+          "<strong>Characteristic X-rays</strong>: emitted when inner-shell vacancies (created by inelastic scattering) are filled by outer-shell electrons. Energy is element-specific. The basis of EDX analysis.",
+          "<strong>Auger electrons</strong>: alternative to X-ray emission. The energy from filling an inner-shell vacancy ejects another electron. Very surface-sensitive (escape depth 0.5 to 3 nm). Used in a different instrument (Auger electron spectroscopy)."
+        ]],
+
+        ["h3", "Secondary electron imaging"],
+        ["p", "SE imaging is the default mode of SEM. Secondary electrons have very low energy, so only those generated within a few nanometres of the surface can escape. This makes SE imaging extremely surface-sensitive. Surfaces tilted toward the detector produce more SE signal, giving an intuitive three-dimensional appearance to the image."],
+        ["p", "The resolution in SE mode is limited mainly by the beam diameter, which depends on the electron source. A tungsten filament source gives about 5 nm resolution. A field emission gun (FEG) can achieve better than 1 nm. FEG-SEMs are now standard in most research laboratories."],
+        ["p", "SE images reveal fracture surfaces, grain morphology, porosity, particle size distributions, fibre orientations in composites, and surface defects. They are the electron microscopy equivalent of looking at something with your eyes, just at much higher magnification."],
+
+        ["h3", "Backscattered electron imaging"],
+        ["p", "BSE imaging exploits the fact that the backscatter yield (fraction of incident electrons that backscatter) increases with atomic number $Z$. The relationship is approximately:"],
+        ["eq", "\\eta \\approx -0.0254 + 0.016Z - 1.86 \\times 10^{-4}Z^2 + 8.3 \\times 10^{-7}Z^3"],
+        ["p", "For carbon ($Z = 6$), $\\eta \\approx 0.06$. For gold ($Z = 79$), $\\eta \\approx 0.50$. Heavy elements appear bright in BSE images; light elements appear dark. This gives immediate compositional contrast without any spectroscopy."],
+        ["p", "BSE images are invaluable for identifying different phases in a polished cross-section. In a steel, cementite (Fe$_3$C) appears at slightly different contrast from ferrite. In a Ni-base superalloy, the gamma-prime precipitates show clearly against the gamma matrix. The spatial resolution of BSE is worse than SE (typically 50 to 200 nm) because backscattered electrons originate from deeper within the interaction volume."],
+        ["callout", "BSE vs SE in practice", "Use SE for topography: fracture surfaces, powder morphology, etched microstructures. Use BSE for compositional contrast on flat polished sections: phase identification, coating thickness, inclusions. Many SEMs collect both signals simultaneously using separate detectors."],
+
+        ["h3", "Energy-dispersive X-ray spectroscopy (EDX)"],
+        ["p", "When a primary electron knocks out an inner-shell electron from a specimen atom, the resulting vacancy is filled by an outer-shell electron that emits a characteristic X-ray. The energy of this X-ray is the difference between the two electron energy levels and is unique to each element. Moseley's law relates the characteristic X-ray energy to atomic number:"],
+        ["eq", "E \\approx 13.6 \\,(Z - \\sigma)^2 \\left(\\frac{1}{n_1^2} - \\frac{1}{n_2^2}\\right) \\text{ eV}"],
+        ["p", "where $\\sigma$ is a screening constant and $n_1$, $n_2$ are the principal quantum numbers of the shells involved. For the K$\\alpha$ line ($n_1 = 1$, $n_2 = 2$), the energy scales roughly as $(Z-1)^2$. Fe K$\\alpha$ is at 6.40 keV. Cu K$\\alpha$ is at 8.04 keV. Al K$\\alpha$ is at 1.49 keV."],
+        ["p", "An EDX detector (typically a silicon drift detector, SDD) measures the energy of each incoming X-ray, building up a spectrum of counts versus energy. Peaks in the spectrum identify the elements present. The energy resolution of a modern SDD is about 125 eV at Mn K$\\alpha$ (5.9 keV), sufficient to resolve most K, L, and M lines."],
+
+        ["h3", "Quantification"],
+        ["p", "Converting EDX peak intensities to composition requires corrections for three effects, collectively called ZAF:"],
+        ["ul", [
+          "<strong>Z</strong> (atomic number): heavier atoms backscatter more electrons, reducing the number available to generate X-rays.",
+          "<strong>A</strong> (absorption): X-rays generated deep in the specimen may be absorbed before reaching the detector. Low-energy X-rays (e.g., O K$\\alpha$ at 0.52 keV) are strongly absorbed.",
+          "<strong>F</strong> (fluorescence): characteristic X-rays from one element may excite X-rays from another element, enhancing its apparent signal."
+        ]],
+        ["p", "Modern EDX software applies ZAF corrections automatically. Accuracy is typically 1 to 2 wt% for major elements with well-resolved peaks. Light elements (Z below 11, sodium) are difficult because their X-rays have low energy, low fluorescence yield, and high absorption. Quantification of elements below carbon is essentially impossible by EDX."],
+        ["p", "Wavelength-dispersive spectroscopy (WDS), used in the electron microprobe, achieves better energy resolution (about 10 eV) and lower detection limits (0.01 wt% versus 0.1 wt% for EDX). WDS diffracts the X-rays from a crystal analyser, separating them by wavelength rather than energy. It is slower but far more precise."],
+
+        ["h3", "Mapping and line scans"],
+        ["p", "EDX mapping scans the beam across the specimen, collecting a spectrum at each pixel. The result is a set of elemental maps showing the spatial distribution of each element. This is essential for studying diffusion couples, corrosion layers, weld zones, and composite interfaces."],
+        ["p", "A line scan collects spectra along a single line, producing a composition profile. Typical spatial resolution for EDX mapping is 0.5 to 2 micrometres, limited by the interaction volume rather than the beam size. Thin specimens (as in TEM-EDX) can achieve much better spatial resolution because the interaction volume is confined by the specimen thickness."],
+
+        ["problem", "An EDX spectrum from a polished cross-section of a nickel-base superalloy shows peaks at 0.52 keV, 1.49 keV, 5.41 keV, 7.47 keV, and 8.04 keV. Identify the elements. Why might quantification of the 0.52 keV peak be unreliable?", [
+          ["p", "The peaks correspond to: 0.52 keV = O K$\\alpha$, 1.49 keV = Al K$\\alpha$, 5.41 keV = Cr K$\\alpha$, 7.47 keV = Ni K$\\alpha$, 8.04 keV = Cu K$\\alpha$ (or possibly Ni K$\\beta$ at 8.26 keV, requiring careful fitting)."],
+          ["p", "Actually, 7.47 keV is Ni K$\\alpha$ and 8.04 keV matches Cu K$\\alpha$. In a Ni-base superalloy, the aluminium is expected (gamma-prime phase is Ni$_3$Al). Chromium is a major alloying element. The oxygen may indicate surface oxide."],
+          ["p", "The 0.52 keV peak (O K$\\alpha$) is unreliable for quantification because: (1) low-energy X-rays are strongly absorbed by the specimen and detector window, (2) the fluorescence yield for K-shell emission from oxygen is only about 0.9%, meaning most de-excitations produce Auger electrons rather than X-rays, and (3) peak overlaps with Cr L$\\alpha$ (0.57 keV) may occur at the energy resolution of EDX."]
+        ]]
+      ],
+      "related": [
+        { "title": "Transmission Electron Microscopy", "url": "transmission-electron-microscopy" },
+        { "title": "Surface & Interface Analysis", "url": "surface-interface-analysis" },
+        { "title": "X-ray Diffraction", "url": "x-ray-diffraction-powder-single-crystal" }
+      ]
     },
     {
       "id": "transmission-electron-microscopy",
       "number": "15.3",
       "title": "Transmission Electron Microscopy",
-      "description": "",
-      "readingTime": "— min",
-      "intro": "",
-      "body": [],
-      "related": []
+      "description": "Imaging crystal defects and atomic structure by transmitting electrons through thin foils.",
+      "readingTime": "14 min",
+      "intro": "Transmission electron microscopy pushes resolution to the atomic scale. A thin specimen, transparent to high-energy electrons, reveals dislocations, grain boundaries, precipitates and even individual atomic columns. No other technique combines imaging, diffraction and spectroscopy with this spatial resolution.",
+      "body": [
+        ["h3", "Why electrons?"],
+        ["p", "The resolution of any imaging system is limited by the wavelength of the probe. Visible light (400 to 700 nm) cannot resolve features smaller than about 200 nm, even with perfect optics. Electrons accelerated through a potential $V$ have a de Broglie wavelength:"],
+        ["eq", "\\lambda = \\frac{h}{\\sqrt{2m_e eV}} \\approx \\frac{1.226}{\\sqrt{V}} \\text{ nm (non-relativistic)}"],
+        ["p", "At 200 kV (a typical TEM operating voltage), the relativistically corrected wavelength is 0.00251 nm, or 2.51 pm. This is far smaller than any interatomic spacing. In practice, lens aberrations limit the resolution to about 0.1 nm for conventional TEM and 0.05 nm (50 pm) for aberration-corrected instruments. This is sufficient to resolve individual atomic columns in most materials."],
+
+        ["h3", "Specimen preparation"],
+        ["p", "Electrons at 200 kV penetrate at most a few hundred nanometres of solid material. The specimen must be thinned to electron transparency, typically below 100 nm. This is the main practical challenge of TEM."],
+        ["p", "Common preparation methods include:"],
+        ["ul", [
+          "<strong>Electropolishing</strong>: a disc is thinned by anodic dissolution in an electrolyte. A jet of electrolyte is directed at the centre until a hole forms. The thin edges around the hole are electron-transparent. Works well for metals.",
+          "<strong>Ion milling</strong>: argon ions (3 to 6 keV) sputter material from both sides of a mechanically pre-thinned disc. Works for ceramics, semiconductors, and multiphase materials where electropolishing is not uniform.",
+          "<strong>Focused ion beam (FIB)</strong>: a gallium ion beam cuts a specific site from a bulk specimen with micrometre precision. The lamella (typically 10 by 5 micrometres, 100 nm thick) is lifted out and attached to a TEM grid. Essential for site-specific analysis: a particular grain boundary, a device cross-section, or a failure initiation site."
+        ]],
+        ["callout", "Specimen artefacts", "TEM specimens are thin enough that surfaces matter. Ion milling can introduce amorphous damage layers 5 to 20 nm thick. FIB preparation implants gallium into the surface. Electropolishing can selectively dissolve one phase in a two-phase alloy. Always consider whether what you see is real structure or preparation artefact."],
+
+        ["h3", "Bright-field and dark-field imaging"],
+        ["p", "In bright-field (BF) imaging, an aperture in the back focal plane of the objective lens selects only the transmitted beam. Regions that diffract strongly (satisfying Bragg's condition) appear dark because their intensity has been redirected into diffracted beams. A dislocation appears as a dark line because the lattice distortion around its core brings nearby planes into the Bragg condition."],
+        ["p", "In dark-field (DF) imaging, the aperture selects one diffracted beam instead. Now the diffracting regions appear bright against a dark background. DF imaging is useful for highlighting specific features: a particular precipitate phase, ordered domains, or stacking faults."],
+        ["p", "The width of a dislocation image in conventional TEM is about 10 to 20 nm, much larger than the actual core. The image is a strain-contrast effect, not a direct image of the core. Dislocation densities can be estimated from BF images. Annealed metals have about $10^{10}$ m$^{-2}$. Heavily cold-worked metals reach $10^{15}$ m$^{-2}$."],
+
+        ["h3", "Electron diffraction"],
+        ["p", "Electrons diffract from crystal planes just as X-rays do, but with important differences. The wavelength is much shorter, so Bragg angles are very small (typically less than 1 degree). The interaction with matter is much stronger (electrons scatter from both nuclei and electron clouds), so dynamical scattering effects are significant. And the specimen is a thin foil, not a powder, so the diffraction pattern comes from a single oriented grain or a small number of grains."],
+        ["p", "A selected-area diffraction pattern (SADP) from a single grain of a cubic crystal shows a regular array of spots. The pattern corresponds to a section through the reciprocal lattice perpendicular to the beam direction (the zone axis). Indexing the pattern gives the crystal structure and orientation."],
+        ["p", "Polycrystalline specimens produce ring patterns, analogous to powder XRD. Amorphous materials produce diffuse halos with no sharp features. Ordered precipitates produce superlattice reflections at positions between the matrix spots."],
+
+        ["h3", "High-resolution TEM and STEM"],
+        ["p", "High-resolution TEM (HRTEM) uses a large objective aperture to allow multiple beams (transmitted and several diffracted) to interfere. The resulting image shows lattice fringes with spacing equal to the $d$-spacing of the diffracting planes. With aberration correction, individual atomic columns become visible as dark or bright dots depending on the imaging conditions."],
+        ["p", "Scanning TEM (STEM) focuses the beam to a probe (0.05 to 0.2 nm with aberration correction) and scans it across the specimen. A high-angle annular dark-field (HAADF) detector collects electrons scattered to large angles. The HAADF signal scales approximately as $Z^{1.7}$, giving strong atomic-number contrast. Heavy atoms appear bright. This makes HAADF-STEM ideal for imaging heavy-atom dopants, interface chemistry, and ordering in alloys."],
+
+        ["h3", "Analytical TEM"],
+        ["p", "TEM supports the same spectroscopic techniques as SEM but with far better spatial resolution. EDX in STEM mode achieves spatial resolution of 1 to 2 nm (the probe size), compared to 1 micrometre in SEM. Electron energy-loss spectroscopy (EELS) measures the energy lost by transmitted electrons, giving access to elemental composition, bonding state, and electronic structure with sub-nanometre resolution."],
+        ["p", "EELS is particularly powerful for light elements. The carbon K-edge at 284 eV shows distinct fine structure for sp$^2$ bonding (graphite, graphene) versus sp$^3$ bonding (diamond). The oxygen K-edge distinguishes different oxide phases. Near-edge structure (ELNES) in EELS is the electron-scattering equivalent of X-ray absorption near-edge structure (XANES)."],
+
+        ["problem", "The electron diffraction pattern from an FCC aluminium grain (zone axis [001]) shows spots. Calculate the camera length $L$ if the distance from the transmitted beam to the $(200)$ spot is $R = 8.14$ mm and $a = 4.0496$ angstroms. The accelerating voltage is 200 kV ($\\lambda = 0.02508$ angstroms).", [
+          ["p", "The camera equation relates spot distance to $d$-spacing:"],
+          ["eq", "Rd = \\lambda L"],
+          ["p", "For the $(200)$ reflection:"],
+          ["eq", "d_{200} = \\frac{a}{\\sqrt{h^2+k^2+l^2}} = \\frac{4.0496}{2} = 2.0248 \\text{ angstroms}"],
+          ["eq", "L = \\frac{Rd}{\\lambda} = \\frac{8.14 \\times 2.0248}{0.02508} = 657 \\text{ mm}"],
+          ["p", "The camera length is 657 mm. This is a virtual distance that accounts for the post-specimen lens magnification. The physical distance from specimen to screen is much shorter. Camera length calibration using a known standard (typically polycrystalline gold or aluminium) is essential for accurate $d$-spacing measurements."]
+        ]]
+      ],
+      "related": [
+        { "title": "X-ray Diffraction", "url": "x-ray-diffraction-powder-single-crystal" },
+        { "title": "Scanning Electron Microscopy & EDX", "url": "scanning-electron-microscopy-edx" },
+        { "title": "Reciprocal Lattice & Diffraction", "url": "../crystallography/reciprocal-lattice" }
+      ]
     },
     {
       "id": "spectroscopy-xps-raman-ftir",
       "number": "15.4",
       "title": "Spectroscopy (XPS, Raman, FTIR)",
-      "description": "",
-      "readingTime": "— min",
-      "intro": "",
-      "body": [],
-      "related": []
+      "description": "Probing chemical bonding, oxidation states and molecular structure through spectroscopic methods.",
+      "readingTime": "13 min",
+      "intro": "Diffraction tells you where atoms are. Spectroscopy tells you what they are doing: their bonding, oxidation state, and vibrational modes. XPS, Raman and FTIR are three complementary probes. Each responds to different physics, and each answers different questions.",
+      "body": [
+        ["h3", "X-ray photoelectron spectroscopy (XPS)"],
+        ["p", "XPS (also called ESCA, electron spectroscopy for chemical analysis) measures the kinetic energy of photoelectrons ejected from a surface by soft X-rays. The binding energy of each photoelectron is characteristic of the element and its chemical environment."],
+        ["p", "The physics is the photoelectric effect. A photon of known energy $h\\nu$ (typically Al K$\\alpha$ at 1486.6 eV or Mg K$\\alpha$ at 1253.6 eV) ejects a core-level electron with kinetic energy:"],
+        ["eq", "E_K = h\\nu - E_B - \\phi"],
+        ["p", "where $E_B$ is the binding energy and $\\phi$ is the spectrometer work function (calibrated out). By measuring $E_K$, you get $E_B$, which identifies the element and the chemical state."],
+        ["p", "The key feature of XPS is the chemical shift. The C 1s peak for graphitic carbon appears at 284.6 eV. For C-O bonds it shifts to 286.5 eV. For C=O it moves to 288.0 eV. For O-C=O (carboxyl) it reaches 289.0 eV. These shifts arise because different chemical environments change the screening of the core electrons by valence electrons. More electronegative neighbours pull electron density away, increasing the binding energy."],
+        ["callout", "Surface sensitivity of XPS", "XPS probes only the top 1 to 10 nm of the surface. Photoelectrons generated deeper are inelastically scattered and lose energy, contributing to the background rather than to the peaks. The information depth is about $3\\lambda$, where $\\lambda$ is the inelastic mean free path (1 to 3 nm for most materials at typical kinetic energies). This extreme surface sensitivity is both a strength and a limitation: you see the surface, not the bulk."],
+        ["p", "Quantification in XPS uses peak areas corrected by sensitivity factors. The composition of the sampled volume is:"],
+        ["eq", "C_i = \\frac{A_i / S_i}{\\sum_j A_j / S_j}"],
+        ["p", "where $A_i$ is the peak area and $S_i$ is the relative sensitivity factor for element $i$. Accuracy is typically 5 to 10 at%. Depth profiling by argon ion sputtering extends the analysis through layers, though sputtering can alter the chemistry."],
+
+        ["h3", "Raman spectroscopy"],
+        ["p", "Raman spectroscopy measures the vibrational frequencies of a material by detecting the inelastic scattering of monochromatic light (usually a visible laser). When a photon interacts with a molecule or crystal, most photons scatter elastically (Rayleigh scattering, same frequency). A small fraction (about 1 in $10^7$) scatter inelastically, gaining or losing energy equal to a vibrational mode."],
+        ["p", "The Raman shift is reported in wavenumbers (cm$^{-1}$), the difference between the incident and scattered photon energies:"],
+        ["eq", "\\Delta\\tilde{\\nu} = \\frac{1}{\\lambda_{\\text{incident}}} - \\frac{1}{\\lambda_{\\text{scattered}}} \\quad (\\text{cm}^{-1})"],
+        ["p", "A vibrational mode is Raman-active if it changes the polarisability of the molecule or crystal. This is complementary to infrared absorption, which requires a change in dipole moment. For a centrosymmetric crystal, a mode that is Raman-active is IR-inactive and vice versa (the rule of mutual exclusion)."],
+        ["p", "Raman spectra are fingerprints of phases and bonding. Diamond has a single sharp Raman peak at 1332 cm$^{-1}$. Graphite shows a G band at 1580 cm$^{-1}$ (in-plane C-C stretching) and a D band at 1350 cm$^{-1}$ (disorder-activated). The D/G intensity ratio measures the degree of disorder. Graphene has a characteristic 2D band near 2700 cm$^{-1}$ whose shape distinguishes single-layer from few-layer graphene."],
+        ["p", "Silicon has a first-order Raman peak at 520 cm$^{-1}$. Stress shifts this peak: compressive stress shifts it to higher wavenumber, tensile stress to lower. A shift of 1 cm$^{-1}$ corresponds to about 250 MPa of biaxial stress in silicon. This makes Raman spectroscopy a non-contact stress measurement tool for semiconductor devices."],
+
+        ["h3", "Fourier-transform infrared spectroscopy (FTIR)"],
+        ["p", "FTIR measures the absorption of infrared radiation (wavelengths 2.5 to 25 micrometres, wavenumbers 400 to 4000 cm$^{-1}$) by a sample. The absorbed frequencies correspond to vibrational modes of the molecules or crystal. A mode is IR-active if it changes the electric dipole moment."],
+        ["p", "FTIR uses a Michelson interferometer rather than a dispersive monochromator. The interferometer modulates all wavelengths simultaneously, and a Fourier transform recovers the spectrum. This gives FTIR two major advantages: the multiplex (Fellgett) advantage (all wavelengths measured at once, better signal-to-noise) and the throughput (Jacquinot) advantage (no slits, more light reaches the detector)."],
+        ["p", "Key absorption bands for materials science:"],
+        ["ul", [
+          "O-H stretch: 3200 to 3600 cm$^{-1}$ (broad). Water, hydroxides, hydrated phases.",
+          "C-H stretch: 2850 to 3000 cm$^{-1}$. Organic contamination, polymer identification.",
+          "C=O stretch: 1700 to 1750 cm$^{-1}$. Carbonyl groups in polymers, oxidation products.",
+          "Si-O stretch: 1000 to 1100 cm$^{-1}$. Silicates, glass, silicone contamination.",
+          "Metal-O stretch: 400 to 800 cm$^{-1}$. Metal oxides (e.g., Fe-O in haematite at 540 and 470 cm$^{-1}$)."
+        ]],
+        ["p", "Attenuated total reflectance (ATR) is the most common sampling mode. The sample is pressed against a high-refractive-index crystal (diamond, germanium, or ZnSe), and the evanescent wave penetrating about 0.5 to 2 micrometres into the sample is absorbed. ATR requires no sample preparation and works for solids, liquids, and powders."],
+
+        ["h3", "Choosing the right spectroscopy"],
+        ["p", "XPS answers: what elements are at the surface, and what are their oxidation states? Raman answers: what phases are present, and are they crystalline or amorphous? FTIR answers: what functional groups or molecular species are present? They are complementary, not competing."],
+        ["p", "For example, studying corrosion of steel: XPS identifies the iron oxidation state (Fe$^{2+}$ vs Fe$^{3+}$) in the top 5 nm. Raman distinguishes haematite ($\\alpha$-Fe$_2$O$_3$, peaks at 225, 293, 411, 612 cm$^{-1}$) from magnetite (Fe$_3$O$_4$, peak at 670 cm$^{-1}$) and goethite ($\\alpha$-FeOOH, peaks at 300, 390, 480 cm$^{-1}$). FTIR detects hydroxyl groups and adsorbed water in the corrosion products."],
+
+        ["problem", "An XPS survey spectrum from an oxidised aluminium surface shows peaks at binding energies of 73.0 eV, 119.0 eV, 285.0 eV, and 531.0 eV. Identify the peaks. The Al 2p peak can be fitted with two components at 72.0 eV and 75.6 eV. What do these represent?", [
+          ["p", "The peaks are: 73.0 eV = Al 2p, 119.0 eV = Al 2s, 285.0 eV = C 1s (adventitious carbon, present on nearly all air-exposed surfaces), 531.0 eV = O 1s."],
+          ["p", "The two Al 2p components: 72.0 eV corresponds to metallic aluminium (Al$^0$). The component at 75.6 eV is shifted by +3.6 eV, characteristic of Al$^{3+}$ in Al$_2$O$_3$. The higher binding energy reflects the loss of valence electron density to the oxygen neighbours."],
+          ["p", "The ratio of the oxide to metal component areas (corrected for the exponential attenuation of the metal signal through the oxide layer) can be used to estimate the oxide thickness. Native aluminium oxide is typically 2 to 4 nm thick."]
+        ]]
+      ],
+      "related": [
+        { "title": "Surface & Interface Analysis", "url": "surface-interface-analysis" },
+        { "title": "Scanning Electron Microscopy & EDX", "url": "scanning-electron-microscopy-edx" },
+        { "title": "X-ray Diffraction", "url": "x-ray-diffraction-powder-single-crystal" }
+      ]
     },
     {
       "id": "thermal-analysis-dsc-tga-dta",
       "number": "15.5",
       "title": "Thermal Analysis (DSC, TGA, DTA)",
-      "description": "",
-      "readingTime": "— min",
-      "intro": "",
-      "body": [],
-      "related": []
+      "description": "Measuring heat flow, mass loss and phase transitions as a function of temperature.",
+      "readingTime": "13 min",
+      "intro": "Heating a material while measuring what happens is one of the simplest and most informative experiments in materials science. Differential scanning calorimetry measures heat flow. Thermogravimetric analysis measures mass. Together they reveal melting points, glass transitions, crystallisation kinetics, decomposition temperatures and oxidation behaviour.",
+      "body": [
+        ["h3", "Differential scanning calorimetry (DSC)"],
+        ["p", "DSC measures the heat flow to or from a sample as it is heated, cooled or held at constant temperature. The sample and an inert reference (usually an empty aluminium pan) are heated at the same rate, typically 10 K/min. When the sample undergoes an endothermic event (melting, dehydration), it absorbs extra heat and the DSC records a downward (or upward, depending on convention) peak. An exothermic event (crystallisation, curing, oxidation) appears as a peak in the opposite direction."],
+        ["p", "The area under a DSC peak is the enthalpy change $\\Delta H$, measured in J/g or kJ/mol. The onset temperature of the peak (where the baseline first deviates) is the thermodynamic transition temperature. Peak temperature depends on heating rate and should not be reported as the transition temperature."],
+
+        ["h3", "Real DSC traces"],
+        ["p", "Pure indium (used as a calibration standard) melts at 156.6 degrees C with a sharp endothermic peak. The enthalpy of fusion is 28.6 J/g. The onset is sharp because indium is a pure element: melting occurs at a single temperature."],
+        ["p", "A solder alloy (Sn-3.0Ag-0.5Cu) melts over a range. The DSC trace on heating shows a sharp onset at 217 degrees C (the eutectic temperature) followed by a broad endotherm extending to about 221 degrees C as the remaining solid dissolves into the liquid. The total enthalpy of fusion is about 59 J/g."],
+        ["p", "For polymers, the DSC trace reveals three distinct features:"],
+        ["ul", [
+          "<strong>Glass transition ($T_g$)</strong>: a step change in heat capacity, not a peak. The baseline shifts because the amorphous chains gain segmental mobility. For polycarbonate, $T_g \\approx 150°$C. For PET, $T_g \\approx 75°$C. The magnitude of the step is proportional to the amorphous fraction.",
+          "<strong>Crystallisation ($T_c$)</strong>: an exothermic peak on heating (cold crystallisation) as amorphous chains above $T_g$ organise into crystals. PET quenched from the melt shows cold crystallisation near 130 degrees C. The enthalpy is typically 20 to 40 J/g.",
+          "<strong>Melting ($T_m$)</strong>: an endothermic peak. PET melts near 255 degrees C with $\\Delta H_f \\approx 50$ J/g for a 35% crystalline sample. The degree of crystallinity is $\\Delta H_{\\text{measured}} / \\Delta H_f^{100\\%}$, where $\\Delta H_f^{100\\%} = 140$ J/g for PET."
+        ]],
+        ["callout", "Heating rate matters", "Higher heating rates shift DSC peaks to higher temperature and improve sensitivity (larger peaks relative to noise) but reduce resolution (nearby events merge). Standard practice is 10 K/min. For kinetics studies, multiple heating rates (5, 10, 20, 40 K/min) are used to extract activation energies via the Kissinger equation: $\\ln(\\beta/T_p^2) = -E_a/(RT_p) + C$, where $\\beta$ is the heating rate and $T_p$ is the peak temperature."],
+
+        ["h3", "Thermogravimetric analysis (TGA)"],
+        ["p", "TGA measures the mass of a sample as a function of temperature or time in a controlled atmosphere. Mass loss indicates decomposition, dehydration, or evaporation. Mass gain indicates oxidation."],
+        ["p", "The derivative of the TGA curve (DTG) shows the rate of mass change and resolves overlapping events. A calcium oxalate monohydrate sample (CaC$_2$O$_4 \\cdot$ H$_2$O, a common TGA standard) shows three distinct mass-loss steps:"],
+        ["ol", [
+          "100 to 200 degrees C: loss of H$_2$O (12.3% mass loss). Product: CaC$_2$O$_4$.",
+          "400 to 500 degrees C: loss of CO (19.2% mass loss). Product: CaCO$_3$.",
+          "600 to 800 degrees C: loss of CO$_2$ (30.1% mass loss). Product: CaO."
+        ]],
+        ["p", "These mass losses match stoichiometric predictions exactly, making calcium oxalate an excellent calibration standard. The total mass loss is 61.6%, leaving 38.4% CaO."],
+        ["p", "TGA is widely used to measure: the water content of clays and cements, the organic binder content in ceramic green bodies, the oxidation resistance of metals and alloys in air, and the thermal stability of polymers. Polystyrene decomposes in a single step near 400 degrees C in nitrogen. Polyimides survive above 500 degrees C, which is why they are used as high-temperature insulation."],
+
+        ["h3", "Differential thermal analysis (DTA)"],
+        ["p", "DTA is the precursor to DSC. It measures the temperature difference between the sample and reference as both are heated. A phase transition produces a temperature lag (endothermic) or lead (exothermic). DTA gives qualitative or semi-quantitative enthalpy data and works at higher temperatures than DSC (up to 1600 degrees C or more). It is commonly used for determining liquidus and solidus temperatures of alloys and the phase transition temperatures of ceramics."],
+
+        ["h3", "Combined techniques"],
+        ["p", "Simultaneous DSC/TGA instruments (often called STA, simultaneous thermal analysis) measure heat flow and mass simultaneously. This separates events that involve mass change (decomposition, oxidation) from those that do not (melting, glass transition, crystallisation). Coupling to a mass spectrometer (STA-MS) or FTIR identifies the evolved gases, answering not just how much mass was lost but what left."],
+
+        ["derivation", "Degree of crystallinity from DSC", [
+          ["p", "The fractional crystallinity $X_c$ of a polymer is the ratio of the measured melting enthalpy to the enthalpy of a 100% crystalline sample:"],
+          ["eq", "X_c = \\frac{\\Delta H_m - \\Delta H_c}{\\Delta H_f^{100\\%}}"],
+          ["p", "where $\\Delta H_m$ is the melting enthalpy, $\\Delta H_c$ is the cold crystallisation enthalpy (subtracted because these crystals formed during the scan, not in the original sample), and $\\Delta H_f^{100\\%}$ is the reference value. For PET with $\\Delta H_m = 50$ J/g, $\\Delta H_c = 20$ J/g, and $\\Delta H_f^{100\\%} = 140$ J/g:"],
+          ["eq", "X_c = \\frac{50 - 20}{140} = 0.214 = 21.4\\%"]
+        ]],
+
+        ["problem", "A TGA experiment on a hydrated salt (MgCl$_2 \\cdot x$H$_2$O) shows a total mass loss of 53.2% when heated to 400 degrees C in dry nitrogen, leaving anhydrous MgCl$_2$. Determine $x$ (the number of water molecules per formula unit). The molar masses are: MgCl$_2$ = 95.21 g/mol, H$_2$O = 18.015 g/mol.", [
+          ["p", "Let the initial sample be MgCl$_2 \\cdot x$H$_2$O with molar mass $M = 95.21 + 18.015x$."],
+          ["p", "The mass fraction lost is:"],
+          ["eq", "\\frac{18.015x}{95.21 + 18.015x} = 0.532"],
+          ["p", "Solving: $18.015x = 0.532(95.21 + 18.015x)$"],
+          ["p", "$18.015x = 50.65 + 9.584x$"],
+          ["p", "$8.431x = 50.65$"],
+          ["p", "$x = 6.01 \\approx 6$"],
+          ["p", "The hydrate is MgCl$_2 \\cdot 6$H$_2$O (bischofite), with a molar mass of 203.3 g/mol. The six water molecules account for 53.2% of the total mass. In practice, the water is lost in stages: typically two molecules below 150 degrees C, two more below 200 degrees C, and the final two require higher temperatures. DTA or DSC run simultaneously would show endothermic peaks at each dehydration step."]
+        ]]
+      ],
+      "related": [
+        { "title": "Mechanical Testing & Nanoindentation", "url": "mechanical-testing-nanoindentation" },
+        { "title": "Spectroscopy (XPS, Raman, FTIR)", "url": "spectroscopy-xps-raman-ftir" },
+        { "title": "Phase Transformations", "url": "../phase-transformations/" }
+      ]
     },
     {
       "id": "mechanical-testing-nanoindentation",
       "number": "15.6",
       "title": "Mechanical Testing & Nanoindentation",
-      "description": "",
-      "readingTime": "— min",
-      "intro": "",
-      "body": [],
-      "related": []
+      "description": "Measuring strength, toughness and hardness from bulk specimens down to thin films.",
+      "readingTime": "14 min",
+      "intro": "The tensile test, the Charpy impact test and the nanoindentation experiment are three scales of mechanical measurement. Each answers a different question. Tensile testing gives stress-strain curves. Charpy testing measures impact toughness. Nanoindentation extracts hardness and modulus from volumes smaller than a single grain.",
+      "body": [
+        ["h3", "Tensile testing"],
+        ["p", "The uniaxial tensile test is the most fundamental mechanical test. A specimen of standardised geometry is gripped at both ends and pulled at a controlled rate while force and displacement are recorded. The result is a stress-strain curve that encodes elastic modulus, yield strength, ultimate tensile strength, uniform elongation and fracture strain."],
+        ["p", "International standards define specimen geometry to ensure reproducible results. ASTM E8/E8M (metals) specifies a rectangular or round cross-section with a gauge length of 50 mm (or 4 times the diameter for round specimens). BS EN ISO 6892-1 is the European equivalent. Strain rates are typically $10^{-4}$ to $10^{-3}$ s$^{-1}$ for quasi-static testing. The strain rate matters: most metals show higher yield stress at higher strain rate."],
+        ["p", "Key quantities extracted from a tensile test:"],
+        ["ul", [
+          "<strong>Young's modulus $E$</strong>: slope of the initial linear region. Steel: 210 GPa. Aluminium: 70 GPa.",
+          "<strong>0.2% proof stress $\\sigma_{0.2}$</strong>: stress at 0.2% plastic strain (for materials without a sharp yield point). Found by drawing a line parallel to the elastic slope, offset by $\\varepsilon = 0.002$.",
+          "<strong>Ultimate tensile strength (UTS)</strong>: maximum engineering stress. The onset of necking.",
+          "<strong>Elongation at fracture $\\varepsilon_f$</strong>: total engineering strain at failure. Reported as a percentage.",
+          "<strong>Reduction in area</strong>: $(A_0 - A_f)/A_0$, measured from the fracture surface. A better measure of ductility than elongation because it is independent of gauge length."
+        ]],
+        ["p", "Some representative tensile data at room temperature: low-carbon steel has $\\sigma_{0.2} \\approx 250$ MPa, UTS $\\approx 400$ MPa, elongation 25 to 30%. Ti-6Al-4V has $\\sigma_{0.2} \\approx 880$ MPa, UTS $\\approx 950$ MPa, elongation 14%. An austenitic stainless steel (316L) gives $\\sigma_{0.2} \\approx 220$ MPa, UTS $\\approx 520$ MPa, elongation 40 to 50%."],
+
+        ["h3", "Charpy impact testing"],
+        ["p", "The Charpy test measures the energy absorbed by a notched specimen when struck by a swinging pendulum. A standard Charpy specimen (ASTM E23 or ISO 148-1) is a 10 by 10 by 55 mm bar with a V-notch (2 mm deep, 45 degree angle, 0.25 mm root radius). The pendulum strikes the face opposite the notch. The energy absorbed is calculated from the height difference of the pendulum before and after impact."],
+        ["p", "Charpy impact energy is reported in joules. Room-temperature values for common materials: mild steel 100 to 200 J, high-strength low-alloy steel 40 to 100 J, aluminium alloy 20 to 40 J, grey cast iron 2 to 5 J, engineering ceramics less than 1 J."],
+        ["p", "The main use of Charpy testing is to determine the ductile-to-brittle transition temperature (DBTT) of BCC metals. At high temperature, BCC steels absorb substantial energy (ductile, 100+ J). Below the DBTT, the fracture mechanism changes to cleavage and the absorbed energy drops sharply (10 J or less). FCC metals (aluminium, copper, austenitic stainless steel) do not show a DBTT because they remain ductile down to cryogenic temperatures. This is why austenitic stainless steels are used for cryogenic applications."],
+        ["callout", "The Liberty Ships", "During World War II, over 1500 Liberty cargo ships were built with low-carbon steel. About 400 suffered serious fractures, and 12 broke completely in half. The DBTT of the steel plate was above the North Atlantic sea temperature. The Charpy test, already known but not routinely specified, became a mandatory quality control test for structural steel as a direct consequence of these failures."],
+
+        ["h3", "Hardness testing"],
+        ["p", "Hardness measures a material's resistance to localised plastic deformation, usually by pressing an indenter into the surface. The three common scales are:"],
+        ["ul", [
+          "<strong>Vickers (HV)</strong>: a diamond pyramid with 136 degree face angle. Hardness $= 1.854 F/d^2$, where $F$ is force (kgf) and $d$ is the diagonal of the square impression (mm). Works for all materials. Indent size typically 20 to 100 micrometres.",
+          "<strong>Brinell (HBW)</strong>: a 10 mm tungsten carbide ball at 3000 kgf load (for steel). Hardness $= 2F/(\\pi D(D - \\sqrt{D^2 - d^2}))$. Larger indent (3 to 5 mm diameter) gives a better average over coarse microstructures.",
+          "<strong>Rockwell (HRC, HRB)</strong>: measures depth of penetration rather than indent area. Fast and simple but less versatile. HRC uses a diamond cone, 150 kgf. Widely used for quality control in production."
+        ]],
+        ["p", "An approximate conversion between Vickers hardness and tensile strength for steels is $\\sigma_{\\text{UTS}} \\approx 3.3 \\times \\text{HV}$ (in MPa when HV is in kgf/mm$^2$). A steel with HV 300 has UTS of about 1000 MPa. This factor of about 3 arises because the stress state under an indenter is constrained (triaxial compression) rather than uniaxial."],
+
+        ["h3", "Nanoindentation and the Oliver-Pharr method"],
+        ["p", "Nanoindentation uses very low loads (micro-newtons to milli-newtons) and measures the continuous force-displacement curve during loading and unloading. The indent depths are typically 50 to 500 nm, allowing measurement of individual phases, thin films, and coatings."],
+        ["p", "The standard indenter is a Berkovich tip: a three-sided diamond pyramid with an included half-angle of 65.27 degrees, chosen so that the projected area-to-depth relationship matches the Vickers geometry. The contact area at depth $h_c$ is:"],
+        ["eq", "A = 24.5\\,h_c^2"],
+        ["p", "The Oliver-Pharr method (1992) extracts hardness and reduced modulus from the unloading curve. The key insight is that the initial unloading is elastic and follows the Sneddon contact mechanics solution:"],
+        ["eq", "S = \\frac{dF}{dh}\\bigg|_{h_{\\max}} = \\frac{2}{\\sqrt{\\pi}}E_r\\sqrt{A}"],
+        ["p", "where $S$ is the contact stiffness (the slope of the unloading curve at maximum load) and $E_r$ is the reduced modulus:"],
+        ["eq", "\\frac{1}{E_r} = \\frac{1 - \\nu_s^2}{E_s} + \\frac{1 - \\nu_i^2}{E_i}"],
+        ["p", "Here $E_s$, $\\nu_s$ are the specimen modulus and Poisson's ratio, and $E_i = 1141$ GPa, $\\nu_i = 0.07$ for diamond. The hardness is:"],
+        ["eq", "H = \\frac{F_{\\max}}{A}"],
+        ["p", "The contact depth $h_c$ is not the total displacement $h_{\\max}$ but is corrected for elastic sink-in:"],
+        ["eq", "h_c = h_{\\max} - \\epsilon \\frac{F_{\\max}}{S}"],
+        ["p", "where $\\epsilon = 0.75$ for a Berkovich indenter. This correction accounts for the fact that the surface deflects elastically around the contact, so the true contact area is smaller than what the total depth would suggest."],
+        ["callout", "Substrate effects", "When indenting a thin film, the substrate influences the measured properties if the indent depth exceeds about 10% of the film thickness. A 1 micrometre hard coating on a soft substrate will appear softer than it truly is if indented to 200 nm. The 10% rule is a guideline, not a hard limit: stiff substrates affect modulus measurements at even shallower depths."],
+
+        ["derivation", "Why $H \\approx 3\\sigma_y$ for metals", [
+          ["p", "The constraint factor of about 3 between hardness and yield stress comes from the Tabor analysis of plastic indentation. Under a blunt indenter, the material beneath the contact is in a state of triaxial compression. Slip-line field theory gives:"],
+          ["eq", "H \\approx C \\cdot \\sigma_y"],
+          ["p", "where $C \\approx 2.8$ to $3.0$ for metals obeying the von Mises yield criterion. The physical picture is that the material cannot simply push sideways: it is confined by the surrounding elastic material, and more stress is needed to cause yielding than in uniaxial tension. For strain-hardening materials, the relevant flow stress is that at about 8 to 10% strain under the indenter."]
+        ]],
+
+        ["problem", "A nanoindentation test on a fused silica calibration standard gives a maximum load of 10 mN at a depth of 285 nm. The unloading stiffness is $S = 0.105$ mN/nm. Using the Oliver-Pharr method, calculate the contact depth, contact area, hardness and reduced modulus.", [
+          ["p", "Contact depth:"],
+          ["eq", "h_c = 285 - 0.75 \\times \\frac{10}{0.105} = 285 - 71.4 = 213.6 \\text{ nm}"],
+          ["p", "Contact area:"],
+          ["eq", "A = 24.5 \\times (213.6)^2 = 24.5 \\times 45585 = 1.117 \\times 10^6 \\text{ nm}^2 = 1.117 \\text{ } \\mu\\text{m}^2"],
+          ["p", "Hardness:"],
+          ["eq", "H = \\frac{10 \\times 10^{-3}}{1.117 \\times 10^{-12}} = 8.95 \\text{ GPa}"],
+          ["p", "Reduced modulus (converting $S$ to N/m and $A$ to m$^2$):"],
+          ["eq", "E_r = \\frac{S\\sqrt{\\pi}}{2\\sqrt{A}} = \\frac{0.105 \\times 10^6 \\times \\sqrt{\\pi}}{2\\sqrt{1.117 \\times 10^{-12}}} = \\frac{1.861 \\times 10^5}{2.114 \\times 10^{-6}} = 88.1 \\text{ GPa}"],
+          ["p", "Literature values for fused silica: $H = 9.0 \\pm 0.5$ GPa, $E_r = 69.6$ GPa (corresponding to $E = 72$ GPa, $\\nu = 0.17$). Our hardness agrees well. The modulus is higher than expected, likely because the area function calibration of the tip is imperfect at this depth. This is precisely why fused silica is used as a calibration standard: discrepancies reveal the need to recalibrate the area function $A(h_c)$."]
+        ]]
+      ],
+      "related": [
+        { "title": "Stress & Strain", "url": "../mechanical-properties/stress-strain-engineering-vs-true" },
+        { "title": "Thermal Analysis", "url": "thermal-analysis-dsc-tga-dta" },
+        { "title": "Surface & Interface Analysis", "url": "surface-interface-analysis" }
+      ]
     },
     {
       "id": "surface-interface-analysis",
       "number": "15.7",
       "title": "Surface & Interface Analysis",
-      "description": "",
-      "readingTime": "— min",
-      "intro": "",
-      "body": [],
-      "related": []
+      "description": "Techniques for probing the outermost atomic layers and buried interfaces of materials.",
+      "readingTime": "12 min",
+      "intro": "The surface of a material is not the bulk. Atoms at a surface have missing neighbours, different bonding, and different chemistry. Many failure modes (corrosion, wear, fatigue crack initiation) start at surfaces or interfaces. This article covers the specialised techniques for probing these critical regions.",
+      "body": [
+        ["h3", "Why surfaces are different"],
+        ["p", "A bulk atom in copper has 12 nearest neighbours. An atom on the (111) surface has 9. The missing bonds mean higher energy, changed electronic structure, and a driving force for adsorption and reconstruction. The surface energy of copper is about 1.8 J/m$^2$. For alumina it is about 1.0 J/m$^2$. For polyethylene it is 0.03 J/m$^2$. These numbers control wetting, adhesion and sintering."],
+        ["p", "The practical consequence: surfaces accumulate contamination (adventitious carbon on every air-exposed surface), form native oxides (3 nm on aluminium, 2 nm on silicon, just 1 nm on chromium in stainless steel), and segregate impurities (sulphur and phosphorus segregate to grain boundaries in steel, causing temper embrittlement). Understanding and controlling surface chemistry is central to adhesion, catalysis, corrosion and thin-film growth."],
+
+        ["h3", "Auger electron spectroscopy (AES)"],
+        ["p", "AES uses a focused electron beam (3 to 20 keV) to create inner-shell vacancies. The vacancy is filled by an outer electron, and the excess energy ejects a third electron (the Auger electron) with a kinetic energy characteristic of the element. The Auger process competes with X-ray emission; for light elements (Z below 30), Auger emission dominates."],
+        ["p", "The Auger electron energy depends on three energy levels and is written in spectroscopic notation. The carbon KLL Auger transition involves ionisation of the K shell, with an L-shell electron filling the vacancy and another L-shell electron being ejected. The kinetic energy is approximately:"],
+        ["eq", "E_{KLL} \\approx E_K - E_L - E_L - \\phi \\approx 272 \\text{ eV for carbon}"],
+        ["p", "The escape depth of Auger electrons is 0.5 to 3 nm, making AES even more surface-sensitive than XPS. Combined with ion sputtering, AES provides depth profiles with excellent depth resolution (better than 1 nm per sputter cycle)."],
+        ["p", "The main advantage of AES over XPS is spatial resolution. The electron beam can be focused to 10 nm or less, enabling Auger mapping of composition variations across features like grain boundaries, precipitates and thin-film interfaces. XPS, using a broad X-ray beam, typically has spatial resolution of 10 to 100 micrometres (though modern instruments with focused X-ray sources reach 1 micrometre)."],
+
+        ["h3", "Secondary ion mass spectrometry (SIMS)"],
+        ["p", "SIMS bombards the surface with a primary ion beam (O$_2^+$, Cs$^+$, Ga$^+$, or Bi$^+$, typically 0.5 to 25 keV) and analyses the sputtered secondary ions by mass spectrometry. It is the most sensitive surface analysis technique, with detection limits of parts per billion for some elements."],
+        ["p", "SIMS operates in two modes:"],
+        ["ul", [
+          "<strong>Dynamic SIMS</strong>: high primary ion current erodes the surface rapidly. Used for depth profiling of dopant concentrations in semiconductors. Can profile boron or arsenic implants in silicon down to $10^{14}$ atoms/cm$^3$ with nanometre depth resolution.",
+          "<strong>Static SIMS (ToF-SIMS)</strong>: very low primary ion dose (below $10^{12}$ ions/cm$^2$, the static limit) ensures less than 1% of the surface is sputtered. The time-of-flight mass analyser gives a complete mass spectrum from each pixel. Used for molecular surface analysis: polymer surface chemistry, contamination identification, biological materials."
+        ]],
+        ["p", "SIMS is quantitatively difficult because the ionisation probability of sputtered atoms depends enormously on the chemical environment (the matrix effect). Oxygen in the matrix enhances positive ion yields by orders of magnitude. Quantification requires standards with known concentrations in the same matrix as the unknown."],
+
+        ["h3", "Atomic force microscopy (AFM)"],
+        ["p", "AFM is not strictly a chemical analysis technique, but it provides surface topography with sub-nanometre vertical resolution and nanometre lateral resolution. A sharp tip (radius 5 to 20 nm) on a flexible cantilever is scanned across the surface. The cantilever deflection is measured by reflecting a laser beam off its back onto a position-sensitive detector."],
+        ["p", "In contact mode, the tip drags across the surface at constant force (set by the cantilever spring constant, typically 0.1 to 1 N/m). In tapping mode, the cantilever oscillates near its resonance frequency (100 to 400 kHz) and intermittently contacts the surface. Tapping mode reduces lateral forces and is preferred for soft materials."],
+        ["p", "AFM measures surface roughness (Ra values down to 0.1 nm for polished silicon wafers), step heights on crystal surfaces, grain structure in thin films, and the morphology of nanoparticles. Force-distance curves (pressing the tip into the surface and retracting) measure adhesion forces, stiffness, and can even unfold individual protein molecules."],
+
+        ["h3", "Profilometry and ellipsometry"],
+        ["p", "Stylus profilometry drags a diamond tip (radius 2 to 10 micrometres) across a surface and measures the vertical displacement. It gives line profiles with nanometre vertical resolution but poor lateral resolution compared to AFM. It is the standard method for measuring thin-film thickness by scanning across a step edge."],
+        ["p", "Spectroscopic ellipsometry measures the change in polarisation of light reflected from a surface. By fitting the ellipsometric angles $\\Psi$ and $\\Delta$ as a function of wavelength to an optical model, film thickness and optical constants (refractive index, extinction coefficient) can be extracted. Ellipsometry is non-contact, non-destructive, and sensitive to films as thin as 0.1 nm. It is the standard method for measuring oxide thickness on silicon wafers in the semiconductor industry."],
+
+        ["h3", "Choosing the right surface technique"],
+        ["p", "The choice depends on what you need to know:"],
+        ["ul", [
+          "Elemental composition of the top 5 nm: XPS (broad area) or AES (high spatial resolution).",
+          "Trace impurities and dopant profiles: SIMS.",
+          "Molecular identification at surfaces: ToF-SIMS or ATR-FTIR.",
+          "Oxide thickness: ellipsometry (non-destructive) or XPS (from attenuation of substrate signal).",
+          "Surface roughness and topography: AFM.",
+          "Grain boundary chemistry: AES with a fracture stage (fracture in vacuum to expose the boundary)."
+        ]],
+
+        ["problem", "A silicon wafer with a thermally grown SiO$_2$ layer is measured by spectroscopic ellipsometry, giving an oxide thickness of 95.2 nm. An XPS spectrum of the same wafer shows the Si 2p region with two components: a peak at 99.3 eV (Si$^0$) and a peak at 103.4 eV (Si$^{4+}$). The Si$^0$ peak has 15% of the intensity of the Si$^{4+}$ peak. Estimate the oxide thickness from XPS and compare.", [
+          ["p", "The XPS oxide thickness can be estimated from the attenuation of the substrate signal through the oxide layer:"],
+          ["eq", "\\frac{I_{\\text{sub}}}{I_{\\text{ox}}} = \\frac{I_{\\text{sub}}^\\infty}{I_{\\text{ox}}^\\infty} \\exp\\left(-\\frac{d}{\\lambda \\cos\\theta}\\right)"],
+          ["p", "For normal emission ($\\theta = 0$) and using the approximation for thick oxides where $I_{\\text{ox}} \\approx I_{\\text{ox}}^\\infty$:"],
+          ["eq", "d \\approx \\lambda \\ln\\left(1 + \\frac{I_{\\text{ox}}}{I_{\\text{sub}}} \\cdot \\frac{I_{\\text{sub}}^\\infty}{I_{\\text{ox}}^\\infty}\\right)"],
+          ["p", "Taking the inelastic mean free path $\\lambda \\approx 3.5$ nm for Si 2p photoelectrons in SiO$_2$, and assuming the ratio of infinite-thickness signals $I_{\\text{sub}}^\\infty / I_{\\text{ox}}^\\infty \\approx 0.83$ (accounting for different atomic densities and sensitivity factors):"],
+          ["p", "The measured ratio $I_{\\text{sub}}/I_{\\text{ox}} = 0.15$. So the substrate signal is strongly attenuated, consistent with a thick oxide."],
+          ["eq", "d \\approx \\lambda \\ln\\left(\\frac{I_{\\text{ox}}^\\infty}{I_{\\text{sub}}^\\infty} \\cdot \\frac{1}{I_{\\text{sub}}/I_{\\text{ox}}} + 1\\right) = 3.5 \\ln\\left(\\frac{1}{0.83 \\times 0.15} + 1\\right) = 3.5 \\ln(9.03) = 7.7 \\text{ nm}"],
+          ["p", "This gives about 7.7 nm, which is much less than the ellipsometric value of 95.2 nm. The discrepancy arises because XPS only probes the top 10 nm. For an oxide much thicker than the XPS sampling depth, virtually all the Si$^0$ signal comes from the oxide/substrate interface, and the intensity ratio saturates. XPS is reliable for oxide thickness below about $3\\lambda \\approx 10$ nm. For thicker films, ellipsometry is the appropriate technique."]
+        ]]
+      ],
+      "related": [
+        { "title": "Spectroscopy (XPS, Raman, FTIR)", "url": "spectroscopy-xps-raman-ftir" },
+        { "title": "Scanning Electron Microscopy & EDX", "url": "scanning-electron-microscopy-edx" },
+        { "title": "Mechanical Testing & Nanoindentation", "url": "mechanical-testing-nanoindentation" }
+      ]
     }
   ]
 }

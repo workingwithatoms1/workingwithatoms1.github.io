@@ -6,78 +6,528 @@
     "part": "III",
     "partTitle": "Material Classes",
     "topic": "Polymers",
-    "intro": ""
+    "intro": "Polymers are long-chain molecules built from repeating chemical units. Their properties arise not from the strength of individual bonds but from the collective behaviour of tangled, coiled chains. This module covers synthesis, molecular weight, chain architecture, crystallinity, viscoelastic response, thermal transitions and the industrial processes that shape polymers into products."
   },
   "articles": [
     {
       "id": "polymer-chemistry-classification",
       "number": "13.1",
       "title": "Polymer Chemistry & Classification",
-      "description": "",
-      "readingTime": "— min",
-      "intro": "",
-      "body": [],
-      "related": []
+      "description": "How polymers are synthesised, named and classified by mechanism, structure and thermal response.",
+      "readingTime": "12 min",
+      "intro": "Every synthetic polymer begins as a collection of small molecules that are persuaded to link together. The mechanism by which they link, the architecture they form, and the way they respond to heat determine almost everything about the final material.",
+      "body": [
+        ["h3", "Monomers and repeat units"],
+        ["p", "A polymer is a molecule built from many repeating subunits called monomers. Polyethylene is built from ethylene (CH$_2$=CH$_2$). Polystyrene is built from styrene (CH$_2$=CHC$_6$H$_5$). Nylon 6,6 is built from two monomers: hexamethylenediamine and adipic acid. The repeat unit is the smallest structural fragment that, when replicated along the chain, reproduces the polymer."],
+        ["p", "The number of repeat units in a single chain is the degree of polymerisation $n$. Commercial polyethylene has $n$ ranging from a few hundred to several hundred thousand. The molecular weight of the chain is $M = n M_0$, where $M_0$ is the molecular weight of the repeat unit. For polyethylene, $M_0 = 28$ g/mol, so a chain with $n = 10{,}000$ has $M = 280{,}000$ g/mol."],
+
+        ["h3", "Addition polymerisation"],
+        ["p", "In addition (chain-growth) polymerisation, monomers add to an active chain end one at a time. The process has three stages: initiation, propagation and termination. A free radical, cation or anion opens the double bond of a vinyl monomer and adds it to the growing chain. Propagation is fast: a single chain can grow to thousands of repeat units in under a second."],
+        ["p", "Polyethylene, polypropylene, polystyrene, poly(methyl methacrylate) and poly(vinyl chloride) are all made by addition polymerisation. The monomer must have a carbon-carbon double bond (or ring) that can open to form new single bonds along the backbone."],
+        ["p", "Because chains grow one monomer at a time and terminate randomly, the product is a mixture of chain lengths. Control over the molecular weight distribution requires control over the ratio of initiation to propagation rates. Living polymerisation techniques (anionic, RAFT, ATRP) suppress termination and produce narrow distributions with polydispersity indices below 1.1."],
+
+        ["h3", "Condensation polymerisation"],
+        ["p", "In condensation (step-growth) polymerisation, any two molecules with complementary functional groups can react. Monomers react with monomers, dimers with dimers, trimers with monomers, and so on. A small molecule (usually water) is released at each step. The molecular weight builds up slowly: high conversion is needed to reach high chain lengths."],
+        ["p", "Carothers showed that the number-average degree of polymerisation depends on the extent of reaction $p$:"],
+        ["eq", "\\bar{X}_n = \\frac{1}{1 - p}"],
+        ["p", "At 99% conversion ($p = 0.99$), $\\bar{X}_n = 100$. At 99.9%, $\\bar{X}_n = 1000$. This steep dependence on conversion means that condensation polymers require very pure monomers and precise stoichiometry. Even 0.1% excess of one monomer caps chain growth."],
+        ["p", "Polyesters (PET), polyamides (nylons), polycarbonates and polyurethanes are condensation polymers. Nylon 6,6 is made from the reaction of hexamethylenediamine (6 carbons) with adipic acid (6 carbons), releasing water at each amide bond."],
+
+        ["callout", "Carothers vs Flory", "Carothers distinguished addition from condensation by mechanism (chain-growth vs step-growth). Flory pointed out that some polymers classified as condensation by their chemistry actually polymerise by a chain-growth mechanism (e.g. polyurethanes in some formulations). The modern classification uses mechanism, not by-product, as the criterion."],
+
+        ["h3", "Thermoplastics, thermosets and elastomers"],
+        ["p", "Polymers are classified by their thermal response into three groups:"],
+        ["ul", [
+          "<strong>Thermoplastics</strong> soften and flow when heated. Their chains are held together only by secondary bonds (van der Waals, hydrogen bonds). Heating weakens these bonds, allowing the chains to slide past each other. Cooling restores the solid. Thermoplastics can be reshaped repeatedly. Examples: polyethylene, polypropylene, PET, nylon, PMMA, polycarbonate.",
+          "<strong>Thermosets</strong> are cross-linked into a covalent network during curing. Once set, they cannot be resoftened by heating. The network is permanent. Heating above the decomposition temperature destroys the polymer. Examples: epoxy resins (cured with amines), phenol-formaldehyde (Bakelite), melamine, vulcanised rubber (lightly cross-linked).",
+          "<strong>Elastomers</strong> are lightly cross-linked polymers with glass transition temperatures well below room temperature. Their chains are flexible and mobile, and the cross-links provide a restoring force. They can sustain strains of 500% or more and recover. Natural rubber cross-linked with 1-3% sulphur is the classic example."
+        ]],
+
+        ["h3", "Chain architecture"],
+        ["p", "Polymer chains are not always simple linear sequences. Branching occurs when a growing chain forms a side chain off the main backbone. Short-chain branches (10-20 carbons) disrupt crystallinity. Long-chain branches alter melt viscosity and processing behaviour."],
+        ["p", "Low-density polyethylene (LDPE), made by free-radical polymerisation at high pressure (1000-3000 atm, 200-300 C), has extensive short- and long-chain branching. Its density is 0.91-0.94 g/cm$^3$ and its crystallinity is 40-55%. High-density polyethylene (HDPE), made with Ziegler-Natta or metallocene catalysts at low pressure, is nearly linear. Its density is 0.94-0.97 g/cm$^3$ and its crystallinity is 60-80%. The difference in branching explains the difference in crystallinity, density, stiffness and melting point (115 C for LDPE vs 135 C for HDPE)."],
+
+        ["h3", "Copolymers"],
+        ["p", "A polymer built from two different monomers A and B is a copolymer. The arrangement of A and B along the chain determines the properties:"],
+        ["ul", [
+          "<strong>Random</strong>: A and B distributed statistically. Ethylene-vinyl acetate (EVA) copolymer.",
+          "<strong>Alternating</strong>: strict ABABAB sequence. Styrene-maleic anhydride.",
+          "<strong>Block</strong>: long runs of A followed by long runs of B. Styrene-butadiene-styrene (SBS) triblock copolymer used in shoe soles.",
+          "<strong>Graft</strong>: branches of B attached to a backbone of A. High-impact polystyrene (HIPS) has polybutadiene grafted onto polystyrene."
+        ]],
+
+        ["problem", "A condensation polymerisation uses 1.000 mol of diacid and 0.995 mol of diamine. What is the maximum achievable degree of polymerisation?", [
+          ["p", "When the stoichiometry is imbalanced, the Carothers equation becomes $\\bar{X}_n = (1 + r)/(1 + r - 2rp)$, where $r$ is the ratio of the minority to majority monomer ($r \\leq 1$). Here $r = 0.995/1.000 = 0.995$."],
+          ["p", "At full conversion of the minority monomer ($p = 1$):"],
+          ["eq", "\\bar{X}_n = \\frac{1 + r}{1 - r} = \\frac{1.995}{0.005} = 399"],
+          ["p", "The 0.5% excess diacid limits the chain length to about 400 repeat units, regardless of how long the reaction runs. This is why stoichiometric balance is so important in condensation polymerisation."]
+        ]]
+      ],
+      "related": [
+        { "title": "Molecular Weight & Distributions", "url": "molecular-weight-distributions" },
+        { "title": "Crystallinity in Polymers", "url": "crystallinity-in-polymers" },
+        { "title": "Covalent Bonding", "url": "../bonding/covalent-bonding" }
+      ]
     },
     {
       "id": "molecular-weight-distributions",
       "number": "13.2",
       "title": "Molecular Weight & Distributions",
-      "description": "",
-      "readingTime": "— min",
-      "intro": "",
-      "body": [],
-      "related": []
+      "description": "Number-average and weight-average molecular weights, the polydispersity index, and why they matter for processing and properties.",
+      "readingTime": "11 min",
+      "intro": "No synthetic polymer sample contains chains of a single length. Every sample is a distribution. The way we average that distribution determines the molecular weight we report, and different averages weight different parts of the distribution. Getting this wrong leads to wrong predictions of viscosity, strength and processability.",
+      "body": [
+        ["h3", "Why there is a distribution"],
+        ["p", "In free-radical polymerisation, chains initiate at random times and terminate at random times. Some chains grow long before a termination event finds them. Others are cut short. The result is a broad distribution of chain lengths. In condensation polymerisation, the distribution arises because any two functional groups can react, producing a statistical mixture of oligomers that gradually combine into longer chains."],
+        ["p", "The distribution is not academic. A sample of polystyrene with a narrow distribution (all chains roughly the same length) behaves differently from one with a broad distribution, even if their average molecular weights are identical. The narrow sample has a sharper viscosity transition with temperature. The broad sample flows more easily at low shear rates because its short chains act as a lubricant."],
+
+        ["h3", "Number-average molecular weight"],
+        ["p", "Count the chains and take the arithmetic mean. If there are $N_i$ chains of molecular weight $M_i$, the number-average molecular weight is:"],
+        ["eq", "M_n = \\frac{\\sum_i N_i M_i}{\\sum_i N_i}"],
+        ["p", "$M_n$ weights every chain equally. A single short chain counts the same as a single long chain. This average is measured by techniques that count molecules: osmometry, end-group analysis, vapour pressure osmometry. Gel permeation chromatography (GPC) also provides $M_n$ from the full distribution."],
+        ["p", "Colligative properties (boiling point elevation, freezing point depression, osmotic pressure) depend on the number of molecules in solution, so they naturally yield $M_n$."],
+
+        ["h3", "Weight-average molecular weight"],
+        ["p", "Weight each chain by its mass. A chain twice as heavy contributes twice as much:"],
+        ["eq", "M_w = \\frac{\\sum_i N_i M_i^2}{\\sum_i N_i M_i}"],
+        ["p", "$M_w$ is always greater than or equal to $M_n$. The two are equal only if every chain has the same length (a monodisperse sample). $M_w$ is sensitive to the high-molecular-weight tail of the distribution. A small mass fraction of very long chains pulls $M_w$ up without much effect on $M_n$."],
+        ["p", "Light scattering measures $M_w$ directly, because the scattering intensity from a dissolved polymer is proportional to the product of concentration and molecular weight."],
+
+        ["h3", "The polydispersity index"],
+        ["p", "The ratio of the two averages is the polydispersity index (PDI), also called the dispersity:"],
+        ["eq", "\\text{PDI} = \\frac{M_w}{M_n} \\geq 1"],
+        ["p", "PDI = 1 means all chains are the same length. Larger values mean a broader distribution. Typical values:"],
+        ["ul", [
+          "Anionic living polymerisation: PDI = 1.01-1.05",
+          "RAFT / ATRP controlled radical: PDI = 1.05-1.3",
+          "Free-radical polymerisation: PDI = 1.5-2.5",
+          "Condensation polymerisation (Flory distribution): PDI $\\to$ 2.0 at high conversion",
+          "Ziegler-Natta polyethylene: PDI = 3-8",
+          "Metallocene polyethylene: PDI = 2.0-2.5"
+        ]],
+
+        ["callout", "Why PDI matters for processing", "Injection moulding and film blowing depend on melt rheology, which depends on the molecular weight distribution. A broad distribution (high PDI) gives easier flow at low shear rates but less consistent part dimensions. Metallocene catalysts were developed specifically to narrow the distribution and give more predictable processing behaviour."],
+
+        ["h3", "Real values for common polymers"],
+        ["p", "The following are representative molecular weights for commercial grades:"],
+        ["ul", [
+          "HDPE (blow moulding): $M_n \\approx 15{,}000$, $M_w \\approx 150{,}000$, PDI $\\approx 10$",
+          "HDPE (pipe): $M_n \\approx 20{,}000$, $M_w \\approx 200{,}000$, PDI $\\approx 10$",
+          "Polystyrene (general purpose): $M_n \\approx 100{,}000$, $M_w \\approx 250{,}000$, PDI $\\approx 2.5$",
+          "PET (bottle grade): $M_n \\approx 24{,}000$, $M_w \\approx 48{,}000$, PDI $\\approx 2.0$",
+          "Nylon 6,6: $M_n \\approx 17{,}000$, $M_w \\approx 34{,}000$, PDI $\\approx 2.0$",
+          "PMMA (optical grade): $M_n \\approx 50{,}000$, $M_w \\approx 100{,}000$, PDI $\\approx 2.0$",
+          "UHMWPE (hip implants): $M_w \\approx 3{,}000{,}000-6{,}000{,}000$, very broad distribution"
+        ]],
+
+        ["h3", "Effect of molecular weight on properties"],
+        ["p", "Below a critical molecular weight $M_c$, the polymer has no mechanical integrity. The chains are too short to entangle. Above $M_c$, entanglements form a temporary physical network, and properties change rapidly."],
+        ["p", "Tensile strength increases steeply with $M_n$ up to about $5 M_c$, then levels off. For polystyrene, $M_c \\approx 31{,}000$ g/mol. Below this value, the material is brittle and crumbly. Above $5 M_c \\approx 155{,}000$, the tensile strength saturates near 40 MPa."],
+        ["p", "Melt viscosity $\\eta_0$ (the zero-shear viscosity) scales as:"],
+        ["eq", "\\eta_0 \\propto M_w^{3.4}"],
+        ["p", "This is a strong dependence. Doubling the molecular weight increases the viscosity by a factor of $2^{3.4} \\approx 10.6$. UHMWPE ($M_w > 3 \\times 10^6$) cannot be melt-processed by conventional methods because the viscosity is too high. It is instead processed by compression moulding or ram extrusion."],
+
+        ["h3", "Measuring molecular weight"],
+        ["p", "Gel permeation chromatography (GPC, also called size-exclusion chromatography) is the standard method. A dissolved polymer sample passes through a column packed with porous beads. Small chains enter the pores and are retained longer. Large chains are excluded from the pores and elute first. A detector (refractive index or light scattering) records the concentration as a function of elution time. Calibration with standards of known molecular weight converts elution time to $M$. The full distribution, $M_n$, $M_w$ and PDI are all obtained from a single run."],
+
+        ["derivation", "For a most-probable (Flory) distribution from condensation polymerisation, PDI approaches 2 at high conversion.", [
+          ["p", "In step-growth polymerisation at extent of reaction $p$, the number fraction of chains with $x$ repeat units is:"],
+          ["eq", "n_x = (1 - p) p^{x-1}"],
+          ["p", "This is a geometric distribution. The number-average degree of polymerisation is:"],
+          ["eq", "\\bar{X}_n = \\frac{1}{1 - p}"],
+          ["p", "The weight-average degree of polymerisation is:"],
+          ["eq", "\\bar{X}_w = \\frac{1 + p}{1 - p}"],
+          ["p", "The polydispersity index is:"],
+          ["eq", "\\text{PDI} = \\frac{\\bar{X}_w}{\\bar{X}_n} = 1 + p"],
+          ["p", "As $p \\to 1$ (high conversion), PDI $\\to$ 2. This is the narrowest distribution achievable from an uncontrolled step-growth process."]
+        ]],
+
+        ["problem", "A polymer sample contains three fractions: 2 mol of chains with $M = 10{,}000$ g/mol, 5 mol of chains with $M = 50{,}000$ g/mol, and 1 mol of chains with $M = 200{,}000$ g/mol. Calculate $M_n$, $M_w$ and the PDI.", [
+          ["p", "Number-average:"],
+          ["eq", "M_n = \\frac{2(10{,}000) + 5(50{,}000) + 1(200{,}000)}{2 + 5 + 1} = \\frac{470{,}000}{8} = 58{,}750 \\text{ g/mol}"],
+          ["p", "Weight-average. First compute $\\sum N_i M_i^2$:"],
+          ["eq", "\\sum N_i M_i^2 = 2(10^4)^2 + 5(5 \\times 10^4)^2 + 1(2 \\times 10^5)^2"],
+          ["eq", "= 2 \\times 10^8 + 1.25 \\times 10^{10} + 4 \\times 10^{10} = 5.27 \\times 10^{10}"],
+          ["eq", "M_w = \\frac{5.27 \\times 10^{10}}{4.70 \\times 10^5} = 112{,}100 \\text{ g/mol}"],
+          ["p", "PDI = $M_w / M_n = 112{,}100 / 58{,}750 = 1.91$."],
+          ["p", "The single fraction of 200,000 g/mol chains (12.5% by number, 42.6% by mass) pulls $M_w$ far above $M_n$. This is the characteristic signature of a heavy tail in the distribution."]
+        ]]
+      ],
+      "related": [
+        { "title": "Polymer Chemistry & Classification", "url": "polymer-chemistry-classification" },
+        { "title": "Viscoelasticity & Mechanical Behaviour", "url": "viscoelasticity-mechanical-behaviour" },
+        { "title": "Polymer Processing", "url": "polymer-processing" }
+      ]
     },
     {
       "id": "chain-conformation-configuration",
       "number": "13.3",
       "title": "Chain Conformation & Configuration",
-      "description": "",
-      "readingTime": "— min",
-      "intro": "",
-      "body": [],
-      "related": []
+      "description": "How polymer chains are arranged in space: rotational isomers, the random coil, tacticity, and the end-to-end distance.",
+      "readingTime": "12 min",
+      "intro": "A polymer chain with 10,000 backbone bonds has an enormous number of spatial arrangements available to it. The distinction between configuration (fixed by synthesis) and conformation (changed by bond rotation) is fundamental. Configuration determines whether a polymer can crystallise. Conformation determines how much space it occupies.",
+      "body": [
+        ["h3", "Configuration vs conformation"],
+        ["p", "Configuration refers to the spatial arrangement of substituents that is fixed during synthesis and can only be changed by breaking bonds. A polypropylene chain with all methyl groups on the same side of the backbone (isotactic) has a different configuration from one with methyl groups alternating sides (syndiotactic). Converting one to the other requires breaking and re-forming C-C bonds."],
+        ["p", "Conformation refers to the spatial arrangement achieved by rotation about single bonds. A polyethylene chain in the all-trans conformation is a fully extended zigzag. A single gauche rotation kinks it. The chain constantly samples different conformations by thermal fluctuations. At room temperature, the interconversion between trans and gauche states happens on picosecond timescales."],
+
+        ["h3", "Tacticity"],
+        ["p", "For vinyl polymers with a substituent on every other carbon (polypropylene, polystyrene, PMMA), the placement of the substituent relative to the backbone plane defines the tacticity:"],
+        ["ul", [
+          "<strong>Isotactic</strong>: all substituents on the same side. The chain adopts a regular helical conformation and crystallises readily. Isotactic polypropylene ($T_m = 165$ C) is the commercial form, made with Ziegler-Natta or metallocene catalysts.",
+          "<strong>Syndiotactic</strong>: substituents alternate sides regularly. Also capable of crystallisation, but with a different crystal structure. Syndiotactic polystyrene ($T_m = 270$ C) exists but is less common commercially.",
+          "<strong>Atactic</strong>: substituents placed randomly. The chain has no regular repeating conformation and cannot crystallise. Atactic polystyrene is the common transparent, amorphous material ($T_g = 100$ C, no $T_m$)."
+        ]],
+        ["p", "Tacticity is a configuration. It is set during polymerisation and cannot be changed afterward. The choice of catalyst controls tacticity. Ziegler-Natta catalysts produce >95% isotactic polypropylene. Free-radical polymerisation of propylene gives an atactic product that is a soft, tacky material with no commercial value."],
+
+        ["h3", "The freely jointed chain"],
+        ["p", "The simplest model of a polymer chain treats it as $n$ rigid links, each of length $l$, connected by joints that allow free rotation in any direction. Each bond orientation is independent of its neighbours. This is the freely jointed chain."],
+        ["p", "The end-to-end vector $\\mathbf{R}$ is the sum of $n$ bond vectors:"],
+        ["eq", "\\mathbf{R} = \\sum_{i=1}^{n} \\mathbf{l}_i"],
+        ["p", "Since bond orientations are random, $\\langle \\mathbf{R} \\rangle = 0$: the average end-to-end vector is zero. The chain is equally likely to end up in any direction from its starting point. The useful quantity is the mean-square end-to-end distance:"],
+        ["eq", "\\langle R^2 \\rangle = n l^2"],
+
+        ["derivation", "The mean-square end-to-end distance of a freely jointed chain is $\\langle R^2 \\rangle = nl^2$.", [
+          ["p", "Expand the squared magnitude:"],
+          ["eq", "\\langle R^2 \\rangle = \\left\\langle \\sum_i \\mathbf{l}_i \\cdot \\sum_j \\mathbf{l}_j \\right\\rangle = \\sum_i \\sum_j \\langle \\mathbf{l}_i \\cdot \\mathbf{l}_j \\rangle"],
+          ["p", "For a freely jointed chain, bond orientations are uncorrelated. When $i \\neq j$, $\\langle \\mathbf{l}_i \\cdot \\mathbf{l}_j \\rangle = 0$. When $i = j$, $\\langle \\mathbf{l}_i \\cdot \\mathbf{l}_i \\rangle = l^2$. There are $n$ such terms, so:"],
+          ["eq", "\\langle R^2 \\rangle = n l^2"],
+          ["p", "The root-mean-square end-to-end distance is $R_{\\text{rms}} = l\\sqrt{n}$. A chain with $n = 10{,}000$ bonds has $R_{\\text{rms}} = 100 \\, l$, only 1% of its fully extended length $nl$. The chain is a compact coil."]
+        ]],
+
+        ["h3", "The characteristic ratio"],
+        ["p", "Real chains are not freely jointed. Bond angles are fixed (the C-C-C angle is 109.5 degrees), and gauche conformations are higher in energy than trans. These constraints make the chain stiffer than the freely jointed model predicts, so $\\langle R^2 \\rangle > nl^2$."],
+        ["p", "The characteristic ratio $C_\\infty$ captures how much stiffer the real chain is:"],
+        ["eq", "\\langle R^2 \\rangle = C_\\infty \\, n \\, l^2"],
+        ["p", "Some measured values: polyethylene $C_\\infty = 6.7$, polystyrene $C_\\infty = 10.0$, poly(methyl methacrylate) $C_\\infty = 8.2$, polyisoprene (natural rubber) $C_\\infty = 4.7$, polydimethylsiloxane $C_\\infty = 6.3$. Higher $C_\\infty$ means a stiffer chain that sweeps out a larger volume per unit backbone length."],
+
+        ["h3", "The random coil in solution"],
+        ["p", "In a theta solvent (one that is thermodynamically neutral, neither good nor bad), the chain adopts the unperturbed random coil dimensions described by $C_\\infty$. In a good solvent, the chain swells beyond these dimensions because segments prefer contact with solvent over contact with other segments. In a poor solvent, the chain contracts."],
+        ["p", "The radius of gyration $R_g$ is the root-mean-square distance of chain segments from the centre of mass. For a Gaussian coil:"],
+        ["eq", "R_g = \\frac{R_{\\text{rms}}}{\\sqrt{6}}"],
+        ["p", "For a polystyrene chain with $M = 100{,}000$ g/mol in a theta solvent: $n \\approx 960$ backbone bonds, $l = 1.54$ A, $C_\\infty = 10.0$, so $R_{\\text{rms}} = 1.54 \\times \\sqrt{10.0 \\times 960} \\approx 151$ A $= 15.1$ nm, and $R_g \\approx 6.2$ nm. This is a tiny coil containing a chain that, if fully extended, would be 148 nm long."],
+
+        ["h3", "The equivalent freely jointed chain"],
+        ["p", "Any real chain can be mapped onto a freely jointed chain with fewer, longer links. The Kuhn length $b$ and the number of Kuhn segments $N$ are defined so that the contour length and mean-square end-to-end distance are preserved:"],
+        ["eq", "Nb = nl, \\qquad Nb^2 = C_\\infty \\, n l^2"],
+        ["p", "Solving: $b = C_\\infty l$ and $N = n / C_\\infty$. The Kuhn length for polyethylene is $b = 6.7 \\times 1.54 = 10.3$ A. Each Kuhn segment contains about 7 backbone bonds. For polystyrene, $b = 15.4$ A and each Kuhn segment contains 10 bonds."],
+
+        ["problem", "A polyethylene chain has $M = 140{,}000$ g/mol. Each backbone bond has length $l = 1.54$ A and $C_\\infty = 6.7$. Calculate the number of backbone bonds, the root-mean-square end-to-end distance, and the ratio of $R_{\\text{rms}}$ to the fully extended length.", [
+          ["p", "The repeat unit is CH$_2$-CH$_2$ with $M_0 = 28$ g/mol, contributing 2 backbone bonds. Degree of polymerisation: $n_{\\text{repeat}} = 140{,}000/28 = 5000$. Number of backbone bonds: $n = 2 \\times 5000 = 10{,}000$."],
+          ["p", "Root-mean-square end-to-end distance:"],
+          ["eq", "R_{\\text{rms}} = l\\sqrt{C_\\infty \\, n} = 1.54 \\times \\sqrt{6.7 \\times 10{,}000} = 1.54 \\times 258.8 = 399 \\text{ A} = 39.9 \\text{ nm}"],
+          ["p", "The fully extended length (all-trans zigzag) is $L = n \\times l \\times \\sin(\\theta/2) = 10{,}000 \\times 1.54 \\times \\sin(54.75°) = 10{,}000 \\times 1.26 = 12{,}600$ A $= 1260$ nm."],
+          ["p", "The ratio $R_{\\text{rms}}/L = 39.9/1260 = 0.032$, or about 3%. The chain is overwhelmingly coiled."]
+        ]]
+      ],
+      "related": [
+        { "title": "Polymer Chemistry & Classification", "url": "polymer-chemistry-classification" },
+        { "title": "Crystallinity in Polymers", "url": "crystallinity-in-polymers" },
+        { "title": "Glass Transition & Melting", "url": "glass-transition-melting" }
+      ]
     },
     {
       "id": "crystallinity-in-polymers",
       "number": "13.4",
       "title": "Crystallinity in Polymers",
-      "description": "",
-      "readingTime": "— min",
-      "intro": "",
-      "body": [],
-      "related": []
+      "description": "How polymer chains pack into crystals, the lamellar structure, spherulites, and the factors controlling the degree of crystallinity.",
+      "readingTime": "12 min",
+      "intro": "Polymers can crystallise, but they never reach 100% crystallinity. The long, entangled chains cannot disentangle fully, so crystalline lamellae coexist with amorphous regions. The degree of crystallinity controls density, stiffness, optical clarity and barrier properties.",
+      "body": [
+        ["h3", "Requirements for crystallisation"],
+        ["p", "A polymer chain must be regular enough to pack into a crystal lattice. Three factors control whether crystallisation is possible:"],
+        ["ul", [
+          "<strong>Chain regularity</strong>: Isotactic and syndiotactic polymers crystallise. Atactic polymers generally do not. Isotactic polypropylene is a stiff, crystalline solid ($T_m = 165$ C). Atactic polypropylene is a soft, amorphous gum.",
+          "<strong>Flexible backbone</strong>: The chain must be mobile enough to rearrange into a crystal. Rigid-rod polymers like Kevlar crystallise from solution, not from the melt, because the chains are too stiff to fold.",
+          "<strong>Small or regular substituents</strong>: Polyethylene (no substituents) crystallises easily. Poly(vinyl alcohol) (small OH groups) crystallises. Polystyrene (bulky phenyl groups, atactic) does not."
+        ]],
+        ["p", "Some polymers crystallise even without perfect regularity. Polyethylene terephthalate (PET) is technically a regular chain, but its crystallisation rate is slow enough that it can be quenched to a fully amorphous glass. Stretching the amorphous PET orients the chains and induces crystallisation, which is why drawn PET bottles are translucent rather than transparent."],
+
+        ["h3", "The chain-folded lamella"],
+        ["p", "Polymer crystals are thin platelets called lamellae, typically 10-20 nm thick and several micrometres across. The chain axis runs roughly perpendicular to the large face of the lamella. Since a typical chain is much longer than 20 nm, it must fold back and forth repeatedly to fit within the lamella."],
+        ["p", "This chain-folded model was established by Keller in 1957, when he grew single crystals of polyethylene from dilute solution and found them to be flat, thin rhombic platelets with the chain axis perpendicular to the platelet face. The fold period (lamella thickness) is typically 10-15 nm for polyethylene crystallised from the melt."],
+        ["p", "The fold surface is a region of disorder. Not all re-entries are adjacent (sharp folds); many chains wander through an amorphous region before re-entering the crystal. This is the switchboard model. The degree of adjacent re-entry depends on crystallisation conditions."],
+
+        ["h3", "Spherulites"],
+        ["p", "When a polymer crystallises from the melt, lamellae nucleate at a point and grow outward radially, branching and splaying as they go. The result is a roughly spherical aggregate called a spherulite, typically 1-100 $\\mu$m in diameter. Between the radiating lamellae is amorphous material: chains that did not incorporate into the crystal, chain ends, entanglements and branches."],
+        ["p", "Spherulites are easily seen under a polarising microscope, where they show the characteristic Maltese cross pattern. In a film of slowly cooled polyethylene, the spherulites may grow until they impinge on their neighbours, filling the entire volume. The boundaries between spherulites are weak points and often the site of crack initiation."],
+
+        ["h3", "Degree of crystallinity"],
+        ["p", "No bulk polymer is fully crystalline. The degree of crystallinity $\\chi_c$ is the mass or volume fraction of crystalline material. It is measured by several methods:"],
+        ["ul", [
+          "<strong>Density</strong>: The crystalline phase is denser than the amorphous phase. If $\\rho_c$ and $\\rho_a$ are the crystalline and amorphous densities, $\\chi_c = (\\rho - \\rho_a)/(\\rho_c - \\rho_a)$. For polyethylene: $\\rho_c = 1.000$ g/cm$^3$, $\\rho_a = 0.855$ g/cm$^3$.",
+          "<strong>DSC</strong>: The area under the melting peak gives $\\Delta H_{\\text{melt}}$. Dividing by the enthalpy of fusion for 100% crystalline material gives $\\chi_c$. For polyethylene, $\\Delta H_f^\\circ = 293$ J/g.",
+          "<strong>X-ray diffraction</strong>: Crystalline material gives sharp Bragg peaks; amorphous material gives a broad halo. The ratio of the areas gives $\\chi_c$."
+        ]],
+        ["p", "Typical crystallinities for commercial polymers: HDPE 60-80%, LDPE 40-55%, isotactic polypropylene 50-70%, PET (bottle) 30-40%, nylon 6,6 35-45%, PTFE 50-75%."],
+
+        ["callout", "Crystallinity and transparency", "Spherulites scatter visible light because their size (1-100 $\\mu$m) is comparable to the wavelength of light and the refractive index differs between crystalline and amorphous regions. Highly crystalline polyethylene is opaque and white. Amorphous PET and PMMA are transparent. PET bottles are strain-crystallised with very small crystallites (<< wavelength of light), so they remain clear despite being semi-crystalline."],
+
+        ["h3", "Factors controlling crystallinity"],
+        ["p", "Crystallinity is not an intrinsic property of a polymer type; it depends on processing:"],
+        ["ul", [
+          "Slower cooling gives more time for chains to organise, increasing crystallinity. Quenching can freeze an amorphous structure.",
+          "Stretching orients chains and promotes crystallisation. Drawing PET fibre increases crystallinity from 5% to 45%.",
+          "Nucleating agents (talc, sodium benzoate) increase the nucleation rate, producing smaller spherulites and often higher overall crystallinity.",
+          "Molecular weight affects crystallinity. Very high molecular weight polymers crystallise more slowly because chain mobility is lower.",
+          "Branching disrupts packing. LDPE (branched) has lower crystallinity than HDPE (linear) despite being the same chemical species.",
+          "Copolymerisation with a co-monomer that disrupts regularity reduces crystallinity. Adding 5-10% hexene comonomer to polyethylene produces LLDPE with intermediate properties."
+        ]],
+
+        ["h3", "The Avrami equation for polymer crystallisation"],
+        ["p", "The isothermal crystallisation kinetics of polymers follow the Avrami equation:"],
+        ["eq", "1 - \\chi_c(t) = \\exp(-K t^n)"],
+        ["p", "where $K$ is a rate constant and $n$ is the Avrami exponent. For spherulitic growth from sporadic nuclei in three dimensions, $n = 4$. For instantaneous nucleation (all nuclei present at the start), $n = 3$. For two-dimensional growth (thin films), $n$ is reduced by 1. Measured values of $n$ for polyethylene are typically 2.5-4, depending on temperature and nucleation conditions."],
+
+        ["problem", "A sample of HDPE has a density of 0.960 g/cm$^3$. Using $\\rho_c = 1.000$ g/cm$^3$ and $\\rho_a = 0.855$ g/cm$^3$, calculate the volume fraction crystallinity. If the same sample gives a DSC melting enthalpy of 195 J/g and $\\Delta H_f^\\circ = 293$ J/g, what crystallinity does DSC give?", [
+          ["p", "From density:"],
+          ["eq", "\\chi_c = \\frac{\\rho - \\rho_a}{\\rho_c - \\rho_a} = \\frac{0.960 - 0.855}{1.000 - 0.855} = \\frac{0.105}{0.145} = 0.724 = 72.4\\%"],
+          ["p", "From DSC:"],
+          ["eq", "\\chi_c = \\frac{\\Delta H_{\\text{melt}}}{\\Delta H_f^\\circ} = \\frac{195}{293} = 0.665 = 66.5\\%"],
+          ["p", "The two methods give slightly different answers (72% vs 67%). This is common. The density method assumes a sharp two-phase model with no intermediate density. The DSC method assumes that the enthalpy of fusion for imperfect crystals is the same as for perfect crystals. Neither assumption is strictly true. Differences of 5-10% between methods are typical and reflect the imperfect nature of the two-phase model."]
+        ]]
+      ],
+      "related": [
+        { "title": "Chain Conformation & Configuration", "url": "chain-conformation-configuration" },
+        { "title": "Glass Transition & Melting", "url": "glass-transition-melting" },
+        { "title": "Polymer Processing", "url": "polymer-processing" },
+        { "title": "Crystallography", "url": "../crystallography/" }
+      ]
     },
     {
       "id": "viscoelasticity-mechanical-behaviour",
       "number": "13.5",
       "title": "Viscoelasticity & Mechanical Behaviour",
-      "description": "",
-      "readingTime": "— min",
-      "intro": "",
-      "body": [],
-      "related": []
+      "description": "The Maxwell and Kelvin-Voigt models, stress relaxation, creep, the WLF equation, and time-temperature superposition.",
+      "readingTime": "14 min",
+      "intro": "Polymers are neither purely elastic nor purely viscous. They remember their deformation history. A rubber band snaps back, but slowly. A polymer beam under constant load sags over months. This time-dependent behaviour is viscoelasticity, and it requires models that combine springs and dashpots.",
+      "body": [
+        ["h3", "Springs and dashpots"],
+        ["p", "The two building blocks of linear viscoelastic models are:"],
+        ["ul", [
+          "A <strong>spring</strong> (Hookean element): $\\sigma = E \\varepsilon$. Instantaneous, fully recoverable. Represents the elastic response of bond stretching and chain uncoiling.",
+          "A <strong>dashpot</strong> (Newtonian element): $\\sigma = \\eta \\dot{\\varepsilon}$. Stress proportional to strain rate, not strain. Represents viscous flow of chains sliding past each other. The deformation is permanent."
+        ]],
+        ["p", "All linear viscoelastic models are built from combinations of these two elements. The simplest useful combinations are the Maxwell model and the Kelvin-Voigt model."],
+
+        ["h3", "The Maxwell model"],
+        ["p", "A spring and dashpot in series. Both elements carry the same stress $\\sigma$. The total strain is the sum of the elastic and viscous strains:"],
+        ["eq", "\\dot{\\varepsilon} = \\frac{\\dot{\\sigma}}{E} + \\frac{\\sigma}{\\eta}"],
+        ["p", "Apply a sudden strain $\\varepsilon_0$ and hold it fixed ($\\dot{\\varepsilon} = 0$). The stress relaxes exponentially:"],
+        ["eq", "\\sigma(t) = E \\varepsilon_0 \\exp\\left(-\\frac{t}{\\tau}\\right), \\qquad \\tau = \\frac{\\eta}{E}"],
+        ["p", "The relaxation time $\\tau$ is the time for the stress to fall to $1/e$ of its initial value. For a polymer melt, $\\tau$ might be 0.01-10 s. For a glassy polymer well below $T_g$, $\\tau$ can exceed the age of the universe: the dashpot is effectively frozen."],
+        ["p", "The Maxwell model is good for stress relaxation and for describing polymer melts. It fails for creep: under constant stress, the dashpot flows indefinitely with no equilibrium strain, which is realistic for a melt but not for a solid polymer."],
+
+        ["h3", "The Kelvin-Voigt model"],
+        ["p", "A spring and dashpot in parallel. Both elements experience the same strain. The total stress is the sum:"],
+        ["eq", "\\sigma = E \\varepsilon + \\eta \\dot{\\varepsilon}"],
+        ["p", "Apply a constant stress $\\sigma_0$. The strain approaches an equilibrium value exponentially:"],
+        ["eq", "\\varepsilon(t) = \\frac{\\sigma_0}{E}\\left(1 - \\exp\\left(-\\frac{t}{\\tau}\\right)\\right), \\qquad \\tau = \\frac{\\eta}{E}"],
+        ["p", "This is creep followed by a finite equilibrium strain $\\sigma_0/E$. Remove the stress and the strain recovers fully. The Kelvin-Voigt model is good for creep of solid polymers. It fails for stress relaxation: applying an instantaneous strain requires infinite stress (because the dashpot resists sudden deformation)."],
+
+        ["callout", "Real polymers need more elements", "Neither model alone describes a real polymer. The standard linear solid (a Maxwell element in parallel with a spring) captures both stress relaxation and creep with a finite equilibrium modulus. For quantitative work, a generalised Maxwell model with a spectrum of relaxation times (5-20 elements) is used. Each element represents chain motions at a different length scale."],
+
+        ["h3", "Creep in practice"],
+        ["p", "Creep is the progressive deformation of a material under constant load. For polymers, it is a major engineering concern. A nylon gear tooth under constant mesh load will slowly change dimensions. A polyethylene pipe under internal pressure will gradually expand."],
+        ["p", "Creep data are presented as creep compliance $J(t) = \\varepsilon(t)/\\sigma_0$ versus time. Typical values for PMMA at 20 C and 10 MPa: $J = 0.33$ GPa$^{-1}$ at 1 hour, rising to $0.40$ GPa$^{-1}$ at 1000 hours. The effective modulus drops from 3.0 GPa to 2.5 GPa over that period. This 17% loss of stiffness must be accounted for in design."],
+        ["p", "For polyethylene at 20 C and 5 MPa, the creep compliance rises from $J \\approx 1.0$ GPa$^{-1}$ at 1 hour to $J \\approx 2.5$ GPa$^{-1}$ at 10,000 hours (about 1 year). The material loses 60% of its short-term stiffness. PE water pipes are designed for a 50-year service life, and the creep rupture stress (the stress causing failure after 50 years) may be only 40% of the short-term tensile strength."],
+
+        ["h3", "Time-temperature superposition"],
+        ["p", "A polymer at high temperature for a short time behaves like the same polymer at low temperature for a long time. This is because the same molecular motions (chain segment rotations, reptation) are involved, just at different rates. The relaxation time $\\tau$ decreases as temperature increases."],
+        ["p", "This principle allows you to construct a master curve of modulus versus time (or frequency) spanning many decades, by shifting data collected at different temperatures along the log time axis. The shift factor $a_T$ is the horizontal displacement needed to superimpose the data onto a reference curve at temperature $T_0$."],
+
+        ["h3", "The WLF equation"],
+        ["p", "Williams, Landel and Ferry showed in 1955 that the shift factor for most amorphous polymers follows a universal equation in the range $T_g$ to $T_g + 100$ K:"],
+        ["eq", "\\log_{10} a_T = \\frac{-C_1 (T - T_0)}{C_2 + (T - T_0)}"],
+        ["p", "When the reference temperature $T_0$ is taken as $T_g$, the constants are approximately universal: $C_1 = 17.4$ and $C_2 = 51.6$ K. These values work for a wide range of polymers: polystyrene, PMMA, polyisobutylene, poly(vinyl acetate), polycarbonate."],
+        ["p", "The WLF equation means that a 10 C rise in temperature near $T_g$ can shift the relaxation time by 3-4 decades. This is far stronger than Arrhenius behaviour and reflects the cooperative nature of chain motion near the glass transition. Above $T_g + 100$ K, Arrhenius kinetics apply and the WLF equation no longer holds."],
+
+        ["derivation", "The WLF equation can be understood through free volume theory.", [
+          ["p", "The fractional free volume $f$ is the fraction of total volume not occupied by polymer segments. At $T_g$, $f = f_g \\approx 0.025$ (about 2.5% for most polymers). Above $T_g$, free volume increases linearly:"],
+          ["eq", "f = f_g + \\alpha_f (T - T_g)"],
+          ["p", "where $\\alpha_f \\approx 4.8 \\times 10^{-4}$ K$^{-1}$ is the expansion coefficient of the free volume."],
+          ["p", "The Doolittle equation relates viscosity (and hence relaxation time) to free volume:"],
+          ["eq", "\\ln \\eta = \\ln A + \\frac{B}{f}"],
+          ["p", "Taking the ratio of viscosities at $T$ and $T_g$, and converting to $\\log_{10}$:"],
+          ["eq", "\\log_{10} a_T = \\frac{-B / (2.303 f_g) \\cdot (T - T_g)}{f_g / \\alpha_f + (T - T_g)}"],
+          ["p", "Substituting $f_g = 0.025$ and $\\alpha_f = 4.8 \\times 10^{-4}$ K$^{-1}$ with $B = 1$: $C_1 = B/(2.303 f_g) = 1/(2.303 \\times 0.025) = 17.4$ and $C_2 = f_g/\\alpha_f = 0.025/4.8 \\times 10^{-4} = 52$ K. These match the universal WLF constants."]
+        ]],
+
+        ["h3", "Dynamic mechanical analysis"],
+        ["p", "In a DMA experiment, a small sinusoidal strain $\\varepsilon = \\varepsilon_0 \\sin(\\omega t)$ is applied and the resulting stress is measured. For a viscoelastic material, the stress response is out of phase with the strain by an angle $\\delta$:"],
+        ["eq", "\\sigma = \\sigma_0 \\sin(\\omega t + \\delta)"],
+        ["p", "The storage modulus $E' = (\\sigma_0/\\varepsilon_0)\\cos\\delta$ measures the elastic (stored) component. The loss modulus $E'' = (\\sigma_0/\\varepsilon_0)\\sin\\delta$ measures the viscous (dissipated) component. The ratio $\\tan \\delta = E''/E'$ is the loss tangent, a measure of damping."],
+        ["p", "A typical DMA scan of polycarbonate shows $E' \\approx 2.4$ GPa below $T_g$ (147 C), with a sharp drop through the glass transition to about 1 MPa in the rubbery region. The peak in $\\tan \\delta$ marks $T_g$. Secondary relaxations ($\\beta$ and $\\gamma$ peaks) at lower temperatures correspond to smaller-scale motions: side-group rotations, local backbone flexing."],
+
+        ["problem", "A polycarbonate beam supports a constant stress of 20 MPa at 25 C (well below $T_g = 147$ C). The WLF equation gives $\\log_{10} a_T = -17.4(25 - 147)/(51.6 + 25 - 147)$. Calculate $a_T$ and explain what this means for creep.", [
+          ["p", "Substituting into the WLF equation with $T_0 = T_g = 147$ C:"],
+          ["eq", "\\log_{10} a_T = \\frac{-17.4 \\times (25 - 147)}{51.6 + (25 - 147)} = \\frac{-17.4 \\times (-122)}{51.6 - 122} = \\frac{2122.8}{-70.4} = -30.2"],
+          ["p", "So $a_T = 10^{-30.2} \\approx 6 \\times 10^{-31}$."],
+          ["p", "This means the relaxation time at 25 C is about $10^{30}$ times longer than at $T_g$. A process that takes 1 second at $T_g$ would take $10^{30}$ seconds (about $3 \\times 10^{22}$ years) at 25 C. The polymer is effectively frozen. Creep at room temperature is negligible on any engineering timescale, which is why polycarbonate is used for structural glazing, safety glasses and riot shields."],
+          ["p", "Note: the WLF equation is strictly valid only between $T_g$ and $T_g + 100$ K. Extrapolating 122 K below $T_g$ gives a qualitatively correct picture (extremely slow relaxation) but the numerical value should not be taken literally."]
+        ]]
+      ],
+      "related": [
+        { "title": "Glass Transition & Melting", "url": "glass-transition-melting" },
+        { "title": "Molecular Weight & Distributions", "url": "molecular-weight-distributions" },
+        { "title": "Stress & Strain", "url": "../mechanical-properties/stress-strain-engineering-vs-true" },
+        { "title": "Elasticity & Elastic Moduli", "url": "../mechanical-properties/elasticity-elastic-moduli" }
+      ]
     },
     {
       "id": "glass-transition-melting",
       "number": "13.6",
       "title": "Glass Transition & Melting",
-      "description": "",
-      "readingTime": "— min",
-      "intro": "",
-      "body": [],
-      "related": []
+      "description": "The glass transition temperature, free volume theory, the Fox equation for blends, and melting in semi-crystalline polymers.",
+      "readingTime": "13 min",
+      "intro": "Polymers have two characteristic temperatures. The glass transition $T_g$ is where the amorphous phase changes from a rigid glass to a rubbery or viscous state. The melting point $T_m$ is where the crystalline phase melts. Amorphous polymers have only $T_g$. Semi-crystalline polymers have both.",
+      "body": [
+        ["h3", "The glass transition"],
+        ["p", "Cool a polymer melt. Above $T_m$ (if the polymer can crystallise) or at all temperatures (if it cannot), the chains are in constant Brownian motion: segments rotate, reptate, and rearrange. As temperature drops, the motions slow. At the glass transition temperature $T_g$, the timescale for segmental motion exceeds the experimental timescale. The chains freeze into whatever conformation they happen to be in. The polymer becomes a glass."],
+        ["p", "The glass transition is not a phase transition in the thermodynamic sense. There is no latent heat, no discontinuity in volume. Instead, there is a change in slope: the volume-temperature curve bends from a steeper slope (liquid-like thermal expansion) to a shallower slope (glass-like thermal expansion). The heat capacity drops abruptly. The coefficient of thermal expansion drops by roughly a factor of 2-3."],
+
+        ["h3", "Measuring $T_g$"],
+        ["p", "The most common method is differential scanning calorimetry (DSC). On heating, the glass transition appears as a step in the heat capacity baseline, not a peak. The midpoint of the step is reported as $T_g$. Typical DSC heating rates are 10-20 K/min."],
+        ["p", "DMA measures $T_g$ as the peak in $\\tan \\delta$ or the onset of the drop in $E'$. DMA values are typically 10-20 K higher than DSC values because the oscillation frequency (1 Hz) probes faster motions than the DSC scan rate. $T_g$ depends on the measurement rate because it is a kinetic phenomenon."],
+
+        ["h3", "$T_g$ values for common polymers"],
+        ["p", "Glass transition temperatures vary enormously:"],
+        ["ul", [
+          "Polydimethylsiloxane (silicone rubber): $T_g = -125$ C",
+          "Polybutadiene: $T_g = -100$ C",
+          "Natural rubber (polyisoprene): $T_g = -70$ C",
+          "Polyethylene (amorphous regions): $T_g = -80$ C",
+          "Polypropylene (isotactic): $T_g = -10$ C",
+          "Nylon 6,6: $T_g = 50$ C",
+          "PET: $T_g = 75$ C",
+          "Poly(vinyl chloride): $T_g = 80$ C",
+          "Polystyrene: $T_g = 100$ C",
+          "PMMA: $T_g = 105$ C",
+          "Polycarbonate: $T_g = 147$ C",
+          "Polyimide (Kapton): $T_g = 360$ C"
+        ]],
+        ["p", "The pattern is clear. Flexible backbones with small substituents give low $T_g$. Stiff backbones, bulky substituents and strong intermolecular interactions (hydrogen bonds in nylons, aromatic rings in polycarbonate and polyimide) give high $T_g$."],
+
+        ["h3", "Free volume theory"],
+        ["p", "The free volume model explains $T_g$ as the temperature at which the fractional free volume $f$ falls below a critical value $f_g \\approx 0.025$. Above $T_g$, free volume increases linearly with temperature:"],
+        ["eq", "f = f_g + \\alpha_f(T - T_g)"],
+        ["p", "where $\\alpha_f$ is the thermal expansion coefficient of the free volume, typically $4.8 \\times 10^{-4}$ K$^{-1}$. Below $T_g$, the free volume is frozen at $f_g$. Chain segments need a minimum amount of surrounding free space to rearrange. When $f$ drops below 0.025, they cannot."],
+        ["p", "The free volume theory connects directly to the WLF equation (article 13.5). The Doolittle equation $\\ln \\eta \\propto 1/f$ combined with the linear free volume expansion gives the WLF form for the shift factor. The universal constants $C_1 = 17.4$ and $C_2 = 51.6$ K emerge from $f_g = 0.025$ and $\\alpha_f = 4.8 \\times 10^{-4}$ K$^{-1}$."],
+
+        ["h3", "Factors affecting $T_g$"],
+        ["p", "Several structural and processing factors shift $T_g$:"],
+        ["ul", [
+          "<strong>Backbone flexibility</strong>: Si-O bonds rotate more freely than C-C bonds. Polydimethylsiloxane has $T_g = -125$ C. Replacing the flexible ether linkage in a polyester with a rigid para-phenylene group raises $T_g$ by 50-100 K.",
+          "<strong>Side groups</strong>: Bulky side groups impede rotation. Polystyrene (phenyl: $T_g = 100$ C) vs polyethylene (H: $T_g = -80$ C). Longer flexible side chains have the opposite effect: they act as internal plasticisers. Poly(n-butyl methacrylate) has $T_g = 20$ C, lower than PMMA at 105 C despite the bulkier side chain, because the butyl group is flexible.",
+          "<strong>Molecular weight</strong>: Short chains have more free ends, and chain ends contribute excess free volume. $T_g$ increases with molecular weight and levels off above about $10 M_c$. The Fox-Flory equation: $T_g = T_g^\\infty - K/M_n$, where $K$ is a polymer-specific constant.",
+          "<strong>Plasticisers</strong>: Small molecules (di-octyl phthalate, citrate esters) dissolve between chains and increase free volume. Adding 30% DOP to PVC drops $T_g$ from 80 C to about $-20$ C, converting a rigid pipe material into a flexible film or cable sheathing.",
+          "<strong>Cross-linking</strong>: Cross-links reduce chain mobility and raise $T_g$. Highly cross-linked epoxy resins can have $T_g > 200$ C."
+        ]],
+
+        ["h3", "The Fox equation for blends"],
+        ["p", "When two miscible polymers are blended, the blend has a single $T_g$ intermediate between the two component values. The Fox equation predicts it:"],
+        ["eq", "\\frac{1}{T_g} = \\frac{w_1}{T_{g,1}} + \\frac{w_2}{T_{g,2}}"],
+        ["p", "where $w_1$ and $w_2$ are weight fractions and $T_g$ values are in kelvin. This equation also applies to random copolymers and to plasticised polymers (treating the plasticiser as component 2 with its own $T_g$)."],
+        ["p", "An immiscible blend shows two separate $T_g$ values, one for each phase. The presence of one or two glass transitions in a DSC scan is the standard test for miscibility."],
+
+        ["callout", "The $T_g / T_m$ rule of thumb", "For many polymers, the ratio $T_g/T_m$ (both in kelvin) falls in a narrow range. For symmetric polymers (polyethylene, PTFE): $T_g/T_m \\approx 2/3$. For asymmetric polymers (polystyrene, polycarbonate): $T_g/T_m \\approx 1/2$. This is an empirical observation, not a law. It holds roughly for: PE (193/414 = 0.47), nylon 6,6 (323/538 = 0.60), PET (348/538 = 0.65), PP (263/438 = 0.60), PTFE (160/600 = 0.27, an exception). The rule is useful for quick estimates when only one temperature is known."],
+
+        ["h3", "Melting of semi-crystalline polymers"],
+        ["p", "The crystalline fraction of a semi-crystalline polymer melts at $T_m$, absorbing latent heat. Unlike small-molecule crystals, polymer melting occurs over a range of temperature (10-30 K is typical) because the crystal population contains lamellae of varying thickness and perfection. Thicker, more perfect lamellae melt at higher temperatures."],
+        ["p", "The equilibrium melting point $T_m^0$ (the melting point of an infinitely thick, perfect crystal) is a thermodynamic quantity:"],
+        ["eq", "T_m^0 = \\frac{\\Delta H_f}{\\Delta S_f}"],
+        ["p", "where $\\Delta H_f$ and $\\Delta S_f$ are the enthalpy and entropy of fusion per repeat unit. The observed melting point of finite lamellae is depressed below $T_m^0$ according to the Thomson-Gibbs equation:"],
+        ["eq", "T_m = T_m^0 \\left(1 - \\frac{2 \\gamma_e}{\\Delta H_f \\cdot l}\\right)"],
+        ["p", "where $\\gamma_e$ is the fold-surface free energy and $l$ is the lamella thickness. Thinner lamellae melt at lower temperatures. For polyethylene: $T_m^0 = 141.4$ C, $\\gamma_e = 90$ mJ/m$^2$, $\\Delta H_f = 293$ J/cm$^3$. A lamella 10 nm thick melts at about 128 C; one 20 nm thick melts at about 135 C."],
+
+        ["h3", "Some melting points"],
+        ["p", "Representative equilibrium melting temperatures:"],
+        ["ul", [
+          "Polyethylene: $T_m^0 = 141$ C",
+          "Isotactic polypropylene: $T_m = 165$ C",
+          "Nylon 6,6: $T_m = 265$ C",
+          "PET: $T_m = 265$ C",
+          "PTFE: $T_m = 327$ C",
+          "PEEK: $T_m = 343$ C",
+          "Nylon 6: $T_m = 225$ C"
+        ]],
+        ["p", "High melting points come from strong intermolecular interactions (hydrogen bonds in nylons), stiff chains (aromatic rings in PET and PEEK), and high symmetry (PTFE). PEEK is used for aerospace components because it retains mechanical properties above 250 C."],
+
+        ["problem", "A blend of polystyrene ($T_g = 100$ C, $w_1 = 0.60$) and poly(phenylene oxide) ($T_g = 210$ C, $w_2 = 0.40$) is miscible at all compositions. Use the Fox equation to predict the blend $T_g$. This blend is sold commercially as Noryl by SABIC.", [
+          ["p", "Convert to kelvin: $T_{g,1} = 373$ K, $T_{g,2} = 483$ K."],
+          ["eq", "\\frac{1}{T_g} = \\frac{0.60}{373} + \\frac{0.40}{483} = 1.609 \\times 10^{-3} + 0.828 \\times 10^{-3} = 2.437 \\times 10^{-3}"],
+          ["eq", "T_g = \\frac{1}{2.437 \\times 10^{-3}} = 410 \\text{ K} = 137 \\text{ C}"],
+          ["p", "The Fox equation predicts $T_g = 137$ C for this 60/40 PS/PPO blend. The measured value is about 140 C. The agreement is typical for miscible blends. Noryl is used when PS alone is too soft (insufficient heat resistance) and PPO alone is too expensive or difficult to process."]
+        ]]
+      ],
+      "related": [
+        { "title": "Viscoelasticity & Mechanical Behaviour", "url": "viscoelasticity-mechanical-behaviour" },
+        { "title": "Crystallinity in Polymers", "url": "crystallinity-in-polymers" },
+        { "title": "Chain Conformation & Configuration", "url": "chain-conformation-configuration" },
+        { "title": "Glass Formation & the Glass Transition", "url": "../ceramics/glass-formation-the-glass-transition" }
+      ]
     },
     {
       "id": "polymer-processing",
       "number": "13.7",
       "title": "Polymer Processing",
-      "description": "",
-      "readingTime": "— min",
-      "intro": "",
-      "body": [],
-      "related": []
+      "description": "Injection moulding, extrusion, blow moulding and other industrial processes for shaping thermoplastics and thermosets.",
+      "readingTime": "13 min",
+      "intro": "A polymer's properties are set not just by its chemistry but by how it is shaped. Cooling rate, shear history, orientation and pressure during processing all affect crystallinity, residual stress and final dimensions. This article covers the main industrial shaping processes with real operating parameters.",
+      "body": [
+        ["h3", "Polymer melts and viscosity"],
+        ["p", "Before shaping, a thermoplastic must be melted or softened. Polymer melts are highly viscous compared to other liquids. Water has a viscosity of $10^{-3}$ Pa$\\cdot$s. A typical polymer melt has a viscosity of $10^2$-$10^4$ Pa$\\cdot$s, a million times higher. This high viscosity dictates the pressures, temperatures and flow rates used in processing."],
+        ["p", "Polymer melts are also shear-thinning: the viscosity decreases with increasing shear rate. This is because shear aligns and disentangles chains. At the shear rates encountered in injection moulding ($10^3$-$10^4$ s$^{-1}$), the viscosity may be 10-100 times lower than the zero-shear value. Shear thinning is essential; without it, the pressures required to fill a mould would be impractical."],
+        ["p", "The melt flow index (MFI), measured by extruding polymer through a standard die under a fixed load (ASTM D1238), is the simplest characterisation of processability. A high MFI means low viscosity and easy flow. HDPE for injection moulding: MFI = 5-50 g/10 min. HDPE for blow moulding: MFI = 0.2-1 g/10 min (higher viscosity to support the parison)."],
+
+        ["h3", "Extrusion"],
+        ["p", "Extrusion is the continuous process of forcing molten polymer through a die to produce a constant cross-section. It accounts for the largest volume of polymer processing worldwide."],
+        ["p", "A single-screw extruder has a heated barrel (typically 25-35 L/D, where L is the barrel length and D the screw diameter) with a rotating Archimedean screw inside. Polymer pellets enter at the hopper, are conveyed forward by the screw, melted by a combination of barrel heating and viscous dissipation (shear heating), and pushed through a die at the end."],
+        ["p", "Typical operating conditions for HDPE pipe extrusion: barrel temperatures 180-220 C, die temperature 200-210 C, screw speed 30-100 rpm, output 100-500 kg/h, melt pressure at the die 10-30 MPa. The pipe exits the die and passes through a vacuum calibration tank (to set the outer diameter) and a water cooling bath."],
+        ["p", "Products made by extrusion: pipe, profile (window frames, cable ducting), sheet, film (cast and blown), wire coating, filaments. The die geometry defines the product cross-section. Post-die operations (stretching, blowing, calibration) refine dimensions and orientation."],
+
+        ["h3", "Blown film extrusion"],
+        ["p", "A tubular die produces a thin-walled tube of melt that is inflated by internal air pressure into a bubble, typically 2-4 times the die diameter (the blow-up ratio). The bubble is cooled by external air rings, collapsed by nip rollers, and wound onto rolls. The film thickness depends on the blow-up ratio and the draw-down ratio."],
+        ["p", "Typical conditions for LDPE packaging film: die diameter 200-400 mm, die gap 1.0-1.5 mm, blow-up ratio 2.5-3.0, final film thickness 20-50 $\\mu$m, frost line height 0.5-1.5 m, output 100-300 kg/h, melt temperature 170-190 C. The biaxial stretching (circumferential from blowing, axial from draw-down) gives balanced film properties."],
+
+        ["h3", "Injection moulding"],
+        ["p", "Injection moulding is the dominant process for producing discrete polymer parts. A reciprocating screw melts and homogenises the polymer, then acts as a piston to inject it into a closed mould cavity at high speed and pressure."],
+        ["p", "The cycle has four stages: (1) plasticisation: the screw rotates, melting pellets and accumulating a shot of melt in front of the screw; (2) injection: the screw moves forward, injecting the melt into the mould at 50-200 MPa and 100-500 cm$^3$/s; (3) packing: the screw maintains pressure (30-80% of injection pressure) while the part cools and shrinks, forcing additional melt into the cavity to compensate; (4) cooling: the part solidifies in the water-cooled mould (mould temperature 20-80 C for most commodity polymers)."],
+        ["p", "Cycle times range from 5 s for thin-walled packaging to 60 s for thick-walled technical parts. The limiting factor is almost always cooling time, which scales as the square of the wall thickness. Doubling the wall thickness quadruples the cooling time."],
+        ["p", "Representative parameters for polypropylene injection moulding: melt temperature 220-280 C, mould temperature 20-50 C, injection pressure 80-120 MPa, hold pressure 40-60 MPa, cooling time 8-20 s, clamp force 500-3000 kN."],
+
+        ["callout", "Shrinkage and warpage", "All injection-moulded parts shrink as they cool. Semi-crystalline polymers shrink more (1.5-3% for PP, 2-4% for HDPE) than amorphous polymers (0.4-0.7% for PS, 0.5-0.7% for PC). Non-uniform cooling or flow-induced molecular orientation causes differential shrinkage, which leads to warpage. Designing for uniform wall thickness is the single most effective way to reduce warpage."],
+
+        ["h3", "Blow moulding"],
+        ["p", "Blow moulding produces hollow parts: bottles, containers, automotive ducts, fuel tanks. There are two main variants."],
+        ["p", "<strong>Extrusion blow moulding</strong>: a tube of melt (the parison) is extruded downward, a two-part mould closes around it, and compressed air (0.3-0.8 MPa) inflates the parison against the mould walls. After cooling, the mould opens and the part is ejected. The process is fast (10-20 s per cycle for a 1 L bottle) and suited to large production volumes. HDPE milk bottles and detergent containers are made this way. Melt temperature 170-200 C, parison wall thickness 2-4 mm, bottle wall thickness 0.3-0.8 mm."],
+        ["p", "<strong>Injection stretch blow moulding</strong>: used for PET beverage bottles. First, a preform (a thick-walled test-tube shape) is injection-moulded. Then the preform is reheated to 95-110 C (above $T_g = 75$ C but well below $T_m = 265$ C), stretched axially by a rod, and blown radially by compressed air (2.5-4.0 MPa). The biaxial stretching induces strain crystallisation, which gives the bottle its strength, clarity and gas barrier properties. A 28 g preform becomes a 500 mL bottle with a wall thickness of 0.25-0.40 mm. Cycle time for the blow stage is 3-5 s."],
+
+        ["h3", "Thermoset processing"],
+        ["p", "Thermosets cannot be melted and reshaped. They are processed by mixing reactive components (resin + hardener), shaping the mixture while it is still liquid, and then curing (cross-linking) it in place."],
+        ["p", "Compression moulding: a pre-measured charge of uncured material (sheet moulding compound, bulk moulding compound) is placed in a heated mould cavity. The mould closes under 5-15 MPa, and the material flows and cures simultaneously. Mould temperatures 130-170 C, cure times 30-300 s. Used for automotive body panels (SMC), electrical switchgear and cookware handles."],
+        ["p", "Resin transfer moulding (RTM): dry fibre reinforcement is placed in a mould, the mould is closed, and liquid thermoset resin (epoxy, polyester, vinyl ester) is injected at 0.2-1.0 MPa. The resin wets the fibres and cures in the mould. Used for composite aerospace and automotive parts where fibre volume fractions of 50-60% are needed."],
+
+        ["h3", "The effect of processing on properties"],
+        ["p", "Processing determines microstructure, which determines properties. A slowly cooled polypropylene part has large spherulites, high crystallinity, high stiffness and low impact strength. A rapidly quenched part has small spherulites or partially amorphous structure, lower stiffness but better impact resistance. The same polymer, different properties, set entirely by the cooling rate."],
+        ["p", "Flow-induced orientation aligns chains in the flow direction. Near the mould wall, where shear rates are highest and cooling is fastest, a highly oriented skin forms. In the centre, where cooling is slow, the chains relax to an isotropic state. This skin-core structure gives different properties in different directions and is a fundamental feature of injection-moulded parts."],
+
+        ["problem", "A polypropylene injection moulding has a wall thickness of 2.5 mm and takes 15 s to cool. A redesign increases the wall thickness to 4.0 mm. Estimate the new cooling time. The mould temperature and melt temperature remain the same.", [
+          ["p", "Cooling time scales approximately as the square of the wall thickness:"],
+          ["eq", "t_{\\text{cool}} \\propto h^2"],
+          ["p", "where $h$ is the wall thickness. The ratio:"],
+          ["eq", "\\frac{t_2}{t_1} = \\left(\\frac{h_2}{h_1}\\right)^2 = \\left(\\frac{4.0}{2.5}\\right)^2 = 2.56"],
+          ["eq", "t_2 = 15 \\times 2.56 = 38.4 \\text{ s}"],
+          ["p", "The cooling time increases from 15 s to about 38 s. Since the total cycle time is dominated by cooling, this represents a significant increase in cycle time and cost per part. If the total cycle was 20 s (15 s cooling + 5 s injection/ejection), it becomes about 43 s, more than doubling the time. This is why designers aim for the minimum wall thickness that meets the structural requirement."]
+        ]]
+      ],
+      "related": [
+        { "title": "Molecular Weight & Distributions", "url": "molecular-weight-distributions" },
+        { "title": "Crystallinity in Polymers", "url": "crystallinity-in-polymers" },
+        { "title": "Glass Transition & Melting", "url": "glass-transition-melting" },
+        { "title": "Composites", "url": "../composites/" },
+        { "title": "Manufacturing", "url": "../manufacturing/" }
+      ]
     }
   ]
 }

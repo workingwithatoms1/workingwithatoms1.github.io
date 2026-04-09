@@ -6,78 +6,532 @@
     "part": "IV",
     "partTitle": "Practice",
     "topic": "Manufacturing",
-    "intro": ""
+    "intro": "Turning raw materials into useful components. This module covers the principal routes by which metals and alloys are shaped, joined, treated and coated, from molten metal poured into a sand mould to laser powder-bed fusion building parts layer by layer."
   },
   "articles": [
     {
       "id": "casting-solidification-processing",
       "number": "16.1",
       "title": "Casting & Solidification Processing",
-      "description": "",
-      "readingTime": "— min",
-      "intro": "",
-      "body": [],
-      "related": []
+      "description": "Sand casting, die casting and investment casting: how molten metal fills a mould and solidifies, and what can go wrong.",
+      "readingTime": "14 min",
+      "intro": "Casting is the oldest metal-forming process and still one of the most versatile. Pour molten metal into a shaped cavity, let it solidify, remove the mould. The simplicity is deceptive. The physics of fluid flow, heat transfer and solidification shrinkage makes casting one of the most defect-prone manufacturing steps. Understanding the process means understanding the defects.",
+      "body": [
+        ["h3", "Why cast?"],
+        ["p", "Casting can produce shapes that no other process can match economically. A V8 engine block, a ship's propeller, a turbine housing: all are cast. The process imposes few constraints on geometry, works with nearly any alloy, and scales from grams to hundreds of tonnes. The trade-off is that cast microstructures are coarser and more defect-prone than wrought ones. Porosity, segregation and residual stress are constant concerns."],
+
+        ["h3", "Sand casting"],
+        ["p", "Sand casting uses a pattern (usually wood, resin or metal) pressed into bonded sand to form the mould cavity. The mould is split into a cope (top half) and drag (bottom half). Cores of bonded sand create internal cavities. Molten metal enters through a runner system: a pouring basin, sprue, runners and gates sized to fill the cavity without turbulence."],
+        ["p", "Sand casting is cheap for low volumes. Tooling cost is low. The penalty is surface finish and dimensional tolerance. Typical surface roughness is 12-25 $\\mu$m Ra. Dimensional tolerance is $\\pm$1.5 mm on a 300 mm dimension, roughly $\\pm$0.5%. Minimum wall thickness is about 5 mm for ferrous alloys."],
+        ["p", "Solidification in a sand mould is slow because sand is a poor thermal conductor ($k \\approx 0.5$ W/m$\\cdot$K). A 50 mm section of cast iron takes 10-15 minutes to solidify. The resulting grain size is coarse, typically 1-5 mm. Mechanical properties are lower than for the same alloy in wrought form."],
+        ["callout", "Chvorinov's rule", "Solidification time $t_s$ is proportional to the square of the volume-to-surface-area ratio: $t_s = B(V/A)^2$, where $B$ is a mould constant (typically 2-10 min/cm$^2$ for sand moulds). A sphere solidifies faster than a cube of the same volume because it has a lower $V/A$."],
+
+        ["h3", "Die casting"],
+        ["p", "Die casting forces molten metal under high pressure (10-175 MPa) into a steel mould (die). Fill times are short: 10-100 ms for a thin-walled aluminium part. The metal die conducts heat rapidly ($k \\approx 30$ W/m$\\cdot$K for H13 tool steel), so solidification is fast. Grain size is fine (50-200 $\\mu$m), surface finish is good (1-3 $\\mu$m Ra) and dimensional tolerance is tight ($\\pm$0.1 mm on 100 mm, roughly $\\pm$0.1%)."],
+        ["p", "Die casting is economical for high volumes (typically above 10,000 parts) because die costs are high: $\\$$20,000-$\\$$200,000 for a multi-cavity die. Aluminium, zinc and magnesium alloys dominate. Ferrous alloys are rarely die-cast because their high melting points (above 1400$°$C) destroy steel dies rapidly."],
+        ["p", "The main limitation is porosity. Air trapped during the violent fill produces gas porosity, and solidification shrinkage produces shrinkage porosity. Typical porosity in a high-pressure die casting is 1-5% by volume. This prevents heat treatment (pores expand and blister) and limits fatigue life. Vacuum-assisted die casting reduces porosity to below 1%."],
+
+        ["h3", "Investment casting (lost-wax)"],
+        ["p", "Investment casting produces the highest dimensional accuracy and surface finish of any casting process. A wax pattern is coated with ceramic slurry, dried, and the wax melted out to leave a thin ceramic shell mould. Metal is poured (often under vacuum for superalloys) and solidifies against the ceramic."],
+        ["p", "Tolerances reach $\\pm$0.1 mm on 25 mm ($\\pm$0.4%). Surface roughness is 1.5-6 $\\mu$m Ra. Wall thickness can be as low as 1 mm. The process is used for turbine blades, orthopaedic implants, golf club heads and jewellery."],
+        ["p", "Single-crystal turbine blades are made by investment casting with a grain selector or seed crystal at the base of the mould. Directional solidification from bottom to top, with a thermal gradient of 3-5$°$C/mm, eliminates grain boundaries. The CMSX-4 nickel superalloy blade in a jet engine operates at 1050$°$C with no grain boundaries to act as creep failure initiation sites."],
+
+        ["h3", "Solidification: nucleation and growth"],
+        ["p", "Solidification begins with nucleation. Homogeneous nucleation requires undercoolings of 100-300$°$C (observed only in carefully cleaned melts of small droplets). In practice, heterogeneous nucleation occurs on mould walls, oxide inclusions and deliberately added inoculants at undercoolings of just 1-10$°$C."],
+        ["p", "Aluminium castings are inoculated with Al-5Ti-1B master alloy. The TiB$_2$ particles (diameter 1-5 $\\mu$m) are potent nucleation sites that refine the grain size from 5 mm down to 200 $\\mu$m. Grain refinement improves strength (Hall-Petch), ductility and resistance to hot tearing."],
+        ["p", "After nucleation, crystals grow as dendrites: tree-like structures with primary arms in the direction of maximum heat flow and secondary arms branching at regular intervals. The secondary dendrite arm spacing (SDAS) $\\lambda_2$ depends on local solidification time $t_f$:"],
+        ["eq", "\\lambda_2 = c\\,t_f^{1/3}"],
+        ["p", "where $c$ is a constant (about 10 $\\mu$m$\\cdot$s$^{-1/3}$ for Al-Si alloys). Fast cooling (die casting, $t_f \\approx 1$ s) gives $\\lambda_2 \\approx 10$ $\\mu$m. Slow cooling (sand casting, $t_f \\approx 1000$ s) gives $\\lambda_2 \\approx 100$ $\\mu$m. Finer SDAS means better mechanical properties because microsegregation is on a shorter length scale and more easily homogenised."],
+
+        ["h3", "Casting defects"],
+        ["p", "Casting defects fall into several categories:"],
+        ["ul", [
+          "<strong>Shrinkage porosity.</strong> Most metals contract 3-7% by volume on solidification. If liquid metal cannot feed the last region to solidify, a void forms. Risers (reservoirs of liquid metal) are placed above thick sections to compensate.",
+          "<strong>Gas porosity.</strong> Hydrogen solubility in aluminium drops from 0.69 mL/100g in the liquid to 0.036 mL/100g in the solid (at 660$°$C). The rejected gas forms spherical pores 0.1-5 mm in diameter. Degassing the melt with argon or nitrogen reduces hydrogen content to below 0.1 mL/100g.",
+          "<strong>Hot tearing.</strong> If the casting is constrained as it cools, thermal contraction stresses can open cracks along grain boundaries where the last liquid film solidifies. Long, thin sections and re-entrant corners are vulnerable.",
+          "<strong>Misruns and cold shuts.</strong> Metal that solidifies before filling the mould leaves an incomplete casting. Pour temperature must exceed the liquidus by 50-150$°$C (superheat) to ensure complete fill.",
+          "<strong>Segregation.</strong> Solute is rejected into the liquid during solidification. The last-to-freeze regions (dendrite boundaries, section centres) are enriched. Manganese sulphide stringers in steel castings are a classic example."
+        ]],
+
+        ["h3", "Design rules for castings"],
+        ["p", "Good casting design avoids isolated heavy sections (they form shrinkage cavities), ensures progressive solidification towards risers, and uses generous fillets at intersections to avoid stress concentrations and hot tears. Draft angles of 1-3$°$ allow pattern withdrawal in sand casting and ejection in die casting. Uniform wall thickness is the single most important design rule."],
+
+        ["derivation", "Chvorinov's rule: $t_s = B(V/A)^2$.", [
+          ["p", "Solidification is controlled by heat flow through the mould wall. The rate of heat extraction per unit area is approximately $q \\propto 1/\\sqrt{t}$ for a semi-infinite mould (the mould surface temperature rises, reducing the temperature gradient). Integrating, the total heat removed per unit area up to time $t$ goes as $\\sqrt{t}$."],
+          ["p", "The total heat to be removed is proportional to the casting volume $V$. The surface area available for heat extraction is $A$. Setting the heat removed equal to the heat content:"],
+          ["eq", "A \\cdot c_1 \\sqrt{t_s} = c_2 \\cdot V"],
+          ["p", "Solving for $t_s$:"],
+          ["eq", "t_s = B\\left(\\frac{V}{A}\\right)^2"],
+          ["p", "where $B$ collects the thermal properties of the mould and the superheat and latent heat of the metal. For a green sand mould casting steel, $B \\approx 3$ min/cm$^2$."]
+        ]],
+
+        ["problem", "An aluminium alloy cylinder (diameter 100 mm, height 150 mm) is sand-cast. The mould constant $B = 4$ min/cm$^2$. Calculate the solidification time. If the cylinder is redesigned as a hollow tube (OD 100 mm, ID 60 mm, height 150 mm), what is the new solidification time?", [
+          ["p", "Solid cylinder: $V = \\pi r^2 h = \\pi(5)^2(15) = 1178$ cm$^3$. $A = 2\\pi r h + 2\\pi r^2 = 2\\pi(5)(15) + 2\\pi(25) = 628$ cm$^2$."],
+          ["p", "$V/A = 1178/628 = 1.88$ cm."],
+          ["eq", "t_s = 4 \\times (1.88)^2 = 14.1 \\text{ min}"],
+          ["p", "Hollow tube: $V = \\pi(5^2 - 3^2)(15) = \\pi(16)(15) = 754$ cm$^3$. The surface area now includes the inner surface: $A = 2\\pi(5)(15) + 2\\pi(3)(15) + 2\\pi(5^2 - 3^2) = 471 + 283 + 201 = 955$ cm$^2$."],
+          ["p", "$V/A = 754/955 = 0.79$ cm."],
+          ["eq", "t_s = 4 \\times (0.79)^2 = 2.5 \\text{ min}"],
+          ["p", "The hollow tube solidifies 5.6 times faster. Less metal to solidify and more surface area to extract heat through. This also means finer SDAS and better properties."]
+        ]]
+      ],
+      "related": [
+        { "title": "Phase Diagrams & Lever Rule", "url": "../phase-transformations/phase-diagrams-lever-rule" },
+        { "title": "Nucleation", "url": "../phase-transformations/nucleation" },
+        { "title": "Heat Treatment", "url": "heat-treatment" }
+      ]
     },
     {
       "id": "deformation-processing-rolling-forging-extrusion",
       "number": "16.2",
       "title": "Deformation Processing (Rolling, Forging, Extrusion)",
-      "description": "",
-      "readingTime": "— min",
-      "intro": "",
-      "body": [],
-      "related": []
+      "description": "Shaping metals by plastic deformation: the mechanics of rolling reduction, forging temperature windows and extrusion ratios.",
+      "readingTime": "14 min",
+      "intro": "Casting gives shape. Deformation processing gives shape and microstructure. When metal is rolled, forged or extruded, the grains are refined, porosity is closed and the texture is controlled. The result is a wrought product with properties that cast metal cannot match. The physics is straightforward: apply enough stress to exceed the yield strength, and the metal flows.",
+      "body": [
+        ["h3", "Hot and cold working"],
+        ["p", "The boundary between hot and cold working is not a temperature. It is a fraction of the melting point. Hot working occurs above about 0.5$T_m$ (in kelvin), where dynamic recovery and recrystallisation soften the material as fast as deformation hardens it. Cold working occurs below about 0.3$T_m$, where dislocation accumulation dominates and the metal strain-hardens."],
+        ["p", "Lead ($T_m = 327°$C, or 600 K) recrystallises at room temperature (300 K = 0.5$T_m$). Deforming lead at 20$°$C is hot working. Steel ($T_m \\approx 1500°$C) must be heated above about 600$°$C before hot working begins. The distinction matters because hot-worked metal has equiaxed, recrystallised grains (low residual stress, moderate strength), while cold-worked metal has elongated, heavily dislocated grains (high residual stress, high strength, low ductility)."],
+
+        ["h3", "Rolling"],
+        ["p", "Rolling passes metal between two rotating rolls, reducing its thickness. It is the most common deformation process: over 90% of all steel is rolled at some stage. The two key parameters are the draft (reduction in thickness) and the rolling reduction:"],
+        ["eq", "r = \\frac{h_0 - h_f}{h_0} = \\frac{\\Delta h}{h_0}"],
+        ["p", "where $h_0$ is the entry thickness and $h_f$ is the exit thickness. A single pass through hot rolling mills typically achieves $r = 0.1$-$0.5$ (10-50% reduction). The total reduction from a 250 mm continuously cast slab to a 2 mm hot-rolled strip is about 99.2%, achieved in 15-20 passes."],
+        ["p", "The roll applies a compressive stress. For the metal to be drawn into the roll gap by friction, the contact angle $\\alpha$ must not exceed the friction angle. The maximum draft in a single pass is:"],
+        ["eq", "\\Delta h_{\\max} = \\mu^2 R"],
+        ["p", "where $\\mu$ is the friction coefficient and $R$ is the roll radius. For hot rolling of steel with $\\mu = 0.4$ and $R = 300$ mm: $\\Delta h_{\\max} = 0.16 \\times 300 = 48$ mm. For cold rolling with lubricant ($\\mu = 0.05$, $R = 250$ mm): $\\Delta h_{\\max} = 0.625$ mm. This is why cold rolling uses small reductions per pass."],
+        ["callout", "Volume constancy in rolling", "Plastic deformation conserves volume: $h_0 w_0 L_0 = h_f w_f L_f$. In sheet rolling, the width barely changes (plane strain), so the strip gets longer in proportion to the thickness reduction. A 50% reduction in thickness doubles the length. The exit speed is higher than the entry speed, and somewhere in the roll gap the strip speed exactly matches the roll surface speed. This is the neutral point."],
+
+        ["h3", "Rolling force and power"],
+        ["p", "The roll separating force determines the mill size and stiffness. For a simple estimate:"],
+        ["eq", "F = \\bar{\\sigma}_f \\cdot w \\cdot L_p"],
+        ["p", "where $\\bar{\\sigma}_f$ is the average flow stress of the metal in the roll gap, $w$ is the strip width and $L_p = \\sqrt{R \\cdot \\Delta h}$ is the projected contact length. For hot rolling of low-carbon steel ($\\bar{\\sigma}_f \\approx 150$ MPa) with $w = 1500$ mm, $R = 400$ mm and $\\Delta h = 30$ mm: $L_p = \\sqrt{400 \\times 30} = 110$ mm and $F = 150 \\times 1500 \\times 110 = 24.7$ MN (about 2500 tonnes). Hot strip mill housings are massive for good reason."],
+
+        ["h3", "Forging"],
+        ["p", "Forging compresses metal between dies. Open-die forging uses flat or simple-shaped dies; closed-die (impression) forging uses dies machined to the shape of the final part. Isothermal forging maintains the workpiece at constant temperature by heating the dies."],
+        ["p", "Forging temperatures for common alloys:"],
+        ["ul", [
+          "Low-carbon steel: 1100-1250$°$C (0.77-0.86$T_m$).",
+          "Stainless steel 304: 1050-1200$°$C.",
+          "Aluminium 6061: 400-480$°$C (0.72-0.81$T_m$).",
+          "Titanium Ti-6Al-4V: 900-960$°$C (below the $\\beta$-transus at 995$°$C for $\\alpha$+$\\beta$ forging).",
+          "Nickel superalloy 718: 950-1050$°$C."
+        ]],
+        ["p", "Forging refines the grain structure. A cast billet with 5 mm grains, forged at 1200$°$C with 60% reduction, recrystallises to 50-200 $\\mu$m grains. The mechanical properties are markedly better: a forged 4340 steel crankshaft has 20-30% higher fatigue life than a cast one of the same composition. The grain flow follows the part shape, aligning grain boundaries parallel to the maximum stress direction."],
+        ["p", "Forging pressure depends on the flow stress and the friction between workpiece and die. For a flat die with friction:"],
+        ["eq", "p_{\\text{avg}} = \\sigma_f \\left(1 + \\frac{2\\mu a}{3h}\\right)"],
+        ["p", "where $a$ is the half-width of the workpiece and $h$ is its height. The friction hill creates peak pressures at the centre of the die, which can reach 3-5 times the flow stress for thin, wide forgings."],
+
+        ["h3", "Extrusion"],
+        ["p", "Extrusion forces a billet through a die orifice to produce a constant cross-section profile. The process is particularly suited to aluminium because aluminium's low flow stress at elevated temperature (20-50 MPa at 450$°$C) and excellent surface oxide behaviour make it easy to extrude into complex hollow sections. About 80% of all extruded products are aluminium."],
+        ["p", "The extrusion ratio $R_e$ is the ratio of billet cross-section to product cross-section. Typical values range from 10:1 to 100:1. The extrusion pressure is approximately:"],
+        ["eq", "p = \\sigma_f \\ln R_e"],
+        ["p", "For aluminium 6063 at 480$°$C ($\\sigma_f \\approx 25$ MPa) with $R_e = 50$: $p = 25 \\ln 50 = 98$ MPa. Real pressures are higher (150-200 MPa) due to friction and redundant work. A 2500-tonne extrusion press can push a 180 mm diameter billet through a die at 5-30 m/min."],
+        ["p", "Steel extrusion is rare because the high flow stress and temperature (1100-1250$°$C) destroy steel dies rapidly. The Ugine-Sejournet process uses molten glass as a lubricant and thermal barrier, enabling extrusion of stainless steel and nickel alloys for seamless tubes and turbine shafts."],
+
+        ["h3", "Texture and anisotropy"],
+        ["p", "Deformation rotates grains towards preferred orientations. Cold-rolled copper develops a strong brass-type texture $\\{110\\}\\langle 112 \\rangle$ mixed with copper-type $\\{112\\}\\langle 111 \\rangle$. Cold-rolled BCC steel develops an $\\alpha$-fibre with $\\langle 110 \\rangle$ parallel to the rolling direction. Subsequent recrystallisation annealing produces new textures: the cube texture $\\{001\\}\\langle 100 \\rangle$ in aluminium, the gamma fibre $\\{111\\}\\langle uvw \\rangle$ in deep-drawing steel."],
+        ["p", "Texture creates anisotropy. The Lankford coefficient (r-value) measures the ratio of width strain to thickness strain in a tensile test. For good deep drawability, $\\bar{r} > 1.5$ is needed, meaning the sheet resists thinning. Low-carbon steel with strong gamma fibre has $\\bar{r} = 1.5$-$2.2$, which is why steel beverage cans are deep-drawn while aluminium cans (with $\\bar{r} \\approx 0.7$) are drawn-and-ironed."],
+
+        ["derivation", "Maximum draft in rolling: $\\Delta h_{\\max} = \\mu^2 R$.", [
+          ["p", "For the strip to be pulled into the roll gap by friction, the horizontal component of the friction force must exceed the horizontal component of the normal force at the point of first contact."],
+          ["p", "At the entry point, the contact angle $\\alpha$ satisfies $\\cos\\alpha = 1 - \\Delta h/(2R)$. The friction condition requires $\\mu \\geq \\tan\\alpha$. For small angles, $\\tan\\alpha \\approx \\alpha$ and $1 - \\cos\\alpha \\approx \\alpha^2/2$."],
+          ["p", "Setting $\\mu = \\alpha$:"],
+          ["eq", "\\frac{\\Delta h}{2R} = 1 - \\cos\\alpha \\approx \\frac{\\alpha^2}{2} = \\frac{\\mu^2}{2}"],
+          ["eq", "\\Delta h_{\\max} = \\mu^2 R"]
+        ]],
+
+        ["problem", "A 200 mm thick steel slab is hot-rolled to 150 mm in one pass. Roll radius is 500 mm. (a) Calculate the rolling reduction and the minimum friction coefficient needed. (b) If the flow stress is 180 MPa and the strip width is 1200 mm, estimate the roll separating force.", [
+          ["p", "(a) $r = (200 - 150)/200 = 0.25$ (25% reduction). Draft $\\Delta h = 50$ mm."],
+          ["p", "From $\\Delta h_{\\max} = \\mu^2 R$: $\\mu_{\\min} = \\sqrt{\\Delta h / R} = \\sqrt{50/500} = \\sqrt{0.1} = 0.316$. This is achievable for hot rolling without lubricant ($\\mu \\approx 0.3$-$0.5$)."],
+          ["p", "(b) Projected contact length: $L_p = \\sqrt{R \\cdot \\Delta h} = \\sqrt{500 \\times 50} = 158$ mm."],
+          ["eq", "F = \\bar{\\sigma}_f \\cdot w \\cdot L_p = 180 \\times 1200 \\times 158 = 34.1 \\text{ MN}"],
+          ["p", "That is about 3480 tonnes. A heavy-plate rolling mill must withstand this."]
+        ]]
+      ],
+      "related": [
+        { "title": "Plastic Deformation & Slip", "url": "../mechanical-properties/plastic-deformation-slip" },
+        { "title": "Stress & Strain", "url": "../mechanical-properties/stress-strain-engineering-vs-true" },
+        { "title": "Heat Treatment", "url": "heat-treatment" }
+      ]
     },
     {
       "id": "powder-metallurgy-sintering",
       "number": "16.3",
       "title": "Powder Metallurgy & Sintering",
-      "description": "",
-      "readingTime": "— min",
-      "intro": "",
-      "body": [],
-      "related": []
+      "description": "Making components from metal powders: atomisation, compaction, sintering and the driving force for densification.",
+      "readingTime": "13 min",
+      "intro": "Some components cannot be made by casting or forging. Tungsten carbide cutting tools, porous bronze bearings, oxide-dispersion-strengthened superalloys: all require powder metallurgy. The idea is simple. Make a powder, press it into shape, then heat it until the particles bond together. The physics of sintering is diffusion, and the driving force is surface energy reduction.",
+      "body": [
+        ["h3", "Why powder metallurgy?"],
+        ["p", "Powder metallurgy (PM) is used when other processes fail or are uneconomical. Four common reasons: (1) the material has too high a melting point for conventional casting (tungsten, $T_m = 3422°$C), (2) the microstructure requires a fine, uniform dispersion impossible to achieve by solidification (cemented carbides, ODS alloys), (3) the part has complex geometry suited to net-shape pressing (gears, cam lobes), or (4) controlled porosity is needed (self-lubricating bearings, filters)."],
+        ["p", "The PM market is large. About 70% of PM parts go into automotive applications: connecting rods, synchroniser hubs, valve seat inserts. A typical family car contains 10-15 kg of PM parts."],
+
+        ["h3", "Powder production"],
+        ["p", "The properties of the final component depend critically on the powder. Key powder characteristics are particle size distribution, shape, apparent density and flowability."],
+        ["ul", [
+          "<strong>Gas atomisation.</strong> Molten metal is broken into droplets by a high-velocity gas jet (nitrogen or argon at 2-4 MPa). Droplets solidify in flight. Typical particle size: 10-150 $\\mu$m, spherical shape, good flowability. This is the standard route for steel, stainless steel and superalloy powders.",
+          "<strong>Water atomisation.</strong> High-pressure water jets (10-20 MPa) break the metal stream. Particles are irregular in shape (rougher surface, better green strength after pressing). Size: 50-500 $\\mu$m. Cheaper than gas atomisation. Dominant for iron powder (over 1 million tonnes/year).",
+          "<strong>Reduction of oxides.</strong> Iron powder is made by reducing iron ore or mill scale with hydrogen or carbon at 800-1000$°$C. The Hoganas sponge iron process produces porous, irregular particles well suited to pressing.",
+          "<strong>Electrolysis.</strong> Copper and iron powders with dendritic morphology and high surface area, useful for high green strength."
+        ]],
+
+        ["h3", "Compaction"],
+        ["p", "Powder is loaded into a hardened steel or carbide die and pressed uniaxially at 300-800 MPa. The powder particles deform and interlock to form a green compact with 75-90% of theoretical density. Green strength is low (5-25 MPa in tension) but sufficient for handling."],
+        ["p", "Density is not uniform. Die-wall friction causes a pressure gradient: the region near the punch is denser than the region far from it. Double-acting presses (punches moving from both ends) improve uniformity. For parts longer than about 2.5 times their diameter, density gradients become unacceptable with uniaxial pressing."],
+        ["p", "Cold isostatic pressing (CIP) applies pressure uniformly via a flexible rubber or polyurethane mould immersed in pressurised fluid (typically water at 100-400 MPa). This produces uniform green density for large or elongated parts. Hot isostatic pressing (HIP) applies pressure and temperature simultaneously (typically 100-200 MPa, 1000-1200$°$C for nickel superalloys) and achieves full density in a single step."],
+
+        ["h3", "Sintering"],
+        ["p", "Sintering heats the green compact to 0.7-0.9$T_m$ in a controlled atmosphere (hydrogen, nitrogen or vacuum). At this temperature, atoms diffuse across the contact points (necks) between particles. The necks grow, pores shrink, and the compact densifies. The driving force is the reduction in total surface energy."],
+        ["p", "The sintering temperature and time for common systems: iron and steel, 1120-1150$°$C for 20-30 min; copper, 800-900$°$C for 15-20 min; tungsten carbide-cobalt, 1350-1500$°$C for 30-90 min (liquid-phase sintering, where the cobalt binder melts and wets the carbide grains); aluminium, 590-620$°$C for 20-30 min (just below the solidus at 630$°$C for pressed Al-Cu-Mg blends)."],
+        ["p", "The initial stage of sintering involves neck growth between touching spheres. For two spheres of radius $R$, the neck radius $x$ grows by volume diffusion as:"],
+        ["eq", "\\frac{x^5}{R^2} = \\frac{40 D_v \\gamma \\Omega t}{kT}"],
+        ["p", "where $D_v$ is the volume diffusion coefficient, $\\gamma$ is the surface energy, $\\Omega$ is the atomic volume, and $t$ is time. The $x^5$ dependence means neck growth is initially rapid then slows. Surface diffusion dominates at short times (neck growth without densification); volume and grain boundary diffusion dominate later (neck growth with densification and pore shrinkage)."],
+        ["callout", "Why sintering densifies", "A curved surface has a higher chemical potential than a flat one. The Gibbs-Thomson equation gives the excess: $\\Delta \\mu = 2\\gamma\\Omega / r$, where $r$ is the radius of curvature. At a neck between particles, the surface is concave ($r < 0$) and the chemical potential is lower. At the particle surface, the curvature is convex and the chemical potential is higher. Atoms diffuse from high to low chemical potential: from the particle surface (or grain boundary) into the neck. The pore shrinks."],
+
+        ["h3", "Liquid-phase sintering"],
+        ["p", "When one component melts during sintering, the liquid wets the solid particles and capillary forces pull them together. Densification is rapid. WC-Co cemented carbide is the classic example: cobalt melts at 1320$°$C (depending on dissolved W and C) and wets the WC grains. Sintering at 1380-1500$°$C for 30-60 min produces 99.5-99.9% dense material. The three stages are: (1) liquid redistribution and particle rearrangement (rapid densification in the first few minutes), (2) solution-reprecipitation (WC dissolves in Co, reprecipitates on larger grains, driving Ostwald ripening), and (3) final densification by pore elimination."],
+
+        ["h3", "Sintered properties"],
+        ["p", "Sintered parts typically reach 90-95% of theoretical density with conventional pressing and sintering. Porosity reduces mechanical properties. Tensile strength scales approximately as:"],
+        ["eq", "\\sigma = \\sigma_0 \\left(\\frac{\\rho}{\\rho_0}\\right)^n"],
+        ["p", "where $\\rho / \\rho_0$ is the relative density and $n \\approx 3$-$6$. A sintered iron part at 90% density has only about 60-75% of the tensile strength of fully dense wrought iron. Fatigue performance is worse: pores are stress concentrators."],
+        ["p", "To achieve full density, secondary operations are used: re-pressing (coining), infiltration (filling pores with a lower-melting-point metal such as copper in iron), or hot isostatic pressing. Powder-forging combines sintering and forging: the sintered preform is hot-forged to full density in a single blow. This route produces automotive connecting rods at a rate of 1000 per hour."],
+
+        ["derivation", "Surface energy as the driving force for sintering.", [
+          ["p", "Consider $N$ spherical particles of radius $R$ with surface energy $\\gamma$. The total surface area is $4\\pi R^2 N$. After sintering to full density, the surface area reduces to the external surface of the component, which is negligible by comparison."],
+          ["p", "The reduction in surface energy is:"],
+          ["eq", "\\Delta G \\approx -4\\pi R^2 N \\gamma"],
+          ["p", "For 1 kg of iron powder ($\\rho = 7870$ kg/m$^3$, $R = 50$ $\\mu$m, $\\gamma = 2.4$ J/m$^2$): the number of particles $N = m / (\\rho \\cdot 4\\pi R^3/3) = 1 / (7870 \\times 5.24 \\times 10^{-13}) = 2.43 \\times 10^8$."],
+          ["eq", "\\Delta G = 4\\pi (50 \\times 10^{-6})^2 \\times 2.43 \\times 10^8 \\times 2.4 = 18.3 \\text{ J}"],
+          ["p", "Only 18 J to sinter 1 kg of powder. The driving force is tiny, which is why sintering requires high temperatures (to provide sufficient atomic mobility via diffusion)."]
+        ]],
+
+        ["problem", "A PM gear is pressed from water-atomised iron powder to a green density of 6.8 g/cm$^3$ and sintered at 1120$°$C. Theoretical density of iron is 7.87 g/cm$^3$. (a) What is the relative density and the porosity? (b) If the strength scales as $(\\rho/\\rho_0)^4$ and fully dense iron has UTS = 300 MPa, estimate the sintered UTS.", [
+          ["p", "(a) Relative density: $\\rho / \\rho_0 = 6.8 / 7.87 = 0.864$ (86.4%). Porosity = $1 - 0.864 = 0.136$ (13.6%)."],
+          ["p", "(b) UTS $= 300 \\times (0.864)^4 = 300 \\times 0.558 = 167$ MPa."],
+          ["p", "This is a significant knockdown. To reach the full 300 MPa, the part would need to be HIPped, infiltrated with copper, or powder-forged to close the remaining porosity."]
+        ]]
+      ],
+      "related": [
+        { "title": "Diffusion", "url": "../diffusion/ficks-first-second-laws" },
+        { "title": "Additive Manufacturing", "url": "additive-manufacturing" },
+        { "title": "Surface Engineering & Coatings", "url": "surface-engineering-coatings" }
+      ]
     },
     {
       "id": "joining-welding-brazing-adhesives",
       "number": "16.4",
       "title": "Joining (Welding, Brazing, Adhesives)",
-      "description": "",
-      "readingTime": "— min",
-      "intro": "",
-      "body": [],
-      "related": []
+      "description": "Fusion welding, solid-state welding, brazing and adhesive bonding: metallurgy of the joint and why welds crack.",
+      "readingTime": "14 min",
+      "intro": "Almost every engineered structure is an assembly of parts. The joint is frequently the weakest link. Welding melts and re-solidifies metal, creating a cast microstructure in the fusion zone surrounded by a heat-affected zone where the base metal has been altered. Brazing avoids melting the base metal. Adhesives avoid metallurgical changes entirely. Each approach trades off strength, temperature capability and cost.",
+      "body": [
+        ["h3", "Fusion welding"],
+        ["p", "Fusion welding melts the base metal (and often a filler metal) to form a joint. The most common processes:"],
+        ["ul", [
+          "<strong>Gas metal arc welding (GMAW/MIG).</strong> A consumable wire electrode is fed continuously through a torch. An electric arc (150-400 A, 18-32 V) melts the wire and base metal. Shielding gas (argon, CO$_2$ or a mix) protects the weld pool from oxidation. Deposition rate: 3-8 kg/h. Widely used for steel, aluminium and stainless steel.",
+          "<strong>Gas tungsten arc welding (GTAW/TIG).</strong> A non-consumable tungsten electrode creates the arc. Filler wire is added manually. Inert gas shielding (argon or helium). Lower deposition rate (0.5-2 kg/h) but superior control and weld quality. Used for thin sections, root passes, and reactive metals (titanium, zirconium).",
+          "<strong>Submerged arc welding (SAW).</strong> The arc is submerged under a layer of granular flux. High deposition rate (10-25 kg/h), deep penetration. Used for thick-section steel: shipbuilding, pressure vessels, pipeline girth welds.",
+          "<strong>Laser welding.</strong> A focused laser beam (1-20 kW fibre or disc laser) produces a narrow, deep weld with a small heat-affected zone. Travel speeds of 1-10 m/min. Keyhole mode penetration up to 20 mm in steel. Used for automotive body-in-white (0.7-1.5 mm sheet at 5-8 m/min)."
+        ]],
+
+        ["h3", "Weld metallurgy"],
+        ["p", "The fusion zone is essentially a small casting. Metal melts, mixes and re-solidifies. Solidification is epitaxial: crystals grow from the partially melted grains at the fusion boundary, inheriting their orientation. Growth is columnar, directed towards the weld centre line. The resulting microstructure is dendritic with composition gradients (microsegregation) just like a casting."],
+        ["p", "The heat-affected zone (HAZ) is the region where the base metal was heated above some critical temperature but did not melt. In carbon steel, the HAZ contains several sub-zones:"],
+        ["ul", [
+          "<strong>Coarse-grained HAZ</strong> (peak temperature 1100-1500$°$C): austenite grains grow to 100-300 $\\mu$m. On cooling, these transform to bainite or martensite depending on cooling rate and carbon equivalent. This is the most brittle region.",
+          "<strong>Fine-grained HAZ</strong> (peak temperature 900-1100$°$C): full austenitisation with limited grain growth. Fine, tough microstructure on cooling.",
+          "<strong>Intercritical HAZ</strong> (peak temperature 720-900$°$C): partial austenitisation. Some regions transform; others do not. Can produce local hard spots.",
+          "<strong>Sub-critical HAZ</strong> (peak temperature below 720$°$C): no phase transformation but possible tempering of any prior martensite, or ageing of precipitation-hardened alloys."
+        ]],
+
+        ["h3", "Weldability and the carbon equivalent"],
+        ["p", "The risk of hydrogen-induced cold cracking in the HAZ depends on the hardenability of the steel. The carbon equivalent (CE) is an empirical measure:"],
+        ["eq", "CE = C + \\frac{Mn}{6} + \\frac{Cr + Mo + V}{5} + \\frac{Ni + Cu}{15}"],
+        ["p", "If $CE < 0.4$, the steel is readily weldable with minimal preheat. If $CE > 0.5$, preheat to 100-200$°$C is required to slow the cooling rate and avoid martensite formation. A typical structural steel S355 has $CE \\approx 0.42$ and needs mild preheat for thick sections."],
+        ["callout", "Hydrogen cracking", "Hydrogen dissolves in the arc atmosphere, enters the weld pool, and diffuses to the HAZ. If the HAZ transforms to martensite (hard, brittle), the trapped hydrogen causes delayed cracking hours or days after welding. Prevention: use low-hydrogen electrodes (< 5 mL H$_2$/100g deposited metal), preheat to slow cooling, and apply post-weld hydrogen bake-out at 200-300$°$C for 2-4 hours."],
+
+        ["h3", "Residual stress and distortion"],
+        ["p", "The weld metal contracts on cooling while the surrounding base metal constrains it. The result is tensile residual stress in the weld, often reaching the yield strength of the material (250-500 MPa in structural steel). Compressive residual stress exists in the base metal to maintain equilibrium. These residual stresses cause distortion (angular distortion of 1-5$°$ in a single-pass butt weld), increase the risk of fatigue failure and promote stress corrosion cracking."],
+        ["p", "Post-weld heat treatment (PWHT) at 580-650$°$C for 1-2 hours per 25 mm of thickness relaxes residual stresses by creep. The stress drops to 10-30% of its original value. PWHT is mandatory for thick-section pressure vessels under codes like ASME VIII and PD 5500."],
+
+        ["h3", "Solid-state welding"],
+        ["p", "Some processes join metals without melting. Friction stir welding (FSW) uses a rotating tool (1000-2000 rpm) plunged into the joint. Frictional heating raises the temperature to 80-90% of the solidus (about 450-500$°$C for aluminium alloys). The softened metal is stirred around the tool to form a fine-grained joint. FSW produces 5-10 $\\mu$m equiaxed grains in the stir zone compared to 50-100 $\\mu$m in a fusion weld. Tensile strength retention is 80-95% of the base metal compared to 60-75% for MIG welds of heat-treatable aluminium alloys (2xxx, 6xxx, 7xxx)."],
+        ["p", "FSW is used for aerospace structures (Eclipse 500 fuselage, Hitachi railway car bodies), shipbuilding and Apple laptop enclosures. The joint is solid-state, so solidification defects (porosity, hot cracking) are eliminated."],
+
+        ["h3", "Brazing"],
+        ["p", "Brazing joins metals using a filler that melts above 450$°$C but below the solidus of the base metals. The filler is drawn into the joint by capillary action. Joint clearances of 0.025-0.15 mm are optimal. Common brazing alloys: Ag-Cu-Zn (melting range 620-780$°$C, for steel and copper), Cu-P (710-925$°$C, self-fluxing on copper), Ni-Cr-B (970-1080$°$C, for superalloy turbine components in vacuum furnaces)."],
+        ["p", "Brazed joints are strong in shear but weak in peel. A well-made silver-brazed joint in steel achieves shear strengths of 200-400 MPa. Brazing is preferred for joining dissimilar metals and for assemblies that cannot tolerate the distortion of welding."],
+
+        ["h3", "Adhesive bonding"],
+        ["p", "Structural adhesives (epoxies, acrylics, polyurethanes) bond metals without heat or metallurgical change. Shear strengths of 20-40 MPa for epoxies, 15-30 MPa for polyurethanes. These are low compared to welds, but adhesives distribute load over the entire bond area, avoiding the stress concentration at a weld toe."],
+        ["p", "Surface preparation is critical. Aluminium is typically degreased, etched in chromic-sulphuric acid or treated with a sol-gel primer. Bond durability in humid environments is the main limitation. Aerospace uses phosphoric acid anodising of aluminium followed by a corrosion-inhibiting primer (BR 127) to achieve bond lifetimes exceeding 30 years."],
+
+        ["derivation", "The heat input and cooling rate in arc welding.", [
+          ["p", "The net heat input per unit length of weld is:"],
+          ["eq", "H = \\frac{\\eta V I}{v}"],
+          ["p", "where $V$ is arc voltage, $I$ is current, $v$ is travel speed and $\\eta$ is the arc efficiency (0.70-0.85 for GMAW, 0.50-0.70 for GTAW, 0.90-0.99 for SAW)."],
+          ["p", "For GMAW of steel at 280 A, 28 V, 6 mm/s, $\\eta = 0.80$:"],
+          ["eq", "H = \\frac{0.80 \\times 28 \\times 280}{6} = 1045 \\text{ J/mm}"],
+          ["p", "The cooling rate at 540$°$C (relevant for martensite formation) depends on the heat input and plate thickness. The Rosenthal thin-plate solution gives a cooling rate inversely proportional to $H$: higher heat input means slower cooling, less martensite and lower HAZ hardness."]
+        ]],
+
+        ["problem", "A structural steel plate (20 mm thick, $CE = 0.45$) is butt-welded by GMAW at 300 A, 30 V, 5 mm/s with arc efficiency 0.80. (a) Calculate the heat input. (b) Should preheat be used?", [
+          ["p", "(a) $H = \\eta V I / v = 0.80 \\times 30 \\times 300 / 5 = 1440$ J/mm."],
+          ["p", "(b) With $CE = 0.45$, the steel is in the marginal range (0.40-0.50). For a 20 mm thick plate, the cooling rate is moderate at this heat input. BS EN 1011-2 recommends a preheat of 75-100$°$C for this combination of CE, thickness and hydrogen level."],
+          ["p", "Without preheat, the coarse-grained HAZ will likely contain some martensite, raising the risk of hydrogen cracking. With 75$°$C preheat, the cooling rate decreases sufficiently to produce bainite instead."]
+        ]]
+      ],
+      "related": [
+        { "title": "Phase Transformations", "url": "../phase-transformations/nucleation" },
+        { "title": "Casting & Solidification", "url": "casting-solidification-processing" },
+        { "title": "Heat Treatment", "url": "heat-treatment" }
+      ]
     },
     {
       "id": "additive-manufacturing",
       "number": "16.5",
       "title": "Additive Manufacturing",
-      "description": "",
-      "readingTime": "— min",
-      "intro": "",
-      "body": [],
-      "related": []
+      "description": "Selective laser melting, electron beam melting and directed energy deposition: build parameters, microstructures and real mechanical properties.",
+      "readingTime": "14 min",
+      "intro": "Additive manufacturing builds parts layer by layer from powder or wire. It inverts the logic of conventional manufacturing: instead of removing material from a block, you add material only where it is needed. This unlocks geometries impossible to machine or cast, but it introduces new metallurgical challenges. Rapid solidification, directional heat flow and cyclic thermal histories produce microstructures unlike anything in the wrought or cast world.",
+      "body": [
+        ["h3", "The main metal AM processes"],
+        ["p", "Three processes dominate metal additive manufacturing:"],
+        ["ul", [
+          "<strong>Selective laser melting (SLM)</strong>, also called laser powder bed fusion (LPBF). A laser (200-1000 W, Yb-fibre, $\\lambda = 1070$ nm) scans across a thin layer of metal powder (20-60 $\\mu$m thick), melting it in a track. A fresh layer of powder is spread and the process repeats. Build rate: 5-30 cm$^3$/h. Atmosphere: argon or nitrogen. Resolution: 100-200 $\\mu$m minimum feature size.",
+          "<strong>Electron beam melting (EBM)</strong>. A focused electron beam (3-6 kW) melts powder in a vacuum chamber ($<10^{-3}$ mbar). Layer thickness: 50-100 $\\mu$m. Build rate: 20-80 cm$^3$/h (faster than SLM because the beam can be split and scanned electromagnetically at very high speed). Powder bed preheated to 400-1000$°$C, which reduces residual stress but coarsens the microstructure.",
+          "<strong>Directed energy deposition (DED)</strong>. A laser (1-10 kW) or electron beam melts powder or wire that is fed into the melt pool. Build rate: 50-300 cm$^3$/h. Lower resolution than powder bed processes (minimum feature size 1-3 mm) but can build on existing components for repair or adding features. Used for cladding turbine blades and repairing dies."
+        ]],
+
+        ["h3", "Build parameters"],
+        ["p", "The critical SLM parameters are laser power $P$, scan speed $v$, hatch spacing $h$ (distance between adjacent scan tracks) and layer thickness $t$. These combine into the volumetric energy density:"],
+        ["eq", "E_v = \\frac{P}{v \\cdot h \\cdot t}"],
+        ["p", "Typical parameter sets for common alloys:"],
+        ["ul", [
+          "Ti-6Al-4V: $P = 280$ W, $v = 1200$ mm/s, $h = 140$ $\\mu$m, $t = 30$ $\\mu$m. $E_v = 56$ J/mm$^3$.",
+          "316L stainless steel: $P = 200$ W, $v = 800$ mm/s, $h = 100$ $\\mu$m, $t = 30$ $\\mu$m. $E_v = 83$ J/mm$^3$.",
+          "AlSi10Mg: $P = 370$ W, $v = 1300$ mm/s, $h = 190$ $\\mu$m, $t = 30$ $\\mu$m. $E_v = 50$ J/mm$^3$.",
+          "Inconel 718: $P = 285$ W, $v = 960$ mm/s, $h = 110$ $\\mu$m, $t = 40$ $\\mu$m. $E_v = 67$ J/mm$^3$."
+        ]],
+        ["p", "If $E_v$ is too low, the powder does not fully melt and lack-of-fusion porosity results. If $E_v$ is too high, the melt pool becomes unstable: keyholing (deep, narrow vapour cavity) traps gas, producing spherical pores. The process window is typically $E_v = 40$-$120$ J/mm$^3$, but the optimal range is alloy-specific."],
+        ["callout", "Cooling rates in SLM", "The melt pool in SLM is tiny: 100-200 $\\mu$m wide, 50-100 $\\mu$m deep. Cooling rates are extreme: $10^5$-$10^7$ K/s, compared to $10^1$-$10^3$ K/s in casting and $10^3$-$10^5$ K/s in welding. This produces very fine microstructures, extended solid solubility and sometimes metastable phases. AlSi10Mg solidifies with a cellular structure at 0.5-1 $\\mu$m spacing compared to 20-50 $\\mu$m SDAS in die casting."],
+
+        ["h3", "Microstructure"],
+        ["p", "The layer-by-layer thermal history creates distinctive microstructures. In Ti-6Al-4V by SLM, the rapid cooling from the $\\beta$ phase field (above 995$°$C) produces acicular $\\alpha'$ martensite within columnar prior-$\\beta$ grains that grow epitaxially through many layers. These prior-$\\beta$ grains can be millimetres tall but only 100-200 $\\mu$m wide, giving strong $\\langle 001 \\rangle_{\\beta}$ texture parallel to the build direction."],
+        ["p", "In EBM, the powder bed preheat (700-750$°$C for Ti-6Al-4V) decomposes the martensite in situ. The resulting microstructure is fine $\\alpha + \\beta$ lamellar within columnar prior-$\\beta$ grains. This is closer to a wrought microstructure and has better ductility than as-built SLM."],
+        ["p", "316L stainless steel by SLM solidifies as austenite with a cellular-dendritic structure at sub-micrometre scale. The cell walls are enriched in Mo and Cr. A dense dislocation network forms at cell boundaries, giving the as-built material a yield strength of 450-550 MPa compared to 200-250 MPa for conventionally annealed 316L."],
+
+        ["h3", "Mechanical properties"],
+        ["p", "As-built SLM properties for key alloys:"],
+        ["ul", [
+          "Ti-6Al-4V: UTS = 1050-1200 MPa, YS = 950-1100 MPa, elongation = 6-10%. After stress relief (800$°$C / 4h): UTS = 1020-1100 MPa, elongation = 10-14%. Wrought annealed: UTS = 950 MPa, elongation = 14%.",
+          "316L stainless steel: UTS = 600-700 MPa, YS = 450-550 MPa, elongation = 30-50%. Wrought annealed: UTS = 515 MPa, YS = 205 MPa, elongation = 60%.",
+          "AlSi10Mg: UTS = 350-450 MPa, YS = 230-290 MPa, elongation = 3-9%. After T6 heat treatment: UTS = 280-330 MPa, elongation = 8-12%. Die-cast: UTS = 300-350 MPa.",
+          "Inconel 718 (after solution + age): UTS = 1350-1420 MPa, YS = 1150-1250 MPa, elongation = 12-18%. Wrought: UTS = 1375 MPa, YS = 1170 MPa, elongation = 18%."
+        ]],
+        ["p", "The general pattern: SLM-built parts match or exceed wrought strength but with lower ductility and more scatter. Anisotropy is a concern. Tensile properties in the build direction are typically 5-15% lower than in the horizontal plane for Ti-6Al-4V, owing to the columnar grain structure and any lack-of-fusion defects on layer boundaries."],
+
+        ["h3", "Defects"],
+        ["p", "AM defects differ from those in casting and welding:"],
+        ["ul", [
+          "<strong>Lack-of-fusion porosity.</strong> Irregular, sharp-edged voids at layer boundaries where insufficient energy left unmelted powder. These are the most damaging fatigue defects. Size: 20-200 $\\mu$m.",
+          "<strong>Gas porosity.</strong> Spherical pores 10-50 $\\mu$m diameter from trapped shielding gas or dissolved gas in the powder. Less damaging than lack-of-fusion because they are round.",
+          "<strong>Keyhole porosity.</strong> Spherical pores 50-200 $\\mu$m at the bottom of deep melt pools. Caused by excessive energy density.",
+          "<strong>Residual stress.</strong> The steep thermal gradients (up to $10^7$ K/m) generate large residual stresses, often exceeding 500 MPa in Ti-6Al-4V. Parts can distort or crack during the build. Preheating the base plate to 200$°$C (SLM) or the entire powder bed to 700$°$C (EBM) reduces residual stress.",
+          "<strong>Surface roughness.</strong> As-built SLM surfaces are rough: 8-20 $\\mu$m Ra on vertical walls, 15-30 $\\mu$m Ra on up-facing surfaces at 45$°$. Partially sintered powder particles adhere to the surface. Post-processing (machining, blasting, chemical etching) is usually required for functional surfaces."
+        ]],
+
+        ["h3", "Post-processing"],
+        ["p", "Almost no SLM part is used as-built. Typical post-processing steps: (1) stress relief or full heat treatment (800$°$C/4h for Ti-6Al-4V, or HIP at 920$°$C/100 MPa/2h to close porosity), (2) removal from the build plate by wire EDM or band saw, (3) support structure removal, (4) machining of critical surfaces, (5) surface finishing. HIP closes internal pores and improves fatigue life by 2-10 times."],
+
+        ["h3", "Design for AM"],
+        ["p", "AM enables lattice structures, conformal cooling channels in moulds, topology-optimised brackets and consolidated assemblies. The GE LEAP fuel nozzle tip consolidated 20 parts into 1, reduced weight by 25% and improved durability by 5 times. But AM has constraints: overhangs beyond 45$°$ need support structures, minimum wall thickness is 0.3-0.5 mm, and build volume limits part size (typical SLM build volume: 250 $\\times$ 250 $\\times$ 300 mm, though large-format machines reach 600 $\\times$ 600 $\\times$ 600 mm)."],
+
+        ["derivation", "Volumetric energy density and melt pool dimensions.", [
+          ["p", "The energy delivered per unit volume of powder bed is:"],
+          ["eq", "E_v = \\frac{P}{v \\cdot h \\cdot t}"],
+          ["p", "where $P$ is laser power (W), $v$ is scan speed (m/s), $h$ is hatch spacing (m) and $t$ is layer thickness (m). Units: J/m$^3$, typically expressed as J/mm$^3$."],
+          ["p", "The minimum energy density needed to fully melt the powder is approximately:"],
+          ["eq", "E_{v,\\min} = \\rho \\left( c_p \\Delta T + L_f \\right)"],
+          ["p", "For 316L ($\\rho = 8000$ kg/m$^3$, $c_p = 500$ J/kg$\\cdot$K, $\\Delta T = 1200$ K from room temperature to melting at 1400$°$C, $L_f = 270$ kJ/kg):"],
+          ["eq", "E_{v,\\min} = 8000 (500 \\times 1200 + 270000) = 6.96 \\times 10^9 \\text{ J/m}^3 = 7.0 \\text{ J/mm}^3"],
+          ["p", "The actual required $E_v$ (60-100 J/mm$^3$) is 10 times higher because much of the energy is lost to conduction into the substrate, reflection from the powder surface (30-70% for infrared laser on metal powder) and heating of surrounding powder that does not become part of the melt track."]
+        ]],
+
+        ["problem", "An SLM build of Ti-6Al-4V uses $P = 280$ W, $v = 1200$ mm/s, $h = 140$ $\\mu$m, $t = 30$ $\\mu$m. (a) Calculate the volumetric energy density. (b) The build volume is a solid block 50 $\\times$ 50 $\\times$ 80 mm. Estimate the build time, assuming 50% of the time is spent scanning and 50% is overhead (recoating, repositioning).", [
+          ["p", "(a) $E_v = P / (v \\cdot h \\cdot t) = 280 / (1200 \\times 0.14 \\times 0.03) = 280 / 5.04 = 55.6$ J/mm$^3$."],
+          ["p", "(b) Build volume: $50 \\times 50 \\times 80 = 200{,}000$ mm$^3$. Number of layers: $80 / 0.03 = 2667$."],
+          ["p", "Each layer has area $50 \\times 50 = 2500$ mm$^2$. The number of scan tracks per layer: $50 / 0.14 = 357$. Length per track: 50 mm. Total scan length per layer: $357 \\times 50 = 17{,}850$ mm."],
+          ["p", "Scan time per layer: $17{,}850 / 1200 = 14.9$ s. Total scan time: $2667 \\times 14.9 = 39{,}700$ s = 11.0 h."],
+          ["p", "With 50% overhead: total build time $\\approx 22$ h. This is typical for SLM. The process is slow for bulk parts, which is why it is best suited to high-value, low-volume components."]
+        ]]
+      ],
+      "related": [
+        { "title": "Casting & Solidification", "url": "casting-solidification-processing" },
+        { "title": "Heat Treatment", "url": "heat-treatment" },
+        { "title": "Powder Metallurgy & Sintering", "url": "powder-metallurgy-sintering" }
+      ]
     },
     {
       "id": "heat-treatment",
       "number": "16.6",
       "title": "Heat Treatment",
-      "description": "",
-      "readingTime": "— min",
-      "intro": "",
-      "body": [],
-      "related": []
+      "description": "Normalising, annealing, quench and temper, case hardening: controlling microstructure and properties of steel through thermal cycles.",
+      "readingTime": "15 min",
+      "intro": "Heat treatment transforms properties without changing shape. A soft, machinable steel becomes a hard, wear-resistant tool. A brittle as-welded joint becomes tough. The same composition of iron and carbon can be ferrite plus pearlite, bainite, martensite or tempered martensite, each with vastly different hardness, strength and toughness. The only variable is the thermal cycle: how hot, how long, how fast the cooling.",
+      "body": [
+        ["h3", "The iron-carbon system: a quick review"],
+        ["p", "Steel heat treatment relies on the allotropy of iron. Below 727$°$C, equilibrium phases are ferrite ($\\alpha$, BCC, soft, max 0.022 wt% C) and cementite (Fe$_3$C, orthorhombic, hard). Above 727$°$C, austenite ($\\gamma$, FCC, dissolves up to 2.14 wt% C at 1147$°$C) is stable. The eutectoid point is 0.76 wt% C at 727$°$C. Slow cooling from the austenite field produces pearlite: alternating lamellae of ferrite and cementite with a spacing of 0.1-1 $\\mu$m depending on cooling rate."],
+        ["p", "Key temperatures for a 0.4 wt% C steel (a common engineering grade, similar to AISI 1040): $A_1 = 727°$C (eutectoid), $A_3 = 790°$C (upper boundary of the $\\alpha + \\gamma$ two-phase region). The practical austenitising temperature is 30-50$°$C above $A_3$ to ensure complete transformation, so 820-850$°$C for 1040 steel."],
+
+        ["h3", "Normalising"],
+        ["p", "Heat to 30-50$°$C above $A_3$ (or $A_{cm}$ for hypereutectoid steels) and air cool. The purpose is to refine the grain size and produce a uniform, fine pearlitic microstructure. The cooling rate in still air is about 0.5-1.0$°$C/s for a 25 mm section."],
+        ["p", "Normalising is applied after casting, forging or heavy machining to eliminate coarse or non-uniform microstructures. A 1040 steel normalised from 860$°$C has a typical grain size of ASTM 7-8 (25-30 $\\mu$m), hardness 170-210 HB, UTS 590-650 MPa. It is the starting condition before further heat treatment."],
+        ["p", "For hypereutectoid steels (above 0.76 wt% C), normalising dissolves the coarse cementite network that forms at grain boundaries during slow cooling. The faster air cool suppresses network formation and distributes the cementite more uniformly."],
+
+        ["h3", "Full annealing"],
+        ["p", "Heat to 30$°$C above $A_3$ and furnace cool (the furnace is turned off with the part inside, cooling at 10-30$°$C/h). The result is the softest possible condition: coarse pearlite with maximum lamellar spacing (0.5-1 $\\mu$m), low hardness and high ductility. This is used before heavy machining to minimise tool wear and cutting forces."],
+        ["p", "A 1040 steel, fully annealed from 840$°$C: hardness 140-170 HB, UTS 520-570 MPa, elongation 28-32%. Compare with the normalised condition: harder, stronger, less ductile. The difference is entirely due to pearlite spacing."],
+        ["p", "Spheroidise annealing is a variant for high-carbon steels. Holding at 700-720$°$C (just below $A_1$) for 15-25 hours allows the cementite lamellae to break up into spheroids. Spheroidised 1095 steel has a hardness of about 160-180 HB, the softest condition for a hypereutectoid steel, enabling cold forming of springs and bearings."],
+
+        ["h3", "Quenching: forming martensite"],
+        ["p", "Heat to 30-50$°$C above $A_3$ and cool rapidly (water, oil, polymer or salt quench). If the cooling rate exceeds the critical cooling rate, austenite transforms to martensite by a diffusionless, shear transformation. Carbon atoms are trapped in a body-centred tetragonal (BCT) lattice, straining it and creating enormous hardness."],
+        ["p", "Quench media and approximate cooling rates at 300$°$C for a 25 mm bar: water, 150-250$°$C/s; 10% NaCl brine, 300-400$°$C/s; quench oil, 30-70$°$C/s; polymer (PAG) quenchant, 50-150$°$C/s; forced air, 5-15$°$C/s. Faster quench means more martensite, but also more residual stress and distortion."],
+        ["p", "The martensite start temperature $M_s$ depends on composition. For plain carbon steels:"],
+        ["eq", "M_s\\,(°\\text{C}) \\approx 539 - 423\\,C - 30.4\\,Mn - 17.7\\,Ni - 12.1\\,Cr - 7.5\\,Mo"],
+        ["p", "where compositions are in wt%. A 0.4% C steel has $M_s \\approx 370°$C and $M_f \\approx 200°$C. A 0.8% C steel has $M_s \\approx 200°$C and some retained austenite at room temperature. Higher carbon steels retain more austenite because $M_f$ drops below room temperature."],
+
+        ["h3", "Hardness of martensite"],
+        ["p", "Carbon content controls martensite hardness. At 0.1 wt% C, martensite is about 38 HRC (380 HV). At 0.4 wt% C: 55-58 HRC (600-650 HV). At 0.8 wt% C: 64-66 HRC (800-850 HV). Above 0.6 wt% C, retained austenite begins to reduce the measured hardness. The hardness comes from solid solution strengthening by trapped carbon and the high density of transformation-induced dislocations ($10^{15}$-$10^{16}$ m$^{-2}$)."],
+        ["callout", "Hardenability is not hardness", "Hardness is the resistance to indentation. Hardenability is the depth to which a steel can be hardened by quenching. A shallow-hardening steel (plain carbon, like 1040) may be fully martensitic only to a depth of 5-10 mm; the core transforms to bainite or pearlite. A deep-hardening steel (alloyed, like 4340 with Ni, Cr, Mo) can be fully martensitic through a 100 mm section. The Jominy end-quench test measures hardenability: one end of a 25 mm bar is water-quenched and hardness is plotted against distance from the quenched end."],
+
+        ["h3", "Tempering"],
+        ["p", "As-quenched martensite is too brittle for engineering use (1-2% elongation, Charpy impact energy 5-10 J). Tempering heats the quenched steel to 150-700$°$C and holds for 1-2 hours, allowing carbon atoms to diffuse out of the BCT lattice and form fine carbide precipitates."],
+        ["p", "Tempering stages in plain carbon steel:"],
+        ["ol", [
+          "<strong>100-250$°$C:</strong> $\\varepsilon$-carbide (Fe$_{2.4}$C) precipitates. Slight hardness decrease. Internal stresses relax. Spring steels are tempered here (200-300$°$C) to retain high hardness (50-55 HRC) with improved toughness.",
+          "<strong>250-350$°$C:</strong> Retained austenite decomposes to bainite. This can actually increase brittleness (tempered martensite embrittlement, TME). Avoid this range for critical applications.",
+          "<strong>350-550$°$C:</strong> $\\varepsilon$-carbide transforms to cementite (Fe$_3$C). Significant hardness decrease, large increase in toughness. General engineering components are tempered in this range.",
+          "<strong>550-700$°$C:</strong> Cementite particles coarsen and spheroidise. The steel approaches the fully softened condition. Used for maximum toughness at the expense of strength."
+        ]],
+        ["p", "Typical properties of 4340 steel (0.40C-1.8Ni-0.8Cr-0.25Mo), oil quenched and tempered at various temperatures:"],
+        ["ul", [
+          "200$°$C: UTS = 1950 MPa, YS = 1600 MPa, elongation = 10%, Charpy V-notch = 15 J, 54 HRC.",
+          "400$°$C: UTS = 1500 MPa, YS = 1350 MPa, elongation = 12%, Charpy = 30 J, 46 HRC.",
+          "600$°$C: UTS = 1050 MPa, YS = 950 MPa, elongation = 18%, Charpy = 80 J, 32 HRC."
+        ]],
+        ["p", "The engineer selects the tempering temperature to balance strength and toughness for the application. A gear shaft might be tempered at 400-500$°$C; a spring at 200-300$°$C; a pressure vessel at 600-650$°$C."],
+
+        ["h3", "Case hardening"],
+        ["p", "Many components need a hard, wear-resistant surface and a tough, shock-resistant core. Case hardening achieves this by enriching the surface with carbon (carburising) or nitrogen (nitriding) before or instead of quenching."],
+        ["p", "<strong>Carburising</strong> exposes a low-carbon steel (0.1-0.25 wt% C) to a carbon-rich atmosphere at 900-950$°$C. Carbon diffuses into the surface, raising the surface carbon to 0.7-0.9 wt% over a case depth of 0.5-2.0 mm (depending on time: typically 4-12 hours for a 1 mm case). The part is then quenched. The high-carbon surface transforms to hard martensite (58-62 HRC) while the low-carbon core transforms to a softer, tougher martensite or bainite (30-40 HRC)."],
+        ["p", "The case depth depends on the diffusion length: $x \\approx 2\\sqrt{Dt}$, where $D$ is the diffusivity of carbon in austenite. At 925$°$C, $D \\approx 1.5 \\times 10^{-11}$ m$^2$/s. For $t = 8$ h (28,800 s): $x \\approx 2\\sqrt{1.5 \\times 10^{-11} \\times 28800} = 1.3$ mm."],
+        ["p", "<strong>Nitriding</strong> is performed at 500-570$°$C in ammonia or a nitrogen-hydrogen plasma. Nitrogen diffuses into the surface and forms hard nitride precipitates (Fe$_4$N, CrN, AlN) without requiring a quench. Case depth is shallow (0.1-0.5 mm after 20-80 hours, because nitrogen diffusion at 520$°$C is slow: $D \\approx 5 \\times 10^{-12}$ m$^2$/s). Surface hardness reaches 900-1200 HV for nitriding steels containing Al, Cr or V (e.g., Nitralloy 135M). The low treatment temperature means minimal distortion."],
+
+        ["derivation", "The Hollomon-Jaffe tempering parameter.", [
+          ["p", "Tempering is a diffusion-controlled process. Time and temperature are interchangeable to some extent: a short time at a high temperature produces similar results to a long time at a low temperature. Hollomon and Jaffe (1945) proposed the parameter:"],
+          ["eq", "P = T(C + \\log_{10} t)"],
+          ["p", "where $T$ is temperature in kelvin, $t$ is time in hours, and $C$ is a constant (about 20 for carbon steels, 15-25 depending on alloy). Steels tempered to the same value of $P$ have approximately the same hardness regardless of the specific $T$ and $t$ used."],
+          ["p", "For 4340 steel tempered at 600$°$C (873 K) for 1 hour: $P = 873(20 + \\log_{10} 1) = 873 \\times 20 = 17460$. The same parameter is achieved at 500$°$C (773 K) for: $t = 10^{(P/T - C)} = 10^{(17460/773 - 20)} = 10^{2.59} = 389$ hours. High temperature is far more effective than long time."]
+        ]],
+
+        ["problem", "A 1045 steel shaft (25 mm diameter) is austenitised at 850$°$C and quenched in oil. The surface cools fast enough to form martensite but the core does not. (a) What is the approximate surface hardness? (b) The shaft is tempered at 450$°$C for 1 hour. Estimate the Hollomon-Jaffe parameter. (c) After tempering, the surface hardness is 40 HRC. Is this consistent with the tempering parameter?", [
+          ["p", "(a) For 0.45 wt% C martensite: approximately 57-59 HRC (from the martensite hardness vs carbon curve)."],
+          ["p", "(b) $P = T(C + \\log_{10} t) = (450 + 273)(20 + \\log_{10} 1) = 723 \\times 20 = 14460$."],
+          ["p", "(c) Published tempering data for 1045 show that $P = 14500$ gives approximately 38-42 HRC. A surface hardness of 40 HRC is consistent. The temper has reduced hardness from 58 HRC to 40 HRC, trading strength for toughness."]
+        ]]
+      ],
+      "related": [
+        { "title": "TTT & CCT Diagrams", "url": "../diffusion/ttt-cct-diagrams" },
+        { "title": "Phase Diagrams & Lever Rule", "url": "../phase-transformations/phase-diagrams-lever-rule" },
+        { "title": "Casting & Solidification", "url": "casting-solidification-processing" }
+      ]
     },
     {
       "id": "surface-engineering-coatings",
       "number": "16.7",
       "title": "Surface Engineering & Coatings",
-      "description": "",
-      "readingTime": "— min",
-      "intro": "",
-      "body": [],
-      "related": []
+      "description": "Protecting and functionalising surfaces: electroplating, thermal spray, PVD, CVD and anodising, with real thicknesses and applications.",
+      "readingTime": "13 min",
+      "intro": "The surface of a component is where corrosion starts, wear occurs and fatigue cracks initiate. Surface engineering modifies the outer microns to millimetres of a part without altering the bulk. The goal might be corrosion resistance, wear resistance, thermal protection, electrical conductivity, optical reflectivity or simply appearance. The diversity of techniques reflects the diversity of demands.",
+      "body": [
+        ["h3", "Why coat?"],
+        ["p", "A component's bulk provides structural support. Its surface faces the environment. These two functions demand different material properties. A steel gear shaft needs a tough core but a hard, wear-resistant surface. A turbine blade needs creep-resistant superalloy inside but an oxidation-resistant coating outside. A bathroom tap is brass for machinability but chromium-plated for corrosion resistance and aesthetics. Surface engineering decouples the bulk and surface requirements."],
+
+        ["h3", "Electroplating"],
+        ["p", "Electroplating deposits a metal coating from an aqueous electrolyte using an applied electric current. The workpiece is the cathode. Metal ions in solution are reduced at the surface: $M^{n+} + ne^- \\to M$."],
+        ["p", "Common electroplated coatings:"],
+        ["ul", [
+          "<strong>Hard chromium.</strong> Deposited from chromic acid (CrO$_3$) at 50-60$°$C, current density 30-60 A/dm$^2$. Coating thickness: 5-500 $\\mu$m. Hardness: 800-1000 HV. Used for hydraulic piston rods, rolls and gauges. Current efficiency is only 10-15% (most of the current evolves hydrogen). REACH regulations are driving replacement by trivalent chromium processes.",
+          "<strong>Nickel.</strong> From Watts bath (NiSO$_4$ + NiCl$_2$ + H$_3$BO$_3$), 45-65$°$C, 3-10 A/dm$^2$. Thickness: 5-50 $\\mu$m. Hardness: 200-400 HV (up to 700 HV for electroless Ni-P after heat treatment). Provides corrosion resistance and a bright finish under decorative chromium.",
+          "<strong>Zinc.</strong> The most widely applied electroplated coating. Thickness: 5-25 $\\mu$m. Protects steel by acting as a sacrificial anode (zinc corrodes preferentially). Hot-dip galvanising (immersion in molten zinc at 450$°$C) gives thicker coatings (45-85 $\\mu$m) for structural steelwork."
+        ]],
+        ["p", "The coating thickness depends on current density and time via Faraday's law:"],
+        ["eq", "d = \\frac{M \\cdot I \\cdot t}{n \\cdot F \\cdot \\rho \\cdot A}"],
+        ["p", "where $d$ is thickness, $M$ is molar mass, $I$ is current, $t$ is time, $n$ is the charge number, $F$ is Faraday's constant (96485 C/mol), $\\rho$ is coating density and $A$ is surface area."],
+
+        ["h3", "Thermal spray"],
+        ["p", "Thermal spray melts or semi-melts a feedstock (powder or wire) and propels it onto the substrate at high velocity. The splattered droplets (splats, 10-200 $\\mu$m diameter, 1-5 $\\mu$m thick) build up to form a lamellar coating. The substrate stays cool (below 150-200$°$C), so there is no metallurgical change."],
+        ["p", "Variants differ in energy source and particle velocity:"],
+        ["ul", [
+          "<strong>Atmospheric plasma spray (APS).</strong> An argon-hydrogen plasma at 10,000-15,000$°$C melts ceramic or metal powder. Particle velocity: 200-400 m/s. Porosity: 5-15%. Used for yttria-stabilised zirconia (YSZ) thermal barrier coatings on turbine blades (150-300 $\\mu$m thick, reducing metal temperature by 100-170$°$C).",
+          "<strong>High-velocity oxy-fuel (HVOF).</strong> Combustion of kerosene or hydrogen with oxygen at 8-12 bar produces a gas jet at 1500-2000 m/s. Particle velocity: 500-800 m/s. Porosity: < 2%. Produces dense, well-bonded coatings. WC-Co or WC-CoCr coatings (200-400 $\\mu$m) replace hard chromium plating for landing gear and hydraulic actuators.",
+          "<strong>Cold spray.</strong> Unmelted powder particles (5-50 $\\mu$m) are accelerated to 500-1200 m/s by a converging-diverging nozzle using heated nitrogen or helium. Particles deform plastically on impact and bond by adiabatic shear. No oxidation, no melting. Excellent for oxygen-sensitive materials: copper, aluminium, titanium. Coating thickness up to several millimetres."
+        ]],
+
+        ["h3", "Physical vapour deposition (PVD)"],
+        ["p", "PVD deposits thin films (0.5-10 $\\mu$m) by evaporation or sputtering in a vacuum chamber ($10^{-3}$-$10^{-5}$ mbar). Coating materials include TiN, CrN, TiAlN, DLC (diamond-like carbon) and Al$_2$O$_3$."],
+        ["p", "The workhorse PVD coating is TiN (gold colour, hardness 2000-2400 HV, coefficient of friction 0.4-0.5, maximum service temperature 600$°$C). Applied at 2-5 $\\mu$m thickness on cutting tools, it increases tool life by 2-5 times compared to uncoated HSS. TiAlN (hardness 2800-3200 HV, service temperature up to 900$°$C) has largely replaced TiN for high-speed dry machining."],
+        ["p", "Cathodic arc evaporation and magnetron sputtering are the two main PVD techniques. Arc evaporation produces high ionisation of the vapour flux (50-90%), enabling dense, well-adhered coatings. Magnetron sputtering gives better thickness uniformity and smoother coatings but at lower deposition rates (0.1-1 $\\mu$m/h vs 1-5 $\\mu$m/h for arc)."],
+
+        ["h3", "Chemical vapour deposition (CVD)"],
+        ["p", "CVD deposits coatings by chemical reaction of gaseous precursors at the substrate surface. Temperature: 800-1100$°$C for conventional thermal CVD, 200-600$°$C for plasma-enhanced CVD (PECVD). The high temperature of thermal CVD limits substrates to cemented carbides and ceramics."],
+        ["p", "CVD coatings on cemented carbide cutting tool inserts typically comprise multiple layers: TiN / Al$_2$O$_3$ / TiCN, total thickness 5-20 $\\mu$m. The $\\alpha$-Al$_2$O$_3$ layer (hardness 2000-2200 HV, chemically inert, low thermal conductivity) provides crater wear resistance at high cutting speeds. Over 80% of cemented carbide inserts sold worldwide are CVD-coated."],
+        ["p", "CVD diamond coatings (5-30 $\\mu$m) are deposited from CH$_4$/H$_2$ mixtures at 700-900$°$C on carbide tools for machining aluminium, graphite and composites. Hardness: 8000-10,000 HV. These coatings fail on steel because carbon diffuses into iron at cutting temperature."],
+
+        ["h3", "Anodising"],
+        ["p", "Anodising grows an oxide layer on aluminium by making it the anode in an acid electrolyte (typically 15-20% H$_2$SO$_4$ at 20$°$C, 1.5 A/dm$^2$). The natural oxide on aluminium is 2-5 nm thick. Anodising produces a porous columnar oxide 5-25 $\\mu$m thick (decorative) or 25-100 $\\mu$m thick (hard anodising at lower temperature and higher current density)."],
+        ["p", "The oxide is amorphous Al$_2$O$_3$ with a regular hexagonal pore structure (pore diameter 10-100 nm, pore spacing 30-300 nm). The pores can be filled with organic or inorganic dyes for colour, then sealed in boiling water or nickel acetate to close the pores and improve corrosion resistance."],
+        ["p", "Hard anodising (type III, MIL-A-8625) produces coatings of 50-75 $\\mu$m with hardness 300-500 HV. Used for pistons, cylinders and sliding components. The oxide is integral to the substrate (it grows inward), so dimensional changes are about half the total coating thickness outward and half inward."],
+        ["callout", "Oxide growth", "Anodising follows a parabolic growth law: $d^2 = k \\cdot t$, where $d$ is oxide thickness and $t$ is time. The rate constant $k$ depends on current density, temperature and electrolyte concentration. This parabolic behaviour arises because the ionic transport through the oxide (Al$^{3+}$ outward, O$^{2-}$ inward) becomes the rate-limiting step as the film thickens."],
+
+        ["h3", "Selecting a surface treatment"],
+        ["p", "The choice depends on the required property, the substrate, the operating environment, the component geometry and the cost. Some rules of thumb:"],
+        ["ul", [
+          "Corrosion protection of steel: zinc plating (5-25 $\\mu$m) or hot-dip galvanising (50-85 $\\mu$m) for atmospheric exposure; nickel-chromium plating for aggressive environments.",
+          "Wear resistance: PVD TiAlN (3-5 $\\mu$m) for cutting tools; HVOF WC-Co (200-300 $\\mu$m) for sliding and abrasive wear; nitriding (0.2-0.5 mm) for gears and crankshafts.",
+          "Thermal protection: APS YSZ (150-300 $\\mu$m) for turbine blades and combustion chambers.",
+          "Decorative: electroplated Ni + Cr (20 $\\mu$m Ni, 0.25 $\\mu$m Cr); anodised and dyed aluminium.",
+          "Electrical conductivity: electroplated copper (5-50 $\\mu$m) or silver (1-10 $\\mu$m) on connectors."
+        ]],
+
+        ["derivation", "Faraday's law applied to electroplating thickness.", [
+          ["p", "The mass of metal deposited is given by Faraday's law:"],
+          ["eq", "m = \\frac{M \\cdot I \\cdot t}{n \\cdot F}"],
+          ["p", "The thickness of a uniform deposit on a flat surface of area $A$ is:"],
+          ["eq", "d = \\frac{m}{\\rho \\cdot A} = \\frac{M \\cdot I \\cdot t}{n \\cdot F \\cdot \\rho \\cdot A}"],
+          ["p", "For nickel plating ($M = 58.7$ g/mol, $n = 2$, $\\rho = 8900$ kg/m$^3$) at $I/A = 5$ A/dm$^2$ = 500 A/m$^2$ for 30 minutes (1800 s):"],
+          ["eq", "d = \\frac{0.0587 \\times 500 \\times 1800}{2 \\times 96485 \\times 8900} = \\frac{52830}{1.717 \\times 10^9} = 3.08 \\times 10^{-5} \\text{ m} = 30.8 \\text{ }\\mu\\text{m}"],
+          ["p", "This assumes 100% current efficiency. In practice, nickel plating achieves 92-97% efficiency, so the actual deposit would be 28-30 $\\mu$m."]
+        ]],
+
+        ["problem", "A steel hydraulic piston rod (diameter 80 mm, length 500 mm) needs a hard chromium coating of 50 $\\mu$m thickness. The plating bath operates at 50 A/dm$^2$ with 15% current efficiency. Calculate the plating time. ($M_{Cr} = 52.0$ g/mol, $n = 6$, $\\rho_{Cr} = 7190$ kg/m$^3$).", [
+          ["p", "Surface area: $A = \\pi d L = \\pi \\times 0.08 \\times 0.5 = 0.1257$ m$^2$ = 12.57 dm$^2$."],
+          ["p", "Current: $I = 50 \\times 12.57 = 628.5$ A."],
+          ["p", "Required mass: $m = \\rho \\cdot d \\cdot A = 7190 \\times 50 \\times 10^{-6} \\times 0.1257 = 45.2$ g."],
+          ["p", "From Faraday's law with efficiency $\\eta = 0.15$:"],
+          ["eq", "t = \\frac{m \\cdot n \\cdot F}{\\eta \\cdot M \\cdot I} = \\frac{45.2 \\times 6 \\times 96485}{0.15 \\times 52.0 \\times 628.5}"],
+          ["p", "$t = 26.16 \\times 10^6 / 4902 = 5337$ s $\\approx 89$ min."],
+          ["p", "About 1.5 hours. The low current efficiency of hexavalent chromium plating is the reason it is slow, expensive and generates large volumes of hydrogen gas."]
+        ]]
+      ],
+      "related": [
+        { "title": "Corrosion", "url": "../electrochemistry/corrosion" },
+        { "title": "Heat Treatment", "url": "heat-treatment" },
+        { "title": "Deformation Processing", "url": "deformation-processing-rolling-forging-extrusion" }
+      ]
     }
   ]
 }

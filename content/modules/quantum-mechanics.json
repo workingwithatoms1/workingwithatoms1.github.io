@@ -6,68 +6,418 @@
     "part": "S",
     "partTitle": "Supporting Modules",
     "topic": "Quantum Mechanics",
-    "intro": ""
+    "intro": "The quantum mechanics that underpins materials science. From wave-particle duality through the Schrodinger equation to the formation of energy bands, this module builds the physical foundations used in electronic properties, bonding, and spectroscopy."
   },
   "articles": [
     {
       "id": "wave-particle-duality",
       "number": "18.1",
       "title": "Wave-Particle Duality",
-      "description": "",
-      "readingTime": "— min",
-      "intro": "",
-      "body": [],
-      "related": []
+      "description": "Light behaves as particles, electrons behave as waves, and the double-slit experiment proves it.",
+      "readingTime": "11 min",
+      "intro": "At the start of the twentieth century, physics assumed that waves were waves and particles were particles. Experiments proved otherwise. Light comes in discrete packets of energy. Electrons diffract like waves. This duality is not a metaphor. It is measurable, and it is the reason quantum mechanics exists.",
+      "body": [
+        ["h3", "The photoelectric effect"],
+        ["p", "Shine ultraviolet light on a clean metal surface and electrons fly off. Classical wave theory predicts that brighter light should eject faster electrons. It does not. Increasing the intensity ejects more electrons, but their maximum kinetic energy depends only on the frequency of the light. Below a threshold frequency, no electrons are emitted at all, regardless of intensity."],
+        ["p", "Einstein explained this in 1905 by proposing that light consists of discrete quanta, later called photons, each carrying energy:"],
+        ["eq", "E = h\\nu = \\frac{hc}{\\lambda}"],
+        ["p", "where $h = 6.626 \\times 10^{-34}$ J s is Planck's constant, $\\nu$ is the frequency, $c = 3.00 \\times 10^{8}$ m/s is the speed of light, and $\\lambda$ is the wavelength. An electron absorbs one photon and escapes if the photon energy exceeds the work function $\\phi$ of the metal:"],
+        ["eq", "K_{\\max} = h\\nu - \\phi"],
+        ["p", "Work functions for common metals: aluminium 4.08 eV, copper 4.7 eV, gold 5.1 eV, caesium 2.1 eV. The threshold wavelength for aluminium is $\\lambda = hc/\\phi = 304$ nm, firmly in the ultraviolet. Visible light will not eject electrons from aluminium."],
+        ["callout", "Electron-volts", "An electron-volt (eV) is the energy gained by one electron accelerated through 1 V. $1\\text{ eV} = 1.602 \\times 10^{-19}$ J. Atomic and molecular energies are almost always quoted in eV because the numbers are convenient: bond energies are 1 to 10 eV, ionisation energies are 5 to 25 eV, core electron binding energies are hundreds to thousands of eV."],
+
+        ["h3", "De Broglie wavelength"],
+        ["p", "In 1924, de Broglie proposed the converse: if light waves carry momentum like particles, then particles should have wavelengths like waves. The de Broglie wavelength of any particle with momentum $p$ is:"],
+        ["eq", "\\lambda = \\frac{h}{p} = \\frac{h}{mv}"],
+        ["p", "where $m$ is the mass and $v$ is the velocity. This equation bridges the wave and particle pictures. The wavelength is inversely proportional to mass and velocity, so wave behaviour is only detectable for very light, slow-moving particles."],
+        ["p", "Some real numbers make the point. An electron accelerated through 100 V has kinetic energy $K = eV = 100$ eV $= 1.602 \\times 10^{-17}$ J. Its momentum is $p = \\sqrt{2m_e K}$, where $m_e = 9.109 \\times 10^{-31}$ kg:"],
+        ["eq", "\\lambda_e = \\frac{h}{\\sqrt{2 m_e K}} = \\frac{6.626 \\times 10^{-34}}{\\sqrt{2 \\times 9.109 \\times 10^{-31} \\times 1.602 \\times 10^{-17}}} = 1.23 \\text{ \\AA}"],
+        ["p", "That is comparable to interatomic spacings in crystals. Electrons at 100 eV can diffract from crystal surfaces. At 200 kV (a typical transmission electron microscope), $\\lambda = 0.0251$ A. This is why electron microscopy achieves atomic resolution."],
+        ["p", "A thermal neutron at room temperature ($T = 300$ K) has kinetic energy $K = \\frac{3}{2}k_BT = 0.039$ eV. With neutron mass $m_n = 1.675 \\times 10^{-27}$ kg:"],
+        ["eq", "\\lambda_n = \\frac{h}{\\sqrt{2 m_n K}} = \\frac{6.626 \\times 10^{-34}}{\\sqrt{2 \\times 1.675 \\times 10^{-27} \\times 6.25 \\times 10^{-21}}} = 1.45 \\text{ \\AA}"],
+        ["p", "Thermal neutrons also have wavelengths comparable to lattice spacings, which is why neutron diffraction is such a powerful technique for crystal structure determination."],
+        ["p", "A baseball (0.145 kg) thrown at 40 m/s has $\\lambda = h/(mv) = 6.626 \\times 10^{-34}/(0.145 \\times 40) = 1.14 \\times 10^{-34}$ m. This is $10^{-24}$ times smaller than a proton. Wave behaviour is utterly undetectable for macroscopic objects. Quantum mechanics matters only when $\\lambda$ is comparable to the length scales of the system."],
+
+        ["h3", "The double-slit experiment"],
+        ["p", "Send a beam of electrons at a barrier with two narrow slits. Place a detector screen behind it. If electrons were classical particles, you would see two bright bands, one behind each slit. Instead you see an interference pattern: alternating bright and dark fringes, exactly like the pattern produced by light waves passing through two slits."],
+        ["p", "The fringe spacing for slits separated by distance $d$ at a screen distance $L$ is:"],
+        ["eq", "\\Delta y = \\frac{\\lambda L}{d}"],
+        ["p", "Reduce the beam intensity until only one electron passes through at a time. Each electron lands at a single point on the detector (particle behaviour). But after thousands of individual electrons, the interference pattern builds up (wave behaviour). Each electron somehow interferes with itself, passing through both slits simultaneously."],
+        ["p", "Place a detector at one slit to determine which slit each electron passes through, and the interference pattern vanishes. The act of measurement collapses the wave behaviour. This is not a philosophical curiosity. It is experimentally verified and forces us to abandon any purely classical picture of matter."],
+        ["callout", "Davisson-Germer experiment", "The wave nature of electrons was confirmed experimentally in 1927 by Davisson and Germer, who observed electron diffraction from a nickel crystal surface. The diffraction angles matched the predictions of de Broglie's equation using the known lattice spacing of nickel (3.52 A). This experiment earned de Broglie the Nobel Prize in Physics in 1929."],
+
+        ["h3", "The uncertainty principle"],
+        ["p", "Wave-particle duality has a fundamental consequence. A wave that is precisely localised in space must be a superposition of many wavelengths. A wave with a single precise wavelength extends infinitely. You cannot have both at once."],
+        ["p", "Heisenberg's uncertainty principle quantifies this:"],
+        ["eq", "\\Delta x \\, \\Delta p \\geq \\frac{\\hbar}{2}"],
+        ["p", "where $\\Delta x$ is the uncertainty in position, $\\Delta p$ is the uncertainty in momentum, and $\\hbar = h/(2\\pi) = 1.055 \\times 10^{-34}$ J s is the reduced Planck constant. The better you know a particle's position, the less you know about its momentum, and vice versa."],
+        ["p", "For an electron confined to an atom (roughly $\\Delta x \\approx 1$ A $= 10^{-10}$ m), the minimum momentum uncertainty is $\\Delta p \\geq \\hbar/(2\\Delta x) \\approx 5 \\times 10^{-25}$ kg m/s. The corresponding kinetic energy is $K \\approx (\\Delta p)^2/(2m_e) \\approx 1.5$ eV. Confinement costs energy. This is why electrons in atoms have nonzero kinetic energy even in their ground state, and it is the origin of the zero-point energy."],
+        ["p", "There is an analogous relation between energy and time:"],
+        ["eq", "\\Delta E \\, \\Delta t \\geq \\frac{\\hbar}{2}"],
+        ["p", "A state that exists for a short time $\\Delta t$ has an energy uncertainty of at least $\\hbar/(2\\Delta t)$. This is why short-lived excited states produce broad spectral lines."],
+
+        ["h3", "Why this matters for materials"],
+        ["p", "Wave-particle duality is not just a theoretical curiosity. Electron diffraction (TEM, LEED) exploits the wave nature of electrons to image crystal structures. Neutron diffraction exploits the wave nature of neutrons to locate light atoms like hydrogen. X-ray photoelectron spectroscopy (XPS) exploits the photoelectric effect to measure surface composition. Every characterisation technique in materials science rests on quantum mechanics."],
+
+        ["problem", "Calculate the de Broglie wavelength of electrons accelerated through 200 kV in a TEM. Compare this with the lattice parameter of silicon (5.431 A). Why can a TEM resolve individual atomic columns?", [
+          ["p", "At 200 kV, the electron kinetic energy is $K = 200 \\times 10^3 \\times 1.602 \\times 10^{-19} = 3.204 \\times 10^{-14}$ J. At this energy, relativistic corrections matter. The relativistic de Broglie wavelength is:"],
+          ["eq", "\\lambda = \\frac{h}{\\sqrt{2m_e K \\left(1 + \\frac{K}{2m_e c^2}\\right)}}"],
+          ["p", "With $m_e c^2 = 8.187 \\times 10^{-14}$ J $= 511$ keV:"],
+          ["eq", "\\lambda = \\frac{6.626 \\times 10^{-34}}{\\sqrt{2 \\times 9.109 \\times 10^{-31} \\times 3.204 \\times 10^{-14} \\times (1 + \\frac{200}{1022})}} = 0.0251 \\text{ \\AA}"],
+          ["p", "This is about 200 times smaller than the silicon lattice parameter. The electron wavelength sets the theoretical resolution limit (the Abbe diffraction limit). Although real TEM resolution is limited by lens aberrations rather than wavelength, the small $\\lambda$ is why atomic-resolution imaging is possible. Modern aberration-corrected TEMs achieve resolution below 0.5 A, routinely imaging individual atomic columns in crystals."]
+        ]]
+      ],
+      "related": [
+        { "title": "The Schrodinger Equation", "url": "the-schrodinger-equation" },
+        { "title": "Quantum Numbers & Orbitals", "url": "quantum-numbers-orbitals" },
+        { "title": "Reciprocal Lattice & Diffraction", "url": "../crystallography/reciprocal-lattice" }
+      ]
     },
     {
       "id": "the-schrodinger-equation",
       "number": "18.2",
       "title": "The Schrodinger Equation",
-      "description": "",
-      "readingTime": "— min",
-      "intro": "",
-      "body": [],
-      "related": []
+      "description": "The master equation of quantum mechanics, and what it predicts for the simplest possible system.",
+      "readingTime": "13 min",
+      "intro": "Once you accept that particles behave as waves, you need an equation to describe those waves. The Schrodinger equation does this. It plays the same role in quantum mechanics that Newton's second law plays in classical mechanics: given the forces acting on a particle, it tells you everything you can know about the particle's state.",
+      "body": [
+        ["h3", "The wavefunction"],
+        ["p", "In quantum mechanics, the state of a particle is described by a wavefunction $\\Psi(\\mathbf{r}, t)$, a complex-valued function of position and time. The wavefunction itself is not directly observable. What is observable is $|\\Psi|^2$: the probability density. The probability of finding the particle in a small volume $dV$ around position $\\mathbf{r}$ at time $t$ is:"],
+        ["eq", "P(\\mathbf{r}, t)\\, dV = |\\Psi(\\mathbf{r}, t)|^2 \\, dV"],
+        ["p", "Since the particle must be somewhere, the wavefunction must be normalised:"],
+        ["eq", "\\int_{-\\infty}^{\\infty} |\\Psi(\\mathbf{r}, t)|^2 \\, dV = 1"],
+        ["p", "The wavefunction encodes everything knowable about the particle. Position, momentum, energy, angular momentum: all are extracted from $\\Psi$ using the appropriate mathematical operators."],
+
+        ["h3", "The time-dependent Schrodinger equation"],
+        ["p", "The full Schrodinger equation is:"],
+        ["eq", "i\\hbar \\frac{\\partial \\Psi}{\\partial t} = -\\frac{\\hbar^2}{2m}\\nabla^2 \\Psi + V(\\mathbf{r})\\Psi"],
+        ["p", "where $m$ is the particle mass, $V(\\mathbf{r})$ is the potential energy, and $\\nabla^2 = \\frac{\\partial^2}{\\partial x^2} + \\frac{\\partial^2}{\\partial y^2} + \\frac{\\partial^2}{\\partial z^2}$ is the Laplacian. The left side gives the time evolution. The right side contains a kinetic energy term ($-\\frac{\\hbar^2}{2m}\\nabla^2$) and a potential energy term ($V$)."],
+        ["p", "This equation was not derived from more fundamental principles. Schrodinger wrote it down in 1926 by requiring consistency with the de Broglie relation and conservation of energy. Its justification is that it works: every prediction it has made has been confirmed by experiment."],
+
+        ["h3", "The time-independent Schrodinger equation"],
+        ["p", "When the potential $V(\\mathbf{r})$ does not depend on time, we can separate the wavefunction into spatial and temporal parts: $\\Psi(\\mathbf{r}, t) = \\psi(\\mathbf{r})\\, e^{-iEt/\\hbar}$. Substituting this into the time-dependent equation gives the time-independent Schrodinger equation:"],
+        ["eq", "-\\frac{\\hbar^2}{2m}\\nabla^2 \\psi + V(\\mathbf{r})\\psi = E\\psi"],
+        ["p", "This is an eigenvalue equation. The operator on the left (the Hamiltonian, $\\hat{H}$) acts on $\\psi$ and returns $\\psi$ multiplied by a constant $E$. The allowed values of $E$ are the energy eigenvalues, and the corresponding $\\psi$ are the eigenfunctions. In most problems, only certain discrete values of $E$ are allowed. This is where quantisation comes from."],
+        ["callout", "Operators and eigenvalues", "In quantum mechanics, every observable quantity has a corresponding operator. The momentum operator is $\\hat{p} = -i\\hbar\\nabla$. The kinetic energy operator is $\\hat{T} = \\hat{p}^2/(2m) = -\\hbar^2\\nabla^2/(2m)$. The Hamiltonian is $\\hat{H} = \\hat{T} + V$. If $\\hat{H}\\psi = E\\psi$, then a measurement of energy on a system in state $\\psi$ will always yield the value $E$."],
+
+        ["h3", "Particle in a one-dimensional box"],
+        ["p", "The simplest application: a particle of mass $m$ confined to a one-dimensional box of length $L$, with impenetrable walls. The potential is $V = 0$ inside the box ($0 < x < L$) and $V = \\infty$ outside. The wavefunction must be zero at the walls (the particle cannot exist where $V = \\infty$)."],
+        ["p", "Inside the box, the Schrodinger equation is:"],
+        ["eq", "-\\frac{\\hbar^2}{2m}\\frac{d^2\\psi}{dx^2} = E\\psi"],
+        ["p", "This is the equation for a simple harmonic function. The general solution is $\\psi(x) = A\\sin(kx) + B\\cos(kx)$ where $k = \\sqrt{2mE}/\\hbar$. Applying the boundary condition $\\psi(0) = 0$ forces $B = 0$. Applying $\\psi(L) = 0$ requires $\\sin(kL) = 0$, so $kL = n\\pi$ with $n = 1, 2, 3, \\ldots$"],
+        ["derivation", "The energy levels of a particle in a 1D box are $E_n = n^2 h^2 / (8mL^2)$.", [
+          ["p", "From $k = n\\pi/L$ and $k = \\sqrt{2mE}/\\hbar$:"],
+          ["eq", "\\frac{n\\pi}{L} = \\frac{\\sqrt{2mE}}{\\hbar}"],
+          ["p", "Solving for $E$:"],
+          ["eq", "E_n = \\frac{n^2 \\pi^2 \\hbar^2}{2mL^2} = \\frac{n^2 h^2}{8mL^2}"],
+          ["p", "The normalised wavefunctions are:"],
+          ["eq", "\\psi_n(x) = \\sqrt{\\frac{2}{L}} \\sin\\left(\\frac{n\\pi x}{L}\\right)"]
+        ]],
+        ["p", "The key features of this result:"],
+        ["ul", [
+          "Energy is quantised. Only discrete values $E_n \\propto n^2$ are allowed. No intermediate energies exist.",
+          "The ground state ($n = 1$) has nonzero energy: $E_1 = h^2/(8mL^2)$. The particle can never be at rest. This is the zero-point energy, a direct consequence of the uncertainty principle.",
+          "Energy scales as $1/L^2$. Smaller boxes mean higher energies. Confinement costs energy.",
+          "Energy scales as $1/m$. Heavier particles have more closely spaced levels."
+        ]],
+
+        ["h3", "Real numbers for real systems"],
+        ["p", "An electron in a box of length $L = 1$ nm (roughly the size of a large molecule):"],
+        ["eq", "E_1 = \\frac{(6.626 \\times 10^{-34})^2}{8 \\times 9.109 \\times 10^{-31} \\times (10^{-9})^2} = 6.02 \\times 10^{-20} \\text{ J} = 0.376 \\text{ eV}"],
+        ["p", "The gap between the first and second levels is $E_2 - E_1 = 3E_1 = 1.13$ eV. This is comparable to the energy of visible light (1.7 to 3.1 eV), which is why nanoscale confinement produces visible colour changes in quantum dots."],
+        ["p", "For a nitrogen molecule ($m = 4.65 \\times 10^{-26}$ kg) in a box of $L = 1$ cm (a gas container): $E_1 = 1.2 \\times 10^{-40}$ J $= 7.4 \\times 10^{-22}$ eV. The energy levels are so closely spaced that they form a continuum. This is why classical mechanics works perfectly for gas molecules in macroscopic containers."],
+
+        ["h3", "The three-dimensional box"],
+        ["p", "Extending to three dimensions with a box of sides $L_x$, $L_y$, $L_z$, the energy levels are:"],
+        ["eq", "E_{n_x, n_y, n_z} = \\frac{h^2}{8m}\\left(\\frac{n_x^2}{L_x^2} + \\frac{n_y^2}{L_y^2} + \\frac{n_z^2}{L_z^2}\\right)"],
+        ["p", "Each quantum number $n_x, n_y, n_z$ is a positive integer. For a cubic box ($L_x = L_y = L_z = L$), the states $(2,1,1)$, $(1,2,1)$, and $(1,1,2)$ all have the same energy: $E = 6h^2/(8mL^2)$. This is degeneracy: different quantum states sharing the same energy. Degeneracy arises from symmetry and will reappear throughout quantum mechanics."],
+        ["p", "The three-dimensional box is the starting point for the free electron model of metals (article 9.1), where the box is the volume of the metal sample and the particles are conduction electrons."],
+
+        ["problem", "Quantum dots made of CdSe have a bulk band gap of 1.74 eV. A spherical quantum dot of radius $R = 2$ nm confines an electron (effective mass $m_e^* = 0.13 m_e$) and a hole (effective mass $m_h^* = 0.45 m_e$). Estimate the confinement energy using the particle-in-a-box model, and predict the approximate emission wavelength.", [
+          ["p", "For a spherical box, the ground state energy is $E_1 = \\pi^2 \\hbar^2 / (2m^* R^2)$ (from the spherical Bessel function solution, slightly different from the cubic box). The confinement energy for electron plus hole is:"],
+          ["eq", "\\Delta E = \\frac{\\pi^2 \\hbar^2}{2R^2}\\left(\\frac{1}{m_e^*} + \\frac{1}{m_h^*}\\right)"],
+          ["eq", "\\Delta E = \\frac{\\pi^2 \\times (1.055 \\times 10^{-34})^2}{2 \\times (2 \\times 10^{-9})^2} \\times \\left(\\frac{1}{0.13 \\times 9.109 \\times 10^{-31}} + \\frac{1}{0.45 \\times 9.109 \\times 10^{-31}}\\right)"],
+          ["p", "$\\Delta E = 1.37 \\times 10^{-38} \\times (8.44 \\times 10^{30} + 2.44 \\times 10^{30}) = 1.37 \\times 10^{-38} \\times 1.088 \\times 10^{31} = 1.49 \\times 10^{-7}$ ... let us recalculate more carefully."],
+          ["p", "$\\pi^2\\hbar^2 / (2R^2) = (9.87 \\times 1.112 \\times 10^{-68}) / (2 \\times 4 \\times 10^{-18}) = 1.098 \\times 10^{-67} / (8 \\times 10^{-18}) = 1.372 \\times 10^{-50}$ J m$^2$ ... Hmm, let's use eV units directly."],
+          ["p", "In convenient units: $\\frac{\\hbar^2}{2m_e} = 3.81$ eV A$^2$. So $\\frac{\\pi^2 \\hbar^2}{2m_e R^2} = \\frac{9.87 \\times 3.81}{(20)^2} = \\frac{37.6}{400} = 0.094$ eV. Dividing by effective masses:"],
+          ["eq", "\\Delta E = \\frac{0.094}{0.13} + \\frac{0.094}{0.45} = 0.72 + 0.21 = 0.93 \\text{ eV}"],
+          ["p", "The effective band gap is $1.74 + 0.93 = 2.67$ eV. The emission wavelength is $\\lambda = hc/E = 1240/2.67 = 464$ nm, which is blue. This matches experimental observations: 2 nm CdSe quantum dots emit blue light, while larger dots (less confinement) emit green, yellow, or red. This tunability is why quantum dots are used in modern displays."]
+        ]]
+      ],
+      "related": [
+        { "title": "Wave-Particle Duality", "url": "wave-particle-duality" },
+        { "title": "Quantum Numbers & Orbitals", "url": "quantum-numbers-orbitals" },
+        { "title": "Free Electron Model & Density of States", "url": "../electronic-properties/free-electron-model-density-of-states" }
+      ]
     },
     {
       "id": "quantum-numbers-orbitals",
       "number": "18.3",
       "title": "Quantum Numbers & Orbitals",
-      "description": "",
-      "readingTime": "— min",
-      "intro": "",
-      "body": [],
-      "related": []
+      "description": "Solving the hydrogen atom: four quantum numbers, radial and angular wavefunctions, and the shapes of s, p, d, and f orbitals.",
+      "readingTime": "14 min",
+      "intro": "The hydrogen atom is the only atom whose Schrodinger equation can be solved exactly. The solutions introduce four quantum numbers that label every possible electron state. These quantum numbers, and the orbital shapes they describe, carry over to every element in the periodic table.",
+      "body": [
+        ["h3", "The hydrogen atom"],
+        ["p", "A single electron of mass $m_e$ orbits a proton. The potential energy is the Coulomb attraction:"],
+        ["eq", "V(r) = -\\frac{e^2}{4\\pi\\varepsilon_0 r}"],
+        ["p", "where $r$ is the electron-proton distance and $e = 1.602 \\times 10^{-19}$ C. The time-independent Schrodinger equation in spherical coordinates $(r, \\theta, \\phi)$ is:"],
+        ["eq", "-\\frac{\\hbar^2}{2m_e}\\nabla^2\\psi - \\frac{e^2}{4\\pi\\varepsilon_0 r}\\psi = E\\psi"],
+        ["p", "Because the potential depends only on $r$, the wavefunction separates into radial and angular parts:"],
+        ["eq", "\\psi_{nlm}(r, \\theta, \\phi) = R_{nl}(r) \\, Y_l^m(\\theta, \\phi)"],
+        ["p", "The angular part $Y_l^m$ is a spherical harmonic, determined entirely by symmetry. The radial part $R_{nl}$ depends on the specific potential. Three quantum numbers emerge from the boundary conditions."],
+
+        ["h3", "The four quantum numbers"],
+        ["p", "<strong>Principal quantum number $n$</strong>: $n = 1, 2, 3, \\ldots$ Determines the energy of the electron in hydrogen and sets the overall size of the orbital. The energy eigenvalues are:"],
+        ["eq", "E_n = -\\frac{m_e e^4}{8\\varepsilon_0^2 h^2} \\cdot \\frac{1}{n^2} = -\\frac{13.6 \\text{ eV}}{n^2}"],
+        ["p", "The ground state ($n = 1$) has $E_1 = -13.6$ eV. The negative sign means the electron is bound. The ionisation energy of hydrogen is 13.6 eV."],
+        ["p", "<strong>Angular momentum quantum number $l$</strong>: $l = 0, 1, 2, \\ldots, n-1$. Determines the shape of the orbital and the magnitude of the orbital angular momentum: $L = \\hbar\\sqrt{l(l+1)}$. The letters s, p, d, f correspond to $l = 0, 1, 2, 3$."],
+        ["p", "<strong>Magnetic quantum number $m_l$</strong>: $m_l = -l, -l+1, \\ldots, 0, \\ldots, l-1, l$. Determines the orientation of the orbital in space. There are $2l + 1$ values for each $l$. This quantum number gets its name because the energy levels split in a magnetic field (the Zeeman effect), with the splitting proportional to $m_l$."],
+        ["p", "<strong>Spin quantum number $m_s$</strong>: $m_s = +1/2$ or $-1/2$. Electron spin is an intrinsic angular momentum with no classical analogue. It was discovered experimentally (Stern-Gerlach, 1922) and incorporated into quantum mechanics by Dirac (1928). Spin does not emerge from the non-relativistic Schrodinger equation; it is added as an additional degree of freedom."],
+        ["callout", "Counting states", "For a given $n$: $l$ runs from 0 to $n-1$, and for each $l$ there are $2l+1$ values of $m_l$. The total number of orbital states is $\\sum_{l=0}^{n-1}(2l+1) = n^2$. Including spin (factor of 2), the $n$th shell holds $2n^2$ electrons. $n = 1$: 2 electrons. $n = 2$: 8. $n = 3$: 18. $n = 4$: 32."],
+
+        ["h3", "Radial wavefunctions"],
+        ["p", "The radial part $R_{nl}(r)$ determines how the probability density varies with distance from the nucleus. The natural length scale is the Bohr radius:"],
+        ["eq", "a_0 = \\frac{4\\pi\\varepsilon_0\\hbar^2}{m_e e^2} = 0.529 \\text{ \\AA}"],
+        ["p", "The first few radial wavefunctions:"],
+        ["ul", [
+          "$R_{10} = 2\\left(\\frac{1}{a_0}\\right)^{3/2} e^{-r/a_0}$ (1s): pure exponential decay.",
+          "$R_{20} = \\frac{1}{2\\sqrt{2}}\\left(\\frac{1}{a_0}\\right)^{3/2}\\left(2 - \\frac{r}{a_0}\\right)e^{-r/(2a_0)}$ (2s): one radial node at $r = 2a_0$.",
+          "$R_{21} = \\frac{1}{2\\sqrt{6}}\\left(\\frac{1}{a_0}\\right)^{3/2}\\frac{r}{a_0}e^{-r/(2a_0)}$ (2p): zero at the origin, one maximum."
+        ]],
+        ["p", "The number of radial nodes (zeros of $R_{nl}$, excluding $r = 0$ and $r = \\infty$) is $n - l - 1$. The 1s orbital has no nodes. The 2s has one. The 3s has two."],
+        ["p", "The probability of finding the electron between $r$ and $r + dr$ is given by the radial probability density $P(r) = r^2 |R_{nl}(r)|^2$. The factor of $r^2$ comes from the volume element in spherical coordinates. For the 1s orbital, $P(r)$ peaks at $r = a_0 = 0.529$ A. This is the most probable distance, matching the Bohr model prediction, but the electron has a nonzero probability of being found at any distance."],
+
+        ["h3", "Angular wavefunctions and orbital shapes"],
+        ["p", "The angular part $Y_l^m(\\theta, \\phi)$ determines the directional shape of the orbital."],
+        ["p", "<strong>s orbitals ($l = 0$)</strong>: $Y_0^0 = 1/\\sqrt{4\\pi}$, a constant. Spherically symmetric. No angular dependence. The 1s, 2s, 3s orbitals all have the same spherical shape; they differ only in their radial extent and number of radial nodes."],
+        ["p", "<strong>p orbitals ($l = 1$)</strong>: three orbitals ($m_l = -1, 0, +1$). The real combinations are $p_x$, $p_y$, $p_z$, each shaped like a dumbbell oriented along its respective axis. The $p_z$ orbital has $Y_1^0 = \\sqrt{3/(4\\pi)}\\cos\\theta$: maximum probability along the $z$ axis, zero in the $xy$ plane (a nodal plane). Each p orbital has one angular node."],
+        ["p", "<strong>d orbitals ($l = 2$)</strong>: five orbitals. The real combinations are $d_{xy}$, $d_{xz}$, $d_{yz}$ (each with four lobes between the axes), $d_{x^2-y^2}$ (four lobes along the $x$ and $y$ axes), and $d_{z^2}$ (a lobe along $z$ with a torus in the $xy$ plane). Each has two angular nodes. The d orbitals are critical for transition metal chemistry and crystal field theory."],
+        ["p", "<strong>f orbitals ($l = 3$)</strong>: seven orbitals with complex multi-lobed shapes and three angular nodes. Important for lanthanides and actinides. The 4f electrons in rare earth magnets (Nd$_2$Fe$_{14}$B) give rise to the strong magnetocrystalline anisotropy that makes permanent magnets possible."],
+
+        ["h3", "Beyond hydrogen: effective nuclear charge"],
+        ["p", "For atoms with more than one electron, the Schrodinger equation cannot be solved exactly because of electron-electron repulsion. However, the hydrogen quantum numbers $(n, l, m_l, m_s)$ still label the states. The key difference: in multi-electron atoms, the energy depends on both $n$ and $l$, not just $n$."],
+        ["p", "An electron in a 2s orbital penetrates closer to the nucleus than a 2p electron (the 2s radial wavefunction is nonzero at $r = 0$, while the 2p is zero there). The 2s electron therefore experiences a larger effective nuclear charge and is more tightly bound. This is why 2s fills before 2p, and generally why s fills before p before d before f within a given period."],
+        ["p", "The effective nuclear charge $Z_{\\text{eff}}$ felt by an electron is the actual nuclear charge $Z$ minus the shielding from inner electrons. Slater's rules give a rough estimate: for a 3d electron in iron ($Z = 26$), $Z_{\\text{eff}} \\approx 6.25$. For a 4s electron in iron, $Z_{\\text{eff}} \\approx 3.75$. Despite the lower $Z_{\\text{eff}}$, the 4s electron has lower energy than 3d because of its greater penetration toward the nucleus."],
+
+        ["problem", "The most probable radius for the 1s electron in hydrogen is $a_0 = 0.529$ A. For a hydrogen-like ion with nuclear charge $Z$ (e.g. He$^+$ with $Z = 2$, Li$^{2+}$ with $Z = 3$), all lengths scale as $a_0/Z$ and all energies scale as $Z^2$. Calculate the ground-state energy and most probable radius for He$^+$ and Li$^{2+}$.", [
+          ["p", "For a hydrogen-like ion with nuclear charge $Z$:"],
+          ["eq", "E_1 = -13.6 \\, Z^2 \\text{ eV}, \\quad r_{\\text{mp}} = \\frac{a_0}{Z}"],
+          ["p", "He$^+$ ($Z = 2$): $E_1 = -13.6 \\times 4 = -54.4$ eV. $r_{\\text{mp}} = 0.529/2 = 0.265$ A. The electron is twice as close and four times as tightly bound."],
+          ["p", "Li$^{2+}$ ($Z = 3$): $E_1 = -13.6 \\times 9 = -122.4$ eV. $r_{\\text{mp}} = 0.529/3 = 0.176$ A."],
+          ["p", "The ionisation energy of He$^+$ (54.4 eV) is experimentally confirmed. It is the highest ionisation energy of any one-electron system with $Z \\leq 3$. Scaling with $Z^2$ is exact for hydrogen-like ions because there is no electron-electron repulsion."]
+        ]]
+      ],
+      "related": [
+        { "title": "The Schrodinger Equation", "url": "the-schrodinger-equation" },
+        { "title": "Pauli Exclusion & Electron Filling", "url": "pauli-exclusion-electron-filling" },
+        { "title": "Atomic Structure & Electron Configuration", "url": "../bonding/atomic-structure-electron-configuration" }
+      ]
     },
     {
       "id": "pauli-exclusion-electron-filling",
       "number": "18.4",
       "title": "Pauli Exclusion & Electron Filling",
-      "description": "",
-      "readingTime": "— min",
-      "intro": "",
-      "body": [],
-      "related": []
+      "description": "How the exclusion principle, Hund's rules, and the aufbau principle determine electron configurations across the periodic table.",
+      "readingTime": "12 min",
+      "intro": "Quantum numbers label the available states. But which states do the electrons actually occupy? The answer comes from three rules: the Pauli exclusion principle, the aufbau principle, and Hund's rules. Together they explain the structure of the periodic table and the chemical behaviour of every element.",
+      "body": [
+        ["h3", "The Pauli exclusion principle"],
+        ["p", "No two electrons in an atom can have the same set of four quantum numbers $(n, l, m_l, m_s)$. This is the Pauli exclusion principle, stated by Wolfgang Pauli in 1925. It is not a force or an interaction. It is a fundamental property of fermions (particles with half-integer spin)."],
+        ["p", "The consequences are immediate. Each orbital (defined by $n$, $l$, $m_l$) can hold at most two electrons: one with $m_s = +1/2$ (spin up) and one with $m_s = -1/2$ (spin down). An s subshell ($l = 0$, one orbital) holds 2 electrons. A p subshell ($l = 1$, three orbitals) holds 6. A d subshell ($l = 2$, five orbitals) holds 10. An f subshell ($l = 3$, seven orbitals) holds 14."],
+        ["p", "Without the exclusion principle, every electron in an atom would collapse into the 1s orbital. There would be no shell structure, no periodic table, and no chemistry as we know it. It is no exaggeration to say that the exclusion principle is responsible for the diversity of matter."],
+        ["callout", "Fermions and bosons", "Particles with half-integer spin (1/2, 3/2, ...) are fermions and obey the exclusion principle. Electrons, protons, and neutrons are all fermions. Particles with integer spin (0, 1, 2, ...) are bosons and do not obey the exclusion principle. Photons are bosons. Any number of photons can occupy the same quantum state, which is why lasers work. The distinction between fermions and bosons has profound consequences: fermions build the structure of matter, while bosons mediate forces between them."],
+
+        ["h3", "The aufbau principle"],
+        ["p", "Electrons fill orbitals in order of increasing energy. This is the aufbau (German: 'building up') principle. For hydrogen, the energy depends only on $n$, so all orbitals with the same $n$ are degenerate. For multi-electron atoms, electron-electron repulsion breaks this degeneracy: the energy depends on both $n$ and $l$."],
+        ["p", "The approximate filling order is:"],
+        ["p", "1s, 2s, 2p, 3s, 3p, 4s, 3d, 4p, 5s, 4d, 5p, 6s, 4f, 5d, 6p, 7s, 5f, 6d, 7p"],
+        ["p", "The rule of thumb is that orbitals fill in order of increasing $n + l$. When two subshells have the same $n + l$, the one with lower $n$ fills first. This is the Madelung rule (or Klechkowski rule). It works for most elements but has exceptions."],
+        ["p", "The 4s orbital fills before 3d because 4s has greater penetration toward the nucleus despite having a higher principal quantum number. But once the 3d shell begins to fill, the 3d electrons are actually lower in energy than 4s in transition metal ions. This is why transition metal ions lose 4s electrons first: Fe is [Ar] 3d$^6$ 4s$^2$, but Fe$^{2+}$ is [Ar] 3d$^6$, not [Ar] 3d$^4$ 4s$^2$."],
+
+        ["h3", "Hund's rules"],
+        ["p", "When filling a subshell that is partially occupied, electrons follow Hund's rules:"],
+        ["ol", [
+          "<strong>Maximise total spin $S$</strong>. Electrons occupy empty orbitals with parallel spins before pairing up in the same orbital. This minimises electron-electron repulsion because parallel-spin electrons are kept apart by the exchange interaction (a quantum effect with no classical analogue).",
+          "<strong>Maximise total orbital angular momentum $L$</strong> (consistent with rule 1). Among configurations with the same $S$, the one with the highest $L$ is lowest in energy.",
+          "<strong>For the total angular momentum $J$</strong>: if the subshell is less than half full, $J = |L - S|$ (lowest $J$). If more than half full, $J = L + S$ (highest $J$). This arises from spin-orbit coupling."
+        ]],
+        ["p", "In practice, rule 1 is the most important for understanding electron configurations. Nitrogen (7 electrons: 1s$^2$ 2s$^2$ 2p$^3$) has its three 2p electrons in three separate orbitals, all spin-up. Carbon (6 electrons: 1s$^2$ 2s$^2$ 2p$^2$) has its two 2p electrons in two separate orbitals with parallel spins, not paired in one orbital."],
+
+        ["h3", "Configurations of materials-relevant elements"],
+        ["p", "Some configurations that matter for materials science:"],
+        ["ul", [
+          "<strong>Iron</strong> (Fe, $Z = 26$): [Ar] 3d$^6$ 4s$^2$. Four unpaired d electrons. Strong paramagnet, ferromagnetic below 770 C.",
+          "<strong>Copper</strong> (Cu, $Z = 29$): [Ar] 3d$^{10}$ 4s$^1$. Exception to the filling order. A filled d$^{10}$ shell is unusually stable, so one 4s electron transfers to 3d. Same for Cr: [Ar] 3d$^5$ 4s$^1$ (half-filled d shell).",
+          "<strong>Silicon</strong> (Si, $Z = 14$): [Ne] 3s$^2$ 3p$^2$. Two unpaired p electrons. The sp$^3$ hybridised tetrahedral bonding creates the diamond cubic structure.",
+          "<strong>Neodymium</strong> (Nd, $Z = 60$): [Xe] 4f$^4$ 6s$^2$. Four unpaired f electrons. The 4f electrons are shielded by the outer 5s, 5p, 5d shells and barely participate in bonding, but their large angular momentum gives Nd its exceptional magnetic anisotropy in Nd$_2$Fe$_{14}$B magnets.",
+          "<strong>Titanium</strong> (Ti, $Z = 22$): [Ar] 3d$^2$ 4s$^2$. Two d electrons. Forms Ti$^{4+}$ by losing all four outer electrons, giving the noble gas configuration [Ar]. This is why TiO$_2$ is so stable."
+        ]],
+
+        ["h3", "Electron configuration and the periodic table"],
+        ["p", "The periodic table is a map of electron configurations. Each row (period) corresponds to filling a new principal shell. Each block corresponds to the type of subshell being filled:"],
+        ["ul", [
+          "s block (groups 1-2): filling the s subshell. Alkali and alkaline earth metals.",
+          "p block (groups 13-18): filling the p subshell. Includes metals, metalloids, nonmetals, noble gases.",
+          "d block (groups 3-12): filling the d subshell. Transition metals. Their partially filled d orbitals give rise to coloured compounds, variable oxidation states, and catalytic activity.",
+          "f block (lanthanides and actinides): filling the f subshell. The 4f lanthanides are the rare earth elements used in permanent magnets, phosphors, and laser materials."
+        ]],
+        ["p", "The length of each block follows directly from the number of orbitals: s block is 2 columns wide (one orbital, two electrons), p block is 6 columns, d block is 10, f block is 14. The structure of the periodic table is a consequence of quantum mechanics."],
+
+        ["problem", "Write the full electron configuration of Fe$^{3+}$ and determine the number of unpaired electrons. Would you expect Fe$^{3+}$ compounds to be paramagnetic or diamagnetic?", [
+          ["p", "Iron ($Z = 26$): [Ar] 3d$^6$ 4s$^2$. Fe$^{3+}$ loses three electrons. The 4s electrons are lost first (they are highest in energy in the ion), then one 3d electron:"],
+          ["eq", "\\text{Fe}^{3+}: [\\text{Ar}]\\, 3d^5"],
+          ["p", "Five d electrons in five d orbitals: by Hund's first rule, all five are in separate orbitals with parallel spins. There are 5 unpaired electrons."],
+          ["p", "Fe$^{3+}$ is strongly paramagnetic. The magnetic moment is approximately $\\mu = \\sqrt{n(n+2)}\\,\\mu_B = \\sqrt{5 \\times 7}\\,\\mu_B = 5.92\\,\\mu_B$, where $\\mu_B$ is the Bohr magneton. Measured values for high-spin Fe$^{3+}$ compounds are typically 5.7 to 6.0 $\\mu_B$, confirming the five unpaired electrons. The half-filled d$^5$ configuration is particularly stable, which is why Fe$^{3+}$ is a common and stable oxidation state."]
+        ]]
+      ],
+      "related": [
+        { "title": "Quantum Numbers & Orbitals", "url": "quantum-numbers-orbitals" },
+        { "title": "Perturbation Theory & Approximations", "url": "perturbation-theory-approximations" },
+        { "title": "Atomic Structure & Electron Configuration", "url": "../bonding/atomic-structure-electron-configuration" }
+      ]
     },
     {
       "id": "perturbation-theory-approximations",
       "number": "18.5",
       "title": "Perturbation Theory & Approximations",
-      "description": "",
-      "readingTime": "— min",
-      "intro": "",
-      "body": [],
-      "related": []
+      "description": "How to handle quantum systems that are too complicated to solve exactly, from perturbation theory to the variational method.",
+      "readingTime": "13 min",
+      "intro": "Exact quantum mechanical solutions exist only for a handful of systems: the hydrogen atom, the harmonic oscillator, the particle in a box. Everything else requires approximation. Two methods dominate: perturbation theory (for small corrections to a known solution) and the variational method (for finding upper bounds on ground state energies). Both are used daily in computational materials science.",
+      "body": [
+        ["h3", "Why we need approximations"],
+        ["p", "The Schrodinger equation for a helium atom (two electrons, one nucleus) has no closed-form solution. The electron-electron repulsion term $e^2/(4\\pi\\varepsilon_0 r_{12})$ couples the two electrons and makes the equation inseparable. For a solid with $10^{23}$ atoms, exact solution is unthinkable. Approximation is not a shortcut. It is the only path."],
+        ["p", "The two main approaches take complementary strategies. Perturbation theory starts from a problem you can solve exactly and adds a small correction. The variational method guesses a trial wavefunction and optimises it. Both give rigorous, quantitative results."],
+
+        ["h3", "Time-independent perturbation theory"],
+        ["p", "Suppose you can solve the Schrodinger equation exactly for a Hamiltonian $\\hat{H}_0$:"],
+        ["eq", "\\hat{H}_0 \\psi_n^{(0)} = E_n^{(0)} \\psi_n^{(0)}"],
+        ["p", "Now add a small perturbation $\\hat{H}' = \\lambda \\hat{V}$, so the full Hamiltonian is $\\hat{H} = \\hat{H}_0 + \\lambda \\hat{V}$, where $\\lambda$ is a small parameter. The corrected energy to first order is:"],
+        ["eq", "E_n \\approx E_n^{(0)} + \\langle \\psi_n^{(0)} | \\hat{V} | \\psi_n^{(0)} \\rangle"],
+        ["p", "The first-order correction is the expectation value of the perturbation in the unperturbed state. No new wavefunctions need to be calculated. This is remarkably powerful: it says that the energy shift equals the average of the perturbation over the original probability distribution."],
+        ["p", "The second-order correction is:"],
+        ["eq", "E_n^{(2)} = \\sum_{m \\neq n} \\frac{|\\langle \\psi_m^{(0)} | \\hat{V} | \\psi_n^{(0)} \\rangle|^2}{E_n^{(0)} - E_m^{(0)}}"],
+        ["p", "The second-order correction involves all other states. States close in energy to the state of interest contribute the most (small denominator). States with the same symmetry as the perturbation contribute the most (large numerator, via selection rules). Second-order corrections are always negative for the ground state, because all terms have $E_0^{(0)} - E_m^{(0)} < 0$."],
+        ["callout", "When perturbation theory fails", "Perturbation theory requires that the perturbation is small compared to the energy level spacing. If two unperturbed levels are nearly degenerate, the denominator in the second-order correction approaches zero and the series diverges. Degenerate perturbation theory handles this by diagonalising $\\hat{V}$ within the degenerate subspace first. Crystal field theory (the splitting of d-orbital energies in transition metal compounds) is a textbook application of degenerate perturbation theory."],
+
+        ["h3", "Example: the helium atom"],
+        ["p", "Helium has two electrons around a $Z = 2$ nucleus. The unperturbed Hamiltonian treats each electron independently in the nuclear potential (two hydrogen-like problems with $Z = 2$). The unperturbed ground state energy is:"],
+        ["eq", "E^{(0)} = 2 \\times (-13.6 \\times Z^2) = 2 \\times (-13.6 \\times 4) = -108.8 \\text{ eV}"],
+        ["p", "The perturbation is the electron-electron repulsion. The first-order correction (calculated by integrating $e^2/(4\\pi\\varepsilon_0 r_{12})$ over the product of two 1s wavefunctions) is:"],
+        ["eq", "E^{(1)} = +34.0 \\text{ eV}"],
+        ["p", "So the first-order estimate of the helium ground state energy is $-108.8 + 34.0 = -74.8$ eV. The experimental value is $-79.0$ eV. The error is 5.3%, not bad for a first approximation. The second-order correction brings it closer, and sophisticated calculations reproduce the experimental value to 0.001%."],
+
+        ["h3", "The variational method"],
+        ["p", "The variational principle states: for any trial wavefunction $\\psi_{\\text{trial}}$, the expectation value of the Hamiltonian is always greater than or equal to the true ground state energy $E_0$:"],
+        ["eq", "\\langle \\hat{H} \\rangle = \\frac{\\langle \\psi_{\\text{trial}} | \\hat{H} | \\psi_{\\text{trial}} \\rangle}{\\langle \\psi_{\\text{trial}} | \\psi_{\\text{trial}} \\rangle} \\geq E_0"],
+        ["p", "This gives you a systematic strategy. Choose a family of trial wavefunctions with adjustable parameters. Calculate $\\langle \\hat{H} \\rangle$ as a function of those parameters. Minimise. The result is an upper bound on the ground state energy, and the minimising wavefunction is the best approximation within your chosen family."],
+        ["p", "For helium, using a trial wavefunction of the hydrogen-like form $\\psi = e^{-Z_{\\text{eff}}r_1/a_0}e^{-Z_{\\text{eff}}r_2/a_0}$ with $Z_{\\text{eff}}$ as a free parameter, the variational method gives $Z_{\\text{eff}} = 27/16 = 1.6875$ and $E = -77.5$ eV. The effective nuclear charge is less than 2 because each electron partially shields the other. This is already closer to the experimental value than first-order perturbation theory."],
+        ["derivation", "The variational principle: $\\langle \\hat{H} \\rangle \\geq E_0$ for any normalised trial wavefunction.", [
+          ["p", "Expand $\\psi_{\\text{trial}}$ in the exact eigenstates: $\\psi_{\\text{trial}} = \\sum_n c_n \\psi_n$."],
+          ["p", "Then $\\langle \\hat{H} \\rangle = \\sum_n |c_n|^2 E_n$. Since $E_n \\geq E_0$ for all $n$:"],
+          ["eq", "\\langle \\hat{H} \\rangle = \\sum_n |c_n|^2 E_n \\geq E_0 \\sum_n |c_n|^2 = E_0"],
+          ["p", "The equality holds only when $\\psi_{\\text{trial}}$ is the exact ground state. Any deviation from the true ground state raises the energy."]
+        ]],
+
+        ["h3", "The Born-Oppenheimer approximation"],
+        ["p", "In a molecule or solid, both electrons and nuclei obey quantum mechanics. But nuclei are at least 1836 times heavier than electrons (the proton-to-electron mass ratio). Nuclei move slowly. Electrons respond almost instantaneously to any nuclear displacement."],
+        ["p", "The Born-Oppenheimer approximation exploits this mass difference: solve the electronic Schrodinger equation at fixed nuclear positions, treating the nuclei as stationary. Then move the nuclei and solve again. The electronic energy as a function of nuclear positions gives the potential energy surface on which the nuclei move."],
+        ["p", "This approximation is the foundation of nearly all computational materials science. DFT calculations, molecular dynamics with electronic structure, phonon calculations: all rely on Born-Oppenheimer. It fails only when electronic states are nearly degenerate and nuclear motion can cause transitions between them (e.g. Jahn-Teller distortions, conical intersections in photochemistry)."],
+
+        ["h3", "The Hartree-Fock method"],
+        ["p", "The Hartree-Fock method is the variational method applied to multi-electron systems. The trial wavefunction is a single Slater determinant: an antisymmetrised product of one-electron orbitals. This automatically satisfies the Pauli exclusion principle (the wavefunction changes sign when two electrons are exchanged)."],
+        ["p", "Each electron moves in the average field of all other electrons. The equations are solved self-consistently: guess the orbitals, compute the average field, solve for new orbitals, repeat until convergence. Hartree-Fock captures about 99% of the total electronic energy but misses the correlation energy: the energy lowering due to electrons dynamically avoiding each other beyond the mean-field level."],
+        ["p", "Post-Hartree-Fock methods (configuration interaction, coupled cluster, Moller-Plesset perturbation theory) recover the correlation energy systematically. Density functional theory (DFT) takes a different approach entirely, working with the electron density rather than the wavefunction. Both are covered in the computational methods module (article 17.2)."],
+
+        ["problem", "Use the variational method with a trial wavefunction $\\psi(x) = A(L^2/4 - x^2)$ for a particle in a 1D box of length $L$ (centred at $x = 0$, so the box runs from $-L/2$ to $L/2$). Calculate the estimated ground state energy and compare it to the exact value $E_1 = \\pi^2\\hbar^2/(2mL^2)$.", [
+          ["p", "Normalisation: $\\langle \\psi|\\psi \\rangle = A^2 \\int_{-L/2}^{L/2}(L^2/4 - x^2)^2 dx = A^2 \\cdot L^5/30$, so $A^2 = 30/L^5$."],
+          ["p", "The kinetic energy integral: $\\psi'' = -2A$, so"],
+          ["eq", "\\langle \\hat{T} \\rangle = -\\frac{\\hbar^2}{2m} A^2 \\int_{-L/2}^{L/2}(L^2/4 - x^2)(-2) \\, dx = \\frac{\\hbar^2 A^2}{m} \\cdot \\frac{L^3}{12}"],
+          ["p", "Substituting $A^2 = 30/L^5$:"],
+          ["eq", "\\langle \\hat{T} \\rangle = \\frac{\\hbar^2}{m} \\cdot \\frac{30}{L^5} \\cdot \\frac{L^3}{12} = \\frac{5\\hbar^2}{2mL^2}"],
+          ["p", "The variational estimate is $E \\approx 5\\hbar^2/(2mL^2) = 10\\hbar^2/(2mL^2) \\cdot (1/2)$... Let's express it relative to the exact answer."],
+          ["eq", "\\frac{E_{\\text{var}}}{E_{\\text{exact}}} = \\frac{5\\hbar^2/(2mL^2)}{\\pi^2\\hbar^2/(2mL^2)} = \\frac{5}{\\pi^2} = \\frac{5}{9.870} = 0.507... "],
+          ["p", "Wait, let me redo this. $E_{\\text{var}} = 5\\hbar^2/(2mL^2)$. $E_{\\text{exact}} = \\pi^2\\hbar^2/(2mL^2) = 4.935\\hbar^2/(mL^2)$. The ratio is $5/\\pi^2 = 1.013$. The variational estimate exceeds the exact answer by 1.3%, confirming the variational principle: the estimate is an upper bound, and a simple polynomial trial function gives a remarkably accurate result."]
+        ]]
+      ],
+      "related": [
+        { "title": "Pauli Exclusion & Electron Filling", "url": "pauli-exclusion-electron-filling" },
+        { "title": "From Atoms to Bonds to Bands", "url": "from-atoms-to-bonds-to-bands" },
+        { "title": "Computational Methods", "url": "../computational/" }
+      ]
     },
     {
       "id": "from-atoms-to-bonds-to-bands",
       "number": "18.6",
       "title": "From Atoms to Bonds to Bands",
-      "description": "",
-      "readingTime": "— min",
-      "intro": "",
-      "body": [],
-      "related": []
+      "description": "How atomic orbitals combine into molecular orbitals, and how molecular orbitals evolve into the continuous energy bands of a solid.",
+      "readingTime": "14 min",
+      "intro": "An isolated atom has discrete energy levels. Bring two atoms together and those levels split into bonding and antibonding pairs. Bring $N$ atoms together and the levels broaden into bands. This progression from atom to molecule to solid is the conceptual backbone of electronic structure theory in materials science.",
+      "body": [
+        ["h3", "Linear combination of atomic orbitals (LCAO)"],
+        ["p", "Start with the simplest molecule: H$_2^+$, one electron shared between two protons separated by distance $R$. The electron can sit on either atom. A reasonable trial wavefunction is a linear combination of the 1s orbitals on each atom:"],
+        ["eq", "\\psi = c_1 \\phi_{1s}(\\mathbf{r} - \\mathbf{R}_A) + c_2 \\phi_{1s}(\\mathbf{r} - \\mathbf{R}_B)"],
+        ["p", "This is the LCAO (linear combination of atomic orbitals) approximation. It is a variational ansatz: choose the coefficients $c_1$ and $c_2$ to minimise the energy."],
+        ["p", "By symmetry, $|c_1| = |c_2|$. Two possibilities remain: $c_1 = c_2$ (symmetric, called $\\sigma_g$ or bonding) and $c_1 = -c_2$ (antisymmetric, called $\\sigma_u^*$ or antibonding)."],
+
+        ["h3", "Bonding and antibonding orbitals"],
+        ["p", "The bonding orbital $\\psi_+ = \\phi_A + \\phi_B$ (after normalisation) has enhanced electron density between the nuclei. The electron is shared, screening the nuclear repulsion and holding the molecule together. Its energy is lower than the isolated atomic orbital."],
+        ["p", "The antibonding orbital $\\psi_- = \\phi_A - \\phi_B$ has a node midway between the nuclei. The electron density is depleted exactly where it would be most useful for bonding. Its energy is higher than the isolated atomic orbital."],
+        ["p", "The energy splitting depends on the overlap integral $S = \\langle \\phi_A | \\phi_B \\rangle$ and the resonance integral $\\beta = \\langle \\phi_A | \\hat{H} | \\phi_B \\rangle$. For s orbitals at typical bond distances, $S \\approx 0.5$ to $0.8$ and $\\beta$ is negative (stabilising). The bonding orbital is lowered by approximately $|\\beta|/(1+S)$ and the antibonding orbital is raised by $|\\beta|/(1-S)$. The antibonding destabilisation is always slightly larger than the bonding stabilisation."],
+        ["callout", "Why antibonding is more destabilising", "The asymmetry arises from the overlap integral. The bonding level drops by $|\\beta|/(1+S)$ while the antibonding level rises by $|\\beta|/(1-S)$. Since $S > 0$, the denominator $(1-S)$ is smaller, making the antibonding shift larger. This is why filling both bonding and antibonding orbitals (e.g. He$_2$) does not produce a net bond. The total energy goes up, not down."],
+
+        ["h3", "Building molecules: H$_2$ to N$_2$"],
+        ["p", "H$_2$: two 1s orbitals form one $\\sigma$ bonding and one $\\sigma^*$ antibonding orbital. Two electrons fill the bonding orbital. Bond energy: 4.52 eV. Bond length: 0.74 A."],
+        ["p", "He$_2$: four electrons would fill both $\\sigma$ and $\\sigma^*$. Net bond order is zero. Helium does not form a stable diatomic molecule. (He$_2$ has been detected with a bond energy of only $10^{-7}$ eV, held together by van der Waals forces, not covalent bonding.)"],
+        ["p", "For second-row diatomics (Li$_2$ through Ne$_2$), both 2s and 2p orbitals participate. The 2p orbitals form one $\\sigma$ bond (end-on overlap) and two $\\pi$ bonds (side-on overlap), each with its antibonding counterpart. The bond order is:"],
+        ["eq", "\\text{Bond order} = \\frac{n_{\\text{bonding}} - n_{\\text{antibonding}}}{2}"],
+        ["p", "N$_2$: 10 valence electrons fill $\\sigma_{2s}$, $\\sigma_{2s}^*$, $\\pi_{2p}$ (two degenerate orbitals, 4 electrons), and $\\sigma_{2p}$. Bond order = $(8 - 2)/2 = 3$. A triple bond. Bond energy: 9.79 eV, one of the strongest bonds known. This is why nitrogen gas is so unreactive."],
+        ["p", "O$_2$: 12 valence electrons. By Hund's rule, the last two electrons enter the two degenerate $\\pi^*$ antibonding orbitals with parallel spins. Bond order = 2. Two unpaired electrons. This is why oxygen is paramagnetic, a fact unexplained by Lewis structures but predicted naturally by molecular orbital theory."],
+
+        ["h3", "From two atoms to $N$ atoms"],
+        ["p", "Two atoms produce one bonding and one antibonding level. Three atoms in a row produce three levels (one bonding, one nonbonding, one antibonding). Four atoms produce four levels. The pattern is clear: $N$ atoms produce $N$ molecular orbitals from each atomic orbital."],
+        ["p", "As $N$ grows, the levels crowd together. For $N = 10$, you have 10 levels spanning an energy range of about $4|\\beta|$. For $N = 10^{23}$ (a mole of atoms), you have $10^{23}$ levels in the same energy range. The spacing between adjacent levels is approximately $4|\\beta|/N \\approx 10^{-23}$ eV. This is unresolvably small. The discrete levels have merged into a continuous energy band."],
+        ["eq", "\\text{Bandwidth} \\approx 4|\\beta|"],
+        ["p", "The bandwidth depends on the overlap between neighbouring atomic orbitals. Strong overlap (large $|\\beta|$) gives a wide band. Weak overlap gives a narrow band. s and p orbitals, which extend far from the nucleus, form wide bands (5 to 15 eV). d orbitals, which are more compact, form narrow bands (2 to 6 eV). f orbitals form very narrow bands (less than 1 eV) or remain essentially localised."],
+
+        ["h3", "Band structure and the density of states"],
+        ["p", "In a periodic crystal, Bloch's theorem states that the electron wavefunctions have the form:"],
+        ["eq", "\\psi_k(\\mathbf{r}) = e^{i\\mathbf{k}\\cdot\\mathbf{r}} u_k(\\mathbf{r})"],
+        ["p", "where $\\mathbf{k}$ is the crystal momentum (a quantum number labelling the state within the band) and $u_k$ has the periodicity of the lattice. The energy $E(\\mathbf{k})$ as a function of $\\mathbf{k}$ is the band structure. At the bottom of the band ($k = 0$ for a simple 1D chain), $\\psi$ has bonding character (all neighbours in phase). At the top ($k = \\pi/a$), $\\psi$ has antibonding character (neighbours out of phase)."],
+        ["p", "The density of states $g(E)$ counts how many states exist per unit energy. For a 1D tight-binding band, $E(k) = E_0 - 2|\\beta|\\cos(ka)$, and the density of states diverges at the band edges (van Hove singularities). In 3D, the DOS has more structure, but the basic picture remains: it is large where bands are flat ($dE/dk \\approx 0$) and small where bands are steep."],
+        ["p", "The density of states at the Fermi level, $g(E_F)$, determines many electronic properties: the electronic specific heat ($\\gamma T$ with $\\gamma \\propto g(E_F)$), the Pauli paramagnetic susceptibility ($\\chi \\propto g(E_F)$), and the superconducting transition temperature (via the BCS formula)."],
+
+        ["h3", "Metals, semiconductors, and insulators"],
+        ["p", "The distinction between metals, semiconductors, and insulators reduces to band filling:"],
+        ["ul", [
+          "<strong>Metal</strong>: a partially filled band. Electrons at the Fermi level can be excited into empty states with arbitrarily small energy. Electrical conduction is easy. Sodium has one 3s electron per atom, filling the 3s band exactly halfway.",
+          "<strong>Insulator</strong>: a completely filled band separated from the next empty band by a large gap ($E_g > 3$ eV typically). Diamond: $E_g = 5.5$ eV. No electrons near empty states. No conduction without very high energy input.",
+          "<strong>Semiconductor</strong>: a filled band separated by a small gap ($E_g < 3$ eV). Silicon: $E_g = 1.12$ eV. Germanium: $E_g = 0.67$ eV. GaAs: $E_g = 1.42$ eV. Thermal excitation at room temperature promotes some electrons across the gap, producing moderate conductivity that increases with temperature."
+        ]],
+        ["p", "The band gap arises from the crystal potential. In the nearly-free electron model, a periodic potential with Fourier component $V_G$ opens a gap of $2|V_G|$ at the Brillouin zone boundary. In the tight-binding picture, the gap appears when two different types of atoms (or orbitals) alternate, producing two bands with a gap between them. GaAs has a gap because Ga and As have different atomic energies; pure Ge (same row, same structure) has a smaller gap."],
+        ["p", "This LCAO-to-band picture connects directly to the electronic properties module (article 9.2), where band theory is used to explain the electrical, optical, and magnetic properties of materials."],
+
+        ["derivation", "Tight-binding band structure of a 1D monatomic chain.", [
+          ["p", "Consider a chain of $N$ identical atoms with spacing $a$, each contributing one s orbital. The Hamiltonian matrix element between nearest neighbours is $\\beta$ (the hopping integral), and the on-site energy is $\\varepsilon$. By Bloch's theorem, the wavefunction is:"],
+          ["eq", "\\psi_k = \\frac{1}{\\sqrt{N}} \\sum_{n=1}^{N} e^{ikna} \\phi(\\mathbf{r} - \\mathbf{R}_n)"],
+          ["p", "The energy eigenvalue is:"],
+          ["eq", "E(k) = \\varepsilon + 2\\beta \\cos(ka)"],
+          ["p", "This gives a single band of width $4|\\beta|$, centred at $\\varepsilon$. The bottom of the band ($k = 0$, all orbitals in phase, bonding) has energy $\\varepsilon + 2\\beta$ (with $\\beta < 0$, this is the lowest energy). The top ($k = \\pi/a$, alternating phase, antibonding) has energy $\\varepsilon - 2|\\beta|$."]
+        ]],
+
+        ["problem", "A 1D diatomic chain has alternating atoms A and B with on-site energies $\\varepsilon_A$ and $\\varepsilon_B$ and hopping integral $\\beta$ between neighbours. Show that the band structure has two bands separated by a gap, and find the gap at the zone boundary.", [
+          ["p", "The unit cell contains two atoms. The $2 \\times 2$ Hamiltonian in $k$-space is:"],
+          ["eq", "H(k) = \\begin{pmatrix} \\varepsilon_A & \\beta(1 + e^{-ika}) \\\\ \\beta(1 + e^{ika}) & \\varepsilon_B \\end{pmatrix}"],
+          ["p", "The eigenvalues are:"],
+          ["eq", "E_{\\pm}(k) = \\frac{\\varepsilon_A + \\varepsilon_B}{2} \\pm \\sqrt{\\left(\\frac{\\varepsilon_A - \\varepsilon_B}{2}\\right)^2 + 4\\beta^2 \\cos^2(ka/2)}"],
+          ["p", "At the zone boundary $k = \\pi/a$: $\\cos^2(\\pi/2) = 0$, so $E_+ - E_- = |\\varepsilon_A - \\varepsilon_B|$. The gap equals the difference in on-site energies. When $\\varepsilon_A = \\varepsilon_B$ (monatomic chain), the gap closes and we recover the single-band result. The larger the electronegativity difference between A and B, the larger the gap. This is why the band gap of III-V semiconductors increases with ionicity: GaAs (1.42 eV) < AlAs (2.16 eV) < BN (6.0 eV)."]
+        ]]
+      ],
+      "related": [
+        { "title": "Perturbation Theory & Approximations", "url": "perturbation-theory-approximations" },
+        { "title": "Band Theory & Brillouin Zones", "url": "../electronic-properties/band-theory-brillouin-zones" },
+        { "title": "Covalent Bonding", "url": "../bonding/covalent-bonding" }
+      ]
     }
   ]
 }

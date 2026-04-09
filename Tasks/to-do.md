@@ -1,13 +1,6 @@
 # To Do
 
-## Module content — write at thermodynamics depth
-
-### 1. Introduction & Overview (5 articles)
-- What is Materials Science?
-- The Structure-Property-Processing-Performance Tetrahedron
-- Length Scales in Materials
-- Classes of Materials
-- Materials Selection & Design Thinking
+## Priority 1 — Foundations (builds on existing content)
 
 ### 2. Atomic Bonding & Structure (7 articles)
 - Atomic Structure & Electron Configuration
@@ -16,27 +9,26 @@
 - Metallic Bonding
 - Secondary Bonding (van der Waals, Hydrogen)
 - Bond Energy, Interatomic Spacing & Force Curves
+  **Widget:** Interactive interatomic potential (Lennard-Jones), drag atoms, see force curve
 - Mixed Bonding Character & Pauling's Rules
-
-### 3. Crystallography (4 articles)
-- Crystal Systems & Bravais Lattices *(has draft content)*
-- Miller Indices & Crystallographic Directions
-- Point Groups & Space Groups
-- Reciprocal Lattice & Diffraction Geometry
 
 ### 4. Defects (4 articles)
 - Point Defects (Vacancies, Interstitials, Substitutional)
 - Dislocations (Edge, Screw, Mixed)
+  **Widget:** Edge dislocation glide animation, apply shear to see slip
 - Planar Defects (Grain Boundaries, Stacking Faults, Twins)
 - Solid Solutions & Hume-Rothery Rules
 
 ### 6. Diffusion & Kinetics (7 articles)
 - Fick's First & Second Laws
+  **Widget:** Diffusion profile evolution, drag time slider, see concentration profile spread
 - Atomistic Mechanisms of Diffusion
 - Temperature Dependence & Arrhenius Behaviour
+  **Widget:** Arrhenius plot builder, enter Ea and D0, see log(D) vs 1/T
 - Solutions to the Diffusion Equation
 - The Kirkendall Effect
 - Reaction Kinetics & the Avrami Equation
+  **Widget:** Avrami curve, adjust n and k, see transformation fraction vs time
 - TTT & CCT Diagrams
 
 ### 7. Phase Equilibria & Transformations (11 articles)
@@ -45,118 +37,72 @@
 - Ternary Phase Diagrams
 - Gibbs Phase Rule
 - Nucleation (Homogeneous & Heterogeneous)
+  **Widget:** Nucleation energy barrier, drag radius, see volume/surface/total energy
 - Growth Kinetics
 - Solidification & Microstructure
 - Spinodal Decomposition
 - Precipitation & Age Hardening
+  **Widget:** Hardness vs ageing time curve, show under/peak/overaged regimes
 - Martensitic Transformations
 - Order-Disorder Transitions
 
-### 8. Mechanical Properties (8 articles)
-- Stress & Strain (Engineering vs True)
-- Elasticity & Elastic Moduli
-- Plastic Deformation & Slip
-- Strengthening Mechanisms
-- Fracture Mechanics (Griffith, K_IC)
-- Fatigue
-- Creep & High-Temperature Behaviour
-- Hardness & Indentation
+## Priority 2 — Properties & Behaviour
 
 ### 9. Electronic, Optical & Magnetic Properties (7 articles)
 - Free Electron Model & Density of States
+  **Widget:** Density of states plot, adjust Fermi energy
 - Band Theory & Brillouin Zones
 - Semiconductors (Intrinsic & Extrinsic)
+  **Widget:** Band diagram with Fermi level, toggle n-type/p-type/intrinsic
 - Dielectric Properties
 - Optical Properties (Absorption, Reflection, Luminescence)
 - Magnetic Behaviour (Dia-, Para-, Ferro-, Antiferro-, Ferri-)
+  **Widget:** Hysteresis loop, adjust coercivity and saturation
 - Superconductivity
 
 ### 10. Electrochemistry & Corrosion (7 articles)
 - Electrochemical Cells & Standard Potentials
 - The Nernst Equation
 - Electrode Kinetics & Butler-Volmer
+  **Widget:** Butler-Volmer curve, adjust exchange current density and transfer coefficient
 - Pourbaix Diagrams
 - Types of Corrosion
 - Corrosion Prevention & Protection
 - Batteries, Fuel Cells & Electrolysers
 
+## Priority 3 — Material Classes
+
 ### 11. Metals & Alloys (7 articles)
-- Structure of Metals
-- Alloy Design Principles
-- Steels & Cast Irons
-- Aluminium Alloys
-- Titanium Alloys
-- Nickel Superalloys
-- Shape Memory Alloys & Intermetallics
-
 ### 12. Ceramics & Glasses (7 articles)
-- Crystal Structures of Ceramics
-- Mechanical Behaviour & Brittle Fracture
-- Glass Formation & the Glass Transition
-- Functional Ceramics (Piezoelectric, Ferroelectric)
-- Refractories & Structural Ceramics
-- Cement, Concrete & Geopolymers
-- Ceramic Processing
-
 ### 13. Polymers (7 articles)
-- Polymer Chemistry & Classification
-- Molecular Weight & Distributions
-- Chain Conformation & Configuration
-- Crystallinity in Polymers
-- Viscoelasticity & Mechanical Behaviour
-- Glass Transition & Melting
-- Polymer Processing
-
 ### 14. Composites (7 articles)
-- Types of Composites
-- Rule of Mixtures & Bounds
-- Fibre-Reinforced Composites
-- Particle & Short-Fibre Composites
-- Laminate Theory
-- Failure Mechanisms & Damage Tolerance
-- Natural & Bio-Inspired Composites
+
+## Priority 4 — Practice
 
 ### 15. Characterisation Techniques (7 articles)
-- X-ray Diffraction (Powder & Single-Crystal)
-- Scanning Electron Microscopy & EDX
-- Transmission Electron Microscopy
-- Spectroscopy (XPS, Raman, FTIR)
-- Thermal Analysis (DSC, TGA, DTA)
-- Mechanical Testing & Nanoindentation
-- Surface & Interface Analysis
-
 ### 16. Manufacturing (7 articles)
-- Casting & Solidification Processing
-- Deformation Processing (Rolling, Forging, Extrusion)
-- Powder Metallurgy & Sintering
-- Joining (Welding, Brazing, Adhesives)
-- Additive Manufacturing
-- Heat Treatment
-- Surface Engineering & Coatings
-
 ### 17. Computational Materials Science (6 articles)
-- Density Functional Theory
-- Molecular Dynamics
-- Phase-Field Modelling
-- CALPHAD & Thermodynamic Databases
-- Finite Element Methods
-- Machine Learning in Materials Science
+
+## Priority 5 — Supporting
 
 ### 18. Quantum Mechanics for Materials (6 articles)
-- Wave-Particle Duality
-- The Schrodinger Equation
-- Quantum Numbers & Orbitals
-- Pauli Exclusion & Electron Filling
-- Perturbation Theory & Approximations
-- From Atoms to Bonds to Bands
-
 ### 19. Mathematical Methods (6 articles)
-- Vectors, Tensors & Matrix Algebra
-- Ordinary & Partial Differential Equations
-- Fourier Analysis
-- Statistical Mechanics Fundamentals
-- Numerical Methods & Discretisation
-- Symmetry & Group Theory
+
+---
+
+## Widgets to build
+
+- Interatomic potential (Lennard-Jones) — bonding module
+- Edge dislocation glide — defects module
+- Diffusion profile evolution — diffusion module
+- Arrhenius plot builder — diffusion module
+- Avrami transformation curve — diffusion module
+- Nucleation energy barrier — phase transformations module
+- Ageing/hardness curve — phase transformations module
+- Density of states — electronic properties module
+- Semiconductor band diagram — electronic properties module
+- Hysteresis loop — electronic properties module
+- Butler-Volmer kinetics — electrochemistry module
 
 ---
 

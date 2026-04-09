@@ -6,78 +6,468 @@
     "part": "III",
     "partTitle": "Material Classes",
     "topic": "Composites",
-    "intro": ""
+    "intro": "Materials made from two or more constituents that remain distinct at the macroscopic scale. This module covers the mechanics of load sharing between matrix and reinforcement, from simple bounds to classical laminate theory, then examines how composites fail and how nature builds them."
   },
   "articles": [
     {
       "id": "types-of-composites",
       "number": "14.1",
       "title": "Types of Composites",
-      "description": "",
-      "readingTime": "— min",
-      "intro": "",
-      "body": [],
-      "related": []
+      "description": "Classifying composites by reinforcement geometry and matrix material.",
+      "readingTime": "10 min",
+      "intro": "A composite is any material made from two or more constituents that remain physically distinct. The reinforcement carries load; the matrix transfers it. The geometry of the reinforcement and the nature of the matrix define the composite type and largely determine its properties.",
+      "body": [
+        ["h3", "What makes a composite?"],
+        ["p", "Concrete is a composite: gravel and sand in a cement matrix. Wood is a composite: cellulose fibres in a lignin matrix. A carbon fibre racing bicycle is a composite: carbon fibres in an epoxy matrix. In each case, the bulk material has properties that neither constituent has alone."],
+        ["p", "The defining feature is that the constituents are distinct at a scale larger than atomic. This distinguishes composites from alloys (where different atoms share the same crystal lattice) and from multiphase materials like pearlite (where both phases are the same element system). In a composite, you can usually see or image the two phases separately."],
+        ["p", "Two parameters dominate composite behaviour: the volume fraction of reinforcement $V_f$ (typically 0.3 to 0.7 for structural composites) and the aspect ratio of the reinforcement (length divided by diameter). A continuous fibre has an effectively infinite aspect ratio. A spherical particle has an aspect ratio of 1."],
+
+        ["h3", "Classification by reinforcement geometry"],
+        ["p", "There are three broad categories:"],
+        ["ul", [
+          "<strong>Continuous-fibre composites</strong>: long fibres running the full length of the component. Unidirectional carbon/epoxy prepreg, filament-wound pressure vessels, and pultrusions. The fibres carry almost all the load in the fibre direction. These are the highest-performance composites.",
+          "<strong>Short-fibre and whisker composites</strong>: discontinuous reinforcements with aspect ratios from 10 to 1000. Chopped strand mat glass/polyester, injection-moulded glass/nylon, and SiC whisker-reinforced alumina. Cheaper and easier to form into complex shapes than continuous-fibre composites, but lower stiffness and strength.",
+          "<strong>Particle-reinforced composites</strong>: roughly equiaxed particles with aspect ratios near 1. WC/Co cemented carbides (cutting tools), Al/SiC metal-matrix composites, and concrete. The particles stiffen the matrix and can improve wear resistance, but do not carry tensile load as effectively as fibres."
+        ]],
+
+        ["h3", "Classification by matrix material"],
+        ["p", "<strong>Polymer-matrix composites (PMCs)</strong> are the most common structural composites. The matrix is a thermoset (epoxy, polyester, vinyl ester) or a thermoplastic (PEEK, PPS, nylon). Processing temperatures are low (120 to 400 °C), densities are low (1.5 to 2.0 g/cm$^3$ for CFRP), and corrosion resistance is good. The limitation is temperature: most polymer matrices degrade above 200 to 300 °C."],
+        ["p", "<strong>Metal-matrix composites (MMCs)</strong> use aluminium, titanium, or magnesium alloys as the matrix. They tolerate higher temperatures than PMCs and have better transverse and shear properties. Al/SiC particulate composites are used in brake rotors and electronic packaging. Ti/SiC fibre composites have been used in military jet engine components. Processing is more difficult and expensive than for PMCs."],
+        ["p", "<strong>Ceramic-matrix composites (CMCs)</strong> solve the brittleness problem of monolithic ceramics by introducing fibres that bridge cracks and absorb energy. SiC/SiC composites operate above 1300 °C in jet engine hot sections. C/C (carbon fibre in a carbon matrix) is used for aircraft brake discs and rocket nozzles, surviving above 2000 °C in inert atmospheres. The matrix is brittle, but the composite is not: fibres pull out of the matrix as a crack advances, absorbing energy."],
+
+        ["h3", "Volume fraction and its measurement"],
+        ["p", "The volume fraction of reinforcement $V_f$ is the single most important microstructural parameter. For a two-phase composite with no voids:"],
+        ["eq", "V_f + V_m = 1"],
+        ["p", "where $V_m$ is the matrix volume fraction. In practice, composites contain some void fraction $V_v$ (typically 0.5 to 2% for autoclave-cured aerospace laminates, up to 5% for hand layup). The relationship becomes $V_f + V_m + V_v = 1$."],
+        ["p", "Volume fraction is measured by acid digestion (dissolving the matrix and weighing the remaining fibres), by burnout (for glass fibres in a polymer matrix), or by image analysis of polished cross-sections. For a unidirectional carbon/epoxy prepreg tape, a typical value is $V_f = 0.60$. For a woven fabric laminate, $V_f = 0.45$ to $0.55$."],
+        ["callout", "Weight fraction vs volume fraction", "Manufacturers often quote weight fraction $W_f$ because it is easier to measure. Conversion requires knowing the densities: $V_f = (W_f / \\rho_f) / (W_f / \\rho_f + W_m / \\rho_m)$. For carbon/epoxy with $\\rho_f = 1.76$ g/cm$^3$ and $\\rho_m = 1.25$ g/cm$^3$, a weight fraction of 65% corresponds to a volume fraction of about 57%."],
+
+        ["h3", "A materials selection perspective"],
+        ["p", "Why use composites at all? The answer is almost always specific properties: property divided by density. Unidirectional CFRP has a specific stiffness ($E/\\rho$) of about 140 GPa/(g/cm$^3$), compared with 26 for steel and 26 for aluminium. Its specific strength ($\\sigma/\\rho$) is about 1000 MPa/(g/cm$^3$), compared with 125 for mild steel and 185 for aerospace aluminium (7075-T6)."],
+        ["p", "The penalty is cost, anisotropy, and difficulty of inspection. A composite wing skin can be half the weight of an aluminium one, but it costs more per kilogram, must be designed for loads in every direction (not just the worst case), and cannot be inspected for internal damage by eye. These trade-offs define the engineering of composites."],
+
+        ["problem", "A carbon/epoxy composite has a fibre weight fraction of 62%. The carbon fibre density is 1.78 g/cm$^3$ and the epoxy density is 1.25 g/cm$^3$. Calculate the fibre volume fraction and the composite density.", [
+          ["p", "Convert weight fraction to volume fraction:"],
+          ["eq", "V_f = \\frac{W_f / \\rho_f}{W_f / \\rho_f + W_m / \\rho_m} = \\frac{0.62/1.78}{0.62/1.78 + 0.38/1.25} = \\frac{0.3483}{0.3483 + 0.3040} = 0.534"],
+          ["p", "The fibre volume fraction is 53.4%."],
+          ["p", "The composite density from the rule of mixtures:"],
+          ["eq", "\\rho_c = V_f \\rho_f + V_m \\rho_m = 0.534 \\times 1.78 + 0.466 \\times 1.25 = 0.951 + 0.583 = 1.53 \\text{ g/cm}^3"]
+        ]]
+      ],
+      "related": [
+        { "title": "Rule of Mixtures & Bounds", "url": "rule-of-mixtures-bounds" },
+        { "title": "Fibre-Reinforced Composites", "url": "fibre-reinforced-composites" },
+        { "title": "Polymers", "url": "../polymers/" }
+      ]
     },
     {
       "id": "rule-of-mixtures-bounds",
       "number": "14.2",
       "title": "Rule of Mixtures & Bounds",
-      "description": "",
-      "readingTime": "— min",
-      "intro": "",
-      "body": [],
-      "related": []
+      "description": "Upper and lower bounds on composite stiffness from equal-strain and equal-stress models.",
+      "readingTime": "13 min",
+      "intro": "How stiff is a mixture of two materials? The answer depends on geometry. Two simple models, due to Voigt and Reuss, give the upper and lower bounds on stiffness. Every real composite falls between them. These bounds are the starting point for all composite mechanics.",
+      "body": [
+        ["h3", "The Voigt bound (equal strain, upper bound)"],
+        ["p", "Consider a composite loaded parallel to continuous fibres. Both fibre and matrix experience the same strain $\\varepsilon$. This is the iso-strain or Voigt condition. The total stress is the volume-weighted sum of the stresses in each phase:"],
+        ["eq", "\\sigma_c = V_f \\sigma_f + V_m \\sigma_m = V_f E_f \\varepsilon + V_m E_m \\varepsilon"],
+        ["p", "Since $\\sigma_c = E_c \\varepsilon$, we get the Voigt (upper) bound:"],
+        ["derivation", "The Voigt bound on composite modulus: $E_c = V_f E_f + V_m E_m$", [
+          ["p", "Assume uniform strain throughout the composite: $\\varepsilon_f = \\varepsilon_m = \\varepsilon_c = \\varepsilon$."],
+          ["p", "Force balance on a cross-section of total area $A$:"],
+          ["eq", "\\sigma_c A = \\sigma_f A_f + \\sigma_m A_m"],
+          ["p", "Divide by $A$ and note that $A_f/A = V_f$ and $A_m/A = V_m$ for continuous fibres:"],
+          ["eq", "\\sigma_c = V_f \\sigma_f + V_m \\sigma_m"],
+          ["p", "Substituting Hooke's law ($\\sigma = E\\varepsilon$) and dividing by the common strain:"],
+          ["eq", "E_c = V_f E_f + V_m E_m"],
+          ["p", "This is a simple weighted average. It is exact for continuous fibres loaded axially, and it is an upper bound for all other geometries."]
+        ]],
+        ["p", "The Voigt bound is a linear function of $V_f$. For $V_f = 0$ it gives $E_m$; for $V_f = 1$ it gives $E_f$. This is the best a composite can do for a given volume fraction."],
+
+        ["h3", "The Reuss bound (equal stress, lower bound)"],
+        ["p", "Now load the composite perpendicular to the fibres (or consider a layered structure loaded through its thickness). Both phases carry the same stress $\\sigma$, but they strain by different amounts. The total strain is the volume-weighted sum:"],
+        ["eq", "\\varepsilon_c = V_f \\varepsilon_f + V_m \\varepsilon_m = V_f \\frac{\\sigma}{E_f} + V_m \\frac{\\sigma}{E_m}"],
+        ["derivation", "The Reuss bound on composite modulus: $1/E_c = V_f/E_f + V_m/E_m$", [
+          ["p", "Assume uniform stress throughout the composite: $\\sigma_f = \\sigma_m = \\sigma_c = \\sigma$."],
+          ["p", "The total deformation is the sum of deformations in each phase. For a composite of total thickness $L$:"],
+          ["eq", "\\delta_c = \\delta_f + \\delta_m"],
+          ["p", "Dividing by $L$ and noting that $L_f/L = V_f$ and $L_m/L = V_m$:"],
+          ["eq", "\\varepsilon_c = V_f \\varepsilon_f + V_m \\varepsilon_m = \\frac{V_f \\sigma}{E_f} + \\frac{V_m \\sigma}{E_m}"],
+          ["p", "Since $\\varepsilon_c = \\sigma / E_c$:"],
+          ["eq", "\\frac{1}{E_c} = \\frac{V_f}{E_f} + \\frac{V_m}{E_m}"],
+          ["p", "This is the harmonic (reciprocal) average. It is exact for a layered composite loaded through its thickness, and is a lower bound for all other geometries."]
+        ]],
+        ["p", "The Reuss bound is always less than or equal to the Voigt bound. The gap between them is largest when the modulus contrast $E_f/E_m$ is large. For carbon fibre ($E_f = 230$ GPa) in epoxy ($E_m = 3.5$ GPa), the ratio is about 65, and the gap is enormous."],
+
+        ["h3", "Real data: CFRP and GFRP"],
+        ["p", "For a unidirectional CFRP (T300 carbon fibre, $E_f = 230$ GPa, in epoxy, $E_m = 3.5$ GPa, $V_f = 0.60$):"],
+        ["ul", [
+          "Voigt (axial): $E_1 = 0.60 \\times 230 + 0.40 \\times 3.5 = 139.4$ GPa",
+          "Reuss (transverse): $1/E_2 = 0.60/230 + 0.40/3.5 = 0.00261 + 0.1143 = 0.1169$, so $E_2 = 8.6$ GPa",
+          "Measured axial modulus: 135 to 140 GPa (agrees with Voigt almost exactly)",
+          "Measured transverse modulus: 9 to 10 GPa (above the Reuss bound, because fibres constrain transverse contraction)"
+        ]],
+        ["p", "For unidirectional GFRP (E-glass fibre, $E_f = 72$ GPa, in polyester, $E_m = 3.0$ GPa, $V_f = 0.50$):"],
+        ["ul", [
+          "Voigt (axial): $E_1 = 0.50 \\times 72 + 0.50 \\times 3.0 = 37.5$ GPa",
+          "Reuss (transverse): $1/E_2 = 0.50/72 + 0.50/3.0 = 0.00694 + 0.1667 = 0.1736$, so $E_2 = 5.8$ GPa",
+          "Measured axial modulus: 37 to 39 GPa",
+          "Measured transverse modulus: 8 to 10 GPa"
+        ]],
+        ["p", "The axial modulus is almost exactly Voigt. The transverse modulus exceeds Reuss by 30 to 70% because the real fibre geometry is not a simple series stack. Fibres are cylinders embedded in a matrix, and their stiffness constrains the lateral deformation of the surrounding material."],
+
+        ["h3", "The Halpin-Tsai equations"],
+        ["p", "The Reuss bound underestimates transverse stiffness badly. Halpin and Tsai proposed a semi-empirical interpolation that matches experimental data much better:"],
+        ["eq", "\\frac{E_c}{E_m} = \\frac{1 + \\xi \\eta V_f}{1 - \\eta V_f}, \\quad \\text{where} \\quad \\eta = \\frac{E_f/E_m - 1}{E_f/E_m + \\xi}"],
+        ["p", "The parameter $\\xi$ depends on reinforcement geometry: $\\xi = 2$ for circular fibres in transverse loading, $\\xi = 2l/d$ for short fibres of length $l$ and diameter $d$ in axial loading. As $\\xi \\to \\infty$, the Halpin-Tsai equation reduces to the Voigt bound. As $\\xi \\to 0$, it reduces to the Reuss bound."],
+        ["p", "For the T300/epoxy example above with $\\xi = 2$: $\\eta = (230/3.5 - 1)/(230/3.5 + 2) = 64.71/67.71 = 0.956$. Then $E_2/3.5 = (1 + 2 \\times 0.956 \\times 0.60)/(1 - 0.956 \\times 0.60) = 2.147/0.426 = 5.04$, giving $E_2 = 17.6$ GPa. This overshoots the measured 9 to 10 GPa somewhat; in practice $\\xi$ is often calibrated against experimental data."],
+
+        ["h3", "Other properties: density, strength, thermal expansion"],
+        ["p", "The rule of mixtures applies exactly to density and heat capacity (per unit volume), because these are simple volume averages:"],
+        ["eq", "\\rho_c = V_f \\rho_f + V_m \\rho_m"],
+        ["p", "For axial tensile strength of a continuous-fibre composite (assuming the fibres all break at the same strain):"],
+        ["eq", "\\sigma_{c}^* = V_f \\sigma_f^* + V_m \\sigma_m'"],
+        ["p", "where $\\sigma_f^*$ is the fibre ultimate strength and $\\sigma_m'$ is the stress in the matrix at the fibre failure strain (not the matrix ultimate strength, because the matrix has not yet failed when the fibres break)."],
+        ["p", "Axial thermal expansion follows a modified rule, because the phases constrain each other:"],
+        ["eq", "\\alpha_1 = \\frac{V_f E_f \\alpha_f + V_m E_m \\alpha_m}{V_f E_f + V_m E_m}"],
+        ["p", "This is weighted by stiffness, not just volume. Carbon fibres have a slightly negative axial CTE ($-0.4 \\times 10^{-6}$ K$^{-1}$), so unidirectional CFRP can be designed with near-zero axial thermal expansion. This is used in satellite structures and telescope mirrors where dimensional stability matters."],
+
+        ["problem", "A unidirectional E-glass/epoxy composite has $E_f = 72$ GPa, $E_m = 3.5$ GPa, and $V_f = 0.55$. Calculate the Voigt and Reuss bounds on modulus, and the ratio $E_1/E_2$. Comment on the anisotropy.", [
+          ["p", "Voigt (axial):"],
+          ["eq", "E_1 = 0.55 \\times 72 + 0.45 \\times 3.5 = 39.6 + 1.58 = 41.2 \\text{ GPa}"],
+          ["p", "Reuss (transverse):"],
+          ["eq", "\\frac{1}{E_2} = \\frac{0.55}{72} + \\frac{0.45}{3.5} = 0.00764 + 0.1286 = 0.1362"],
+          ["eq", "E_2 = 7.3 \\text{ GPa}"],
+          ["p", "The ratio $E_1/E_2 = 41.2/7.3 = 5.6$. The composite is roughly 6 times stiffer along the fibres than across them. This extreme anisotropy is why unidirectional laminates are rarely used alone. In practice, plies are stacked at different angles to distribute stiffness in the directions needed (article 14.5)."]
+        ]]
+      ],
+      "related": [
+        { "title": "Types of Composites", "url": "types-of-composites" },
+        { "title": "Fibre-Reinforced Composites", "url": "fibre-reinforced-composites" },
+        { "title": "Laminate Theory", "url": "laminate-theory" },
+        { "title": "Stress & Strain", "url": "../stress-strain-engineering-vs-true/" }
+      ]
     },
     {
       "id": "fibre-reinforced-composites",
       "number": "14.3",
       "title": "Fibre-Reinforced Composites",
-      "description": "",
-      "readingTime": "— min",
-      "intro": "",
-      "body": [],
-      "related": []
+      "description": "Carbon and glass fibres, matrix systems, and how they combine in high-performance structures.",
+      "readingTime": "14 min",
+      "intro": "Continuous-fibre composites dominate high-performance structures: aircraft fuselages, wind turbine blades, racing cars. The properties depend on the fibre, the matrix, and the interface between them. This article covers the main fibre types, matrix systems, and the engineering choices that determine performance.",
+      "body": [
+        ["h3", "Carbon fibres"],
+        ["p", "Carbon fibres are made by pyrolysing a polymer precursor, almost always polyacrylonitrile (PAN). The PAN fibre is stabilised in air at 200 to 300 °C (cross-linking the polymer chains), then carbonised at 1000 to 1500 °C in nitrogen (driving off non-carbon atoms), and optionally graphitised above 2000 °C (improving crystallite alignment and modulus at the expense of strength)."],
+        ["p", "The result is a fibre 5 to 7 $\\mu$m in diameter with a microstructure of turbostratic graphite crystallites aligned roughly along the fibre axis. The degree of alignment determines the modulus. Higher heat-treatment temperature gives better alignment, higher modulus, but lower tensile strength because defects in the larger crystallites act as crack initiators."],
+        ["p", "Three widely used Toray carbon fibres illustrate the trade-off:"],
+        ["ul", [
+          "<strong>T300</strong> (standard modulus): $E = 230$ GPa, $\\sigma^* = 3530$ MPa, $\\varepsilon^* = 1.5\\%$, $\\rho = 1.76$ g/cm$^3$. The workhorse fibre for aerospace since the 1970s.",
+          "<strong>T700S</strong> (high strength): $E = 230$ GPa, $\\sigma^* = 4900$ MPa, $\\varepsilon^* = 2.1\\%$, $\\rho = 1.80$ g/cm$^3$. Better precursor control gives higher strength at the same modulus. Widely used in wind turbine spar caps and pressure vessels.",
+          "<strong>M40J</strong> (high modulus): $E = 377$ GPa, $\\sigma^* = 4410$ MPa, $\\varepsilon^* = 1.2\\%$, $\\rho = 1.77$ g/cm$^3$. Graphitised at higher temperature. Used where stiffness is critical: satellite structures, racing car chassis."
+        ]],
+        ["p", "The specific modulus of T300 is $230/1.76 = 131$ GPa/(g/cm$^3$). For comparison, steel gives $210/7.85 = 27$ and aluminium gives $70/2.70 = 26$. Carbon fibre is 5 times more mass-efficient for stiffness-limited design."],
+        ["callout", "Fibre diameter and handling", "A single carbon fibre is too thin to handle. Fibres are bundled into tows, specified by the number of filaments: 3k (3000), 6k, 12k, 24k, or 50k. A 12k tow of T700S has a cross-sectional area of about 0.43 mm$^2$ and a linear density of 0.80 g/m."],
+
+        ["h3", "Glass fibres"],
+        ["p", "Glass fibres are drawn from molten glass through platinum bushings with hundreds of nozzles. They are much cheaper than carbon fibres (roughly 1/10 the cost per kilogram) and have good strength but lower modulus:"],
+        ["ul", [
+          "<strong>E-glass</strong>: $E = 72$ GPa, $\\sigma^* = 3450$ MPa, $\\rho = 2.54$ g/cm$^3$. The standard for boats, wind turbines, automotive panels, and chemical tanks. The 'E' stands for electrical, from its original use as electrical insulation.",
+          "<strong>S-glass</strong>: $E = 87$ GPa, $\\sigma^* = 4580$ MPa, $\\rho = 2.49$ g/cm$^3$. Higher strength, used in ballistic armour and aerospace. Roughly 3 times the cost of E-glass.",
+          "<strong>R-glass</strong>: similar to S-glass but a European specification. $E = 86$ GPa, $\\sigma^* = 4400$ MPa."
+        ]],
+        ["p", "Glass fibre diameter is typically 10 to 20 $\\mu$m, larger than carbon. The surface is coated with a silane coupling agent (a 'size') during drawing to promote adhesion to the polymer matrix and protect the fibre from moisture damage."],
+
+        ["h3", "Other reinforcing fibres"],
+        ["p", "<strong>Aramid fibres</strong> (Kevlar, Twaron): $E = 60$ to $130$ GPa, $\\sigma^* = 3000$ to $3600$ MPa, $\\rho = 1.44$ g/cm$^3$. Organic fibres with outstanding toughness and energy absorption. Used in ballistic protection, ropes, and racing sails. Poor in compression because the fibre buckles internally at the fibrillar level."],
+        ["p", "<strong>SiC fibres</strong> (Nicalon, Hi-Nicalon S, Tyranno): $E = 180$ to $400$ GPa, $\\sigma^* = 2500$ to $3000$ MPa. Used in ceramic-matrix composites for high-temperature applications. Hi-Nicalon S retains strength above 1400 °C."],
+        ["p", "<strong>Ultra-high-molecular-weight polyethylene</strong> (Dyneema, Spectra): $E = 80$ to $130$ GPa, $\\sigma^* = 2500$ to $3500$ MPa, $\\rho = 0.97$ g/cm$^3$. The lightest structural fibre. Outstanding specific strength. Melts at 145 °C, limiting applications to low-temperature use."],
+
+        ["h3", "Matrix systems"],
+        ["p", "<strong>Thermoset matrices</strong> are cross-linked during cure and cannot be re-melted. They dominate aerospace composites."],
+        ["ul", [
+          "<strong>Epoxy</strong>: the standard aerospace matrix. Stiffness 3 to 4 GPa, strength 60 to 90 MPa, $T_g$ of 120 to 200 °C depending on formulation. Good adhesion to carbon fibre. Cure at 120 or 180 °C under autoclave pressure (6 to 7 bar). Brittle: $G_{Ic} \\approx 100$ to $300$ J/m$^2$.",
+          "<strong>Polyester</strong>: cheaper than epoxy, easier to process. Used in marine and automotive applications. Lower mechanical properties and worse hot/wet performance.",
+          "<strong>BMI and cyanate ester</strong>: higher $T_g$ (250 to 300 °C) for applications near jet exhausts and engine nacelles. More expensive and more brittle than epoxy."
+        ]],
+        ["p", "<strong>Thermoplastic matrices</strong> can be re-melted, which enables welding and faster processing. They are tougher than thermosets."],
+        ["ul", [
+          "<strong>PEEK</strong> (polyether ether ketone): $T_g = 143$ °C, $T_m = 343$ °C, $G_{Ic} \\approx 1500$ J/m$^2$. CF/PEEK (AS4/APC-2) is used in leading edges and ribs. Ten times tougher than CF/epoxy.",
+          "<strong>PPS</strong> (polyphenylene sulphide): $T_m = 280$ °C, good chemical resistance. Used in aerospace brackets and clips."
+        ]],
+
+        ["h3", "The Boeing 787: a case study"],
+        ["p", "The Boeing 787 Dreamliner is 50% composite by weight. The fuselage is a one-piece barrel of carbon/epoxy (Toray T800S fibre, toughened epoxy matrix), wound and cured in a single autoclave cycle. Previous aircraft (Boeing 777) used composites for empennage and floor beams but kept an aluminium fuselage."],
+        ["p", "The 787's composite fuselage saves roughly 20% weight compared with a 2024-T3 aluminium equivalent. It also eliminates about 40,000 fasteners per fuselage barrel, removing fatigue initiation sites and reducing manufacturing time. The cabin can be pressurised to a higher equivalent altitude (6000 ft vs 8000 ft) because composites do not fatigue like aluminium, allowing higher pressure cycles without a weight penalty."],
+        ["p", "The wings use T800S/3900-2 (a toughened epoxy system). The wing box skins are about 30 mm thick, built from over 20 plies at 0°, $\\pm$45°, and 90° orientations. Total composite content per aircraft is about 35 tonnes."],
+
+        ["h3", "Fibre-matrix interface"],
+        ["p", "The interface between fibre and matrix controls load transfer, damage tolerance, and environmental durability. Carbon fibres are surface-treated by electrochemical oxidation or plasma treatment to introduce oxygen-containing functional groups that bond to the epoxy. Too weak an interface gives poor transverse strength. Too strong an interface gives brittle behaviour because cracks run straight through fibres instead of deflecting along the interface."],
+        ["p", "An intermediate interface strength gives the best overall performance. Cracks approaching a fibre are deflected along the interface, causing fibre debonding and pull-out, which absorb energy. This is the mechanism that gives composites their damage tolerance despite using brittle fibres and (often) a brittle matrix."],
+
+        ["problem", "A unidirectional T700S/epoxy composite has $V_f = 0.60$. The fibre properties are $E_f = 230$ GPa, $\\sigma_f^* = 4900$ MPa, $\\rho_f = 1.80$ g/cm$^3$. The epoxy has $E_m = 3.5$ GPa, $\\sigma_m^* = 80$ MPa, $\\rho_m = 1.25$ g/cm$^3$. Calculate the axial modulus, axial tensile strength (assuming the matrix stress at fibre failure strain), and composite density.", [
+          ["p", "Axial modulus (Voigt):"],
+          ["eq", "E_1 = 0.60 \\times 230 + 0.40 \\times 3.5 = 138.0 + 1.4 = 139.4 \\text{ GPa}"],
+          ["p", "Fibre failure strain: $\\varepsilon_f^* = 4900/230000 = 0.0213 = 2.13\\%$."],
+          ["p", "Matrix stress at fibre failure strain: $\\sigma_m' = E_m \\times \\varepsilon_f^* = 3500 \\times 0.0213 = 74.6$ MPa. This is below the matrix strength of 80 MPa, so the matrix has not failed."],
+          ["eq", "\\sigma_c^* = V_f \\sigma_f^* + V_m \\sigma_m' = 0.60 \\times 4900 + 0.40 \\times 74.6 = 2940 + 29.8 = 2970 \\text{ MPa}"],
+          ["p", "Composite density:"],
+          ["eq", "\\rho_c = 0.60 \\times 1.80 + 0.40 \\times 1.25 = 1.08 + 0.50 = 1.58 \\text{ g/cm}^3"],
+          ["p", "The specific strength is $2970/1.58 = 1880$ MPa/(g/cm$^3$), about 15 times that of mild steel."]
+        ]]
+      ],
+      "related": [
+        { "title": "Rule of Mixtures & Bounds", "url": "rule-of-mixtures-bounds" },
+        { "title": "Laminate Theory", "url": "laminate-theory" },
+        { "title": "Failure Mechanisms & Damage Tolerance", "url": "failure-mechanisms-damage-tolerance" },
+        { "title": "Polymers", "url": "../polymers/" }
+      ]
     },
     {
       "id": "particle-short-fibre-composites",
       "number": "14.4",
       "title": "Particle & Short-Fibre Composites",
-      "description": "",
-      "readingTime": "— min",
-      "intro": "",
-      "body": [],
-      "related": []
+      "description": "How discontinuous reinforcements stiffen and strengthen a matrix, and the mechanics of load transfer at finite aspect ratio.",
+      "readingTime": "12 min",
+      "intro": "Most composites by volume are not continuous-fibre laminates. They are concrete, filled polymers, metal-matrix composites with particles or chopped fibres. The mechanics of short reinforcements is fundamentally different from continuous fibres because the reinforcement has ends, and load must be transferred through shear at the interface.",
+      "body": [
+        ["h3", "The shear-lag model"],
+        ["p", "A short fibre embedded in a matrix cannot carry load at its ends. Load is transferred from the matrix to the fibre by shear stress along the fibre-matrix interface. The stress in the fibre builds up from zero at each end to a maximum in the middle. The shear-lag model, first developed by Cox in 1952, quantifies this."],
+        ["p", "For a fibre of length $l$ and diameter $d$, embedded in a matrix with shear modulus $G_m$, the axial stress in the fibre varies as:"],
+        ["eq", "\\sigma_f(x) = E_f \\varepsilon_c \\left(1 - \\frac{\\cosh(\\beta(l/2 - x))}{\\cosh(\\beta l/2)}\\right)"],
+        ["p", "where $x$ is measured from one end and $\\beta$ is a shear-lag parameter that depends on the fibre packing geometry and the ratio $G_m/E_f$. The fibre stress reaches its maximum (equal to $E_f \\varepsilon_c$, same as a continuous fibre) only if the fibre is long enough. If $\\beta l/2 \\gg 1$, the $\\cosh$ terms become negligible over most of the fibre length."],
+
+        ["h3", "Critical fibre length"],
+        ["p", "A simpler and more practical approach: assume the interfacial shear stress is constant at a value $\\tau_i$ (either the matrix shear yield stress or the interface shear strength, whichever is lower). Force balance on a fibre element gives a linear stress build-up from each end:"],
+        ["eq", "\\sigma_f(x) = \\frac{2 \\tau_i}{r} x \\quad \\text{for } x \\leq l_c/2"],
+        ["p", "where $r$ is the fibre radius. The fibre reaches its full strength $\\sigma_f^*$ when the build-up length equals $l_c/2$:"],
+        ["eq", "l_c = \\frac{\\sigma_f^* d}{2 \\tau_i}"],
+        ["p", "This is the critical fibre length. For carbon fibre ($\\sigma_f^* = 4900$ MPa, $d = 7$ $\\mu$m) with a matrix shear yield strength of 35 MPa: $l_c = 4900 \\times 7 \\times 10^{-3} / (2 \\times 35) = 0.49$ mm. So fibres longer than about 0.5 mm can be stressed to their full strength over most of their length. Fibres shorter than $l_c$ will pull out of the matrix rather than break."],
+        ["callout", "Critical aspect ratio", "Dividing by $d$: the critical aspect ratio is $l_c/d = \\sigma_f^* / (2\\tau_i)$. For the example above, $l_c/d = 4900/(2 \\times 35) = 70$. Short fibres in injection-moulded composites typically have aspect ratios of 10 to 50, below the critical value. They reinforce, but not to their full potential."],
+
+        ["h3", "Strength of short-fibre composites"],
+        ["p", "For aligned short fibres with $l > l_c$, the average stress in the fibre is less than $\\sigma_f^*$ because the ends carry less load. The composite strength is:"],
+        ["eq", "\\sigma_c^* = V_f \\sigma_f^* \\left(1 - \\frac{l_c}{2l}\\right) + V_m \\sigma_m'"],
+        ["p", "As $l \\to \\infty$, this reduces to the continuous-fibre result. As $l \\to l_c$, the effective fibre contribution drops to half its potential. For $l < l_c$, the fibre pulls out before breaking, and the strength is:"],
+        ["eq", "\\sigma_c^* = V_f \\frac{l \\tau_i}{d} + V_m \\sigma_m'"],
+        ["p", "Random orientation further reduces properties. For randomly oriented short fibres in a plane (sheet moulding compound), the modulus is roughly $3/8$ of the aligned value for in-plane stiffness and $1/5$ for strength. For three-dimensional random orientation (injection moulding), the factors are roughly $1/5$ for modulus and $1/6$ for strength."],
+
+        ["h3", "Particle-reinforced composites"],
+        ["p", "Particles have an aspect ratio near 1, so the shear-lag mechanism is inefficient. Particles reinforce primarily by constraining matrix deformation. The matrix cannot deform freely because rigid particles are in the way. The stiffening is moderate: a 20 vol% addition of SiC particles to aluminium increases the modulus from 70 GPa to about 95 GPa."],
+        ["p", "The Halpin-Tsai equation with $\\xi = 2$ (for spheres) gives a reasonable estimate. An even simpler approximation for moderate volume fractions is:"],
+        ["eq", "E_c \\approx E_m(1 + 2.5 V_p) \\quad \\text{(dilute, rigid particles)}"],
+        ["p", "This is the Einstein result, originally derived for the viscosity of a suspension of rigid spheres. It works for $V_p < 0.15$ or so."],
+
+        ["h3", "Cemented carbides"],
+        ["p", "WC/Co cemented carbides are particle composites of tungsten carbide grains (hardness 2200 HV, $E = 700$ GPa) in a cobalt binder (ductile, $E = 209$ GPa). Typical compositions range from 6 to 25 wt% Co, with WC grain sizes from 0.2 to 5 $\\mu$m."],
+        ["p", "A 6% Co grade has a hardness of about 1800 HV, a transverse rupture strength of 1500 MPa, and a fracture toughness of 9 MPa$\\sqrt{\\text{m}}$. A 15% Co grade has a hardness of 1300 HV but a toughness of 15 MPa$\\sqrt{\\text{m}}$. More cobalt means more ductile binder, more toughness, less hardness. The choice is a trade-off between wear resistance and resistance to chipping."],
+        ["p", "Cemented carbides account for about 50% of all cutting tool materials used in metalworking. Annual global production is roughly 80,000 tonnes."],
+
+        ["h3", "Concrete"],
+        ["p", "Concrete is the most-produced composite on Earth: about 30 billion tonnes per year, or 4 tonnes per person per year. Coarse aggregate (gravel, 5 to 20 mm) and fine aggregate (sand) are bonded by a cement paste matrix. The aggregate volume fraction is typically 0.65 to 0.75."],
+        ["p", "The compressive strength of standard concrete is 25 to 50 MPa. The tensile strength is about 1/10 of this (2 to 5 MPa), limited by the weak cement-aggregate interface and pre-existing microcracks. This is why concrete is almost always reinforced with steel rebar, which carries the tensile loads. The steel and concrete have similar thermal expansion coefficients ($\\alpha_{\\text{steel}} \\approx 12 \\times 10^{-6}$ K$^{-1}$, $\\alpha_{\\text{concrete}} \\approx 10 \\times 10^{-6}$ K$^{-1}$), which is fortunate."],
+        ["p", "High-performance concrete (60 to 120 MPa) uses silica fume, superplasticisers, and lower water-to-cement ratios. Ultra-high-performance concrete (UHPC, $>$150 MPa) eliminates coarse aggregate entirely and adds steel fibres. Ductal, a commercial UHPC, reaches 200 MPa in compression with 2% steel fibre content."],
+
+        ["problem", "Carbon fibres ($\\sigma_f^* = 3530$ MPa, $d = 7$ $\\mu$m) are chopped to a length of 6 mm and randomly oriented in a plane within a nylon 6,6 matrix ($\\tau_i = 25$ MPa). Calculate the critical fibre length and determine whether these fibres can reach their full strength.", [
+          ["p", "Critical fibre length:"],
+          ["eq", "l_c = \\frac{\\sigma_f^* d}{2 \\tau_i} = \\frac{3530 \\times 7 \\times 10^{-3}}{2 \\times 25} = \\frac{24.71}{50} = 0.49 \\text{ mm}"],
+          ["p", "The fibre length (6 mm) is about 12 times the critical length. These fibres can reach their full tensile strength over most of their length ($1 - l_c/(2l) = 1 - 0.49/12 = 0.96$, so 96% of the continuous-fibre value)."],
+          ["p", "However, the random planar orientation reduces the effective modulus to about $3/8$ of the aligned value and the strength to about $1/5$. The random orientation is a much larger penalty than the finite fibre length in this case."]
+        ]]
+      ],
+      "related": [
+        { "title": "Types of Composites", "url": "types-of-composites" },
+        { "title": "Rule of Mixtures & Bounds", "url": "rule-of-mixtures-bounds" },
+        { "title": "Fibre-Reinforced Composites", "url": "fibre-reinforced-composites" },
+        { "title": "Ceramics & Glasses", "url": "../ceramics/" }
+      ]
     },
     {
       "id": "laminate-theory",
       "number": "14.5",
       "title": "Laminate Theory",
-      "description": "",
-      "readingTime": "— min",
-      "intro": "",
-      "body": [],
-      "related": []
+      "description": "Classical laminate theory, stacking sequences, and the design of quasi-isotropic layups.",
+      "readingTime": "14 min",
+      "intro": "A single unidirectional ply is stiff and strong in one direction, weak in all others. Real composite structures stack plies at different angles to distribute properties. Classical laminate theory (CLT) provides the framework for analysing these stacks. It is the bridge between single-ply properties and the behaviour of a real component.",
+      "body": [
+        ["h3", "Ply coordinate systems"],
+        ["p", "Each ply has a material coordinate system aligned with its fibres. The 1-direction is along the fibres, the 2-direction is transverse in the ply plane, and the 3-direction is through the thickness. The laminate has a global coordinate system $x$-$y$-$z$. The angle $\\theta$ between the fibre direction and the laminate $x$-axis defines the ply orientation."],
+        ["p", "A ply oriented at 0° has its fibres along $x$. A ply at 90° has fibres along $y$. A ply at $+45$° has fibres at 45° to $x$. The notation $[0/90/+45/-45]_s$ means: a 0° ply, then 90°, then $+45$°, then $-45$°, then mirror-symmetric about the midplane (so the full sequence is $[0/90/+45/-45/-45/+45/90/0]$). The subscript $s$ denotes symmetry."],
+
+        ["h3", "Stiffness of a single ply"],
+        ["p", "In its own coordinate system, a unidirectional ply under plane stress has the reduced stiffness matrix:"],
+        ["eq", "\\begin{pmatrix} \\sigma_1 \\\\ \\sigma_2 \\\\ \\tau_{12} \\end{pmatrix} = \\begin{pmatrix} Q_{11} & Q_{12} & 0 \\\\ Q_{12} & Q_{22} & 0 \\\\ 0 & 0 & Q_{66} \\end{pmatrix} \\begin{pmatrix} \\varepsilon_1 \\\\ \\varepsilon_2 \\\\ \\gamma_{12} \\end{pmatrix}"],
+        ["p", "where the reduced stiffness components are:"],
+        ["eq", "Q_{11} = \\frac{E_1}{1 - \\nu_{12}\\nu_{21}}, \\quad Q_{22} = \\frac{E_2}{1 - \\nu_{12}\\nu_{21}}, \\quad Q_{12} = \\frac{\\nu_{12} E_2}{1 - \\nu_{12}\\nu_{21}}, \\quad Q_{66} = G_{12}"],
+        ["p", "For T300/epoxy at $V_f = 0.60$: $E_1 = 139$ GPa, $E_2 = 9.5$ GPa, $\\nu_{12} = 0.30$, $G_{12} = 5.2$ GPa. From the reciprocal relation $\\nu_{21} = \\nu_{12} E_2/E_1 = 0.30 \\times 9.5/139 = 0.0205$. Then $Q_{11} = 139/(1-0.30 \\times 0.0205) = 139.9$ GPa, $Q_{22} = 9.56$ GPa, $Q_{12} = 2.87$ GPa, $Q_{66} = 5.2$ GPa."],
+
+        ["h3", "Transformation to laminate coordinates"],
+        ["p", "To find the stiffness of a ply oriented at angle $\\theta$ to the laminate $x$-axis, the $Q$ matrix is transformed:"],
+        ["eq", "\\bar{Q}_{ij} = T^{-1} Q_{ij} T^{-T}"],
+        ["p", "where $T$ is the transformation matrix involving $\\cos\\theta$ and $\\sin\\theta$ terms. The transformed stiffness matrix $\\bar{Q}$ is generally fully populated: an off-axis ply develops shear strain under normal stress (shear-extension coupling). Only for $\\theta = 0°$ and $90°$ are the coupling terms zero."],
+        ["p", "The key result for a $\\pm 45$° ply: the shear modulus in the $x$-$y$ frame is roughly $(Q_{11} + Q_{22} - 2Q_{12})/4$, which for T300/epoxy gives about 36 GPa. A $\\pm 45$° layup is excellent for carrying shear loads."],
+
+        ["h3", "The ABD matrix"],
+        ["p", "CLT assembles the ply stiffnesses into three laminate-level matrices. For a laminate of $N$ plies with the $k$th ply extending from $z_{k-1}$ to $z_k$ (measured from the midplane):"],
+        ["eq", "A_{ij} = \\sum_{k=1}^{N} \\bar{Q}_{ij}^{(k)} (z_k - z_{k-1})"],
+        ["eq", "B_{ij} = \\frac{1}{2} \\sum_{k=1}^{N} \\bar{Q}_{ij}^{(k)} (z_k^2 - z_{k-1}^2)"],
+        ["eq", "D_{ij} = \\frac{1}{3} \\sum_{k=1}^{N} \\bar{Q}_{ij}^{(k)} (z_k^3 - z_{k-1}^3)"],
+        ["p", "$A$ is the extensional stiffness matrix (force per unit width per unit strain). $D$ is the bending stiffness matrix (moment per unit width per unit curvature). $B$ is the coupling matrix, which links in-plane forces to curvatures and bending moments to mid-plane strains."],
+        ["callout", "Why symmetry matters", "If the stacking sequence is symmetric about the midplane, $B = 0$. This is almost always desirable because non-zero $B$ means the laminate warps when loaded in tension (or extends when bent). Thermal stresses from curing in the autoclave will also cause warping if $B \\neq 0$. Virtually all practical laminates are symmetric."],
+
+        ["h3", "Common stacking sequences"],
+        ["p", "<strong>Unidirectional $[0]_n$</strong>: maximum axial stiffness and strength. Used for spar caps in wind turbine blades and helicopter rotor flexbeams. Extremely weak transverse to the fibres."],
+        ["p", "<strong>Cross-ply $[0/90]_s$</strong>: stiff in both $x$ and $y$ but weak in shear. Used where biaxial loads dominate and shear is small."],
+        ["p", "<strong>Angle-ply $[\\pm 45]_s$</strong>: high shear stiffness and strength. Often used for torque tubes, drive shafts, and the skins of control surfaces."],
+        ["p", "<strong>Quasi-isotropic $[0/\\pm 45/90]_s$</strong>: equal in-plane stiffness in all directions. This is the minimum number of orientations needed for isotropy in the plane. The in-plane modulus is:"],
+        ["eq", "E_{\\text{QI}} \\approx \\frac{1}{4}(Q_{11} + Q_{22} + 2Q_{12} + 4Q_{66})t"],
+        ["p", "For T300/epoxy this gives $E_{\\text{QI}} \\approx 52$ GPa. Note that this is only about 37% of the unidirectional axial modulus. You pay for isotropy with a large reduction in peak stiffness. The quasi-isotropic layup is common for skins and panels where load directions are uncertain, such as fuselage skins and fairings."],
+        ["p", "A quasi-isotropic laminate has the same in-plane stiffness in every direction, but it is not isotropic in bending. The bending stiffness depends on which plies are on the outside (furthest from the midplane), because those plies contribute most to $D$ through the $z^3$ terms. Placing 0° plies on the outside maximises bending stiffness about the $y$-axis."],
+
+        ["h3", "Ply percentage guidelines"],
+        ["p", "Aerospace design rules typically require:"],
+        ["ul", [
+          "Minimum 10% of plies in each of the four standard orientations (0°, $\\pm$45°, 90°) to prevent matrix-dominated failure in any direction.",
+          "No more than 4 consecutive plies of the same orientation (to limit interlaminar stresses at free edges).",
+          "Symmetric and balanced layup ($B = 0$, no shear-extension coupling). Balanced means equal numbers of $+\\theta$ and $-\\theta$ plies."
+        ]],
+        ["p", "For a wing skin carrying primarily bending and shear from aerodynamic loads, a typical ply distribution might be 40% at 0° (spanwise bending), 40% at $\\pm 45$° (shear from torque), and 20% at 90° (chordwise loads and damage tolerance)."],
+
+        ["problem", "A symmetric cross-ply laminate $[0/90]_s$ is made from T300/epoxy plies, each 0.125 mm thick. There are 4 plies total, so the laminate is 0.5 mm thick. Using $Q_{11} = 140$ GPa and $Q_{22} = 9.6$ GPa, calculate the $A_{11}$ extensional stiffness.", [
+          ["p", "The laminate is $[0/90/90/0]$ with ply positions: $z_0 = -0.25$ mm, $z_1 = -0.125$ mm, $z_2 = 0$ mm, $z_3 = 0.125$ mm, $z_4 = 0.25$ mm."],
+          ["p", "For 0° plies: $\\bar{Q}_{11} = Q_{11} = 140$ GPa. For 90° plies: $\\bar{Q}_{11} = Q_{22} = 9.6$ GPa."],
+          ["eq", "A_{11} = Q_{11}(z_1 - z_0) + Q_{22}(z_2 - z_1) + Q_{22}(z_3 - z_2) + Q_{11}(z_4 - z_3)"],
+          ["eq", "A_{11} = 140(0.125) + 9.6(0.125) + 9.6(0.125) + 140(0.125)"],
+          ["eq", "A_{11} = 17.5 + 1.2 + 1.2 + 17.5 = 37.4 \\text{ GPa} \\cdot \\text{mm}"],
+          ["p", "The effective in-plane modulus is $E_x = A_{11}/h = 37.4/0.5 = 74.8$ GPa. This is roughly the average of $E_1$ and $E_2$, as expected for equal proportions of 0° and 90° plies."]
+        ]]
+      ],
+      "related": [
+        { "title": "Rule of Mixtures & Bounds", "url": "rule-of-mixtures-bounds" },
+        { "title": "Fibre-Reinforced Composites", "url": "fibre-reinforced-composites" },
+        { "title": "Failure Mechanisms & Damage Tolerance", "url": "failure-mechanisms-damage-tolerance" },
+        { "title": "Stress & Strain", "url": "../stress-strain-engineering-vs-true/" }
+      ]
     },
     {
       "id": "failure-mechanisms-damage-tolerance",
       "number": "14.6",
       "title": "Failure Mechanisms & Damage Tolerance",
-      "description": "",
-      "readingTime": "— min",
-      "intro": "",
-      "body": [],
-      "related": []
+      "description": "How composites fail, from first-ply failure through delamination to impact damage and residual strength.",
+      "readingTime": "13 min",
+      "intro": "Composites do not fail like metals. There is no single crack that propagates to fracture. Instead, damage accumulates through multiple mechanisms operating simultaneously: matrix cracking, fibre breakage, delamination, fibre pull-out. Understanding these mechanisms is essential for safe design and for exploiting the damage tolerance that composites can provide.",
+      "body": [
+        ["h3", "Failure modes in unidirectional plies"],
+        ["p", "A unidirectional ply has five distinct failure modes:"],
+        ["ol", [
+          "<strong>Fibre tensile failure</strong>: the fibres break. This is the catastrophic mode in the fibre direction. The ply loses almost all its load-carrying capacity.",
+          "<strong>Fibre compressive failure</strong>: fibres buckle, usually by microbuckling (coordinated rotation of fibres over a band width of 10 to 15 fibre diameters). Compressive strength is typically 50 to 60% of tensile strength. Compressive strength is matrix-dominated because the matrix must support the fibres against buckling.",
+          "<strong>Matrix tensile failure</strong>: cracks run parallel to the fibres through the matrix. This occurs under transverse tension ($\\sigma_2 > 0$) or in-plane shear. The ply can still carry axial load, but its transverse stiffness and Poisson's ratio change.",
+          "<strong>Matrix compressive failure</strong>: shear failure of the matrix on a plane inclined at about 53° to the loading direction (not 45°, because of internal friction).",
+          "<strong>Fibre-matrix shear failure</strong>: the interface fails under combined transverse and shear loading."
+        ]],
+
+        ["h3", "Failure criteria for a ply"],
+        ["p", "Several criteria predict when a ply fails under combined loading. The simplest is maximum stress: the ply fails when any one stress component reaches its limiting value. This gives a rectangular failure envelope in stress space."],
+        ["p", "The Tsai-Hill criterion is an interactive criterion based on the von Mises yield criterion adapted for anisotropy:"],
+        ["eq", "\\frac{\\sigma_1^2}{X^2} - \\frac{\\sigma_1 \\sigma_2}{X^2} + \\frac{\\sigma_2^2}{Y^2} + \\frac{\\tau_{12}^2}{S^2} = 1"],
+        ["p", "where $X$ is the axial strength, $Y$ the transverse strength, and $S$ the shear strength. Use tensile or compressive values depending on the sign of each stress. The interaction term $\\sigma_1 \\sigma_2 / X^2$ means that combined loading can cause failure before either stress reaches its individual limit."],
+        ["p", "For T300/epoxy: $X_t = 1500$ MPa, $X_c = 1200$ MPa, $Y_t = 40$ MPa, $Y_c = 246$ MPa, $S = 68$ MPa. The transverse tensile strength (40 MPa) is the weakest link. Matrix cracking under transverse tension is almost always the first failure event in a multidirectional laminate."],
+
+        ["h3", "First-ply failure and progressive damage"],
+        ["p", "In a multidirectional laminate under increasing load, the first ply to fail is usually a 90° ply under transverse tension (because it is loaded across its fibres). This is first-ply failure (FPF). The laminate does not collapse. The cracked ply loses its transverse stiffness, the load redistributes to the remaining plies, and loading continues."],
+        ["p", "As the load increases, more transverse cracks form in the 90° plies (at a roughly regular spacing determined by the shear-lag transfer length), then the off-axis plies develop matrix cracks, and eventually the 0° plies fail in fibre tension or the laminate delaminates. The ratio of ultimate failure load to first-ply failure load can be 3:1 or more for a quasi-isotropic laminate. This progressive damage is one reason composites are damage-tolerant: the loss of one ply does not mean structural failure."],
+
+        ["h3", "Delamination"],
+        ["p", "Delamination is the separation of adjacent plies. It is driven by interlaminar stresses: the through-thickness normal stress $\\sigma_3$ and the interlaminar shear stresses $\\tau_{13}$ and $\\tau_{23}$. These stresses are zero according to CLT (which assumes plane stress), but they arise at free edges, around holes, at ply drops, and under impact."],
+        ["p", "Delamination is characterised by fracture mechanics. The critical strain energy release rates are:"],
+        ["ul", [
+          "<strong>Mode I</strong> (opening): $G_{Ic} \\approx 200$ to $300$ J/m$^2$ for carbon/epoxy. $G_{Ic} \\approx 1500$ to $2000$ J/m$^2$ for carbon/PEEK.",
+          "<strong>Mode II</strong> (sliding shear): $G_{IIc} \\approx 500$ to $1000$ J/m$^2$ for carbon/epoxy.",
+          "<strong>Mixed mode</strong>: delaminations in practice propagate under combined mode I and II. Failure loci are measured by mixed-mode bending (MMB) tests."
+        ]],
+        ["p", "Delamination is the most dangerous damage mode because it is internal, invisible on the surface, and reduces compressive strength dramatically by allowing sublaminates to buckle independently."],
+
+        ["h3", "Impact damage"],
+        ["p", "A dropped tool or runway debris striking a composite panel causes barely visible impact damage (BVID). The surface may show only a small dent (below the visibility threshold of 0.3 to 0.5 mm depth for a typical inspection), but internally there is a cone-shaped zone of delaminations and matrix cracks spreading from the impact point through the thickness."],
+        ["p", "The residual compressive strength after impact (CAI) is the critical design metric. For a typical aerospace carbon/epoxy quasi-isotropic laminate, the undamaged compressive strength is about 600 MPa. After a 30 J impact (representative of a 1 kg tool dropped from 3 m), the CAI drops to about 250 to 300 MPa. This is a 50% reduction from a barely visible dent."],
+        ["callout", "The CAI design allowable", "Aerospace structures are typically designed to a CAI allowable of 250 to 300 MPa, not the undamaged strength of 600 MPa. This means roughly half the material capability is sacrificed to damage tolerance. Toughened matrix systems (with rubber or thermoplastic particles in the epoxy interlayer) can improve CAI by 30 to 50%."],
+
+        ["h3", "Fatigue of composites"],
+        ["p", "Composites in fatigue behave differently from metals. There is no single propagating crack. Instead, damage accumulates diffusely: matrix cracks multiply, delaminations grow slowly, fibre breaks accumulate statistically. The S-N curve is much flatter than for metals. CFRP retains about 80 to 90% of its static strength after $10^6$ cycles at $R = -1$ (fully reversed loading). GFRP degrades more, retaining about 30 to 40% of static strength at $10^6$ cycles, because the glass fibres themselves are susceptible to stress corrosion in humid environments."],
+        ["p", "The flat fatigue curve of CFRP was one of the reasons for adopting a composite fuselage on the Boeing 787. An aluminium fuselage accumulates fatigue damage at rivet holes with every pressurisation cycle. A composite fuselage does not, which extends inspection intervals and allows higher cabin pressure."],
+
+        ["problem", "A quasi-isotropic carbon/epoxy laminate has an undamaged compressive strength of 580 MPa. After a 25 J impact, the delaminated area is 1200 mm$^2$ and the residual compressive strength (CAI) is 290 MPa. If the design allowable is based on CAI with a safety factor of 1.5, what is the maximum design stress?", [
+          ["p", "The design allowable stress:"],
+          ["eq", "\\sigma_{\\text{allow}} = \\frac{\\text{CAI}}{\\text{SF}} = \\frac{290}{1.5} = 193 \\text{ MPa}"],
+          ["p", "This is only 33% of the undamaged strength (580 MPa). The effective knockdown from damage tolerance and safety factor combined is a factor of 3. This large knockdown is the cost of ensuring structural integrity despite barely visible damage. It is also why the aerospace industry invests heavily in toughened matrix systems and structural health monitoring."]
+        ]]
+      ],
+      "related": [
+        { "title": "Fibre-Reinforced Composites", "url": "fibre-reinforced-composites" },
+        { "title": "Laminate Theory", "url": "laminate-theory" },
+        { "title": "Natural & Bio-Inspired Composites", "url": "natural-bio-inspired-composites" },
+        { "title": "Fracture Mechanics", "url": "../fracture-mechanics/" }
+      ]
     },
     {
       "id": "natural-bio-inspired-composites",
       "number": "14.7",
       "title": "Natural & Bio-Inspired Composites",
-      "description": "",
-      "readingTime": "— min",
-      "intro": "",
-      "body": [],
-      "related": []
+      "description": "How bone, wood, nacre, and spider silk achieve remarkable properties through hierarchical composite architectures.",
+      "readingTime": "13 min",
+      "intro": "Nature builds composites. Bone, wood, nacre, and silk are all multi-phase materials with hierarchical architectures spanning nanometres to centimetres. They are made from weak constituents (proteins, minerals, sugars) yet achieve mechanical properties that rival or exceed engineering materials on a specific basis. Understanding how they do this is driving a new generation of bio-inspired designs.",
+      "body": [
+        ["h3", "Bone"],
+        ["p", "Bone is a composite of hydroxyapatite mineral (Ca$_{10}$(PO$_4$)$_6$(OH)$_2$, $E \\approx 120$ GPa, brittle) and type I collagen ($E \\approx 1.5$ GPa, tough). The mineral fraction is about 65 wt% (45 vol%). By the simple rule of mixtures, you would predict a modulus of about 55 GPa and a brittle fracture. Cortical bone actually has $E \\approx 15$ to $25$ GPa, a tensile strength of 100 to 150 MPa, and a fracture toughness of 2 to 12 MPa$\\sqrt{\\text{m}}$."],
+        ["p", "The toughness is the surprise. It comes from the hierarchical architecture. At the nanoscale, plate-like hydroxyapatite crystals (50 nm long, 25 nm wide, 2 to 4 nm thick) are embedded within collagen fibrils (100 nm diameter). The fibrils are bundled into fibres (1 to 10 $\\mu$m), which are arranged into lamellae (3 to 7 $\\mu$m thick), which wrap concentrically around blood vessels to form osteons (200 $\\mu$m diameter)."],
+        ["p", "Each level of the hierarchy provides a toughening mechanism. At the nanoscale, mineral platelets transfer load by shear through a thin protein layer (sacrificial bonds that reform after breaking). At the microscale, crack deflection at cement lines between osteons forces cracks to follow tortuous paths. At the mesoscale, uncracked ligaments bridge behind the crack tip and osteon pull-out absorbs energy. The combination gives bone a fracture toughness 10 to 100 times higher than either constituent alone."],
+        ["callout", "Bone remodels", "Unlike engineering composites, bone is a living material that remodels in response to mechanical loading. Osteoclasts dissolve old bone; osteoblasts deposit new bone. Wolff's law states that bone adapts its structure to the loads it carries. An adult skeleton is completely remodelled every 7 to 10 years. This is why astronauts lose bone mass in microgravity and why load-bearing exercise prevents osteoporosis."],
+
+        ["h3", "Wood"],
+        ["p", "Wood is a fibre composite: cellulose microfibrils ($E \\approx 130$ GPa, $\\sigma^* \\approx 1000$ MPa) embedded in a matrix of hemicellulose and lignin ($E \\approx 2$ to $4$ GPa). The cellulose fraction is about 40 to 50 wt%. The fibres are hollow tubes (tracheids in softwoods, 2 to 4 mm long, 20 to 40 $\\mu$m diameter), and the tube walls have a multilayer structure where the microfibril orientation changes between layers."],
+        ["p", "The S2 layer of the cell wall (the thickest layer, about 80% of the wall) has microfibrils wound at a helix angle of 10° to 30° to the cell axis. This angle is the microfibril angle (MFA) and it controls the wood stiffness. Low MFA (10°) gives stiff wood: latewood in conifers has $E \\approx 30$ GPa along the grain. High MFA (40°) gives compliant, tough wood: juvenile wood has $E \\approx 5$ GPa but much higher strain to failure."],
+        ["p", "Typical mechanical properties of clear, straight-grained softwood (Sitka spruce, $\\rho = 0.38$ g/cm$^3$): $E = 11$ GPa along the grain, 0.5 GPa across the grain, tensile strength 90 MPa, compressive strength 36 MPa. The specific modulus ($E/\\rho = 29$ GPa/(g/cm$^3$)) is comparable to steel and aluminium. The specific stiffness along the grain made Sitka spruce the material of choice for early aircraft structures."],
+        ["p", "Balsa wood ($\\rho = 0.12$ g/cm$^3$) is used as core material in sandwich panels. Its compressive strength of 7 MPa at a density of 0.12 g/cm$^3$ gives a specific compressive strength that exceeds most polymer foams."],
+
+        ["h3", "Nacre"],
+        ["p", "Nacre (mother-of-pearl) is the iridescent inner layer of mollusc shells. It is 95 vol% aragonite (CaCO$_3$, a ceramic with $E = 80$ GPa, $K_{Ic} = 0.25$ MPa$\\sqrt{\\text{m}}$) and 5 vol% organic matrix (chitin and silk-like proteins). Despite being almost entirely ceramic, nacre has a fracture toughness of 3 to 9 MPa$\\sqrt{\\text{m}}$: 10 to 30 times tougher than the mineral alone."],
+        ["p", "The architecture is the reason. Aragonite is arranged as hexagonal tablets (5 to 15 $\\mu$m diameter, 0.3 to 0.5 $\\mu$m thick) stacked in a brick-and-mortar arrangement with thin organic interlayers (20 to 40 nm). When a crack tries to propagate, it cannot cut through the tablets. Instead it is deflected along the weak organic layers, forcing a tortuous crack path. The tablets slide over each other, with the organic layers providing viscoelastic resistance, mineral bridges providing additional anchoring, and surface roughness (nanoasperities) providing frictional dissipation."],
+        ["p", "The work of fracture (area under the stress-strain curve) of nacre is about 3000 times that of pure aragonite. This extraordinary amplification from 5% of soft material has inspired intense research into synthetic nacre. Freeze-casting of alumina suspensions can produce brick-and-mortar architectures with toughness values 3 to 5 times higher than monolithic alumina."],
+
+        ["h3", "Spider silk"],
+        ["p", "Major ampullate silk (dragline silk from orb-weaving spiders like <em>Nephila clavipes</em>) has a tensile strength of 1000 to 1400 MPa and a strain to failure of 25 to 30%. No engineering fibre combines this strength with this extensibility. The toughness (energy per unit volume to failure) is about 160 MJ/m$^3$, compared with 6 MJ/m$^3$ for Kevlar and 1 MJ/m$^3$ for high-carbon steel wire."],
+        ["p", "Spider silk is a semicrystalline protein. The crystalline regions are $\\beta$-sheet nanocrystals (2 to 5 nm, made from poly-alanine sequences) embedded in an amorphous matrix of glycine-rich chains. The $\\beta$-sheet crystals are stiff ($E \\approx 20$ GPa) and act as cross-links. The amorphous matrix is extensible and dissipates energy by unfolding hidden length (like a coiled spring being pulled straight). The initial modulus is about 10 GPa, dropping to 2 to 5 GPa after the yield point as the amorphous chains unfold."],
+        ["p", "The density of spider silk is 1.3 g/cm$^3$. Its specific strength (1100 MPa/(g/cm$^3$)) exceeds steel (127) and approaches high-performance carbon fibre (2780 for T700S). But its specific toughness exceeds everything by a large margin."],
+
+        ["h3", "Design principles from natural composites"],
+        ["p", "Several principles recur across biological composites:"],
+        ["ul", [
+          "<strong>Hierarchy</strong>: structural features at multiple length scales, each level contributing a mechanism. Bone has at least seven levels of hierarchy from collagen molecule to whole bone.",
+          "<strong>Brick-and-mortar architecture</strong>: hard platelets in a soft matrix. Crack deflection and platelet pull-out provide toughness far exceeding either constituent. Nacre, tooth enamel, and many fish scales use this.",
+          "<strong>Sacrificial bonds</strong>: weak bonds that break and reform, dissipating energy without catastrophic failure. The organic matrix in bone and nacre exploits this.",
+          "<strong>Functional grading</strong>: gradual transitions in composition and architecture that eliminate stress concentrations. The tendon-bone junction grades from soft, fibrous tendon to hard, mineralised bone over about 1 mm.",
+          "<strong>Self-healing</strong>: bone remodels, wood compartmentalises damage. Engineering self-healing composites use microcapsules or vascular networks filled with a healing agent (typically a monomer that polymerises on contact with a catalyst embedded in the matrix)."
+        ]],
+
+        ["h3", "Bio-inspired engineering composites"],
+        ["p", "Nacre-inspired alumina/PMMA composites made by freeze-casting achieve fracture toughness values of 25 to 30 MPa$\\sqrt{\\text{m}}$, compared with 3 to 4 MPa$\\sqrt{\\text{m}}$ for monolithic alumina. The brick-and-mortar architecture is produced by directional freezing of a ceramic slurry: ice crystals grow as lamellae, pushing ceramic particles into dense walls separated by thin channels that are later infiltrated with polymer."],
+        ["p", "Bouligand structures (helicoidal fibre arrangements, found in mantis shrimp clubs and arthropod cuticle) are being explored for impact-resistant composites. The gradual rotation of fibre orientation through the thickness causes cracks to twist as they propagate, increasing the fracture surface area and energy absorption. Carbon/epoxy laminates with helicoidal layups show 30 to 50% higher impact resistance than quasi-isotropic layups of the same weight."],
+
+        ["problem", "Nacre is 95 vol% aragonite ($E = 80$ GPa, $K_{Ic} = 0.25$ MPa$\\sqrt{\\text{m}}$) and 5 vol% organic matrix ($E = 4$ GPa). Calculate the Voigt and Reuss bounds on modulus. The measured modulus of nacre is about 60 to 70 GPa. Where does it fall between the bounds, and why?", [
+          ["p", "Voigt (upper) bound:"],
+          ["eq", "E_V = 0.95 \\times 80 + 0.05 \\times 4 = 76.0 + 0.2 = 76.2 \\text{ GPa}"],
+          ["p", "Reuss (lower) bound:"],
+          ["eq", "\\frac{1}{E_R} = \\frac{0.95}{80} + \\frac{0.05}{4} = 0.01188 + 0.01250 = 0.02438"],
+          ["eq", "E_R = 41.0 \\text{ GPa}"],
+          ["p", "The measured modulus (60 to 70 GPa) falls between the bounds but closer to the Voigt limit. This makes sense: in the nacre brick-and-mortar architecture, the hard aragonite tablets are roughly continuous in the loading plane (like a parallel arrangement), giving near-Voigt behaviour. The thin organic interlayers are too thin (20 to 40 nm) to contribute much compliance. The architecture is closer to iso-strain than iso-stress."]
+        ]]
+      ],
+      "related": [
+        { "title": "Types of Composites", "url": "types-of-composites" },
+        { "title": "Rule of Mixtures & Bounds", "url": "rule-of-mixtures-bounds" },
+        { "title": "Failure Mechanisms & Damage Tolerance", "url": "failure-mechanisms-damage-tolerance" },
+        { "title": "Ceramics & Glasses", "url": "../ceramics/" }
+      ]
     }
   ]
 }
