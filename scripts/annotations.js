@@ -200,7 +200,7 @@ function createPopup() {
   popup.innerHTML = `
     <div class="ann-popup-inner">
       <div class="ann-quote" id="annQuote"></div>
-      <textarea class="ann-textarea" id="annComment" placeholder="What should we know about this?"></textarea>
+      <textarea class="ann-textarea" id="annComment" placeholder="How can this be improved?"></textarea>
       <div class="ann-row">
         <input class="ann-input" id="annName" placeholder="Name (optional)">
         <input class="ann-input" id="annEmail" placeholder="Email (optional)">
