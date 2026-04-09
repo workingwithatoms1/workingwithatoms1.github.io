@@ -5,8 +5,6 @@
    ========================================================================== */
 
 import { createPageShell, fetchModule, loadKaTeX } from './page-shell.js';
-import { createHalftoneRenderer } from '../halftone.js';
-import { articleBgField } from '../fields.js';
 
 // Persistent references — survive across article swaps
 let innerEl;
@@ -96,16 +94,23 @@ function renderMathIn(root, skipHidden = true) {
   });
   root.querySelectorAll('.inline-eq').forEach(el => {
     if (skipHidden && el.closest('.derivation-body')) return;
-    window.katex.render(el.textContent, el, { displayMode: false, throwOnError: false });
+    let tex = el.textContent;
+    // Bare subscript/superscript (e.g. "$_2$" in "CaF$_2$") needs an empty base
+    if (tex.charAt(0) === '_' || tex.charAt(0) === '^') tex = '{}' + tex;
+    window.katex.render(tex, el, { displayMode: false, throwOnError: false });
   });
 }
 
 async function processMath() {
-  if (!katexLoaded) {
-    await loadKaTeX();
-    katexLoaded = true;
+  try {
+    if (!katexLoaded) {
+      await loadKaTeX();
+      katexLoaded = true;
+    }
+    renderMathIn(document, true);
+  } catch (e) {
+    console.error('processMath failed:', e);
   }
-  renderMathIn(document, true);
 }
 
 /**
@@ -178,7 +183,7 @@ function buildArticleContent(articleId) {
       <span class="article-topic">${mod.topic}</span>
       <span class="article-reading">${art.readingTime} read</span>
     </div>
-    <h2 class="article-title">${art.title}</h2>
+    <h2 class="article-title">${markInlineMath(art.title)}</h2>
   `;
 
   if (hasContent) {
@@ -234,7 +239,7 @@ function buildArticleContent(articleId) {
       html += `
         <a href="../${prev.id}/" class="article-nav-prev">
           <span class="article-nav-label">Previous</span>
-          <span class="article-nav-title">${prev.title}</span>
+          <span class="article-nav-title">${markInlineMath(prev.title)}</span>
         </a>
       `;
     }
@@ -242,7 +247,7 @@ function buildArticleContent(articleId) {
       html += `
         <a href="../${next.id}/" class="article-nav-next">
           <span class="article-nav-label">Next</span>
-          <span class="article-nav-title">${next.title}</span>
+          <span class="article-nav-title">${markInlineMath(next.title)}</span>
         </a>
       `;
     }
@@ -307,11 +312,6 @@ export async function renderArticlePage(moduleId, articleId, rootPath = '../') {
   const section = document.createElement('section');
   section.className = 'article-section';
 
-  const canvas = document.createElement('canvas');
-  canvas.className = 'article-bg-canvas';
-  canvas.id = 'articleBgCanvas';
-  section.appendChild(canvas);
-
   innerEl = document.createElement('div');
   innerEl.className = 'article-inner';
   section.appendChild(innerEl);
@@ -325,13 +325,6 @@ export async function renderArticlePage(moduleId, articleId, rootPath = '../') {
 
   // Enable client-side navigation
   setupNavigation(moduleId);
-
-  // Initialise halftone background (once)
-  createHalftoneRenderer(canvas, {
-    spacing: 12,
-    maxRadius: 3,
-    field: articleBgField
-  });
 
   // Initialise highlight-to-comment annotations
   import('../annotations.js').then(m => m.initAnnotations());

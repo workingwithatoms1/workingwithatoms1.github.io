@@ -217,43 +217,46 @@ const modules = [
 
 // ── HTML shell templates ─────────────────────────────────────────────────
 
-const sectionShell = (slug) => `<!DOCTYPE html>
+const pageShell = (rootPath, initScript) => `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../styles/tokens.css">
-  <link rel="stylesheet" href="../styles/typography.css">
-  <link rel="stylesheet" href="../styles/layout.css">
-  <link rel="stylesheet" href="../styles/components.css">
+  <link rel="stylesheet" href="${rootPath}styles/tokens.css">
+  <link rel="stylesheet" href="${rootPath}styles/typography.css">
+  <link rel="stylesheet" href="${rootPath}styles/layout.css">
+  <link rel="stylesheet" href="${rootPath}styles/components.css">
 </head>
 <body>
-  <script type="module">
-    import { renderSectionPage } from '../scripts/renderers/section-page.js';
-    renderSectionPage('${slug}');
-  </script>
+  <canvas id="siteBgCanvas"></canvas>
+  <nav>
+    <canvas class="nav-bg" id="navCanvas"></canvas>
+    <a href="${rootPath}index.html" class="logo">Working with atoms.</a>
+    <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    <ul class="nav-links">
+      <li><a href="${rootPath}index.html#curriculum">Learn</a></li>
+      <li><a href="#">Phase Diagrams</a></li>
+    </ul>
+  </nav>
+  <main></main>
+  <footer>
+    <div class="footer-logo">Working with atoms.</div>
+    <div><a href="${rootPath}about/" style="color:inherit;text-decoration:none;">About</a></div>
+  </footer>
+  <script type="module">${initScript}</script>
 </body>
 </html>
 `;
 
-const articleShell = (moduleSlug, articleSlug) => `<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../../styles/tokens.css">
-  <link rel="stylesheet" href="../../styles/typography.css">
-  <link rel="stylesheet" href="../../styles/layout.css">
-  <link rel="stylesheet" href="../../styles/components.css">
-</head>
-<body>
-  <script type="module">
+const sectionShell = (slug) => pageShell('../', `
+    import { renderSectionPage } from '../scripts/renderers/section-page.js';
+    renderSectionPage('${slug}');
+  `);
+
+const articleShell = (moduleSlug, articleSlug) => pageShell('../../', `
     import { renderArticlePage } from '../../scripts/renderers/article-page.js';
     renderArticlePage('${moduleSlug}', '${articleSlug}', '../../');
-  </script>
-</body>
-</html>
-`;
+  `);
 
 // ── Generate ─────────────────────────────────────────────────────────────
 

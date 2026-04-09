@@ -5,7 +5,6 @@
 import { createHalftoneRenderer } from './halftone.js';
 import {
   heroField,
-  articleBgField,
   // Part I — Foundations
   fieldIntro,
   fieldOrbital,
@@ -49,7 +48,8 @@ if (heroCanvas) {
   createHalftoneRenderer(heroCanvas, {
     spacing: 10,
     maxRadius: 5,
-    field: heroField
+    field: heroField,
+    static: true
   });
 }
 
@@ -95,13 +95,3 @@ for (const cfg of cardConfigs) {
   });
 }
 
-/* --- Article background ------------------------------------------------- */
-
-const articleCanvas = document.getElementById('articleBgCanvas');
-if (articleCanvas) {
-  createHalftoneRenderer(articleCanvas, {
-    spacing: 12,
-    maxRadius: 3,
-    field: articleBgField
-  });
-}

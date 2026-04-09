@@ -39,14 +39,14 @@ export function initNav() {
     canvas.style.height = h + 'px';
     ctx.scale(dpr, dpr);
 
-    // Speckle
+    // Speckle — only nav height, not full virtual height
     speckle = document.createElement('canvas');
     speckle.width = w;
-    speckle.height = fullH;
+    speckle.height = h;
     const sCtx = speckle.getContext('2d');
     sCtx.fillStyle = '#2a2f7c';
-    sCtx.fillRect(0, 0, w, fullH);
-    const sd = sCtx.getImageData(0, 0, w, fullH);
+    sCtx.fillRect(0, 0, w, h);
+    const sd = sCtx.getImageData(0, 0, w, h);
     const sd_data = sd.data;
     for (let i = 0; i < sd_data.length; i += 4) {
       const px = (i / 4) % w;
@@ -62,7 +62,7 @@ export function initNav() {
     }
     sCtx.putImageData(sd, 0, 0);
 
-    // Grain
+    // Grain — only nav height
     grain = document.createElement('canvas');
     grain.width = w;
     grain.height = h;
@@ -80,10 +80,10 @@ export function initNav() {
     }
     gCtx.putImageData(gd, 0, 0);
 
-    // Dot grid (covers full virtual height so ribbon is complete)
+    // Dot grid — only nav height
     dots = [];
     for (let x = 0; x < w + DOT_SPACING; x += DOT_SPACING) {
-      for (let y = 0; y < fullH + DOT_SPACING; y += DOT_SPACING) {
+      for (let y = 0; y < h + DOT_SPACING; y += DOT_SPACING) {
         dots.push({ x, y });
       }
     }
@@ -92,23 +92,19 @@ export function initNav() {
   }
 
   function draw() {
-    navTime += 0.0016;
+    ctx.drawImage(speckle, 0, 0);
 
-    // Speckle base (clip to nav height)
-    ctx.drawImage(speckle, 0, 0, w, h, 0, 0, w, h);
-
-    // Halftone dots with text avoidance zones
+    // Halftone dots with text avoidance zones — single batched path
     ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+    const TWO_PI = Math.PI * 2;
 
     const logoZone  = { x: 200,      y: h * 0.5, rx: 220,     ry: h * 0.7 };
     const linksZone = { x: w * 0.75, y: h * 0.5, rx: w * 0.3, ry: h * 0.7 };
 
+    ctx.beginPath();
     for (const dot of dots) {
-      if (dot.y > h + 10) continue;
-
       let val = navField(dot.x, dot.y, w, fullH, navTime);
 
-      // Elliptical exclusion with quadratic falloff
       const logoDist  = Math.sqrt(
         Math.pow((dot.x - logoZone.x)  / logoZone.rx,  2) +
         Math.pow((dot.y - logoZone.y)  / logoZone.ry,  2)
@@ -121,11 +117,11 @@ export function initNav() {
 
       if (val > 0.05) {
         const r = val * DOT_RADIUS;
-        ctx.beginPath();
-        ctx.arc(dot.x, dot.y, r, 0, Math.PI * 2);
-        ctx.fill();
+        ctx.moveTo(dot.x + r, dot.y);
+        ctx.arc(dot.x, dot.y, r, 0, TWO_PI);
       }
     }
+    ctx.fill();
 
     // Grain + scan lines
     ctx.globalCompositeOperation = 'luminosity';
@@ -135,8 +131,6 @@ export function initNav() {
     for (let sy = 0; sy < h; sy += 3) {
       ctx.fillRect(0, sy, w, 1);
     }
-
-    requestAnimationFrame(draw);
   }
 
   // Scroll toggle — on homepage, fade in after hero; on other pages, always show

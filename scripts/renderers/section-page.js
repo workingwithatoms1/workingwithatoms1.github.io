@@ -2,9 +2,11 @@
    Section page renderer — builds a module landing page from JSON
    ========================================================================== */
 
-import { createPageShell, fetchModule } from './page-shell.js';
-import { createHalftoneRenderer } from '../halftone.js';
-import { articleBgField } from '../fields.js';
+import { createPageShell, fetchModule, loadKaTeX } from './page-shell.js';
+
+function markInlineMath(text) {
+  return text.replace(/\$([^$]+?)\$/g, '<span class="inline-eq">$1</span>');
+}
 
 /**
  * Render a module section (landing) page.
@@ -24,11 +26,6 @@ export async function renderSectionPage(moduleId, rootPath = '../') {
   // Build section
   const section = document.createElement('section');
   section.className = 'article-section';
-
-  const canvas = document.createElement('canvas');
-  canvas.className = 'article-bg-canvas';
-  canvas.id = 'articleBgCanvas';
-  section.appendChild(canvas);
 
   const inner = document.createElement('div');
   inner.className = 'article-inner';
@@ -65,7 +62,7 @@ export async function renderSectionPage(moduleId, rootPath = '../') {
     row.innerHTML = `
       <span class="section-row-number">${art.number}</span>
       <div class="section-row-body">
-        <span class="section-row-title">${art.title}</span>
+        <span class="section-row-title">${markInlineMath(art.title)}</span>
         <span class="section-row-desc">${art.description}</span>
       </div>
       <span class="section-row-time">${hasContent ? art.readingTime : 'Coming soon'}</span>
@@ -77,10 +74,15 @@ export async function renderSectionPage(moduleId, rootPath = '../') {
   section.appendChild(inner);
   main.appendChild(section);
 
-  // Initialise halftone background
-  createHalftoneRenderer(canvas, {
-    spacing: 12,
-    maxRadius: 3,
-    field: articleBgField
-  });
+  // Render any inline math in titles
+  const hasInlineEq = section.querySelector('.inline-eq');
+  if (hasInlineEq) {
+    loadKaTeX().then(() => {
+      section.querySelectorAll('.inline-eq').forEach(el => {
+        let tex = el.textContent;
+        if (tex.charAt(0) === '_' || tex.charAt(0) === '^') tex = '{}' + tex;
+        window.katex.render(tex, el, { displayMode: false, throwOnError: false });
+      });
+    });
+  }
 }

@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Halftone renderer — canvas factory for animated dot compositions
+   Halftone renderer — canvas factory for static dot compositions
    ========================================================================== */
 
 import { hashNoise } from './noise.js';
@@ -46,41 +46,6 @@ function renderSpeckle(width, height) {
 }
 
 /**
- * Pre-render a static film grain texture (luminosity composite).
- */
-function renderGrain(width, height, seedX = 77, seedY = 33) {
-  const canvas = document.createElement('canvas');
-  canvas.width = width;
-  canvas.height = height;
-  const ctx = canvas.getContext('2d');
-  const imageData = ctx.createImageData(width, height);
-  const data = imageData.data;
-
-  for (let i = 0; i < data.length; i += 4) {
-    const px = (i / 4) % width;
-    const py = Math.floor((i / 4) / width);
-    const v = hashNoise(px + seedX, py + seedY) * 60;
-    data[i]     = v;
-    data[i + 1] = v;
-    data[i + 2] = v;
-    data[i + 3] = GRAIN_ALPHA;
-  }
-
-  ctx.putImageData(imageData, 0, 0);
-  return canvas;
-}
-
-/**
- * Draw faint horizontal scan lines.
- */
-function drawScanLines(ctx, width, height) {
-  ctx.fillStyle = 'rgba(0, 0, 30, 0.02)';
-  for (let y = 0; y < height; y += SCAN_LINE_GAP) {
-    ctx.fillRect(0, y, width, 1);
-  }
-}
-
-/**
  * Build a dot grid for a given area and spacing.
  */
 function buildDotGrid(width, height, spacing) {
@@ -94,22 +59,53 @@ function buildDotGrid(width, height, spacing) {
 }
 
 /**
- * Create an animated halftone renderer bound to a canvas element.
+ * Pre-render a combined overlay (grain + scan lines) for fast per-frame compositing.
+ */
+function renderOverlay(width, height, seedX = 77, seedY = 33) {
+  const canvas = document.createElement('canvas');
+  canvas.width = width;
+  canvas.height = height;
+  const ctx = canvas.getContext('2d');
+
+  // Grain
+  const imageData = ctx.createImageData(width, height);
+  const data = imageData.data;
+  for (let i = 0; i < data.length; i += 4) {
+    const px = (i / 4) % width;
+    const py = Math.floor((i / 4) / width);
+    const v = hashNoise(px + seedX, py + seedY) * 60;
+    data[i]     = v;
+    data[i + 1] = v;
+    data[i + 2] = v;
+    data[i + 3] = GRAIN_ALPHA;
+  }
+  ctx.putImageData(imageData, 0, 0);
+
+  // Scan lines baked in
+  ctx.fillStyle = 'rgba(0, 0, 30, 0.02)';
+  for (let y = 0; y < height; y += SCAN_LINE_GAP) {
+    ctx.fillRect(0, y, width, 1);
+  }
+
+  return canvas;
+}
+
+/**
+ * Create a static halftone renderer bound to a canvas element.
+ * Renders once on init and re-renders on window resize.
  *
  * @param {HTMLCanvasElement} canvas  — target canvas
  * @param {Object} config
  * @param {number}   config.spacing   — dot grid spacing (px)
  * @param {number}   config.maxRadius — maximum dot radius (px)
  * @param {Function} config.field     — (x, y, w, h, time) => 0..1
- * @param {boolean}  [config.static]  — render once and stop (no animation loop)
  * @returns {{ destroy: Function }} — call destroy() to stop and clean up
  */
 export function createHalftoneRenderer(canvas, config) {
   const ctx = canvas.getContext('2d');
-  let w, h, dots, speckle, grain, animId;
-  let time = 0;
+  let w, h, dots, speckle, overlay;
 
-  function resize() {
+  function render() {
     const rect = canvas.parentElement.getBoundingClientRect();
     const dpr = Math.min(window.devicePixelRatio, MAX_DPR);
 
@@ -123,59 +119,42 @@ export function createHalftoneRenderer(canvas, config) {
     ctx.scale(dpr, dpr);
 
     speckle = renderSpeckle(w, h);
-    grain   = renderGrain(w, h);
+    overlay = renderOverlay(w, h);
     dots    = buildDotGrid(w, h, config.spacing || 12);
-  }
-
-  function draw() {
-    if (!config.static) time += 0.0016;
 
     // Layer 1: speckle base
     ctx.drawImage(speckle, 0, 0, w, h);
 
-    // Layer 2: halftone dots
+    // Layer 2: halftone dots — single batched path
     ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
     const maxR = config.maxRadius || 4;
+    const TWO_PI = Math.PI * 2;
 
-    for (const dot of dots) {
-      const val = config.field(dot.x, dot.y, w, h, time);
+    ctx.beginPath();
+    for (let i = 0, len = dots.length; i < len; i++) {
+      const dot = dots[i];
+      const val = config.field(dot.x, dot.y, w, h, 0);
       if (val > 0.05) {
-        const r = config.static
-          ? val * maxR
-          : val * maxR * (1 + Math.sin(time * 0.4 + dot.x * 0.005 + dot.y * 0.007) * 0.08);
-        ctx.beginPath();
-        ctx.arc(dot.x, dot.y, r, 0, Math.PI * 2);
-        ctx.fill();
+        const r = val * maxR;
+        ctx.moveTo(dot.x + r, dot.y);
+        ctx.arc(dot.x, dot.y, r, 0, TWO_PI);
       }
     }
+    ctx.fill();
 
-    // Layer 3: film grain (luminosity)
+    // Layer 3: grain + scan lines (pre-composited overlay)
     ctx.globalCompositeOperation = 'luminosity';
-    ctx.drawImage(grain, 0, 0);
+    ctx.drawImage(overlay, 0, 0);
     ctx.globalCompositeOperation = 'source-over';
-
-    // Layer 4: scan lines
-    drawScanLines(ctx, w, h);
-
-    if (!config.static) animId = requestAnimationFrame(draw);
-  }
-
-  function onResize() {
-    cancelAnimationFrame(animId);
-    resize();
-    draw();
   }
 
   // Initialise
-  resize();
-  draw();
-  window.addEventListener('resize', onResize);
+  render();
+  window.addEventListener('resize', render);
 
-  // Public API
   return {
     destroy() {
-      cancelAnimationFrame(animId);
-      window.removeEventListener('resize', onResize);
+      window.removeEventListener('resize', render);
     }
   };
 }

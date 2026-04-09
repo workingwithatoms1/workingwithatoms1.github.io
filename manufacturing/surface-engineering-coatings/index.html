@@ -9,6 +9,21 @@
   <link rel="stylesheet" href="../../styles/components.css">
 </head>
 <body>
+  <canvas id="siteBgCanvas"></canvas>
+  <nav>
+    <canvas class="nav-bg" id="navCanvas"></canvas>
+    <a href="../../index.html" class="logo">Working with atoms.</a>
+    <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    <ul class="nav-links">
+      <li><a href="../../index.html#curriculum">Learn</a></li>
+      <li><a href="#">Phase Diagrams</a></li>
+    </ul>
+  </nav>
+  <main></main>
+  <footer>
+    <div class="footer-logo">Working with atoms.</div>
+    <div><a href="../../about/" style="color:inherit;text-decoration:none;">About</a></div>
+  </footer>
   <script type="module">
     import { renderArticlePage } from '../../scripts/renderers/article-page.js';
     renderArticlePage('manufacturing', 'surface-engineering-coatings', '../../');

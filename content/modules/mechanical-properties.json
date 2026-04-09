@@ -284,7 +284,7 @@
     {
       "id": "fracture-mechanics-griffith-k-ic",
       "number": "8.5",
-      "title": "Fracture Mechanics (Griffith, K_IC)",
+      "title": "Fracture Mechanics (Griffith, $K_{IC}$)",
       "description": "When and why materials break: the energy balance of crack propagation and the stress intensity approach.",
       "readingTime": "15 min",
       "intro": "Materials do not fail because the average stress reaches some critical value. They fail because a crack, often invisible, concentrates stress to the point where atomic bonds break. Fracture mechanics quantifies this process and provides the tools to design against catastrophic failure.",
