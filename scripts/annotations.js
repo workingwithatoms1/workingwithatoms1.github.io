@@ -392,7 +392,17 @@ function initAnnotations() {
 
     // Show and position popup
     popupEl.style.display = 'block';
-    positionElement(popupEl, currentRect, true);
+    if ('ontouchstart' in window) {
+      // Centre on screen as a fixed overlay on mobile
+      popupEl.style.position = 'fixed';
+      popupEl.style.left = '50%';
+      popupEl.style.top = '50%';
+      popupEl.style.transform = 'translate(-50%, -50%)';
+    } else {
+      popupEl.style.position = 'absolute';
+      popupEl.style.transform = '';
+      positionElement(popupEl, currentRect, true);
+    }
 
     hideButton();
     commentInput.focus();
