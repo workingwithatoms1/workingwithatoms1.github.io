@@ -231,10 +231,10 @@ const pageShell = (rootPath, initScript) => `<!DOCTYPE html>
   <canvas id="siteBgCanvas"></canvas>
   <nav>
     <canvas class="nav-bg" id="navCanvas"></canvas>
-    <a href="${rootPath}index.html" class="logo">Working with atoms.</a>
+    <a href="${rootPath}" class="logo">Working with atoms.</a>
     <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
     <ul class="nav-links">
-      <li><a href="${rootPath}index.html#curriculum">Learn</a></li>
+      <li><a href="${rootPath}#curriculum">Learn</a></li>
       <li><a href="#">Phase Diagrams</a></li>
     </ul>
   </nav>
