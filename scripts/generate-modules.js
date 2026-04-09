@@ -222,6 +222,8 @@ const pageShell = (rootPath, initScript) => `<!DOCTYPE html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="${rootPath}favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="${rootPath}favicon-32.png" sizes="32x32" type="image/png">
   <link rel="stylesheet" href="${rootPath}styles/tokens.css">
   <link rel="stylesheet" href="${rootPath}styles/typography.css">
   <link rel="stylesheet" href="${rootPath}styles/layout.css">
