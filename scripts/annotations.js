@@ -112,6 +112,9 @@ function injectStyles() {
       gap: 8px;
       margin-bottom: 8px;
     }
+    @media (max-width: 480px) {
+      .ann-row { flex-direction: column; }
+    }
 
     .ann-input {
       flex: 1;
@@ -332,7 +335,7 @@ function initAnnotations() {
   });
 
   // Selection handler
-  function onSelectionChange(e) {
+  function onSelectionChange() {
     // Ignore if popup is open
     if (popupEl.style.display !== 'none') return;
 
@@ -361,9 +364,14 @@ function initAnnotations() {
     buttonEl.style.top = (currentRect.top + scrollY - 40) + 'px';
   }
 
-  document.addEventListener('mouseup', (e) => {
-    // Small delay to let selection settle
-    setTimeout(() => onSelectionChange(e), 10);
+  // Desktop: mouseup
+  document.addEventListener('mouseup', () => {
+    setTimeout(onSelectionChange, 10);
+  });
+
+  // Mobile: selectionchange fires as the user drags selection handles
+  document.addEventListener('selectionchange', () => {
+    setTimeout(onSelectionChange, 10);
   });
 
   // Button click → open popup
