@@ -396,8 +396,8 @@ function initAnnotations() {
       // Centre on screen as a fixed overlay on mobile
       popupEl.style.position = 'fixed';
       popupEl.style.left = '50%';
-      popupEl.style.top = '50%';
-      popupEl.style.transform = 'translate(-50%, -50%)';
+      popupEl.style.top = '20%';
+      popupEl.style.transform = 'translateX(-50%)';
     } else {
       popupEl.style.position = 'absolute';
       popupEl.style.transform = '';
