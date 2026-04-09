@@ -1,0 +1,158 @@
+/* ==========================================================================
+   Phase diagram page — periodic table + diagram renderer
+   ========================================================================== */
+
+/* --- Periodic table grid ------------------------------------------------ */
+
+.pd-periodic-table {
+  margin: 24px 0;
+}
+
+.pt-grid {
+  display: grid;
+  grid-template-columns: repeat(18, 1fr);
+  gap: 2px;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.pt-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1;
+  border: 1px solid #e0dfe6;
+  background: #f6f5fa;
+  color: #1a1d3a;
+  cursor: pointer;
+  padding: 2px;
+  font-family: 'DM Sans', sans-serif;
+  transition: background 0.15s, border-color 0.15s, opacity 0.15s;
+}
+
+.pt-cell:hover {
+  background: #eae8f2;
+  border-color: #c8c6d0;
+}
+
+.pt-num {
+  font-size: 7px;
+  opacity: 0.4;
+  line-height: 1;
+}
+
+.pt-sym {
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.pt-cell.pt-selected {
+  background: #2a2f7c;
+  border-color: #2a2f7c;
+  color: #fff;
+}
+
+.pt-cell.pt-available {
+  background: rgba(42, 47, 124, 0.1);
+  border-color: rgba(42, 47, 124, 0.35);
+  color: #2a2f7c;
+}
+
+.pt-cell.pt-available:hover {
+  background: rgba(42, 47, 124, 0.18);
+  border-color: #2a2f7c;
+}
+
+.pt-cell.pt-unavailable {
+  opacity: 0.25;
+  cursor: default;
+}
+
+.pt-cell.pt-unavailable:hover {
+  background: #f6f5fa;
+  border-color: #e0dfe6;
+}
+
+.pt-sep {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  opacity: 0.3;
+  color: #1a1d3a;
+}
+
+/* --- Phase diagram renderer --------------------------------------------- */
+
+.pd-diagram-container {
+  margin: 24px 0;
+}
+
+.pd-header {
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.pd-title {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #1a1d3a;
+  margin: 0;
+}
+
+.pd-ref {
+  font-size: 11px;
+  color: #999;
+  margin: 4px 0 0;
+}
+
+.pd-canvas {
+  border-radius: 4px;
+}
+
+.pd-info {
+  min-height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  color: #888;
+  border-top: 1px solid #eee;
+  margin-top: 6px;
+  padding-top: 8px;
+}
+
+.pd-info b {
+  color: #1a1d3a;
+}
+
+.pd-hint {
+  opacity: 0.4;
+}
+
+.pd-snap-label {
+  font-weight: 600;
+  font-size: 11px;
+}
+
+.pd-loading {
+  text-align: center;
+  color: #888;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  padding: 40px 0;
+}
+
+/* --- Responsive --------------------------------------------------------- */
+
+@media (max-width: 600px) {
+  .pt-sym { font-size: 9px; }
+  .pt-num { font-size: 6px; }
+  .pt-grid { gap: 1px; }
+}

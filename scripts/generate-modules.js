@@ -237,7 +237,7 @@ const pageShell = (rootPath, initScript) => `<!DOCTYPE html>
     <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
     <ul class="nav-links">
       <li><a href="${rootPath}#curriculum">Learn</a></li>
-      <li><a href="#">Phase Diagrams</a></li>
+      <li><a href="${rootPath}phase-diagrams/">Phase Diagrams</a></li>
     </ul>
   </nav>
   <main></main>
