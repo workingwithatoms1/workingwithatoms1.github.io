@@ -211,17 +211,16 @@ export function createPhaseDiagram(container, data) {
       drawSmoothCurve(ctx, c.pts, xS, yS, c.closed);
     }
 
-    // Isotherms (dashed tie lines at invariant temperatures)
+    // Isotherms (solid tie lines between invariant points)
     ctx.strokeStyle = CURVE_COLOR;
-    ctx.lineWidth = 1.2;
-    ctx.setLineDash([6, 4]);
+    ctx.lineWidth = CURVE_WIDTH;
+    ctx.lineCap = 'round';
     for (const iso of data.isotherms) {
       ctx.beginPath();
       ctx.moveTo(xS(iso.x_start), yS(iso.T));
       ctx.lineTo(xS(iso.x_end), yS(iso.T));
       ctx.stroke();
     }
-    ctx.setLineDash([]);
 
     // Special point markers
     for (const sp of data.special_points) {
