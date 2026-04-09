@@ -356,12 +356,15 @@ function initAnnotations() {
     currentSelection = sel.toString().trim();
     currentRect = sel.getRangeAt(0).getBoundingClientRect();
 
-    // Position and show button above selection
+    // Position and show button — below on touch devices, above on desktop
     buttonEl.style.display = 'flex';
     const scrollX = window.scrollX;
     const scrollY = window.scrollY;
+    const isTouchDevice = 'ontouchstart' in window;
     buttonEl.style.left = (currentRect.left + scrollX + currentRect.width / 2 - 16) + 'px';
-    buttonEl.style.top = (currentRect.top + scrollY - 40) + 'px';
+    buttonEl.style.top = isTouchDevice
+      ? (currentRect.bottom + scrollY + 8) + 'px'
+      : (currentRect.top + scrollY - 40) + 'px';
   }
 
   // Desktop: mouseup
