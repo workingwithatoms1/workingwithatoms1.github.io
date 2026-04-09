@@ -3,8 +3,8 @@
     "id": "quantum-mechanics",
     "number": 18,
     "title": "Quantum Mechanics for Materials",
-    "part": "S",
-    "partTitle": "Supporting Modules",
+    "part": "II",
+    "partTitle": "Properties & Behaviour",
     "topic": "Quantum Mechanics",
     "intro": "The quantum mechanics that underpins materials science. From wave-particle duality through the Schrodinger equation to the formation of energy bands, this module builds the physical foundations used in electronic properties, bonding, and spectroscopy."
   },

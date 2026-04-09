@@ -120,6 +120,15 @@ const modules = [
       'Corrosion Prevention & Protection',
       'Batteries, Fuel Cells & Electrolysers',
     ]},
+  { number: 18, title: 'Quantum Mechanics for Materials', slug: 'quantum-mechanics', part: 'II', partTitle: 'Properties & Behaviour', topic: 'Quantum Mechanics',
+    articles: [
+      'Wave-Particle Duality',
+      'The Schrodinger Equation',
+      'Quantum Numbers & Orbitals',
+      'Pauli Exclusion & Electron Filling',
+      'Perturbation Theory & Approximations',
+      'From Atoms to Bonds to Bands',
+    ]},
 
   // Part III — Material Classes
   { number: 11, title: 'Metals & Alloys', slug: 'metals', part: 'III', partTitle: 'Material Classes', topic: 'Metals',
@@ -195,15 +204,6 @@ const modules = [
     ]},
 
   // Supporting Modules
-  { number: 18, title: 'Quantum Mechanics for Materials', slug: 'quantum-mechanics', part: 'S', partTitle: 'Supporting Modules', topic: 'Quantum Mechanics',
-    articles: [
-      'Wave-Particle Duality',
-      'The Schrodinger Equation',
-      'Quantum Numbers & Orbitals',
-      'Pauli Exclusion & Electron Filling',
-      'Perturbation Theory & Approximations',
-      'From Atoms to Bonds to Bands',
-    ]},
   { number: 19, title: 'Mathematical Methods', slug: 'mathematical-methods', part: 'S', partTitle: 'Supporting Modules', topic: 'Mathematical Methods',
     articles: [
       'Vectors, Tensors & Matrix Algebra',
