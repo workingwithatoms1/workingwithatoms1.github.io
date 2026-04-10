@@ -421,8 +421,10 @@ export function createPhaseDiagram(container, data, flipped = false) {
     }
     Tmin = Math.floor(Tmin / 50) * 50;
     Tmax = Math.ceil(Tmax / 50) * 50 + 25;
-    Xmin = toDisplay(activeData.xMin || 0);
-    Xmax = toDisplay(activeData.xMax || 1);
+    const xA = toDisplay(activeData.xMin || 0);
+    const xB = toDisplay(activeData.xMax || 1);
+    Xmin = Math.min(xA, xB);
+    Xmax = Math.max(xA, xB);
     pairPhases = buildPairPhases();
   }
   recalcRanges();
