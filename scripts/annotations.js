@@ -324,6 +324,17 @@ function initAnnotations() {
     popupEl.querySelector('#annEmail').value = '';
     hidePopup();
     hideButton();
+
+    // Refresh sidenotes after a delay to let the backend process
+    setTimeout(() => {
+      import('./sidenotes.js').then(m => {
+        const body = document.querySelector('.article-body');
+        if (body) {
+          const slug = window.location.pathname.split('/').filter(Boolean).join('/');
+          m.renderSidenotes(slug, body);
+        }
+      });
+    }, 3000);
   });
 
   // Selection handler
