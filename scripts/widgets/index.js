@@ -18,6 +18,7 @@ const registry = {
   'ellingham-chart':     () => import('./ellingham-chart.js'),
   'pourbaix-diagram':    () => import('./pourbaix-diagram.js'),
   'lever-rule':          () => import('./lever-rule.js'),
+  'edge-dislocation':    () => import('./edge-dislocation.js'),
 };
 
 /**
