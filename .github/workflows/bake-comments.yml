@@ -1,0 +1,31 @@
+name: Bake comments
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'  # Every 6 hours
+  workflow_dispatch: # Manual trigger
+
+jobs:
+  bake:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Bake comments into module JSONs
+        run: node scripts/bake-comments.js
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add content/modules/*.json
+          if git diff --staged --quiet; then
+            echo "No comment changes to commit"
+          else
+            git commit -m "Bake community comments into module JSONs"
+            git push
+          fi

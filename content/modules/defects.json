@@ -17,60 +17,190 @@
       "readingTime": "14 min",
       "intro": "A vacancy is simply a missing atom. An interstitial is an extra atom wedged between lattice sites. A substitutional defect is the wrong atom sitting on the right site. These three point defects are the simplest imperfections in a crystal, and they are thermodynamically inevitable.",
       "body": [
-        ["h3", "Why perfect crystals do not exist"],
-        ["p", "Consider a perfect crystal at absolute zero: every atom on its lattice site, no disorder, no entropy. Now raise the temperature. Removing one atom from a site in the interior and placing it on the surface costs energy, the vacancy formation energy $E_v$. But it also increases the configurational entropy of the crystal, because there are many ways to choose which site is empty. At any temperature above 0 K, the free energy minimum corresponds to a finite concentration of vacancies."],
-        ["p", "This is not a defect that slipped through quality control. It is a thermodynamic requirement. The equilibrium vacancy concentration follows from minimising the Gibbs free energy with respect to the number of vacancies."],
-        ["derivation", "The equilibrium vacancy fraction is $n_v/N = \\exp(-E_v / k_B T)$.", [
-          ["p", "Take a crystal of $N$ atoms. Remove $n_v$ atoms from interior sites to create vacancies, placing each on the surface. The energy cost is $n_v E_v$. The number of ways to arrange $n_v$ vacancies on $N + n_v \\approx N$ sites is:"],
-          ["eq", "W = \\binom{N}{n_v} = \\frac{N!}{n_v!(N - n_v)!}"],
-          ["p", "The configurational entropy is $S = k_B \\ln W$. Using Stirling's approximation ($\\ln n! \\approx n \\ln n - n$) and minimising $G = n_v E_v - TS$ with respect to $n_v$:"],
-          ["eq", "\\frac{\\partial G}{\\partial n_v} = E_v - k_B T \\ln\\frac{N - n_v}{n_v} = 0"],
-          ["p", "Since $n_v \\ll N$, this gives:"],
-          ["eq", "\\frac{n_v}{N} = \\exp\\left(-\\frac{E_v}{k_B T}\\right)"]
-        ]],
-
-        ["h3", "Vacancy concentrations in real metals"],
-        ["p", "The vacancy formation energy $E_v$ varies from metal to metal. For aluminium, $E_v = 0.68$ eV. For copper, $E_v = 1.27$ eV. For tungsten, $E_v = 3.1$ eV. These values are measured by quenching experiments and positron annihilation spectroscopy."],
-        ["p", "Plug in numbers. For copper at room temperature (300 K), $k_B T = 0.026$ eV:"],
-        ["eq", "\\frac{n_v}{N} = \\exp\\left(-\\frac{1.27}{0.026}\\right) = \\exp(-48.8) \\approx 5 \\times 10^{-22}"],
-        ["p", "That is essentially zero. Now try copper near its melting point (1358 K), where $k_B T = 0.117$ eV:"],
-        ["eq", "\\frac{n_v}{N} = \\exp\\left(-\\frac{1.27}{0.117}\\right) = \\exp(-10.9) \\approx 2 \\times 10^{-5}"],
-        ["p", "About one in 50,000 sites is vacant. In a cubic centimetre of copper containing $8.5 \\times 10^{22}$ atoms, that is roughly $10^{18}$ vacancies. This is enough to dominate the self-diffusion rate."],
-        ["callout", "Quenched-in vacancies", "If you heat a metal to near its melting point and then quench it rapidly in water, the vacancies do not have time to migrate to sinks and annihilate. The high-temperature vacancy concentration is frozen in. This is why quenched metals have higher electrical resistivity than slowly cooled ones: each vacancy scatters conduction electrons. Measuring the excess resistivity after quenching was one of the first methods used to determine $E_v$."],
-
-        ["h3", "Interstitial defects"],
-        ["p", "An interstitial defect is an extra atom occupying a space between lattice sites. There are two kinds. A self-interstitial is an atom of the same species as the host lattice, forced into an interstice. This costs a large amount of energy (roughly 2 to 4 eV in most metals) because the surrounding atoms must be pushed apart. Self-interstitial concentrations at thermal equilibrium are therefore negligible."],
-        ["p", "Foreign interstitials are far more common and far more important. Small atoms (carbon, nitrogen, boron, hydrogen) fit into the interstices of metallic lattices with much lower energy penalties. In BCC iron, carbon atoms sit in octahedral interstitial sites. The maximum solubility of carbon in BCC iron (ferrite) is only 0.022 wt% at 727°C, because the octahedral site in BCC is small and asymmetric: the carbon atom distorts the lattice tetragonally. In FCC iron (austenite), the octahedral holes are larger and more symmetric, allowing up to 2.14 wt% carbon at 1147°C."],
-        ["p", "This difference in interstitial solubility between FCC and BCC iron is the foundation of steel metallurgy. When austenite transforms to ferrite on cooling, carbon is rejected. The steel's microstructure (pearlite, bainite, martensite) depends on how fast this rejection happens relative to the cooling rate."],
-
-        ["h3", "Substitutional defects"],
-        ["p", "A substitutional defect is a foreign atom sitting on a host lattice site. Zinc atoms in copper, chromium atoms in iron, aluminium atoms in nickel: these are all substitutional. Whether a foreign atom dissolves substitutionally or interstitially depends primarily on its size relative to the host. Atoms within about 15% of the host atom radius tend to substitute (the Hume-Rothery rules, article 4.4). Atoms much smaller than the host go interstitial."],
-        ["p", "Substitutional defects introduce local lattice strain. An oversized solute atom pushes its neighbours outward; an undersized one lets them relax inward. This strain field interacts with dislocations, other point defects, and applied stresses. It is the basis of solid solution strengthening: dissolved zinc atoms in copper (brass) increase the yield strength because their strain fields impede dislocation motion."],
-
-        ["h3", "Schottky and Frenkel defects in ionic crystals"],
-        ["p", "Ionic crystals have an additional constraint: charge neutrality. A vacancy on a cation site leaves behind uncompensated negative charge. To maintain neutrality, vacancies must occur in charge-balanced combinations."],
-        ["p", "A Schottky defect is a matched pair of cation and anion vacancies. In NaCl, removing one Na$^+$ and one Cl$^-$ preserves neutrality. The formation energy for a Schottky pair in NaCl is about 2.3 eV. At 300 K, the equilibrium concentration of Schottky pairs is negligible; at 800 K it becomes significant."],
-        ["p", "A Frenkel defect is a single ion displaced from its lattice site into an interstitial position. The lattice site becomes vacant, and the interstitial is created simultaneously. In AgCl, the Ag$^+$ ion is small enough to occupy interstitial sites, so Frenkel defects dominate ($E_f \\approx 1.4$ eV). In fluorite-structured materials like CeO$_2$ and ZrO$_2$, oxygen Frenkel defects (oxygen vacancies plus oxygen interstitials) are central to their use as solid electrolytes and oxygen sensors."],
-        ["callout", "Kroger-Vink notation", "Defect chemists use Kroger-Vink notation to describe point defects in ionic crystals. $V_{\\text{Na}}^{\\prime}$ is a sodium vacancy with an effective negative charge. $V_{\\text{Cl}}^{\\bullet}$ is a chlorine vacancy with an effective positive charge. $\\text{Ag}_i^{\\bullet}$ is a silver interstitial with an effective positive charge. The superscripts $\\bullet$ (positive), $\\prime$ (negative), and $\\times$ (neutral) denote effective charges relative to the perfect lattice. This notation is compact and tracks charge automatically."],
-
-        ["h3", "Why point defects matter"],
-        ["p", "Point defects control several properties. Diffusion in crystalline solids proceeds primarily via vacancy and interstitial mechanisms (module 6). The diffusion coefficient depends exponentially on the vacancy formation and migration energies. Electrical conductivity in ionic solids is carried by mobile vacancies: this is how solid oxide fuel cells and yttria-stabilised zirconia oxygen sensors work. The colour of many gemstones comes from point defects: ruby is corundum (Al$_2$O$_3$) with about 1% of the aluminium sites occupied by Cr$^{3+}$ substitutional defects, which absorb green and blue light."],
-
-        ["problem", "Calculate the equilibrium vacancy concentration in aluminium ($E_v = 0.68$ eV) at 300 K and at 933 K (its melting point). How many vacancies per cm$^3$ at the melting point? The lattice parameter of Al is 4.050 &Aring; (FCC, 4 atoms per cell).", [
-          ["p", "At 300 K, $k_B T = 8.617 \\times 10^{-5} \\times 300 = 0.02585$ eV:"],
-          ["eq", "\\frac{n_v}{N} = \\exp\\left(-\\frac{0.68}{0.02585}\\right) = \\exp(-26.3) = 3.7 \\times 10^{-12}"],
-          ["p", "At 933 K, $k_B T = 0.0804$ eV:"],
-          ["eq", "\\frac{n_v}{N} = \\exp\\left(-\\frac{0.68}{0.0804}\\right) = \\exp(-8.46) = 2.1 \\times 10^{-4}"],
-          ["p", "The atomic density of Al: 4 atoms per cell, cell volume $= (4.050 \\times 10^{-8})^3 = 6.64 \\times 10^{-23}$ cm$^3$."],
-          ["eq", "N_{\\text{atoms}} = \\frac{4}{6.64 \\times 10^{-23}} = 6.02 \\times 10^{22} \\text{ cm}^{-3}"],
-          ["p", "Vacancies per cm$^3$ at 933 K: $6.02 \\times 10^{22} \\times 2.1 \\times 10^{-4} \\approx 1.3 \\times 10^{19}$. That is about one vacancy per 5000 atoms. This enormous number of vacancies is why diffusion rates increase so sharply near the melting point."]
-        ]]
+        [
+          "h3",
+          "Why perfect crystals do not exist"
+        ],
+        [
+          "p",
+          "Consider a perfect crystal at absolute zero: every atom on its lattice site, no disorder, no entropy. Now raise the temperature. Removing one atom from a site in the interior and placing it on the surface costs energy, the vacancy formation energy $E_v$. But it also increases the configurational entropy of the crystal, because there are many ways to choose which site is empty. At any temperature above 0 K, the free energy minimum corresponds to a finite concentration of vacancies."
+        ],
+        [
+          "p",
+          "This is not a defect that slipped through quality control. It is a thermodynamic requirement. The equilibrium vacancy concentration follows from minimising the Gibbs free energy with respect to the number of vacancies."
+        ],
+        [
+          "derivation",
+          "The equilibrium vacancy fraction is $n_v/N = \\exp(-E_v / k_B T)$.",
+          [
+            [
+              "p",
+              "Take a crystal of $N$ atoms. Remove $n_v$ atoms from interior sites to create vacancies, placing each on the surface. The energy cost is $n_v E_v$. The number of ways to arrange $n_v$ vacancies on $N + n_v \\approx N$ sites is:"
+            ],
+            [
+              "eq",
+              "W = \\binom{N}{n_v} = \\frac{N!}{n_v!(N - n_v)!}"
+            ],
+            [
+              "p",
+              "The configurational entropy is $S = k_B \\ln W$. Using Stirling's approximation ($\\ln n! \\approx n \\ln n - n$) and minimising $G = n_v E_v - TS$ with respect to $n_v$:"
+            ],
+            [
+              "eq",
+              "\\frac{\\partial G}{\\partial n_v} = E_v - k_B T \\ln\\frac{N - n_v}{n_v} = 0"
+            ],
+            [
+              "p",
+              "Since $n_v \\ll N$, this gives:"
+            ],
+            [
+              "eq",
+              "\\frac{n_v}{N} = \\exp\\left(-\\frac{E_v}{k_B T}\\right)"
+            ]
+          ]
+        ],
+        [
+          "h3",
+          "Vacancy concentrations in real metals"
+        ],
+        [
+          "p",
+          "The vacancy formation energy $E_v$ varies from metal to metal. For aluminium, $E_v = 0.68$ eV. For copper, $E_v = 1.27$ eV. For tungsten, $E_v = 3.1$ eV. These values are measured by quenching experiments and positron annihilation spectroscopy."
+        ],
+        [
+          "p",
+          "Plug in numbers. For copper at room temperature (300 K), $k_B T = 0.026$ eV:"
+        ],
+        [
+          "eq",
+          "\\frac{n_v}{N} = \\exp\\left(-\\frac{1.27}{0.026}\\right) = \\exp(-48.8) \\approx 5 \\times 10^{-22}"
+        ],
+        [
+          "p",
+          "That is essentially zero. Now try copper near its melting point (1358 K), where $k_B T = 0.117$ eV:"
+        ],
+        [
+          "eq",
+          "\\frac{n_v}{N} = \\exp\\left(-\\frac{1.27}{0.117}\\right) = \\exp(-10.9) \\approx 2 \\times 10^{-5}"
+        ],
+        [
+          "p",
+          "About one in 50,000 sites is vacant. In a cubic centimetre of copper containing $8.5 \\times 10^{22}$ atoms, that is roughly $10^{18}$ vacancies. This is enough to dominate the self-diffusion rate."
+        ],
+        [
+          "callout",
+          "Quenched-in vacancies",
+          "If you heat a metal to near its melting point and then quench it rapidly in water, the vacancies do not have time to migrate to sinks and annihilate. The high-temperature vacancy concentration is frozen in. This is why quenched metals have higher electrical resistivity than slowly cooled ones: each vacancy scatters conduction electrons. Measuring the excess resistivity after quenching was one of the first methods used to determine $E_v$."
+        ],
+        [
+          "h3",
+          "Interstitial defects"
+        ],
+        [
+          "p",
+          "An interstitial defect is an extra atom occupying a space between lattice sites. There are two kinds. A self-interstitial is an atom of the same species as the host lattice, forced into an interstice. This costs a large amount of energy (roughly 2 to 4 eV in most metals) because the surrounding atoms must be pushed apart. Self-interstitial concentrations at thermal equilibrium are therefore negligible."
+        ],
+        [
+          "p",
+          "Foreign interstitials are far more common and far more important. Small atoms (carbon, nitrogen, boron, hydrogen) fit into the interstices of metallic lattices with much lower energy penalties. In BCC iron, carbon atoms sit in octahedral interstitial sites. The maximum solubility of carbon in BCC iron (ferrite) is only 0.022 wt% at 727°C, because the octahedral site in BCC is small and asymmetric: the carbon atom distorts the lattice tetragonally. In FCC iron (austenite), the octahedral holes are larger and more symmetric, allowing up to 2.14 wt% carbon at 1147°C."
+        ],
+        [
+          "p",
+          "This difference in interstitial solubility between FCC and BCC iron is the foundation of steel metallurgy. When austenite transforms to ferrite on cooling, carbon is rejected. The steel's microstructure (pearlite, bainite, martensite) depends on how fast this rejection happens relative to the cooling rate."
+        ],
+        [
+          "h3",
+          "Substitutional defects"
+        ],
+        [
+          "p",
+          "A substitutional defect is a foreign atom sitting on a host lattice site. Zinc atoms in copper, chromium atoms in iron, aluminium atoms in nickel: these are all substitutional. Whether a foreign atom dissolves substitutionally or interstitially depends primarily on its size relative to the host. Atoms within about 15% of the host atom radius tend to substitute (the Hume-Rothery rules, article 4.4). Atoms much smaller than the host go interstitial."
+        ],
+        [
+          "p",
+          "Substitutional defects introduce local lattice strain. An oversized solute atom pushes its neighbours outward; an undersized one lets them relax inward. This strain field interacts with dislocations, other point defects, and applied stresses. It is the basis of solid solution strengthening: dissolved zinc atoms in copper (brass) increase the yield strength because their strain fields impede dislocation motion."
+        ],
+        [
+          "h3",
+          "Schottky and Frenkel defects in ionic crystals"
+        ],
+        [
+          "p",
+          "Ionic crystals have an additional constraint: charge neutrality. A vacancy on a cation site leaves behind uncompensated negative charge. To maintain neutrality, vacancies must occur in charge-balanced combinations."
+        ],
+        [
+          "p",
+          "A Schottky defect is a matched pair of cation and anion vacancies. In NaCl, removing one Na$^+$ and one Cl$^-$ preserves neutrality. The formation energy for a Schottky pair in NaCl is about 2.3 eV. At 300 K, the equilibrium concentration of Schottky pairs is negligible; at 800 K it becomes significant."
+        ],
+        [
+          "p",
+          "A Frenkel defect is a single ion displaced from its lattice site into an interstitial position. The lattice site becomes vacant, and the interstitial is created simultaneously. In AgCl, the Ag$^+$ ion is small enough to occupy interstitial sites, so Frenkel defects dominate ($E_f \\approx 1.4$ eV). In fluorite-structured materials like CeO$_2$ and ZrO$_2$, oxygen Frenkel defects (oxygen vacancies plus oxygen interstitials) are central to their use as solid electrolytes and oxygen sensors."
+        ],
+        [
+          "callout",
+          "Kroger-Vink notation",
+          "Defect chemists use Kroger-Vink notation to describe point defects in ionic crystals. $V_{\\text{Na}}^{\\prime}$ is a sodium vacancy with an effective negative charge. $V_{\\text{Cl}}^{\\bullet}$ is a chlorine vacancy with an effective positive charge. $\\text{Ag}_i^{\\bullet}$ is a silver interstitial with an effective positive charge. The superscripts $\\bullet$ (positive), $\\prime$ (negative), and $\\times$ (neutral) denote effective charges relative to the perfect lattice. This notation is compact and tracks charge automatically."
+        ],
+        [
+          "h3",
+          "Why point defects matter"
+        ],
+        [
+          "p",
+          "Point defects control several properties. Diffusion in crystalline solids proceeds primarily via vacancy and interstitial mechanisms (module 6). The diffusion coefficient depends exponentially on the vacancy formation and migration energies. Electrical conductivity in ionic solids is carried by mobile vacancies: this is how solid oxide fuel cells and yttria-stabilised zirconia oxygen sensors work. The colour of many gemstones comes from point defects: ruby is corundum (Al$_2$O$_3$) with about 1% of the aluminium sites occupied by Cr$^{3+}$ substitutional defects, which absorb green and blue light."
+        ],
+        [
+          "problem",
+          "Calculate the equilibrium vacancy concentration in aluminium ($E_v = 0.68$ eV) at 300 K and at 933 K (its melting point). How many vacancies per cm$^3$ at the melting point? The lattice parameter of Al is 4.050 &Aring; (FCC, 4 atoms per cell).",
+          [
+            [
+              "p",
+              "At 300 K, $k_B T = 8.617 \\times 10^{-5} \\times 300 = 0.02585$ eV:"
+            ],
+            [
+              "eq",
+              "\\frac{n_v}{N} = \\exp\\left(-\\frac{0.68}{0.02585}\\right) = \\exp(-26.3) = 3.7 \\times 10^{-12}"
+            ],
+            [
+              "p",
+              "At 933 K, $k_B T = 0.0804$ eV:"
+            ],
+            [
+              "eq",
+              "\\frac{n_v}{N} = \\exp\\left(-\\frac{0.68}{0.0804}\\right) = \\exp(-8.46) = 2.1 \\times 10^{-4}"
+            ],
+            [
+              "p",
+              "The atomic density of Al: 4 atoms per cell, cell volume $= (4.050 \\times 10^{-8})^3 = 6.64 \\times 10^{-23}$ cm$^3$."
+            ],
+            [
+              "eq",
+              "N_{\\text{atoms}} = \\frac{4}{6.64 \\times 10^{-23}} = 6.02 \\times 10^{22} \\text{ cm}^{-3}"
+            ],
+            [
+              "p",
+              "Vacancies per cm$^3$ at 933 K: $6.02 \\times 10^{22} \\times 2.1 \\times 10^{-4} \\approx 1.3 \\times 10^{19}$. That is about one vacancy per 5000 atoms. This enormous number of vacancies is why diffusion rates increase so sharply near the melting point."
+            ]
+          ]
+        ]
       ],
       "related": [
-        { "title": "Dislocations", "url": "dislocations-edge-screw-mixed" },
-        { "title": "Solid Solutions & Hume-Rothery Rules", "url": "solid-solutions-hume-rothery-rules" },
-        { "title": "Diffusion & Kinetics", "url": "../diffusion/" },
-        { "title": "Crystal Systems & Bravais Lattices", "url": "../crystallography/" }
+        {
+          "title": "Dislocations",
+          "url": "dislocations-edge-screw-mixed"
+        },
+        {
+          "title": "Solid Solutions & Hume-Rothery Rules",
+          "url": "solid-solutions-hume-rothery-rules"
+        },
+        {
+          "title": "Diffusion & Kinetics",
+          "url": "../diffusion/"
+        },
+        {
+          "title": "Crystal Systems & Bravais Lattices",
+          "url": "../crystallography/"
+        }
       ]
     },
     {
@@ -81,60 +211,192 @@
       "readingTime": "16 min",
       "intro": "Crystals yield at stresses 100 to 1000 times lower than the theoretical shear strength. The discrepancy baffled physicists until 1934, when Taylor, Orowan and Polanyi independently proposed the dislocation: a line defect whose motion through the lattice produces plastic deformation one atomic row at a time.",
       "body": [
-        ["h3", "The theoretical shear strength problem"],
-        ["p", "Frenkel estimated the stress needed to shear one plane of atoms rigidly over another in 1926. The calculation is straightforward: model the restoring force as sinusoidal, match the slope at small displacements to the shear modulus $G$, and the result is:"],
-        ["eq", "\\tau_{\\text{th}} = \\frac{G}{2\\pi} \\approx \\frac{G}{6}"],
-        ["p", "For copper, $G = 48$ GPa, giving $\\tau_{\\text{th}} \\approx 8$ GPa. The measured critical resolved shear stress of a copper single crystal is about 1 MPa. The discrepancy is a factor of 8000. Something is wrong with the rigid-shear model."],
-        ["p", "The resolution is that planes do not shear all at once. Plastic deformation occurs by the propagation of line defects, dislocations, through the crystal. Only the atoms near the dislocation line are displaced from their equilibrium positions at any given moment. The rest of the crystal is perfect. Moving the dislocation one atomic spacing requires displacing only a single row of atoms, not an entire plane."],
-
-        ["h3", "Edge dislocations"],
-        ["p", "An edge dislocation is an extra half-plane of atoms inserted into the crystal. Picture a deck of cards with an extra half-card slipped in from one edge. The line where the half-plane terminates inside the crystal is the dislocation line. Above the line, the lattice is in compression (atoms are squeezed together). Below, it is in tension (atoms are pulled apart)."],
-        ["p", "The direction and magnitude of the lattice distortion are described by the Burgers vector $\\mathbf{b}$. For an edge dislocation, $\\mathbf{b}$ is perpendicular to the dislocation line. To find $\\mathbf{b}$, draw a closed circuit (a Burgers circuit) around the dislocation, stepping equal numbers of lattice spacings in each direction. In a perfect crystal, the circuit closes. Around a dislocation, it does not. The vector needed to close it is $\\mathbf{b}$."],
-        ["p", "An edge dislocation glides on the slip plane, which is the plane containing both the dislocation line and $\\mathbf{b}$. The slip plane is uniquely defined for a pure edge dislocation. In FCC copper, the most common dislocation has $\\mathbf{b} = \\frac{a}{2}\\langle 110 \\rangle$ and glides on $\\{111\\}$ planes."],
-
-        ["h3", "Screw dislocations"],
-        ["p", "A screw dislocation has $\\mathbf{b}$ parallel to the dislocation line. Imagine cutting a crystal halfway through on a plane, then shearing the two faces by one atomic spacing parallel to the cut edge. The atoms near the cut edge spiral around the dislocation line like a helical staircase (hence the name)."],
-        ["p", "A screw dislocation has no unique slip plane. Since $\\mathbf{b}$ is parallel to the line, the dislocation can glide on any plane that contains the line. This freedom is called cross-slip, and it is one reason why BCC metals (where screw dislocations are the rate-limiting species) show temperature-dependent yield strengths: the core structure of the screw dislocation in BCC metals spreads out on several planes simultaneously, and thermal activation is needed to constrict it onto a single plane for glide."],
-
-        ["h3", "Mixed dislocations and dislocation loops"],
-        ["p", "Most real dislocations are neither pure edge nor pure screw. They have $\\mathbf{b}$ at some angle to the dislocation line, making them mixed character. A dislocation loop in an FCC crystal is a closed ring of dislocation line with a single Burgers vector. At one point on the loop, the line direction is parallel to $\\mathbf{b}$ (screw character). At the diametrically opposite point, it is also screw, but of opposite sign. At the points 90° away, the line is perpendicular to $\\mathbf{b}$ (edge character). In between, the character is mixed."],
-        ["p", "The Burgers vector is conserved along the entire length of a dislocation line. A dislocation cannot end inside a crystal; it must either form a closed loop, end at a surface, end at a grain boundary, or branch at a node where the Burgers vectors of the meeting dislocations sum to zero (Frank's rule)."],
-
-        ["h3", "The stress field of an edge dislocation"],
-        ["p", "An edge dislocation creates a long-range elastic strain field. Using isotropic elasticity, the stress components in cylindrical coordinates $(r, \\theta)$ around the dislocation line are:"],
-        ["eq", "\\sigma_{xx} = -\\frac{Gb}{2\\pi(1-\\nu)} \\frac{y(3x^2 + y^2)}{(x^2 + y^2)^2}"],
-        ["p", "The key features: the stress varies as $1/r$ (long-range), is compressive above the slip plane and tensile below, and diverges at $r = 0$. The divergence is unphysical; the core region (within about $5b$) requires atomistic rather than continuum treatment. The elastic strain energy per unit length of dislocation is:"],
-        ["eq", "E = \\frac{Gb^2}{4\\pi(1-\\nu)} \\ln\\frac{R}{r_0}"],
-        ["p", "where $R$ is an outer cutoff (typically the grain size or distance to the nearest other dislocation) and $r_0 \\approx b$ is the core cutoff. For copper ($G = 48$ GPa, $b = 0.256$ nm, $\\nu = 0.34$), the energy is roughly 4 eV per nm of dislocation line. A typical annealed metal has a dislocation density of $10^{10}$ m$^{-2}$ (total line length of $10^{10}$ m in each cubic metre). Heavily cold-worked metals reach $10^{15}$ to $10^{16}$ m$^{-2}$."],
-
-        ["callout", "Why $b$ should be small", "The energy per unit length scales as $Gb^2$. Dislocations with the shortest possible Burgers vector are energetically favoured. In FCC metals, the shortest lattice vector is $\\frac{a}{2}\\langle 110 \\rangle$, with magnitude $b = a/\\sqrt{2}$. For copper, $b = 3.615/\\sqrt{2} = 2.556$ &Aring;. Dislocations with $\\mathbf{b} = a\\langle 100 \\rangle$ do exist but they are unstable and spontaneously dissociate: $a[100] \\to \\frac{a}{2}[110] + \\frac{a}{2}[1\\bar{1}0]$, because $b_1^2 + b_2^2 < b_{\\text{original}}^2$. This is Frank's energy criterion."],
-
-        ["h3", "Dislocation motion and plastic deformation"],
-        ["p", "When a shear stress $\\tau$ acts on the slip plane, it exerts a force per unit length on the dislocation:"],
-        ["eq", "f = \\tau b"],
-        ["p", "This is the Peach-Koehler force. When this force exceeds the lattice friction (the Peierls-Nabarro stress), the dislocation glides, and the crystal deforms plastically. Each dislocation that traverses the entire crystal produces a displacement of $\\mathbf{b}$ at the surface. The macroscopic shear strain $\\gamma$ from the motion of many dislocations is:"],
-        ["eq", "\\gamma = \\rho b \\bar{x}"],
-        ["p", "where $\\rho$ is the dislocation density (m$^{-2}$) and $\\bar{x}$ is the average distance each dislocation moves. This is the Orowan equation. It connects the microscopic world of individual line defects to the macroscopic strain you measure in a tensile test."],
-        ["p", "The strain rate follows as:"],
-        ["eq", "\\dot{\\gamma} = \\rho b v"],
-        ["p", "where $v$ is the average dislocation velocity. At a typical strain rate of $10^{-3}$ s$^{-1}$, with $\\rho = 10^{12}$ m$^{-2}$ and $b = 2.5 \\times 10^{-10}$ m, the average dislocation velocity is about 4 mm/s."],
-
-        ["h3", "Dislocation interactions and work hardening"],
-        ["p", "As a metal deforms, new dislocations are generated (principally by Frank-Read sources). The dislocation density rises. Dislocations interact with each other through their stress fields: parallel dislocations of opposite sign attract, while those of the same sign repel. Moving dislocations become tangled, pinned at junctions and immobilised. The stress required to keep deformation going increases with the square root of dislocation density:"],
-        ["eq", "\\tau = \\tau_0 + \\alpha G b \\sqrt{\\rho}"],
-        ["p", "where $\\alpha \\approx 0.3$ to 0.6 is a constant. This is the Taylor hardening law. It explains why metals get harder as you deform them (work hardening, or strain hardening). A copper wire that starts at a yield strength of 70 MPa can be cold-drawn to over 300 MPa."],
-
-        ["problem", "The shear modulus of iron is $G = 82$ GPa. Its lattice parameter (BCC) is $a = 2.867$ &Aring;. The Burgers vector of the most common dislocation is $\\mathbf{b} = \\frac{a}{2}\\langle 111 \\rangle$. (a) Calculate $|\\mathbf{b}|$. (b) Estimate the Frenkel theoretical shear strength. (c) The measured critical resolved shear stress of an iron single crystal is about 28 MPa. What is the ratio of theoretical to measured strength?", [
-          ["p", "(a) $|\\mathbf{b}| = \\frac{a}{2}\\sqrt{1^2 + 1^2 + 1^2} = \\frac{2.867}{2}\\sqrt{3} = 2.483$ &Aring;."],
-          ["p", "(b) $\\tau_{\\text{th}} = G/(2\\pi) = 82 \\times 10^3 / (2\\pi) = 13{,}050$ MPa $\\approx 13$ GPa."],
-          ["p", "(c) Ratio: $13{,}050 / 28 \\approx 470$. Iron single crystals yield at roughly 1/500th of the theoretical strength. This enormous gap is the direct evidence for dislocation-mediated plasticity. The ratio is smaller than for copper because BCC metals have higher Peierls stresses (the core structure of screw dislocations in BCC is non-planar), so the intrinsic lattice friction is greater."]
-        ]]
+        [
+          "h3",
+          "The theoretical shear strength problem"
+        ],
+        [
+          "p",
+          "Frenkel estimated the stress needed to shear one plane of atoms rigidly over another in 1926. The calculation is straightforward: model the restoring force as sinusoidal, match the slope at small displacements to the shear modulus $G$, and the result is:"
+        ],
+        [
+          "eq",
+          "\\tau_{\\text{th}} = \\frac{G}{2\\pi} \\approx \\frac{G}{6}"
+        ],
+        [
+          "p",
+          "For copper, $G = 48$ GPa, giving $\\tau_{\\text{th}} \\approx 8$ GPa. The measured critical resolved shear stress of a copper single crystal is about 1 MPa. The discrepancy is a factor of 8000. Something is wrong with the rigid-shear model."
+        ],
+        [
+          "p",
+          "The resolution is that planes do not shear all at once. Plastic deformation occurs by the propagation of line defects, dislocations, through the crystal. Only the atoms near the dislocation line are displaced from their equilibrium positions at any given moment. The rest of the crystal is perfect. Moving the dislocation one atomic spacing requires displacing only a single row of atoms, not an entire plane."
+        ],
+        [
+          "h3",
+          "Edge dislocations"
+        ],
+        [
+          "p",
+          "An edge dislocation is an extra half-plane of atoms inserted into the crystal. Picture a deck of cards with an extra half-card slipped in from one edge. The line where the half-plane terminates inside the crystal is the dislocation line. Above the line, the lattice is in compression (atoms are squeezed together). Below, it is in tension (atoms are pulled apart)."
+        ],
+        [
+          "p",
+          "The direction and magnitude of the lattice distortion are described by the Burgers vector $\\mathbf{b}$. For an edge dislocation, $\\mathbf{b}$ is perpendicular to the dislocation line. To find $\\mathbf{b}$, draw a closed circuit (a Burgers circuit) around the dislocation, stepping equal numbers of lattice spacings in each direction. In a perfect crystal, the circuit closes. Around a dislocation, it does not. The vector needed to close it is $\\mathbf{b}$."
+        ],
+        [
+          "p",
+          "An edge dislocation glides on the slip plane, which is the plane containing both the dislocation line and $\\mathbf{b}$. The slip plane is uniquely defined for a pure edge dislocation. In FCC copper, the most common dislocation has $\\mathbf{b} = \\frac{a}{2}\\langle 110 \\rangle$ and glides on $\\{111\\}$ planes."
+        ],
+        [
+          "h3",
+          "Screw dislocations"
+        ],
+        [
+          "p",
+          "A screw dislocation has $\\mathbf{b}$ parallel to the dislocation line. Imagine cutting a crystal halfway through on a plane, then shearing the two faces by one atomic spacing parallel to the cut edge. The atoms near the cut edge spiral around the dislocation line like a helical staircase (hence the name)."
+        ],
+        [
+          "p",
+          "A screw dislocation has no unique slip plane. Since $\\mathbf{b}$ is parallel to the line, the dislocation can glide on any plane that contains the line. This freedom is called cross-slip, and it is one reason why BCC metals (where screw dislocations are the rate-limiting species) show temperature-dependent yield strengths: the core structure of the screw dislocation in BCC metals spreads out on several planes simultaneously, and thermal activation is needed to constrict it onto a single plane for glide."
+        ],
+        [
+          "h3",
+          "Mixed dislocations and dislocation loops"
+        ],
+        [
+          "p",
+          "Most real dislocations are neither pure edge nor pure screw. They have $\\mathbf{b}$ at some angle to the dislocation line, making them mixed character. A dislocation loop in an FCC crystal is a closed ring of dislocation line with a single Burgers vector. At one point on the loop, the line direction is parallel to $\\mathbf{b}$ (screw character). At the diametrically opposite point, it is also screw, but of opposite sign. At the points 90° away, the line is perpendicular to $\\mathbf{b}$ (edge character). In between, the character is mixed."
+        ],
+        [
+          "p",
+          "The Burgers vector is conserved along the entire length of a dislocation line. A dislocation cannot end inside a crystal; it must either form a closed loop, end at a surface, end at a grain boundary, or branch at a node where the Burgers vectors of the meeting dislocations sum to zero (Frank's rule)."
+        ],
+        [
+          "h3",
+          "The stress field of an edge dislocation"
+        ],
+        [
+          "p",
+          "An edge dislocation creates a long-range elastic strain field. Using isotropic elasticity, the stress components in cylindrical coordinates $(r, \\theta)$ around the dislocation line are:"
+        ],
+        [
+          "eq",
+          "\\sigma_{xx} = -\\frac{Gb}{2\\pi(1-\\nu)} \\frac{y(3x^2 + y^2)}{(x^2 + y^2)^2}"
+        ],
+        [
+          "p",
+          "The key features: the stress varies as $1/r$ (long-range), is compressive above the slip plane and tensile below, and diverges at $r = 0$. The divergence is unphysical; the core region (within about $5b$) requires atomistic rather than continuum treatment. The elastic strain energy per unit length of dislocation is:"
+        ],
+        [
+          "eq",
+          "E = \\frac{Gb^2}{4\\pi(1-\\nu)} \\ln\\frac{R}{r_0}"
+        ],
+        [
+          "p",
+          "where $R$ is an outer cutoff (typically the grain size or distance to the nearest other dislocation) and $r_0 \\approx b$ is the core cutoff. For copper ($G = 48$ GPa, $b = 0.256$ nm, $\\nu = 0.34$), the energy is roughly 4 eV per nm of dislocation line. A typical annealed metal has a dislocation density of $10^{10}$ m$^{-2}$ (total line length of $10^{10}$ m in each cubic metre). Heavily cold-worked metals reach $10^{15}$ to $10^{16}$ m$^{-2}$."
+        ],
+        [
+          "callout",
+          "Why $b$ should be small",
+          "The energy per unit length scales as $Gb^2$. Dislocations with the shortest possible Burgers vector are energetically favoured. In FCC metals, the shortest lattice vector is $\\frac{a}{2}\\langle 110 \\rangle$, with magnitude $b = a/\\sqrt{2}$. For copper, $b = 3.615/\\sqrt{2} = 2.556$ &Aring;. Dislocations with $\\mathbf{b} = a\\langle 100 \\rangle$ do exist but they are unstable and spontaneously dissociate: $a[100] \\to \\frac{a}{2}[110] + \\frac{a}{2}[1\\bar{1}0]$, because $b_1^2 + b_2^2 < b_{\\text{original}}^2$. This is Frank's energy criterion."
+        ],
+        [
+          "h3",
+          "Dislocation motion and plastic deformation"
+        ],
+        [
+          "p",
+          "When a shear stress $\\tau$ acts on the slip plane, it exerts a force per unit length on the dislocation:"
+        ],
+        [
+          "eq",
+          "f = \\tau b"
+        ],
+        [
+          "p",
+          "This is the Peach-Koehler force. When this force exceeds the lattice friction (the Peierls-Nabarro stress), the dislocation glides, and the crystal deforms plastically. Each dislocation that traverses the entire crystal produces a displacement of $\\mathbf{b}$ at the surface. The macroscopic shear strain $\\gamma$ from the motion of many dislocations is:"
+        ],
+        [
+          "eq",
+          "\\gamma = \\rho b \\bar{x}"
+        ],
+        [
+          "p",
+          "where $\\rho$ is the dislocation density (m$^{-2}$) and $\\bar{x}$ is the average distance each dislocation moves. This is the Orowan equation. It connects the microscopic world of individual line defects to the macroscopic strain you measure in a tensile test."
+        ],
+        [
+          "p",
+          "The strain rate follows as:"
+        ],
+        [
+          "eq",
+          "\\dot{\\gamma} = \\rho b v"
+        ],
+        [
+          "p",
+          "where $v$ is the average dislocation velocity. At a typical strain rate of $10^{-3}$ s$^{-1}$, with $\\rho = 10^{12}$ m$^{-2}$ and $b = 2.5 \\times 10^{-10}$ m, the average dislocation velocity is about 4 mm/s."
+        ],
+        [
+          "h3",
+          "Dislocation interactions and work hardening"
+        ],
+        [
+          "p",
+          "As a metal deforms, new dislocations are generated (principally by Frank-Read sources). The dislocation density rises. Dislocations interact with each other through their stress fields: parallel dislocations of opposite sign attract, while those of the same sign repel. Moving dislocations become tangled, pinned at junctions and immobilised. The stress required to keep deformation going increases with the square root of dislocation density:"
+        ],
+        [
+          "eq",
+          "\\tau = \\tau_0 + \\alpha G b \\sqrt{\\rho}"
+        ],
+        [
+          "p",
+          "where $\\alpha \\approx 0.3$ to 0.6 is a constant. This is the Taylor hardening law. It explains why metals get harder as you deform them (work hardening, or strain hardening). A copper wire that starts at a yield strength of 70 MPa can be cold-drawn to over 300 MPa."
+        ],
+        [
+          "problem",
+          "The shear modulus of iron is $G = 82$ GPa. Its lattice parameter (BCC) is $a = 2.867$ &Aring;. The Burgers vector of the most common dislocation is $\\mathbf{b} = \\frac{a}{2}\\langle 111 \\rangle$. (a) Calculate $|\\mathbf{b}|$. (b) Estimate the Frenkel theoretical shear strength. (c) The measured critical resolved shear stress of an iron single crystal is about 28 MPa. What is the ratio of theoretical to measured strength?",
+          [
+            [
+              "p",
+              "(a) $|\\mathbf{b}| = \\frac{a}{2}\\sqrt{1^2 + 1^2 + 1^2} = \\frac{2.867}{2}\\sqrt{3} = 2.483$ &Aring;."
+            ],
+            [
+              "p",
+              "(b) $\\tau_{\\text{th}} = G/(2\\pi) = 82 \\times 10^3 / (2\\pi) = 13{,}050$ MPa $\\approx 13$ GPa."
+            ],
+            [
+              "p",
+              "(c) Ratio: $13{,}050 / 28 \\approx 470$. Iron single crystals yield at roughly 1/500th of the theoretical strength. This enormous gap is the direct evidence for dislocation-mediated plasticity. The ratio is smaller than for copper because BCC metals have higher Peierls stresses (the core structure of screw dislocations in BCC is non-planar), so the intrinsic lattice friction is greater."
+            ]
+          ]
+        ]
       ],
       "related": [
-        { "title": "Point Defects", "url": "point-defects-vacancies-interstitials-substitutional" },
-        { "title": "Planar Defects", "url": "planar-defects-grain-boundaries-stacking-faults-twins" },
-        { "title": "Mechanical Properties", "url": "../mechanical-properties/" },
-        { "title": "Crystallography", "url": "../crystallography/" }
+        {
+          "title": "Point Defects",
+          "url": "point-defects-vacancies-interstitials-substitutional"
+        },
+        {
+          "title": "Planar Defects",
+          "url": "planar-defects-grain-boundaries-stacking-faults-twins"
+        },
+        {
+          "title": "Mechanical Properties",
+          "url": "../mechanical-properties/"
+        },
+        {
+          "title": "Crystallography",
+          "url": "../crystallography/"
+        }
+      ],
+      "comments": [
+        {
+          "id": "9c55c54f",
+          "selectedText": "Picture a deck of cards with an extra half-card slipped in from one edge.",
+          "comment": "A schematic would be helpful here.",
+          "name": "Jack",
+          "votes": 0
+        }
       ]
     },
     {
@@ -145,59 +407,189 @@
       "readingTime": "15 min",
       "intro": "A planar defect is a two-dimensional surface across which the crystal structure changes. Grain boundaries separate regions of different orientation. Stacking faults disrupt the layer sequence within a grain. Twins reflect the structure across a mirror plane. All three have profound effects on mechanical behaviour.",
       "body": [
-        ["h3", "Grain boundaries"],
-        ["p", "Most engineering metals are polycrystalline: they consist of many small crystals (grains), each with the same crystal structure but different orientations. The interface between two grains is a grain boundary. A typical grain size in annealed structural steel is 10 to 50 $\\mu$m. In nanocrystalline materials produced by severe plastic deformation, grain sizes can be below 100 nm."],
-        ["p", "The misorientation between two grains can range from a fraction of a degree to tens of degrees. Low-angle grain boundaries (misorientation below about 10 to 15°) can be described as arrays of dislocations. A tilt boundary is a wall of parallel edge dislocations; a twist boundary is a grid of screw dislocations. The spacing $D$ between dislocations in a symmetric tilt boundary is related to the misorientation angle $\\theta$ by:"],
-        ["eq", "D = \\frac{b}{\\theta}"],
-        ["p", "where $\\theta$ is in radians. For copper with $b = 0.256$ nm and $\\theta = 2°$ (0.035 rad), $D = 7.3$ nm. You can image these dislocation arrays directly by transmission electron microscopy."],
-        ["p", "High-angle grain boundaries (misorientation above about 15°) cannot be usefully described as dislocation arrays. The boundary region is a disordered layer roughly 2 to 3 atomic spacings thick, with a structure that depends on the specific misorientation and boundary plane. Certain special boundaries, called coincidence site lattice (CSL) boundaries, have an unusually high fraction of lattice sites in coincidence across the interface. The $\\Sigma 3$ boundary (60° rotation about $\\langle 111 \\rangle$) is the coherent twin boundary, which has very low energy (about 20 mJ/m$^2$ in copper, compared to 625 mJ/m$^2$ for a general high-angle boundary)."],
-
-        ["h3", "Grain boundary energy and the Hall-Petch relation"],
-        ["p", "Grain boundaries have excess energy per unit area, $\\gamma_{\\text{gb}}$. For low-angle boundaries, the Read-Shockley equation gives:"],
-        ["eq", "\\gamma_{\\text{gb}} = \\gamma_0 \\, \\theta \\left( A - \\ln \\theta \\right)"],
-        ["p", "where $\\gamma_0$ and $A$ are material constants. The energy rises with misorientation, reaching a plateau near 15° that corresponds to the general high-angle boundary energy. For copper, $\\gamma_{\\text{gb}} \\approx 625$ mJ/m$^2$; for aluminium, about 324 mJ/m$^2$."],
-        ["p", "Grain boundaries act as obstacles to dislocation motion. A dislocation gliding through one grain cannot simply continue into the next, because the slip systems are misoriented. Dislocations pile up against the boundary until the stress concentration at the head of the pile-up is large enough to activate a source in the neighbouring grain. Smaller grains mean shorter pile-ups, which means higher stresses are needed. The result is the Hall-Petch relation:"],
-        ["eq", "\\sigma_y = \\sigma_0 + \\frac{k_y}{\\sqrt{d}}"],
-        ["p", "where $\\sigma_y$ is the yield stress, $d$ is the grain size, $\\sigma_0$ is a friction stress, and $k_y$ is the Hall-Petch coefficient. For low-carbon steel, $\\sigma_0 \\approx 70$ MPa and $k_y \\approx 0.74$ MPa$\\cdot$m$^{1/2}$. Refining the grain size from 50 $\\mu$m to 5 $\\mu$m increases the yield stress from about 175 MPa to about 400 MPa. Grain refinement is one of the few strengthening mechanisms that simultaneously increases both strength and toughness."],
-        ["callout", "The inverse Hall-Petch effect", "Below a critical grain size (roughly 10 to 20 nm, depending on the material), the Hall-Petch relation breaks down. Yield stress stops increasing and can even decrease with further refinement. At these scales, the volume fraction of grain boundary material becomes large, and deformation shifts from dislocation glide within grains to grain boundary sliding and atomic shuffling. This is the inverse Hall-Petch regime, and it limits the strengthening achievable by nanostructuring."],
-
-        ["h3", "Stacking faults"],
-        ["p", "In FCC metals, the close-packed $\\{111\\}$ planes stack in the sequence ABCABCABC. Each layer sits in the hollows of the layer below, and there are two choices of hollow, producing the two stacking positions B and C. A stacking fault is a local error in this sequence."],
-        ["p", "An intrinsic stacking fault removes one layer from the sequence: ABCAB|ABCABC (the vertical bar marks the fault). The structure at the fault plane is locally HCP (two layers of AB stacking). An extrinsic stacking fault inserts an extra layer: ABCAB|C|BCABC. Intrinsic faults are far more common."],
-        ["p", "Stacking faults form when a perfect dislocation in FCC dissociates into two partial dislocations. The perfect Burgers vector $\\frac{a}{2}\\langle 110 \\rangle$ splits into two Shockley partials:"],
-        ["eq", "\\frac{a}{2}[\\bar{1}10] \\to \\frac{a}{6}[\\bar{1}21] + \\frac{a}{6}[\\bar{2}11]"],
-        ["p", "The region between the two partials is the stacking fault. Its width is set by a balance between the repulsive elastic force between the partials and the attractive force from the stacking fault energy $\\gamma_{\\text{SF}}$:"],
-        ["eq", "w = \\frac{Gb^2}{24\\pi \\gamma_{\\text{SF}}} \\cdot \\frac{2 - \\nu}{1 - \\nu}"],
-        ["p", "Stacking fault energies vary enormously. Aluminium: $\\gamma_{\\text{SF}} \\approx 166$ mJ/m$^2$ (narrow faults, easy cross-slip). Copper: $\\gamma_{\\text{SF}} \\approx 45$ mJ/m$^2$ (wider faults). Silver: $\\gamma_{\\text{SF}} \\approx 16$ mJ/m$^2$. Stainless steel (Fe-18Cr-8Ni): $\\gamma_{\\text{SF}} \\approx 20$ mJ/m$^2$ (very wide faults)."],
-        ["p", "Wide stacking faults have important consequences. Cross-slip requires the two partials to recombine into a perfect dislocation, which costs energy proportional to the fault width. Metals with low $\\gamma_{\\text{SF}}$ cross-slip with difficulty, which promotes planar slip, high work-hardening rates, and deformation twinning. This is why brass (Cu-Zn, $\\gamma_{\\text{SF}}$ decreases with Zn content) work-hardens faster than pure copper."],
-
-        ["h3", "Twins"],
-        ["p", "A twin is a region of crystal that is a mirror image of its parent across a specific crystallographic plane (the twin plane). In FCC metals, twins form on $\\{111\\}$ planes. The stacking sequence across a twin boundary is: ABCAB|C|BACBA. On either side of the boundary the structure is perfect FCC, but one side is the mirror image of the other."],
-        ["p", "There are two types. Annealing twins form during recrystallisation and grain growth, driven by the reduction of grain boundary energy. They are abundant in low-$\\gamma_{\\text{SF}}$ FCC metals: look at a polished and etched section of annealed brass or austenitic stainless steel and you will see straight twin boundaries running across many grains. Deformation twins form under high strain rates or at low temperatures when dislocation glide is difficult. In BCC metals (iron, tungsten), deformation twinning occurs at high strain rates and low temperatures. In HCP metals (titanium, magnesium), twinning is an important deformation mechanism because the number of independent slip systems is limited."],
-        ["p", "Twinning in HCP magnesium occurs primarily on $\\{10\\bar{1}2\\}$ planes and accommodates extension along the $c$-axis, which cannot be achieved by basal slip alone. This is why magnesium alloys are more formable than pure magnesium: alloying additions that modify $\\gamma_{\\text{SF}}$ and activate additional twinning modes can improve ductility significantly."],
-
-        ["derivation", "The equilibrium width of a dissociated dislocation in copper.", [
-          ["p", "For copper: $G = 48$ GPa, $a = 3.615$ &Aring;, $\\nu = 0.34$, $\\gamma_{\\text{SF}} = 45$ mJ/m$^2$."],
-          ["p", "The partial Burgers vector magnitude: $b_p = a/\\sqrt{6} = 3.615 / 2.449 = 1.476$ &Aring; $= 1.476 \\times 10^{-10}$ m."],
-          ["p", "Using the equilibrium width formula for an edge-oriented dissociation:"],
-          ["eq", "w = \\frac{Gb_p^2}{24\\pi \\gamma_{\\text{SF}}} \\cdot \\frac{2 - \\nu}{1 - \\nu} = \\frac{48 \\times 10^9 \\times (1.476 \\times 10^{-10})^2}{24\\pi \\times 0.045} \\cdot \\frac{2 - 0.34}{1 - 0.34}"],
-          ["eq", "w = \\frac{48 \\times 10^9 \\times 2.18 \\times 10^{-20}}{3.393} \\times 2.515 = \\frac{1.046 \\times 10^{-9}}{3.393} \\times 2.515 = 7.8 \\times 10^{-10} \\text{ m} \\approx 0.8 \\text{ nm}"],
-          ["p", "This is roughly 3 atomic spacings, consistent with TEM observations. In silver ($\\gamma_{\\text{SF}} = 16$ mJ/m$^2$), the same calculation gives about 2.2 nm, and the wider partials are clearly resolvable in high-resolution electron microscopy."]
-        ]],
-
-        ["problem", "A low-carbon steel has $\\sigma_0 = 70$ MPa and $k_y = 0.74$ MPa$\\cdot$m$^{1/2}$. (a) Calculate the yield stress for grain sizes of 100 $\\mu$m, 10 $\\mu$m, and 1 $\\mu$m. (b) By what factor does the yield stress increase when you refine from 100 $\\mu$m to 1 $\\mu$m?", [
-          ["p", "Using $\\sigma_y = \\sigma_0 + k_y / \\sqrt{d}$:"],
-          ["p", "$d = 100$ $\\mu$m $= 10^{-4}$ m: $\\sigma_y = 70 + 0.74 / \\sqrt{10^{-4}} = 70 + 0.74 / 0.01 = 70 + 74 = 144$ MPa."],
-          ["p", "$d = 10$ $\\mu$m $= 10^{-5}$ m: $\\sigma_y = 70 + 0.74 / \\sqrt{10^{-5}} = 70 + 0.74 / 0.00316 = 70 + 234 = 304$ MPa."],
-          ["p", "$d = 1$ $\\mu$m $= 10^{-6}$ m: $\\sigma_y = 70 + 0.74 / \\sqrt{10^{-6}} = 70 + 0.74 / 0.001 = 70 + 740 = 810$ MPa."],
-          ["p", "Factor of increase: $810 / 144 = 5.6$. A 100-fold reduction in grain size produces a 5.6-fold increase in yield stress. This is why thermomechanical processing (controlled rolling followed by rapid cooling to suppress grain growth) is the primary strengthening route for structural steels."]
-        ]]
+        [
+          "h3",
+          "Grain boundaries"
+        ],
+        [
+          "p",
+          "Most engineering metals are polycrystalline: they consist of many small crystals (grains), each with the same crystal structure but different orientations. The interface between two grains is a grain boundary. A typical grain size in annealed structural steel is 10 to 50 $\\mu$m. In nanocrystalline materials produced by severe plastic deformation, grain sizes can be below 100 nm."
+        ],
+        [
+          "p",
+          "The misorientation between two grains can range from a fraction of a degree to tens of degrees. Low-angle grain boundaries (misorientation below about 10 to 15°) can be described as arrays of dislocations. A tilt boundary is a wall of parallel edge dislocations; a twist boundary is a grid of screw dislocations. The spacing $D$ between dislocations in a symmetric tilt boundary is related to the misorientation angle $\\theta$ by:"
+        ],
+        [
+          "eq",
+          "D = \\frac{b}{\\theta}"
+        ],
+        [
+          "p",
+          "where $\\theta$ is in radians. For copper with $b = 0.256$ nm and $\\theta = 2°$ (0.035 rad), $D = 7.3$ nm. You can image these dislocation arrays directly by transmission electron microscopy."
+        ],
+        [
+          "p",
+          "High-angle grain boundaries (misorientation above about 15°) cannot be usefully described as dislocation arrays. The boundary region is a disordered layer roughly 2 to 3 atomic spacings thick, with a structure that depends on the specific misorientation and boundary plane. Certain special boundaries, called coincidence site lattice (CSL) boundaries, have an unusually high fraction of lattice sites in coincidence across the interface. The $\\Sigma 3$ boundary (60° rotation about $\\langle 111 \\rangle$) is the coherent twin boundary, which has very low energy (about 20 mJ/m$^2$ in copper, compared to 625 mJ/m$^2$ for a general high-angle boundary)."
+        ],
+        [
+          "h3",
+          "Grain boundary energy and the Hall-Petch relation"
+        ],
+        [
+          "p",
+          "Grain boundaries have excess energy per unit area, $\\gamma_{\\text{gb}}$. For low-angle boundaries, the Read-Shockley equation gives:"
+        ],
+        [
+          "eq",
+          "\\gamma_{\\text{gb}} = \\gamma_0 \\, \\theta \\left( A - \\ln \\theta \\right)"
+        ],
+        [
+          "p",
+          "where $\\gamma_0$ and $A$ are material constants. The energy rises with misorientation, reaching a plateau near 15° that corresponds to the general high-angle boundary energy. For copper, $\\gamma_{\\text{gb}} \\approx 625$ mJ/m$^2$; for aluminium, about 324 mJ/m$^2$."
+        ],
+        [
+          "p",
+          "Grain boundaries act as obstacles to dislocation motion. A dislocation gliding through one grain cannot simply continue into the next, because the slip systems are misoriented. Dislocations pile up against the boundary until the stress concentration at the head of the pile-up is large enough to activate a source in the neighbouring grain. Smaller grains mean shorter pile-ups, which means higher stresses are needed. The result is the Hall-Petch relation:"
+        ],
+        [
+          "eq",
+          "\\sigma_y = \\sigma_0 + \\frac{k_y}{\\sqrt{d}}"
+        ],
+        [
+          "p",
+          "where $\\sigma_y$ is the yield stress, $d$ is the grain size, $\\sigma_0$ is a friction stress, and $k_y$ is the Hall-Petch coefficient. For low-carbon steel, $\\sigma_0 \\approx 70$ MPa and $k_y \\approx 0.74$ MPa$\\cdot$m$^{1/2}$. Refining the grain size from 50 $\\mu$m to 5 $\\mu$m increases the yield stress from about 175 MPa to about 400 MPa. Grain refinement is one of the few strengthening mechanisms that simultaneously increases both strength and toughness."
+        ],
+        [
+          "callout",
+          "The inverse Hall-Petch effect",
+          "Below a critical grain size (roughly 10 to 20 nm, depending on the material), the Hall-Petch relation breaks down. Yield stress stops increasing and can even decrease with further refinement. At these scales, the volume fraction of grain boundary material becomes large, and deformation shifts from dislocation glide within grains to grain boundary sliding and atomic shuffling. This is the inverse Hall-Petch regime, and it limits the strengthening achievable by nanostructuring."
+        ],
+        [
+          "h3",
+          "Stacking faults"
+        ],
+        [
+          "p",
+          "In FCC metals, the close-packed $\\{111\\}$ planes stack in the sequence ABCABCABC. Each layer sits in the hollows of the layer below, and there are two choices of hollow, producing the two stacking positions B and C. A stacking fault is a local error in this sequence."
+        ],
+        [
+          "p",
+          "An intrinsic stacking fault removes one layer from the sequence: ABCAB|ABCABC (the vertical bar marks the fault). The structure at the fault plane is locally HCP (two layers of AB stacking). An extrinsic stacking fault inserts an extra layer: ABCAB|C|BCABC. Intrinsic faults are far more common."
+        ],
+        [
+          "p",
+          "Stacking faults form when a perfect dislocation in FCC dissociates into two partial dislocations. The perfect Burgers vector $\\frac{a}{2}\\langle 110 \\rangle$ splits into two Shockley partials:"
+        ],
+        [
+          "eq",
+          "\\frac{a}{2}[\\bar{1}10] \\to \\frac{a}{6}[\\bar{1}21] + \\frac{a}{6}[\\bar{2}11]"
+        ],
+        [
+          "p",
+          "The region between the two partials is the stacking fault. Its width is set by a balance between the repulsive elastic force between the partials and the attractive force from the stacking fault energy $\\gamma_{\\text{SF}}$:"
+        ],
+        [
+          "eq",
+          "w = \\frac{Gb^2}{24\\pi \\gamma_{\\text{SF}}} \\cdot \\frac{2 - \\nu}{1 - \\nu}"
+        ],
+        [
+          "p",
+          "Stacking fault energies vary enormously. Aluminium: $\\gamma_{\\text{SF}} \\approx 166$ mJ/m$^2$ (narrow faults, easy cross-slip). Copper: $\\gamma_{\\text{SF}} \\approx 45$ mJ/m$^2$ (wider faults). Silver: $\\gamma_{\\text{SF}} \\approx 16$ mJ/m$^2$. Stainless steel (Fe-18Cr-8Ni): $\\gamma_{\\text{SF}} \\approx 20$ mJ/m$^2$ (very wide faults)."
+        ],
+        [
+          "p",
+          "Wide stacking faults have important consequences. Cross-slip requires the two partials to recombine into a perfect dislocation, which costs energy proportional to the fault width. Metals with low $\\gamma_{\\text{SF}}$ cross-slip with difficulty, which promotes planar slip, high work-hardening rates, and deformation twinning. This is why brass (Cu-Zn, $\\gamma_{\\text{SF}}$ decreases with Zn content) work-hardens faster than pure copper."
+        ],
+        [
+          "h3",
+          "Twins"
+        ],
+        [
+          "p",
+          "A twin is a region of crystal that is a mirror image of its parent across a specific crystallographic plane (the twin plane). In FCC metals, twins form on $\\{111\\}$ planes. The stacking sequence across a twin boundary is: ABCAB|C|BACBA. On either side of the boundary the structure is perfect FCC, but one side is the mirror image of the other."
+        ],
+        [
+          "p",
+          "There are two types. Annealing twins form during recrystallisation and grain growth, driven by the reduction of grain boundary energy. They are abundant in low-$\\gamma_{\\text{SF}}$ FCC metals: look at a polished and etched section of annealed brass or austenitic stainless steel and you will see straight twin boundaries running across many grains. Deformation twins form under high strain rates or at low temperatures when dislocation glide is difficult. In BCC metals (iron, tungsten), deformation twinning occurs at high strain rates and low temperatures. In HCP metals (titanium, magnesium), twinning is an important deformation mechanism because the number of independent slip systems is limited."
+        ],
+        [
+          "p",
+          "Twinning in HCP magnesium occurs primarily on $\\{10\\bar{1}2\\}$ planes and accommodates extension along the $c$-axis, which cannot be achieved by basal slip alone. This is why magnesium alloys are more formable than pure magnesium: alloying additions that modify $\\gamma_{\\text{SF}}$ and activate additional twinning modes can improve ductility significantly."
+        ],
+        [
+          "derivation",
+          "The equilibrium width of a dissociated dislocation in copper.",
+          [
+            [
+              "p",
+              "For copper: $G = 48$ GPa, $a = 3.615$ &Aring;, $\\nu = 0.34$, $\\gamma_{\\text{SF}} = 45$ mJ/m$^2$."
+            ],
+            [
+              "p",
+              "The partial Burgers vector magnitude: $b_p = a/\\sqrt{6} = 3.615 / 2.449 = 1.476$ &Aring; $= 1.476 \\times 10^{-10}$ m."
+            ],
+            [
+              "p",
+              "Using the equilibrium width formula for an edge-oriented dissociation:"
+            ],
+            [
+              "eq",
+              "w = \\frac{Gb_p^2}{24\\pi \\gamma_{\\text{SF}}} \\cdot \\frac{2 - \\nu}{1 - \\nu} = \\frac{48 \\times 10^9 \\times (1.476 \\times 10^{-10})^2}{24\\pi \\times 0.045} \\cdot \\frac{2 - 0.34}{1 - 0.34}"
+            ],
+            [
+              "eq",
+              "w = \\frac{48 \\times 10^9 \\times 2.18 \\times 10^{-20}}{3.393} \\times 2.515 = \\frac{1.046 \\times 10^{-9}}{3.393} \\times 2.515 = 7.8 \\times 10^{-10} \\text{ m} \\approx 0.8 \\text{ nm}"
+            ],
+            [
+              "p",
+              "This is roughly 3 atomic spacings, consistent with TEM observations. In silver ($\\gamma_{\\text{SF}} = 16$ mJ/m$^2$), the same calculation gives about 2.2 nm, and the wider partials are clearly resolvable in high-resolution electron microscopy."
+            ]
+          ]
+        ],
+        [
+          "problem",
+          "A low-carbon steel has $\\sigma_0 = 70$ MPa and $k_y = 0.74$ MPa$\\cdot$m$^{1/2}$. (a) Calculate the yield stress for grain sizes of 100 $\\mu$m, 10 $\\mu$m, and 1 $\\mu$m. (b) By what factor does the yield stress increase when you refine from 100 $\\mu$m to 1 $\\mu$m?",
+          [
+            [
+              "p",
+              "Using $\\sigma_y = \\sigma_0 + k_y / \\sqrt{d}$:"
+            ],
+            [
+              "p",
+              "$d = 100$ $\\mu$m $= 10^{-4}$ m: $\\sigma_y = 70 + 0.74 / \\sqrt{10^{-4}} = 70 + 0.74 / 0.01 = 70 + 74 = 144$ MPa."
+            ],
+            [
+              "p",
+              "$d = 10$ $\\mu$m $= 10^{-5}$ m: $\\sigma_y = 70 + 0.74 / \\sqrt{10^{-5}} = 70 + 0.74 / 0.00316 = 70 + 234 = 304$ MPa."
+            ],
+            [
+              "p",
+              "$d = 1$ $\\mu$m $= 10^{-6}$ m: $\\sigma_y = 70 + 0.74 / \\sqrt{10^{-6}} = 70 + 0.74 / 0.001 = 70 + 740 = 810$ MPa."
+            ],
+            [
+              "p",
+              "Factor of increase: $810 / 144 = 5.6$. A 100-fold reduction in grain size produces a 5.6-fold increase in yield stress. This is why thermomechanical processing (controlled rolling followed by rapid cooling to suppress grain growth) is the primary strengthening route for structural steels."
+            ]
+          ]
+        ]
       ],
       "related": [
-        { "title": "Dislocations", "url": "dislocations-edge-screw-mixed" },
-        { "title": "Point Defects", "url": "point-defects-vacancies-interstitials-substitutional" },
-        { "title": "Mechanical Properties", "url": "../mechanical-properties/" },
-        { "title": "Crystal Systems & Bravais Lattices", "url": "../crystallography/" }
+        {
+          "title": "Dislocations",
+          "url": "dislocations-edge-screw-mixed"
+        },
+        {
+          "title": "Point Defects",
+          "url": "point-defects-vacancies-interstitials-substitutional"
+        },
+        {
+          "title": "Mechanical Properties",
+          "url": "../mechanical-properties/"
+        },
+        {
+          "title": "Crystal Systems & Bravais Lattices",
+          "url": "../crystallography/"
+        }
       ]
     },
     {
@@ -208,85 +600,222 @@
       "readingTime": "14 min",
       "intro": "A solid solution is a single-phase crystalline solid in which atoms of two or more elements share a common lattice. Whether two elements form an extensive solid solution or barely dissolve in each other is governed by a set of empirical rules identified by William Hume-Rothery in the 1930s. These rules remain among the most useful rules of thumb in metallurgy.",
       "body": [
-        ["h3", "Substitutional solid solutions"],
-        ["p", "In a substitutional solid solution, solute atoms replace solvent atoms on lattice sites at random. Copper-nickel is the textbook example: Cu and Ni are FCC, have nearly identical atomic radii (128 pm and 125 pm), similar electronegativities, and the same valence. They form a continuous solid solution across the entire composition range, from pure Cu to pure Ni. Every composition is a single FCC phase."],
-        ["p", "Copper-zinc (brass) is another important example, but here the solubility is limited. Zinc dissolves in FCC copper up to about 35 at% Zn before a second phase ($\\beta$-brass, BCC) appears. The factors that determine whether solubility is complete or limited are captured by the Hume-Rothery rules."],
-
-        ["h3", "The Hume-Rothery rules"],
-        ["p", "Hume-Rothery and his students at Oxford studied dozens of binary alloy systems in the 1930s and identified four factors that favour extensive substitutional solid solubility:"],
-        ["ol", [
-          "<strong>Atomic size factor.</strong> The atomic radii of solute and solvent must differ by less than about 15%. If the size mismatch exceeds this, the lattice strain energy is too large, and solubility is limited. Cu (128 pm) and Ni (125 pm) differ by 2.3%: complete solubility. Cu (128 pm) and Ag (144 pm) differ by 12.5%: limited solubility (about 8 at% Ag in Cu at the eutectic temperature).",
-          "<strong>Crystal structure.</strong> The two elements should have the same crystal structure. If the solvent is FCC and the solute is BCC, extensive solubility requires reconstructing the lattice at high concentrations, which is energetically costly. Cu and Ni are both FCC: complete solubility. Cu (FCC) and Fe (BCC at room temperature): very limited solubility.",
-          "<strong>Electronegativity.</strong> The Pauling electronegativities should be similar. If the electronegativity difference is large, the elements tend to form intermetallic compounds rather than solid solutions. Mg (1.31) and Sn (1.96) have a large difference and form Mg$_2$Sn rather than an extensive solid solution. Cu (1.90) and Ni (1.91) are virtually identical.",
-          "<strong>Valence (electron concentration).</strong> A higher-valence solute is more soluble in a lower-valence solvent than the reverse. Zinc (valence 2) dissolves extensively in copper (valence 1), up to 35 at%. Copper in zinc is far less soluble. This asymmetry is a direct consequence of how the electron concentration affects the Fermi surface and the stability of the crystal structure."
-        ]],
-        ["callout", "Necessary but not sufficient", "The Hume-Rothery rules are necessary conditions for extensive solubility, not sufficient ones. A pair of elements can satisfy all four rules and still have limited solubility if other factors intervene (strong ordering tendency, magnetic effects). The rules are a filter: if any rule is strongly violated, extensive solubility will not occur. If all are satisfied, extensive solubility is likely but not guaranteed."],
-
-        ["h3", "The size factor in detail"],
-        ["p", "The 15% rule has a physical basis. A misfitting solute atom creates a spherical strain field in the surrounding matrix. The elastic strain energy associated with inserting a sphere of radius $r_s$ into a hole of radius $r_h$ in an elastic matrix is:"],
-        ["eq", "\\Delta G_{\\text{strain}} = \\frac{24\\pi K G r_h (r_s - r_h)^2}{3K + 4G}"],
-        ["p", "where $K$ is the bulk modulus of the solute and $G$ is the shear modulus of the matrix. For copper ($G = 48$ GPa) with a solute that is 15% larger, this energy is of order 0.1 eV per atom, comparable to $k_BT$ at typical annealing temperatures. Above 15% mismatch, the strain energy rises steeply and the equilibrium solubility drops."],
-        ["p", "Some measured size factors and maximum solubilities in copper:"],
-        ["ul", [
-          "Ni: $\\Delta r/r = 2.3\\%$, complete solubility",
-          "Zn: $\\Delta r/r = 4.2\\%$, 38.3 at% maximum solubility",
-          "Al: $\\Delta r/r = 11.8\\%$, 19.6 at% maximum solubility",
-          "Sn: $\\Delta r/r = 15.2\\%$, 9.1 at% maximum solubility",
-          "Pb: $\\Delta r/r = 36.7\\%$, essentially insoluble ($<$ 0.1 at%)"
-        ]],
-
-        ["h3", "Interstitial solid solutions"],
-        ["p", "When the solute atom is much smaller than the solvent, it occupies interstitial sites rather than substitutional ones. The classic example is carbon in iron. The radius of a carbon atom (77 pm) is 38% smaller than iron (126 pm), far too great a mismatch for substitutional solubility. Instead, carbon sits in the octahedral holes of the iron lattice."],
-        ["p", "Interstitial solid solutions are restricted to solutes with small atomic radii: H (25 pm), B (85 pm), C (77 pm), N (75 pm), and O (73 pm). These atoms are small enough to fit into the interstices of transition-metal lattices without excessive strain."],
-        ["p", "The solubility depends on the size of the available interstitial site. In FCC iron (austenite), the octahedral hole has a radius of 0.52 &Aring;. In BCC iron (ferrite), the octahedral hole radius is 0.19 &Aring; (the site is asymmetric and squeezed). Carbon (radius 0.77 &Aring;) fits much better in the FCC holes. This geometric argument correctly predicts that carbon is about 100 times more soluble in austenite than in ferrite."],
-
-        ["h3", "Electron concentration and the Hume-Rothery electron phases"],
-        ["p", "Hume-Rothery noticed that in alloys of copper, silver, or gold with elements of higher valence, phase boundaries occur at specific electron-to-atom ratios. The FCC $\\alpha$ phase becomes unstable at an electron concentration ($e/a$) of about 1.38. The BCC $\\beta$ phase appears near $e/a = 1.48$. The complex $\\gamma$ (gamma brass) phase forms at $e/a = 1.62$."],
-        ["p", "Consider Cu-Zn. Copper has valence 1; zinc has valence 2. At 35 at% Zn:"],
-        ["eq", "e/a = 0.65 \\times 1 + 0.35 \\times 2 = 1.35"],
-        ["p", "Close to the critical value of 1.38, and indeed this is near the FCC/$\\alpha$ phase boundary. The physical explanation, developed by Mott and Jones, is that at these critical electron concentrations, the Fermi sphere just touches a Brillouin zone boundary, making the structure unstable relative to one with a differently shaped zone."],
-        ["p", "The pattern holds across many alloy systems:"],
-        ["ul", [
-          "Cu-Zn: $\\alpha/\\beta$ boundary at $\\sim$38 at% Zn, $e/a \\approx 1.38$",
-          "Cu-Al: $\\alpha/\\beta$ boundary at $\\sim$20 at% Al (Al has valence 3), $e/a \\approx 1.40$",
-          "Cu-Sn: $\\alpha/\\beta$ boundary at $\\sim$15 at% Sn (Sn has valence 4), $e/a \\approx 1.45$",
-          "Ag-Zn: $\\alpha/\\beta$ boundary at $\\sim$38 at% Zn, $e/a \\approx 1.38$"
-        ]],
-
-        ["h3", "Solid solution strengthening"],
-        ["p", "Dissolving solute atoms in a metal matrix increases its yield strength. Each solute atom distorts the lattice locally, creating a strain field that interacts with the strain field of a moving dislocation. The dislocation must do extra work to pass through or around each solute obstacle. For dilute substitutional solid solutions, the increase in critical resolved shear stress scales as:"],
-        ["eq", "\\Delta\\tau \\propto c^{1/2} \\, |\\varepsilon|^{3/2}"],
-        ["p", "where $c$ is the solute concentration and $\\varepsilon$ is the lattice misfit parameter, $\\varepsilon = (1/a)(da/dc)$. Larger atoms produce more strengthening per unit concentration. Tin in copper (large size mismatch) strengthens much more effectively than zinc in copper (small mismatch) per atomic percent of solute added."],
-        ["p", "Some measured solid solution strengthening rates in copper:"],
-        ["ul", [
-          "Ni: $\\sim$0.9 MPa per at% (small misfit, modest strengthening)",
-          "Zn: $\\sim$4.5 MPa per at% (moderate misfit)",
-          "Sn: $\\sim$30 MPa per at% (large misfit, very effective)",
-          "Be: $\\sim$50 MPa per at% (large misfit, also induces ordering)"
-        ]],
-        ["p", "Solid solution strengthening is one of the four classical strengthening mechanisms in metallurgy, alongside work hardening (article 4.2), grain refinement (article 4.3), and precipitation hardening. Unlike precipitation hardening, solid solution strengthening persists at all temperatures (it does not overage) and does not require a heat treatment."],
-
-        ["derivation", "Vegard's law for the lattice parameter of a solid solution.", [
-          ["p", "For an ideal substitutional solid solution, the lattice parameter varies linearly with composition:"],
-          ["eq", "a(x) = (1 - x)\\, a_A + x \\, a_B"],
-          ["p", "where $x$ is the mole fraction of component B, and $a_A$, $a_B$ are the lattice parameters of the pure end members. For Cu-Ni: $a_{\\text{Cu}} = 3.615$ &Aring;, $a_{\\text{Ni}} = 3.524$ &Aring;. At 50 at% Ni:"],
-          ["eq", "a = 0.5 \\times 3.615 + 0.5 \\times 3.524 = 3.570 \\text{ &Aring;}"],
-          ["p", "The measured value for Cu-50Ni (Monel) is 3.565 &Aring;, a slight negative deviation from Vegard's law. Most real alloy systems show small deviations, but the linear approximation is useful for estimating lattice parameters and for measuring composition by X-ray diffraction."]
-        ]],
-
-        ["problem", "Gold (FCC, $a = 4.078$ &Aring;, $r = 144$ pm, electronegativity 2.54, valence 1) and silver (FCC, $a = 4.086$ &Aring;, $r = 144$ pm, electronegativity 1.93, valence 1) form a continuous solid solution. Evaluate each of the four Hume-Rothery rules for this system and explain why complete solubility is expected.", [
-          ["p", "(1) Size factor: $\\Delta r / r = |144 - 144|/144 = 0\\%$. Identical radii. Well within 15%."],
-          ["p", "(2) Crystal structure: both FCC. Same structure."],
-          ["p", "(3) Electronegativity: $|2.54 - 1.93| = 0.61$. This is a moderate difference, larger than Cu-Ni (0.01) but not large enough to drive compound formation. Gold and silver do not form intermetallics."],
-          ["p", "(4) Valence: both have valence 1. Equal valence means no asymmetry in solubility."],
-          ["p", "All four rules are satisfied. Au-Ag forms a continuous FCC solid solution (an isomorphous system). The phase diagram shows a simple lens-shaped two-phase region between liquidus and solidus, with no intermediate phases. The lattice parameters are nearly identical ($< 0.2\\%$ difference), so there is almost no lattice strain. This system is about as close to ideal solid solution behaviour as real metals get."]
-        ]]
+        [
+          "h3",
+          "Substitutional solid solutions"
+        ],
+        [
+          "p",
+          "In a substitutional solid solution, solute atoms replace solvent atoms on lattice sites at random. Copper-nickel is the textbook example: Cu and Ni are FCC, have nearly identical atomic radii (128 pm and 125 pm), similar electronegativities, and the same valence. They form a continuous solid solution across the entire composition range, from pure Cu to pure Ni. Every composition is a single FCC phase."
+        ],
+        [
+          "p",
+          "Copper-zinc (brass) is another important example, but here the solubility is limited. Zinc dissolves in FCC copper up to about 35 at% Zn before a second phase ($\\beta$-brass, BCC) appears. The factors that determine whether solubility is complete or limited are captured by the Hume-Rothery rules."
+        ],
+        [
+          "h3",
+          "The Hume-Rothery rules"
+        ],
+        [
+          "p",
+          "Hume-Rothery and his students at Oxford studied dozens of binary alloy systems in the 1930s and identified four factors that favour extensive substitutional solid solubility:"
+        ],
+        [
+          "ol",
+          [
+            "<strong>Atomic size factor.</strong> The atomic radii of solute and solvent must differ by less than about 15%. If the size mismatch exceeds this, the lattice strain energy is too large, and solubility is limited. Cu (128 pm) and Ni (125 pm) differ by 2.3%: complete solubility. Cu (128 pm) and Ag (144 pm) differ by 12.5%: limited solubility (about 8 at% Ag in Cu at the eutectic temperature).",
+            "<strong>Crystal structure.</strong> The two elements should have the same crystal structure. If the solvent is FCC and the solute is BCC, extensive solubility requires reconstructing the lattice at high concentrations, which is energetically costly. Cu and Ni are both FCC: complete solubility. Cu (FCC) and Fe (BCC at room temperature): very limited solubility.",
+            "<strong>Electronegativity.</strong> The Pauling electronegativities should be similar. If the electronegativity difference is large, the elements tend to form intermetallic compounds rather than solid solutions. Mg (1.31) and Sn (1.96) have a large difference and form Mg$_2$Sn rather than an extensive solid solution. Cu (1.90) and Ni (1.91) are virtually identical.",
+            "<strong>Valence (electron concentration).</strong> A higher-valence solute is more soluble in a lower-valence solvent than the reverse. Zinc (valence 2) dissolves extensively in copper (valence 1), up to 35 at%. Copper in zinc is far less soluble. This asymmetry is a direct consequence of how the electron concentration affects the Fermi surface and the stability of the crystal structure."
+          ]
+        ],
+        [
+          "callout",
+          "Necessary but not sufficient",
+          "The Hume-Rothery rules are necessary conditions for extensive solubility, not sufficient ones. A pair of elements can satisfy all four rules and still have limited solubility if other factors intervene (strong ordering tendency, magnetic effects). The rules are a filter: if any rule is strongly violated, extensive solubility will not occur. If all are satisfied, extensive solubility is likely but not guaranteed."
+        ],
+        [
+          "h3",
+          "The size factor in detail"
+        ],
+        [
+          "p",
+          "The 15% rule has a physical basis. A misfitting solute atom creates a spherical strain field in the surrounding matrix. The elastic strain energy associated with inserting a sphere of radius $r_s$ into a hole of radius $r_h$ in an elastic matrix is:"
+        ],
+        [
+          "eq",
+          "\\Delta G_{\\text{strain}} = \\frac{24\\pi K G r_h (r_s - r_h)^2}{3K + 4G}"
+        ],
+        [
+          "p",
+          "where $K$ is the bulk modulus of the solute and $G$ is the shear modulus of the matrix. For copper ($G = 48$ GPa) with a solute that is 15% larger, this energy is of order 0.1 eV per atom, comparable to $k_BT$ at typical annealing temperatures. Above 15% mismatch, the strain energy rises steeply and the equilibrium solubility drops."
+        ],
+        [
+          "p",
+          "Some measured size factors and maximum solubilities in copper:"
+        ],
+        [
+          "ul",
+          [
+            "Ni: $\\Delta r/r = 2.3\\%$, complete solubility",
+            "Zn: $\\Delta r/r = 4.2\\%$, 38.3 at% maximum solubility",
+            "Al: $\\Delta r/r = 11.8\\%$, 19.6 at% maximum solubility",
+            "Sn: $\\Delta r/r = 15.2\\%$, 9.1 at% maximum solubility",
+            "Pb: $\\Delta r/r = 36.7\\%$, essentially insoluble ($<$ 0.1 at%)"
+          ]
+        ],
+        [
+          "h3",
+          "Interstitial solid solutions"
+        ],
+        [
+          "p",
+          "When the solute atom is much smaller than the solvent, it occupies interstitial sites rather than substitutional ones. The classic example is carbon in iron. The radius of a carbon atom (77 pm) is 38% smaller than iron (126 pm), far too great a mismatch for substitutional solubility. Instead, carbon sits in the octahedral holes of the iron lattice."
+        ],
+        [
+          "p",
+          "Interstitial solid solutions are restricted to solutes with small atomic radii: H (25 pm), B (85 pm), C (77 pm), N (75 pm), and O (73 pm). These atoms are small enough to fit into the interstices of transition-metal lattices without excessive strain."
+        ],
+        [
+          "p",
+          "The solubility depends on the size of the available interstitial site. In FCC iron (austenite), the octahedral hole has a radius of 0.52 &Aring;. In BCC iron (ferrite), the octahedral hole radius is 0.19 &Aring; (the site is asymmetric and squeezed). Carbon (radius 0.77 &Aring;) fits much better in the FCC holes. This geometric argument correctly predicts that carbon is about 100 times more soluble in austenite than in ferrite."
+        ],
+        [
+          "h3",
+          "Electron concentration and the Hume-Rothery electron phases"
+        ],
+        [
+          "p",
+          "Hume-Rothery noticed that in alloys of copper, silver, or gold with elements of higher valence, phase boundaries occur at specific electron-to-atom ratios. The FCC $\\alpha$ phase becomes unstable at an electron concentration ($e/a$) of about 1.38. The BCC $\\beta$ phase appears near $e/a = 1.48$. The complex $\\gamma$ (gamma brass) phase forms at $e/a = 1.62$."
+        ],
+        [
+          "p",
+          "Consider Cu-Zn. Copper has valence 1; zinc has valence 2. At 35 at% Zn:"
+        ],
+        [
+          "eq",
+          "e/a = 0.65 \\times 1 + 0.35 \\times 2 = 1.35"
+        ],
+        [
+          "p",
+          "Close to the critical value of 1.38, and indeed this is near the FCC/$\\alpha$ phase boundary. The physical explanation, developed by Mott and Jones, is that at these critical electron concentrations, the Fermi sphere just touches a Brillouin zone boundary, making the structure unstable relative to one with a differently shaped zone."
+        ],
+        [
+          "p",
+          "The pattern holds across many alloy systems:"
+        ],
+        [
+          "ul",
+          [
+            "Cu-Zn: $\\alpha/\\beta$ boundary at $\\sim$38 at% Zn, $e/a \\approx 1.38$",
+            "Cu-Al: $\\alpha/\\beta$ boundary at $\\sim$20 at% Al (Al has valence 3), $e/a \\approx 1.40$",
+            "Cu-Sn: $\\alpha/\\beta$ boundary at $\\sim$15 at% Sn (Sn has valence 4), $e/a \\approx 1.45$",
+            "Ag-Zn: $\\alpha/\\beta$ boundary at $\\sim$38 at% Zn, $e/a \\approx 1.38$"
+          ]
+        ],
+        [
+          "h3",
+          "Solid solution strengthening"
+        ],
+        [
+          "p",
+          "Dissolving solute atoms in a metal matrix increases its yield strength. Each solute atom distorts the lattice locally, creating a strain field that interacts with the strain field of a moving dislocation. The dislocation must do extra work to pass through or around each solute obstacle. For dilute substitutional solid solutions, the increase in critical resolved shear stress scales as:"
+        ],
+        [
+          "eq",
+          "\\Delta\\tau \\propto c^{1/2} \\, |\\varepsilon|^{3/2}"
+        ],
+        [
+          "p",
+          "where $c$ is the solute concentration and $\\varepsilon$ is the lattice misfit parameter, $\\varepsilon = (1/a)(da/dc)$. Larger atoms produce more strengthening per unit concentration. Tin in copper (large size mismatch) strengthens much more effectively than zinc in copper (small mismatch) per atomic percent of solute added."
+        ],
+        [
+          "p",
+          "Some measured solid solution strengthening rates in copper:"
+        ],
+        [
+          "ul",
+          [
+            "Ni: $\\sim$0.9 MPa per at% (small misfit, modest strengthening)",
+            "Zn: $\\sim$4.5 MPa per at% (moderate misfit)",
+            "Sn: $\\sim$30 MPa per at% (large misfit, very effective)",
+            "Be: $\\sim$50 MPa per at% (large misfit, also induces ordering)"
+          ]
+        ],
+        [
+          "p",
+          "Solid solution strengthening is one of the four classical strengthening mechanisms in metallurgy, alongside work hardening (article 4.2), grain refinement (article 4.3), and precipitation hardening. Unlike precipitation hardening, solid solution strengthening persists at all temperatures (it does not overage) and does not require a heat treatment."
+        ],
+        [
+          "derivation",
+          "Vegard's law for the lattice parameter of a solid solution.",
+          [
+            [
+              "p",
+              "For an ideal substitutional solid solution, the lattice parameter varies linearly with composition:"
+            ],
+            [
+              "eq",
+              "a(x) = (1 - x)\\, a_A + x \\, a_B"
+            ],
+            [
+              "p",
+              "where $x$ is the mole fraction of component B, and $a_A$, $a_B$ are the lattice parameters of the pure end members. For Cu-Ni: $a_{\\text{Cu}} = 3.615$ &Aring;, $a_{\\text{Ni}} = 3.524$ &Aring;. At 50 at% Ni:"
+            ],
+            [
+              "eq",
+              "a = 0.5 \\times 3.615 + 0.5 \\times 3.524 = 3.570 \\text{ &Aring;}"
+            ],
+            [
+              "p",
+              "The measured value for Cu-50Ni (Monel) is 3.565 &Aring;, a slight negative deviation from Vegard's law. Most real alloy systems show small deviations, but the linear approximation is useful for estimating lattice parameters and for measuring composition by X-ray diffraction."
+            ]
+          ]
+        ],
+        [
+          "problem",
+          "Gold (FCC, $a = 4.078$ &Aring;, $r = 144$ pm, electronegativity 2.54, valence 1) and silver (FCC, $a = 4.086$ &Aring;, $r = 144$ pm, electronegativity 1.93, valence 1) form a continuous solid solution. Evaluate each of the four Hume-Rothery rules for this system and explain why complete solubility is expected.",
+          [
+            [
+              "p",
+              "(1) Size factor: $\\Delta r / r = |144 - 144|/144 = 0\\%$. Identical radii. Well within 15%."
+            ],
+            [
+              "p",
+              "(2) Crystal structure: both FCC. Same structure."
+            ],
+            [
+              "p",
+              "(3) Electronegativity: $|2.54 - 1.93| = 0.61$. This is a moderate difference, larger than Cu-Ni (0.01) but not large enough to drive compound formation. Gold and silver do not form intermetallics."
+            ],
+            [
+              "p",
+              "(4) Valence: both have valence 1. Equal valence means no asymmetry in solubility."
+            ],
+            [
+              "p",
+              "All four rules are satisfied. Au-Ag forms a continuous FCC solid solution (an isomorphous system). The phase diagram shows a simple lens-shaped two-phase region between liquidus and solidus, with no intermediate phases. The lattice parameters are nearly identical ($< 0.2\\%$ difference), so there is almost no lattice strain. This system is about as close to ideal solid solution behaviour as real metals get."
+            ]
+          ]
+        ]
       ],
       "related": [
-        { "title": "Point Defects", "url": "point-defects-vacancies-interstitials-substitutional" },
-        { "title": "Phase Equilibria & Transformations", "url": "../phase-transformations/" },
-        { "title": "Crystallography", "url": "../crystallography/" },
-        { "title": "Mechanical Properties", "url": "../mechanical-properties/" }
+        {
+          "title": "Point Defects",
+          "url": "point-defects-vacancies-interstitials-substitutional"
+        },
+        {
+          "title": "Phase Equilibria & Transformations",
+          "url": "../phase-transformations/"
+        },
+        {
+          "title": "Crystallography",
+          "url": "../crystallography/"
+        },
+        {
+          "title": "Mechanical Properties",
+          "url": "../mechanical-properties/"
+        }
       ]
     }
   ]
