@@ -106,10 +106,8 @@ async function init() {
     const sys = fileMap[key];
     if (!sys) return;
 
-    // Determine if we need to flip (el1 should be on the left = x=0)
-    // The JSON has system "A-B" where A is at x=0. If el1 != A, flip.
-    const jsonEls = key.split('-'); // alphabetical
-    const flipped = el1 !== jsonEls[0];
+    // Determine flip after loading — compare el1 against the JSON system order
+    let flipped = false;
 
     // Update URL hash with click order for sharing
     const hashKey = el1 + '-' + el2;
@@ -132,7 +130,9 @@ async function init() {
       .then(r => r.json())
       .then(data => {
         currentData = data;
-        currentFlipped = flipped;
+        // JSON system "Fe-C" means Fe is at x=0. If user clicked el1=Fe, no flip needed.
+        const jsonEl1 = data.system.split('-')[0];
+        currentFlipped = el1 !== jsonEl1;
         renderDiagram();
         diagramContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       })
