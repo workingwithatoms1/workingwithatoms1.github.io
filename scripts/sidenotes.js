@@ -144,19 +144,24 @@ function handleVote(commentId) {
 export async function renderSidenotes(articleSlug, articleBody, bakedComments) {
   if (!articleBody) return;
 
-  // Create the sidenotes container in the margin
+  // Create the sidenotes container — positioned to the right of the article card
   let container = document.querySelector('.sidenotes-container');
   if (!container) {
     container = document.createElement('div');
     container.className = 'sidenotes-container';
-    const card = articleBody.closest('.article-card');
-    if (card) {
-      card.style.position = 'relative';
-      card.appendChild(container);
-    } else {
-      articleBody.parentElement.appendChild(container);
-    }
+    document.body.appendChild(container);
   }
+
+  // Position container at the right edge of the article card
+  function positionContainer() {
+    const card = articleBody.closest('.article-card');
+    if (!card) return;
+    const rect = card.getBoundingClientRect();
+    container.style.left = (rect.right + window.scrollX + 16) + 'px';
+    container.style.top = (rect.top + window.scrollY) + 'px';
+  }
+  positionContainer();
+  window.addEventListener('resize', positionContainer);
 
   // Phase 1: render baked-in comments instantly
   let knownIds = new Set();

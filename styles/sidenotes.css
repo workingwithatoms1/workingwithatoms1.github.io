@@ -6,9 +6,9 @@
 .sidenotes-container {
   position: absolute;
   top: 0;
-  right: -240px;
   width: 220px;
   pointer-events: auto;
+  z-index: 10;
 }
 
 /* --- Individual sidenote ------------------------------------------------- */
