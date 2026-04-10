@@ -66,7 +66,6 @@ function createSidenoteEl(comment) {
         <div class="sidenote-votes">
           <button class="sidenote-vote-btn" data-dir="up" data-id="${comment.id}">\u25B2</button>
           <span class="sidenote-vote-count">${comment.votes}</span>
-          <button class="sidenote-vote-btn" data-dir="down" data-id="${comment.id}">\u25BC</button>
         </div>
       </div>
     </div>
@@ -95,38 +94,35 @@ function escapeHtml(str) {
 /**
  * Handle vote clicks.
  */
-function handleVote(commentId, direction) {
-  // Check localStorage to prevent double voting
+function handleVote(commentId) {
   const voteKey = `vote_${commentId}`;
-  const existing = localStorage.getItem(voteKey);
-  if (existing === direction) return; // already voted this way
+  const already = localStorage.getItem(voteKey);
+
+  // Toggle: if already upvoted, undo; otherwise upvote
+  const direction = already ? 'down' : 'up';
 
   const form = new FormData();
   form.append('action', 'vote');
   form.append('commentId', commentId);
   form.append('direction', direction);
-
   fetch(APPS_SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: form });
 
-  // Update UI optimistically
   const note = document.querySelector(`.sidenote[data-comment-id="${commentId}"]`);
   if (note) {
     const countEl = note.querySelector('.sidenote-vote-count');
     let count = parseInt(countEl.textContent) || 0;
-    // Undo previous vote if switching
-    if (existing === 'up') count--;
-    if (existing === 'down') count++;
-    // Apply new vote
-    if (direction === 'up') count++;
-    if (direction === 'down') count--;
+    count += already ? -1 : 1;
     countEl.textContent = count;
 
-    // Highlight voted button
-    note.querySelectorAll('.sidenote-vote-btn').forEach(b => b.classList.remove('voted'));
-    note.querySelector(`.sidenote-vote-btn[data-dir="${direction}"]`).classList.add('voted');
+    const btn = note.querySelector('.sidenote-vote-btn');
+    btn.classList.toggle('voted');
   }
 
-  localStorage.setItem(voteKey, direction);
+  if (already) {
+    localStorage.removeItem(voteKey);
+  } else {
+    localStorage.setItem(voteKey, 'up');
+  }
 }
 
 /**
@@ -225,7 +221,7 @@ export async function renderSidenotes(articleSlug, articleBody) {
   container.addEventListener('click', (e) => {
     const btn = e.target.closest('.sidenote-vote-btn');
     if (!btn) return;
-    handleVote(btn.dataset.id, btn.dataset.dir);
+    handleVote(btn.dataset.id);
   });
 
   // Restore previous votes from localStorage
