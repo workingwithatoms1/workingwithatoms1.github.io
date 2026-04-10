@@ -228,7 +228,7 @@
         ],
         [
           "p",
-          "Because the electrostatic attraction between Na$^+$ and Cl$^-$ releases far more energy than the transfer costs. At the equilibrium separation of 2.36 Å, the Coulomb energy of a single ion pair is:"
+          "Because the electrostatic attraction between Na$^+$ and Cl$^-$ releases far more energy than the transfer costs. At the equilibrium separation of 2.36 \u00c5, the Coulomb energy of a single ion pair is:"
         ],
         [
           "eq",
@@ -288,7 +288,7 @@
             ],
             [
               "p",
-              "For NaCl ($r_0 = 2.814$ Å, $A = 1.7476$, $n = 8$): $U_L = -756$ kJ/mol. The experimental value (from a Born-Haber cycle) is $-787$ kJ/mol. The 4% discrepancy reflects the neglect of van der Waals attraction and zero-point energy."
+              "For NaCl ($r_0 = 2.814$ \u00c5, $A = 1.7476$, $n = 8$): $U_L = -756$ kJ/mol. The experimental value (from a Born-Haber cycle) is $-787$ kJ/mol. The 4% discrepancy reflects the neglect of van der Waals attraction and zero-point energy."
             ]
           ]
         ],
@@ -344,7 +344,7 @@
         ],
         [
           "p",
-          "High melting points: NaCl melts at 801 C, MgO at 2852 C. The difference reflects the charge: MgO has $z_+ z_- = 4$ versus 1 for NaCl, and shorter bond length (2.11 vs 2.81 Å)."
+          "High melting points: NaCl melts at 801 C, MgO at 2852 C. The difference reflects the charge: MgO has $z_+ z_- = 4$ versus 1 for NaCl, and shorter bond length (2.11 vs 2.81 \u00c5)."
         ],
         [
           "p",
@@ -365,7 +365,7 @@
         ],
         [
           "problem",
-          "Using the Born-Lande equation, estimate the lattice energy of MgO. The Madelung constant is 1.7476 (rocksalt), $r_0 = 2.106$ Å, and $n = 7$ (Born exponent for ions with neon configuration). Compare with the experimental value of 3850 kJ/mol.",
+          "Using the Born-Lande equation, estimate the lattice energy of MgO. The Madelung constant is 1.7476 (rocksalt), $r_0 = 2.106$ \u00c5, and $n = 7$ (Born exponent for ions with neon configuration). Compare with the experimental value of 3850 kJ/mol.",
           [
             [
               "p",
@@ -427,7 +427,7 @@
         ],
         [
           "p",
-          "Two electrons (one from each atom, opposite spins) fill the bonding orbital. The antibonding orbital stays empty. The result: a stable H$_2$ molecule with a bond energy of 436 kJ/mol and an internuclear distance of 0.74 Å."
+          "Two electrons (one from each atom, opposite spins) fill the bonding orbital. The antibonding orbital stays empty. The result: a stable H$_2$ molecule with a bond energy of 436 kJ/mol and an internuclear distance of 0.74 \u00c5."
         ],
         [
           "h3",
@@ -514,9 +514,9 @@
         [
           "ul",
           [
-            "Single (ethane): 1.54 Å, 347 kJ/mol",
-            "Double (ethene): 1.34 Å, 614 kJ/mol",
-            "Triple (ethyne): 1.20 Å, 839 kJ/mol"
+            "Single (ethane): 1.54 \u00c5, 347 kJ/mol",
+            "Double (ethene): 1.34 \u00c5, 614 kJ/mol",
+            "Triple (ethyne): 1.20 \u00c5, 839 kJ/mol"
           ]
         ],
         [
@@ -764,7 +764,7 @@
         ],
         [
           "p",
-          "where $\\alpha$ is the polarisability and $I$ is the ionisation energy. Large, easily polarised atoms (Xe: $\\alpha = 4.04$ Å$^3$) interact more strongly than small ones (He: $\\alpha = 0.20$ Å$^3$). This is why xenon is a liquid at 165 K but helium must be cooled to 4.2 K."
+          "where $\\alpha$ is the polarisability and $I$ is the ionisation energy. Large, easily polarised atoms (Xe: $\\alpha = 4.04$ \u00c5$^3$) interact more strongly than small ones (He: $\\alpha = 0.20$ \u00c5$^3$). This is why xenon is a liquid at 165 K but helium must be cooled to 4.2 K."
         ],
         [
           "h3",
@@ -784,7 +784,7 @@
         ],
         [
           "p",
-          "For argon: $\\varepsilon/k_B = 120$ K (about 0.010 eV), $\\sigma = 3.40$ Å. The equilibrium separation is at $r_{\\text{min}} = 2^{1/6}\\sigma = 3.82$ Å. These values are fitted to second virial coefficient data or crystal properties."
+          "For argon: $\\varepsilon/k_B = 120$ K (about 0.010 eV), $\\sigma = 3.40$ \u00c5. The equilibrium separation is at $r_{\\text{min}} = 2^{1/6}\\sigma = 3.82$ \u00c5. These values are fitted to second virial coefficient data or crystal properties."
         ],
         [
           "callout",
@@ -846,7 +846,7 @@
         ],
         [
           "problem",
-          "The boiling points of the noble gases are: He (4.2 K), Ne (27.1 K), Ar (87.3 K), Kr (119.9 K), Xe (165.1 K). Plot these against polarisability (He: 0.20, Ne: 0.40, Ar: 1.64, Kr: 2.48, Xe: 4.04 Å$^3$) and explain the trend. Estimate the boiling point of radon ($\\alpha \\approx 5.3$ Å$^3$).",
+          "The boiling points of the noble gases are: He (4.2 K), Ne (27.1 K), Ar (87.3 K), Kr (119.9 K), Xe (165.1 K). Plot these against polarisability (He: 0.20, Ne: 0.40, Ar: 1.64, Kr: 2.48, Xe: 4.04 \u00c5$^3$) and explain the trend. Estimate the boiling point of radon ($\\alpha \\approx 5.3$ \u00c5$^3$).",
           [
             [
               "p",
@@ -854,7 +854,7 @@
             ],
             [
               "p",
-              "Fitting a line to the data: slope $\\approx 38$ K/Å$^3$, intercept $\\approx 10$ K. For radon: $T_b \\approx 38 \\times 5.3 + 10 \\approx 211$ K."
+              "Fitting a line to the data: slope $\\approx 38$ K/\u00c5$^3$, intercept $\\approx 10$ K. For radon: $T_b \\approx 38 \\times 5.3 + 10 \\approx 211$ K."
             ],
             [
               "p",
@@ -1041,11 +1041,11 @@
         ],
         [
           "problem",
-          "The Lennard-Jones parameters for argon are $\\varepsilon = 0.0104$ eV and $\\sigma = 3.40$ Å. Find the equilibrium separation, the force constant $k_0$, and estimate the Einstein frequency of vibration in solid argon (atomic mass 39.95 u). Compare with the experimental Debye temperature of 93 K.",
+          "The Lennard-Jones parameters for argon are $\\varepsilon = 0.0104$ eV and $\\sigma = 3.40$ \u00c5. Find the equilibrium separation, the force constant $k_0$, and estimate the Einstein frequency of vibration in solid argon (atomic mass 39.95 u). Compare with the experimental Debye temperature of 93 K.",
           [
             [
               "p",
-              "Equilibrium separation: $r_0 = 2^{1/6}\\sigma = 1.122 \\times 3.40 = 3.82$ Å."
+              "Equilibrium separation: $r_0 = 2^{1/6}\\sigma = 1.122 \\times 3.40 = 3.82$ \u00c5."
             ],
             [
               "p",
@@ -1210,7 +1210,7 @@
         ],
         [
           "p",
-          "Silicate minerals illustrate Pauling's rules beautifully. Si$^{4+}$ ($r = 0.26$ Å) in O$^{2-}$ ($r = 1.40$ Å) gives $r_c/r_a = 0.19$, near the bottom of the tetrahedral range. Silicon is always 4-coordinated in silicates, sitting inside SiO$_4$ tetrahedra."
+          "Silicate minerals illustrate Pauling's rules beautifully. Si$^{4+}$ ($r = 0.26$ \u00c5) in O$^{2-}$ ($r = 1.40$ \u00c5) gives $r_c/r_a = 0.19$, near the bottom of the tetrahedral range. Silicon is always 4-coordinated in silicates, sitting inside SiO$_4$ tetrahedra."
         ],
         [
           "p",
@@ -1261,7 +1261,7 @@
         ],
         [
           "p",
-          "where $d_{ij}$ is the measured bond length, $R_0$ is a tabulated parameter for each cation-anion pair, and $b \\approx 0.37$ Å. The sum of bond valences around each ion should equal its formal charge (the valence sum rule). Deviations identify strained bonds, under-bonded oxygen sites (potential protonation sites), and unstable structures. The method is widely used in mineralogy and solid-state chemistry."
+          "where $d_{ij}$ is the measured bond length, $R_0$ is a tabulated parameter for each cation-anion pair, and $b \\approx 0.37$ \u00c5. The sum of bond valences around each ion should equal its formal charge (the valence sum rule). Deviations identify strained bonds, under-bonded oxygen sites (potential protonation sites), and unstable structures. The method is widely used in mineralogy and solid-state chemistry."
         ],
         [
           "problem",
