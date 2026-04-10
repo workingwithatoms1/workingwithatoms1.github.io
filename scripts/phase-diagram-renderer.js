@@ -331,10 +331,14 @@ export function createPhaseDiagram(container, data) {
   }
 
   function formatPhaseName(raw) {
+    // Per-system overrides take priority
+    const overrides = data.phaseNames || {};
+    if (overrides[raw]) return overrides[raw];
+
     const map = {
       'FCC': '\u03b1', 'FCC_A1': '\u03b1',
       'BCC': '\u03b2', 'BCC_A2': '\u03b2', 'BCC_B2': '\u03b2',
-      'HCP': '\u03b7', 'HCP_A3': '\u03b7',
+      'HCP': 'hcp', 'HCP_A3': 'hcp',
       'LIQUID': 'Liquid',
       'CEMENTITE_D011': 'Fe\u2083C', 'CEMENTITE': 'Fe\u2083C',
       'GRAPHITE': 'Graphite', 'DIAMOND_A4': 'Diamond',

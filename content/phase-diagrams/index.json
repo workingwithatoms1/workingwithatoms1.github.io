@@ -23,6 +23,14 @@
       ],
       "file": "fe-c.json",
       "ref": "G\u00f6hring, Leineweber & Mittemeijer, CALPHAD 52 (2016) 38-46"
+    },
+    {
+      "els": [
+        "Al",
+        "Mg"
+      ],
+      "file": "al-mg.json",
+      "ref": "COST 507 (Ansara, Dinsdale & Rand, 1998)"
     }
   ]
 }
