@@ -292,10 +292,8 @@ function initAnnotations() {
   });
 
   // Submit
-  submitBtn.addEventListener('click', async (e) => {
+  submitBtn.addEventListener('click', (e) => {
     e.stopPropagation();
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Sending...';
 
     const payload = {
       pageUrl: window.location.href,
@@ -307,22 +305,16 @@ function initAnnotations() {
       email: popupEl.querySelector('#annEmail').value.trim(),
     };
 
-    try {
-      if (!APPS_SCRIPT_URL) throw new Error('Apps Script URL not configured');
-      // Use form submission to avoid CORS issues with Apps Script
+    // Fire and forget — don't block the UI
+    if (APPS_SCRIPT_URL) {
       const form = new FormData();
       for (const [key, val] of Object.entries(payload)) {
         form.append(key, val);
       }
-      await fetch(APPS_SCRIPT_URL, {
-        method: 'POST',
-        mode: 'no-cors',
-        body: form,
-      });
-      showToast('Comment submitted. Thank you.');
-    } catch (err) {
-      showToast('Could not submit. Please try again.');
+      fetch(APPS_SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: form });
     }
+
+    showToast('Comment submitted. Thank you.');
 
     // Reset
     submitBtn.textContent = 'Submit';

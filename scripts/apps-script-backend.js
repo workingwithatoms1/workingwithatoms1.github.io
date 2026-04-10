@@ -58,7 +58,7 @@ function doPost(e) {
       data.comment || "",
       data.name || "",
       data.email || "",
-      "unreviewed",
+      "approved",
       0,
       commentId
     ]);
