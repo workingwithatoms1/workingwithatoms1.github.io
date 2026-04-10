@@ -31,10 +31,10 @@
         ["eq", "\\lambda = \\frac{h}{p} = \\frac{h}{mv}"],
         ["p", "where $m$ is the mass and $v$ is the velocity. This equation bridges the wave and particle pictures. The wavelength is inversely proportional to mass and velocity, so wave behaviour is only detectable for very light, slow-moving particles."],
         ["p", "Some real numbers make the point. An electron accelerated through 100 V has kinetic energy $K = eV = 100$ eV $= 1.602 \\times 10^{-17}$ J. Its momentum is $p = \\sqrt{2m_e K}$, where $m_e = 9.109 \\times 10^{-31}$ kg:"],
-        ["eq", "\\lambda_e = \\frac{h}{\\sqrt{2 m_e K}} = \\frac{6.626 \\times 10^{-34}}{\\sqrt{2 \\times 9.109 \\times 10^{-31} \\times 1.602 \\times 10^{-17}}} = 1.23 \\text{ \\AA}"],
+        ["eq", "\\lambda_e = \\frac{h}{\\sqrt{2 m_e K}} = \\frac{6.626 \\times 10^{-34}}{\\sqrt{2 \\times 9.109 \\times 10^{-31} \\times 1.602 \\times 10^{-17}}} = 1.23 \\text{ Å}"],
         ["p", "That is comparable to interatomic spacings in crystals. Electrons at 100 eV can diffract from crystal surfaces. At 200 kV (a typical transmission electron microscope), $\\lambda = 0.0251$ A. This is why electron microscopy achieves atomic resolution."],
         ["p", "A thermal neutron at room temperature ($T = 300$ K) has kinetic energy $K = \\frac{3}{2}k_BT = 0.039$ eV. With neutron mass $m_n = 1.675 \\times 10^{-27}$ kg:"],
-        ["eq", "\\lambda_n = \\frac{h}{\\sqrt{2 m_n K}} = \\frac{6.626 \\times 10^{-34}}{\\sqrt{2 \\times 1.675 \\times 10^{-27} \\times 6.25 \\times 10^{-21}}} = 1.45 \\text{ \\AA}"],
+        ["eq", "\\lambda_n = \\frac{h}{\\sqrt{2 m_n K}} = \\frac{6.626 \\times 10^{-34}}{\\sqrt{2 \\times 1.675 \\times 10^{-27} \\times 6.25 \\times 10^{-21}}} = 1.45 \\text{ Å}"],
         ["p", "Thermal neutrons also have wavelengths comparable to lattice spacings, which is why neutron diffraction is such a powerful technique for crystal structure determination."],
         ["p", "A baseball (0.145 kg) thrown at 40 m/s has $\\lambda = h/(mv) = 6.626 \\times 10^{-34}/(0.145 \\times 40) = 1.14 \\times 10^{-34}$ m. This is $10^{-24}$ times smaller than a proton. Wave behaviour is utterly undetectable for macroscopic objects. Quantum mechanics matters only when $\\lambda$ is comparable to the length scales of the system."],
 
@@ -63,7 +63,7 @@
           ["p", "At 200 kV, the electron kinetic energy is $K = 200 \\times 10^3 \\times 1.602 \\times 10^{-19} = 3.204 \\times 10^{-14}$ J. At this energy, relativistic corrections matter. The relativistic de Broglie wavelength is:"],
           ["eq", "\\lambda = \\frac{h}{\\sqrt{2m_e K \\left(1 + \\frac{K}{2m_e c^2}\\right)}}"],
           ["p", "With $m_e c^2 = 8.187 \\times 10^{-14}$ J $= 511$ keV:"],
-          ["eq", "\\lambda = \\frac{6.626 \\times 10^{-34}}{\\sqrt{2 \\times 9.109 \\times 10^{-31} \\times 3.204 \\times 10^{-14} \\times (1 + \\frac{200}{1022})}} = 0.0251 \\text{ \\AA}"],
+          ["eq", "\\lambda = \\frac{6.626 \\times 10^{-34}}{\\sqrt{2 \\times 9.109 \\times 10^{-31} \\times 3.204 \\times 10^{-14} \\times (1 + \\frac{200}{1022})}} = 0.0251 \\text{ Å}"],
           ["p", "This is about 200 times smaller than the silicon lattice parameter. The electron wavelength sets the theoretical resolution limit (the Abbe diffraction limit). Although real TEM resolution is limited by lens aberrations rather than wavelength, the small $\\lambda$ is why atomic-resolution imaging is possible. Modern aberration-corrected TEMs achieve resolution below 0.5 A, routinely imaging individual atomic columns in crystals."]
         ]]
       ],
@@ -178,7 +178,7 @@
 
         ["h3", "Radial wavefunctions"],
         ["p", "The radial part $R_{nl}(r)$ determines how the probability density varies with distance from the nucleus. The natural length scale is the Bohr radius:"],
-        ["eq", "a_0 = \\frac{4\\pi\\varepsilon_0\\hbar^2}{m_e e^2} = 0.529 \\text{ \\AA}"],
+        ["eq", "a_0 = \\frac{4\\pi\\varepsilon_0\\hbar^2}{m_e e^2} = 0.529 \\text{ Å}"],
         ["p", "The first few radial wavefunctions:"],
         ["ul", [
           "$R_{10} = 2\\left(\\frac{1}{a_0}\\right)^{3/2} e^{-r/a_0}$ (1s): pure exponential decay.",
