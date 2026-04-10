@@ -20,6 +20,7 @@ const registry = {
   'lever-rule':          () => import('./lever-rule.js'),
   'edge-dislocation':    () => import('./edge-dislocation.js'),
   'lennard-jones':       () => import('./lennard-jones.js'),
+  'electronegativity-scale': () => import('./electronegativity-scale.js'),
 };
 
 /**

@@ -103,7 +103,7 @@
         ],
         [
           "p",
-          "The same asymmetry affects mechanical behaviour. Under compression, atoms are pushed into the steep repulsive wall: the restoring force rises sharply. Under tension, they are pulled into the gradual attractive tail: the restoring force increases more slowly. The tangent modulus is therefore higher in compression than in tension. For small strains this difference is negligible (the harmonic approximation holds), but at large strains it becomes significant. This is one reason why ceramics, which are strong in compression, are weak in tension: the asymmetric potential means that tensile strains reach the bond-breaking threshold sooner."
+          "At typical engineering strains (a few percent), atoms barely move from $r_0$ and the potential is effectively symmetric (harmonic). The modulus is the same in tension and compression. The asymmetry only matters at large strains approaching bond breaking, which is relevant to fracture but not to elastic behaviour. The practical consequence of the asymmetry is thermal expansion, not a compression/tension modulus difference."
         ],
         [
           "h3",
@@ -114,8 +114,9 @@
           "Atoms bond because it lowers their energy. How they bond depends on how they share or transfer electrons. The key parameter is the electronegativity difference $\\Delta\\chi$ between the two atoms. Electronegativity measures how strongly an atom attracts electrons in a bond. Fluorine (4.0 on Pauling's scale) pulls hardest. Caesium (0.7) holds most loosely."
         ],
         [
-          "p",
-          "A rough map: Cs (0.7), Na (0.9), Mg (1.3), Al (1.5), Ti (1.5), Fe (1.8), Ni (1.9), Cu (1.9), Si (1.8), C (2.5), S (2.5), N (3.0), O (3.5), F (4.0). Metals cluster below 2.0. Nonmetals sit above 2.5. The gap between bonded atoms determines everything."
+          "widget",
+          "electronegativity-scale",
+          {}
         ],
         [
           "p",
