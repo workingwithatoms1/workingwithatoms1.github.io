@@ -13,6 +13,27 @@ const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwBxJoFlK2UhUmp
 function findTextAnchor(container, selectedText) {
   if (!selectedText || selectedText.length < 5) return null;
 
+  // Check if the selected text looks like a LaTeX equation
+  // (contains backslashes, braces, or common LaTeX commands)
+  const looksLikeEquation = /[\\{}]|frac|int|sum|partial|Delta|alpha|beta|gamma/.test(selectedText);
+
+  if (looksLikeEquation) {
+    // Find the nearest equation element whose rendered text matches
+    const equations = container.querySelectorAll('.article-eq, .inline-eq');
+    for (const eq of equations) {
+      const rendered = eq.textContent.trim();
+      // Check if the equation's rendered output overlaps with the selected text
+      // (KaTeX renders to visible text that may partially match)
+      const snippet = selectedText.replace(/[\\{}$]/g, '').substring(0, 20);
+      if (snippet.length > 3 && rendered.includes(snippet)) {
+        eq.classList.add('sidenote-anchor');
+        const rect = eq.getBoundingClientRect();
+        return { top: rect.top + window.scrollY, span: eq };
+      }
+    }
+  }
+
+  // Normal text search
   const searchText = selectedText.substring(0, 60);
   const walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT);
   let node;
@@ -22,7 +43,6 @@ function findTextAnchor(container, selectedText) {
     if (idx === -1) continue;
 
     try {
-      // Wrap the matched text in a span for precise highlighting
       const range = document.createRange();
       range.setStart(node, idx);
       range.setEnd(node, Math.min(idx + selectedText.length, node.textContent.length));
@@ -32,17 +52,10 @@ function findTextAnchor(container, selectedText) {
       range.surroundContents(span);
 
       const rect = span.getBoundingClientRect();
-      return {
-        top: rect.top + window.scrollY,
-        span: span,
-      };
+      return { top: rect.top + window.scrollY, span: span };
     } catch (e) {
-      // surroundContents fails if range crosses elements — fall back to parent position
       const rect = node.parentElement.getBoundingClientRect();
-      return {
-        top: rect.top + window.scrollY,
-        span: null,
-      };
+      return { top: rect.top + window.scrollY, span: null };
     }
   }
 
