@@ -178,7 +178,7 @@ function buildArticleContent(articleId) {
   let html = `<a href="../" class="article-breadcrumb">${mod.title} &mdash; ${art.number}</a>`;
 
   // Article card
-  html += `<div class="article-card">`;
+  html += `<div class="article-card" data-annotatable="true">`;
   html += `
     <div class="article-header">
       <span class="article-topic">${mod.topic}</span>
@@ -194,7 +194,7 @@ function buildArticleContent(articleId) {
 
     html += `
       <p class="article-intro">${art.intro}</p>
-      <div class="article-body" data-annotatable="true">
+      <div class="article-body"
         ${renderBody(mainBlocks)}
     `;
 
@@ -219,7 +219,7 @@ function buildArticleContent(articleId) {
     }
   } else {
     html += `
-      <div class="article-body" data-annotatable="true">
+      <div class="article-body"
         <div class="article-callout">
           <div class="callout-label">Under Development</div>
           <p>This article is currently being written. Check back soon.</p>
