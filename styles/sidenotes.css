@@ -1,5 +1,6 @@
 /* ==========================================================================
    Sidenotes — Tufte-style margin notes
+   Collapsed by default, expand on click.
    ========================================================================== */
 
 /* --- Container: positioned in the right margin of the article card ------- */
@@ -7,8 +8,8 @@
 .sidenotes-container {
   position: absolute;
   top: 0;
-  right: -260px;
-  width: 240px;
+  right: -240px;
+  width: 220px;
   pointer-events: auto;
 }
 
@@ -16,28 +17,82 @@
 
 .sidenote {
   position: absolute;
-  width: 240px;
-  padding: 12px;
+  width: 220px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* --- Collapsed state: subtle marker -------------------------------------- */
+
+.sidenote-marker {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 0;
+  opacity: 0.4;
+  transition: opacity 0.15s;
+}
+
+.sidenote:hover .sidenote-marker {
+  opacity: 0.8;
+}
+
+.sidenote-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #2a2f7c;
+  flex-shrink: 0;
+}
+
+.sidenote-preview {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  color: #3a3d5a;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 0;
+  opacity: 0;
+  transition: max-width 0.2s ease, opacity 0.2s ease;
+}
+
+.sidenote:hover .sidenote-preview {
+  max-width: 200px;
+  opacity: 1;
+}
+
+/* --- Expanded state: full comment ---------------------------------------- */
+
+.sidenote-expanded {
+  display: none;
+  padding: 10px 0 10px 12px;
+  border-left: 2px solid #2a2f7c;
   font-family: 'DM Sans', sans-serif;
   font-size: 12px;
   line-height: 1.5;
   color: #3a3d5a;
-  background: #f6f5fa;
-  border-left: 2px solid #c8c6d0;
-  transition: border-color 0.15s;
 }
 
-.sidenote:hover {
-  border-left-color: #2a2f7c;
+.sidenote.open .sidenote-marker {
+  display: none;
 }
 
-/* --- Quote (the highlighted text) ---------------------------------------- */
+.sidenote.open .sidenote-expanded {
+  display: block;
+}
+
+.sidenote.open {
+  z-index: 10;
+}
+
+/* --- Quote --------------------------------------------------------------- */
 
 .sidenote-quote {
   font-family: 'Lora', serif;
   font-size: 11px;
   font-style: italic;
-  color: #888;
+  color: #999;
   line-height: 1.4;
   margin-bottom: 6px;
 }
@@ -46,7 +101,7 @@
 
 .sidenote-body {
   color: #3a3d5a;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 /* --- Meta: author + votes ------------------------------------------------ */
@@ -59,14 +114,14 @@
 
 .sidenote-author {
   font-size: 10px;
-  color: #999;
+  color: #bbb;
   font-weight: 500;
 }
 
 .sidenote-votes {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 3px;
 }
 
 .sidenote-vote-btn {
@@ -74,7 +129,7 @@
   border: none;
   cursor: pointer;
   font-size: 8px;
-  color: #bbb;
+  color: #ccc;
   padding: 2px;
   line-height: 1;
   transition: color 0.15s;
@@ -89,18 +144,22 @@
 }
 
 .sidenote-vote-count {
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 600;
-  color: #666;
-  min-width: 16px;
+  color: #999;
+  min-width: 14px;
   text-align: center;
 }
 
 /* --- Anchor highlight on the article text -------------------------------- */
 
 .sidenote-anchor {
-  background: rgba(42, 47, 124, 0.06);
-  border-bottom: 1px dotted rgba(42, 47, 124, 0.3);
+  border-bottom: 1px dotted rgba(42, 47, 124, 0.25);
+  cursor: pointer;
+}
+
+.sidenote-anchor:hover {
+  background: rgba(42, 47, 124, 0.04);
 }
 
 /* --- Mobile: inline instead of margin ------------------------------------ */
@@ -112,7 +171,7 @@
     width: 100%;
     margin-top: 32px;
     padding-top: 16px;
-    border-top: 1px solid rgba(42, 47, 124, 0.1);
+    border-top: 1px solid rgba(42, 47, 124, 0.08);
   }
 
   .sidenotes-container::before {
@@ -123,7 +182,7 @@
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    color: #999;
+    color: #bbb;
     margin-bottom: 12px;
   }
 
@@ -131,6 +190,15 @@
     position: relative;
     top: auto !important;
     width: 100%;
-    margin-bottom: 12px;
+    margin-bottom: 8px;
+  }
+
+  /* On mobile, show expanded by default */
+  .sidenote-marker {
+    display: none;
+  }
+
+  .sidenote-expanded {
+    display: block;
   }
 }

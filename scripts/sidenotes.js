@@ -47,29 +47,42 @@ function findTextAnchor(container, selectedText) {
 }
 
 /**
- * Create a sidenote element.
+ * Create a sidenote element with collapsed/expanded states.
  */
 function createSidenoteEl(comment) {
   const note = document.createElement('div');
   note.className = 'sidenote';
   note.dataset.commentId = comment.id;
 
+  const previewText = truncate(comment.comment, 30);
   const quote = comment.selectedText
     ? `<div class="sidenote-quote">\u201C${truncate(comment.selectedText, 60)}\u201D</div>`
     : '';
 
   note.innerHTML = `
-    ${quote}
-    <div class="sidenote-body">${escapeHtml(comment.comment)}</div>
-    <div class="sidenote-meta">
-      <span class="sidenote-author">${escapeHtml(comment.name)}</span>
-      <div class="sidenote-votes">
-        <button class="sidenote-vote-btn" data-dir="up" data-id="${comment.id}">\u25B2</button>
-        <span class="sidenote-vote-count">${comment.votes}</span>
-        <button class="sidenote-vote-btn" data-dir="down" data-id="${comment.id}">\u25BC</button>
+    <div class="sidenote-marker">
+      <span class="sidenote-dot"></span>
+      <span class="sidenote-preview">${escapeHtml(previewText)}</span>
+    </div>
+    <div class="sidenote-expanded">
+      ${quote}
+      <div class="sidenote-body">${escapeHtml(comment.comment)}</div>
+      <div class="sidenote-meta">
+        <span class="sidenote-author">${escapeHtml(comment.name)}</span>
+        <div class="sidenote-votes">
+          <button class="sidenote-vote-btn" data-dir="up" data-id="${comment.id}">\u25B2</button>
+          <span class="sidenote-vote-count">${comment.votes}</span>
+          <button class="sidenote-vote-btn" data-dir="down" data-id="${comment.id}">\u25BC</button>
+        </div>
       </div>
     </div>
   `;
+
+  // Click to toggle expanded
+  note.addEventListener('click', (e) => {
+    if (e.target.closest('.sidenote-vote-btn')) return;
+    note.classList.toggle('open');
+  });
 
   return note;
 }
@@ -169,9 +182,14 @@ export async function renderSidenotes(articleSlug, articleBody) {
 
     if (anchor) {
       noteEl.style.top = anchor.top + 'px';
-      // Highlight the anchored text
+      // Highlight the anchored text and link it to the sidenote
       if (anchor.element) {
         anchor.element.classList.add('sidenote-anchor');
+        anchor.element.addEventListener('click', () => {
+          // Close all others, open this one
+          container.querySelectorAll('.sidenote.open').forEach(n => n.classList.remove('open'));
+          noteEl.classList.add('open');
+        });
       }
     }
 
