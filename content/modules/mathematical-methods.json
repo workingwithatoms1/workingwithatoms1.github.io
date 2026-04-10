@@ -17,60 +17,177 @@
       "readingTime": "14 min",
       "intro": "A temperature is a single number. A force has magnitude and direction. A stress depends on two directions: the orientation of the face and the direction of the force. Materials science is full of quantities that require more than a scalar to describe, and tensors provide the systematic framework.",
       "body": [
-        ["h3", "Scalars, vectors and the need for tensors"],
-        ["p", "Temperature, density and energy are scalars. One number suffices. Force, velocity and displacement are vectors. Three numbers (the components along three axes) are needed in three dimensions. But many quantities in materials science connect two vectors. Apply a force in one direction and a crystal may deform in a different direction. Apply an electric field and the resulting polarisation need not be parallel to the field. These relationships require tensors."],
-        ["p", "A second-rank tensor in three dimensions has $3^2 = 9$ components. It can be written as a $3 \\times 3$ matrix. The stress tensor $\\sigma_{ij}$ relates force to area. The strain tensor $\\varepsilon_{ij}$ relates displacement to position. The elastic stiffness tensor $C_{ijkl}$ connects them, and it is fourth-rank: $3^4 = 81$ components, though symmetry reduces this dramatically."],
-
-        ["h3", "Vectors and the dot and cross products"],
-        ["p", "A vector $\\mathbf{v}$ in three dimensions has components $(v_1, v_2, v_3)$ with respect to a chosen basis. The dot product of two vectors $\\mathbf{a} \\cdot \\mathbf{b} = a_1 b_1 + a_2 b_2 + a_3 b_3 = |\\mathbf{a}||\\mathbf{b}|\\cos\\theta$ gives a scalar. It appears whenever you project one vector onto another. In crystallography, the interplanar spacing of a set of planes with Miller indices $(hkl)$ involves the dot product of a reciprocal lattice vector with itself."],
-        ["p", "The cross product $\\mathbf{a} \\times \\mathbf{b}$ gives a vector perpendicular to both $\\mathbf{a}$ and $\\mathbf{b}$, with magnitude $|\\mathbf{a}||\\mathbf{b}|\\sin\\theta$. It appears in torque calculations, in computing the area of a parallelogram spanned by two lattice vectors, and in the definition of the reciprocal lattice: $\\mathbf{b}_1 = 2\\pi(\\mathbf{a}_2 \\times \\mathbf{a}_3)/(\\mathbf{a}_1 \\cdot \\mathbf{a}_2 \\times \\mathbf{a}_3)$."],
-
-        ["h3", "The stress tensor"],
-        ["p", "At any point inside a loaded body, the stress state is described by the Cauchy stress tensor $\\boldsymbol{\\sigma}$. Component $\\sigma_{ij}$ is the force per unit area acting in the $j$-direction on a face whose outward normal points in the $i$-direction:"],
-        ["eq", "\\boldsymbol{\\sigma} = \\begin{pmatrix} \\sigma_{11} & \\sigma_{12} & \\sigma_{13} \\\\ \\sigma_{21} & \\sigma_{22} & \\sigma_{23} \\\\ \\sigma_{31} & \\sigma_{32} & \\sigma_{33} \\end{pmatrix}"],
-        ["p", "The diagonal entries ($\\sigma_{11}$, $\\sigma_{22}$, $\\sigma_{33}$) are normal stresses: tension or compression. The off-diagonal entries are shear stresses. Angular momentum balance requires $\\sigma_{ij} = \\sigma_{ji}$, so the tensor is symmetric and has only six independent components."],
-        ["p", "The traction vector $\\mathbf{t}$ on a plane with unit normal $\\mathbf{n}$ is $t_i = \\sigma_{ij} n_j$ (summing over $j$). This is the central operation of the stress tensor: given any cutting plane, it tells you the force per unit area on that plane. A tensile test applies $\\sigma_{11} = F/A$ with all other components zero, which is called uniaxial stress."],
-
-        ["h3", "The strain tensor"],
-        ["p", "The infinitesimal strain tensor describes small deformations. If a point at position $\\mathbf{x}$ displaces to $\\mathbf{x} + \\mathbf{u}$, where $\\mathbf{u}$ is the displacement field, the strain tensor is:"],
-        ["eq", "\\varepsilon_{ij} = \\frac{1}{2}\\left(\\frac{\\partial u_i}{\\partial x_j} + \\frac{\\partial u_j}{\\partial x_i}\\right)"],
-        ["p", "This is symmetric by construction. The diagonal components $\\varepsilon_{11}$, $\\varepsilon_{22}$, $\\varepsilon_{33}$ are normal strains (fractional length changes). The off-diagonal components are half the engineering shear strains: $\\varepsilon_{12} = \\gamma_{12}/2$, where $\\gamma_{12}$ is the change in angle between two initially perpendicular lines."],
-
-        ["h3", "Voigt notation"],
-        ["p", "Writing the full tensor form of Hooke's law $\\sigma_{ij} = C_{ijkl} \\varepsilon_{kl}$ requires a fourth-rank tensor with 81 components. Symmetry of $\\sigma$ and $\\varepsilon$ reduces the independent components of $C$ to 36, and the existence of a strain energy function reduces it further to 21. Even so, $C_{ijkl}$ is unwieldy."],
-        ["p", "Voigt notation maps the six independent stress and strain components into vectors and the stiffness into a $6 \\times 6$ matrix. The mapping is:"],
-        ["eq", "11 \\to 1, \\quad 22 \\to 2, \\quad 33 \\to 3, \\quad 23 \\to 4, \\quad 13 \\to 5, \\quad 12 \\to 6"],
-        ["p", "Hooke's law becomes $\\sigma_\\alpha = C_{\\alpha\\beta} \\varepsilon_\\beta$ (summing over $\\beta$ from 1 to 6). For a cubic crystal, the 21 independent constants collapse to just three: $C_{11}$, $C_{12}$ and $C_{44}$:"],
-        ["eq", "\\begin{pmatrix} \\sigma_1 \\\\ \\sigma_2 \\\\ \\sigma_3 \\\\ \\sigma_4 \\\\ \\sigma_5 \\\\ \\sigma_6 \\end{pmatrix} = \\begin{pmatrix} C_{11} & C_{12} & C_{12} & 0 & 0 & 0 \\\\ C_{12} & C_{11} & C_{12} & 0 & 0 & 0 \\\\ C_{12} & C_{12} & C_{11} & 0 & 0 & 0 \\\\ 0 & 0 & 0 & C_{44} & 0 & 0 \\\\ 0 & 0 & 0 & 0 & C_{44} & 0 \\\\ 0 & 0 & 0 & 0 & 0 & C_{44} \\end{pmatrix} \\begin{pmatrix} \\varepsilon_1 \\\\ \\varepsilon_2 \\\\ \\varepsilon_3 \\\\ \\varepsilon_4 \\\\ \\varepsilon_5 \\\\ \\varepsilon_6 \\end{pmatrix}"],
-        ["p", "For copper: $C_{11} = 168.4$ GPa, $C_{12} = 121.4$ GPa, $C_{44} = 75.4$ GPa. For an isotropic material, the three are not independent: $C_{44} = (C_{11} - C_{12})/2$. Copper violates this ($75.4 \\neq 23.5$), which is why copper single crystals are elastically anisotropic. The Zener anisotropy ratio $A = 2C_{44}/(C_{11} - C_{12})$ equals 3.21 for copper (1.0 would be isotropic)."],
-
-        ["callout", "A note on Voigt strains", "When converting strains to Voigt notation, be careful: the shear strain components carry a factor of 2. In Voigt notation, $\\varepsilon_4 = 2\\varepsilon_{23} = \\gamma_{23}$ (the engineering shear strain), not $\\varepsilon_{23}$ itself. Forgetting this factor of 2 is one of the most common errors in computational mechanics."],
-
-        ["h3", "Matrix operations and eigenvalues"],
-        ["p", "The eigenvalues of the stress tensor are the principal stresses $\\sigma_1 \\geq \\sigma_2 \\geq \\sigma_3$. These are the normal stresses on planes where the shear stress vanishes. They are found by solving $\\det(\\boldsymbol{\\sigma} - \\lambda \\mathbf{I}) = 0$, a cubic characteristic equation. The eigenvectors give the principal directions."],
-        ["p", "The principal stresses determine failure. The von Mises yield criterion, widely used for ductile metals, says yielding occurs when:"],
-        ["eq", "\\sigma_{\\text{vM}} = \\sqrt{\\frac{1}{2}\\left[(\\sigma_1 - \\sigma_2)^2 + (\\sigma_2 - \\sigma_3)^2 + (\\sigma_3 - \\sigma_1)^2\\right]} = \\sigma_y"],
-        ["p", "This is an eigenvalue problem dressed in engineering clothes. The trace $\\sigma_1 + \\sigma_2 + \\sigma_3 = \\sigma_{kk}$ gives three times the hydrostatic stress. These invariants of the tensor do not change when you rotate the coordinate system, which is exactly why they appear in failure criteria."],
-
-        ["h3", "Coordinate transformations"],
-        ["p", "A tensor must transform correctly under rotation. If $\\mathbf{R}$ is a rotation matrix, a second-rank tensor transforms as $\\sigma'_{ij} = R_{ik} R_{jl} \\sigma_{kl}$, or in matrix form $\\boldsymbol{\\sigma}' = \\mathbf{R} \\boldsymbol{\\sigma} \\mathbf{R}^T$. This is the defining property of a tensor: it is not just any matrix, but one whose components transform in this specific way under a change of basis."],
-        ["p", "This matters in practice when relating single-crystal elastic constants (measured in the crystal frame) to the loading direction in a polycrystal. Texture analysis in rolled sheets involves averaging these transformations over all grain orientations weighted by the orientation distribution function."],
-
-        ["derivation", "For uniaxial tension $\\sigma_{11} = \\sigma$ along $x_1$, the resolved shear stress on a slip plane with normal at angle $\\phi$ to the tensile axis, in a slip direction at angle $\\lambda$, is $\\tau = \\sigma \\cos\\phi \\cos\\lambda$.", [
-          ["p", "The traction on the slip plane is $t_i = \\sigma_{ij} n_j$. With $\\sigma_{ij} = \\sigma \\delta_{i1}\\delta_{j1}$, we get $t_1 = \\sigma n_1 = \\sigma \\cos\\phi$, $t_2 = t_3 = 0$."],
-          ["p", "The resolved shear stress is the component of $\\mathbf{t}$ in the slip direction $\\mathbf{s}$: $\\tau = \\mathbf{t} \\cdot \\mathbf{s} = \\sigma \\cos\\phi \\, s_1 = \\sigma \\cos\\phi \\cos\\lambda$."],
-          ["p", "This is Schmid's law, and the product $\\cos\\phi \\cos\\lambda$ is the Schmid factor. Its maximum value of 0.5 occurs when $\\phi = \\lambda = 45°$. This is nothing more than a tensor transformation applied to a specific geometry."]
-        ]],
-
-        ["problem", "The elastic constants of iron (BCC) are $C_{11} = 231.4$ GPa, $C_{12} = 134.7$ GPa, $C_{44} = 116.4$ GPa. Calculate the Zener anisotropy ratio. Is iron more or less elastically anisotropic than copper ($A = 3.21$)?", [
-          ["p", "$A = 2C_{44}/(C_{11} - C_{12}) = 2 \\times 116.4 / (231.4 - 134.7) = 232.8 / 96.7 = 2.41$."],
-          ["p", "Iron has $A = 2.41$, which is closer to the isotropic value of 1.0 than copper's 3.21. Iron is less anisotropic than copper. However, $A = 2.41$ is still a significant departure from isotropy. The Young's modulus of an iron single crystal varies from about 130 GPa in the $\\langle100\\rangle$ direction to 283 GPa in $\\langle111\\rangle$."]
-        ]]
+        [
+          "h3",
+          "Scalars, vectors and the need for tensors"
+        ],
+        [
+          "p",
+          "Temperature, density and energy are scalars. One number suffices. Force, velocity and displacement are vectors. Three numbers (the components along three axes) are needed in three dimensions. But many quantities in materials science connect two vectors. Apply a force in one direction and a crystal may deform in a different direction. Apply an electric field and the resulting polarisation need not be parallel to the field. These relationships require tensors."
+        ],
+        [
+          "p",
+          "A second-rank tensor in three dimensions has $3^2 = 9$ components. It can be written as a $3 \\times 3$ matrix. The stress tensor $\\sigma_{ij}$ relates force to area. The strain tensor $\\varepsilon_{ij}$ relates displacement to position. The elastic stiffness tensor $C_{ijkl}$ connects them, and it is fourth-rank: $3^4 = 81$ components, though symmetry reduces this dramatically."
+        ],
+        [
+          "h3",
+          "Vectors and the dot and cross products"
+        ],
+        [
+          "p",
+          "A vector $\\mathbf{v}$ in three dimensions has components $(v_1, v_2, v_3)$ with respect to a chosen basis. The dot product of two vectors $\\mathbf{a} \\cdot \\mathbf{b} = a_1 b_1 + a_2 b_2 + a_3 b_3 = |\\mathbf{a}||\\mathbf{b}|\\cos\\theta$ gives a scalar. It appears whenever you project one vector onto another. In crystallography, the interplanar spacing of a set of planes with Miller indices $(hkl)$ involves the dot product of a reciprocal lattice vector with itself."
+        ],
+        [
+          "p",
+          "The cross product $\\mathbf{a} \\times \\mathbf{b}$ gives a vector perpendicular to both $\\mathbf{a}$ and $\\mathbf{b}$, with magnitude $|\\mathbf{a}||\\mathbf{b}|\\sin\\theta$. It appears in torque calculations, in computing the area of a parallelogram spanned by two lattice vectors, and in the definition of the reciprocal lattice: $\\mathbf{b}_1 = 2\\pi(\\mathbf{a}_2 \\times \\mathbf{a}_3)/(\\mathbf{a}_1 \\cdot \\mathbf{a}_2 \\times \\mathbf{a}_3)$."
+        ],
+        [
+          "h3",
+          "The stress tensor"
+        ],
+        [
+          "p",
+          "At any point inside a loaded body, the stress state is described by the Cauchy stress tensor $\\boldsymbol{\\sigma}$. Component $\\sigma_{ij}$ is the force per unit area acting in the $j$-direction on a face whose outward normal points in the $i$-direction:"
+        ],
+        [
+          "eq",
+          "\\boldsymbol{\\sigma} = \\begin{pmatrix} \\sigma_{11} & \\sigma_{12} & \\sigma_{13} \\\\ \\sigma_{21} & \\sigma_{22} & \\sigma_{23} \\\\ \\sigma_{31} & \\sigma_{32} & \\sigma_{33} \\end{pmatrix}"
+        ],
+        [
+          "p",
+          "The diagonal entries ($\\sigma_{11}$, $\\sigma_{22}$, $\\sigma_{33}$) are normal stresses: tension or compression. The off-diagonal entries are shear stresses. Angular momentum balance requires $\\sigma_{ij} = \\sigma_{ji}$, so the tensor is symmetric and has only six independent components."
+        ],
+        [
+          "p",
+          "The traction vector $\\mathbf{t}$ on a plane with unit normal $\\mathbf{n}$ is $t_i = \\sigma_{ij} n_j$ (summing over $j$). This is the central operation of the stress tensor: given any cutting plane, it tells you the force per unit area on that plane. A tensile test applies $\\sigma_{11} = F/A$ with all other components zero, which is called uniaxial stress."
+        ],
+        [
+          "h3",
+          "The strain tensor"
+        ],
+        [
+          "p",
+          "The infinitesimal strain tensor describes small deformations. If a point at position $\\mathbf{x}$ displaces to $\\mathbf{x} + \\mathbf{u}$, where $\\mathbf{u}$ is the displacement field, the strain tensor is:"
+        ],
+        [
+          "eq",
+          "\\varepsilon_{ij} = \\frac{1}{2}\\left(\\frac{\\partial u_i}{\\partial x_j} + \\frac{\\partial u_j}{\\partial x_i}\\right)"
+        ],
+        [
+          "p",
+          "This is symmetric by construction. The diagonal components $\\varepsilon_{11}$, $\\varepsilon_{22}$, $\\varepsilon_{33}$ are normal strains (fractional length changes). The off-diagonal components are half the engineering shear strains: $\\varepsilon_{12} = \\gamma_{12}/2$, where $\\gamma_{12}$ is the change in angle between two initially perpendicular lines."
+        ],
+        [
+          "h3",
+          "Voigt notation"
+        ],
+        [
+          "p",
+          "Writing the full tensor form of Hooke's law $\\sigma_{ij} = C_{ijkl} \\varepsilon_{kl}$ requires a fourth-rank tensor with 81 components. Symmetry of $\\sigma$ and $\\varepsilon$ reduces the independent components of $C$ to 36, and the existence of a strain energy function reduces it further to 21. Even so, $C_{ijkl}$ is unwieldy."
+        ],
+        [
+          "p",
+          "Voigt notation maps the six independent stress and strain components into vectors and the stiffness into a $6 \\times 6$ matrix. The mapping is:"
+        ],
+        [
+          "eq",
+          "11 \\to 1, \\quad 22 \\to 2, \\quad 33 \\to 3, \\quad 23 \\to 4, \\quad 13 \\to 5, \\quad 12 \\to 6"
+        ],
+        [
+          "p",
+          "Hooke's law becomes $\\sigma_\\alpha = C_{\\alpha\\beta} \\varepsilon_\\beta$ (summing over $\\beta$ from 1 to 6). For a cubic crystal, the 21 independent constants collapse to just three: $C_{11}$, $C_{12}$ and $C_{44}$:"
+        ],
+        [
+          "eq",
+          "\\begin{pmatrix} \\sigma_1 \\\\ \\sigma_2 \\\\ \\sigma_3 \\\\ \\sigma_4 \\\\ \\sigma_5 \\\\ \\sigma_6 \\end{pmatrix} = \\begin{pmatrix} C_{11} & C_{12} & C_{12} & 0 & 0 & 0 \\\\ C_{12} & C_{11} & C_{12} & 0 & 0 & 0 \\\\ C_{12} & C_{12} & C_{11} & 0 & 0 & 0 \\\\ 0 & 0 & 0 & C_{44} & 0 & 0 \\\\ 0 & 0 & 0 & 0 & C_{44} & 0 \\\\ 0 & 0 & 0 & 0 & 0 & C_{44} \\end{pmatrix} \\begin{pmatrix} \\varepsilon_1 \\\\ \\varepsilon_2 \\\\ \\varepsilon_3 \\\\ \\varepsilon_4 \\\\ \\varepsilon_5 \\\\ \\varepsilon_6 \\end{pmatrix}"
+        ],
+        [
+          "p",
+          "For copper: $C_{11} = 168.4$ GPa, $C_{12} = 121.4$ GPa, $C_{44} = 75.4$ GPa. For an isotropic material, the three are not independent: $C_{44} = (C_{11} - C_{12})/2$. Copper violates this ($75.4 \\neq 23.5$), which is why copper single crystals are elastically anisotropic. The Zener anisotropy ratio $A = 2C_{44}/(C_{11} - C_{12})$ equals 3.21 for copper (1.0 would be isotropic)."
+        ],
+        [
+          "callout",
+          "A note on Voigt strains",
+          "When converting strains to Voigt notation, be careful: the shear strain components carry a factor of 2. In Voigt notation, $\\varepsilon_4 = 2\\varepsilon_{23} = \\gamma_{23}$ (the engineering shear strain), not $\\varepsilon_{23}$ itself. Forgetting this factor of 2 is one of the most common errors in computational mechanics."
+        ],
+        [
+          "h3",
+          "Matrix operations and eigenvalues"
+        ],
+        [
+          "p",
+          "The eigenvalues of the stress tensor are the principal stresses $\\sigma_1 \\geq \\sigma_2 \\geq \\sigma_3$. These are the normal stresses on planes where the shear stress vanishes. They are found by solving $\\det(\\boldsymbol{\\sigma} - \\lambda \\mathbf{I}) = 0$, a cubic characteristic equation. The eigenvectors give the principal directions."
+        ],
+        [
+          "p",
+          "The principal stresses determine failure. The von Mises yield criterion, widely used for ductile metals, says yielding occurs when:"
+        ],
+        [
+          "eq",
+          "\\sigma_{\\text{vM}} = \\sqrt{\\frac{1}{2}\\left[(\\sigma_1 - \\sigma_2)^2 + (\\sigma_2 - \\sigma_3)^2 + (\\sigma_3 - \\sigma_1)^2\\right]} = \\sigma_y"
+        ],
+        [
+          "p",
+          "This is an eigenvalue problem dressed in engineering clothes. The trace $\\sigma_1 + \\sigma_2 + \\sigma_3 = \\sigma_{kk}$ gives three times the hydrostatic stress. These invariants of the tensor do not change when you rotate the coordinate system, which is exactly why they appear in failure criteria."
+        ],
+        [
+          "h3",
+          "Coordinate transformations"
+        ],
+        [
+          "p",
+          "A tensor must transform correctly under rotation. If $\\mathbf{R}$ is a rotation matrix, a second-rank tensor transforms as $\\sigma'_{ij} = R_{ik} R_{jl} \\sigma_{kl}$, or in matrix form $\\boldsymbol{\\sigma}' = \\mathbf{R} \\boldsymbol{\\sigma} \\mathbf{R}^T$. This is the defining property of a tensor: it is not just any matrix, but one whose components transform in this specific way under a change of basis."
+        ],
+        [
+          "p",
+          "This matters in practice when relating single-crystal elastic constants (measured in the crystal frame) to the loading direction in a polycrystal. Texture analysis in rolled sheets involves averaging these transformations over all grain orientations weighted by the orientation distribution function."
+        ],
+        [
+          "derivation",
+          "For uniaxial tension $\\sigma_{11} = \\sigma$ along $x_1$, the resolved shear stress on a slip plane with normal at angle $\\phi$ to the tensile axis, in a slip direction at angle $\\lambda$, is $\\tau = \\sigma \\cos\\phi \\cos\\lambda$.",
+          [
+            [
+              "p",
+              "The traction on the slip plane is $t_i = \\sigma_{ij} n_j$. With $\\sigma_{ij} = \\sigma \\delta_{i1}\\delta_{j1}$, we get $t_1 = \\sigma n_1 = \\sigma \\cos\\phi$, $t_2 = t_3 = 0$."
+            ],
+            [
+              "p",
+              "The resolved shear stress is the component of $\\mathbf{t}$ in the slip direction $\\mathbf{s}$: $\\tau = \\mathbf{t} \\cdot \\mathbf{s} = \\sigma \\cos\\phi \\, s_1 = \\sigma \\cos\\phi \\cos\\lambda$."
+            ],
+            [
+              "p",
+              "This is Schmid's law, and the product $\\cos\\phi \\cos\\lambda$ is the Schmid factor. Its maximum value of 0.5 occurs when $\\phi = \\lambda = 45\u00b0$. This is nothing more than a tensor transformation applied to a specific geometry."
+            ]
+          ]
+        ],
+        [
+          "problem",
+          "The elastic constants of iron (BCC) are $C_{11} = 231.4$ GPa, $C_{12} = 134.7$ GPa, $C_{44} = 116.4$ GPa. Calculate the Zener anisotropy ratio. Is iron more or less elastically anisotropic than copper ($A = 3.21$)?",
+          [
+            [
+              "p",
+              "$A = 2C_{44}/(C_{11} - C_{12}) = 2 \\times 116.4 / (231.4 - 134.7) = 232.8 / 96.7 = 2.41$."
+            ],
+            [
+              "p",
+              "Iron has $A = 2.41$, which is closer to the isotropic value of 1.0 than copper's 3.21. Iron is less anisotropic than copper. However, $A = 2.41$ is still a significant departure from isotropy. The Young's modulus of an iron single crystal varies from about 130 GPa in the $\\langle100\\rangle$ direction to 283 GPa in $\\langle111\\rangle$."
+            ]
+          ]
+        ]
       ],
       "related": [
-        { "title": "Stress & Strain", "url": "../mechanical-properties/stress-strain-engineering-vs-true" },
-        { "title": "Elasticity & Elastic Moduli", "url": "../mechanical-properties/elasticity-elastic-moduli" },
-        { "title": "Crystal Systems & Bravais Lattices", "url": "../crystallography/crystal-systems" }
+        {
+          "title": "Stress & Strain",
+          "url": "../mechanical-properties/stress-strain-engineering-vs-true"
+        },
+        {
+          "title": "Elasticity & Elastic Moduli",
+          "url": "../mechanical-properties/elasticity-elastic-moduli"
+        },
+        {
+          "title": "Crystal Systems & Bravais Lattices",
+          "url": "../crystallography/crystal-systems"
+        }
       ]
     },
     {
@@ -81,67 +198,197 @@
       "readingTime": "15 min",
       "intro": "Most physical laws in materials science are statements about rates of change. Fick's law relates concentration gradients to flux. Fourier's law relates temperature gradients to heat flow. Newton's second law relates force to acceleration. The language for all of these is differential equations, and solving them is how we predict what a material will do.",
       "body": [
-        ["h3", "Ordinary differential equations"],
-        ["p", "An ordinary differential equation (ODE) involves derivatives of a function of one variable. The simplest materials science example is radioactive decay: the rate of disintegration is proportional to the number of atoms remaining:"],
-        ["eq", "\\frac{dN}{dt} = -\\lambda N"],
-        ["p", "This is first-order, linear and separable. The solution is $N(t) = N_0 e^{-\\lambda t}$, with half-life $t_{1/2} = \\ln 2 / \\lambda$. Carbon-14 has $\\lambda = 1.21 \\times 10^{-4}$ yr$^{-1}$, giving $t_{1/2} = 5730$ years. The same mathematics describes the decay of supersaturation during precipitation and the relaxation of stress in a viscoelastic polymer."],
-
-        ["h3", "Second-order ODEs: the harmonic oscillator"],
-        ["p", "The vibration of an atom about its equilibrium position in a crystal is governed by:"],
-        ["eq", "m\\frac{d^2 x}{dt^2} = -kx"],
-        ["p", "where $k$ is the effective spring constant (the curvature of the interatomic potential at its minimum). The general solution is $x(t) = A\\cos(\\omega t) + B\\sin(\\omega t)$ with $\\omega = \\sqrt{k/m}$. This frequency determines the Debye temperature and hence the heat capacity at low temperatures. For copper, $k \\approx 27$ N/m (from the elastic modulus and interatomic spacing), giving a vibrational frequency of about $5 \\times 10^{12}$ Hz."],
-        ["p", "Adding damping gives $m\\ddot{x} + c\\dot{x} + kx = 0$. The character of the solution depends on the discriminant $c^2 - 4mk$. If positive, the system is overdamped: it returns to equilibrium without oscillating. If negative, it is underdamped: it oscillates with decaying amplitude. The critically damped case ($c^2 = 4mk$) returns to equilibrium fastest. This is the same mathematics that describes the response of a galvanometer, a seismometer, or the damping of phonons in a crystal."],
-
-        ["h3", "Partial differential equations: Fick's second law"],
-        ["p", "When a quantity depends on more than one variable, we need partial differential equations (PDEs). The most important PDE in materials science is the diffusion equation, Fick's second law:"],
-        ["eq", "\\frac{\\partial c}{\\partial t} = D \\frac{\\partial^2 c}{\\partial x^2}"],
-        ["p", "This says that the rate of change of concentration at a point is proportional to the curvature of the concentration profile. Where the profile is concave up ($\\partial^2 c / \\partial x^2 > 0$), concentration increases. Where it is concave down, concentration decreases. The constant $D$ is the diffusion coefficient, typically $10^{-14}$ to $10^{-12}$ m$^2$/s for substitutional diffusion in metals at high temperatures."],
-        ["p", "The derivation is straightforward. Fick's first law states that the flux $J = -D \\, \\partial c / \\partial x$. Conservation of mass requires $\\partial c / \\partial t = -\\partial J / \\partial x$. Combining these gives Fick's second law."],
-        ["callout", "The heat equation", "The heat equation $\\partial T / \\partial t = \\alpha \\, \\partial^2 T / \\partial x^2$ (where $\\alpha = k/\\rho c_p$ is the thermal diffusivity) is mathematically identical to Fick's second law. Every solution to one is a solution to the other with the appropriate relabelling. A carburisation problem and a quenching problem are the same PDE."],
-
-        ["h3", "Boundary and initial conditions"],
-        ["p", "A PDE alone does not determine a unique solution. You need initial conditions (the state at $t = 0$) and boundary conditions (what happens at the edges of the domain). The three standard types are:"],
-        ["ul", [
-          "<strong>Dirichlet</strong>: the value is specified at the boundary. Example: the surface concentration during carburisation is held at $c_s$.",
-          "<strong>Neumann</strong>: the gradient (flux) is specified. Example: an insulated boundary where no heat escapes, so $\\partial T / \\partial x = 0$.",
-          "<strong>Robin</strong> (mixed): a linear combination of value and gradient is specified. Example: convective cooling at a surface, where $-k \\, \\partial T / \\partial x = h(T - T_\\infty)$."
-        ]],
-        ["p", "The choice of boundary condition changes the solution completely. Carburising steel with a constant surface concentration gives an error function profile: $c(x,t) = c_s \\text{erfc}(x / 2\\sqrt{Dt})$. Carburising with a constant flux gives a different profile entirely."],
-
-        ["h3", "Separation of variables"],
-        ["p", "The standard analytical method for linear PDEs with simple geometry is separation of variables. Assume $c(x,t) = X(x) \\cdot T(t)$, substitute into the PDE, and separate:"],
-        ["eq", "\\frac{1}{D}\\frac{T'}{T} = \\frac{X''}{X} = -\\lambda"],
-        ["p", "The left side depends only on $t$, the right only on $x$. Both must equal a constant $-\\lambda$. This gives two ODEs: $T' = -D\\lambda T$ and $X'' = -\\lambda X$. The time part decays exponentially. The spatial part is sinusoidal (for $\\lambda > 0$). The full solution is a sum over all allowed $\\lambda$ values, which are determined by the boundary conditions."],
-        ["p", "For a slab of thickness $L$ with $c = 0$ at both surfaces and initial concentration $c_0$, the solution is:"],
-        ["eq", "c(x,t) = \\frac{4c_0}{\\pi} \\sum_{n=0}^{\\infty} \\frac{1}{2n+1} \\sin\\left(\\frac{(2n+1)\\pi x}{L}\\right) \\exp\\left(-\\frac{(2n+1)^2 \\pi^2 D t}{L^2}\\right)"],
-        ["p", "Each term decays exponentially, and the higher harmonics decay fastest (the $n$-th term decays as $e^{-(2n+1)^2 \\pi^2 D t / L^2}$). After a short time, only the first term survives and the profile is sinusoidal."],
-
-        ["h3", "The wave equation"],
-        ["p", "The wave equation $\\partial^2 u / \\partial t^2 = v^2 \\, \\partial^2 u / \\partial x^2$ governs elastic waves in solids. The speed $v = \\sqrt{E/\\rho}$ for a longitudinal wave in a thin rod, where $E$ is Young's modulus and $\\rho$ the density. For steel ($E = 200$ GPa, $\\rho = 7800$ kg/m$^3$), $v \\approx 5060$ m/s. Ultrasonic testing exploits these waves to find internal defects."],
-        ["p", "Unlike the diffusion equation, the wave equation is second-order in time. Its solutions propagate rather than decay. The general solution is $u(x,t) = f(x - vt) + g(x + vt)$: two waves travelling in opposite directions. The diffusion equation smooths out sharp features; the wave equation preserves them."],
-
-        ["h3", "Laplace's and Poisson's equations"],
-        ["p", "At steady state ($\\partial c / \\partial t = 0$), Fick's second law reduces to Laplace's equation: $\\nabla^2 c = 0$. This same equation governs the electric potential in a charge-free region and the temperature in a body with no internal heat sources. In two dimensions:"],
-        ["eq", "\\frac{\\partial^2 \\phi}{\\partial x^2} + \\frac{\\partial^2 \\phi}{\\partial y^2} = 0"],
-        ["p", "The steady-state temperature distribution in a furnace wall, the potential distribution around a corroding pit, and the stress function in an elastic body all satisfy Laplace's equation. If there are sources (heat generation, charge, body forces), it becomes Poisson's equation $\\nabla^2 \\phi = -f$."],
-
-        ["derivation", "Derive the characteristic diffusion length. If the diffusion coefficient is $D$ and the time is $t$, the only combination with dimensions of length is $\\sqrt{Dt}$.", [
-          ["p", "$[D] = \\text{m}^2/\\text{s}$ and $[t] = \\text{s}$. So $[Dt] = \\text{m}^2$ and $[\\sqrt{Dt}] = \\text{m}$."],
-          ["p", "This is dimensional analysis, but it gives the correct scaling. The error function solution for a step initial condition has the form $c = c_0 \\, \\text{erfc}(x / 2\\sqrt{Dt})$. The concentration penetrates a distance of order $\\sqrt{Dt}$."],
-          ["p", "Carbon in austenite at 950 C has $D \\approx 2 \\times 10^{-11}$ m$^2$/s. After 1 hour: $\\sqrt{Dt} = \\sqrt{2 \\times 10^{-11} \\times 3600} \\approx 0.27$ mm. This is why carburising takes hours to produce a case depth of a millimetre or so."]
-        ]],
-
-        ["problem", "A 2 mm thick sheet of palladium separates pure hydrogen (left) from vacuum (right). At 400 C, the diffusion coefficient of H in Pd is $D = 4 \\times 10^{-7}$ cm$^2$/s. In steady state, the concentration profile is linear. If the surface concentration on the hydrogen side is $c_0 = 2 \\times 10^{-3}$ mol/cm$^3$ and the vacuum side is effectively zero, calculate the steady-state flux.", [
-          ["p", "At steady state, $\\partial c / \\partial t = 0$, so $\\partial^2 c / \\partial x^2 = 0$ and the profile is linear: $c(x) = c_0(1 - x/L)$."],
-          ["p", "Fick's first law: $J = -D \\, dc/dx = -D \\times (-c_0/L) = Dc_0/L$."],
-          ["eq", "J = \\frac{4 \\times 10^{-7} \\times 2 \\times 10^{-3}}{0.2} = 4 \\times 10^{-9} \\text{ mol/(cm}^2\\text{s)}"],
-          ["p", "This is the basis of palladium membrane hydrogen purification. The flux is inversely proportional to thickness, which is why practical membranes are made as thin as possible."]
-        ]]
+        [
+          "h3",
+          "Ordinary differential equations"
+        ],
+        [
+          "p",
+          "An ordinary differential equation (ODE) involves derivatives of a function of one variable. The simplest materials science example is radioactive decay: the rate of disintegration is proportional to the number of atoms remaining:"
+        ],
+        [
+          "eq",
+          "\\frac{dN}{dt} = -\\lambda N"
+        ],
+        [
+          "p",
+          "This is first-order, linear and separable. The solution is $N(t) = N_0 e^{-\\lambda t}$, with half-life $t_{1/2} = \\ln 2 / \\lambda$. Carbon-14 has $\\lambda = 1.21 \\times 10^{-4}$ yr$^{-1}$, giving $t_{1/2} = 5730$ years. The same mathematics describes the decay of supersaturation during precipitation and the relaxation of stress in a viscoelastic polymer."
+        ],
+        [
+          "h3",
+          "Second-order ODEs: the harmonic oscillator"
+        ],
+        [
+          "p",
+          "The vibration of an atom about its equilibrium position in a crystal is governed by:"
+        ],
+        [
+          "eq",
+          "m\\frac{d^2 x}{dt^2} = -kx"
+        ],
+        [
+          "p",
+          "where $k$ is the effective spring constant (the curvature of the interatomic potential at its minimum). The general solution is $x(t) = A\\cos(\\omega t) + B\\sin(\\omega t)$ with $\\omega = \\sqrt{k/m}$. This frequency determines the Debye temperature and hence the heat capacity at low temperatures. For copper, $k \\approx 27$ N/m (from the elastic modulus and interatomic spacing), giving a vibrational frequency of about $5 \\times 10^{12}$ Hz."
+        ],
+        [
+          "p",
+          "Adding damping gives $m\\ddot{x} + c\\dot{x} + kx = 0$. The character of the solution depends on the discriminant $c^2 - 4mk$. If positive, the system is overdamped: it returns to equilibrium without oscillating. If negative, it is underdamped: it oscillates with decaying amplitude. The critically damped case ($c^2 = 4mk$) returns to equilibrium fastest. This is the same mathematics that describes the response of a galvanometer, a seismometer, or the damping of phonons in a crystal."
+        ],
+        [
+          "h3",
+          "Partial differential equations: Fick's second law"
+        ],
+        [
+          "p",
+          "When a quantity depends on more than one variable, we need partial differential equations (PDEs). The most important PDE in materials science is the diffusion equation, Fick's second law:"
+        ],
+        [
+          "eq",
+          "\\frac{\\partial c}{\\partial t} = D \\frac{\\partial^2 c}{\\partial x^2}"
+        ],
+        [
+          "p",
+          "This says that the rate of change of concentration at a point is proportional to the curvature of the concentration profile. Where the profile is concave up ($\\partial^2 c / \\partial x^2 > 0$), concentration increases. Where it is concave down, concentration decreases. The constant $D$ is the diffusion coefficient, typically $10^{-14}$ to $10^{-12}$ m$^2$/s for substitutional diffusion in metals at high temperatures."
+        ],
+        [
+          "p",
+          "The derivation is straightforward. Fick's first law states that the flux $J = -D \\, \\partial c / \\partial x$. Conservation of mass requires $\\partial c / \\partial t = -\\partial J / \\partial x$. Combining these gives Fick's second law."
+        ],
+        [
+          "callout",
+          "The heat equation",
+          "The heat equation $\\partial T / \\partial t = \\alpha \\, \\partial^2 T / \\partial x^2$ (where $\\alpha = k/\\rho c_p$ is the thermal diffusivity) is mathematically identical to Fick's second law. Every solution to one is a solution to the other with the appropriate relabelling. A carburisation problem and a quenching problem are the same PDE."
+        ],
+        [
+          "h3",
+          "Boundary and initial conditions"
+        ],
+        [
+          "p",
+          "A PDE alone does not determine a unique solution. You need initial conditions (the state at $t = 0$) and boundary conditions (what happens at the edges of the domain). The three standard types are:"
+        ],
+        [
+          "ul",
+          [
+            "<strong>Dirichlet</strong>: the value is specified at the boundary. Example: the surface concentration during carburisation is held at $c_s$.",
+            "<strong>Neumann</strong>: the gradient (flux) is specified. Example: an insulated boundary where no heat escapes, so $\\partial T / \\partial x = 0$.",
+            "<strong>Robin</strong> (mixed): a linear combination of value and gradient is specified. Example: convective cooling at a surface, where $-k \\, \\partial T / \\partial x = h(T - T_\\infty)$."
+          ]
+        ],
+        [
+          "p",
+          "The choice of boundary condition changes the solution completely. Carburising steel with a constant surface concentration gives an error function profile: $c(x,t) = c_s \\text{erfc}(x / 2\\sqrt{Dt})$. Carburising with a constant flux gives a different profile entirely."
+        ],
+        [
+          "h3",
+          "Separation of variables"
+        ],
+        [
+          "p",
+          "The standard analytical method for linear PDEs with simple geometry is separation of variables. Assume $c(x,t) = X(x) \\cdot T(t)$, substitute into the PDE, and separate:"
+        ],
+        [
+          "eq",
+          "\\frac{1}{D}\\frac{T'}{T} = \\frac{X''}{X} = -\\lambda"
+        ],
+        [
+          "p",
+          "The left side depends only on $t$, the right only on $x$. Both must equal a constant $-\\lambda$. This gives two ODEs: $T' = -D\\lambda T$ and $X'' = -\\lambda X$. The time part decays exponentially. The spatial part is sinusoidal (for $\\lambda > 0$). The full solution is a sum over all allowed $\\lambda$ values, which are determined by the boundary conditions."
+        ],
+        [
+          "p",
+          "For a slab of thickness $L$ with $c = 0$ at both surfaces and initial concentration $c_0$, the solution is:"
+        ],
+        [
+          "eq",
+          "c(x,t) = \\frac{4c_0}{\\pi} \\sum_{n=0}^{\\infty} \\frac{1}{2n+1} \\sin\\left(\\frac{(2n+1)\\pi x}{L}\\right) \\exp\\left(-\\frac{(2n+1)^2 \\pi^2 D t}{L^2}\\right)"
+        ],
+        [
+          "p",
+          "Each term decays exponentially, and the higher harmonics decay fastest (the $n$-th term decays as $e^{-(2n+1)^2 \\pi^2 D t / L^2}$). After a short time, only the first term survives and the profile is sinusoidal."
+        ],
+        [
+          "h3",
+          "The wave equation"
+        ],
+        [
+          "p",
+          "The wave equation $\\partial^2 u / \\partial t^2 = v^2 \\, \\partial^2 u / \\partial x^2$ governs elastic waves in solids. The speed $v = \\sqrt{E/\\rho}$ for a longitudinal wave in a thin rod, where $E$ is Young's modulus and $\\rho$ the density. For steel ($E = 200$ GPa, $\\rho = 7800$ kg/m$^3$), $v \\approx 5060$ m/s. Ultrasonic testing exploits these waves to find internal defects."
+        ],
+        [
+          "p",
+          "Unlike the diffusion equation, the wave equation is second-order in time. Its solutions propagate rather than decay. The general solution is $u(x,t) = f(x - vt) + g(x + vt)$: two waves travelling in opposite directions. The diffusion equation smooths out sharp features; the wave equation preserves them."
+        ],
+        [
+          "h3",
+          "Laplace's and Poisson's equations"
+        ],
+        [
+          "p",
+          "At steady state ($\\partial c / \\partial t = 0$), Fick's second law reduces to Laplace's equation: $\\nabla^2 c = 0$. This same equation governs the electric potential in a charge-free region and the temperature in a body with no internal heat sources. In two dimensions:"
+        ],
+        [
+          "eq",
+          "\\frac{\\partial^2 \\phi}{\\partial x^2} + \\frac{\\partial^2 \\phi}{\\partial y^2} = 0"
+        ],
+        [
+          "p",
+          "The steady-state temperature distribution in a furnace wall, the potential distribution around a corroding pit, and the stress function in an elastic body all satisfy Laplace's equation. If there are sources (heat generation, charge, body forces), it becomes Poisson's equation $\\nabla^2 \\phi = -f$."
+        ],
+        [
+          "derivation",
+          "Derive the characteristic diffusion length. If the diffusion coefficient is $D$ and the time is $t$, the only combination with dimensions of length is $\\sqrt{Dt}$.",
+          [
+            [
+              "p",
+              "$[D] = \\text{m}^2/\\text{s}$ and $[t] = \\text{s}$. So $[Dt] = \\text{m}^2$ and $[\\sqrt{Dt}] = \\text{m}$."
+            ],
+            [
+              "p",
+              "This is dimensional analysis, but it gives the correct scaling. The error function solution for a step initial condition has the form $c = c_0 \\, \\text{erfc}(x / 2\\sqrt{Dt})$. The concentration penetrates a distance of order $\\sqrt{Dt}$."
+            ],
+            [
+              "p",
+              "Carbon in austenite at 950 C has $D \\approx 2 \\times 10^{-11}$ m$^2$/s. After 1 hour: $\\sqrt{Dt} = \\sqrt{2 \\times 10^{-11} \\times 3600} \\approx 0.27$ mm. This is why carburising takes hours to produce a case depth of a millimetre or so."
+            ]
+          ]
+        ],
+        [
+          "problem",
+          "A 2 mm thick sheet of palladium separates pure hydrogen (left) from vacuum (right). At 400 C, the diffusion coefficient of H in Pd is $D = 4 \\times 10^{-7}$ cm$^2$/s. In steady state, the concentration profile is linear. If the surface concentration on the hydrogen side is $c_0 = 2 \\times 10^{-3}$ mol/cm$^3$ and the vacuum side is effectively zero, calculate the steady-state flux.",
+          [
+            [
+              "p",
+              "At steady state, $\\partial c / \\partial t = 0$, so $\\partial^2 c / \\partial x^2 = 0$ and the profile is linear: $c(x) = c_0(1 - x/L)$."
+            ],
+            [
+              "p",
+              "Fick's first law: $J = -D \\, dc/dx = -D \\times (-c_0/L) = Dc_0/L$."
+            ],
+            [
+              "eq",
+              "J = \\frac{4 \\times 10^{-7} \\times 2 \\times 10^{-3}}{0.2} = 4 \\times 10^{-9} \\text{ mol/(cm}^2\\text{s)}"
+            ],
+            [
+              "p",
+              "This is the basis of palladium membrane hydrogen purification. The flux is inversely proportional to thickness, which is why practical membranes are made as thin as possible."
+            ]
+          ]
+        ]
       ],
       "related": [
-        { "title": "Fick's First & Second Laws", "url": "../diffusion/ficks-first-second-laws" },
-        { "title": "Solutions to the Diffusion Equation", "url": "../diffusion/solutions-to-the-diffusion-equation" },
-        { "title": "Numerical Methods & Discretisation", "url": "numerical-methods-discretisation" }
+        {
+          "title": "Fick's First & Second Laws",
+          "url": "../diffusion/ficks-first-second-laws"
+        },
+        {
+          "title": "Solutions to the Diffusion Equation",
+          "url": "../diffusion/solutions-to-the-diffusion-equation"
+        },
+        {
+          "title": "Numerical Methods & Discretisation",
+          "url": "numerical-methods-discretisation"
+        }
       ]
     },
     {
@@ -152,64 +399,197 @@
       "readingTime": "14 min",
       "intro": "Any periodic function can be written as a sum of sines and cosines. This is not just a mathematical curiosity. A crystal is periodic. An X-ray diffraction pattern is the squared modulus of a Fourier transform. Understanding Fourier analysis is understanding diffraction.",
       "body": [
-        ["h3", "Fourier series"],
-        ["p", "A function $f(x)$ that repeats with period $L$ can be written as:"],
-        ["eq", "f(x) = \\frac{a_0}{2} + \\sum_{n=1}^{\\infty} \\left[ a_n \\cos\\left(\\frac{2\\pi n x}{L}\\right) + b_n \\sin\\left(\\frac{2\\pi n x}{L}\\right) \\right]"],
-        ["p", "The coefficients are found by exploiting orthogonality. Multiply both sides by $\\cos(2\\pi m x / L)$ and integrate over one period. Every term vanishes except the one where $n = m$:"],
-        ["eq", "a_n = \\frac{2}{L} \\int_0^L f(x) \\cos\\left(\\frac{2\\pi n x}{L}\\right) dx, \\qquad b_n = \\frac{2}{L} \\int_0^L f(x) \\sin\\left(\\frac{2\\pi n x}{L}\\right) dx"],
-        ["p", "The zeroth coefficient $a_0/2$ is just the average value of the function. The $n$-th coefficients tell you how much of the $n$-th harmonic is present."],
-
-        ["h3", "Complex exponential form"],
-        ["p", "Using Euler's formula $e^{i\\theta} = \\cos\\theta + i\\sin\\theta$, the Fourier series can be written more compactly:"],
-        ["eq", "f(x) = \\sum_{n=-\\infty}^{\\infty} c_n \\, e^{2\\pi i n x / L}, \\qquad c_n = \\frac{1}{L} \\int_0^L f(x) \\, e^{-2\\pi i n x / L} \\, dx"],
-        ["p", "This form is standard in crystallography. The negative values of $n$ are not a separate physical contribution; they combine with the positive ones to produce the real sines and cosines. The complex form is simply cleaner to manipulate."],
-
-        ["h3", "The Fourier transform"],
-        ["p", "For a non-periodic function, the sum over discrete harmonics becomes an integral over continuous frequencies:"],
-        ["eq", "F(k) = \\int_{-\\infty}^{\\infty} f(x) \\, e^{-2\\pi i k x} \\, dx, \\qquad f(x) = \\int_{-\\infty}^{\\infty} F(k) \\, e^{2\\pi i k x} \\, dk"],
-        ["p", "$F(k)$ is the Fourier transform of $f(x)$. It decomposes the function into its frequency content. A sharp spike in $f(x)$ (a delta function) has a flat transform: all frequencies contribute equally. A broad Gaussian transforms to a narrow Gaussian. This reciprocal relationship between width in real space and width in frequency space is fundamental."],
-        ["callout", "The convolution theorem", "The Fourier transform of a convolution is the product of the individual transforms: $\\mathcal{F}[f * g] = \\mathcal{F}[f] \\cdot \\mathcal{F}[g]$. This is why peak broadening in XRD can be separated into instrumental and sample contributions. The measured peak profile is the convolution of the two; in Fourier space, they multiply, and dividing out the instrumental contribution is straightforward."],
-
-        ["h3", "X-ray diffraction as a Fourier transform"],
-        ["p", "When X-rays scatter from a crystal, each atom acts as a source of scattered waves. The amplitude of the scattered wave in direction $\\mathbf{k}'$ from an incident wave $\\mathbf{k}$ depends on the scattering vector $\\mathbf{Q} = \\mathbf{k}' - \\mathbf{k}$. The total scattered amplitude is:"],
-        ["eq", "A(\\mathbf{Q}) = \\int \\rho(\\mathbf{r}) \\, e^{-i \\mathbf{Q} \\cdot \\mathbf{r}} \\, d\\mathbf{r}"],
-        ["p", "where $\\rho(\\mathbf{r})$ is the electron density. This is a Fourier transform. The scattered amplitude is the Fourier transform of the electron density. A diffraction experiment measures $|A(\\mathbf{Q})|^2$, the intensity, which loses the phase information. This is the phase problem of crystallography."],
-        ["p", "For a crystal with a basis of atoms at positions $\\mathbf{r}_j$ within the unit cell, the scattered amplitude separates into a lattice sum (which produces sharp Bragg peaks at reciprocal lattice points $\\mathbf{G}$) and a structure factor:"],
-        ["eq", "F(\\mathbf{G}) = \\sum_j f_j \\, e^{-i \\mathbf{G} \\cdot \\mathbf{r}_j}"],
-        ["p", "where $f_j$ is the atomic scattering factor of atom $j$. The structure factor is a discrete Fourier transform over the atoms in the unit cell. It determines which reflections are present and their relative intensities."],
-
-        ["h3", "Systematic absences"],
-        ["p", "The structure factor explains why certain reflections are missing. For BCC iron, the basis has atoms at $(0,0,0)$ and $(\\frac{1}{2}, \\frac{1}{2}, \\frac{1}{2})$. The structure factor is:"],
-        ["eq", "F(hkl) = f_{\\text{Fe}}\\left[1 + e^{-i\\pi(h+k+l)}\\right]"],
-        ["p", "When $h + k + l$ is odd, the exponential equals $-1$ and $F = 0$. The (100) reflection is absent; the (110) is present. These systematic absences are fingerprints of the lattice type, and they are a direct consequence of the Fourier transform of the atomic arrangement."],
-
-        ["h3", "The Patterson function"],
-        ["p", "Since we measure $|F(\\mathbf{Q})|^2$ rather than $F(\\mathbf{Q})$, we cannot simply invert the Fourier transform to get $\\rho(\\mathbf{r})$. But we can Fourier-transform the intensities directly. The result is the Patterson function:"],
-        ["eq", "P(\\mathbf{u}) = \\int |A(\\mathbf{Q})|^2 \\, e^{i \\mathbf{Q} \\cdot \\mathbf{u}} \\, d\\mathbf{Q}"],
-        ["p", "The Patterson function equals the autocorrelation of the electron density: $P(\\mathbf{u}) = \\int \\rho(\\mathbf{r}) \\, \\rho(\\mathbf{r} + \\mathbf{u}) \\, d\\mathbf{r}$. It has a peak at every interatomic vector $\\mathbf{u}$ in the structure. For a unit cell with $N$ atoms, there are $N^2$ Patterson peaks (including $N$ at the origin). If one atom is much heavier than the rest, the heavy-atom peaks dominate and can be used to locate that atom. This is the heavy-atom method, used historically to solve many protein structures and still used for metal-containing compounds."],
-
-        ["h3", "Fourier analysis of periodic signals"],
-        ["p", "Beyond diffraction, Fourier analysis appears whenever a material has periodic structure. The phonon dispersion relation of a crystal is the spectrum of vibrational frequencies as a function of wavevector, and it is computed by Fourier-transforming the interatomic force constants. EELS (electron energy loss spectroscopy) data is often processed by Fourier techniques to remove plural scattering. And the electron density in a crystal, computed from DFT, is represented as a sum of plane waves, which is a Fourier series truncated at some energy cutoff."],
-
-        ["derivation", "Show that the structure factor for FCC gives $F = 4f$ when $h$, $k$, $l$ are all odd or all even, and $F = 0$ otherwise.", [
-          ["p", "FCC has atoms at $(0,0,0)$, $(\\frac{1}{2},\\frac{1}{2},0)$, $(\\frac{1}{2},0,\\frac{1}{2})$, $(0,\\frac{1}{2},\\frac{1}{2})$."],
-          ["eq", "F(hkl) = f\\left[1 + e^{-i\\pi(h+k)} + e^{-i\\pi(h+l)} + e^{-i\\pi(k+l)}\\right]"],
-          ["p", "Each exponential equals $+1$ if its argument is an even multiple of $\\pi$, and $-1$ if odd. If $h$, $k$, $l$ are all even or all odd, then $h+k$, $h+l$ and $k+l$ are all even, and $F = 4f$."],
-          ["p", "If the indices are mixed (say $h$ odd, $k$ even, $l$ even), then $h+k$ is odd, $h+l$ is odd, $k+l$ is even. The sum becomes $1 + (-1) + (-1) + 1 = 0$. So mixed-index reflections are systematically absent in FCC."]
-        ]],
-
-        ["problem", "Copper is FCC with $a = 3.615$ A. Cu K$\\alpha$ radiation has wavelength $\\lambda = 1.5418$ A. Using Bragg's law $2d\\sin\\theta = \\lambda$ and the FCC selection rule, find the first three allowed reflections and their $2\\theta$ values.", [
-          ["p", "For cubic crystals, $d_{hkl} = a / \\sqrt{h^2 + k^2 + l^2}$. FCC requires all indices even or all odd."],
-          ["p", "First allowed: (111). $d = 3.615/\\sqrt{3} = 2.087$ A. $\\sin\\theta = 1.5418/(2 \\times 2.087) = 0.3694$. $\\theta = 21.67°$. $2\\theta = 43.3°$."],
-          ["p", "Second: (200). $d = 3.615/2 = 1.808$ A. $\\sin\\theta = 0.4263$. $2\\theta = 50.5°$."],
-          ["p", "Third: (220). $d = 3.615/\\sqrt{8} = 1.278$ A. $\\sin\\theta = 0.6030$. $2\\theta = 74.1°$."],
-          ["p", "These are the three strongest peaks in a copper powder diffraction pattern."]
-        ]]
+        [
+          "h3",
+          "Fourier series"
+        ],
+        [
+          "p",
+          "A function $f(x)$ that repeats with period $L$ can be written as:"
+        ],
+        [
+          "eq",
+          "f(x) = \\frac{a_0}{2} + \\sum_{n=1}^{\\infty} \\left[ a_n \\cos\\left(\\frac{2\\pi n x}{L}\\right) + b_n \\sin\\left(\\frac{2\\pi n x}{L}\\right) \\right]"
+        ],
+        [
+          "p",
+          "The coefficients are found by exploiting orthogonality. Multiply both sides by $\\cos(2\\pi m x / L)$ and integrate over one period. Every term vanishes except the one where $n = m$:"
+        ],
+        [
+          "eq",
+          "a_n = \\frac{2}{L} \\int_0^L f(x) \\cos\\left(\\frac{2\\pi n x}{L}\\right) dx, \\qquad b_n = \\frac{2}{L} \\int_0^L f(x) \\sin\\left(\\frac{2\\pi n x}{L}\\right) dx"
+        ],
+        [
+          "p",
+          "The zeroth coefficient $a_0/2$ is just the average value of the function. The $n$-th coefficients tell you how much of the $n$-th harmonic is present."
+        ],
+        [
+          "h3",
+          "Complex exponential form"
+        ],
+        [
+          "p",
+          "Using Euler's formula $e^{i\\theta} = \\cos\\theta + i\\sin\\theta$, the Fourier series can be written more compactly:"
+        ],
+        [
+          "eq",
+          "f(x) = \\sum_{n=-\\infty}^{\\infty} c_n \\, e^{2\\pi i n x / L}, \\qquad c_n = \\frac{1}{L} \\int_0^L f(x) \\, e^{-2\\pi i n x / L} \\, dx"
+        ],
+        [
+          "p",
+          "This form is standard in crystallography. The negative values of $n$ are not a separate physical contribution; they combine with the positive ones to produce the real sines and cosines. The complex form is simply cleaner to manipulate."
+        ],
+        [
+          "h3",
+          "The Fourier transform"
+        ],
+        [
+          "p",
+          "For a non-periodic function, the sum over discrete harmonics becomes an integral over continuous frequencies:"
+        ],
+        [
+          "eq",
+          "F(k) = \\int_{-\\infty}^{\\infty} f(x) \\, e^{-2\\pi i k x} \\, dx, \\qquad f(x) = \\int_{-\\infty}^{\\infty} F(k) \\, e^{2\\pi i k x} \\, dk"
+        ],
+        [
+          "p",
+          "$F(k)$ is the Fourier transform of $f(x)$. It decomposes the function into its frequency content. A sharp spike in $f(x)$ (a delta function) has a flat transform: all frequencies contribute equally. A broad Gaussian transforms to a narrow Gaussian. This reciprocal relationship between width in real space and width in frequency space is fundamental."
+        ],
+        [
+          "callout",
+          "The convolution theorem",
+          "The Fourier transform of a convolution is the product of the individual transforms: $\\mathcal{F}[f * g] = \\mathcal{F}[f] \\cdot \\mathcal{F}[g]$. This is why peak broadening in XRD can be separated into instrumental and sample contributions. The measured peak profile is the convolution of the two; in Fourier space, they multiply, and dividing out the instrumental contribution is straightforward."
+        ],
+        [
+          "h3",
+          "X-ray diffraction as a Fourier transform"
+        ],
+        [
+          "p",
+          "When X-rays scatter from a crystal, each atom acts as a source of scattered waves. The amplitude of the scattered wave in direction $\\mathbf{k}'$ from an incident wave $\\mathbf{k}$ depends on the scattering vector $\\mathbf{Q} = \\mathbf{k}' - \\mathbf{k}$. The total scattered amplitude is:"
+        ],
+        [
+          "eq",
+          "A(\\mathbf{Q}) = \\int \\rho(\\mathbf{r}) \\, e^{-i \\mathbf{Q} \\cdot \\mathbf{r}} \\, d\\mathbf{r}"
+        ],
+        [
+          "p",
+          "where $\\rho(\\mathbf{r})$ is the electron density. This is a Fourier transform. The scattered amplitude is the Fourier transform of the electron density. A diffraction experiment measures $|A(\\mathbf{Q})|^2$, the intensity, which loses the phase information. This is the phase problem of crystallography."
+        ],
+        [
+          "p",
+          "For a crystal with a basis of atoms at positions $\\mathbf{r}_j$ within the unit cell, the scattered amplitude separates into a lattice sum (which produces sharp Bragg peaks at reciprocal lattice points $\\mathbf{G}$) and a structure factor:"
+        ],
+        [
+          "eq",
+          "F(\\mathbf{G}) = \\sum_j f_j \\, e^{-i \\mathbf{G} \\cdot \\mathbf{r}_j}"
+        ],
+        [
+          "p",
+          "where $f_j$ is the atomic scattering factor of atom $j$. The structure factor is a discrete Fourier transform over the atoms in the unit cell. It determines which reflections are present and their relative intensities."
+        ],
+        [
+          "h3",
+          "Systematic absences"
+        ],
+        [
+          "p",
+          "The structure factor explains why certain reflections are missing. For BCC iron, the basis has atoms at $(0,0,0)$ and $(\\frac{1}{2}, \\frac{1}{2}, \\frac{1}{2})$. The structure factor is:"
+        ],
+        [
+          "eq",
+          "F(hkl) = f_{\\text{Fe}}\\left[1 + e^{-i\\pi(h+k+l)}\\right]"
+        ],
+        [
+          "p",
+          "When $h + k + l$ is odd, the exponential equals $-1$ and $F = 0$. The (100) reflection is absent; the (110) is present. These systematic absences are fingerprints of the lattice type, and they are a direct consequence of the Fourier transform of the atomic arrangement."
+        ],
+        [
+          "h3",
+          "The Patterson function"
+        ],
+        [
+          "p",
+          "Since we measure $|F(\\mathbf{Q})|^2$ rather than $F(\\mathbf{Q})$, we cannot simply invert the Fourier transform to get $\\rho(\\mathbf{r})$. But we can Fourier-transform the intensities directly. The result is the Patterson function:"
+        ],
+        [
+          "eq",
+          "P(\\mathbf{u}) = \\int |A(\\mathbf{Q})|^2 \\, e^{i \\mathbf{Q} \\cdot \\mathbf{u}} \\, d\\mathbf{Q}"
+        ],
+        [
+          "p",
+          "The Patterson function equals the autocorrelation of the electron density: $P(\\mathbf{u}) = \\int \\rho(\\mathbf{r}) \\, \\rho(\\mathbf{r} + \\mathbf{u}) \\, d\\mathbf{r}$. It has a peak at every interatomic vector $\\mathbf{u}$ in the structure. For a unit cell with $N$ atoms, there are $N^2$ Patterson peaks (including $N$ at the origin). If one atom is much heavier than the rest, the heavy-atom peaks dominate and can be used to locate that atom. This is the heavy-atom method, used historically to solve many protein structures and still used for metal-containing compounds."
+        ],
+        [
+          "h3",
+          "Fourier analysis of periodic signals"
+        ],
+        [
+          "p",
+          "Beyond diffraction, Fourier analysis appears whenever a material has periodic structure. The phonon dispersion relation of a crystal is the spectrum of vibrational frequencies as a function of wavevector, and it is computed by Fourier-transforming the interatomic force constants. EELS (electron energy loss spectroscopy) data is often processed by Fourier techniques to remove plural scattering. And the electron density in a crystal, computed from DFT, is represented as a sum of plane waves, which is a Fourier series truncated at some energy cutoff."
+        ],
+        [
+          "derivation",
+          "Show that the structure factor for FCC gives $F = 4f$ when $h$, $k$, $l$ are all odd or all even, and $F = 0$ otherwise.",
+          [
+            [
+              "p",
+              "FCC has atoms at $(0,0,0)$, $(\\frac{1}{2},\\frac{1}{2},0)$, $(\\frac{1}{2},0,\\frac{1}{2})$, $(0,\\frac{1}{2},\\frac{1}{2})$."
+            ],
+            [
+              "eq",
+              "F(hkl) = f\\left[1 + e^{-i\\pi(h+k)} + e^{-i\\pi(h+l)} + e^{-i\\pi(k+l)}\\right]"
+            ],
+            [
+              "p",
+              "Each exponential equals $+1$ if its argument is an even multiple of $\\pi$, and $-1$ if odd. If $h$, $k$, $l$ are all even or all odd, then $h+k$, $h+l$ and $k+l$ are all even, and $F = 4f$."
+            ],
+            [
+              "p",
+              "If the indices are mixed (say $h$ odd, $k$ even, $l$ even), then $h+k$ is odd, $h+l$ is odd, $k+l$ is even. The sum becomes $1 + (-1) + (-1) + 1 = 0$. So mixed-index reflections are systematically absent in FCC."
+            ]
+          ]
+        ],
+        [
+          "problem",
+          "Copper is FCC with $a = 3.615$ A. Cu K$\\alpha$ radiation has wavelength $\\lambda = 1.5418$ A. Using Bragg's law $2d\\sin\\theta = \\lambda$ and the FCC selection rule, find the first three allowed reflections and their $2\\theta$ values.",
+          [
+            [
+              "p",
+              "For cubic crystals, $d_{hkl} = a / \\sqrt{h^2 + k^2 + l^2}$. FCC requires all indices even or all odd."
+            ],
+            [
+              "p",
+              "First allowed: (111). $d = 3.615/\\sqrt{3} = 2.087$ A. $\\sin\\theta = 1.5418/(2 \\times 2.087) = 0.3694$. $\\theta = 21.67\u00b0$. $2\\theta = 43.3\u00b0$."
+            ],
+            [
+              "p",
+              "Second: (200). $d = 3.615/2 = 1.808$ A. $\\sin\\theta = 0.4263$. $2\\theta = 50.5\u00b0$."
+            ],
+            [
+              "p",
+              "Third: (220). $d = 3.615/\\sqrt{8} = 1.278$ A. $\\sin\\theta = 0.6030$. $2\\theta = 74.1\u00b0$."
+            ],
+            [
+              "p",
+              "These are the three strongest peaks in a copper powder diffraction pattern."
+            ]
+          ]
+        ]
       ],
       "related": [
-        { "title": "X-ray Diffraction", "url": "../characterisation/x-ray-diffraction-powder-single-crystal" },
-        { "title": "Reciprocal Space & Diffraction", "url": "../crystallography/reciprocal-lattice-diffraction-conditions" },
-        { "title": "Symmetry & Group Theory", "url": "symmetry-group-theory" }
+        {
+          "title": "X-ray Diffraction",
+          "url": "../characterisation/x-ray-diffraction-powder-single-crystal"
+        },
+        {
+          "title": "Reciprocal Space & Diffraction",
+          "url": "../crystallography/reciprocal-lattice-diffraction-conditions"
+        },
+        {
+          "title": "Symmetry & Group Theory",
+          "url": "symmetry-group-theory"
+        }
       ]
     },
     {
@@ -220,67 +600,209 @@
       "readingTime": "15 min",
       "intro": "Thermodynamics tells you that entropy increases and free energy decreases, but it does not tell you why. Statistical mechanics provides the why. It connects the behaviour of individual atoms to the bulk properties we measure, and the bridge is probability.",
       "body": [
-        ["h3", "Microstates and macrostates"],
-        ["p", "Consider $N$ atoms arranged on a lattice, with $n$ of them replaced by a different species (a substitutional solid solution). The macrostate is specified by a few numbers: $N$, $n$, temperature, pressure. The microstate specifies which particular sites are occupied by which atoms. There are $\\binom{N}{n} = N! / (n!(N-n)!)$ distinct microstates for the same macrostate."],
-        ["p", "For a 50-50 binary alloy on 100 lattice sites, there are $\\binom{100}{50} \\approx 10^{29}$ microstates. For Avogadro's number of atoms, the number is unimaginably large. The central postulate of statistical mechanics is that in thermal equilibrium, every accessible microstate is equally probable. The macrostate you observe is the one with the overwhelming majority of microstates."],
-
-        ["h3", "Entropy and the Boltzmann formula"],
-        ["p", "Boltzmann connected the number of microstates $\\Omega$ to the thermodynamic entropy:"],
-        ["eq", "S = k_B \\ln \\Omega"],
-        ["p", "where $k_B = 1.381 \\times 10^{-23}$ J/K is Boltzmann's constant. This equation is carved on his tombstone. It explains why entropy increases: a system evolves toward the macrostate with the most microstates, because that is overwhelmingly the most probable configuration."],
-        ["p", "For the ideal mixing of $n$ atoms of B into $N - n$ atoms of A on a lattice, using Stirling's approximation ($\\ln N! \\approx N \\ln N - N$):"],
-        ["eq", "S_{\\text{mix}} = -k_B \\left[ n \\ln\\frac{n}{N} + (N-n) \\ln\\frac{N-n}{N} \\right] = -Nk_B \\left[ x \\ln x + (1-x) \\ln(1-x) \\right]"],
-        ["p", "where $x = n/N$ is the mole fraction. Per mole, this is $\\Delta S_{\\text{mix}} = -R[x\\ln x + (1-x)\\ln(1-x)]$. At $x = 0.5$, $\\Delta S_{\\text{mix}} = R\\ln 2 = 5.76$ J/(mol K). This is the configurational entropy of mixing, and it is why most metals form at least a limited solid solution with every other metal."],
-        ["callout", "Why Stirling's approximation works here", "For $N \\sim 10^{23}$, the fractional error in $\\ln N!$ from Stirling's approximation is of order $\\ln N / N \\sim 10^{-22}$. The approximation is effectively exact for any macroscopic system. It fails for very small clusters (fewer than about 100 atoms), which matters for nucleation theory."],
-
-        ["h3", "The Boltzmann distribution"],
-        ["p", "In a system at temperature $T$, the probability of finding a particular microstate with energy $E_i$ is:"],
-        ["eq", "p_i = \\frac{e^{-E_i / k_B T}}{Z}"],
-        ["p", "where $Z = \\sum_i e^{-E_i / k_B T}$ is the partition function. The Boltzmann factor $e^{-E_i / k_B T}$ penalises high-energy states. At low temperature, only the lowest-energy state is occupied. At high temperature, all states become equally probable."],
-        ["p", "This distribution governs everything from the population of energy levels in a quantum dot to the fraction of vacancies in a crystal. The equilibrium vacancy concentration in a metal is $c_v = \\exp(-E_f / k_B T)$, where $E_f$ is the vacancy formation energy. For aluminium, $E_f \\approx 0.67$ eV, giving $c_v \\approx 10^{-4}$ at the melting point (933 K) and $c_v \\approx 10^{-12}$ at room temperature. This is a direct application of the Boltzmann distribution."],
-
-        ["h3", "The partition function"],
-        ["p", "The partition function $Z$ is far more than a normalisation constant. All thermodynamic quantities can be extracted from it. The average energy is:"],
-        ["eq", "\\langle E \\rangle = -\\frac{\\partial \\ln Z}{\\partial \\beta}, \\qquad \\beta = \\frac{1}{k_B T}"],
-        ["p", "The Helmholtz free energy is:"],
-        ["eq", "F = -k_B T \\ln Z"],
-        ["p", "The entropy is $S = -\\partial F / \\partial T = k_B \\ln Z + k_B T \\, \\partial \\ln Z / \\partial T$. Once you have the partition function, you have the thermodynamics."],
-
-        ["h3", "The harmonic oscillator partition function"],
-        ["p", "A quantum harmonic oscillator with frequency $\\nu$ has energy levels $E_n = (n + \\frac{1}{2})h\\nu$. Its partition function is a geometric series:"],
-        ["eq", "Z = \\sum_{n=0}^{\\infty} e^{-(n+1/2)h\\nu / k_B T} = \\frac{e^{-h\\nu / 2k_B T}}{1 - e^{-h\\nu / k_B T}}"],
-        ["p", "From this, Einstein derived the heat capacity of a crystal by treating all $3N$ vibrational modes as independent oscillators with the same frequency $\\nu_E$:"],
-        ["eq", "C_V = 3Nk_B \\left(\\frac{\\Theta_E}{T}\\right)^2 \\frac{e^{\\Theta_E/T}}{(e^{\\Theta_E/T} - 1)^2}"],
-        ["p", "where $\\Theta_E = h\\nu_E / k_B$ is the Einstein temperature. At high $T$, this reduces to $C_V = 3Nk_B$ (the Dulong-Petit law: about 25 J/(mol K) for most solids). At low $T$, it falls exponentially. The experimental drop-off is actually $\\propto T^3$, not exponential, because real crystals have a distribution of frequencies. The Debye model corrects this."],
-
-        ["h3", "The Fermi-Dirac and Bose-Einstein distributions"],
-        ["p", "The Boltzmann distribution applies to distinguishable particles. Quantum particles obey different statistics. Electrons (fermions) obey the Pauli exclusion principle, and the probability of a state at energy $E$ being occupied is:"],
-        ["eq", "f(E) = \\frac{1}{e^{(E - \\mu)/k_B T} + 1}"],
-        ["p", "where $\\mu$ is the chemical potential (the Fermi energy $E_F$ at $T = 0$). At zero temperature, all states below $E_F$ are filled and all above are empty. At finite $T$, only states within about $k_BT$ of $E_F$ are affected. For copper, $E_F = 7.04$ eV and $k_BT = 0.025$ eV at room temperature. Only about 0.4% of the electrons are thermally excited, which is why the electronic heat capacity of metals is tiny compared to the lattice contribution."],
-        ["p", "Phonons (bosons) obey Bose-Einstein statistics, where the $+1$ in the denominator becomes $-1$. The average number of phonons in a mode with frequency $\\nu$ at temperature $T$ is $\\langle n \\rangle = 1/(e^{h\\nu/k_BT} - 1)$. This is the Planck distribution, and it underpins the Debye model of heat capacity."],
-
-        ["h3", "Connection to thermodynamics"],
-        ["p", "Statistical mechanics does not replace thermodynamics. It explains it. The second law ($S$ increases for an isolated system) follows from the fact that the system evolves toward the macrostate with the most microstates. The Gibbs free energy $G = H - TS$ is minimised at equilibrium because the minimum represents the optimal trade-off between low energy (few but favourable microstates) and high entropy (many microstates). At low $T$, energy dominates and ordered structures win. At high $T$, entropy dominates and disordered structures win. Phase transitions occur when the balance tips."],
-
-        ["derivation", "Derive the equilibrium vacancy concentration in a crystal.", [
-          ["p", "A crystal of $N$ atoms has $N + n_v$ sites if $n_v$ vacancies are present (the vacancies create new sites). The number of ways to arrange $n_v$ vacancies on $N + n_v$ sites is $\\Omega = \\binom{N + n_v}{n_v}$."],
-          ["p", "The Gibbs free energy change is $\\Delta G = n_v E_f - T \\Delta S = n_v E_f - k_B T \\ln \\Omega$."],
-          ["p", "Using Stirling's approximation and minimising $\\Delta G$ with respect to $n_v$ (setting $\\partial \\Delta G / \\partial n_v = 0$):"],
-          ["eq", "E_f = k_B T \\ln\\frac{N + n_v}{n_v} \\approx k_B T \\ln\\frac{N}{n_v}"],
-          ["p", "since $n_v \\ll N$. Therefore $n_v/N = e^{-E_f/k_BT}$. For aluminium at 900 K with $E_f = 0.67$ eV: $c_v = e^{-0.67 \\times 1.602 \\times 10^{-19} / (1.381 \\times 10^{-23} \\times 900)} = e^{-8.63} \\approx 1.8 \\times 10^{-4}$. About one in every 5500 lattice sites is vacant."]
-        ]],
-
-        ["problem", "The Schottky defect formation energy in NaCl is about 2.3 eV per pair. Estimate the equilibrium concentration of Schottky defect pairs at 800 K and at the melting point (1074 K).", [
-          ["p", "The concentration of Schottky pairs follows $c = \\exp(-E_s / 2k_BT)$ (the factor of 2 arises because each pair involves two vacancies, one on each sublattice, but the formation energy is quoted per pair)."],
-          ["p", "At 800 K: $c = \\exp(-2.3 \\times 1.602 \\times 10^{-19} / (2 \\times 1.381 \\times 10^{-23} \\times 800)) = \\exp(-16.7) = 5.5 \\times 10^{-8}$."],
-          ["p", "At 1074 K: $c = \\exp(-2.3 \\times 1.602 \\times 10^{-19} / (2 \\times 1.381 \\times 10^{-23} \\times 1074)) = \\exp(-12.4) = 4.1 \\times 10^{-6}$."],
-          ["p", "The concentration increases by nearly two orders of magnitude over this 274 K range. This exponential sensitivity to temperature is characteristic of all thermally activated processes."]
-        ]]
+        [
+          "h3",
+          "Microstates and macrostates"
+        ],
+        [
+          "p",
+          "Consider $N$ atoms arranged on a lattice, with $n$ of them replaced by a different species (a substitutional solid solution). The macrostate is specified by a few numbers: $N$, $n$, temperature, pressure. The microstate specifies which particular sites are occupied by which atoms. There are $\\binom{N}{n} = N! / (n!(N-n)!)$ distinct microstates for the same macrostate."
+        ],
+        [
+          "p",
+          "For a 50-50 binary alloy on 100 lattice sites, there are $\\binom{100}{50} \\approx 10^{29}$ microstates. For Avogadro's number of atoms, the number is unimaginably large. The central postulate of statistical mechanics is that in thermal equilibrium, every accessible microstate is equally probable. The macrostate you observe is the one with the overwhelming majority of microstates."
+        ],
+        [
+          "h3",
+          "Entropy and the Boltzmann formula"
+        ],
+        [
+          "p",
+          "Boltzmann connected the number of microstates $\\Omega$ to the thermodynamic entropy:"
+        ],
+        [
+          "eq",
+          "S = k_B \\ln \\Omega"
+        ],
+        [
+          "p",
+          "where $k_B = 1.381 \\times 10^{-23}$ J/K is Boltzmann's constant. This equation is carved on his tombstone. It explains why entropy increases: a system evolves toward the macrostate with the most microstates, because that is overwhelmingly the most probable configuration."
+        ],
+        [
+          "p",
+          "For the ideal mixing of $n$ atoms of B into $N - n$ atoms of A on a lattice, using Stirling's approximation ($\\ln N! \\approx N \\ln N - N$):"
+        ],
+        [
+          "eq",
+          "S_{\\text{mix}} = -k_B \\left[ n \\ln\\frac{n}{N} + (N-n) \\ln\\frac{N-n}{N} \\right] = -Nk_B \\left[ x \\ln x + (1-x) \\ln(1-x) \\right]"
+        ],
+        [
+          "p",
+          "where $x = n/N$ is the mole fraction. Per mole, this is $\\Delta S_{\\text{mix}} = -R[x\\ln x + (1-x)\\ln(1-x)]$. At $x = 0.5$, $\\Delta S_{\\text{mix}} = R\\ln 2 = 5.76$ J/(mol K). This is the configurational entropy of mixing, and it is why most metals form at least a limited solid solution with every other metal."
+        ],
+        [
+          "callout",
+          "Why Stirling's approximation works here",
+          "For $N \\sim 10^{23}$, the fractional error in $\\ln N!$ from Stirling's approximation is of order $\\ln N / N \\sim 10^{-22}$. The approximation is effectively exact for any macroscopic system. It fails for very small clusters (fewer than about 100 atoms), which matters for nucleation theory."
+        ],
+        [
+          "h3",
+          "The Boltzmann distribution"
+        ],
+        [
+          "p",
+          "In a system at temperature $T$, the probability of finding a particular microstate with energy $E_i$ is:"
+        ],
+        [
+          "eq",
+          "p_i = \\frac{e^{-E_i / k_B T}}{Z}"
+        ],
+        [
+          "p",
+          "where $Z = \\sum_i e^{-E_i / k_B T}$ is the partition function. The Boltzmann factor $e^{-E_i / k_B T}$ penalises high-energy states. At low temperature, only the lowest-energy state is occupied. At high temperature, all states become equally probable."
+        ],
+        [
+          "p",
+          "This distribution describes the population of energy levels in a quantum dot to the fraction of vacancies in a crystal. The equilibrium vacancy concentration in a metal is $c_v = \\exp(-E_f / k_B T)$, where $E_f$ is the vacancy formation energy. For aluminium, $E_f \\approx 0.67$ eV, giving $c_v \\approx 10^{-4}$ at the melting point (933 K) and $c_v \\approx 10^{-12}$ at room temperature. This is a direct application of the Boltzmann distribution."
+        ],
+        [
+          "h3",
+          "The partition function"
+        ],
+        [
+          "p",
+          "The partition function $Z$ is far more than a normalisation constant. All thermodynamic quantities can be extracted from it. The average energy is:"
+        ],
+        [
+          "eq",
+          "\\langle E \\rangle = -\\frac{\\partial \\ln Z}{\\partial \\beta}, \\qquad \\beta = \\frac{1}{k_B T}"
+        ],
+        [
+          "p",
+          "The Helmholtz free energy is:"
+        ],
+        [
+          "eq",
+          "F = -k_B T \\ln Z"
+        ],
+        [
+          "p",
+          "The entropy is $S = -\\partial F / \\partial T = k_B \\ln Z + k_B T \\, \\partial \\ln Z / \\partial T$. Once you have the partition function, you have the thermodynamics."
+        ],
+        [
+          "h3",
+          "The harmonic oscillator partition function"
+        ],
+        [
+          "p",
+          "A quantum harmonic oscillator with frequency $\\nu$ has energy levels $E_n = (n + \\frac{1}{2})h\\nu$. Its partition function is a geometric series:"
+        ],
+        [
+          "eq",
+          "Z = \\sum_{n=0}^{\\infty} e^{-(n+1/2)h\\nu / k_B T} = \\frac{e^{-h\\nu / 2k_B T}}{1 - e^{-h\\nu / k_B T}}"
+        ],
+        [
+          "p",
+          "From this, Einstein derived the heat capacity of a crystal by treating all $3N$ vibrational modes as independent oscillators with the same frequency $\\nu_E$:"
+        ],
+        [
+          "eq",
+          "C_V = 3Nk_B \\left(\\frac{\\Theta_E}{T}\\right)^2 \\frac{e^{\\Theta_E/T}}{(e^{\\Theta_E/T} - 1)^2}"
+        ],
+        [
+          "p",
+          "where $\\Theta_E = h\\nu_E / k_B$ is the Einstein temperature. At high $T$, this reduces to $C_V = 3Nk_B$ (the Dulong-Petit law: about 25 J/(mol K) for most solids). At low $T$, it falls exponentially. The experimental drop-off is actually $\\propto T^3$, not exponential, because real crystals have a distribution of frequencies. The Debye model corrects this."
+        ],
+        [
+          "h3",
+          "The Fermi-Dirac and Bose-Einstein distributions"
+        ],
+        [
+          "p",
+          "The Boltzmann distribution applies to distinguishable particles. Quantum particles obey different statistics. Electrons (fermions) obey the Pauli exclusion principle, and the probability of a state at energy $E$ being occupied is:"
+        ],
+        [
+          "eq",
+          "f(E) = \\frac{1}{e^{(E - \\mu)/k_B T} + 1}"
+        ],
+        [
+          "p",
+          "where $\\mu$ is the chemical potential (the Fermi energy $E_F$ at $T = 0$). At zero temperature, all states below $E_F$ are filled and all above are empty. At finite $T$, only states within about $k_BT$ of $E_F$ are affected. For copper, $E_F = 7.04$ eV and $k_BT = 0.025$ eV at room temperature. Only about 0.4% of the electrons are thermally excited, which is why the electronic heat capacity of metals is tiny compared to the lattice contribution."
+        ],
+        [
+          "p",
+          "Phonons (bosons) obey Bose-Einstein statistics, where the $+1$ in the denominator becomes $-1$. The average number of phonons in a mode with frequency $\\nu$ at temperature $T$ is $\\langle n \\rangle = 1/(e^{h\\nu/k_BT} - 1)$. This is the Planck distribution, and it underpins the Debye model of heat capacity."
+        ],
+        [
+          "h3",
+          "Connection to thermodynamics"
+        ],
+        [
+          "p",
+          "Statistical mechanics does not replace thermodynamics. It explains it. The second law ($S$ increases for an isolated system) follows from the fact that the system evolves toward the macrostate with the most microstates. The Gibbs free energy $G = H - TS$ is minimised at equilibrium because the minimum represents the optimal trade-off between low energy (few but favourable microstates) and high entropy (many microstates). At low $T$, energy dominates and ordered structures win. At high $T$, entropy dominates and disordered structures win. Phase transitions occur when the balance tips."
+        ],
+        [
+          "derivation",
+          "Derive the equilibrium vacancy concentration in a crystal.",
+          [
+            [
+              "p",
+              "A crystal of $N$ atoms has $N + n_v$ sites if $n_v$ vacancies are present (the vacancies create new sites). The number of ways to arrange $n_v$ vacancies on $N + n_v$ sites is $\\Omega = \\binom{N + n_v}{n_v}$."
+            ],
+            [
+              "p",
+              "The Gibbs free energy change is $\\Delta G = n_v E_f - T \\Delta S = n_v E_f - k_B T \\ln \\Omega$."
+            ],
+            [
+              "p",
+              "Using Stirling's approximation and minimising $\\Delta G$ with respect to $n_v$ (setting $\\partial \\Delta G / \\partial n_v = 0$):"
+            ],
+            [
+              "eq",
+              "E_f = k_B T \\ln\\frac{N + n_v}{n_v} \\approx k_B T \\ln\\frac{N}{n_v}"
+            ],
+            [
+              "p",
+              "since $n_v \\ll N$. Therefore $n_v/N = e^{-E_f/k_BT}$. For aluminium at 900 K with $E_f = 0.67$ eV: $c_v = e^{-0.67 \\times 1.602 \\times 10^{-19} / (1.381 \\times 10^{-23} \\times 900)} = e^{-8.63} \\approx 1.8 \\times 10^{-4}$. About one in every 5500 lattice sites is vacant."
+            ]
+          ]
+        ],
+        [
+          "problem",
+          "The Schottky defect formation energy in NaCl is about 2.3 eV per pair. Estimate the equilibrium concentration of Schottky defect pairs at 800 K and at the melting point (1074 K).",
+          [
+            [
+              "p",
+              "The concentration of Schottky pairs follows $c = \\exp(-E_s / 2k_BT)$ (the factor of 2 arises because each pair involves two vacancies, one on each sublattice, but the formation energy is quoted per pair)."
+            ],
+            [
+              "p",
+              "At 800 K: $c = \\exp(-2.3 \\times 1.602 \\times 10^{-19} / (2 \\times 1.381 \\times 10^{-23} \\times 800)) = \\exp(-16.7) = 5.5 \\times 10^{-8}$."
+            ],
+            [
+              "p",
+              "At 1074 K: $c = \\exp(-2.3 \\times 1.602 \\times 10^{-19} / (2 \\times 1.381 \\times 10^{-23} \\times 1074)) = \\exp(-12.4) = 4.1 \\times 10^{-6}$."
+            ],
+            [
+              "p",
+              "The concentration increases by nearly two orders of magnitude over this 274 K range. This exponential sensitivity to temperature is characteristic of all thermally activated processes."
+            ]
+          ]
+        ]
       ],
       "related": [
-        { "title": "What Thermodynamics Is For", "url": "../thermodynamics/what-thermodynamics-is-for" },
-        { "title": "Entropy & the Second Law", "url": "../thermodynamics/entropy-second-law" },
-        { "title": "Free Electron Model", "url": "../electronic-properties/free-electron-model-density-of-states" }
+        {
+          "title": "What Thermodynamics Is For",
+          "url": "../thermodynamics/what-thermodynamics-is-for"
+        },
+        {
+          "title": "Entropy & the Second Law",
+          "url": "../thermodynamics/entropy-second-law"
+        },
+        {
+          "title": "Free Electron Model",
+          "url": "../electronic-properties/free-electron-model-density-of-states"
+        }
       ]
     },
     {
@@ -291,66 +813,201 @@
       "readingTime": "14 min",
       "intro": "Most real problems in materials science do not have analytical solutions. Diffusion in a complex geometry, stress in a turbine blade, phase-field evolution during solidification: all require numerical methods. The core idea is the same in every case. Replace the continuous domain with a grid, replace derivatives with algebraic approximations, and solve the resulting system of equations.",
       "body": [
-        ["h3", "Why numerical methods are necessary"],
-        ["p", "The analytical solutions in textbooks are beautiful but limited. The error function solution to the diffusion equation assumes a semi-infinite slab, a constant diffusion coefficient and a fixed surface concentration. Real problems have finite geometry, concentration-dependent diffusivity, moving boundaries and multiple interacting species. The heat equation in a turbine blade has no analytical solution because the blade geometry cannot be described by any coordinate system that makes the PDE separable."],
-        ["p", "Numerical methods trade exactness for generality. You accept a small discretisation error in exchange for the ability to solve problems that are otherwise intractable. The art is in controlling that error."],
-
-        ["h3", "Finite differences"],
-        ["p", "The simplest approach: replace derivatives with differences. On a uniform grid with spacing $\\Delta x$, the first derivative is approximated by:"],
-        ["eq", "\\frac{\\partial c}{\\partial x}\\bigg|_i \\approx \\frac{c_{i+1} - c_{i-1}}{2\\Delta x} \\quad \\text{(central difference, error } O(\\Delta x^2)\\text{)}"],
-        ["p", "The second derivative is:"],
-        ["eq", "\\frac{\\partial^2 c}{\\partial x^2}\\bigg|_i \\approx \\frac{c_{i+1} - 2c_i + c_{i-1}}{\\Delta x^2} \\quad \\text{(error } O(\\Delta x^2)\\text{)}"],
-        ["p", "These come from Taylor expansion. $c_{i+1} = c_i + \\Delta x \\, c' + \\frac{\\Delta x^2}{2} c'' + \\cdots$. Adding $c_{i+1}$ and $c_{i-1}$ cancels the odd terms, leaving the second derivative plus an error of order $\\Delta x^2$."],
-
-        ["h3", "Explicit time stepping for the diffusion equation"],
-        ["p", "Discretise Fick's second law in both space and time. Using a forward difference in time and central difference in space:"],
-        ["eq", "\\frac{c_i^{n+1} - c_i^n}{\\Delta t} = D \\frac{c_{i+1}^n - 2c_i^n + c_{i-1}^n}{\\Delta x^2}"],
-        ["p", "Rearranging gives an explicit update formula:"],
-        ["eq", "c_i^{n+1} = c_i^n + \\frac{D \\Delta t}{\\Delta x^2}(c_{i+1}^n - 2c_i^n + c_{i-1}^n)"],
-        ["p", "This is the forward Euler scheme. It is trivial to implement. You loop over all grid points, compute the new concentration from the old values, and step forward in time. No linear system to solve. But there is a catch."],
-
-        ["callout", "The stability criterion", "The explicit scheme is stable only if $D \\Delta t / \\Delta x^2 \\leq 1/2$. Violate this and the solution oscillates wildly and diverges. This is the CFL (Courant-Friedrichs-Lewy) condition for the diffusion equation. If you halve the grid spacing, you must use a time step four times smaller. For fine grids, this makes explicit methods prohibitively slow."],
-
-        ["h3", "Implicit methods"],
-        ["p", "The implicit (backward Euler) scheme evaluates the spatial derivative at the new time level:"],
-        ["eq", "\\frac{c_i^{n+1} - c_i^n}{\\Delta t} = D \\frac{c_{i+1}^{n+1} - 2c_i^{n+1} + c_{i-1}^{n+1}}{\\Delta x^2}"],
-        ["p", "Now the unknown values at $n+1$ appear on both sides. This gives a system of linear equations (tridiagonal in 1D) that must be solved at each time step. The payoff: the implicit scheme is unconditionally stable. You can take large time steps without the solution blowing up. The solution may lose accuracy with large $\\Delta t$, but it will not diverge."],
-        ["p", "The Crank-Nicolson scheme averages the explicit and implicit approaches (half the spatial derivative at time $n$, half at $n+1$). It is second-order accurate in both space and time, and still unconditionally stable. It is the standard choice for one-dimensional diffusion problems."],
-
-        ["h3", "The finite element method"],
-        ["p", "Finite differences work well on regular grids. Real engineering components are not regular. A turbine blade, a hip implant, a welded joint: these require meshes that conform to complex boundaries. The finite element method (FEM) handles this by dividing the domain into elements (triangles or quadrilaterals in 2D, tetrahedra or hexahedra in 3D) and approximating the solution as a sum of simple functions (shape functions) within each element."],
-        ["p", "Instead of approximating derivatives directly, FEM starts from the weak form of the PDE. For the steady-state heat equation $\\nabla \\cdot (k \\nabla T) = 0$, multiply by a test function $v$, integrate over the domain, and apply integration by parts:"],
-        ["eq", "\\int_\\Omega k \\, \\nabla T \\cdot \\nabla v \\, d\\Omega = \\int_{\\partial \\Omega} k \\frac{\\partial T}{\\partial n} v \\, dS"],
-        ["p", "The left side involves only first derivatives of $T$ and $v$ (not second derivatives), which relaxes the smoothness requirements. The right side naturally incorporates Neumann boundary conditions. Substituting the shape function expansion $T \\approx \\sum_j T_j N_j(\\mathbf{x})$ yields a system of linear equations $\\mathbf{K} \\mathbf{T} = \\mathbf{f}$, where $\\mathbf{K}$ is the stiffness matrix."],
-        ["p", "FEM is the workhorse of computational mechanics. It handles complex geometry, material heterogeneity (different elements can have different properties), and coupled problems (thermal-mechanical, fluid-structure). Commercial codes like ABAQUS and ANSYS are built on it."],
-
-        ["h3", "Mesh convergence and error"],
-        ["p", "A numerical solution is only meaningful if it has converged. This means: refine the mesh (decrease $\\Delta x$) and check that the answer does not change significantly. If halving the grid spacing changes the peak stress by 20%, the original mesh was too coarse."],
-        ["p", "For second-order methods (central differences, linear finite elements), the error scales as $O(\\Delta x^2)$. Halving $\\Delta x$ reduces the error by a factor of 4. For higher-order methods (quadratic elements, spectral methods), the error drops faster but the cost per element is higher. The optimal strategy depends on the required accuracy and the smoothness of the solution."],
-        ["p", "Singularities cause trouble. A crack tip or a re-entrant corner produces a stress field that varies as $r^{-1/2}$, which is not smooth. Standard elements converge slowly near such features. Special quarter-point elements or enriched formulations (XFEM) are needed."],
-
-        ["h3", "Systems of ODEs and time integration"],
-        ["p", "Spatial discretisation of a PDE produces a system of ODEs in time: $d\\mathbf{c}/dt = \\mathbf{f}(\\mathbf{c})$. The forward Euler, backward Euler and Crank-Nicolson methods are all time integrators for this system. More sophisticated methods exist. Runge-Kutta methods (especially the fourth-order RK4) are popular for non-stiff problems. For stiff systems (where some modes decay much faster than others, common in chemical kinetics), implicit methods or specialised stiff solvers (BDF methods) are essential."],
-
-        ["derivation", "Derive the stability condition for the explicit scheme applied to the 1D diffusion equation.", [
-          ["p", "Substitute a Fourier mode $c_i^n = \\hat{c}^n e^{i k i \\Delta x}$ into the explicit update formula:"],
-          ["eq", "\\hat{c}^{n+1} = \\hat{c}^n \\left[1 + \\frac{D\\Delta t}{\\Delta x^2}(e^{ik\\Delta x} - 2 + e^{-ik\\Delta x})\\right]"],
-          ["p", "Using $e^{ik\\Delta x} + e^{-ik\\Delta x} = 2\\cos(k\\Delta x)$:"],
-          ["eq", "\\hat{c}^{n+1} = \\hat{c}^n \\left[1 - \\frac{4D\\Delta t}{\\Delta x^2}\\sin^2\\left(\\frac{k\\Delta x}{2}\\right)\\right]"],
-          ["p", "The amplification factor $G = \\hat{c}^{n+1}/\\hat{c}^n$ must satisfy $|G| \\leq 1$ for all $k$. The worst case is $\\sin^2(k\\Delta x/2) = 1$, giving $G = 1 - 4D\\Delta t/\\Delta x^2$. Requiring $G \\geq -1$:"],
-          ["eq", "\\frac{D\\Delta t}{\\Delta x^2} \\leq \\frac{1}{2}"]
-        ]],
-
-        ["problem", "You are simulating carbon diffusion in austenite at 950 C ($D = 2 \\times 10^{-11}$ m$^2$/s) using an explicit scheme with grid spacing $\\Delta x = 10$ $\\mu$m. What is the maximum stable time step? How many time steps are needed to simulate 1 hour of diffusion?", [
-          ["p", "The stability criterion gives $\\Delta t \\leq \\Delta x^2 / (2D) = (10 \\times 10^{-6})^2 / (2 \\times 2 \\times 10^{-11}) = 10^{-10} / (4 \\times 10^{-11}) = 2.5$ s."],
-          ["p", "For 1 hour (3600 s): $3600 / 2.5 = 1440$ time steps."],
-          ["p", "This is manageable. But if you refine to $\\Delta x = 1$ $\\mu$m, the maximum time step drops to $0.025$ s and you need 144,000 steps. At $\\Delta x = 0.1$ $\\mu$m, it is $2.5 \\times 10^{-4}$ s and 14.4 million steps. This is why implicit methods become necessary for fine grids."]
-        ]]
+        [
+          "h3",
+          "Why numerical methods are necessary"
+        ],
+        [
+          "p",
+          "The analytical solutions in textbooks are beautiful but limited. The error function solution to the diffusion equation assumes a semi-infinite slab, a constant diffusion coefficient and a fixed surface concentration. Real problems have finite geometry, concentration-dependent diffusivity, moving boundaries and multiple interacting species. The heat equation in a turbine blade has no analytical solution because the blade geometry cannot be described by any coordinate system that makes the PDE separable."
+        ],
+        [
+          "p",
+          "Numerical methods trade exactness for generality. You accept a small discretisation error in exchange for the ability to solve problems that are otherwise intractable. The art is in controlling that error."
+        ],
+        [
+          "h3",
+          "Finite differences"
+        ],
+        [
+          "p",
+          "The simplest approach: replace derivatives with differences. On a uniform grid with spacing $\\Delta x$, the first derivative is approximated by:"
+        ],
+        [
+          "eq",
+          "\\frac{\\partial c}{\\partial x}\\bigg|_i \\approx \\frac{c_{i+1} - c_{i-1}}{2\\Delta x} \\quad \\text{(central difference, error } O(\\Delta x^2)\\text{)}"
+        ],
+        [
+          "p",
+          "The second derivative is:"
+        ],
+        [
+          "eq",
+          "\\frac{\\partial^2 c}{\\partial x^2}\\bigg|_i \\approx \\frac{c_{i+1} - 2c_i + c_{i-1}}{\\Delta x^2} \\quad \\text{(error } O(\\Delta x^2)\\text{)}"
+        ],
+        [
+          "p",
+          "These come from Taylor expansion. $c_{i+1} = c_i + \\Delta x \\, c' + \\frac{\\Delta x^2}{2} c'' + \\cdots$. Adding $c_{i+1}$ and $c_{i-1}$ cancels the odd terms, leaving the second derivative plus an error of order $\\Delta x^2$."
+        ],
+        [
+          "h3",
+          "Explicit time stepping for the diffusion equation"
+        ],
+        [
+          "p",
+          "Discretise Fick's second law in both space and time. Using a forward difference in time and central difference in space:"
+        ],
+        [
+          "eq",
+          "\\frac{c_i^{n+1} - c_i^n}{\\Delta t} = D \\frac{c_{i+1}^n - 2c_i^n + c_{i-1}^n}{\\Delta x^2}"
+        ],
+        [
+          "p",
+          "Rearranging gives an explicit update formula:"
+        ],
+        [
+          "eq",
+          "c_i^{n+1} = c_i^n + \\frac{D \\Delta t}{\\Delta x^2}(c_{i+1}^n - 2c_i^n + c_{i-1}^n)"
+        ],
+        [
+          "p",
+          "This is the forward Euler scheme. It is trivial to implement. You loop over all grid points, compute the new concentration from the old values, and step forward in time. No linear system to solve. But there is a catch."
+        ],
+        [
+          "callout",
+          "The stability criterion",
+          "The explicit scheme is stable only if $D \\Delta t / \\Delta x^2 \\leq 1/2$. Violate this and the solution oscillates wildly and diverges. This is the CFL (Courant-Friedrichs-Lewy) condition for the diffusion equation. If you halve the grid spacing, you must use a time step four times smaller. For fine grids, this makes explicit methods prohibitively slow."
+        ],
+        [
+          "h3",
+          "Implicit methods"
+        ],
+        [
+          "p",
+          "The implicit (backward Euler) scheme evaluates the spatial derivative at the new time level:"
+        ],
+        [
+          "eq",
+          "\\frac{c_i^{n+1} - c_i^n}{\\Delta t} = D \\frac{c_{i+1}^{n+1} - 2c_i^{n+1} + c_{i-1}^{n+1}}{\\Delta x^2}"
+        ],
+        [
+          "p",
+          "Now the unknown values at $n+1$ appear on both sides. This gives a system of linear equations (tridiagonal in 1D) that must be solved at each time step. The payoff: the implicit scheme is unconditionally stable. You can take large time steps without the solution blowing up. The solution may lose accuracy with large $\\Delta t$, but it will not diverge."
+        ],
+        [
+          "p",
+          "The Crank-Nicolson scheme averages the explicit and implicit approaches (half the spatial derivative at time $n$, half at $n+1$). It is second-order accurate in both space and time, and still unconditionally stable. It is the standard choice for one-dimensional diffusion problems."
+        ],
+        [
+          "h3",
+          "The finite element method"
+        ],
+        [
+          "p",
+          "Finite differences work well on regular grids. Real engineering components are not regular. A turbine blade, a hip implant, a welded joint: these require meshes that conform to complex boundaries. The finite element method (FEM) handles this by dividing the domain into elements (triangles or quadrilaterals in 2D, tetrahedra or hexahedra in 3D) and approximating the solution as a sum of simple functions (shape functions) within each element."
+        ],
+        [
+          "p",
+          "Instead of approximating derivatives directly, FEM starts from the weak form of the PDE. For the steady-state heat equation $\\nabla \\cdot (k \\nabla T) = 0$, multiply by a test function $v$, integrate over the domain, and apply integration by parts:"
+        ],
+        [
+          "eq",
+          "\\int_\\Omega k \\, \\nabla T \\cdot \\nabla v \\, d\\Omega = \\int_{\\partial \\Omega} k \\frac{\\partial T}{\\partial n} v \\, dS"
+        ],
+        [
+          "p",
+          "The left side involves only first derivatives of $T$ and $v$ (not second derivatives), which relaxes the smoothness requirements. The right side naturally incorporates Neumann boundary conditions. Substituting the shape function expansion $T \\approx \\sum_j T_j N_j(\\mathbf{x})$ yields a system of linear equations $\\mathbf{K} \\mathbf{T} = \\mathbf{f}$, where $\\mathbf{K}$ is the stiffness matrix."
+        ],
+        [
+          "p",
+          "FEM is the workhorse of computational mechanics. It handles complex geometry, material heterogeneity (different elements can have different properties), and coupled problems (thermal-mechanical, fluid-structure). Commercial codes like ABAQUS and ANSYS are built on it."
+        ],
+        [
+          "h3",
+          "Mesh convergence and error"
+        ],
+        [
+          "p",
+          "A numerical solution is only meaningful if it has converged. This means: refine the mesh (decrease $\\Delta x$) and check that the answer does not change significantly. If halving the grid spacing changes the peak stress by 20%, the original mesh was too coarse."
+        ],
+        [
+          "p",
+          "For second-order methods (central differences, linear finite elements), the error scales as $O(\\Delta x^2)$. Halving $\\Delta x$ reduces the error by a factor of 4. For higher-order methods (quadratic elements, spectral methods), the error drops faster but the cost per element is higher. The optimal strategy depends on the required accuracy and the smoothness of the solution."
+        ],
+        [
+          "p",
+          "Singularities cause trouble. A crack tip or a re-entrant corner produces a stress field that varies as $r^{-1/2}$, which is not smooth. Standard elements converge slowly near such features. Special quarter-point elements or enriched formulations (XFEM) are needed."
+        ],
+        [
+          "h3",
+          "Systems of ODEs and time integration"
+        ],
+        [
+          "p",
+          "Spatial discretisation of a PDE produces a system of ODEs in time: $d\\mathbf{c}/dt = \\mathbf{f}(\\mathbf{c})$. The forward Euler, backward Euler and Crank-Nicolson methods are all time integrators for this system. More sophisticated methods exist. Runge-Kutta methods (especially the fourth-order RK4) are popular for non-stiff problems. For stiff systems (where some modes decay much faster than others, common in chemical kinetics), implicit methods or specialised stiff solvers (BDF methods) are essential."
+        ],
+        [
+          "derivation",
+          "Derive the stability condition for the explicit scheme applied to the 1D diffusion equation.",
+          [
+            [
+              "p",
+              "Substitute a Fourier mode $c_i^n = \\hat{c}^n e^{i k i \\Delta x}$ into the explicit update formula:"
+            ],
+            [
+              "eq",
+              "\\hat{c}^{n+1} = \\hat{c}^n \\left[1 + \\frac{D\\Delta t}{\\Delta x^2}(e^{ik\\Delta x} - 2 + e^{-ik\\Delta x})\\right]"
+            ],
+            [
+              "p",
+              "Using $e^{ik\\Delta x} + e^{-ik\\Delta x} = 2\\cos(k\\Delta x)$:"
+            ],
+            [
+              "eq",
+              "\\hat{c}^{n+1} = \\hat{c}^n \\left[1 - \\frac{4D\\Delta t}{\\Delta x^2}\\sin^2\\left(\\frac{k\\Delta x}{2}\\right)\\right]"
+            ],
+            [
+              "p",
+              "The amplification factor $G = \\hat{c}^{n+1}/\\hat{c}^n$ must satisfy $|G| \\leq 1$ for all $k$. The worst case is $\\sin^2(k\\Delta x/2) = 1$, giving $G = 1 - 4D\\Delta t/\\Delta x^2$. Requiring $G \\geq -1$:"
+            ],
+            [
+              "eq",
+              "\\frac{D\\Delta t}{\\Delta x^2} \\leq \\frac{1}{2}"
+            ]
+          ]
+        ],
+        [
+          "problem",
+          "You are simulating carbon diffusion in austenite at 950 C ($D = 2 \\times 10^{-11}$ m$^2$/s) using an explicit scheme with grid spacing $\\Delta x = 10$ $\\mu$m. What is the maximum stable time step? How many time steps are needed to simulate 1 hour of diffusion?",
+          [
+            [
+              "p",
+              "The stability criterion gives $\\Delta t \\leq \\Delta x^2 / (2D) = (10 \\times 10^{-6})^2 / (2 \\times 2 \\times 10^{-11}) = 10^{-10} / (4 \\times 10^{-11}) = 2.5$ s."
+            ],
+            [
+              "p",
+              "For 1 hour (3600 s): $3600 / 2.5 = 1440$ time steps."
+            ],
+            [
+              "p",
+              "This is manageable. But if you refine to $\\Delta x = 1$ $\\mu$m, the maximum time step drops to $0.025$ s and you need 144,000 steps. At $\\Delta x = 0.1$ $\\mu$m, it is $2.5 \\times 10^{-4}$ s and 14.4 million steps. This is why implicit methods become necessary for fine grids."
+            ]
+          ]
+        ]
       ],
       "related": [
-        { "title": "Finite Element Methods", "url": "../computational/finite-element-methods" },
-        { "title": "Phase-Field Modelling", "url": "../computational/phase-field-modelling" },
-        { "title": "Ordinary & Partial Differential Equations", "url": "ordinary-partial-differential-equations" }
+        {
+          "title": "Finite Element Methods",
+          "url": "../computational/finite-element-methods"
+        },
+        {
+          "title": "Phase-Field Modelling",
+          "url": "../computational/phase-field-modelling"
+        },
+        {
+          "title": "Ordinary & Partial Differential Equations",
+          "url": "ordinary-partial-differential-equations"
+        }
       ]
     },
     {
@@ -361,84 +1018,214 @@
       "readingTime": "15 min",
       "intro": "Symmetry is the most powerful organising principle in materials science. It determines which physical properties a crystal can have, which spectroscopic transitions are allowed, and which tensor components are independent. Group theory is the mathematical language that makes these predictions systematic rather than case-by-case.",
       "body": [
-        ["h3", "Symmetry operations"],
-        ["p", "A symmetry operation is a transformation that leaves an object indistinguishable from its original state. The five types relevant to crystals are:"],
-        ["ul", [
-          "<strong>Identity</strong> ($E$): do nothing. Every object has this symmetry.",
-          "<strong>Rotation</strong> ($C_n$): rotate by $360°/n$ about an axis. A square has $C_4$; a hexagon has $C_6$.",
-          "<strong>Reflection</strong> ($\\sigma$): reflect through a plane. Labelled $\\sigma_h$ (horizontal, perpendicular to the principal axis), $\\sigma_v$ (vertical, containing the principal axis), or $\\sigma_d$ (dihedral, bisecting two $C_2$ axes).",
-          "<strong>Inversion</strong> ($i$): map every point $(x, y, z)$ to $(-x, -y, -z)$ through a centre of symmetry.",
-          "<strong>Improper rotation</strong> ($S_n$): rotate by $360°/n$ followed by reflection through a plane perpendicular to the axis. $S_2 = i$ and $S_1 = \\sigma_h$."
-        ]],
-        ["p", "The collection of all symmetry operations of an object forms a mathematical group: it is closed under composition (doing one operation followed by another gives a third operation in the set), it has an identity element, every operation has an inverse, and composition is associative."],
-
-        ["h3", "Point groups"],
-        ["p", "A point group is the set of symmetry operations that leave at least one point unmoved. For molecules and the external shapes of crystals, there are 32 crystallographic point groups (those compatible with translational periodicity). They restrict the allowed rotation axes to 1, 2, 3, 4 and 6-fold. Five-fold symmetry, as in an icosahedron, is forbidden in a periodic crystal (though it appears in quasicrystals)."],
-        ["p", "Some familiar examples:"],
-        ["ul", [
-          "The water molecule belongs to point group $C_{2v}$: one $C_2$ axis and two mirror planes.",
-          "Benzene belongs to $D_{6h}$: a 6-fold axis, six $C_2$ axes, horizontal and vertical mirrors, and inversion.",
-          "A cube (and therefore the cubic crystal system) belongs to $O_h$: 48 symmetry operations, including three 4-fold axes, four 3-fold axes, six 2-fold axes, and inversion.",
-          "The BCC and FCC Bravais lattices both have point group $O_h$. The HCP lattice has $D_{6h}$."
-        ]],
-
-        ["h3", "Representations and character tables"],
-        ["p", "A representation of a group assigns a matrix to each symmetry operation such that the matrix multiplication table mirrors the group multiplication table. The character of an operation in a given representation is the trace of its matrix."],
-        ["p", "The character table lists the characters of all irreducible representations (the simplest ones, from which all others can be built). For the point group $C_{2v}$:"],
-        ["eq", "\\begin{array}{c|cccc} C_{2v} & E & C_2 & \\sigma_v & \\sigma_v' \\\\ \\hline A_1 & 1 & 1 & 1 & 1 \\\\ A_2 & 1 & 1 & -1 & -1 \\\\ B_1 & 1 & -1 & 1 & -1 \\\\ B_2 & 1 & -1 & -1 & 1 \\end{array}"],
-        ["p", "Each row is an irreducible representation. The labels ($A_1$, $A_2$, $B_1$, $B_2$) follow Mulliken notation: $A$ is symmetric under the principal rotation, $B$ is antisymmetric. The subscripts distinguish representations with different mirror symmetries."],
-        ["p", "Why do we care? Because every physical property transforms as one of these representations. A property that transforms as $A_1$ is totally symmetric and is always allowed. Properties transforming as other representations may vanish by symmetry."],
-
-        ["h3", "Neumann's principle and property tensors"],
-        ["p", "Neumann's principle states: the symmetry of any physical property of a crystal must include the symmetry of the point group of the crystal. If the crystal has a mirror plane, every measurable tensor must be invariant under that reflection."],
-        ["p", "This has immediate consequences. The piezoelectric tensor $d_{ijk}$ is third-rank. Under inversion, a third-rank tensor changes sign ($d_{ijk} \\to -d_{ijk}$). But if the crystal has a centre of inversion, Neumann's principle requires $d_{ijk} = -d_{ijk}$, so $d_{ijk} = 0$. Centrosymmetric crystals cannot be piezoelectric. This eliminates 11 of the 32 point groups (those with inversion symmetry, plus $O$ for other reasons). Only 20 point groups allow piezoelectricity."],
-        ["p", "Quartz (point group 32, which is $D_3$) lacks inversion and is strongly piezoelectric. This is why quartz oscillators are used in watches and electronic circuits. BaTiO$_3$ (point group $4mm$ or $C_{4v}$ in the tetragonal ferroelectric phase) is piezoelectric and also pyroelectric and ferroelectric. These are all consequences of its symmetry."],
-
-        ["h3", "Selection rules"],
-        ["p", "In spectroscopy, a transition between states $|i\\rangle$ and $|f\\rangle$ is allowed only if the matrix element $\\langle f | \\hat{O} | i \\rangle \\neq 0$, where $\\hat{O}$ is the operator for the relevant interaction (the electric dipole moment for IR absorption, the polarisability tensor for Raman scattering)."],
-        ["p", "Group theory provides a shortcut. The matrix element vanishes unless the direct product of the representations of $|f\\rangle$, $\\hat{O}$, and $|i\\rangle$ contains the totally symmetric representation ($A_1$ or its equivalent). This is the group-theoretic selection rule."],
-        ["p", "For a molecule in $C_{2v}$: the electric dipole operator transforms as $B_1$ ($x$), $B_2$ ($y$) or $A_1$ ($z$). A transition from $A_1$ to $B_2$ is IR-allowed (via the $y$-component) because $A_1 \\otimes B_2 \\otimes B_2 = A_1$. A transition from $A_1$ to $A_2$ is IR-forbidden because $A_1 \\otimes A_2 \\otimes B_1 = B_2 \\neq A_1$ (and similarly for the other dipole components)."],
-        ["callout", "The rule of mutual exclusion", "In a molecule with a centre of inversion, modes that are IR-active are Raman-inactive, and vice versa. This is because the dipole operator is odd under inversion (it transforms as $u$) while the polarisability is even ($g$). A mode cannot be both $g$ and $u$. For CO$_2$ (point group $D_{\\infty h}$, centrosymmetric), the symmetric stretch is Raman-active but IR-inactive. The antisymmetric stretch is IR-active but Raman-inactive."],
-
-        ["h3", "Space groups"],
-        ["p", "Point groups describe the symmetry of a single point. Space groups combine point group symmetry with translational symmetry (the lattice) and two additional operations that only exist in periodic structures:"],
-        ["ul", [
-          "<strong>Screw axes</strong>: a rotation combined with a translation along the axis. A $2_1$ screw axis rotates by 180° and translates by half a lattice vector.",
-          "<strong>Glide planes</strong>: a reflection combined with a translation parallel to the plane."
-        ]],
-        ["p", "There are exactly 230 space groups in three dimensions (established independently by Fedorov, Schoenflies and Barlow around 1890). Every crystal structure belongs to one of them. The space group determines the systematic absences in the diffraction pattern, which is how crystallographers identify it experimentally."],
-        ["p", "Diamond has space group $Fd\\bar{3}m$ (number 227). The $d$ indicates a diamond glide, and the $\\bar{3}$ indicates a 3-fold rotoinversion axis. Silicon, germanium and grey tin share this space group. NaCl has $Fm\\bar{3}m$ (number 225). Perovskite (BaTiO$_3$) above the Curie temperature has $Pm\\bar{3}m$ (number 221); below it, the structure distorts and the space group changes to $P4mm$, breaking inversion symmetry and enabling ferroelectricity."],
-
-        ["h3", "Symmetry and elastic constants"],
-        ["p", "Group theory determines how many independent elastic constants a crystal has. The general case (triclinic, point group $\\bar{1}$) has 21. Adding symmetry elements forces certain components to be equal or zero:"],
-        ["ul", [
-          "Monoclinic: 13 independent constants",
-          "Orthorhombic: 9",
-          "Tetragonal (classes $4mm$, $\\bar{4}2m$, $422$, $4/mmm$): 6",
-          "Hexagonal: 5",
-          "Cubic: 3 ($C_{11}$, $C_{12}$, $C_{44}$)",
-          "Isotropic: 2 (any two of $E$, $\\nu$, $G$, $K$)"
-        ]],
-        ["p", "These reductions are not empirical observations. They are mathematical consequences of Neumann's principle applied to the fourth-rank stiffness tensor under the symmetry operations of the point group. Group theory turns 21 unknowns into 3 for a cubic crystal, saving enormous experimental and computational effort."],
-
-        ["derivation", "Show that a cubic crystal has only three independent elastic constants by applying the 4-fold rotation symmetry.", [
-          ["p", "A cubic crystal has a 4-fold rotation axis along each cube edge. Consider $C_4$ about the $x_3$-axis, which maps $x_1 \\to x_2$, $x_2 \\to -x_1$, $x_3 \\to x_3$."],
-          ["p", "The stiffness tensor must be invariant: $C_{ijkl} = R_{ip}R_{jq}R_{kr}R_{ls}C_{pqrs}$. Applying this transformation to $C_{1111}$:"],
-          ["eq", "C_{1111} = R_{1p}R_{1q}R_{1r}R_{1s}C_{pqrs} = C_{2222}"],
-          ["p", "The 4-fold axis forces $C_{1111} = C_{2222}$. By the 4-fold axis along $x_1$: $C_{2222} = C_{3333}$. So all three diagonal normal stiffnesses are equal: this is $C_{11}$ in Voigt notation."],
-          ["p", "Similarly, $C_{1122} = C_{2233} = C_{1133}$ (this is $C_{12}$), and $C_{2323} = C_{1313} = C_{1212}$ (this is $C_{44}$). The 4-fold rotations and the 3-fold rotation along the body diagonal together reduce the 21 constants to exactly 3."]
-        ]],
-
-        ["problem", "Gallium arsenide (GaAs) crystallises in the zinc blende structure, space group $F\\bar{4}3m$, point group $\\bar{4}3m$ ($T_d$). Does the zinc blende structure have a centre of inversion? Can GaAs be piezoelectric?", [
-          ["p", "The zinc blende structure has two interpenetrating FCC lattices offset by $(\\frac{1}{4}, \\frac{1}{4}, \\frac{1}{4})$, with Ga on one and As on the other. Unlike diamond (where both sublattices have the same atom), the two sublattices are chemically distinct."],
-          ["p", "In diamond ($Fd\\bar{3}m$, point group $m\\bar{3}m$), inversion maps each atom onto an equivalent atom on the other sublattice. In zinc blende, inversion maps Ga onto As positions and vice versa. Since Ga $\\neq$ As, the structure is not invariant under inversion. Point group $T_d$ ($\\bar{4}3m$) does not contain inversion."],
-          ["p", "Since GaAs lacks a centre of inversion, it can be piezoelectric. And it is: GaAs has a piezoelectric coefficient $d_{14} = 2.6$ pC/N. This is small compared to PZT ($d_{33} \\sim 300$ pC/N) but nonzero, and it confirms the symmetry prediction."]
-        ]]
+        [
+          "h3",
+          "Symmetry operations"
+        ],
+        [
+          "p",
+          "A symmetry operation is a transformation that leaves an object indistinguishable from its original state. The five types relevant to crystals are:"
+        ],
+        [
+          "ul",
+          [
+            "<strong>Identity</strong> ($E$): do nothing. Every object has this symmetry.",
+            "<strong>Rotation</strong> ($C_n$): rotate by $360\u00b0/n$ about an axis. A square has $C_4$; a hexagon has $C_6$.",
+            "<strong>Reflection</strong> ($\\sigma$): reflect through a plane. Labelled $\\sigma_h$ (horizontal, perpendicular to the principal axis), $\\sigma_v$ (vertical, containing the principal axis), or $\\sigma_d$ (dihedral, bisecting two $C_2$ axes).",
+            "<strong>Inversion</strong> ($i$): map every point $(x, y, z)$ to $(-x, -y, -z)$ through a centre of symmetry.",
+            "<strong>Improper rotation</strong> ($S_n$): rotate by $360\u00b0/n$ followed by reflection through a plane perpendicular to the axis. $S_2 = i$ and $S_1 = \\sigma_h$."
+          ]
+        ],
+        [
+          "p",
+          "The collection of all symmetry operations of an object forms a mathematical group: it is closed under composition (doing one operation followed by another gives a third operation in the set), it has an identity element, every operation has an inverse, and composition is associative."
+        ],
+        [
+          "h3",
+          "Point groups"
+        ],
+        [
+          "p",
+          "A point group is the set of symmetry operations that leave at least one point unmoved. For molecules and the external shapes of crystals, there are 32 crystallographic point groups (those compatible with translational periodicity). They restrict the allowed rotation axes to 1, 2, 3, 4 and 6-fold. Five-fold symmetry, as in an icosahedron, is forbidden in a periodic crystal (though it appears in quasicrystals)."
+        ],
+        [
+          "p",
+          "Some familiar examples:"
+        ],
+        [
+          "ul",
+          [
+            "The water molecule belongs to point group $C_{2v}$: one $C_2$ axis and two mirror planes.",
+            "Benzene belongs to $D_{6h}$: a 6-fold axis, six $C_2$ axes, horizontal and vertical mirrors, and inversion.",
+            "A cube (and therefore the cubic crystal system) belongs to $O_h$: 48 symmetry operations, including three 4-fold axes, four 3-fold axes, six 2-fold axes, and inversion.",
+            "The BCC and FCC Bravais lattices both have point group $O_h$. The HCP lattice has $D_{6h}$."
+          ]
+        ],
+        [
+          "h3",
+          "Representations and character tables"
+        ],
+        [
+          "p",
+          "A representation of a group assigns a matrix to each symmetry operation such that the matrix multiplication table mirrors the group multiplication table. The character of an operation in a given representation is the trace of its matrix."
+        ],
+        [
+          "p",
+          "The character table lists the characters of all irreducible representations (the simplest ones, from which all others can be built). For the point group $C_{2v}$:"
+        ],
+        [
+          "eq",
+          "\\begin{array}{c|cccc} C_{2v} & E & C_2 & \\sigma_v & \\sigma_v' \\\\ \\hline A_1 & 1 & 1 & 1 & 1 \\\\ A_2 & 1 & 1 & -1 & -1 \\\\ B_1 & 1 & -1 & 1 & -1 \\\\ B_2 & 1 & -1 & -1 & 1 \\end{array}"
+        ],
+        [
+          "p",
+          "Each row is an irreducible representation. The labels ($A_1$, $A_2$, $B_1$, $B_2$) follow Mulliken notation: $A$ is symmetric under the principal rotation, $B$ is antisymmetric. The subscripts distinguish representations with different mirror symmetries."
+        ],
+        [
+          "p",
+          "Why do we care? Because every physical property transforms as one of these representations. A property that transforms as $A_1$ is totally symmetric and is always allowed. Properties transforming as other representations may vanish by symmetry."
+        ],
+        [
+          "h3",
+          "Neumann's principle and property tensors"
+        ],
+        [
+          "p",
+          "Neumann's principle states: the symmetry of any physical property of a crystal must include the symmetry of the point group of the crystal. If the crystal has a mirror plane, every measurable tensor must be invariant under that reflection."
+        ],
+        [
+          "p",
+          "This has immediate consequences. The piezoelectric tensor $d_{ijk}$ is third-rank. Under inversion, a third-rank tensor changes sign ($d_{ijk} \\to -d_{ijk}$). But if the crystal has a centre of inversion, Neumann's principle requires $d_{ijk} = -d_{ijk}$, so $d_{ijk} = 0$. Centrosymmetric crystals cannot be piezoelectric. This eliminates 11 of the 32 point groups (those with inversion symmetry, plus $O$ for other reasons). Only 20 point groups allow piezoelectricity."
+        ],
+        [
+          "p",
+          "Quartz (point group 32, which is $D_3$) lacks inversion and is strongly piezoelectric. This is why quartz oscillators are used in watches and electronic circuits. BaTiO$_3$ (point group $4mm$ or $C_{4v}$ in the tetragonal ferroelectric phase) is piezoelectric and also pyroelectric and ferroelectric. These are all consequences of its symmetry."
+        ],
+        [
+          "h3",
+          "Selection rules"
+        ],
+        [
+          "p",
+          "In spectroscopy, a transition between states $|i\\rangle$ and $|f\\rangle$ is allowed only if the matrix element $\\langle f | \\hat{O} | i \\rangle \\neq 0$, where $\\hat{O}$ is the operator for the relevant interaction (the electric dipole moment for IR absorption, the polarisability tensor for Raman scattering)."
+        ],
+        [
+          "p",
+          "Group theory provides a shortcut. The matrix element vanishes unless the direct product of the representations of $|f\\rangle$, $\\hat{O}$, and $|i\\rangle$ contains the totally symmetric representation ($A_1$ or its equivalent). This is the group-theoretic selection rule."
+        ],
+        [
+          "p",
+          "For a molecule in $C_{2v}$: the electric dipole operator transforms as $B_1$ ($x$), $B_2$ ($y$) or $A_1$ ($z$). A transition from $A_1$ to $B_2$ is IR-allowed (via the $y$-component) because $A_1 \\otimes B_2 \\otimes B_2 = A_1$. A transition from $A_1$ to $A_2$ is IR-forbidden because $A_1 \\otimes A_2 \\otimes B_1 = B_2 \\neq A_1$ (and similarly for the other dipole components)."
+        ],
+        [
+          "callout",
+          "The rule of mutual exclusion",
+          "In a molecule with a centre of inversion, modes that are IR-active are Raman-inactive, and vice versa. This is because the dipole operator is odd under inversion (it transforms as $u$) while the polarisability is even ($g$). A mode cannot be both $g$ and $u$. For CO$_2$ (point group $D_{\\infty h}$, centrosymmetric), the symmetric stretch is Raman-active but IR-inactive. The antisymmetric stretch is IR-active but Raman-inactive."
+        ],
+        [
+          "h3",
+          "Space groups"
+        ],
+        [
+          "p",
+          "Point groups describe the symmetry of a single point. Space groups combine point group symmetry with translational symmetry (the lattice) and two additional operations that only exist in periodic structures:"
+        ],
+        [
+          "ul",
+          [
+            "<strong>Screw axes</strong>: a rotation combined with a translation along the axis. A $2_1$ screw axis rotates by 180\u00b0 and translates by half a lattice vector.",
+            "<strong>Glide planes</strong>: a reflection combined with a translation parallel to the plane."
+          ]
+        ],
+        [
+          "p",
+          "There are exactly 230 space groups in three dimensions (established independently by Fedorov, Schoenflies and Barlow around 1890). Every crystal structure belongs to one of them. The space group determines the systematic absences in the diffraction pattern, which is how crystallographers identify it experimentally."
+        ],
+        [
+          "p",
+          "Diamond has space group $Fd\\bar{3}m$ (number 227). The $d$ indicates a diamond glide, and the $\\bar{3}$ indicates a 3-fold rotoinversion axis. Silicon, germanium and grey tin share this space group. NaCl has $Fm\\bar{3}m$ (number 225). Perovskite (BaTiO$_3$) above the Curie temperature has $Pm\\bar{3}m$ (number 221); below it, the structure distorts and the space group changes to $P4mm$, breaking inversion symmetry and enabling ferroelectricity."
+        ],
+        [
+          "h3",
+          "Symmetry and elastic constants"
+        ],
+        [
+          "p",
+          "Group theory determines how many independent elastic constants a crystal has. The general case (triclinic, point group $\\bar{1}$) has 21. Adding symmetry elements forces certain components to be equal or zero:"
+        ],
+        [
+          "ul",
+          [
+            "Monoclinic: 13 independent constants",
+            "Orthorhombic: 9",
+            "Tetragonal (classes $4mm$, $\\bar{4}2m$, $422$, $4/mmm$): 6",
+            "Hexagonal: 5",
+            "Cubic: 3 ($C_{11}$, $C_{12}$, $C_{44}$)",
+            "Isotropic: 2 (any two of $E$, $\\nu$, $G$, $K$)"
+          ]
+        ],
+        [
+          "p",
+          "These reductions are not empirical observations. They are mathematical consequences of Neumann's principle applied to the fourth-rank stiffness tensor under the symmetry operations of the point group. Group theory turns 21 unknowns into 3 for a cubic crystal, saving enormous experimental and computational effort."
+        ],
+        [
+          "derivation",
+          "Show that a cubic crystal has only three independent elastic constants by applying the 4-fold rotation symmetry.",
+          [
+            [
+              "p",
+              "A cubic crystal has a 4-fold rotation axis along each cube edge. Consider $C_4$ about the $x_3$-axis, which maps $x_1 \\to x_2$, $x_2 \\to -x_1$, $x_3 \\to x_3$."
+            ],
+            [
+              "p",
+              "The stiffness tensor must be invariant: $C_{ijkl} = R_{ip}R_{jq}R_{kr}R_{ls}C_{pqrs}$. Applying this transformation to $C_{1111}$:"
+            ],
+            [
+              "eq",
+              "C_{1111} = R_{1p}R_{1q}R_{1r}R_{1s}C_{pqrs} = C_{2222}"
+            ],
+            [
+              "p",
+              "The 4-fold axis forces $C_{1111} = C_{2222}$. By the 4-fold axis along $x_1$: $C_{2222} = C_{3333}$. So all three diagonal normal stiffnesses are equal: this is $C_{11}$ in Voigt notation."
+            ],
+            [
+              "p",
+              "Similarly, $C_{1122} = C_{2233} = C_{1133}$ (this is $C_{12}$), and $C_{2323} = C_{1313} = C_{1212}$ (this is $C_{44}$). The 4-fold rotations and the 3-fold rotation along the body diagonal together reduce the 21 constants to exactly 3."
+            ]
+          ]
+        ],
+        [
+          "problem",
+          "Gallium arsenide (GaAs) crystallises in the zinc blende structure, space group $F\\bar{4}3m$, point group $\\bar{4}3m$ ($T_d$). Does the zinc blende structure have a centre of inversion? Can GaAs be piezoelectric?",
+          [
+            [
+              "p",
+              "The zinc blende structure has two interpenetrating FCC lattices offset by $(\\frac{1}{4}, \\frac{1}{4}, \\frac{1}{4})$, with Ga on one and As on the other. Unlike diamond (where both sublattices have the same atom), the two sublattices are chemically distinct."
+            ],
+            [
+              "p",
+              "In diamond ($Fd\\bar{3}m$, point group $m\\bar{3}m$), inversion maps each atom onto an equivalent atom on the other sublattice. In zinc blende, inversion maps Ga onto As positions and vice versa. Since Ga $\\neq$ As, the structure is not invariant under inversion. Point group $T_d$ ($\\bar{4}3m$) does not contain inversion."
+            ],
+            [
+              "p",
+              "Since GaAs lacks a centre of inversion, it can be piezoelectric. And it is: GaAs has a piezoelectric coefficient $d_{14} = 2.6$ pC/N. This is small compared to PZT ($d_{33} \\sim 300$ pC/N) but nonzero, and it confirms the symmetry prediction."
+            ]
+          ]
+        ]
       ],
       "related": [
-        { "title": "Crystal Systems & Bravais Lattices", "url": "../crystallography/crystal-systems" },
-        { "title": "Fourier Analysis", "url": "fourier-analysis" },
-        { "title": "Spectroscopy (XPS, Raman, FTIR)", "url": "../characterisation/spectroscopy-xps-raman-ftir" }
+        {
+          "title": "Crystal Systems & Bravais Lattices",
+          "url": "../crystallography/crystal-systems"
+        },
+        {
+          "title": "Fourier Analysis",
+          "url": "fourier-analysis"
+        },
+        {
+          "title": "Spectroscopy (XPS, Raman, FTIR)",
+          "url": "../characterisation/spectroscopy-xps-raman-ftir"
+        }
       ]
     }
   ]

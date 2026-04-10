@@ -15,7 +15,7 @@
       "title": "Why Atoms Bond",
       "description": "The interatomic potential, bond energy, and the spectrum from ionic to covalent to metallic.",
       "readingTime": "10 min",
-      "intro": "Isolated atoms are higher in energy than bonded atoms. That single fact drives everything in materials science. This article introduces the interatomic potential, defines bond energy and equilibrium spacing, and establishes the spectrum of bond character that organises the rest of the module.",
+      "intro": "Isolated atoms are higher in energy than bonded atoms. This article starts from that fact and introduces the interatomic potential, defines bond energy and equilibrium spacing, and establishes the spectrum of bond character that organises the rest of the module.",
       "body": [
         [
           "h3",
