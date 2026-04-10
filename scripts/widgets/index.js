@@ -19,6 +19,7 @@ const registry = {
   'pourbaix-diagram':    () => import('./pourbaix-diagram.js'),
   'lever-rule':          () => import('./lever-rule.js'),
   'edge-dislocation':    () => import('./edge-dislocation.js'),
+  'lennard-jones':       () => import('./lennard-jones.js'),
 };
 
 /**

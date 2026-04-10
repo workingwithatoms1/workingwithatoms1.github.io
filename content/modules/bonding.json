@@ -12,51 +12,205 @@
     {
       "id": "atomic-structure-electron-configuration",
       "number": "2.1",
-      "title": "Atomic Structure & Electron Configuration",
-      "description": "Quantum numbers, orbital filling, and the periodic trends that govern bonding.",
-      "readingTime": "12 min",
-      "intro": "Every property of every material traces back to electrons. How they are arranged around an atomic nucleus determines what bonds an atom can form, how strong those bonds are, and what structures result. This article covers the quantum-mechanical rules that govern electron configuration.",
+      "title": "Why Atoms Bond",
+      "description": "The interatomic potential, bond energy, and the spectrum from ionic to covalent to metallic.",
+      "readingTime": "10 min",
+      "intro": "Isolated atoms are higher in energy than bonded atoms. That single fact drives everything in materials science. This article introduces the interatomic potential, defines bond energy and equilibrium spacing, and establishes the spectrum of bond character that organises the rest of the module.",
       "body": [
-        ["h3", "The nuclear atom"],
-        ["p", "An atom is a nucleus of protons and neutrons surrounded by electrons. The nucleus is small (radius $\\sim 10^{-15}$ m) and dense (nuclear density $\\sim 2.3 \\times 10^{17}$ kg/m$^3$). The electrons occupy a much larger region ($\\sim 10^{-10}$ m), and it is the electrons that participate in bonding."],
-        ["p", "The atomic number $Z$ counts protons. It defines the element. Hydrogen: $Z = 1$. Carbon: $Z = 6$. Iron: $Z = 26$. A neutral atom has $Z$ electrons. Remove or add electrons and you get an ion."],
-
-        ["h3", "Quantum numbers and orbitals"],
-        ["p", "Electrons in an atom are described by four quantum numbers. These are not arbitrary labels; they emerge from solving the Schrodinger equation for the Coulomb potential of the nucleus."],
-        ["p", "The principal quantum number $n = 1, 2, 3, \\ldots$ sets the energy level and the size of the orbital. Higher $n$ means higher energy and a more diffuse electron cloud."],
-        ["p", "The angular momentum quantum number $l = 0, 1, \\ldots, n-1$ determines the orbital shape. $l = 0$ is an s orbital (spherical), $l = 1$ is p (dumbbell), $l = 2$ is d (cloverleaf), $l = 3$ is f (complex). The letter names are historical (sharp, principal, diffuse, fundamental)."],
-        ["p", "The magnetic quantum number $m_l = -l, \\ldots, +l$ specifies the orbital orientation. There are $2l + 1$ orbitals for each value of $l$: one s, three p, five d, seven f."],
-        ["p", "The spin quantum number $m_s = \\pm 1/2$ distinguishes the two spin states of an electron. The Pauli exclusion principle states that no two electrons in an atom can share all four quantum numbers. Each orbital holds at most two electrons, with opposite spins."],
-
-        ["h3", "Filling order and the aufbau principle"],
-        ["p", "Electrons fill orbitals from the lowest energy upward. For hydrogen, energy depends only on $n$. For multi-electron atoms, electron-electron repulsion splits the degeneracy: within a shell, s < p < d < f in energy. The filling order follows the Madelung rule: $1s, 2s, 2p, 3s, 3p, 4s, 3d, 4p, 5s, 4d, \\ldots$"],
-        ["p", "Hund's rule: electrons fill degenerate orbitals singly (with parallel spins) before pairing. This minimises electron-electron repulsion."],
-        ["p", "Some examples. Oxygen ($Z = 8$): $1s^2\\,2s^2\\,2p^4$. The two 2p electrons beyond half-filling are forced to pair, increasing repulsion, which is why the first ionisation energy of oxygen (1314 kJ/mol) is lower than nitrogen's (1402 kJ/mol) despite oxygen having a higher nuclear charge."],
-        ["p", "Iron ($Z = 26$): $[\\text{Ar}]\\,3d^6\\,4s^2$. The partially filled 3d shell gives iron its magnetic properties and its ability to form multiple oxidation states (Fe$^{2+}$ and Fe$^{3+}$). Chromium ($Z = 24$): $[\\text{Ar}]\\,3d^5\\,4s^1$, not $3d^4\\,4s^2$. A half-filled d shell has extra stability from exchange energy."],
-
-        ["callout", "Why does 4s fill before 3d?", "In a hydrogen atom, 3d and 4s have the same energy. In a multi-electron atom, the inner electrons partially screen the nuclear charge. An s electron penetrates closer to the nucleus (its probability density does not vanish at $r = 0$), so it feels a higher effective nuclear charge and sits lower in energy. This is why 4s fills before 3d. But once the 3d shell begins to fill, the additional nuclear charge from higher $Z$ pulls 3d below 4s, which is why transition metal ions lose 4s electrons first."],
-
-        ["h3", "Periodic trends"],
-        ["p", "The periodic table is organised by electron configuration, and the trends it encodes govern bonding."],
-        ["p", "<strong>Atomic radius</strong> decreases across a period (more protons, same shell, stronger pull on electrons) and increases down a group (new shells). Lithium: 152 pm. Carbon: 77 pm. Sodium: 186 pm. Caesium: 265 pm."],
-        ["p", "<strong>Ionisation energy</strong> (energy to remove an electron) increases across a period and decreases down a group. The most electropositive elements (Cs, Fr) lose electrons easily. The noble gases have the highest ionisation energies in each period."],
-        ["p", "<strong>Electron affinity</strong> (energy released when an atom gains an electron) is most negative (most favourable) for the halogens. Chlorine: $-349$ kJ/mol. Fluorine is anomalous: $-328$ kJ/mol. The small F atom suffers from electron-electron repulsion in its compact 2p shell."],
-        ["p", "<strong>Electronegativity</strong> measures an atom's tendency to attract shared electrons. Pauling's scale ranges from 0.7 (Cs) to 4.0 (F). The electronegativity difference between bonded atoms determines the bond character: small difference gives covalent, large difference gives ionic. This idea runs through the rest of the module."],
-
-        ["h3", "Valence electrons and bonding capacity"],
-        ["p", "Only the outermost (valence) electrons participate in bonding. Core electrons are too tightly bound. Carbon has four valence electrons ($2s^2\\,2p^2$) and forms four bonds. Silicon also has four ($3s^2\\,3p^2$) and is tetrahedrally coordinated in most of its compounds. Transition metals have both s and d valence electrons, giving them variable valence and complex chemistry."],
-        ["p", "The noble gases (He, Ne, Ar, Kr, Xe) have filled valence shells and form almost no compounds. This filled-shell stability is the driving force behind both ionic and covalent bonding: atoms gain, lose, or share electrons to approach a noble gas configuration."],
-
-        ["problem", "Write the full electron configuration of titanium ($Z = 22$) and its Ti$^{4+}$ ion. Explain why Ti$^{4+}$ is the most stable oxidation state of titanium in oxides, and predict the crystal field behaviour of the ion.", [
-          ["p", "Titanium: $1s^2\\,2s^2\\,2p^6\\,3s^2\\,3p^6\\,3d^2\\,4s^2$, or $[\\text{Ar}]\\,3d^2\\,4s^2$."],
-          ["p", "Ti$^{4+}$: remove the two 4s electrons first, then the two 3d electrons. Configuration: $[\\text{Ar}]$, identical to argon. This is a noble gas configuration with all shells complete."],
-          ["p", "Ti$^{4+}$ is stable because it has an empty d shell ($d^0$). There are no d-d electronic transitions, so TiO$_2$ is colourless (white). The lattice energy of TiO$_2$ is large (rutile: about $12{,}150$ kJ/mol), compensating for the high fourth ionisation energy. The $d^0$ configuration also means no crystal field stabilisation energy, so Ti$^{4+}$ is found in both octahedral (rutile) and distorted environments without strong geometric preference."]
-        ]]
+        [
+          "h3",
+          "Two atoms approaching"
+        ],
+        [
+          "p",
+          "Take two neutral atoms far apart. They do not interact. Bring them closer and two things happen simultaneously. First, an attractive force develops: the electrons of one atom feel the nuclear charge of the other, and the overlap of electron clouds lowers the total energy. Second, a repulsive force develops: the nuclei repel each other, and the Pauli exclusion principle prevents the electron clouds from fully interpenetrating."
+        ],
+        [
+          "p",
+          "At large separations, attraction dominates. At very small separations, repulsion dominates. Somewhere in between, the total energy reaches a minimum. That minimum defines the equilibrium bond length $r_0$ and the bond energy $E_0$."
+        ],
+        [
+          "h3",
+          "The interatomic potential"
+        ],
+        [
+          "p",
+          "Plot the total energy $E$ of two atoms as a function of their separation $r$ and you get the interatomic potential curve. It has a characteristic shape: a deep well near $r_0$ with a steep repulsive wall on the left and a gradual attractive tail on the right."
+        ],
+        [
+          "p",
+          "For a pair of atoms interacting through a van der Waals potential, this is captured by the Lennard-Jones model:"
+        ],
+        [
+          "eq",
+          "E(r) = 4\\varepsilon \\left[\\left(\\frac{\\sigma}{r}\\right)^{12} - \\left(\\frac{\\sigma}{r}\\right)^{6}\\right]"
+        ],
+        [
+          "p",
+          "The $r^{-6}$ term is attraction (induced dipole interactions). The $r^{-12}$ term is repulsion (electron cloud overlap). $\\varepsilon$ is the depth of the well (the bond energy) and $\\sigma$ is the distance at which $E = 0$. The equilibrium spacing is $r_0 = 2^{1/6}\\sigma \\approx 1.12\\sigma$."
+        ],
+        [
+          "p",
+          "Real bonds are more complex than Lennard-Jones, but the shape of the curve is universal. Ionic, covalent, and metallic bonds all produce a potential well. What differs is the depth (bond energy), the width (stiffness), and the symmetry (thermal expansion behaviour)."
+        ],
+        [
+          "widget",
+          "lennard-jones",
+          {}
+        ],
+        [
+          "h3",
+          "Bond energy and its consequences"
+        ],
+        [
+          "p",
+          "The depth of the potential well is the bond energy $E_0$. Typical values span two orders of magnitude:"
+        ],
+        [
+          "ul",
+          [
+            "Van der Waals (Ar-Ar): ~0.01 eV (1 kJ/mol)",
+            "Hydrogen bonds (water): ~0.1 eV (10 kJ/mol)",
+            "Metallic (Fe-Fe): ~0.7 eV (70 kJ/mol)",
+            "Ionic (Na-Cl): ~3 eV (300 kJ/mol)",
+            "Covalent (C-C in diamond): ~3.6 eV (350 kJ/mol)"
+          ]
+        ],
+        [
+          "p",
+          "Bond energy controls melting point, boiling point, and cohesive energy. Diamond, with the strongest bonds in the table, melts above 3500 \u00b0C. Argon, with the weakest, boils at $-186$ \u00b0C. A materials scientist choosing a high-temperature structural material is, at the most fundamental level, choosing strong bonds."
+        ],
+        [
+          "h3",
+          "Stiffness and the force curve"
+        ],
+        [
+          "p",
+          "The curvature of the potential well at $r_0$ determines the bond stiffness. A narrow, deep well means a stiff bond; the atoms resist displacement. A broad, shallow well means a compliant bond. The restoring force for a small displacement $\\delta r$ from equilibrium is:"
+        ],
+        [
+          "eq",
+          "F = -\\frac{dE}{dr}\\bigg|_{r_0} \\approx -k\\,\\delta r"
+        ],
+        [
+          "p",
+          "where $k = d^2E/dr^2|_{r_0}$ is the spring constant. This microscopic stiffness, summed over all bonds in a solid, gives the macroscopic elastic modulus. Diamond: $E \\approx 1000$ GPa. Steel: $\\approx 200$ GPa. Polyethylene: $\\approx 1$ GPa. The modulus tracks bond stiffness almost perfectly."
+        ],
+        [
+          "callout",
+          "The asymmetry that causes thermal expansion",
+          "The interatomic potential is not symmetric about $r_0$. The repulsive wall is steep; the attractive tail is gradual. As temperature increases, atoms vibrate with greater amplitude, but they can extend further into the shallow attractive side than they can compress into the steep repulsive side. The average position shifts to larger $r$. This is thermal expansion, and it is a direct consequence of the asymmetry of the potential curve."
+        ],
+        [
+          "p",
+          "The same asymmetry affects mechanical behaviour. Under compression, atoms are pushed into the steep repulsive wall: the restoring force rises sharply. Under tension, they are pulled into the gradual attractive tail: the restoring force increases more slowly. The tangent modulus is therefore higher in compression than in tension. For small strains this difference is negligible (the harmonic approximation holds), but at large strains it becomes significant. This is one reason why ceramics, which are strong in compression, are weak in tension: the asymmetric potential means that tensile strains reach the bond-breaking threshold sooner."
+        ],
+        [
+          "h3",
+          "What determines bond type"
+        ],
+        [
+          "p",
+          "Atoms bond because it lowers their energy. How they bond depends on how they share or transfer electrons. The key parameter is the electronegativity difference $\\Delta\\chi$ between the two atoms. Electronegativity measures how strongly an atom attracts electrons in a bond. Fluorine (4.0 on Pauling's scale) pulls hardest. Caesium (0.7) holds most loosely."
+        ],
+        [
+          "p",
+          "A rough map: Cs (0.7), Na (0.9), Mg (1.3), Al (1.5), Ti (1.5), Fe (1.8), Ni (1.9), Cu (1.9), Si (1.8), C (2.5), S (2.5), N (3.0), O (3.5), F (4.0). Metals cluster below 2.0. Nonmetals sit above 2.5. The gap between bonded atoms determines everything."
+        ],
+        [
+          "p",
+          "When $\\Delta\\chi$ is large (say Na and Cl, $\\Delta\\chi = 2.1$), one atom essentially transfers its electron to the other. This is ionic bonding: electrostatic attraction between ions."
+        ],
+        [
+          "p",
+          "When $\\Delta\\chi$ is small (say two carbon atoms, $\\Delta\\chi = 0$), the atoms share electrons equally. This is covalent bonding: directional, localised electron pairs."
+        ],
+        [
+          "p",
+          "When many atoms of similar electronegativity pool their valence electrons into a delocalised sea, the result is metallic bonding: non-directional, with electrons free to move."
+        ],
+        [
+          "p",
+          "These are not three separate phenomena. They are regions on a continuous spectrum. Most real bonds have mixed character. The Si-O bond in silica is 50% ionic, 50% covalent. The bonding in transition metal carbides is simultaneously metallic, covalent, and ionic. Understanding this spectrum is the purpose of the next six articles."
+        ],
+        [
+          "h3",
+          "Valence: how many bonds an atom forms"
+        ],
+        [
+          "p",
+          "Not all of an atom's electrons participate in bonding. The inner electrons are tightly bound to the nucleus. Only the outermost (valence) electrons are involved. Carbon has four valence electrons and forms four bonds. Oxygen has six, uses two for bonding, and retains two lone pairs. Metals like iron and titanium have variable valence because their d electrons can participate to different degrees. The number of bonds an atom forms, and in what geometry, traces directly to its electron configuration."
+        ],
+        [
+          "p",
+          "For the purposes of this module, you need to know how many valence electrons each element has (read it from the group number) and how that number relates to bonding. The deeper question of why electron configurations are what they are belongs to quantum mechanics."
+        ],
+        [
+          "problem",
+          "The Lennard-Jones parameters for argon are $\\varepsilon = 0.0104$ eV and $\\sigma = 3.40$ \\AA. (a) Calculate the equilibrium spacing $r_0$. (b) Calculate the force constant $k$ at $r_0$ in N/m. (c) The elastic modulus of solid argon (FCC crystal, $a = 5.26$ \\AA) is approximately $E = k/(\\pi r_0)$ for a pair potential. Estimate $E$ and compare to diamond ($\\sim 1000$ GPa). What does this tell you about the relationship between bond type and mechanical properties?",
+          [
+            [
+              "p",
+              "(a) $r_0 = 2^{1/6}\\sigma = 1.122 \\times 3.40 = 3.82$ \\AA."
+            ],
+            [
+              "p",
+              "(b) The second derivative of the LJ potential at $r_0$ gives $k = 72\\varepsilon/r_0^2 = 72 \\times 0.0104 \\times 1.6 \\times 10^{-19} / (3.82 \\times 10^{-10})^2 \\approx 0.82$ N/m."
+            ],
+            [
+              "p",
+              "(c) $E \\approx k/(\\pi r_0) \\approx 0.82 / (\\pi \\times 3.82 \\times 10^{-10}) \\approx 0.68$ GPa. Diamond is $\\sim 1000$ GPa, roughly 1500 times stiffer. The factor of 1500 comes almost entirely from the difference in bond energy: covalent C-C bonds ($\\sim 3.6$ eV) vs van der Waals Ar-Ar bonds ($\\sim 0.01$ eV). Bond type, set by electron configuration and electronegativity, determines mechanical properties across three orders of magnitude."
+            ]
+          ]
+        ]
       ],
       "related": [
-        { "title": "Ionic Bonding", "url": "ionic-bonding" },
-        { "title": "Covalent Bonding", "url": "covalent-bonding" },
-        { "title": "Quantum Mechanics", "url": "../quantum-mechanics/" }
+        {
+          "title": "Ionic Bonding",
+          "url": "ionic-bonding"
+        },
+        {
+          "title": "Covalent Bonding",
+          "url": "covalent-bonding"
+        },
+        {
+          "title": "Metallic Bonding",
+          "url": "metallic-bonding"
+        },
+        {
+          "title": "Bond Energy, Interatomic Spacing & Force Curves",
+          "url": "bond-energy-interatomic-spacing-force-curves"
+        },
+        {
+          "title": "Quantum Mechanics",
+          "url": "../quantum-mechanics/"
+        }
+      ],
+      "comments": [
+        {
+          "id": "ecf1a744",
+          "selectedText": "eracting through a van der Waals potential, this is captured by the Lennard-Jones model:",
+          "comment": "Can we add a plot of the Lennard-Jones?",
+          "name": "Anonymous",
+          "votes": 0,
+          "status": "integrated"
+        },
+        {
+          "id": 6.6404e+22,
+          "selectedText": "interatomic potential is not symmetric about \r\n\ud835\udc5f\r\n0\r\nr \r\n0\r\n\u200b\r\n . The repulsive wall is steep; the attractive tail is gradual.",
+          "comment": "Wouldn't this drive a compression/tension asymmetry in modulus?",
+          "name": "Anonymous",
+          "votes": 0,
+          "status": "integrated"
+        },
+        {
+          "id": "01bfa54a",
+          "selectedText": "Electronegativity measures how strongly an atom attracts electrons in a bond.",
+          "comment": "A scale of electronegativity populated by elements would be cool.",
+          "name": "Anonymous",
+          "votes": 0,
+          "status": "integrated"
+        }
       ]
     },
     {
@@ -67,69 +221,191 @@
       "readingTime": "14 min",
       "intro": "When the electronegativity difference between two atoms is large, one surrenders electrons to the other. The resulting ions attract electrostatically, forming an ionic bond. This mechanism produces some of the hardest, highest-melting, and most insulating materials we have.",
       "body": [
-        ["h3", "The formation of ions"],
-        ["p", "Sodium has one valence electron ($3s^1$) with an ionisation energy of 496 kJ/mol. Chlorine has seven valence electrons ($3s^2\\,3p^5$) and an electron affinity of $-349$ kJ/mol. If sodium gives its electron to chlorine, the electron transfer alone costs $496 - 349 = 147$ kJ/mol. That is endothermic. So why does NaCl form?"],
-        ["p", "Because the electrostatic attraction between Na$^+$ and Cl$^-$ releases far more energy than the transfer costs. At the equilibrium separation of 2.36 \\AA, the Coulomb energy of a single ion pair is:"],
-        ["eq", "E = -\\frac{e^2}{4\\pi\\varepsilon_0 r_0} = -\\frac{(1.602 \\times 10^{-19})^2}{4\\pi(8.854 \\times 10^{-12})(2.36 \\times 10^{-10})} = -9.77 \\times 10^{-19} \\text{ J} = -589 \\text{ kJ/mol}"],
-        ["p", "That single pair already makes the process exothermic. In the full crystal, each ion interacts with all other ions, amplifying the energy enormously."],
-
-        ["h3", "Lattice energy and the Madelung constant"],
-        ["p", "In a crystal, each Na$^+$ is surrounded by 6 Cl$^-$ at distance $r_0$, then 12 Na$^+$ at $r_0\\sqrt{2}$, then 8 Cl$^-$ at $r_0\\sqrt{3}$, and so on. The total Coulomb energy per ion pair is:"],
-        ["eq", "E_{\\text{Coulomb}} = -\\frac{A e^2}{4\\pi\\varepsilon_0 r_0}"],
-        ["p", "where $A$ is the Madelung constant, a purely geometric sum that depends on the crystal structure. For NaCl (rocksalt): $A = 1.7476$. For CsCl: $A = 1.7627$. For ZnS (wurtzite): $A = 1.6413$. The Madelung series converges slowly and requires careful summation techniques (Ewald summation)."],
-
-        ["derivation", "The Born-Lande equation gives the lattice energy as $U_L = -\\frac{N_A A e^2}{4\\pi\\varepsilon_0 r_0}\\left(1 - \\frac{1}{n}\\right)$, balancing Coulomb attraction against short-range repulsion.", [
-          ["p", "The total energy per ion pair includes the Coulomb attraction and a short-range repulsion (from overlapping electron clouds). Born modelled the repulsion as $B/r^n$ where $n$ is the Born exponent (typically 6 to 12, determined from compressibility data)."],
-          ["p", "Total energy per ion pair:"],
-          ["eq", "E(r) = -\\frac{Ae^2}{4\\pi\\varepsilon_0 r} + \\frac{B}{r^n}"],
-          ["p", "At equilibrium, $dE/dr = 0$:"],
-          ["eq", "\\frac{Ae^2}{4\\pi\\varepsilon_0 r_0^2} = \\frac{nB}{r_0^{n+1}}"],
-          ["p", "Solving for $B$ and substituting back:"],
-          ["eq", "U_L = -\\frac{N_A A e^2}{4\\pi\\varepsilon_0 r_0}\\left(1 - \\frac{1}{n}\\right)"],
-          ["p", "For NaCl ($r_0 = 2.814$ \\AA, $A = 1.7476$, $n = 8$): $U_L = -756$ kJ/mol. The experimental value (from a Born-Haber cycle) is $-787$ kJ/mol. The 4% discrepancy reflects the neglect of van der Waals attraction and zero-point energy."]
-        ]],
-
-        ["h3", "The Born-Haber cycle"],
-        ["p", "The lattice energy cannot be measured directly. Instead, we construct a thermodynamic cycle (Born-Haber) from measurable quantities:"],
-        ["ol", [
-          "Sublimation of the metal: Na(s) $\\to$ Na(g), $\\Delta H = +107$ kJ/mol",
-          "Dissociation of Cl$_2$: $\\frac{1}{2}$Cl$_2$(g) $\\to$ Cl(g), $\\Delta H = +122$ kJ/mol",
-          "Ionisation of Na: Na(g) $\\to$ Na$^+$(g) + e$^-$, $\\Delta H = +496$ kJ/mol",
-          "Electron affinity of Cl: Cl(g) + e$^-$ $\\to$ Cl$^-$(g), $\\Delta H = -349$ kJ/mol",
-          "Formation of the crystal: Na$^+$(g) + Cl$^-$(g) $\\to$ NaCl(s), $\\Delta H = -U_L$"
-        ]],
-        ["p", "The sum equals the standard enthalpy of formation: $\\Delta H_f^\\circ$(NaCl) $= -411$ kJ/mol. Working backward: $U_L = 411 + 107 + 122 + 496 - 349 = 787$ kJ/mol."],
-
-        ["h3", "Ionic crystal structures"],
-        ["p", "Ionic structures are governed by two principles: (1) maximise the number of oppositely charged neighbours (coordination), and (2) avoid contact between like-charged ions."],
-        ["p", "The radius ratio $r_+/r_-$ determines the maximum coordination number. If the cation is too small to keep the anions apart, the structure is unstable. The critical ratios are:"],
-        ["ul", [
-          "$r_+/r_- > 0.732$: coordination number 8 (CsCl structure). Cs$^+$/Cl$^-$ = 1.67/1.81 = 0.92.",
-          "$0.414 < r_+/r_- < 0.732$: coordination number 6 (NaCl structure). Na$^+$/Cl$^-$ = 1.02/1.81 = 0.56.",
-          "$0.225 < r_+/r_- < 0.414$: coordination number 4 (ZnS structure). Zn$^{2+}$/S$^{2-}$ = 0.74/1.84 = 0.40."
-        ]],
-        ["p", "These are guidelines, not strict rules. Many compounds violate the predicted structure. MgO has $r_+/r_- = 0.72/1.40 = 0.51$ and adopts the NaCl structure as predicted. But CsCl itself sits above 0.732 yet many caesium halides prefer the NaCl structure at ambient pressure."],
-
-        ["h3", "Properties of ionic solids"],
-        ["p", "High melting points: NaCl melts at 801 C, MgO at 2852 C. The difference reflects the charge: MgO has $z_+ z_- = 4$ versus 1 for NaCl, and shorter bond length (2.11 vs 2.81 \\AA)."],
-        ["p", "Electrical insulators as solids (ions locked in place), but conductors when molten or dissolved (ions free to move). NaCl conductivity: $\\sim 10^{-18}$ S/m at 25 C, $\\sim 3.6$ S/m at 801 C."],
-        ["p", "Brittle. A slip displacement of one lattice spacing brings like-charged ions face to face. The electrostatic repulsion fractures the crystal. This is fundamentally different from metals, where slip preserves the bonding environment."],
-        ["p", "Transparent in the visible range (wide band gap). NaCl transmits from 0.2 to 15 $\\mu$m. Coloured ionic crystals (ruby, sapphire) owe their colour to transition-metal impurities, not to the ionic bonding itself."],
-
-        ["callout", "Lattice energy trends", "Lattice energy scales as $z_+z_-/(r_+ + r_-)$. NaCl: 787 kJ/mol. MgO ($2+ / 2-$, shorter distance): 3850 kJ/mol. Al$_2$O$_3$ ($3+ / 2-$): estimated 15,916 kJ/mol from a generalised Born-Haber analysis. The jump from singly to multiply charged ions explains why MgO melts 2000 C higher than NaCl, and why Al$_2$O$_3$ is used as a refractory."],
-
-        ["problem", "Using the Born-Lande equation, estimate the lattice energy of MgO. The Madelung constant is 1.7476 (rocksalt), $r_0 = 2.106$ \\AA, and $n = 7$ (Born exponent for ions with neon configuration). Compare with the experimental value of 3850 kJ/mol.", [
-          ["p", "Substituting into the Born-Lande equation with $z_+ = 2$, $z_- = 2$:"],
-          ["eq", "U_L = \\frac{N_A \\cdot 1.7476 \\cdot (2)(2) \\cdot (1.602 \\times 10^{-19})^2}{4\\pi(8.854 \\times 10^{-12})(2.106 \\times 10^{-10})} \\cdot \\left(1 - \\frac{1}{7}\\right)"],
-          ["p", "The factor $z_+ z_- = 4$ quadruples the energy relative to NaCl. The shorter distance further increases it."],
-          ["eq", "U_L = \\frac{(6.022 \\times 10^{23})(1.7476)(4)(2.307 \\times 10^{-28})}{(1.112 \\times 10^{-10})(2.106 \\times 10^{-10})} \\times \\frac{6}{7}"],
-          ["p", "Evaluating: $U_L \\approx 3930$ kJ/mol. The experimental value is 3850 kJ/mol, an overestimate of about 2%. The Born-Mayer equation (exponential repulsion) gives a slightly better fit."]
-        ]]
+        [
+          "h3",
+          "The formation of ions"
+        ],
+        [
+          "p",
+          "Sodium has one valence electron ($3s^1$) with an ionisation energy of 496 kJ/mol. Chlorine has seven valence electrons ($3s^2\\,3p^5$) and an electron affinity of $-349$ kJ/mol. If sodium gives its electron to chlorine, the electron transfer alone costs $496 - 349 = 147$ kJ/mol. That is endothermic. So why does NaCl form?"
+        ],
+        [
+          "p",
+          "Because the electrostatic attraction between Na$^+$ and Cl$^-$ releases far more energy than the transfer costs. At the equilibrium separation of 2.36 \\AA, the Coulomb energy of a single ion pair is:"
+        ],
+        [
+          "eq",
+          "E = -\\frac{e^2}{4\\pi\\varepsilon_0 r_0} = -\\frac{(1.602 \\times 10^{-19})^2}{4\\pi(8.854 \\times 10^{-12})(2.36 \\times 10^{-10})} = -9.77 \\times 10^{-19} \\text{ J} = -589 \\text{ kJ/mol}"
+        ],
+        [
+          "p",
+          "That single pair already makes the process exothermic. In the full crystal, each ion interacts with all other ions, amplifying the energy enormously."
+        ],
+        [
+          "h3",
+          "Lattice energy and the Madelung constant"
+        ],
+        [
+          "p",
+          "In a crystal, each Na$^+$ is surrounded by 6 Cl$^-$ at distance $r_0$, then 12 Na$^+$ at $r_0\\sqrt{2}$, then 8 Cl$^-$ at $r_0\\sqrt{3}$, and so on. The total Coulomb energy per ion pair is:"
+        ],
+        [
+          "eq",
+          "E_{\\text{Coulomb}} = -\\frac{A e^2}{4\\pi\\varepsilon_0 r_0}"
+        ],
+        [
+          "p",
+          "where $A$ is the Madelung constant, a purely geometric sum that depends on the crystal structure. For NaCl (rocksalt): $A = 1.7476$. For CsCl: $A = 1.7627$. For ZnS (wurtzite): $A = 1.6413$. The Madelung series converges slowly and requires careful summation techniques (Ewald summation)."
+        ],
+        [
+          "derivation",
+          "The Born-Lande equation gives the lattice energy as $U_L = -\\frac{N_A A e^2}{4\\pi\\varepsilon_0 r_0}\\left(1 - \\frac{1}{n}\\right)$, balancing Coulomb attraction against short-range repulsion.",
+          [
+            [
+              "p",
+              "The total energy per ion pair includes the Coulomb attraction and a short-range repulsion (from overlapping electron clouds). Born modelled the repulsion as $B/r^n$ where $n$ is the Born exponent (typically 6 to 12, determined from compressibility data)."
+            ],
+            [
+              "p",
+              "Total energy per ion pair:"
+            ],
+            [
+              "eq",
+              "E(r) = -\\frac{Ae^2}{4\\pi\\varepsilon_0 r} + \\frac{B}{r^n}"
+            ],
+            [
+              "p",
+              "At equilibrium, $dE/dr = 0$:"
+            ],
+            [
+              "eq",
+              "\\frac{Ae^2}{4\\pi\\varepsilon_0 r_0^2} = \\frac{nB}{r_0^{n+1}}"
+            ],
+            [
+              "p",
+              "Solving for $B$ and substituting back:"
+            ],
+            [
+              "eq",
+              "U_L = -\\frac{N_A A e^2}{4\\pi\\varepsilon_0 r_0}\\left(1 - \\frac{1}{n}\\right)"
+            ],
+            [
+              "p",
+              "For NaCl ($r_0 = 2.814$ \\AA, $A = 1.7476$, $n = 8$): $U_L = -756$ kJ/mol. The experimental value (from a Born-Haber cycle) is $-787$ kJ/mol. The 4% discrepancy reflects the neglect of van der Waals attraction and zero-point energy."
+            ]
+          ]
+        ],
+        [
+          "h3",
+          "The Born-Haber cycle"
+        ],
+        [
+          "p",
+          "The lattice energy cannot be measured directly. Instead, we construct a thermodynamic cycle (Born-Haber) from measurable quantities:"
+        ],
+        [
+          "ol",
+          [
+            "Sublimation of the metal: Na(s) $\\to$ Na(g), $\\Delta H = +107$ kJ/mol",
+            "Dissociation of Cl$_2$: $\\frac{1}{2}$Cl$_2$(g) $\\to$ Cl(g), $\\Delta H = +122$ kJ/mol",
+            "Ionisation of Na: Na(g) $\\to$ Na$^+$(g) + e$^-$, $\\Delta H = +496$ kJ/mol",
+            "Electron affinity of Cl: Cl(g) + e$^-$ $\\to$ Cl$^-$(g), $\\Delta H = -349$ kJ/mol",
+            "Formation of the crystal: Na$^+$(g) + Cl$^-$(g) $\\to$ NaCl(s), $\\Delta H = -U_L$"
+          ]
+        ],
+        [
+          "p",
+          "The sum equals the standard enthalpy of formation: $\\Delta H_f^\\circ$(NaCl) $= -411$ kJ/mol. Working backward: $U_L = 411 + 107 + 122 + 496 - 349 = 787$ kJ/mol."
+        ],
+        [
+          "h3",
+          "Ionic crystal structures"
+        ],
+        [
+          "p",
+          "Ionic structures are governed by two principles: (1) maximise the number of oppositely charged neighbours (coordination), and (2) avoid contact between like-charged ions."
+        ],
+        [
+          "p",
+          "The radius ratio $r_+/r_-$ determines the maximum coordination number. If the cation is too small to keep the anions apart, the structure is unstable. The critical ratios are:"
+        ],
+        [
+          "ul",
+          [
+            "$r_+/r_- > 0.732$: coordination number 8 (CsCl structure). Cs$^+$/Cl$^-$ = 1.67/1.81 = 0.92.",
+            "$0.414 < r_+/r_- < 0.732$: coordination number 6 (NaCl structure). Na$^+$/Cl$^-$ = 1.02/1.81 = 0.56.",
+            "$0.225 < r_+/r_- < 0.414$: coordination number 4 (ZnS structure). Zn$^{2+}$/S$^{2-}$ = 0.74/1.84 = 0.40."
+          ]
+        ],
+        [
+          "p",
+          "These are guidelines, not strict rules. Many compounds violate the predicted structure. MgO has $r_+/r_- = 0.72/1.40 = 0.51$ and adopts the NaCl structure as predicted. But CsCl itself sits above 0.732 yet many caesium halides prefer the NaCl structure at ambient pressure."
+        ],
+        [
+          "h3",
+          "Properties of ionic solids"
+        ],
+        [
+          "p",
+          "High melting points: NaCl melts at 801 C, MgO at 2852 C. The difference reflects the charge: MgO has $z_+ z_- = 4$ versus 1 for NaCl, and shorter bond length (2.11 vs 2.81 \\AA)."
+        ],
+        [
+          "p",
+          "Electrical insulators as solids (ions locked in place), but conductors when molten or dissolved (ions free to move). NaCl conductivity: $\\sim 10^{-18}$ S/m at 25 C, $\\sim 3.6$ S/m at 801 C."
+        ],
+        [
+          "p",
+          "Brittle. A slip displacement of one lattice spacing brings like-charged ions face to face. The electrostatic repulsion fractures the crystal. This is fundamentally different from metals, where slip preserves the bonding environment."
+        ],
+        [
+          "p",
+          "Transparent in the visible range (wide band gap). NaCl transmits from 0.2 to 15 $\\mu$m. Coloured ionic crystals (ruby, sapphire) owe their colour to transition-metal impurities, not to the ionic bonding itself."
+        ],
+        [
+          "callout",
+          "Lattice energy trends",
+          "Lattice energy scales as $z_+z_-/(r_+ + r_-)$. NaCl: 787 kJ/mol. MgO ($2+ / 2-$, shorter distance): 3850 kJ/mol. Al$_2$O$_3$ ($3+ / 2-$): estimated 15,916 kJ/mol from a generalised Born-Haber analysis. The jump from singly to multiply charged ions explains why MgO melts 2000 C higher than NaCl, and why Al$_2$O$_3$ is used as a refractory."
+        ],
+        [
+          "problem",
+          "Using the Born-Lande equation, estimate the lattice energy of MgO. The Madelung constant is 1.7476 (rocksalt), $r_0 = 2.106$ \\AA, and $n = 7$ (Born exponent for ions with neon configuration). Compare with the experimental value of 3850 kJ/mol.",
+          [
+            [
+              "p",
+              "Substituting into the Born-Lande equation with $z_+ = 2$, $z_- = 2$:"
+            ],
+            [
+              "eq",
+              "U_L = \\frac{N_A \\cdot 1.7476 \\cdot (2)(2) \\cdot (1.602 \\times 10^{-19})^2}{4\\pi(8.854 \\times 10^{-12})(2.106 \\times 10^{-10})} \\cdot \\left(1 - \\frac{1}{7}\\right)"
+            ],
+            [
+              "p",
+              "The factor $z_+ z_- = 4$ quadruples the energy relative to NaCl. The shorter distance further increases it."
+            ],
+            [
+              "eq",
+              "U_L = \\frac{(6.022 \\times 10^{23})(1.7476)(4)(2.307 \\times 10^{-28})}{(1.112 \\times 10^{-10})(2.106 \\times 10^{-10})} \\times \\frac{6}{7}"
+            ],
+            [
+              "p",
+              "Evaluating: $U_L \\approx 3930$ kJ/mol. The experimental value is 3850 kJ/mol, an overestimate of about 2%. The Born-Mayer equation (exponential repulsion) gives a slightly better fit."
+            ]
+          ]
+        ]
       ],
       "related": [
-        { "title": "Atomic Structure & Electron Configuration", "url": "atomic-structure-electron-configuration" },
-        { "title": "Bond Energy & Force Curves", "url": "bond-energy-interatomic-spacing-force-curves" },
-        { "title": "Crystal Systems & Bravais Lattices", "url": "../crystallography/" }
+        {
+          "title": "Atomic Structure & Electron Configuration",
+          "url": "atomic-structure-electron-configuration"
+        },
+        {
+          "title": "Bond Energy & Force Curves",
+          "url": "bond-energy-interatomic-spacing-force-curves"
+        },
+        {
+          "title": "Crystal Systems & Bravais Lattices",
+          "url": "../crystallography/"
+        }
       ]
     },
     {
@@ -140,57 +416,148 @@
       "readingTime": "14 min",
       "intro": "When two atoms have similar electronegativities, neither can capture the other's electron. Instead they share. The resulting covalent bond is strong, directional, and responsible for the structures of diamond, silicon, organic molecules, and every polymer.",
       "body": [
-        ["h3", "Why sharing works"],
-        ["p", "Consider two hydrogen atoms approaching each other. Each has one electron in a 1s orbital. When the atoms are far apart, the electron on each atom feels only its own nucleus. As they approach, the electron wavefunctions overlap, and each electron begins to feel both nuclei."],
-        ["p", "Quantum mechanics gives two possible combinations. The bonding orbital $\\psi_+ = \\psi_A + \\psi_B$ concentrates electron density between the nuclei. The antibonding orbital $\\psi_- = \\psi_A - \\psi_B$ has a node between them. The bonding orbital is lower in energy because the electrons spend time in the region where they are attracted to both nuclei simultaneously."],
-        ["p", "Two electrons (one from each atom, opposite spins) fill the bonding orbital. The antibonding orbital stays empty. The result: a stable H$_2$ molecule with a bond energy of 436 kJ/mol and an internuclear distance of 0.74 \\AA."],
-
-        ["h3", "Hybridisation"],
-        ["p", "Carbon has the configuration $2s^2\\,2p^2$. With only two unpaired electrons, you might expect it to form two bonds. Instead, the 2s and 2p orbitals mix (hybridise) to form new orbitals better suited to bonding."],
-        ["p", "$sp^3$ hybridisation: one s and three p orbitals combine into four equivalent orbitals pointing toward the corners of a tetrahedron (bond angle 109.5 degrees). This is the bonding in diamond, methane (CH$_4$), and polyethylene. Each C-C bond in diamond has an energy of about 347 kJ/mol."],
-        ["p", "$sp^2$ hybridisation: one s and two p orbitals form three orbitals in a plane (120 degrees). The remaining p orbital is perpendicular and forms a $\\pi$ bond. Graphite consists of $sp^2$-bonded carbon sheets: strong in-plane, weakly bonded between planes by van der Waals forces. The in-plane C-C bond (graphite) has an energy of about 524 kJ/mol (partial double bond character)."],
-        ["p", "$sp$ hybridisation: one s and one p orbital give two orbitals at 180 degrees. Acetylene (C$_2$H$_2$) has a triple bond: one $\\sigma$ and two $\\pi$ bonds. Bond energy: 839 kJ/mol."],
-
-        ["h3", "Directionality and its consequences"],
-        ["p", "Unlike ionic or metallic bonds, covalent bonds point in specific directions. This has enormous consequences for materials."],
-        ["p", "Diamond is the hardest known material. Every carbon atom forms four $sp^3$ bonds in a rigid tetrahedral network. There are no easy slip planes, no metallic ductility. The bond energy is high (347 kJ/mol) and the coordination is fully three-dimensional."],
-        ["p", "Silicon has the same structure as diamond (both $sp^3$) but weaker bonds (Si-Si: 226 kJ/mol). Silicon's band gap is 1.12 eV; diamond's is 5.47 eV. Same structure, different elements, vastly different electronic properties."],
-        ["p", "Graphite shows anisotropy at its most extreme. In-plane: the $sp^2$ bonds give a modulus of about 1000 GPa and electrical conductivity of $2.5 \\times 10^4$ S/m (the delocalised $\\pi$ electrons conduct). Out-of-plane: the layers are held by van der Waals forces (modulus ~35 GPa), and the material cleaves easily along the basal plane. A pencil works because graphite layers shear off onto paper."],
-
-        ["callout", "The 8-N rule", "For elements in groups IV through VII of the periodic table, the number of covalent bonds formed is $8 - N$, where $N$ is the group number. Carbon (group IV): $8 - 4 = 4$ bonds. Nitrogen (V): 3 bonds. Oxygen (VI): 2 bonds. Chlorine (VII): 1 bond. Phosphorus and sulfur can exceed this rule by using d orbitals to expand their valence (e.g., SF$_6$), but the rule holds well for period 2 elements."],
-
-        ["h3", "Covalent solids"],
-        ["p", "Pure covalent solids are rare. Diamond, silicon, germanium, SiC, BN (both cubic and hexagonal), and a handful of others. Their shared characteristics:"],
-        ["ul", [
-          "Very high hardness and melting points (diamond sublimes above 3500 C; SiC decomposes at 2730 C).",
-          "Low coordination numbers (4 for diamond, 3 for graphite sheets). Packing efficiency is low: diamond fills only 34% of space, compared to 74% for FCC metals.",
-          "Electrical behaviour ranges from insulating (diamond, 5.47 eV gap) to semiconducting (Si, 1.12 eV; Ge, 0.67 eV) depending on the band gap.",
-          "Brittle. The directional bonds resist shear; dislocations in covalent crystals have very high Peierls stresses."
-        ]],
-
-        ["h3", "Molecular orbital picture of band formation"],
-        ["p", "In a single covalent bond, two atomic orbitals combine to make one bonding and one antibonding molecular orbital. Now put $N$ atoms in a crystal. The $N$ atomic orbitals produce $N$ molecular orbitals, spaced so closely in energy that they merge into a continuous band."],
-        ["p", "In diamond, the four $sp^3$ orbitals per atom give rise to a valence band (bonding, full) and a conduction band (antibonding, empty) separated by a 5.47 eV gap. In silicon the gap is 1.12 eV. In tin ($\\alpha$-Sn, grey tin) the gap vanishes. Same column of the periodic table, same crystal structure, three qualitatively different electronic behaviours."],
-
-        ["h3", "Bond length and bond order"],
-        ["p", "Bond length decreases and bond strength increases with bond order (number of shared electron pairs). Carbon-carbon bonds:"],
-        ["ul", [
-          "Single (ethane): 1.54 \\AA, 347 kJ/mol",
-          "Double (ethene): 1.34 \\AA, 614 kJ/mol",
-          "Triple (ethyne): 1.20 \\AA, 839 kJ/mol"
-        ]],
-        ["p", "The trend is not linear. Doubling the bond order does not double the bond energy because $\\pi$ bonds overlap less effectively than $\\sigma$ bonds. The $\\pi$ contribution to a double bond is $614 - 347 = 267$ kJ/mol, compared to 347 kJ/mol for the $\\sigma$ bond."],
-
-        ["problem", "Silicon carbide (SiC) exists in over 200 polytypes, but the most common (6H-SiC) has a band gap of 3.0 eV. Given that Si-Si bonds have an energy of 226 kJ/mol and C-C bonds 347 kJ/mol, explain why SiC (bond energy ~318 kJ/mol per Si-C bond) is used for high-power electronics rather than silicon, and estimate whether SiC would be transparent to visible light.", [
-          ["p", "The band gap of SiC (3.0 eV for 6H polytype, 3.26 eV for 4H) is nearly three times that of silicon (1.12 eV). A larger gap means fewer thermally excited carriers at a given temperature, so SiC devices can operate at higher temperatures (up to ~600 C vs ~150 C for Si) without excessive leakage current."],
-          ["p", "The higher breakdown field ($\\sim 3 \\times 10^6$ V/cm vs $\\sim 3 \\times 10^5$ V/cm for Si) means thinner drift regions for a given blocking voltage, reducing on-resistance. This is why SiC MOSFETs dominate the 600-1700 V range for electric vehicle inverters and fast chargers."],
-          ["p", "Visible light spans about 1.8 to 3.1 eV. Pure 6H-SiC (gap 3.0 eV) absorbs only at the violet edge, so it appears nearly transparent with a faint yellow-green tint. Colourless SiC crystals are sold as synthetic gemstones (moissanite). Doped or defective SiC can be green or black."]
-        ]]
+        [
+          "h3",
+          "Why sharing works"
+        ],
+        [
+          "p",
+          "Consider two hydrogen atoms approaching each other. Each has one electron in a 1s orbital. When the atoms are far apart, the electron on each atom feels only its own nucleus. As they approach, the electron wavefunctions overlap, and each electron begins to feel both nuclei."
+        ],
+        [
+          "p",
+          "Quantum mechanics gives two possible combinations. The bonding orbital $\\psi_+ = \\psi_A + \\psi_B$ concentrates electron density between the nuclei. The antibonding orbital $\\psi_- = \\psi_A - \\psi_B$ has a node between them. The bonding orbital is lower in energy because the electrons spend time in the region where they are attracted to both nuclei simultaneously."
+        ],
+        [
+          "p",
+          "Two electrons (one from each atom, opposite spins) fill the bonding orbital. The antibonding orbital stays empty. The result: a stable H$_2$ molecule with a bond energy of 436 kJ/mol and an internuclear distance of 0.74 \\AA."
+        ],
+        [
+          "h3",
+          "Hybridisation"
+        ],
+        [
+          "p",
+          "Carbon has the configuration $2s^2\\,2p^2$. With only two unpaired electrons, you might expect it to form two bonds. Instead, the 2s and 2p orbitals mix (hybridise) to form new orbitals better suited to bonding."
+        ],
+        [
+          "p",
+          "$sp^3$ hybridisation: one s and three p orbitals combine into four equivalent orbitals pointing toward the corners of a tetrahedron (bond angle 109.5 degrees). This is the bonding in diamond, methane (CH$_4$), and polyethylene. Each C-C bond in diamond has an energy of about 347 kJ/mol."
+        ],
+        [
+          "p",
+          "$sp^2$ hybridisation: one s and two p orbitals form three orbitals in a plane (120 degrees). The remaining p orbital is perpendicular and forms a $\\pi$ bond. Graphite consists of $sp^2$-bonded carbon sheets: strong in-plane, weakly bonded between planes by van der Waals forces. The in-plane C-C bond (graphite) has an energy of about 524 kJ/mol (partial double bond character)."
+        ],
+        [
+          "p",
+          "$sp$ hybridisation: one s and one p orbital give two orbitals at 180 degrees. Acetylene (C$_2$H$_2$) has a triple bond: one $\\sigma$ and two $\\pi$ bonds. Bond energy: 839 kJ/mol."
+        ],
+        [
+          "h3",
+          "Directionality and its consequences"
+        ],
+        [
+          "p",
+          "Unlike ionic or metallic bonds, covalent bonds point in specific directions. This has enormous consequences for materials."
+        ],
+        [
+          "p",
+          "Diamond is the hardest known material. Every carbon atom forms four $sp^3$ bonds in a rigid tetrahedral network. There are no easy slip planes, no metallic ductility. The bond energy is high (347 kJ/mol) and the coordination is fully three-dimensional."
+        ],
+        [
+          "p",
+          "Silicon has the same structure as diamond (both $sp^3$) but weaker bonds (Si-Si: 226 kJ/mol). Silicon's band gap is 1.12 eV; diamond's is 5.47 eV. Same structure, different elements, vastly different electronic properties."
+        ],
+        [
+          "p",
+          "Graphite shows anisotropy at its most extreme. In-plane: the $sp^2$ bonds give a modulus of about 1000 GPa and electrical conductivity of $2.5 \\times 10^4$ S/m (the delocalised $\\pi$ electrons conduct). Out-of-plane: the layers are held by van der Waals forces (modulus ~35 GPa), and the material cleaves easily along the basal plane. A pencil works because graphite layers shear off onto paper."
+        ],
+        [
+          "callout",
+          "The 8-N rule",
+          "For elements in groups IV through VII of the periodic table, the number of covalent bonds formed is $8 - N$, where $N$ is the group number. Carbon (group IV): $8 - 4 = 4$ bonds. Nitrogen (V): 3 bonds. Oxygen (VI): 2 bonds. Chlorine (VII): 1 bond. Phosphorus and sulfur can exceed this rule by using d orbitals to expand their valence (e.g., SF$_6$), but the rule holds well for period 2 elements."
+        ],
+        [
+          "h3",
+          "Covalent solids"
+        ],
+        [
+          "p",
+          "Pure covalent solids are rare. Diamond, silicon, germanium, SiC, BN (both cubic and hexagonal), and a handful of others. Their shared characteristics:"
+        ],
+        [
+          "ul",
+          [
+            "Very high hardness and melting points (diamond sublimes above 3500 C; SiC decomposes at 2730 C).",
+            "Low coordination numbers (4 for diamond, 3 for graphite sheets). Packing efficiency is low: diamond fills only 34% of space, compared to 74% for FCC metals.",
+            "Electrical behaviour ranges from insulating (diamond, 5.47 eV gap) to semiconducting (Si, 1.12 eV; Ge, 0.67 eV) depending on the band gap.",
+            "Brittle. The directional bonds resist shear; dislocations in covalent crystals have very high Peierls stresses."
+          ]
+        ],
+        [
+          "h3",
+          "Molecular orbital picture of band formation"
+        ],
+        [
+          "p",
+          "In a single covalent bond, two atomic orbitals combine to make one bonding and one antibonding molecular orbital. Now put $N$ atoms in a crystal. The $N$ atomic orbitals produce $N$ molecular orbitals, spaced so closely in energy that they merge into a continuous band."
+        ],
+        [
+          "p",
+          "In diamond, the four $sp^3$ orbitals per atom give rise to a valence band (bonding, full) and a conduction band (antibonding, empty) separated by a 5.47 eV gap. In silicon the gap is 1.12 eV. In tin ($\\alpha$-Sn, grey tin) the gap vanishes. Same column of the periodic table, same crystal structure, three qualitatively different electronic behaviours."
+        ],
+        [
+          "h3",
+          "Bond length and bond order"
+        ],
+        [
+          "p",
+          "Bond length decreases and bond strength increases with bond order (number of shared electron pairs). Carbon-carbon bonds:"
+        ],
+        [
+          "ul",
+          [
+            "Single (ethane): 1.54 \\AA, 347 kJ/mol",
+            "Double (ethene): 1.34 \\AA, 614 kJ/mol",
+            "Triple (ethyne): 1.20 \\AA, 839 kJ/mol"
+          ]
+        ],
+        [
+          "p",
+          "The trend is not linear. Doubling the bond order does not double the bond energy because $\\pi$ bonds overlap less effectively than $\\sigma$ bonds. The $\\pi$ contribution to a double bond is $614 - 347 = 267$ kJ/mol, compared to 347 kJ/mol for the $\\sigma$ bond."
+        ],
+        [
+          "problem",
+          "Silicon carbide (SiC) exists in over 200 polytypes, but the most common (6H-SiC) has a band gap of 3.0 eV. Given that Si-Si bonds have an energy of 226 kJ/mol and C-C bonds 347 kJ/mol, explain why SiC (bond energy ~318 kJ/mol per Si-C bond) is used for high-power electronics rather than silicon, and estimate whether SiC would be transparent to visible light.",
+          [
+            [
+              "p",
+              "The band gap of SiC (3.0 eV for 6H polytype, 3.26 eV for 4H) is nearly three times that of silicon (1.12 eV). A larger gap means fewer thermally excited carriers at a given temperature, so SiC devices can operate at higher temperatures (up to ~600 C vs ~150 C for Si) without excessive leakage current."
+            ],
+            [
+              "p",
+              "The higher breakdown field ($\\sim 3 \\times 10^6$ V/cm vs $\\sim 3 \\times 10^5$ V/cm for Si) means thinner drift regions for a given blocking voltage, reducing on-resistance. This is why SiC MOSFETs dominate the 600-1700 V range for electric vehicle inverters and fast chargers."
+            ],
+            [
+              "p",
+              "Visible light spans about 1.8 to 3.1 eV. Pure 6H-SiC (gap 3.0 eV) absorbs only at the violet edge, so it appears nearly transparent with a faint yellow-green tint. Colourless SiC crystals are sold as synthetic gemstones (moissanite). Doped or defective SiC can be green or black."
+            ]
+          ]
+        ]
       ],
       "related": [
-        { "title": "Atomic Structure & Electron Configuration", "url": "atomic-structure-electron-configuration" },
-        { "title": "Secondary Bonding", "url": "secondary-bonding-van-der-waals-hydrogen" },
-        { "title": "Electronic Properties", "url": "../electronic-properties/" }
+        {
+          "title": "Atomic Structure & Electron Configuration",
+          "url": "atomic-structure-electron-configuration"
+        },
+        {
+          "title": "Secondary Bonding",
+          "url": "secondary-bonding-van-der-waals-hydrogen"
+        },
+        {
+          "title": "Electronic Properties",
+          "url": "../electronic-properties/"
+        }
       ]
     },
     {
@@ -201,55 +568,165 @@
       "readingTime": "13 min",
       "intro": "Metallic bonding is what happens when atoms have too few valence electrons and too low ionisation energies to form covalent or ionic bonds. The electrons detach from individual atoms and form a shared \"sea\" that binds the positive ion cores together. This simple picture explains an extraordinary range of properties.",
       "body": [
-        ["h3", "The electron sea model"],
-        ["p", "A sodium atom has one valence electron with an ionisation energy of 496 kJ/mol. That is low enough that in a condensed solid, the 3s electrons delocalise across the entire crystal. The result is a regular array of Na$^+$ ion cores immersed in a gas of free electrons."],
-        ["p", "The bonding is non-directional: the electron gas exerts a uniform inward pressure on the ion cores, holding them together regardless of the relative positions of nearest neighbours. This is why metals adopt close-packed structures (FCC, HCP, BCC) that maximise coordination number."],
-        ["p", "The cohesive energy of a metal is the energy required to separate the solid into isolated atoms. For sodium: 107 kJ/mol. For tungsten: 860 kJ/mol. The enormous range reflects the number of valence electrons and the d-orbital bonding contribution. Transition metals with partially filled d bands (W, Mo, Re) have the highest cohesive energies and the highest melting points."],
-
-        ["h3", "Free-electron theory"],
-        ["p", "The simplest model treats the valence electrons as non-interacting particles in a box. Despite its crudeness, this model explains many metallic properties."],
-        ["p", "In one dimension, the allowed energy levels are $E_n = n^2 h^2 / (8mL^2)$. In three dimensions, for a cube of side $L$ containing $N$ electrons, the electrons fill states up to the Fermi energy:"],
-        ["eq", "E_F = \\frac{\\hbar^2}{2m_e}\\left(\\frac{3\\pi^2 N}{V}\\right)^{2/3}"],
-        ["p", "For copper (one valence electron per atom, $n = 8.49 \\times 10^{28}$ m$^{-3}$): $E_F = 7.04$ eV. This corresponds to a Fermi temperature $T_F = E_F / k_B = 81{,}700$ K. At room temperature, $k_BT = 0.025$ eV, so only electrons within $\\sim k_BT$ of the Fermi level can be thermally excited. The rest are frozen by the Pauli exclusion principle."],
-
-        ["callout", "Why metals conduct", "Apply an electric field and all electrons feel a force. But only those near the Fermi surface can change their state (the lower electrons have no empty states to move into). These Fermi-surface electrons accelerate, scatter off phonons and impurities, and reach a steady-state drift velocity. The result is Ohm's law: $\\mathbf{J} = \\sigma \\mathbf{E}$, where $\\sigma = ne^2\\tau/m_e$ and $\\tau$ is the mean time between scattering events. Copper: $\\sigma = 5.96 \\times 10^7$ S/m, $\\tau \\approx 2.5 \\times 10^{-14}$ s."],
-
-        ["h3", "Properties explained by the electron gas"],
-        ["p", "<strong>Electrical conductivity.</strong> Free electrons carry current under an applied field. Conductivity decreases with temperature (more phonon scattering). Copper at 300 K: $5.96 \\times 10^7$ S/m. At 4 K: $\\sim 5 \\times 10^{10}$ S/m (limited by residual impurity scattering). Alloys conduct less well than pure metals because solute atoms scatter electrons: bronze ($\\sigma \\approx 1.5 \\times 10^7$ S/m) is worse than copper."],
-        ["p", "<strong>Thermal conductivity.</strong> Free electrons also carry heat. The Wiedemann-Franz law states that the ratio of thermal to electrical conductivity is proportional to temperature:"],
-        ["eq", "\\frac{\\kappa}{\\sigma} = LT, \\quad L = \\frac{\\pi^2}{3}\\left(\\frac{k_B}{e}\\right)^2 = 2.44 \\times 10^{-8} \\text{ W} \\cdot \\Omega \\cdot \\text{K}^{-2}"],
-        ["p", "This works well for most metals at room temperature. Copper: $\\kappa = 401$ W/(m $\\cdot$ K), $\\sigma = 5.96 \\times 10^7$ S/m, ratio $= 6.73 \\times 10^{-6}$ W $\\cdot \\Omega$ / K, predicted $LT = 7.3 \\times 10^{-6}$. Agreement within 10%."],
-        ["p", "<strong>Optical reflectivity.</strong> Free electrons respond to electromagnetic waves. Below the plasma frequency $\\omega_p = \\sqrt{ne^2/(\\varepsilon_0 m_e)}$, the electrons screen the field and the metal reflects. For aluminium, $\\omega_p$ corresponds to a wavelength of about 80 nm (deep UV). Visible light (400-700 nm) is well below this frequency, so aluminium reflects >90% of visible light. Metals are shiny because their electron densities place the plasma frequency in the ultraviolet."],
-        ["p", "<strong>Ductility.</strong> The non-directional bonding means that when one plane of atoms slides over another (dislocation motion), the bonding environment does not fundamentally change. Each ion core still sits in a sea of electrons. This is the atomic-scale reason why metals can plastically deform without fracturing."],
-
-        ["h3", "Trends across the periodic table"],
-        ["p", "Melting point peaks in the middle of each transition series: W (3695 K), Re (3459 K), Os (3306 K). These elements have half-filled d bands, maximising the bonding-orbital occupancy. The alkali metals (one valence electron, no d contribution) have low melting points: Na (371 K), K (337 K), Cs (302 K)."],
-        ["p", "Elastic modulus follows a similar trend. Tungsten: 411 GPa. Iron: 211 GPa. Aluminium: 70 GPa. Lead: 16 GPa. The modulus reflects the curvature of the binding energy curve near equilibrium, which is steeper when more electrons participate in bonding."],
-
-        ["h3", "Limitations of the free-electron model"],
-        ["p", "The free-electron model cannot explain everything. It predicts all metals should have positive Hall coefficients, but aluminium and beryllium have negative ones. It cannot distinguish magnetic from non-magnetic metals. It gives no reason why some elements are metals and others are not."],
-        ["p", "These failures point to the need for band theory, which accounts for the periodic potential of the ion cores. The key result: the interaction of electron waves with the lattice opens band gaps at the Brillouin zone boundaries. If the Fermi level falls in a gap, the material is an insulator or semiconductor. If it falls within a band, the material is a metal. Band theory is treated in the Electronic Properties module."],
-
-        ["derivation", "The electronic specific heat of a metal is $C_{el} = \\gamma T$ where $\\gamma = \\pi^2 k_B^2 g(E_F)/3$. This is much smaller than classical theory predicts.", [
-          ["p", "Classically, each electron should contribute $\\frac{3}{2}k_B$ to the heat capacity, giving $C = \\frac{3}{2}Nk_B$. Experimentally, the electronic contribution is about 100 times smaller at room temperature."],
-          ["p", "The resolution is the Pauli exclusion principle. At temperature $T$, only electrons within $\\sim k_BT$ of the Fermi energy can be thermally excited. The fraction of electrons that participate is $\\sim k_BT/E_F$."],
-          ["p", "The electronic heat capacity is therefore:"],
-          ["eq", "C_{el} \\approx N k_B \\times \\frac{k_BT}{E_F} = \\frac{\\pi^2}{2}\\frac{Nk_B^2 T}{E_F}"],
-          ["p", "For copper at 300 K: $k_BT/E_F = 0.025/7.04 = 0.0036$. Only 0.36% of the electrons contribute to the heat capacity. At room temperature, the lattice contribution ($3Nk_B$, Dulong-Petit) dominates. The linear electronic term $\\gamma T$ becomes important only below $\\sim 5$ K."]
-        ]],
-
-        ["problem", "Aluminium has three valence electrons per atom, an atomic mass of 26.98 g/mol, and a density of 2.70 g/cm$^3$. Calculate the free-electron density, the Fermi energy, and the plasma frequency. At what wavelength does aluminium become transparent?", [
-          ["p", "Electron density: $n = \\frac{3 \\times 2.70 \\times 6.022 \\times 10^{23}}{26.98} = 1.81 \\times 10^{29}$ m$^{-3}$."],
-          ["eq", "E_F = \\frac{(1.055 \\times 10^{-34})^2}{2(9.109 \\times 10^{-31})}(3\\pi^2 \\times 1.81 \\times 10^{29})^{2/3} = 11.7 \\text{ eV}"],
-          ["eq", "\\omega_p = \\sqrt{\\frac{ne^2}{\\varepsilon_0 m_e}} = \\sqrt{\\frac{1.81 \\times 10^{29} \\times (1.602 \\times 10^{-19})^2}{8.854 \\times 10^{-12} \\times 9.109 \\times 10^{-31}}} = 2.40 \\times 10^{16} \\text{ rad/s}"],
-          ["p", "Wavelength: $\\lambda_p = 2\\pi c / \\omega_p = 2\\pi \\times 3 \\times 10^8 / 2.40 \\times 10^{16} = 79$ nm (deep UV)."],
-          ["p", "Aluminium becomes transparent for $\\lambda < 79$ nm (extreme UV / soft X-rays). For visible light ($\\lambda = 400$-$700$ nm), aluminium is highly reflective. This is why aluminium is used as a mirror coating for telescopes and everyday mirrors."]
-        ]]
+        [
+          "h3",
+          "The electron sea model"
+        ],
+        [
+          "p",
+          "A sodium atom has one valence electron with an ionisation energy of 496 kJ/mol. That is low enough that in a condensed solid, the 3s electrons delocalise across the entire crystal. The result is a regular array of Na$^+$ ion cores immersed in a gas of free electrons."
+        ],
+        [
+          "p",
+          "The bonding is non-directional: the electron gas exerts a uniform inward pressure on the ion cores, holding them together regardless of the relative positions of nearest neighbours. This is why metals adopt close-packed structures (FCC, HCP, BCC) that maximise coordination number."
+        ],
+        [
+          "p",
+          "The cohesive energy of a metal is the energy required to separate the solid into isolated atoms. For sodium: 107 kJ/mol. For tungsten: 860 kJ/mol. The enormous range reflects the number of valence electrons and the d-orbital bonding contribution. Transition metals with partially filled d bands (W, Mo, Re) have the highest cohesive energies and the highest melting points."
+        ],
+        [
+          "h3",
+          "Free-electron theory"
+        ],
+        [
+          "p",
+          "The simplest model treats the valence electrons as non-interacting particles in a box. Despite its crudeness, this model explains many metallic properties."
+        ],
+        [
+          "p",
+          "In one dimension, the allowed energy levels are $E_n = n^2 h^2 / (8mL^2)$. In three dimensions, for a cube of side $L$ containing $N$ electrons, the electrons fill states up to the Fermi energy:"
+        ],
+        [
+          "eq",
+          "E_F = \\frac{\\hbar^2}{2m_e}\\left(\\frac{3\\pi^2 N}{V}\\right)^{2/3}"
+        ],
+        [
+          "p",
+          "For copper (one valence electron per atom, $n = 8.49 \\times 10^{28}$ m$^{-3}$): $E_F = 7.04$ eV. This corresponds to a Fermi temperature $T_F = E_F / k_B = 81{,}700$ K. At room temperature, $k_BT = 0.025$ eV, so only electrons within $\\sim k_BT$ of the Fermi level can be thermally excited. The rest are frozen by the Pauli exclusion principle."
+        ],
+        [
+          "callout",
+          "Why metals conduct",
+          "Apply an electric field and all electrons feel a force. But only those near the Fermi surface can change their state (the lower electrons have no empty states to move into). These Fermi-surface electrons accelerate, scatter off phonons and impurities, and reach a steady-state drift velocity. The result is Ohm's law: $\\mathbf{J} = \\sigma \\mathbf{E}$, where $\\sigma = ne^2\\tau/m_e$ and $\\tau$ is the mean time between scattering events. Copper: $\\sigma = 5.96 \\times 10^7$ S/m, $\\tau \\approx 2.5 \\times 10^{-14}$ s."
+        ],
+        [
+          "h3",
+          "Properties explained by the electron gas"
+        ],
+        [
+          "p",
+          "<strong>Electrical conductivity.</strong> Free electrons carry current under an applied field. Conductivity decreases with temperature (more phonon scattering). Copper at 300 K: $5.96 \\times 10^7$ S/m. At 4 K: $\\sim 5 \\times 10^{10}$ S/m (limited by residual impurity scattering). Alloys conduct less well than pure metals because solute atoms scatter electrons: bronze ($\\sigma \\approx 1.5 \\times 10^7$ S/m) is worse than copper."
+        ],
+        [
+          "p",
+          "<strong>Thermal conductivity.</strong> Free electrons also carry heat. The Wiedemann-Franz law states that the ratio of thermal to electrical conductivity is proportional to temperature:"
+        ],
+        [
+          "eq",
+          "\\frac{\\kappa}{\\sigma} = LT, \\quad L = \\frac{\\pi^2}{3}\\left(\\frac{k_B}{e}\\right)^2 = 2.44 \\times 10^{-8} \\text{ W} \\cdot \\Omega \\cdot \\text{K}^{-2}"
+        ],
+        [
+          "p",
+          "This works well for most metals at room temperature. Copper: $\\kappa = 401$ W/(m $\\cdot$ K), $\\sigma = 5.96 \\times 10^7$ S/m, ratio $= 6.73 \\times 10^{-6}$ W $\\cdot \\Omega$ / K, predicted $LT = 7.3 \\times 10^{-6}$. Agreement within 10%."
+        ],
+        [
+          "p",
+          "<strong>Optical reflectivity.</strong> Free electrons respond to electromagnetic waves. Below the plasma frequency $\\omega_p = \\sqrt{ne^2/(\\varepsilon_0 m_e)}$, the electrons screen the field and the metal reflects. For aluminium, $\\omega_p$ corresponds to a wavelength of about 80 nm (deep UV). Visible light (400-700 nm) is well below this frequency, so aluminium reflects >90% of visible light. Metals are shiny because their electron densities place the plasma frequency in the ultraviolet."
+        ],
+        [
+          "p",
+          "<strong>Ductility.</strong> The non-directional bonding means that when one plane of atoms slides over another (dislocation motion), the bonding environment does not fundamentally change. Each ion core still sits in a sea of electrons. This is the atomic-scale reason why metals can plastically deform without fracturing."
+        ],
+        [
+          "h3",
+          "Trends across the periodic table"
+        ],
+        [
+          "p",
+          "Melting point peaks in the middle of each transition series: W (3695 K), Re (3459 K), Os (3306 K). These elements have half-filled d bands, maximising the bonding-orbital occupancy. The alkali metals (one valence electron, no d contribution) have low melting points: Na (371 K), K (337 K), Cs (302 K)."
+        ],
+        [
+          "p",
+          "Elastic modulus follows a similar trend. Tungsten: 411 GPa. Iron: 211 GPa. Aluminium: 70 GPa. Lead: 16 GPa. The modulus reflects the curvature of the binding energy curve near equilibrium, which is steeper when more electrons participate in bonding."
+        ],
+        [
+          "h3",
+          "Limitations of the free-electron model"
+        ],
+        [
+          "p",
+          "The free-electron model cannot explain everything. It predicts all metals should have positive Hall coefficients, but aluminium and beryllium have negative ones. It cannot distinguish magnetic from non-magnetic metals. It gives no reason why some elements are metals and others are not."
+        ],
+        [
+          "p",
+          "These failures point to the need for band theory, which accounts for the periodic potential of the ion cores. The key result: the interaction of electron waves with the lattice opens band gaps at the Brillouin zone boundaries. If the Fermi level falls in a gap, the material is an insulator or semiconductor. If it falls within a band, the material is a metal. Band theory is treated in the Electronic Properties module."
+        ],
+        [
+          "derivation",
+          "The electronic specific heat of a metal is $C_{el} = \\gamma T$ where $\\gamma = \\pi^2 k_B^2 g(E_F)/3$. This is much smaller than classical theory predicts.",
+          [
+            [
+              "p",
+              "Classically, each electron should contribute $\\frac{3}{2}k_B$ to the heat capacity, giving $C = \\frac{3}{2}Nk_B$. Experimentally, the electronic contribution is about 100 times smaller at room temperature."
+            ],
+            [
+              "p",
+              "The resolution is the Pauli exclusion principle. At temperature $T$, only electrons within $\\sim k_BT$ of the Fermi energy can be thermally excited. The fraction of electrons that participate is $\\sim k_BT/E_F$."
+            ],
+            [
+              "p",
+              "The electronic heat capacity is therefore:"
+            ],
+            [
+              "eq",
+              "C_{el} \\approx N k_B \\times \\frac{k_BT}{E_F} = \\frac{\\pi^2}{2}\\frac{Nk_B^2 T}{E_F}"
+            ],
+            [
+              "p",
+              "For copper at 300 K: $k_BT/E_F = 0.025/7.04 = 0.0036$. Only 0.36% of the electrons contribute to the heat capacity. At room temperature, the lattice contribution ($3Nk_B$, Dulong-Petit) dominates. The linear electronic term $\\gamma T$ becomes important only below $\\sim 5$ K."
+            ]
+          ]
+        ],
+        [
+          "problem",
+          "Aluminium has three valence electrons per atom, an atomic mass of 26.98 g/mol, and a density of 2.70 g/cm$^3$. Calculate the free-electron density, the Fermi energy, and the plasma frequency. At what wavelength does aluminium become transparent?",
+          [
+            [
+              "p",
+              "Electron density: $n = \\frac{3 \\times 2.70 \\times 6.022 \\times 10^{23}}{26.98} = 1.81 \\times 10^{29}$ m$^{-3}$."
+            ],
+            [
+              "eq",
+              "E_F = \\frac{(1.055 \\times 10^{-34})^2}{2(9.109 \\times 10^{-31})}(3\\pi^2 \\times 1.81 \\times 10^{29})^{2/3} = 11.7 \\text{ eV}"
+            ],
+            [
+              "eq",
+              "\\omega_p = \\sqrt{\\frac{ne^2}{\\varepsilon_0 m_e}} = \\sqrt{\\frac{1.81 \\times 10^{29} \\times (1.602 \\times 10^{-19})^2}{8.854 \\times 10^{-12} \\times 9.109 \\times 10^{-31}}} = 2.40 \\times 10^{16} \\text{ rad/s}"
+            ],
+            [
+              "p",
+              "Wavelength: $\\lambda_p = 2\\pi c / \\omega_p = 2\\pi \\times 3 \\times 10^8 / 2.40 \\times 10^{16} = 79$ nm (deep UV)."
+            ],
+            [
+              "p",
+              "Aluminium becomes transparent for $\\lambda < 79$ nm (extreme UV / soft X-rays). For visible light ($\\lambda = 400$-$700$ nm), aluminium is highly reflective. This is why aluminium is used as a mirror coating for telescopes and everyday mirrors."
+            ]
+          ]
+        ]
       ],
       "related": [
-        { "title": "Ionic Bonding", "url": "ionic-bonding" },
-        { "title": "Bond Energy & Force Curves", "url": "bond-energy-interatomic-spacing-force-curves" },
-        { "title": "Electronic Properties", "url": "../electronic-properties/" }
+        {
+          "title": "Ionic Bonding",
+          "url": "ionic-bonding"
+        },
+        {
+          "title": "Bond Energy & Force Curves",
+          "url": "bond-energy-interatomic-spacing-force-curves"
+        },
+        {
+          "title": "Electronic Properties",
+          "url": "../electronic-properties/"
+        }
       ]
     },
     {
@@ -260,53 +737,148 @@
       "readingTime": "12 min",
       "intro": "Even atoms and molecules with no permanent charge or dipole attract each other. These secondary bonds are individually weak (0.01 to 1 eV per bond, compared to 1 to 10 eV for primary bonds), but they are ubiquitous. They hold polymer chains together, determine the boiling points of gases, and stabilise the double helix of DNA.",
       "body": [
-        ["h3", "Van der Waals forces"],
-        ["p", "Van der Waals forces arise from fluctuations and asymmetries in the electron clouds of atoms and molecules. There are three types, in decreasing order of strength."],
-        ["p", "<strong>Keesom forces (dipole-dipole).</strong> Permanent dipoles attract each other. HCl has a permanent dipole moment of 1.08 D. In the liquid, the molecules orient so that the positive end of one faces the negative end of its neighbour. The interaction energy scales as $1/r^6$ after thermal averaging."],
-        ["p", "<strong>Debye forces (dipole-induced dipole).</strong> A polar molecule induces a dipole in a nonpolar neighbour. Water near an argon atom distorts argon's electron cloud. The interaction is weaker than Keesom because the induced dipole is proportional to the polarisability $\\alpha$ of the nonpolar molecule."],
-        ["p", "<strong>London dispersion forces (induced dipole-induced dipole).</strong> Even nonpolar atoms have instantaneous dipoles from electron fluctuations. These correlated fluctuations produce a net attraction. London forces are present in all matter. For noble gases, they are the only attractive force."],
-        ["p", "The London dispersion energy between two atoms separated by distance $r$ is:"],
-        ["eq", "E_{\\text{London}} = -\\frac{3}{4} \\frac{\\alpha^2 I}{(4\\pi\\varepsilon_0)^2 r^6}"],
-        ["p", "where $\\alpha$ is the polarisability and $I$ is the ionisation energy. Large, easily polarised atoms (Xe: $\\alpha = 4.04$ \\AA$^3$) interact more strongly than small ones (He: $\\alpha = 0.20$ \\AA$^3$). This is why xenon is a liquid at 165 K but helium must be cooled to 4.2 K."],
-
-        ["h3", "The Lennard-Jones potential"],
-        ["p", "The total van der Waals interaction is often modelled by the Lennard-Jones 12-6 potential:"],
-        ["eq", "V(r) = 4\\varepsilon\\left[\\left(\\frac{\\sigma}{r}\\right)^{12} - \\left(\\frac{\\sigma}{r}\\right)^{6}\\right]"],
-        ["p", "The $r^{-6}$ term is the attractive van der Waals interaction. The $r^{-12}$ term is a convenient (but not rigorous) model for the short-range Pauli repulsion when electron clouds overlap. The parameter $\\varepsilon$ is the well depth (binding energy) and $\\sigma$ is the distance at which $V = 0$."],
-        ["p", "For argon: $\\varepsilon/k_B = 120$ K (about 0.010 eV), $\\sigma = 3.40$ \\AA. The equilibrium separation is at $r_{\\text{min}} = 2^{1/6}\\sigma = 3.82$ \\AA. These values are fitted to second virial coefficient data or crystal properties."],
-
-        ["callout", "Why the $r^{-6}$ dependence?", "London showed in 1930, using second-order perturbation theory, that the dispersion interaction between two atoms decays as $1/r^6$. The physical picture: atom A develops a fluctuating dipole $\\sim e \\cdot \\delta r$. The field from this dipole at distance $r$ is $\\sim 1/r^3$. This field induces a dipole in atom B proportional to $\\alpha / r^3$. The interaction energy of the induced dipole with the original field gives $\\sim \\alpha / r^6$. The calculation requires quantum mechanics because a classical oscillator at zero temperature has no fluctuations."],
-
-        ["h3", "Hydrogen bonding"],
-        ["p", "The hydrogen bond is a special case of dipole-dipole interaction that is strong enough to deserve its own category. When hydrogen is bonded to a highly electronegative atom (F, O, or N), the electron density shifts toward the electronegative atom, leaving the hydrogen as a nearly bare proton. This exposed positive charge interacts strongly with a lone pair on a neighbouring F, O, or N."],
-        ["p", "Hydrogen bond energies: 10 to 40 kJ/mol (0.1 to 0.4 eV). Weak compared to covalent bonds (150 to 800 kJ/mol) but strong compared to London forces (0.5 to 5 kJ/mol)."],
-        ["p", "Water is the classic example. Each water molecule can form four hydrogen bonds (two through its hydrogens, two through its lone pairs). This network explains water's anomalous properties:"],
-        ["ul", [
-          "Boiling point 100 C, versus $-60$ C predicted by extrapolating from H$_2$S, H$_2$Se, H$_2$Te.",
-          "Density maximum at 4 C: ice has an open tetrahedral structure less dense than liquid water.",
-          "High specific heat capacity (4.18 J/(g $\\cdot$ K)), moderating Earth's climate.",
-          "High surface tension (72.8 mN/m at 20 C), enabling capillary action in plants."
-        ]],
-
-        ["h3", "Secondary bonding in materials"],
-        ["p", "<strong>Polymers.</strong> Polyethylene chains are held together entirely by van der Waals forces. Melting point of high-density polyethylene: about 130 C. Nylon chains form hydrogen bonds between the amide groups (N-H$\\cdots$O=C), raising the melting point to 220 C for nylon 6,6. Kevlar takes this further: extensive hydrogen bonding between rigid aromatic chains gives a tensile strength of 3.6 GPa and a decomposition temperature above 400 C."],
-        ["p", "<strong>Layered materials.</strong> Graphite layers (strong covalent bonds in-plane) are held together by van der Waals forces (interlayer binding energy: ~52 meV per atom). MoS$_2$, h-BN, and other layered materials share this architecture. The weak interlayer bonding enables exfoliation to single layers (graphene from graphite, discovered 2004) and makes these materials excellent solid lubricants."],
-        ["p", "<strong>Molecular crystals.</strong> Solid argon (FCC, melting point 84 K), solid CO$_2$ (sublimes at 195 K), iodine (melts at 114 C). These crystals are soft, low-melting, and electrically insulating."],
-        ["p", "<strong>Biological systems.</strong> Protein folding, DNA base pairing, lipid bilayers, and enzyme-substrate binding all rely on hydrogen bonds and van der Waals forces. The double helix of DNA is held together by hydrogen bonds between complementary base pairs: A-T (two H-bonds) and G-C (three H-bonds). The combination of specificity (base pairing rules) and reversibility (H-bonds can break and reform) is essential for replication and transcription."],
-
-        ["h3", "Van der Waals solids and equations of state"],
-        ["p", "The van der Waals equation of state $(P + a/V^2)(V - b) = RT$ corrects the ideal gas law for intermolecular attraction ($a$) and finite molecular volume ($b$). The parameter $a$ increases with polarisability: He ($a = 0.034$ L$^2$ atm/mol$^2$), Ar ($a = 1.36$), Xe ($a = 4.19$). Water's high value ($a = 5.54$) reflects hydrogen bonding, not just dispersion."],
-
-        ["problem", "The boiling points of the noble gases are: He (4.2 K), Ne (27.1 K), Ar (87.3 K), Kr (119.9 K), Xe (165.1 K). Plot these against polarisability (He: 0.20, Ne: 0.40, Ar: 1.64, Kr: 2.48, Xe: 4.04 \\AA$^3$) and explain the trend. Estimate the boiling point of radon ($\\alpha \\approx 5.3$ \\AA$^3$).", [
-          ["p", "The trend is nearly linear when plotted as $T_b$ vs $\\alpha$. This makes physical sense: the London dispersion energy scales as $\\alpha^2$, but the boiling point also depends on the number of nearest neighbours and the equilibrium separation (which increases with atom size). The net effect is approximately linear in $\\alpha$."],
-          ["p", "Fitting a line to the data: slope $\\approx 38$ K/\\AA$^3$, intercept $\\approx 10$ K. For radon: $T_b \\approx 38 \\times 5.3 + 10 \\approx 211$ K."],
-          ["p", "The actual boiling point of radon is 211 K. The agreement is surprisingly good for such a simple extrapolation, and it demonstrates that London dispersion forces dominate the cohesion of noble gas liquids."]
-        ]]
+        [
+          "h3",
+          "Van der Waals forces"
+        ],
+        [
+          "p",
+          "Van der Waals forces arise from fluctuations and asymmetries in the electron clouds of atoms and molecules. There are three types, in decreasing order of strength."
+        ],
+        [
+          "p",
+          "<strong>Keesom forces (dipole-dipole).</strong> Permanent dipoles attract each other. HCl has a permanent dipole moment of 1.08 D. In the liquid, the molecules orient so that the positive end of one faces the negative end of its neighbour. The interaction energy scales as $1/r^6$ after thermal averaging."
+        ],
+        [
+          "p",
+          "<strong>Debye forces (dipole-induced dipole).</strong> A polar molecule induces a dipole in a nonpolar neighbour. Water near an argon atom distorts argon's electron cloud. The interaction is weaker than Keesom because the induced dipole is proportional to the polarisability $\\alpha$ of the nonpolar molecule."
+        ],
+        [
+          "p",
+          "<strong>London dispersion forces (induced dipole-induced dipole).</strong> Even nonpolar atoms have instantaneous dipoles from electron fluctuations. These correlated fluctuations produce a net attraction. London forces are present in all matter. For noble gases, they are the only attractive force."
+        ],
+        [
+          "p",
+          "The London dispersion energy between two atoms separated by distance $r$ is:"
+        ],
+        [
+          "eq",
+          "E_{\\text{London}} = -\\frac{3}{4} \\frac{\\alpha^2 I}{(4\\pi\\varepsilon_0)^2 r^6}"
+        ],
+        [
+          "p",
+          "where $\\alpha$ is the polarisability and $I$ is the ionisation energy. Large, easily polarised atoms (Xe: $\\alpha = 4.04$ \\AA$^3$) interact more strongly than small ones (He: $\\alpha = 0.20$ \\AA$^3$). This is why xenon is a liquid at 165 K but helium must be cooled to 4.2 K."
+        ],
+        [
+          "h3",
+          "The Lennard-Jones potential"
+        ],
+        [
+          "p",
+          "The total van der Waals interaction is often modelled by the Lennard-Jones 12-6 potential:"
+        ],
+        [
+          "eq",
+          "V(r) = 4\\varepsilon\\left[\\left(\\frac{\\sigma}{r}\\right)^{12} - \\left(\\frac{\\sigma}{r}\\right)^{6}\\right]"
+        ],
+        [
+          "p",
+          "The $r^{-6}$ term is the attractive van der Waals interaction. The $r^{-12}$ term is a convenient (but not rigorous) model for the short-range Pauli repulsion when electron clouds overlap. The parameter $\\varepsilon$ is the well depth (binding energy) and $\\sigma$ is the distance at which $V = 0$."
+        ],
+        [
+          "p",
+          "For argon: $\\varepsilon/k_B = 120$ K (about 0.010 eV), $\\sigma = 3.40$ \\AA. The equilibrium separation is at $r_{\\text{min}} = 2^{1/6}\\sigma = 3.82$ \\AA. These values are fitted to second virial coefficient data or crystal properties."
+        ],
+        [
+          "callout",
+          "Why the $r^{-6}$ dependence?",
+          "London showed in 1930, using second-order perturbation theory, that the dispersion interaction between two atoms decays as $1/r^6$. The physical picture: atom A develops a fluctuating dipole $\\sim e \\cdot \\delta r$. The field from this dipole at distance $r$ is $\\sim 1/r^3$. This field induces a dipole in atom B proportional to $\\alpha / r^3$. The interaction energy of the induced dipole with the original field gives $\\sim \\alpha / r^6$. The calculation requires quantum mechanics because a classical oscillator at zero temperature has no fluctuations."
+        ],
+        [
+          "h3",
+          "Hydrogen bonding"
+        ],
+        [
+          "p",
+          "The hydrogen bond is a special case of dipole-dipole interaction that is strong enough to deserve its own category. When hydrogen is bonded to a highly electronegative atom (F, O, or N), the electron density shifts toward the electronegative atom, leaving the hydrogen as a nearly bare proton. This exposed positive charge interacts strongly with a lone pair on a neighbouring F, O, or N."
+        ],
+        [
+          "p",
+          "Hydrogen bond energies: 10 to 40 kJ/mol (0.1 to 0.4 eV). Weak compared to covalent bonds (150 to 800 kJ/mol) but strong compared to London forces (0.5 to 5 kJ/mol)."
+        ],
+        [
+          "p",
+          "Water is the classic example. Each water molecule can form four hydrogen bonds (two through its hydrogens, two through its lone pairs). This network explains water's anomalous properties:"
+        ],
+        [
+          "ul",
+          [
+            "Boiling point 100 C, versus $-60$ C predicted by extrapolating from H$_2$S, H$_2$Se, H$_2$Te.",
+            "Density maximum at 4 C: ice has an open tetrahedral structure less dense than liquid water.",
+            "High specific heat capacity (4.18 J/(g $\\cdot$ K)), moderating Earth's climate.",
+            "High surface tension (72.8 mN/m at 20 C), enabling capillary action in plants."
+          ]
+        ],
+        [
+          "h3",
+          "Secondary bonding in materials"
+        ],
+        [
+          "p",
+          "<strong>Polymers.</strong> Polyethylene chains are held together entirely by van der Waals forces. Melting point of high-density polyethylene: about 130 C. Nylon chains form hydrogen bonds between the amide groups (N-H$\\cdots$O=C), raising the melting point to 220 C for nylon 6,6. Kevlar takes this further: extensive hydrogen bonding between rigid aromatic chains gives a tensile strength of 3.6 GPa and a decomposition temperature above 400 C."
+        ],
+        [
+          "p",
+          "<strong>Layered materials.</strong> Graphite layers (strong covalent bonds in-plane) are held together by van der Waals forces (interlayer binding energy: ~52 meV per atom). MoS$_2$, h-BN, and other layered materials share this architecture. The weak interlayer bonding enables exfoliation to single layers (graphene from graphite, discovered 2004) and makes these materials excellent solid lubricants."
+        ],
+        [
+          "p",
+          "<strong>Molecular crystals.</strong> Solid argon (FCC, melting point 84 K), solid CO$_2$ (sublimes at 195 K), iodine (melts at 114 C). These crystals are soft, low-melting, and electrically insulating."
+        ],
+        [
+          "p",
+          "<strong>Biological systems.</strong> Protein folding, DNA base pairing, lipid bilayers, and enzyme-substrate binding all rely on hydrogen bonds and van der Waals forces. The double helix of DNA is held together by hydrogen bonds between complementary base pairs: A-T (two H-bonds) and G-C (three H-bonds). The combination of specificity (base pairing rules) and reversibility (H-bonds can break and reform) is essential for replication and transcription."
+        ],
+        [
+          "h3",
+          "Van der Waals solids and equations of state"
+        ],
+        [
+          "p",
+          "The van der Waals equation of state $(P + a/V^2)(V - b) = RT$ corrects the ideal gas law for intermolecular attraction ($a$) and finite molecular volume ($b$). The parameter $a$ increases with polarisability: He ($a = 0.034$ L$^2$ atm/mol$^2$), Ar ($a = 1.36$), Xe ($a = 4.19$). Water's high value ($a = 5.54$) reflects hydrogen bonding, not just dispersion."
+        ],
+        [
+          "problem",
+          "The boiling points of the noble gases are: He (4.2 K), Ne (27.1 K), Ar (87.3 K), Kr (119.9 K), Xe (165.1 K). Plot these against polarisability (He: 0.20, Ne: 0.40, Ar: 1.64, Kr: 2.48, Xe: 4.04 \\AA$^3$) and explain the trend. Estimate the boiling point of radon ($\\alpha \\approx 5.3$ \\AA$^3$).",
+          [
+            [
+              "p",
+              "The trend is nearly linear when plotted as $T_b$ vs $\\alpha$. This makes physical sense: the London dispersion energy scales as $\\alpha^2$, but the boiling point also depends on the number of nearest neighbours and the equilibrium separation (which increases with atom size). The net effect is approximately linear in $\\alpha$."
+            ],
+            [
+              "p",
+              "Fitting a line to the data: slope $\\approx 38$ K/\\AA$^3$, intercept $\\approx 10$ K. For radon: $T_b \\approx 38 \\times 5.3 + 10 \\approx 211$ K."
+            ],
+            [
+              "p",
+              "The actual boiling point of radon is 211 K. The agreement is surprisingly good for such a simple extrapolation, and it demonstrates that London dispersion forces dominate the cohesion of noble gas liquids."
+            ]
+          ]
+        ]
       ],
       "related": [
-        { "title": "Covalent Bonding", "url": "covalent-bonding" },
-        { "title": "Bond Energy & Force Curves", "url": "bond-energy-interatomic-spacing-force-curves" },
-        { "title": "Polymers", "url": "../polymers/" }
+        {
+          "title": "Covalent Bonding",
+          "url": "covalent-bonding"
+        },
+        {
+          "title": "Bond Energy & Force Curves",
+          "url": "bond-energy-interatomic-spacing-force-curves"
+        },
+        {
+          "title": "Polymers",
+          "url": "../polymers/"
+        }
       ]
     },
     {
@@ -317,70 +889,203 @@
       "readingTime": "14 min",
       "intro": "All bonding types produce the same qualitative shape: an energy well with a steep repulsive wall at short range and a gentler attractive tail at long range. The depth, width, and asymmetry of this well determine almost every bulk property of a material.",
       "body": [
-        ["h3", "The interatomic potential"],
-        ["p", "Consider two atoms separated by distance $r$. At large separation, they attract (the mechanism depends on bond type: Coulomb for ionic, orbital overlap for covalent, electron gas for metallic, dispersion for van der Waals). At short separation, they repel (Pauli exclusion: overlapping electron clouds create occupied antibonding states)."],
-        ["p", "The total energy has the form:"],
-        ["eq", "E(r) = -\\frac{A}{r^m} + \\frac{B}{r^n}"],
-        ["p", "where $m$ and $n$ are positive integers with $n > m$ (the repulsion must be shorter-ranged than the attraction for a stable minimum to exist). For ionic bonds, $m = 1$ and $n \\approx 8$-$12$. For van der Waals, $m = 6$ and $n = 12$."],
-        ["p", "The equilibrium separation $r_0$ occurs at the minimum of $E(r)$, where $dE/dr = 0$. The bond energy $E_0$ is the depth of the well: the energy required to separate the two atoms to infinity."],
-
-        ["h3", "From the potential to the force"],
-        ["p", "The interatomic force is the negative gradient of the potential:"],
-        ["eq", "F(r) = -\\frac{dE}{dr} = -\\frac{mA}{r^{m+1}} + \\frac{nB}{r^{n+1}}"],
-        ["p", "At $r = r_0$: $F = 0$ (equilibrium). For $r > r_0$: $F < 0$ (attractive, restoring). For $r < r_0$: $F > 0$ (repulsive, restoring). The system behaves like a spring near equilibrium."],
-        ["p", "The maximum tensile force the bond can sustain occurs at the inflection point of $E(r)$, where $d^2E/dr^2 = 0$. Beyond this point, the force decreases with increasing separation, and the bond becomes unstable. This sets the theoretical cohesive strength of the material."],
-
-        ["h3", "Elastic modulus from the bond curve"],
-        ["p", "Near equilibrium, expand $E(r)$ in a Taylor series:"],
-        ["eq", "E(r) \\approx E_0 + \\frac{1}{2}\\left(\\frac{d^2E}{dr^2}\\right)_{r_0}(r - r_0)^2 + \\ldots"],
-        ["p", "This is a harmonic potential. The force constant (spring constant) is $k_0 = (d^2E/dr^2)_{r_0}$. The Young's modulus $Y$ of a material is related to this atomic spring constant by:"],
-        ["eq", "Y \\approx \\frac{k_0}{r_0}"],
-        ["p", "Stiffer bonds (larger $k_0$) give higher modulus. Shorter bonds (smaller $r_0$) also increase the modulus, because the density of bonds per unit area is higher."],
-
-        ["derivation", "The theoretical strength of a material is roughly $Y/10$ to $Y/30$, corresponding to the maximum in the force curve.", [
-          ["p", "Approximate the force curve near its maximum as sinusoidal: $F = F_{\\max} \\sin(2\\pi x / \\lambda)$ where $x = r - r_0$ is the displacement and $\\lambda$ is the half-period."],
-          ["p", "Near equilibrium ($x \\ll \\lambda$): $F \\approx F_{\\max} \\cdot 2\\pi x / \\lambda$. But also $F = k_0 x = (Y/r_0)x \\cdot A$ for a cross-section $A$, giving $\\sigma = Y x / r_0$."],
-          ["p", "Matching: $\\sigma_{\\max} = \\frac{Y \\lambda}{2\\pi r_0}$. For $\\lambda \\approx r_0$:"],
-          ["eq", "\\sigma_{\\text{th}} \\approx \\frac{Y}{2\\pi} \\approx \\frac{Y}{6}"],
-          ["p", "Diamond: $Y = 1050$ GPa, so $\\sigma_{\\text{th}} \\approx 170$ GPa. Iron: $Y = 211$ GPa, $\\sigma_{\\text{th}} \\approx 34$ GPa. Real metals yield at 30 to 300 MPa, a factor of 100 to 1000 lower. The discrepancy led to the prediction of dislocations in 1934."]
-        ]],
-
-        ["h3", "Thermal expansion from asymmetry"],
-        ["p", "The interatomic potential is not symmetric about $r_0$. The repulsive wall is steep; the attractive tail is gentle. This asymmetry (anharmonicity) is the origin of thermal expansion."],
-        ["p", "At temperature $T$, atoms vibrate with thermal energy $\\sim k_BT$. Because the well is steeper on the left (compression) than on the right (tension), the average position shifts to larger $r$ as temperature increases. The material expands."],
-        ["p", "Deep, symmetric wells give small thermal expansion. Shallow, asymmetric wells give large expansion. Diamond ($\\alpha = 1.0 \\times 10^{-6}$ K$^{-1}$) has a deep, nearly symmetric well. Lead ($\\alpha = 29 \\times 10^{-6}$ K$^{-1}$) has a shallow, highly asymmetric one. Invar (Fe-36%Ni) achieves near-zero expansion through a magnetic contribution that counteracts the normal anharmonic expansion."],
-
-        ["callout", "The Gruneisen parameter", "The degree of anharmonicity is quantified by the Gruneisen parameter $\\gamma_G$, defined as $\\gamma_G = -d\\ln\\omega / d\\ln V$ where $\\omega$ is a vibrational frequency and $V$ is volume. For most solids, $\\gamma_G \\approx 1$-$3$. The thermal expansion coefficient is $\\alpha = \\gamma_G C_V / (3B V)$ where $B$ is the bulk modulus and $C_V$ the heat capacity. A perfectly harmonic crystal ($\\gamma_G = 0$) would not expand at all."],
-
-        ["h3", "Melting point and bond energy"],
-        ["p", "Lindemann proposed in 1910 that a crystal melts when the amplitude of thermal vibrations reaches a critical fraction (about 10 to 15%) of the interatomic spacing. This connects the melting temperature to the depth of the energy well."],
-        ["p", "Roughly: $k_B T_m \\sim \\frac{1}{2} k_0 (0.1 r_0)^2$. Since $k_0 \\propto Y r_0$ and $Y \\propto E_0 / r_0^3$, the melting point scales with bond energy. Some values:"],
-        ["ul", [
-          "Tungsten: $E_0 = 8.90$ eV/atom, $T_m = 3695$ K",
-          "Iron: $E_0 = 4.28$ eV/atom, $T_m = 1811$ K",
-          "Aluminium: $E_0 = 3.39$ eV/atom, $T_m = 933$ K",
-          "Sodium: $E_0 = 1.11$ eV/atom, $T_m = 371$ K",
-          "Argon: $E_0 = 0.080$ eV/atom, $T_m = 84$ K"
-        ]],
-        ["p", "The correlation is not perfect (crystal structure and coordination number also matter), but the trend is unmistakable: stronger bonds mean higher melting points."],
-
-        ["h3", "Correlations between properties"],
-        ["p", "Because modulus, melting point, thermal expansion, and cohesive energy all trace to the same interatomic potential, they are correlated. Materials with high modulus tend to have high melting points and low thermal expansion. Diamond is the extreme example: $Y = 1050$ GPa, $T_m > 3500$ C (sublimation), $\\alpha = 1.0 \\times 10^{-6}$ K$^{-1}$."],
-        ["p", "These correlations are not accidental. They are different projections of the same underlying physics: the shape of the bond energy curve."],
-
-        ["problem", "The Lennard-Jones parameters for argon are $\\varepsilon = 0.0104$ eV and $\\sigma = 3.40$ \\AA. Find the equilibrium separation, the force constant $k_0$, and estimate the Einstein frequency of vibration in solid argon (atomic mass 39.95 u). Compare with the experimental Debye temperature of 93 K.", [
-          ["p", "Equilibrium separation: $r_0 = 2^{1/6}\\sigma = 1.122 \\times 3.40 = 3.82$ \\AA."],
-          ["p", "Force constant: $k_0 = d^2V/dr^2$ at $r_0$. Differentiating $V(r) = 4\\varepsilon[(\\sigma/r)^{12} - (\\sigma/r)^6]$ twice and evaluating at $r = 2^{1/6}\\sigma$:"],
-          ["eq", "k_0 = \\frac{72\\varepsilon}{2^{1/3}\\sigma^2} = \\frac{72 \\times 0.0104 \\times 1.602 \\times 10^{-19}}{1.260 \\times (3.40 \\times 10^{-10})^2} = 0.825 \\text{ N/m}"],
-          ["p", "Einstein frequency: $\\omega_E = \\sqrt{k_0/m} = \\sqrt{0.825/(39.95 \\times 1.661 \\times 10^{-27})} = 1.11 \\times 10^{12}$ rad/s."],
-          ["p", "Einstein temperature: $\\Theta_E = \\hbar\\omega_E/k_B = (1.055 \\times 10^{-34} \\times 1.11 \\times 10^{12})/1.381 \\times 10^{-23} = 85$ K."],
-          ["p", "The Debye temperature is 93 K, close to our Einstein estimate. The agreement is reasonable; the Debye model distributes frequencies over a range, with the Debye temperature typically 10-20% higher than the Einstein temperature."]
-        ]]
+        [
+          "h3",
+          "The interatomic potential"
+        ],
+        [
+          "p",
+          "Consider two atoms separated by distance $r$. At large separation, they attract (the mechanism depends on bond type: Coulomb for ionic, orbital overlap for covalent, electron gas for metallic, dispersion for van der Waals). At short separation, they repel (Pauli exclusion: overlapping electron clouds create occupied antibonding states)."
+        ],
+        [
+          "p",
+          "The total energy has the form:"
+        ],
+        [
+          "eq",
+          "E(r) = -\\frac{A}{r^m} + \\frac{B}{r^n}"
+        ],
+        [
+          "p",
+          "where $m$ and $n$ are positive integers with $n > m$ (the repulsion must be shorter-ranged than the attraction for a stable minimum to exist). For ionic bonds, $m = 1$ and $n \\approx 8$-$12$. For van der Waals, $m = 6$ and $n = 12$."
+        ],
+        [
+          "p",
+          "The equilibrium separation $r_0$ occurs at the minimum of $E(r)$, where $dE/dr = 0$. The bond energy $E_0$ is the depth of the well: the energy required to separate the two atoms to infinity."
+        ],
+        [
+          "h3",
+          "From the potential to the force"
+        ],
+        [
+          "p",
+          "The interatomic force is the negative gradient of the potential:"
+        ],
+        [
+          "eq",
+          "F(r) = -\\frac{dE}{dr} = -\\frac{mA}{r^{m+1}} + \\frac{nB}{r^{n+1}}"
+        ],
+        [
+          "p",
+          "At $r = r_0$: $F = 0$ (equilibrium). For $r > r_0$: $F < 0$ (attractive, restoring). For $r < r_0$: $F > 0$ (repulsive, restoring). The system behaves like a spring near equilibrium."
+        ],
+        [
+          "p",
+          "The maximum tensile force the bond can sustain occurs at the inflection point of $E(r)$, where $d^2E/dr^2 = 0$. Beyond this point, the force decreases with increasing separation, and the bond becomes unstable. This sets the theoretical cohesive strength of the material."
+        ],
+        [
+          "h3",
+          "Elastic modulus from the bond curve"
+        ],
+        [
+          "p",
+          "Near equilibrium, expand $E(r)$ in a Taylor series:"
+        ],
+        [
+          "eq",
+          "E(r) \\approx E_0 + \\frac{1}{2}\\left(\\frac{d^2E}{dr^2}\\right)_{r_0}(r - r_0)^2 + \\ldots"
+        ],
+        [
+          "p",
+          "This is a harmonic potential. The force constant (spring constant) is $k_0 = (d^2E/dr^2)_{r_0}$. The Young's modulus $Y$ of a material is related to this atomic spring constant by:"
+        ],
+        [
+          "eq",
+          "Y \\approx \\frac{k_0}{r_0}"
+        ],
+        [
+          "p",
+          "Stiffer bonds (larger $k_0$) give higher modulus. Shorter bonds (smaller $r_0$) also increase the modulus, because the density of bonds per unit area is higher."
+        ],
+        [
+          "derivation",
+          "The theoretical strength of a material is roughly $Y/10$ to $Y/30$, corresponding to the maximum in the force curve.",
+          [
+            [
+              "p",
+              "Approximate the force curve near its maximum as sinusoidal: $F = F_{\\max} \\sin(2\\pi x / \\lambda)$ where $x = r - r_0$ is the displacement and $\\lambda$ is the half-period."
+            ],
+            [
+              "p",
+              "Near equilibrium ($x \\ll \\lambda$): $F \\approx F_{\\max} \\cdot 2\\pi x / \\lambda$. But also $F = k_0 x = (Y/r_0)x \\cdot A$ for a cross-section $A$, giving $\\sigma = Y x / r_0$."
+            ],
+            [
+              "p",
+              "Matching: $\\sigma_{\\max} = \\frac{Y \\lambda}{2\\pi r_0}$. For $\\lambda \\approx r_0$:"
+            ],
+            [
+              "eq",
+              "\\sigma_{\\text{th}} \\approx \\frac{Y}{2\\pi} \\approx \\frac{Y}{6}"
+            ],
+            [
+              "p",
+              "Diamond: $Y = 1050$ GPa, so $\\sigma_{\\text{th}} \\approx 170$ GPa. Iron: $Y = 211$ GPa, $\\sigma_{\\text{th}} \\approx 34$ GPa. Real metals yield at 30 to 300 MPa, a factor of 100 to 1000 lower. The discrepancy led to the prediction of dislocations in 1934."
+            ]
+          ]
+        ],
+        [
+          "h3",
+          "Thermal expansion from asymmetry"
+        ],
+        [
+          "p",
+          "The interatomic potential is not symmetric about $r_0$. The repulsive wall is steep; the attractive tail is gentle. This asymmetry (anharmonicity) is the origin of thermal expansion."
+        ],
+        [
+          "p",
+          "At temperature $T$, atoms vibrate with thermal energy $\\sim k_BT$. Because the well is steeper on the left (compression) than on the right (tension), the average position shifts to larger $r$ as temperature increases. The material expands."
+        ],
+        [
+          "p",
+          "Deep, symmetric wells give small thermal expansion. Shallow, asymmetric wells give large expansion. Diamond ($\\alpha = 1.0 \\times 10^{-6}$ K$^{-1}$) has a deep, nearly symmetric well. Lead ($\\alpha = 29 \\times 10^{-6}$ K$^{-1}$) has a shallow, highly asymmetric one. Invar (Fe-36%Ni) achieves near-zero expansion through a magnetic contribution that counteracts the normal anharmonic expansion."
+        ],
+        [
+          "callout",
+          "The Gruneisen parameter",
+          "The degree of anharmonicity is quantified by the Gruneisen parameter $\\gamma_G$, defined as $\\gamma_G = -d\\ln\\omega / d\\ln V$ where $\\omega$ is a vibrational frequency and $V$ is volume. For most solids, $\\gamma_G \\approx 1$-$3$. The thermal expansion coefficient is $\\alpha = \\gamma_G C_V / (3B V)$ where $B$ is the bulk modulus and $C_V$ the heat capacity. A perfectly harmonic crystal ($\\gamma_G = 0$) would not expand at all."
+        ],
+        [
+          "h3",
+          "Melting point and bond energy"
+        ],
+        [
+          "p",
+          "Lindemann proposed in 1910 that a crystal melts when the amplitude of thermal vibrations reaches a critical fraction (about 10 to 15%) of the interatomic spacing. This connects the melting temperature to the depth of the energy well."
+        ],
+        [
+          "p",
+          "Roughly: $k_B T_m \\sim \\frac{1}{2} k_0 (0.1 r_0)^2$. Since $k_0 \\propto Y r_0$ and $Y \\propto E_0 / r_0^3$, the melting point scales with bond energy. Some values:"
+        ],
+        [
+          "ul",
+          [
+            "Tungsten: $E_0 = 8.90$ eV/atom, $T_m = 3695$ K",
+            "Iron: $E_0 = 4.28$ eV/atom, $T_m = 1811$ K",
+            "Aluminium: $E_0 = 3.39$ eV/atom, $T_m = 933$ K",
+            "Sodium: $E_0 = 1.11$ eV/atom, $T_m = 371$ K",
+            "Argon: $E_0 = 0.080$ eV/atom, $T_m = 84$ K"
+          ]
+        ],
+        [
+          "p",
+          "The correlation is not perfect (crystal structure and coordination number also matter), but the trend is unmistakable: stronger bonds mean higher melting points."
+        ],
+        [
+          "h3",
+          "Correlations between properties"
+        ],
+        [
+          "p",
+          "Because modulus, melting point, thermal expansion, and cohesive energy all trace to the same interatomic potential, they are correlated. Materials with high modulus tend to have high melting points and low thermal expansion. Diamond is the extreme example: $Y = 1050$ GPa, $T_m > 3500$ C (sublimation), $\\alpha = 1.0 \\times 10^{-6}$ K$^{-1}$."
+        ],
+        [
+          "p",
+          "These correlations are not accidental. They are different projections of the same underlying physics: the shape of the bond energy curve."
+        ],
+        [
+          "problem",
+          "The Lennard-Jones parameters for argon are $\\varepsilon = 0.0104$ eV and $\\sigma = 3.40$ \\AA. Find the equilibrium separation, the force constant $k_0$, and estimate the Einstein frequency of vibration in solid argon (atomic mass 39.95 u). Compare with the experimental Debye temperature of 93 K.",
+          [
+            [
+              "p",
+              "Equilibrium separation: $r_0 = 2^{1/6}\\sigma = 1.122 \\times 3.40 = 3.82$ \\AA."
+            ],
+            [
+              "p",
+              "Force constant: $k_0 = d^2V/dr^2$ at $r_0$. Differentiating $V(r) = 4\\varepsilon[(\\sigma/r)^{12} - (\\sigma/r)^6]$ twice and evaluating at $r = 2^{1/6}\\sigma$:"
+            ],
+            [
+              "eq",
+              "k_0 = \\frac{72\\varepsilon}{2^{1/3}\\sigma^2} = \\frac{72 \\times 0.0104 \\times 1.602 \\times 10^{-19}}{1.260 \\times (3.40 \\times 10^{-10})^2} = 0.825 \\text{ N/m}"
+            ],
+            [
+              "p",
+              "Einstein frequency: $\\omega_E = \\sqrt{k_0/m} = \\sqrt{0.825/(39.95 \\times 1.661 \\times 10^{-27})} = 1.11 \\times 10^{12}$ rad/s."
+            ],
+            [
+              "p",
+              "Einstein temperature: $\\Theta_E = \\hbar\\omega_E/k_B = (1.055 \\times 10^{-34} \\times 1.11 \\times 10^{12})/1.381 \\times 10^{-23} = 85$ K."
+            ],
+            [
+              "p",
+              "The Debye temperature is 93 K, close to our Einstein estimate. The agreement is reasonable; the Debye model distributes frequencies over a range, with the Debye temperature typically 10-20% higher than the Einstein temperature."
+            ]
+          ]
+        ]
       ],
       "related": [
-        { "title": "Ionic Bonding", "url": "ionic-bonding" },
-        { "title": "Metallic Bonding", "url": "metallic-bonding" },
-        { "title": "Mechanical Properties", "url": "../mechanical-properties/" }
+        {
+          "title": "Ionic Bonding",
+          "url": "ionic-bonding"
+        },
+        {
+          "title": "Metallic Bonding",
+          "url": "metallic-bonding"
+        },
+        {
+          "title": "Mechanical Properties",
+          "url": "../mechanical-properties/"
+        }
       ]
     },
     {
@@ -391,81 +1096,216 @@
       "readingTime": "13 min",
       "intro": "No real bond is purely ionic, purely covalent, or purely metallic. Most bonds have mixed character, and the degree of mixing determines the properties. Pauling's electronegativity scale quantifies this, while his five rules predict the structures of complex ionic compounds.",
       "body": [
-        ["h3", "The bonding triangle"],
-        ["p", "Materials can be placed on a triangle whose vertices are ionic, covalent, and metallic bonding. NaCl sits near the ionic vertex. Diamond sits at the covalent vertex. Sodium metal sits at the metallic vertex. Most real materials sit somewhere inside."],
-        ["p", "GaAs: Gallium (electronegativity 1.81) and arsenic (2.18) have a small difference (0.37). The bonding is predominantly covalent with about 4% ionic character. But the small ionicity is enough to open up a direct band gap (1.42 eV) and make GaAs a far better optoelectronic material than purely covalent silicon (indirect gap, 1.12 eV)."],
-        ["p", "SiC: Si (1.90) and C (2.55), difference 0.65. About 12% ionic character. The partial ionicity contributes to SiC's very high hardness (9.5 on the Mohs scale) and chemical stability."],
-        ["p", "Transition metal carbides like TiC sit in the middle of the triangle. Ti-C bonds have ionic character (electronegativity difference 1.04), covalent character (strong directional bonding from Ti d-orbitals overlapping with C p-orbitals), and metallic character (TiC conducts electricity: resistivity $68$ $\\mu\\Omega \\cdot$ cm). The result is a material that is hard (Mohs 9-9.5), high-melting (3067 C), and electrically conducting."],
-
-        ["h3", "Pauling's electronegativity and percent ionic character"],
-        ["p", "Pauling defined electronegativity from bond energies. If the bond A-B were purely covalent, its energy would be approximately the geometric mean of the A-A and B-B bond energies. The extra energy $\\Delta$ of the A-B bond above this mean is attributed to ionic character:"],
-        ["eq", "\\Delta = D(A\\text{-}B) - \\sqrt{D(A\\text{-}A) \\cdot D(B\\text{-}B)}"],
-        ["p", "where $D$ is the bond dissociation energy in eV. Pauling set:"],
-        ["eq", "|\\chi_A - \\chi_B| = \\sqrt{\\Delta}"],
-        ["p", "With $\\chi_{\\text{F}} = 4.0$ as the reference, the entire scale follows. Hydrogen: 2.20. Oxygen: 3.44. Carbon: 2.55. Iron: 1.83. Caesium: 0.79."],
-        ["p", "The percent ionic character is approximated by:"],
-        ["eq", "\\% \\text{ionic} = \\left[1 - \\exp\\left(-\\frac{(\\chi_A - \\chi_B)^2}{4}\\right)\\right] \\times 100"],
-        ["p", "For NaCl ($\\Delta\\chi = 2.1$): 67% ionic. For HF ($\\Delta\\chi = 1.8$): 55% ionic. For SiO$_2$ ($\\Delta\\chi = 1.54$): 45% ionic. Even NaCl is not \"purely\" ionic."],
-
-        ["callout", "The ionic-covalent boundary", "The traditional rule of thumb places the boundary at $\\Delta\\chi \\approx 1.7$ (about 50% ionic character). Below this, the bond is considered \"predominantly covalent\"; above, \"predominantly ionic\". But this is a continuum, not a sharp divide. The boundary matters less than understanding how properties change along it. Increasing ionicity generally increases coordination number (from 4 toward 6 or 8), decreases directional bonding, increases transparency, and increases brittleness."],
-
-        ["h3", "Pauling's rules for ionic structures"],
-        ["p", "For complex ionic structures (minerals, ceramics, most oxides), Pauling proposed five rules in 1929 that predict structure from ion sizes and charges. Eighty years on, they remain powerful."],
-
-        ["p", "<strong>Rule 1: The coordination polyhedron.</strong> A polyhedron of anions forms around each cation. The cation-anion distance is determined by the sum of ionic radii. The coordination number is determined by the radius ratio $r_c/r_a$. The critical ratios and their polyhedra:"],
-        ["ul", [
-          "$< 0.155$: linear (CN = 2)",
-          "$0.155$-$0.225$: triangle (CN = 3)",
-          "$0.225$-$0.414$: tetrahedron (CN = 4)",
-          "$0.414$-$0.732$: octahedron (CN = 6)",
-          "$0.732$-$1.0$: cube (CN = 8)"
-        ]],
-        ["p", "Example: in MgO, $r_{\\text{Mg}^{2+}}/r_{\\text{O}^{2-}} = 0.72/1.40 = 0.51$, predicting octahedral coordination (CN = 6). MgO adopts the rocksalt structure: confirmed."],
-
-        ["p", "<strong>Rule 2: Electrostatic valence principle.</strong> In a stable structure, the total electrostatic bond strength reaching an anion from all neighbouring cations equals (or nearly equals) the anion's charge. The electrostatic bond strength from one cation is $s = z_c/\\text{CN}$, where $z_c$ is the cation charge and CN its coordination number."],
-        ["p", "In rutile (TiO$_2$): Ti$^{4+}$ has CN = 6, so $s = 4/6 = 2/3$. Each O$^{2-}$ must receive bond strengths totalling 2, so it bonds to three Ti$^{4+}$ ions ($3 \\times 2/3 = 2$). This fixes the O coordination number at 3."],
-
-        ["p", "<strong>Rule 3: Shared edges and faces destabilise.</strong> Sharing edges between coordination polyhedra is less stable than sharing corners, and sharing faces is least stable. This is because shared elements bring cations closer together, increasing cation-cation repulsion. The effect is strongest for cations with high charge and low coordination number."],
-        ["p", "Rutile shares edges (each octahedron shares two edges with neighbours). Anatase (also TiO$_2$) shares more edges and is metastable. Corundum ($\\alpha$-Al$_2$O$_3$) shares faces between AlO$_6$ octahedra, but the low charge of Al$^{3+}$ and the large coordination number partially compensate."],
-
-        ["p", "<strong>Rule 4: Cations with high charge and small size avoid sharing.</strong> In structures containing multiple cation types, those with the highest charge and smallest radius tend to share as few polyhedral elements as possible. Si$^{4+}$ (small, high charge) nearly always occupies isolated tetrahedra in silicates. Al$^{3+}$ (lower charge) can share edges more readily."],
-
-        ["p", "<strong>Rule 5: The principle of parsimony.</strong> The number of distinct sites in a crystal structure tends to be small. A crystal with many chemically similar atoms tends to place them on equivalent sites rather than creating a zoo of slightly different environments."],
-
-        ["h3", "Application: the silicate minerals"],
-        ["p", "Silicate minerals illustrate Pauling's rules beautifully. Si$^{4+}$ ($r = 0.26$ \\AA) in O$^{2-}$ ($r = 1.40$ \\AA) gives $r_c/r_a = 0.19$, near the bottom of the tetrahedral range. Silicon is always 4-coordinated in silicates, sitting inside SiO$_4$ tetrahedra."],
-        ["p", "The electrostatic bond strength from Si to O is $4/4 = 1$. Since O$^{2-}$ needs a total of 2, each oxygen in a SiO$_4$ tetrahedron has one unit of bond strength \"remaining\" for other cations. This controls how tetrahedra link:"],
-        ["ul", [
-          "<strong>Nesosilicates</strong> (isolated tetrahedra): olivine (Mg,Fe)$_2$SiO$_4$. Each O bonds to Si and to Mg/Fe. Hard, dense, high melting.",
-          "<strong>Inosilicates</strong> (chains): pyroxenes (single chain, e.g., enstatite MgSiO$_3$), amphiboles (double chain). Chain direction gives anisotropic cleavage.",
-          "<strong>Phyllosilicates</strong> (sheets): micas, clays. Strong in-plane, weak between sheets. Perfect basal cleavage.",
-          "<strong>Tectosilicates</strong> (3D framework): quartz (SiO$_2$), feldspars. All oxygens are shared between two Si. Very stable, hard, high melting."
-        ]],
-
-        ["derivation", "Pauling's Rule 2 predicts the coordination of oxygen in perovskite (CaTiO$_3$).", [
-          ["p", "In the ideal perovskite structure: Ca$^{2+}$ has CN = 12 (cuboctahedral), so $s_{\\text{Ca}} = 2/12 = 1/6$. Ti$^{4+}$ has CN = 6 (octahedral), so $s_{\\text{Ti}} = 4/6 = 2/3$."],
-          ["p", "Each O$^{2-}$ must receive bond strengths summing to 2. It bonds to 4 Ca$^{2+}$ and 2 Ti$^{4+}$:"],
-          ["eq", "4 \\times \\frac{1}{6} + 2 \\times \\frac{2}{3} = \\frac{2}{3} + \\frac{4}{3} = 2 \\quad \\checkmark"],
-          ["p", "The rule is satisfied exactly. This is characteristic of stable structures. When the sum departs from the anion charge (\"bond valence mismatch\"), the structure is strained or unstable, as quantified by the modern bond valence method developed by Brown and Altermatt."]
-        ]],
-
-        ["h3", "Beyond Pauling: the bond valence method"],
-        ["p", "Pauling's electrostatic bond strength treats all bonds to a given cation as equal. The bond valence method generalises this by making the bond strength depend on the actual bond length:"],
-        ["eq", "s_{ij} = \\exp\\left(\\frac{R_0 - d_{ij}}{b}\\right)"],
-        ["p", "where $d_{ij}$ is the measured bond length, $R_0$ is a tabulated parameter for each cation-anion pair, and $b \\approx 0.37$ \\AA. The sum of bond valences around each ion should equal its formal charge (the valence sum rule). Deviations identify strained bonds, under-bonded oxygen sites (potential protonation sites), and unstable structures. The method is widely used in mineralogy and solid-state chemistry."],
-
-        ["problem", "Spinel (MgAl$_2$O$_4$) has Mg$^{2+}$ in tetrahedral sites (CN = 4) and Al$^{3+}$ in octahedral sites (CN = 6). Use Pauling's second rule to verify that the bond strengths reaching each O$^{2-}$ sum to 2. Then predict what happens in \"inverse spinel\" Fe$_3$O$_4$ (magnetite), where Fe$^{3+}$ occupies tetrahedral sites and both Fe$^{2+}$ and Fe$^{3+}$ occupy octahedral sites.", [
-          ["p", "Normal spinel (MgAl$_2$O$_4$): $s_{\\text{Mg}} = 2/4 = 1/2$. $s_{\\text{Al}} = 3/6 = 1/2$. Each O bonds to 1 Mg and 3 Al: $1 \\times 1/2 + 3 \\times 1/2 = 2$. Satisfied."],
-          ["p", "Inverse spinel (Fe$_3$O$_4$ = Fe$^{3+}$[Fe$^{2+}$Fe$^{3+}$]O$_4$):"],
-          ["p", "Tetrahedral Fe$^{3+}$: $s = 3/4$. Octahedral Fe$^{2+}$: $s = 2/6 = 1/3$. Octahedral Fe$^{3+}$: $s = 3/6 = 1/2$."],
-          ["p", "Each O bonds to 1 tetrahedral Fe$^{3+}$, and 3 octahedral Fe (mix of $2+$ and $3+$). Average octahedral $s = (1/3 + 1/2)/2 = 5/12$. Sum: $3/4 + 3 \\times 5/12 = 3/4 + 5/4 = 2$. Satisfied."],
-          ["p", "Magnetite is an inverse spinel because Fe$^{3+}$ (a $d^5$ ion with no crystal field stabilisation energy in either site) is flexible about its coordination, while Fe$^{2+}$ ($d^6$) has a strong octahedral preference from crystal field stabilisation. The mixed-valence octahedral site enables electron hopping between Fe$^{2+}$ and Fe$^{3+}$, making magnetite a good electrical conductor (resistivity $\\sim 10^{-4}$ $\\Omega \\cdot$ m) despite being an oxide."]
-        ]]
+        [
+          "h3",
+          "The bonding triangle"
+        ],
+        [
+          "p",
+          "Materials can be placed on a triangle whose vertices are ionic, covalent, and metallic bonding. NaCl sits near the ionic vertex. Diamond sits at the covalent vertex. Sodium metal sits at the metallic vertex. Most real materials sit somewhere inside."
+        ],
+        [
+          "p",
+          "GaAs: Gallium (electronegativity 1.81) and arsenic (2.18) have a small difference (0.37). The bonding is predominantly covalent with about 4% ionic character. But the small ionicity is enough to open up a direct band gap (1.42 eV) and make GaAs a far better optoelectronic material than purely covalent silicon (indirect gap, 1.12 eV)."
+        ],
+        [
+          "p",
+          "SiC: Si (1.90) and C (2.55), difference 0.65. About 12% ionic character. The partial ionicity contributes to SiC's very high hardness (9.5 on the Mohs scale) and chemical stability."
+        ],
+        [
+          "p",
+          "Transition metal carbides like TiC sit in the middle of the triangle. Ti-C bonds have ionic character (electronegativity difference 1.04), covalent character (strong directional bonding from Ti d-orbitals overlapping with C p-orbitals), and metallic character (TiC conducts electricity: resistivity $68$ $\\mu\\Omega \\cdot$ cm). The result is a material that is hard (Mohs 9-9.5), high-melting (3067 C), and electrically conducting."
+        ],
+        [
+          "h3",
+          "Pauling's electronegativity and percent ionic character"
+        ],
+        [
+          "p",
+          "Pauling defined electronegativity from bond energies. If the bond A-B were purely covalent, its energy would be approximately the geometric mean of the A-A and B-B bond energies. The extra energy $\\Delta$ of the A-B bond above this mean is attributed to ionic character:"
+        ],
+        [
+          "eq",
+          "\\Delta = D(A\\text{-}B) - \\sqrt{D(A\\text{-}A) \\cdot D(B\\text{-}B)}"
+        ],
+        [
+          "p",
+          "where $D$ is the bond dissociation energy in eV. Pauling set:"
+        ],
+        [
+          "eq",
+          "|\\chi_A - \\chi_B| = \\sqrt{\\Delta}"
+        ],
+        [
+          "p",
+          "With $\\chi_{\\text{F}} = 4.0$ as the reference, the entire scale follows. Hydrogen: 2.20. Oxygen: 3.44. Carbon: 2.55. Iron: 1.83. Caesium: 0.79."
+        ],
+        [
+          "p",
+          "The percent ionic character is approximated by:"
+        ],
+        [
+          "eq",
+          "\\% \\text{ionic} = \\left[1 - \\exp\\left(-\\frac{(\\chi_A - \\chi_B)^2}{4}\\right)\\right] \\times 100"
+        ],
+        [
+          "p",
+          "For NaCl ($\\Delta\\chi = 2.1$): 67% ionic. For HF ($\\Delta\\chi = 1.8$): 55% ionic. For SiO$_2$ ($\\Delta\\chi = 1.54$): 45% ionic. Even NaCl is not \"purely\" ionic."
+        ],
+        [
+          "callout",
+          "The ionic-covalent boundary",
+          "The traditional rule of thumb places the boundary at $\\Delta\\chi \\approx 1.7$ (about 50% ionic character). Below this, the bond is considered \"predominantly covalent\"; above, \"predominantly ionic\". But this is a continuum, not a sharp divide. The boundary matters less than understanding how properties change along it. Increasing ionicity generally increases coordination number (from 4 toward 6 or 8), decreases directional bonding, increases transparency, and increases brittleness."
+        ],
+        [
+          "h3",
+          "Pauling's rules for ionic structures"
+        ],
+        [
+          "p",
+          "For complex ionic structures (minerals, ceramics, most oxides), Pauling proposed five rules in 1929 that predict structure from ion sizes and charges. Eighty years on, they remain powerful."
+        ],
+        [
+          "p",
+          "<strong>Rule 1: The coordination polyhedron.</strong> A polyhedron of anions forms around each cation. The cation-anion distance is determined by the sum of ionic radii. The coordination number is determined by the radius ratio $r_c/r_a$. The critical ratios and their polyhedra:"
+        ],
+        [
+          "ul",
+          [
+            "$< 0.155$: linear (CN = 2)",
+            "$0.155$-$0.225$: triangle (CN = 3)",
+            "$0.225$-$0.414$: tetrahedron (CN = 4)",
+            "$0.414$-$0.732$: octahedron (CN = 6)",
+            "$0.732$-$1.0$: cube (CN = 8)"
+          ]
+        ],
+        [
+          "p",
+          "Example: in MgO, $r_{\\text{Mg}^{2+}}/r_{\\text{O}^{2-}} = 0.72/1.40 = 0.51$, predicting octahedral coordination (CN = 6). MgO adopts the rocksalt structure: confirmed."
+        ],
+        [
+          "p",
+          "<strong>Rule 2: Electrostatic valence principle.</strong> In a stable structure, the total electrostatic bond strength reaching an anion from all neighbouring cations equals (or nearly equals) the anion's charge. The electrostatic bond strength from one cation is $s = z_c/\\text{CN}$, where $z_c$ is the cation charge and CN its coordination number."
+        ],
+        [
+          "p",
+          "In rutile (TiO$_2$): Ti$^{4+}$ has CN = 6, so $s = 4/6 = 2/3$. Each O$^{2-}$ must receive bond strengths totalling 2, so it bonds to three Ti$^{4+}$ ions ($3 \\times 2/3 = 2$). This fixes the O coordination number at 3."
+        ],
+        [
+          "p",
+          "<strong>Rule 3: Shared edges and faces destabilise.</strong> Sharing edges between coordination polyhedra is less stable than sharing corners, and sharing faces is least stable. This is because shared elements bring cations closer together, increasing cation-cation repulsion. The effect is strongest for cations with high charge and low coordination number."
+        ],
+        [
+          "p",
+          "Rutile shares edges (each octahedron shares two edges with neighbours). Anatase (also TiO$_2$) shares more edges and is metastable. Corundum ($\\alpha$-Al$_2$O$_3$) shares faces between AlO$_6$ octahedra, but the low charge of Al$^{3+}$ and the large coordination number partially compensate."
+        ],
+        [
+          "p",
+          "<strong>Rule 4: Cations with high charge and small size avoid sharing.</strong> In structures containing multiple cation types, those with the highest charge and smallest radius tend to share as few polyhedral elements as possible. Si$^{4+}$ (small, high charge) nearly always occupies isolated tetrahedra in silicates. Al$^{3+}$ (lower charge) can share edges more readily."
+        ],
+        [
+          "p",
+          "<strong>Rule 5: The principle of parsimony.</strong> The number of distinct sites in a crystal structure tends to be small. A crystal with many chemically similar atoms tends to place them on equivalent sites rather than creating a zoo of slightly different environments."
+        ],
+        [
+          "h3",
+          "Application: the silicate minerals"
+        ],
+        [
+          "p",
+          "Silicate minerals illustrate Pauling's rules beautifully. Si$^{4+}$ ($r = 0.26$ \\AA) in O$^{2-}$ ($r = 1.40$ \\AA) gives $r_c/r_a = 0.19$, near the bottom of the tetrahedral range. Silicon is always 4-coordinated in silicates, sitting inside SiO$_4$ tetrahedra."
+        ],
+        [
+          "p",
+          "The electrostatic bond strength from Si to O is $4/4 = 1$. Since O$^{2-}$ needs a total of 2, each oxygen in a SiO$_4$ tetrahedron has one unit of bond strength \"remaining\" for other cations. This controls how tetrahedra link:"
+        ],
+        [
+          "ul",
+          [
+            "<strong>Nesosilicates</strong> (isolated tetrahedra): olivine (Mg,Fe)$_2$SiO$_4$. Each O bonds to Si and to Mg/Fe. Hard, dense, high melting.",
+            "<strong>Inosilicates</strong> (chains): pyroxenes (single chain, e.g., enstatite MgSiO$_3$), amphiboles (double chain). Chain direction gives anisotropic cleavage.",
+            "<strong>Phyllosilicates</strong> (sheets): micas, clays. Strong in-plane, weak between sheets. Perfect basal cleavage.",
+            "<strong>Tectosilicates</strong> (3D framework): quartz (SiO$_2$), feldspars. All oxygens are shared between two Si. Very stable, hard, high melting."
+          ]
+        ],
+        [
+          "derivation",
+          "Pauling's Rule 2 predicts the coordination of oxygen in perovskite (CaTiO$_3$).",
+          [
+            [
+              "p",
+              "In the ideal perovskite structure: Ca$^{2+}$ has CN = 12 (cuboctahedral), so $s_{\\text{Ca}} = 2/12 = 1/6$. Ti$^{4+}$ has CN = 6 (octahedral), so $s_{\\text{Ti}} = 4/6 = 2/3$."
+            ],
+            [
+              "p",
+              "Each O$^{2-}$ must receive bond strengths summing to 2. It bonds to 4 Ca$^{2+}$ and 2 Ti$^{4+}$:"
+            ],
+            [
+              "eq",
+              "4 \\times \\frac{1}{6} + 2 \\times \\frac{2}{3} = \\frac{2}{3} + \\frac{4}{3} = 2 \\quad \\checkmark"
+            ],
+            [
+              "p",
+              "The rule is satisfied exactly. This is characteristic of stable structures. When the sum departs from the anion charge (\"bond valence mismatch\"), the structure is strained or unstable, as quantified by the modern bond valence method developed by Brown and Altermatt."
+            ]
+          ]
+        ],
+        [
+          "h3",
+          "Beyond Pauling: the bond valence method"
+        ],
+        [
+          "p",
+          "Pauling's electrostatic bond strength treats all bonds to a given cation as equal. The bond valence method generalises this by making the bond strength depend on the actual bond length:"
+        ],
+        [
+          "eq",
+          "s_{ij} = \\exp\\left(\\frac{R_0 - d_{ij}}{b}\\right)"
+        ],
+        [
+          "p",
+          "where $d_{ij}$ is the measured bond length, $R_0$ is a tabulated parameter for each cation-anion pair, and $b \\approx 0.37$ \\AA. The sum of bond valences around each ion should equal its formal charge (the valence sum rule). Deviations identify strained bonds, under-bonded oxygen sites (potential protonation sites), and unstable structures. The method is widely used in mineralogy and solid-state chemistry."
+        ],
+        [
+          "problem",
+          "Spinel (MgAl$_2$O$_4$) has Mg$^{2+}$ in tetrahedral sites (CN = 4) and Al$^{3+}$ in octahedral sites (CN = 6). Use Pauling's second rule to verify that the bond strengths reaching each O$^{2-}$ sum to 2. Then predict what happens in \"inverse spinel\" Fe$_3$O$_4$ (magnetite), where Fe$^{3+}$ occupies tetrahedral sites and both Fe$^{2+}$ and Fe$^{3+}$ occupy octahedral sites.",
+          [
+            [
+              "p",
+              "Normal spinel (MgAl$_2$O$_4$): $s_{\\text{Mg}} = 2/4 = 1/2$. $s_{\\text{Al}} = 3/6 = 1/2$. Each O bonds to 1 Mg and 3 Al: $1 \\times 1/2 + 3 \\times 1/2 = 2$. Satisfied."
+            ],
+            [
+              "p",
+              "Inverse spinel (Fe$_3$O$_4$ = Fe$^{3+}$[Fe$^{2+}$Fe$^{3+}$]O$_4$):"
+            ],
+            [
+              "p",
+              "Tetrahedral Fe$^{3+}$: $s = 3/4$. Octahedral Fe$^{2+}$: $s = 2/6 = 1/3$. Octahedral Fe$^{3+}$: $s = 3/6 = 1/2$."
+            ],
+            [
+              "p",
+              "Each O bonds to 1 tetrahedral Fe$^{3+}$, and 3 octahedral Fe (mix of $2+$ and $3+$). Average octahedral $s = (1/3 + 1/2)/2 = 5/12$. Sum: $3/4 + 3 \\times 5/12 = 3/4 + 5/4 = 2$. Satisfied."
+            ],
+            [
+              "p",
+              "Magnetite is an inverse spinel because Fe$^{3+}$ (a $d^5$ ion with no crystal field stabilisation energy in either site) is flexible about its coordination, while Fe$^{2+}$ ($d^6$) has a strong octahedral preference from crystal field stabilisation. The mixed-valence octahedral site enables electron hopping between Fe$^{2+}$ and Fe$^{3+}$, making magnetite a good electrical conductor (resistivity $\\sim 10^{-4}$ $\\Omega \\cdot$ m) despite being an oxide."
+            ]
+          ]
+        ]
       ],
       "related": [
-        { "title": "Ionic Bonding", "url": "ionic-bonding" },
-        { "title": "Covalent Bonding", "url": "covalent-bonding" },
-        { "title": "Crystal Systems & Bravais Lattices", "url": "../crystallography/" }
+        {
+          "title": "Ionic Bonding",
+          "url": "ionic-bonding"
+        },
+        {
+          "title": "Covalent Bonding",
+          "url": "covalent-bonding"
+        },
+        {
+          "title": "Crystal Systems & Bravais Lattices",
+          "url": "../crystallography/"
+        }
       ]
     }
   ]

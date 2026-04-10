@@ -116,3 +116,6 @@ A styled fallback page when navigating to a module that doesn't exist yet.
 
 ### Favicon and Open Graph meta tags
 Site identity for browser tabs and link sharing.
+
+### Quantum Mechanics module
+- Move detailed electron configuration content (quantum numbers, aufbau, Hund's rule, filling exceptions) from bonding 2.1 into the QM module articles
