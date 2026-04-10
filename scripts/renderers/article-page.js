@@ -198,14 +198,6 @@ function buildArticleContent(articleId) {
         ${renderBody(mainBlocks)}
     `;
 
-    // Contribute prompt
-    html += `
-      <div class="article-contribute">
-        <span class="contribute-icon">\u270E</span>
-        <span>Spot something that could be improved? <strong>Highlight any text</strong> and submit a suggestion. Community contributions are reviewed and integrated into the article.</span>
-      </div>
-    `;
-
     // Related topics
     if (art.related && art.related.length > 0) {
       html += `

@@ -168,6 +168,13 @@ export async function renderSidenotes(articleSlug, articleBody, bakedComments) {
   if (!container) {
     container = document.createElement('div');
     container.className = 'sidenotes-container';
+
+    // Contribute prompt at top of margin
+    const prompt = document.createElement('div');
+    prompt.className = 'sidenote-prompt';
+    prompt.innerHTML = '<strong>Highlight any text</strong> to suggest an improvement';
+    container.appendChild(prompt);
+
     document.body.appendChild(container);
   }
 

@@ -537,33 +537,6 @@ a.article-breadcrumb:hover {
 .callout-label { margin-bottom: 12px; }
 .article-callout p { margin-bottom: 0; }
 
-/* --- Contribute prompt -------------------------------------------------- */
-
-.article-contribute {
-  margin-top: 48px;
-  padding: 14px 18px;
-  background: rgba(42, 47, 124, 0.04);
-  border-left: 2px solid rgba(42, 47, 124, 0.15);
-  font-family: 'DM Sans', sans-serif;
-  font-size: 13px;
-  color: #666;
-  line-height: 1.5;
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-}
-
-.contribute-icon {
-  font-size: 16px;
-  opacity: 0.4;
-  flex-shrink: 0;
-  margin-top: 1px;
-}
-
-.article-contribute strong {
-  color: #3a3d5a;
-}
-
 /* --- References --------------------------------------------------------- */
 
 .article-refs {

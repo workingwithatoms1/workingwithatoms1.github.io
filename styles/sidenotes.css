@@ -11,6 +11,21 @@
   z-index: 10;
 }
 
+/* --- Contribute prompt at top of margin ---------------------------------- */
+
+.sidenote-prompt {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.35);
+  line-height: 1.4;
+  padding-bottom: 16px;
+  margin-bottom: 8px;
+}
+
+.sidenote-prompt strong {
+  color: rgba(255, 255, 255, 0.55);
+}
+
 /* --- Individual sidenote ------------------------------------------------- */
 
 .sidenote {
