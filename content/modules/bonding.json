@@ -99,7 +99,7 @@
         [
           "callout",
           "Why Hooke's law works",
-          "The interatomic potential is not symmetric about $r_0$: the repulsive wall is steep, the attractive tail is gradual. Yet materials obey Hooke's law (linear elasticity) up to the yield point. The reason is scale. Elastic strains in metals are typically 0.1 to 0.5%, displacing atoms by less than 0.01 \\AA from equilibrium. At that scale, any smooth curve looks parabolic. The asymmetry is real, but atoms never explore enough of it to notice before the material yields or fractures. Linear elasticity is the harmonic approximation, and it works because bonds are stiff."
+          "The interatomic potential is not symmetric about $r_0$: the repulsive wall is steep, the attractive tail is gradual. Yet materials obey Hooke's law (linear elasticity) up to the yield point. The reason is scale. Elastic strains in metals are typically 0.1 to 0.5%, displacing atoms by less than 0.01 \u00c5 from equilibrium. At that scale, any smooth curve looks parabolic. The asymmetry is real, but atoms never explore enough of it to notice before the material yields or fractures. Linear elasticity is the harmonic approximation, and it works because bonds are stiff."
         ],
         [
           "h3",
@@ -144,11 +144,11 @@
         ],
         [
           "problem",
-          "The Lennard-Jones parameters for argon are $\\varepsilon = 0.0104$ eV and $\\sigma = 3.40$ \\AA. (a) Calculate the equilibrium spacing $r_0$. (b) Calculate the force constant $k$ at $r_0$ in N/m. (c) The elastic modulus of solid argon (FCC crystal, $a = 5.26$ \\AA) is approximately $E = k/(\\pi r_0)$ for a pair potential. Estimate $E$ and compare to diamond ($\\sim 1000$ GPa). What does this tell you about the relationship between bond type and mechanical properties?",
+          "The Lennard-Jones parameters for argon are $\\varepsilon = 0.0104$ eV and $\\sigma = 3.40$ \u00c5. (a) Calculate the equilibrium spacing $r_0$. (b) Calculate the force constant $k$ at $r_0$ in N/m. (c) The elastic modulus of solid argon (FCC crystal, $a = 5.26$ \u00c5) is approximately $E = k/(\\pi r_0)$ for a pair potential. Estimate $E$ and compare to diamond ($\\sim 1000$ GPa). What does this tell you about the relationship between bond type and mechanical properties?",
           [
             [
               "p",
-              "(a) $r_0 = 2^{1/6}\\sigma = 1.122 \\times 3.40 = 3.82$ \\AA."
+              "(a) $r_0 = 2^{1/6}\\sigma = 1.122 \\times 3.40 = 3.82$ \u00c5."
             ],
             [
               "p",
