@@ -156,7 +156,7 @@
 /* --- Anchor: highlighted text in the article ----------------------------- */
 
 .sidenote-anchor {
-  border-bottom: 2px solid #4d5cf2;
+  border-bottom: 1px solid #4d5cf2;
   cursor: pointer;
   transition: background 0.15s;
 }
