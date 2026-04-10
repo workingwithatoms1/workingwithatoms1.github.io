@@ -11,6 +11,14 @@
     {
       "els": [
         "Al",
+        "Mg"
+      ],
+      "file": "al-mg.json",
+      "ref": "COST 507 (Ansara, Dinsdale & Rand, 1998)"
+    },
+    {
+      "els": [
+        "Al",
         "Zn"
       ],
       "file": "al-zn.json",
@@ -26,11 +34,11 @@
     },
     {
       "els": [
-        "Al",
-        "Mg"
+        "Ti",
+        "Al"
       ],
-      "file": "al-mg.json",
-      "ref": "COST 507 (Ansara, Dinsdale & Rand, 1998)"
+      "file": "ti-al.json",
+      "ref": "Wang et al., CALPHAD 39 (2012) 31-38"
     }
   ]
 }

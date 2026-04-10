@@ -585,17 +585,20 @@ export function createPhaseDiagram(container, data, flipped = false) {
     ctx.fillText(el1, xS(toDisplay(0)), pad.t - 12);
     ctx.fillText(el2, xS(toDisplay(1)), pad.t - 12);
 
-    // Invariant reaction labels (below isotherms)
-    for (const iso of activeData.isotherms) {
+    // Invariant temperatures — only label if there's enough vertical space
+    // (skip if another isotherm is within 40px)
+    const isoYs = activeData.isotherms.map(iso => yS(iso.T));
+    for (let i = 0; i < activeData.isotherms.length; i++) {
+      const iso = activeData.isotherms[i];
+      const y = isoYs[i];
+      const tooClose = isoYs.some((y2, j) => j !== i && Math.abs(y2 - y) < 30);
+      if (tooClose) continue;
       const midX = xS((toDisplay(iso.x_start) + toDisplay(iso.x_end)) / 2);
-      ctx.font = '400 9px "DM Sans", sans-serif';
+      ctx.font = '500 9px "DM Sans", sans-serif';
       ctx.fillStyle = MUTED;
       ctx.textAlign = 'center';
       ctx.textBaseline = 'top';
-      ctx.fillText(iso.name, midX, yS(iso.T) + 4);
-      // Temperature label
-      ctx.font = '600 9px "DM Sans", sans-serif';
-      ctx.fillText(Math.round(iso.T) + ' K', midX, yS(iso.T) + 15);
+      ctx.fillText(Math.round(iso.T) + ' K', midX, yS(iso.T) + 4);
     }
 
     // Phase region labels
