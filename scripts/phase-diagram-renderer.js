@@ -641,8 +641,11 @@ export function createPhaseDiagram(container, data, flipped = false) {
           // Start from side of text, not centre
           const textW = ctx.measureText(lbl.text).width;
           let startX = px;
-          if (lbl.arrow_from === 'right') startX = px + textW / 2 + 4;
-          else if (lbl.arrow_from === 'left') startX = px - textW / 2 - 4;
+          let arrowDir = lbl.arrow_from;
+          if (flipped && arrowDir === 'right') arrowDir = 'left';
+          else if (flipped && arrowDir === 'left') arrowDir = 'right';
+          if (arrowDir === 'right') startX = px + textW / 2 + 4;
+          else if (arrowDir === 'left') startX = px - textW / 2 - 4;
           else startX = ax > px ? px + textW / 2 + 4 : px - textW / 2 - 4;
           const startY = py;
           const dx = ax - startX;
