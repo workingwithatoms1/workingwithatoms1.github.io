@@ -102,10 +102,6 @@
           "The interatomic potential is not symmetric about $r_0$. The repulsive wall is steep; the attractive tail is gradual. As temperature increases, atoms vibrate with greater amplitude, but they can extend further into the shallow attractive side than they can compress into the steep repulsive side. The average position shifts to larger $r$. This is thermal expansion, and it is a direct consequence of the asymmetry of the potential curve."
         ],
         [
-          "p",
-          "At typical engineering strains (a few percent), atoms barely move from $r_0$ and the potential is effectively symmetric (harmonic). The modulus is the same in tension and compression. The asymmetry only matters at large strains approaching bond breaking, which is relevant to fracture but not to elastic behaviour. The practical consequence of the asymmetry is thermal expansion, not a compression/tension modulus difference."
-        ],
-        [
           "h3",
           "What determines bond type"
         ],
