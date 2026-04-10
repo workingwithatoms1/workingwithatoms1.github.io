@@ -130,16 +130,16 @@ function handleVote(commentId) {
  *
  * @param {string} articleSlug — e.g. 'thermodynamics/carnot-cycle'
  * @param {HTMLElement} articleBody — the .article-body element
+ * @param {Array} bakedComments — pre-baked comments from the article JSON (optional)
  */
-export async function renderSidenotes(articleSlug, articleBody) {
-  if (!APPS_SCRIPT_URL || !articleBody) return;
+export async function renderSidenotes(articleSlug, articleBody, bakedComments) {
+  if (!articleBody) return;
 
   // Create the sidenotes container in the margin
   let container = document.querySelector('.sidenotes-container');
   if (!container) {
     container = document.createElement('div');
     container.className = 'sidenotes-container';
-    // Position relative to the article card
     const card = articleBody.closest('.article-card');
     if (card) {
       card.style.position = 'relative';
@@ -148,25 +148,37 @@ export async function renderSidenotes(articleSlug, articleBody) {
       articleBody.parentElement.appendChild(container);
     }
   }
-  container.innerHTML = '';
 
-  // Fetch approved comments
-  let comments;
-  try {
-    const res = await fetch(`${APPS_SCRIPT_URL}?slug=${encodeURIComponent(articleSlug)}`);
-    const data = await res.json();
-    if (data.status !== 'ok' || !data.comments) return;
-    comments = data.comments;
-  } catch (e) {
-    // Silently fail — sidenotes are non-essential
-    return;
+  // Phase 1: render baked-in comments instantly
+  let knownIds = new Set();
+  if (bakedComments && bakedComments.length > 0) {
+    renderComments(bakedComments, articleBody, container, knownIds);
   }
 
-  if (comments.length === 0) return;
+  // Phase 2: fetch fresh comments from API in background, merge any new ones
+  if (APPS_SCRIPT_URL) {
+    try {
+      const res = await fetch(`${APPS_SCRIPT_URL}?slug=${encodeURIComponent(articleSlug)}`);
+      const data = await res.json();
+      if (data.status === 'ok' && data.comments) {
+        const fresh = data.comments.filter(c => !knownIds.has(c.id));
+        if (fresh.length > 0) {
+          renderComments(fresh, articleBody, container, knownIds);
+        }
+      }
+    } catch (e) {
+      // Silently fail
+    }
+  }
+}
+
+function renderComments(comments, articleBody, container, knownIds) {
+  if (!comments || comments.length === 0) return;
 
   // Position each sidenote at the anchor text location
-  const positions = [];
   for (const comment of comments) {
+    if (knownIds.has(comment.id)) continue;
+    knownIds.add(comment.id);
     const anchor = findTextAnchor(articleBody, comment.selectedText);
     const noteEl = createSidenoteEl(comment);
 

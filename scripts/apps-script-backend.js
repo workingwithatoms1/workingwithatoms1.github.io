@@ -90,6 +90,7 @@ function doGet(e) {
 
       comments.push({
         id: rows[i][10] || '',       // Column K
+        slug: rows[i][2] || '',      // Column C
         selectedText: rows[i][3],     // Column D
         comment: rows[i][5],          // Column F
         name: rows[i][6] || 'Anonymous', // Column G

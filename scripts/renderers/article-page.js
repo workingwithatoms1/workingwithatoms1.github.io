@@ -266,7 +266,9 @@ function buildArticleContent(articleId) {
   const articleBody = innerEl.querySelector('.article-body');
   if (articleBody) {
     const slug = moduleData.module.id + '/' + articleId;
-    renderSidenotes(slug, articleBody);
+    const art = moduleData.articles.find(a => a.id === articleId);
+    const bakedComments = art && art.comments ? art.comments : [];
+    renderSidenotes(slug, articleBody, bakedComments);
   }
 }
 
