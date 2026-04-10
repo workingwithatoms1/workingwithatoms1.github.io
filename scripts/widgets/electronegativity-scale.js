@@ -45,8 +45,8 @@ export function create(container) {
   function render() {
     const { ctx: c, w, h } = C.setupCanvas(canvas, container, 0.22);
 
-    const pad = { l: 40, r: 30, t: 32, b: 28 };
-    const barY = pad.t + 18;
+    const pad = { l: 40, r: 30, t: 44, b: 28 };
+    const barY = pad.t + 12;
     const barH = 12;
     const xS = C.scale(0.5, 4.2, pad.l, w - pad.r);
 
@@ -57,7 +57,7 @@ export function create(container) {
     c.font = '600 11px "DM Sans", sans-serif';
     c.fillStyle = '#3a3d5a';
     c.textAlign = 'left';
-    c.fillText('Pauling Electronegativity', pad.l, pad.t - 4);
+    c.fillText('Pauling Electronegativity', pad.l, 14);
 
     // Gradient bar
     const grad = c.createLinearGradient(xS(0.5), 0, xS(4.2), 0);
