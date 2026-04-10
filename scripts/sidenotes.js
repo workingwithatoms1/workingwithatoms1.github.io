@@ -21,20 +21,29 @@ function findTextAnchor(container, selectedText) {
     const idx = node.textContent.indexOf(searchText.substring(0, 40));
     if (idx === -1) continue;
 
-    // Wrap the matched text in a span for precise highlighting
-    const range = document.createRange();
-    range.setStart(node, idx);
-    range.setEnd(node, Math.min(idx + selectedText.length, node.textContent.length));
+    try {
+      // Wrap the matched text in a span for precise highlighting
+      const range = document.createRange();
+      range.setStart(node, idx);
+      range.setEnd(node, Math.min(idx + selectedText.length, node.textContent.length));
 
-    const span = document.createElement('span');
-    span.className = 'sidenote-anchor';
-    range.surroundContents(span);
+      const span = document.createElement('span');
+      span.className = 'sidenote-anchor';
+      range.surroundContents(span);
 
-    const rect = span.getBoundingClientRect();
-    return {
-      top: rect.top + window.scrollY,
-      span: span,
-    };
+      const rect = span.getBoundingClientRect();
+      return {
+        top: rect.top + window.scrollY,
+        span: span,
+      };
+    } catch (e) {
+      // surroundContents fails if range crosses elements — fall back to parent position
+      const rect = node.parentElement.getBoundingClientRect();
+      return {
+        top: rect.top + window.scrollY,
+        span: null,
+      };
+    }
   }
 
   return null;
@@ -214,7 +223,6 @@ function renderComments(comments, articleBody, container, knownIds) {
       }
     }
 
-    positions.push({ el: noteEl, top: anchor ? anchor.top : null, comment });
     container.appendChild(noteEl);
   }
 
