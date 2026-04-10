@@ -75,12 +75,26 @@ async function main() {
     let changed = false;
 
     for (const art of data.articles) {
-      const articleComments = (bySlug[moduleId] && bySlug[moduleId][art.id]) || [];
-      const existing = JSON.stringify(art.comments || []);
-      const fresh = JSON.stringify(articleComments);
+      const freshComments = (bySlug[moduleId] && bySlug[moduleId][art.id]) || [];
+      const existingComments = art.comments || [];
 
-      if (existing !== fresh) {
-        art.comments = articleComments;
+      // Build a map of existing statuses to preserve "integrated"
+      const statusMap = {};
+      for (const c of existingComments) {
+        if (c.id && c.status) statusMap[c.id] = c.status;
+      }
+
+      // Merge: use fresh data but preserve local status
+      const merged = freshComments.map(c => {
+        if (statusMap[c.id]) c.status = statusMap[c.id];
+        return c;
+      });
+
+      const existingJSON = JSON.stringify(existingComments);
+      const mergedJSON = JSON.stringify(merged);
+
+      if (existingJSON !== mergedJSON) {
+        art.comments = merged;
         changed = true;
       }
     }
