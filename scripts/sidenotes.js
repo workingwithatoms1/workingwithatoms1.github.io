@@ -67,12 +67,17 @@ function findTextAnchor(container, selectedText) {
  */
 function createSidenoteEl(comment) {
   const note = document.createElement('div');
-  note.className = 'sidenote';
+  const isIntegrated = comment.status === 'integrated';
+  note.className = 'sidenote' + (isIntegrated ? ' integrated' : '');
   note.dataset.commentId = comment.id;
 
-  const previewText = truncate(comment.comment, 30);
+  const previewText = isIntegrated ? '\u2713 Addressed' : truncate(comment.comment, 30);
   const quote = comment.selectedText
     ? `<div class="sidenote-quote">\u201C${truncate(comment.selectedText, 60)}\u201D</div>`
+    : '';
+
+  const statusBadge = isIntegrated
+    ? '<div class="sidenote-status">\u2713 Addressed</div>'
     : '';
 
   note.innerHTML = `
@@ -81,6 +86,7 @@ function createSidenoteEl(comment) {
       <span class="sidenote-preview">${escapeHtml(previewText)}</span>
     </div>
     <div class="sidenote-expanded">
+      ${statusBadge}
       ${quote}
       <div class="sidenote-body">${escapeHtml(comment.comment)}</div>
       <div class="sidenote-meta">
@@ -214,6 +220,9 @@ function renderComments(comments, articleBody, container, knownIds) {
       // Link the anchor span to the sidenote
       if (anchor.span) {
         anchor.span.dataset.noteId = comment.id;
+        if (comment.status === 'integrated') {
+          anchor.span.classList.add('integrated');
+        }
         // Clicking anchor text opens the sidenote
         anchor.span.addEventListener('click', () => {
           container.querySelectorAll('.sidenote.open').forEach(n => n.classList.remove('open'));

@@ -400,7 +400,8 @@
           "selectedText": "Picture a deck of cards with an extra half-card slipped in from one edge.",
           "comment": "A schematic would be helpful here.",
           "name": "Jack",
-          "votes": 0
+          "votes": 0,
+          "status": "integrated"
         }
       ]
     },
