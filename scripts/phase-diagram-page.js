@@ -69,8 +69,37 @@ async function init() {
   const footer = document.querySelector('footer');
   if (footer) footer.style.display = '';
 
-  // Current renderer
+  // Current renderer state
   let currentRenderer = null;
+  let currentData = null;
+  let currentFlipped = false;
+
+  function renderDiagram() {
+    if (!currentData) return;
+    diagramContainer.innerHTML = '';
+    diagramContainer.style.display = '';
+    diagramContainer.style.position = 'relative';
+
+    // Flip button in top right of diagram container
+    const flipBtn = document.createElement('button');
+    flipBtn.className = 'pd-flip-btn';
+    flipBtn.title = 'Swap axes';
+    flipBtn.textContent = '\u21CC';
+    flipBtn.addEventListener('click', () => {
+      currentFlipped = !currentFlipped;
+      if (currentRenderer) currentRenderer.destroy();
+      renderDiagram();
+      // Update URL
+      const [a, b] = currentData.system.split('-');
+      const newEl1 = currentFlipped ? b : a;
+      const newEl2 = currentFlipped ? a : b;
+      history.replaceState(null, '', '#' + newEl1 + '-' + newEl2);
+    });
+    diagramContainer.appendChild(flipBtn);
+
+    if (currentRenderer) currentRenderer.destroy();
+    currentRenderer = createPhaseDiagram(diagramContainer, currentData, currentFlipped);
+  }
 
   function onSelect(el1, el2, skipHistory) {
     const key = [el1, el2].sort().join('-');
@@ -102,8 +131,9 @@ async function init() {
     fetch(ROOT + 'content/phase-diagrams/' + sys.file)
       .then(r => r.json())
       .then(data => {
-        diagramContainer.innerHTML = '';
-        currentRenderer = createPhaseDiagram(diagramContainer, data, flipped);
+        currentData = data;
+        currentFlipped = flipped;
+        renderDiagram();
         diagramContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       })
       .catch(() => {

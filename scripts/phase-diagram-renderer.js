@@ -169,27 +169,14 @@ export function createPhaseDiagram(container, data, flipped = false) {
     labels: data.labels,
   };
 
-  // Title with flip button
+  // Title
   const header = document.createElement('div');
   header.className = 'pd-header';
   header.innerHTML = `
-    <h2 class="pd-title">${el1}\u2013${el2} Binary Phase Diagram
-      <button class="pd-flip-btn" title="Swap axes">\u21CC</button>
-    </h2>
+    <h2 class="pd-title">${el1}\u2013${el2} Binary Phase Diagram</h2>
     <p class="pd-ref">${data.reference || ''}</p>
   `;
   container.appendChild(header);
-
-  let destroyFn = null;
-  header.querySelector('.pd-flip-btn').addEventListener('click', () => {
-    if (destroyFn) destroyFn();
-    const newRenderer = createPhaseDiagram(container, data, !flipped);
-    destroyFn = newRenderer.destroy;
-    // Update URL hash
-    const newEl1 = flipped ? jsonEl1 : jsonEl2;
-    const newEl2 = flipped ? jsonEl2 : jsonEl1;
-    history.replaceState(null, '', '#' + newEl1 + '-' + newEl2);
-  });
 
   // Stable/metastable toggle (only for Fe-C style diagrams)
   if (data.metastable) {
