@@ -72,10 +72,15 @@ async function init() {
   // Current renderer
   let currentRenderer = null;
 
-  function onSelect(el1, el2) {
+  function onSelect(el1, el2, skipHistory) {
     const key = [el1, el2].sort().join('-');
     const sys = fileMap[key];
     if (!sys) return;
+
+    // Update URL hash for sharing
+    if (!skipHistory) {
+      history.pushState({ system: key }, '', '#' + key);
+    }
 
     // Show loading state
     diagramContainer.style.display = '';
@@ -100,7 +105,19 @@ async function init() {
       });
   }
 
-  createPeriodicTable(ptContainer, availablePairs, onSelect);
+  const pt = createPeriodicTable(ptContainer, availablePairs, onSelect);
+
+  // Load system from URL hash (e.g. #Al-Zn or #Fe-C)
+  function loadFromHash() {
+    const hash = window.location.hash.slice(1);
+    if (hash && availablePairs.has(hash)) {
+      const [a, b] = hash.split('-');
+      onSelect(a, b, true);
+    }
+  }
+
+  loadFromHash();
+  window.addEventListener('popstate', loadFromHash);
 }
 
 init();
