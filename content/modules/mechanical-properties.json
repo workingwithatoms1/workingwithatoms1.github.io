@@ -501,7 +501,7 @@
       "intro": "Hardness testing is the most common mechanical test in industry. It is fast, nearly non-destructive and requires minimal specimen preparation. A hard indenter is pressed into the surface, and the size or depth of the impression reveals the material's resistance to plastic deformation.",
       "body": [
         ["h3", "What hardness measures"],
-        ["p", "Hardness is not a fundamental material property in the way that Young's modulus or yield stress is. It is a composite response that depends on elastic modulus, yield strength, work hardening and friction between indenter and surface. Nonetheless, hardness correlates well with yield strength and UTS, and it is far easier to measure."],
+        ["p", "Hardness is a composite response rather than a fundamental property like Young's modulus or yield stress. It that depends on elastic modulus, yield strength, work hardening and friction between indenter and surface. Nonetheless, hardness correlates well with yield strength and UTS, and it is far easier to measure."],
         ["p", "The basic idea is the same for all methods: press an indenter of known geometry into the surface with a known force, and measure the size of the resulting indent."],
 
         ["h3", "Brinell hardness (HB)"],

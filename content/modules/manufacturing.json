@@ -90,7 +90,7 @@
       "intro": "Casting gives shape. Deformation processing gives shape and microstructure. When metal is rolled, forged or extruded, the grains are refined, porosity is closed and the texture is controlled. The result is a wrought product with properties that cast metal cannot match. The physics is straightforward: apply enough stress to exceed the yield strength, and the metal flows.",
       "body": [
         ["h3", "Hot and cold working"],
-        ["p", "The boundary between hot and cold working is not a temperature. It is a fraction of the melting point. Hot working occurs above about 0.5$T_m$ (in kelvin), where dynamic recovery and recrystallisation soften the material as fast as deformation hardens it. Cold working occurs below about 0.3$T_m$, where dislocation accumulation dominates and the metal strain-hardens."],
+        ["p", "The boundary between hot and cold working is defined not by a fixed temperature but by a fraction of the melting point. Hot working occurs above about 0.5$T_m$ (in kelvin), where dynamic recovery and recrystallisation soften the material as fast as deformation hardens it. Cold working occurs below about 0.3$T_m$, where dislocation accumulation dominates and the metal strain-hardens."],
         ["p", "Lead ($T_m = 327°$C, or 600 K) recrystallises at room temperature (300 K = 0.5$T_m$). Deforming lead at 20$°$C is hot working. Steel ($T_m \\approx 1500°$C) must be heated above about 600$°$C before hot working begins. The distinction matters because hot-worked metal has equiaxed, recrystallised grains (low residual stress, moderate strength), while cold-worked metal has elongated, heavily dislocated grains (high residual stress, high strength, low ductility)."],
 
         ["h3", "Rolling"],

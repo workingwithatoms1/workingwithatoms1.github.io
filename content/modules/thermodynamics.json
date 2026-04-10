@@ -1834,7 +1834,7 @@
         ],
         [
           "p",
-          "The chemical potentials of all components in a mixture are not independent. They are linked by the Gibbs-Duhem equation:"
+          "The chemical potentials of all components in a mixture are linked by the Gibbs-Duhem equation:"
         ],
         [
           "eq",

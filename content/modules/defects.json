@@ -102,7 +102,7 @@
         ],
         [
           "p",
-          "Foreign interstitials are far more common and far more important. Small atoms (carbon, nitrogen, boron, hydrogen) fit into the interstices of metallic lattices with much lower energy penalties. In BCC iron, carbon atoms sit in octahedral interstitial sites. The maximum solubility of carbon in BCC iron (ferrite) is only 0.022 wt% at 727\u00b0C, because the octahedral site in BCC is small and asymmetric: the carbon atom distorts the lattice tetragonally. In FCC iron (austenite), the octahedral holes are larger and more symmetric, allowing up to 2.14 wt% carbon at 1147\u00b0C."
+          "Foreign interstitials are far more common and far more important. Small atoms (carbon, nitrogen, boron, hydrogen) fit into the interstices of metallic lattices with much lower energy penalties. In BCC iron, carbon atoms sit in octahedral interstitial sites. The maximum solubility of carbon in BCC iron (ferrite) is only 0.022 wt% at 727°C, because the octahedral site in BCC is small and asymmetric: the carbon atom distorts the lattice tetragonally. In FCC iron (austenite), the octahedral holes are larger and more symmetric, allowing up to 2.14 wt% carbon at 1147°C."
         ],
         [
           "p",
@@ -270,7 +270,7 @@
         ],
         [
           "p",
-          "Most real dislocations are neither pure edge nor pure screw. They have $\\mathbf{b}$ at some angle to the dislocation line, making them mixed character. A dislocation loop in an FCC crystal is a closed ring of dislocation line with a single Burgers vector. At one point on the loop, the line direction is parallel to $\\mathbf{b}$ (screw character). At the diametrically opposite point, it is also screw, but of opposite sign. At the points 90\u00b0 away, the line is perpendicular to $\\mathbf{b}$ (edge character). In between, the character is mixed."
+          "Most real dislocations are neither pure edge nor pure screw. They have $\\mathbf{b}$ at some angle to the dislocation line, making them mixed character. A dislocation loop in an FCC crystal is a closed ring of dislocation line with a single Burgers vector. At one point on the loop, the line direction is parallel to $\\mathbf{b}$ (screw character). At the diametrically opposite point, it is also screw, but of opposite sign. At the points 90° away, the line is perpendicular to $\\mathbf{b}$ (edge character). In between, the character is mixed."
         ],
         [
           "p",
@@ -400,8 +400,21 @@
           "selectedText": "Picture a deck of cards with an extra half-card slipped in from one edge.",
           "comment": "A schematic would be helpful here.",
           "name": "Jack",
-          "votes": 0,
-          "status": "integrated"
+          "votes": 0
+        },
+        {
+          "id": "a0412f09",
+          "selectedText": "σ \r\nxx\r\n​\r\n =− \r\n2π(1−ν)\r\nGb\r\n​\r\n  \r\n(x \r\n2\r\n +y \r\n2\r\n ) \r\n2\r\n \r\ny(3x \r\n2\r\n +y \r\n2\r\n )\r\n​",
+          "comment": "Would be nice to have a derivation of this that's expandable/collapsible.",
+          "name": "Jack A",
+          "votes": 0
+        },
+        {
+          "id": "00ce66ae",
+          "selectedText": "(principally by Frank-Read sources).",
+          "comment": "Some micrographs of these would be great.",
+          "name": "Anonymous",
+          "votes": 0
         }
       ]
     },
@@ -423,7 +436,7 @@
         ],
         [
           "p",
-          "The misorientation between two grains can range from a fraction of a degree to tens of degrees. Low-angle grain boundaries (misorientation below about 10 to 15\u00b0) can be described as arrays of dislocations. A tilt boundary is a wall of parallel edge dislocations; a twist boundary is a grid of screw dislocations. The spacing $D$ between dislocations in a symmetric tilt boundary is related to the misorientation angle $\\theta$ by:"
+          "The misorientation between two grains can range from a fraction of a degree to tens of degrees. Low-angle grain boundaries (misorientation below about 10 to 15°) can be described as arrays of dislocations. A tilt boundary is a wall of parallel edge dislocations; a twist boundary is a grid of screw dislocations. The spacing $D$ between dislocations in a symmetric tilt boundary is related to the misorientation angle $\\theta$ by:"
         ],
         [
           "eq",
@@ -431,11 +444,11 @@
         ],
         [
           "p",
-          "where $\\theta$ is in radians. For copper with $b = 0.256$ nm and $\\theta = 2\u00b0$ (0.035 rad), $D = 7.3$ nm. You can image these dislocation arrays directly by transmission electron microscopy."
+          "where $\\theta$ is in radians. For copper with $b = 0.256$ nm and $\\theta = 2°$ (0.035 rad), $D = 7.3$ nm. You can image these dislocation arrays directly by transmission electron microscopy."
         ],
         [
           "p",
-          "High-angle grain boundaries (misorientation above about 15\u00b0) cannot be usefully described as dislocation arrays. The boundary region is a disordered layer roughly 2 to 3 atomic spacings thick, with a structure that depends on the specific misorientation and boundary plane. Certain special boundaries, called coincidence site lattice (CSL) boundaries, have an unusually high fraction of lattice sites in coincidence across the interface. The $\\Sigma 3$ boundary (60\u00b0 rotation about $\\langle 111 \\rangle$) is the coherent twin boundary, which has very low energy (about 20 mJ/m$^2$ in copper, compared to 625 mJ/m$^2$ for a general high-angle boundary)."
+          "High-angle grain boundaries (misorientation above about 15°) cannot be usefully described as dislocation arrays. The boundary region is a disordered layer roughly 2 to 3 atomic spacings thick, with a structure that depends on the specific misorientation and boundary plane. Certain special boundaries, called coincidence site lattice (CSL) boundaries, have an unusually high fraction of lattice sites in coincidence across the interface. The $\\Sigma 3$ boundary (60° rotation about $\\langle 111 \\rangle$) is the coherent twin boundary, which has very low energy (about 20 mJ/m$^2$ in copper, compared to 625 mJ/m$^2$ for a general high-angle boundary)."
         ],
         [
           "h3",
@@ -451,7 +464,7 @@
         ],
         [
           "p",
-          "where $\\gamma_0$ and $A$ are material constants. The energy rises with misorientation, reaching a plateau near 15\u00b0 that corresponds to the general high-angle boundary energy. For copper, $\\gamma_{\\text{gb}} \\approx 625$ mJ/m$^2$; for aluminium, about 324 mJ/m$^2$."
+          "where $\\gamma_0$ and $A$ are material constants. The energy rises with misorientation, reaching a plateau near 15° that corresponds to the general high-angle boundary energy. For copper, $\\gamma_{\\text{gb}} \\approx 625$ mJ/m$^2$; for aluminium, about 324 mJ/m$^2$."
         ],
         [
           "p",

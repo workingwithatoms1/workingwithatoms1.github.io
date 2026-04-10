@@ -228,7 +228,7 @@
       "title": "Particle & Short-Fibre Composites",
       "description": "How discontinuous reinforcements stiffen and strengthen a matrix, and the mechanics of load transfer at finite aspect ratio.",
       "readingTime": "12 min",
-      "intro": "Most composites by volume are not continuous-fibre laminates. They are concrete, filled polymers, metal-matrix composites with particles or chopped fibres. The mechanics of short reinforcements is fundamentally different from continuous fibres because the reinforcement has ends, and load must be transferred through shear at the interface.",
+      "intro": "Most composites by volume are concrete, filled polymers, metal-matrix composites with particles or chopped fibres. The mechanics of short reinforcements is fundamentally different from continuous fibres because the reinforcement has ends, and load must be transferred through shear at the interface.",
       "body": [
         ["h3", "The shear-lag model"],
         ["p", "A short fibre embedded in a matrix cannot carry load at its ends. Load is transferred from the matrix to the fibre by shear stress along the fibre-matrix interface. The stress in the fibre builds up from zero at each end to a maximum in the middle. The shear-lag model, first developed by Cox in 1952, quantifies this."],
