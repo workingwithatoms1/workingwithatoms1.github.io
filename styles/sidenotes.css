@@ -29,18 +29,19 @@
 }
 
 .sidenote-dot {
-  width: 7px;
-  height: 7px;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.6);
+  background: #fff;
   flex-shrink: 0;
-  transition: background 0.15s;
+  transition: box-shadow 0.15s;
 }
 
 .sidenote:hover .sidenote-dot,
 .sidenote.hover .sidenote-dot {
-  background: #fff;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
 }
+
 
 .sidenote-preview {
   font-family: 'DM Sans', sans-serif;
