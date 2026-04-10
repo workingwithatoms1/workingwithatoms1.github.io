@@ -15,15 +15,17 @@
 
 .sidenote-prompt {
   font-family: 'DM Sans', sans-serif;
-  font-size: 11px;
-  color: rgba(255, 255, 255, 0.35);
-  line-height: 1.4;
-  padding-bottom: 16px;
-  margin-bottom: 8px;
+  font-size: 13px;
+  color: #1a1d3a;
+  line-height: 1.5;
+  background: #fff;
+  padding: 12px 14px;
+  margin-bottom: 16px;
+  border-left: 2px solid #2a2f7c;
 }
 
 .sidenote-prompt strong {
-  color: rgba(255, 255, 255, 0.55);
+  color: #2a2f7c;
 }
 
 /* --- Individual sidenote ------------------------------------------------- */
