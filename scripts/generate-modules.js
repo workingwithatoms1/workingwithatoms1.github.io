@@ -228,6 +228,7 @@ const pageShell = (rootPath, initScript) => `<!DOCTYPE html>
   <link rel="stylesheet" href="${rootPath}styles/typography.css">
   <link rel="stylesheet" href="${rootPath}styles/layout.css">
   <link rel="stylesheet" href="${rootPath}styles/components.css">
+  <link rel="stylesheet" href="${rootPath}styles/sidenotes.css">
 </head>
 <body>
   <canvas id="siteBgCanvas"></canvas>

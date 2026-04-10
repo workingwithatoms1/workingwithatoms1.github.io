@@ -5,6 +5,7 @@
    ========================================================================== */
 
 import { createPageShell, fetchModule, loadKaTeX } from './page-shell.js';
+import { renderSidenotes } from '../sidenotes.js';
 
 // Persistent references — survive across article swaps
 let innerEl;
@@ -260,6 +261,13 @@ function buildArticleContent(articleId) {
   processMath();
   initWidgets();
   initDerivationToggles();
+
+  // Load and render community sidenotes
+  const articleBody = innerEl.querySelector('.article-body');
+  if (articleBody) {
+    const slug = moduleData.module.id + '/' + articleId;
+    renderSidenotes(slug, articleBody);
+  }
 }
 
 /**
