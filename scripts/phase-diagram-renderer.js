@@ -9,6 +9,26 @@ import { setupCanvas, scale, BLUE, DARK, MUTED, LABEL_FONT, TICK_FONT, MAX_DPR }
 const CURVE_COLOR = '#1a1d3a';
 const CURVE_WIDTH = 1.8;
 const SNAP_PT = 28;
+
+// Atomic masses for mol↔wt% conversion
+const ATOMIC_MASS = {
+  'Al':26.982,'B':10.81,'C':12.011,'Ce':140.12,'Cr':51.996,'Cu':63.546,
+  'Fe':55.845,'Hf':178.49,'Li':6.941,'Mg':24.305,'Mn':54.938,'Mo':95.95,
+  'Nb':92.906,'Nd':144.24,'Ni':58.693,'Si':28.086,'Sn':118.71,'Ta':180.95,
+  'Ti':47.867,'V':50.942,'W':183.84,'Y':88.906,'Zn':65.38,'Zr':91.224,
+};
+
+function molToWt(x, mA, mB) {
+  if (x <= 0) return 0;
+  if (x >= 1) return 1;
+  return (x * mB) / (x * mB + (1 - x) * mA);
+}
+
+function wtToMol(w, mA, mB) {
+  if (w <= 0) return 0;
+  if (w >= 1) return 1;
+  return (w / mB) / (w / mB + (1 - w) / mA);
+}
 const SNAP_CURVE = 18;
 const MARKER_RED = '#8b2252';
 const MARKER_BLUE = BLUE;
@@ -30,12 +50,12 @@ function interp(pts, T) {
 /**
  * Find snap target near mouse position.
  */
-function findSnap(data, mx, my, xS, yS) {
+function findSnap(data, mx, my, xS, yS, toDisp, fromDisp) {
   // Check special points first (larger catch radius)
   let bestPt = null;
   let bestPtD = SNAP_PT;
   for (const sp of data.special_points) {
-    const dx = xS(sp.x) - mx;
+    const dx = xS(toDisp(sp.x)) - mx;
     const dy = yS(sp.T) - my;
     const dist = Math.sqrt(dx * dx + dy * dy);
     if (dist < bestPtD) {
@@ -45,9 +65,10 @@ function findSnap(data, mx, my, xS, yS) {
   }
   if (bestPt) {
     return {
-      px: xS(bestPt.x), py: yS(bestPt.T),
+      px: xS(toDisp(bestPt.x)), py: yS(bestPt.T),
       xVal: bestPt.x, T: bestPt.T,
-      name: bestPt.name, type: bestPt.type
+      name: bestPt.name, type: bestPt.type,
+      reaction: bestPt.reaction || null
     };
   }
 
@@ -58,11 +79,11 @@ function findSnap(data, mx, my, xS, yS) {
   for (const curve of data.curves) {
     const xOn = interp(curve.pts, T);
     if (xOn === null) continue;
-    const d = Math.abs(xS(xOn) - mx);
+    const d = Math.abs(xS(toDisp(xOn)) - mx);
     if (d < bestCD) {
       bestCD = d;
       bestC = {
-        px: xS(xOn), py: yS(T),
+        px: xS(toDisp(xOn)), py: yS(T),
         xVal: xOn, T,
         name: curve.name, type: 'boundary'
       };
@@ -71,13 +92,13 @@ function findSnap(data, mx, my, xS, yS) {
 
   // Check isotherms
   for (const iso of data.isotherms) {
-    const xM = xS.inv(mx);
-    if (Math.abs(yS(iso.T) - my) < 10 && xM >= iso.x_start && xM <= iso.x_end) {
+    const xMol = fromDisp(xS.inv(mx));
+    if (Math.abs(yS(iso.T) - my) < 10 && xMol >= iso.x_start && xMol <= iso.x_end) {
       const iD = Math.abs(yS(iso.T) - my);
       if (!bestC || iD < bestCD) {
         return {
           px: mx, py: yS(iso.T),
-          xVal: xM, T: iso.T,
+          xVal: xMol, T: iso.T,
           name: iso.name + ' isotherm', type: 'boundary'
         };
       }
@@ -90,9 +111,10 @@ function findSnap(data, mx, my, xS, yS) {
 /**
  * Draw a smooth curve through points using Catmull-Rom to cubic bezier.
  */
-function drawSmoothCurve(ctx, pts, xS, yS, closed) {
+function drawSmoothCurve(ctx, pts, xS, yS, closed, xTransform) {
   if (pts.length < 2) return;
-  const P = pts.map(([x, t]) => [xS(x), yS(t)]);
+  const tx = xTransform || (x => x);
+  const P = pts.map(([x, t]) => [xS(tx(x)), yS(t)]);
 
   ctx.beginPath();
   ctx.moveTo(P[0][0], P[0][1]);
@@ -128,6 +150,23 @@ export function createPhaseDiagram(container, data) {
   // Parse system elements
   const [el1, el2] = data.system.split('-');
 
+  // Active dataset (supports stable/metastable toggle)
+  // Default to metastable if available
+  let isMetastable = !!data.metastable;
+  let activeData = isMetastable ? {
+    curves: data.metastable.curves,
+    special_points: data.metastable.special_points,
+    isotherms: data.metastable.isotherms,
+    labels: data.metastable.labels,
+    xMin: data.metastable.xMin,
+    xMax: data.metastable.xMax,
+  } : {
+    curves: data.curves,
+    special_points: data.special_points,
+    isotherms: data.isotherms,
+    labels: data.labels,
+  };
+
   // Title
   const header = document.createElement('div');
   header.className = 'pd-header';
@@ -136,6 +175,47 @@ export function createPhaseDiagram(container, data) {
     <p class="pd-ref">${data.reference || ''}</p>
   `;
   container.appendChild(header);
+
+  // Stable/metastable toggle (only for Fe-C style diagrams)
+  if (data.metastable) {
+    const toggle = document.createElement('div');
+    toggle.className = 'pd-toggle';
+    toggle.innerHTML = `
+      <button class="pd-toggle-btn" data-mode="stable">Stable (graphite)</button>
+      <button class="pd-toggle-btn pd-toggle-active" data-mode="metastable">Metastable (Fe\u2083C)</button>
+    `;
+    container.appendChild(toggle);
+
+    toggle.addEventListener('click', (e) => {
+      const btn = e.target.closest('.pd-toggle-btn');
+      if (!btn) return;
+      const mode = btn.dataset.mode;
+      isMetastable = mode === 'metastable';
+
+      toggle.querySelectorAll('.pd-toggle-btn').forEach(b => b.classList.remove('pd-toggle-active'));
+      btn.classList.add('pd-toggle-active');
+
+      if (isMetastable) {
+        activeData = {
+          curves: data.metastable.curves,
+          special_points: data.metastable.special_points,
+          isotherms: data.metastable.isotherms,
+          labels: data.metastable.labels,
+          xMin: data.metastable.xMin,
+          xMax: data.metastable.xMax,
+        };
+      } else {
+        activeData = {
+          curves: data.curves,
+          special_points: data.special_points,
+          isotherms: data.isotherms,
+          labels: data.labels,
+        };
+      }
+      recalcRanges();
+      render();
+    });
+  }
 
   // Canvas
   const canvas = document.createElement('canvas');
@@ -151,22 +231,193 @@ export function createPhaseDiagram(container, data) {
   info.innerHTML = '<span class="pd-hint">Hover to inspect \u00B7 snaps to boundaries and invariant points</span>';
   container.appendChild(info);
 
+  // Mol/Wt% toggle
+  const mA = ATOMIC_MASS[el1] || 1;
+  const mB = ATOMIC_MASS[el2] || 1;
+  let useWt = false;
+
+  const unitToggle = document.createElement('div');
+  unitToggle.className = 'pd-toggle';
+  unitToggle.innerHTML = `
+    <button class="pd-toggle-btn pd-toggle-active" data-unit="mol">mol%</button>
+    <button class="pd-toggle-btn" data-unit="wt">wt%</button>
+  `;
+  container.appendChild(unitToggle);
+
+  unitToggle.addEventListener('click', (e) => {
+    const btn = e.target.closest('.pd-toggle-btn');
+    if (!btn) return;
+    useWt = btn.dataset.unit === 'wt';
+    unitToggle.querySelectorAll('.pd-toggle-btn').forEach(b => b.classList.remove('pd-toggle-active'));
+    btn.classList.add('pd-toggle-active');
+    recalcRanges();
+    render();
+  });
+
   // State
-  const pad = { l: 56, r: 48, t: 28, b: 48 };
+  const pad = { l: 64, r: 76, t: 28, b: 56 };
   let hover = null;
   let w = 0, h = 0, xS, yS;
 
-  // Determine T range from data
-  let Tmin = Infinity, Tmax = -Infinity;
-  for (const c of data.curves) {
-    for (const [, t] of c.pts) {
-      if (t < Tmin) Tmin = t;
-      if (t > Tmax) Tmax = t;
+  /**
+   * Determine which phase region a point (x, T) falls in.
+   * Sweeps all curves at the given T, finds which interval the x falls in,
+   * and returns the bounding curve names as a region description.
+   */
+  function getRegion(x, T) {
+    // Find all curve crossings at this temperature
+    const crossings = [];
+    for (const c of activeData.curves) {
+      if (c.closed) {
+        const half = Math.floor(c.pts.length / 2);
+        const xl = interp(c.pts.slice(0, half), T);
+        const xr = interp(c.pts.slice(half), T);
+        if (xl !== null) crossings.push({ x: xl, id: c.id + '_L', name: c.name });
+        if (xr !== null) crossings.push({ x: xr, id: c.id + '_R', name: c.name });
+      } else {
+        const xc = interp(c.pts, T);
+        if (xc !== null) crossings.push({ x: xc, id: c.id, name: c.name });
+      }
     }
+    crossings.sort((a, b) => a.x - b.x);
+
+    // Find which interval x falls in
+    let leftCurve = null;
+    let rightCurve = null;
+    for (let i = 0; i < crossings.length; i++) {
+      if (x < crossings[i].x) {
+        rightCurve = crossings[i];
+        leftCurve = i > 0 ? crossings[i - 1] : null;
+        break;
+      }
+    }
+    if (!rightCurve && crossings.length > 0) {
+      leftCurve = crossings[crossings.length - 1];
+    }
+
+    // Determine region from bounding curves
+    // If both curves share a phase pair prefix, it's a two-phase region
+    if (leftCurve && rightCurve) {
+      const lp = leftCurve.id.replace(/_low.*|_high.*|_L$|_R$/, '');
+      const rp = rightCurve.id.replace(/_low.*|_high.*|_L$|_R$/, '');
+      if (lp === rp) {
+        // Two-phase region — format the pair name nicely
+        return formatPairName(lp);
+      }
+    }
+
+    // Single-phase region — identify from adjacent two-phase regions
+    // The phase is the one shared between the left and right bounding pairs
+    if (leftCurve) {
+      const lp = leftCurve.id.replace(/_low.*|_high.*|_L$|_R$/, '');
+      // The "high" side of a pair → the right phase of that pair
+      if (leftCurve.id.includes('_high') || leftCurve.id.includes('_R')) {
+        return formatPhaseName(lp.split('_').pop());
+      }
+    }
+    if (rightCurve) {
+      const rp = rightCurve.id.replace(/_low.*|_high.*|_L$|_R$/, '');
+      if (rightCurve.id.includes('_low') || rightCurve.id.includes('_L')) {
+        return formatPhaseName(rp.split('_')[0]);
+      }
+    }
+
+    // Above all curves = liquid, below = check boundaries
+    if (crossings.length > 0 && x >= 0 && x <= 1) {
+      if (T > crossings[0].x) return 'Liquid';
+    }
+
+    return null;
   }
-  // Round to nice values
-  Tmin = Math.floor(Tmin / 50) * 50;
-  Tmax = Math.ceil(Tmax / 50) * 50;
+
+  function formatPhaseName(raw) {
+    const map = {
+      'FCC': '\u03b1', 'FCC_A1': '\u03b1',
+      'BCC': '\u03b2', 'BCC_A2': '\u03b2', 'BCC_B2': '\u03b2',
+      'HCP': '\u03b7', 'HCP_A3': '\u03b7',
+      'LIQUID': 'Liquid',
+      'CEMENTITE_D011': 'Fe\u2083C', 'CEMENTITE': 'Fe\u2083C',
+      'GRAPHITE': 'Graphite', 'DIAMOND_A4': 'Diamond',
+    };
+    if (map[raw]) return map[raw];
+    // Strip Strukturbericht suffixes (_D011, _A1, _B2, _A3, _A15, etc.)
+    const stripped = raw.replace(/_[A-D]\d+[A-Z]?$/, '');
+    if (map[stripped]) return map[stripped];
+    // Greek letter names
+    const greek = {
+      'THETA':'\u03b8','ETA':'\u03b7','EPSILON':'\u03b5','ZETA':'\u03b6',
+      'DELTA':'\u03b4','GAMMA':'\u03b3','BETA':'\u03b2','ALPHA':'\u03b1',
+      'SIGMA':'\u03c3','MU':'\u03bc','CHI':'\u03c7',
+    };
+    for (const part of raw.split('_')) {
+      if (greek[part]) return greek[part];
+    }
+    // Compound names: AL2LI3 -> Al₂Li₃
+    const subs = '\u2080\u2081\u2082\u2083\u2084\u2085\u2086\u2087\u2088\u2089';
+    return raw.replace(/([A-Z][a-z]?)(\d+)/g, (_, el, n) =>
+      el + n.split('').map(d => subs[parseInt(d)]).join('')
+    );
+  }
+
+  // Build a lookup from curve pair prefix -> [phase1 name, phase2 name]
+  function buildPairPhases() {
+    const pp = {};
+    for (const c of activeData.curves) {
+      if (c.closed) continue;
+      const prefix = c.id.replace(/_low.*|_high.*|_l$|_r$/, '');
+      if (!pp[prefix]) pp[prefix] = [];
+      const phaseName = c.name.replace(' boundary', '');
+      if (!pp[prefix].includes(phaseName)) {
+        pp[prefix].push(phaseName);
+      }
+    }
+    return pp;
+  }
+  let pairPhases = buildPairPhases();
+
+  function formatPairName(raw) {
+    const phases = pairPhases[raw];
+    if (phases && phases.length === 2) {
+      return formatPhaseName(phases[0]) + ' + ' + formatPhaseName(phases[1]);
+    }
+    if (phases && phases.length === 1) {
+      return formatPhaseName(phases[0]);
+    }
+    return formatPhaseName(raw);
+  }
+
+  // Convert mole fraction to display value (mol or wt%)
+  function toDisplay(x) {
+    return useWt ? molToWt(x, mA, mB) : x;
+  }
+  // Convert display value back to mole fraction
+  function fromDisplay(d) {
+    return useWt ? wtToMol(d, mA, mB) : d;
+  }
+
+  // Determine T and X range from active data
+  let Tmin, Tmax, Xmin, Xmax;
+  function recalcRanges() {
+    Tmin = Infinity; Tmax = -Infinity;
+    for (const c of activeData.curves) {
+      for (const [, t] of c.pts) {
+        if (t < Tmin) Tmin = t;
+        if (t > Tmax) Tmax = t;
+      }
+    }
+    if (activeData.labels) {
+      for (const lbl of activeData.labels) {
+        if (lbl.T < Tmin) Tmin = lbl.T;
+        if (lbl.T > Tmax) Tmax = lbl.T;
+      }
+    }
+    Tmin = Math.floor(Tmin / 50) * 50;
+    Tmax = Math.ceil(Tmax / 50) * 50 + 25;
+    Xmin = toDisplay(activeData.xMin || 0);
+    Xmax = toDisplay(activeData.xMax || 1);
+    pairPhases = buildPairPhases();
+  }
+  recalcRanges();
 
   function render() {
     const dpr = Math.min(window.devicePixelRatio, MAX_DPR);
@@ -179,17 +430,27 @@ export function createPhaseDiagram(container, data) {
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.clearRect(0, 0, w, h);
 
-    xS = scale(0, 1, pad.l, w - pad.r);
+    xS = scale(Xmin, Xmax, pad.l, w - pad.r);
     yS = scale(Tmin, Tmax, h - pad.b, pad.t);
 
     // White plot area
     ctx.fillStyle = '#fff';
     ctx.fillRect(pad.l, pad.t, w - pad.l - pad.r, h - pad.t - pad.b);
 
-    // Grid
+    // Grid — generate ticks in display units
+    const xTicks = [];
+    if (useWt) {
+      // Nice round wt% values
+      const step = Xmax <= 0.1 ? 0.01 : Xmax <= 0.5 ? 0.05 : 0.1;
+      for (let w = 0; w <= Xmax + 0.001; w += step) xTicks.push(Math.round(w * 1000) / 1000);
+    } else {
+      const step = Xmax <= 0.5 ? 0.1 : 0.2;
+      for (let x = 0; x <= Xmax + 0.001; x += step) xTicks.push(Math.round(x * 100) / 100);
+    }
+
     ctx.strokeStyle = 'rgba(0,0,0,0.05)';
     ctx.lineWidth = 0.6;
-    for (let x = 0; x <= 1; x += 0.2) {
+    for (const x of xTicks) {
       ctx.beginPath();
       ctx.moveTo(xS(x), pad.t);
       ctx.lineTo(xS(x), h - pad.b);
@@ -207,24 +468,24 @@ export function createPhaseDiagram(container, data) {
     ctx.lineWidth = CURVE_WIDTH;
     ctx.lineJoin = 'round';
     ctx.lineCap = 'round';
-    for (const c of data.curves) {
-      drawSmoothCurve(ctx, c.pts, xS, yS, c.closed);
+    for (const c of activeData.curves) {
+      drawSmoothCurve(ctx, c.pts, xS, yS, c.closed, toDisplay);
     }
 
     // Isotherms (solid tie lines between invariant points)
     ctx.strokeStyle = CURVE_COLOR;
     ctx.lineWidth = CURVE_WIDTH;
     ctx.lineCap = 'round';
-    for (const iso of data.isotherms) {
+    for (const iso of activeData.isotherms) {
       ctx.beginPath();
-      ctx.moveTo(xS(iso.x_start), yS(iso.T));
-      ctx.lineTo(xS(iso.x_end), yS(iso.T));
+      ctx.moveTo(xS(toDisplay(iso.x_start)), yS(iso.T));
+      ctx.lineTo(xS(toDisplay(iso.x_end)), yS(iso.T));
       ctx.stroke();
     }
 
     // Special point markers
-    for (const sp of data.special_points) {
-      const px = xS(sp.x);
+    for (const sp of activeData.special_points) {
+      const px = xS(toDisplay(sp.x));
       const py = yS(sp.T);
       ctx.beginPath();
       if (sp.type === 'triple') {
@@ -253,46 +514,70 @@ export function createPhaseDiagram(container, data) {
     ctx.lineWidth = 1;
     ctx.strokeRect(pad.l, pad.t, w - pad.l - pad.r, h - pad.t - pad.b);
 
-    // X axis labels
-    ctx.font = TICK_FONT;
-    ctx.fillStyle = MUTED;
+    // X axis ticks
+    ctx.font = '500 12px "DM Sans", sans-serif';
+    ctx.fillStyle = DARK;
     ctx.textAlign = 'center';
     ctx.textBaseline = 'top';
-    for (let x = 0; x <= 1; x += 0.2) {
-      ctx.fillText(x.toFixed(1), xS(x), h - pad.b + 6);
+    for (const x of xTicks) {
+      ctx.fillText(Math.round(x * 100).toString(), xS(x), h - pad.b + 6);
     }
-    ctx.font = LABEL_FONT;
-    ctx.fillStyle = DARK;
-    ctx.fillText('Mole Fraction ' + el2, pad.l + (w - pad.l - pad.r) / 2, h - 8);
+    // X axis title
+    ctx.font = '600 14px "DM Sans", sans-serif';
+    ctx.fillText((useWt ? 'wt% ' : 'mol% ') + el2, pad.l + (w - pad.l - pad.r) / 2, h - pad.b + 26);
 
-    // Y axis labels
-    ctx.font = TICK_FONT;
-    ctx.fillStyle = MUTED;
+    // Y axis ticks
+    ctx.font = '500 12px "DM Sans", sans-serif';
+    ctx.fillStyle = DARK;
     ctx.textAlign = 'right';
     ctx.textBaseline = 'middle';
     for (let t = Tmin; t <= Tmax; t += 100) {
       ctx.fillText(t.toString(), pad.l - 6, yS(t));
     }
+    // Y axis title
     ctx.save();
     ctx.translate(14, pad.t + (h - pad.t - pad.b) / 2);
     ctx.rotate(-Math.PI / 2);
-    ctx.font = LABEL_FONT;
+    ctx.font = '600 14px "DM Sans", sans-serif';
     ctx.fillStyle = DARK;
     ctx.textAlign = 'center';
     ctx.textBaseline = 'top';
     ctx.fillText('Temperature (K)', 0, 0);
     ctx.restore();
 
+    // Right axis: °C at round 100°C intervals
+    ctx.font = '500 12px "DM Sans", sans-serif';
+    ctx.fillStyle = DARK;
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'middle';
+    const cMin = Math.ceil((Tmin - 273.15) / 100) * 100;
+    const cMax = Math.floor((Tmax - 273.15) / 100) * 100;
+    for (let tC = cMin; tC <= cMax; tC += 100) {
+      const tK = tC + 273.15;
+      if (tK >= Tmin && tK <= Tmax) {
+        ctx.fillText(tC.toString(), w - pad.r + 6, yS(tK));
+      }
+    }
+    ctx.save();
+    ctx.translate(w - 14, pad.t + (h - pad.t - pad.b) / 2);
+    ctx.rotate(Math.PI / 2);
+    ctx.font = '600 14px "DM Sans", sans-serif';
+    ctx.fillStyle = DARK;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'top';
+    ctx.fillText('Temperature (\u00B0C)', 0, 0);
+    ctx.restore();
+
     // Element labels at top
     ctx.font = '700 14px "DM Sans", sans-serif';
     ctx.fillStyle = DARK;
     ctx.textAlign = 'center';
-    ctx.fillText(el1, xS(0), pad.t - 12);
-    ctx.fillText(el2, xS(1), pad.t - 12);
+    ctx.fillText(el1, xS(toDisplay(0)), pad.t - 12);
+    ctx.fillText(el2, xS(toDisplay(1)), pad.t - 12);
 
     // Invariant reaction labels (below isotherms)
-    for (const iso of data.isotherms) {
-      const midX = xS((iso.x_start + iso.x_end) / 2);
+    for (const iso of activeData.isotherms) {
+      const midX = xS((toDisplay(iso.x_start) + toDisplay(iso.x_end)) / 2);
       ctx.font = '400 9px "DM Sans", sans-serif';
       ctx.fillStyle = MUTED;
       ctx.textAlign = 'center';
@@ -305,9 +590,9 @@ export function createPhaseDiagram(container, data) {
 
     // Phase region labels
     const LB = '#444';
-    if (data.labels) {
-      for (const lbl of data.labels) {
-        const px = lbl.anchor === 'right' ? w - pad.r + 10 : xS(lbl.x);
+    if (activeData.labels) {
+      for (const lbl of activeData.labels) {
+        const px = lbl.anchor === 'right' ? w - pad.r + 10 : xS(toDisplay(lbl.x));
         const py = yS(lbl.T);
 
         ctx.textBaseline = 'middle';
@@ -328,14 +613,30 @@ export function createPhaseDiagram(container, data) {
         }
 
         ctx.textAlign = lbl.anchor === 'right' ? 'left' : 'center';
-        ctx.fillText(lbl.text, px, py);
+
+        if (lbl.rotate) {
+          ctx.save();
+          ctx.translate(px, py);
+          ctx.rotate(-Math.PI / 2);
+          ctx.fillText(lbl.text, 0, 0);
+          ctx.restore();
+        } else {
+          ctx.fillText(lbl.text, px, py);
+        }
 
         // Arrow from label to narrow region
         if (lbl.arrow) {
-          const ax = xS(lbl.arrow[0]);
+          const ax = xS(toDisplay(lbl.arrow[0]));
           const ay = yS(lbl.arrow[1]);
-          const dx = ax - px;
-          const dy = ay - py;
+          // Start from side of text, not centre
+          const textW = ctx.measureText(lbl.text).width;
+          let startX = px;
+          if (lbl.arrow_from === 'right') startX = px + textW / 2 + 4;
+          else if (lbl.arrow_from === 'left') startX = px - textW / 2 - 4;
+          else startX = ax > px ? px + textW / 2 + 4 : px - textW / 2 - 4;
+          const startY = py;
+          const dx = ax - startX;
+          const dy = ay - startY;
           const len = Math.sqrt(dx * dx + dy * dy);
           if (len > 10) {
             const ux = dx / len;
@@ -343,8 +644,8 @@ export function createPhaseDiagram(container, data) {
             ctx.strokeStyle = LB;
             ctx.lineWidth = 0.8;
             ctx.beginPath();
-            ctx.moveTo(px + ux * 8, py + uy * 8);
-            ctx.lineTo(ax - ux * 2, ay - uy * 2);
+            ctx.moveTo(startX, startY);
+            ctx.lineTo(ax, ay);
             ctx.stroke();
             // Arrowhead
             ctx.fillStyle = LB;
@@ -445,10 +746,12 @@ export function createPhaseDiagram(container, data) {
       }
 
       // Info bar
+      const region = getRegion(hover.xVal, hover.T);
       info.innerHTML = `
-        <span>x<sub>${el2}</sub> = <b>${hover.xVal.toFixed(4)}</b></span>
-        <span>T = <b>${hover.T.toFixed(1)} K</b></span>
-        ${hover.name ? `<span class="pd-snap-label" style="color:${col}">${hover.name}</span>` : ''}
+        <span>${useWt ? 'wt%' : 'x'}<sub>${el2}</sub> = <b>${useWt ? (toDisplay(hover.xVal) * 100).toFixed(2) + '%' : hover.xVal.toFixed(4)}</b></span>
+        <span>T = <b>${hover.T.toFixed(0)} K</b> (${(hover.T - 273.15).toFixed(0)} \u00B0C)</span>
+        ${region ? `<span style="font-weight:600;background:#333;color:#fff;border-radius:3px;padding:3px 10px;font-size:14px">${region}</span>` : ''}
+        ${hover.reaction ? `<span class="pd-snap-label" style="color:${col}">${hover.reaction}</span>` : hover.name ? `<span class="pd-snap-label" style="color:${col}">${hover.name}</span>` : ''}
       `;
     }
   }
@@ -459,24 +762,25 @@ export function createPhaseDiagram(container, data) {
     const mx = (e.clientX - rect.left) * scaleX;
     const my = (e.clientY - rect.top) * scaleX;
 
-    const xF = xS.inv(mx);
+    const xDisplay = xS.inv(mx);
     const tV = yS.inv(my);
+    const xF = fromDisplay(xDisplay);  // convert back to mol fraction
 
-    if (xF < -0.02 || xF > 1.02 || tV < Tmin - 10 || tV > Tmax + 10) {
+    if (xDisplay < Xmin - 0.02 || xDisplay > Xmax + 0.02 || tV < Tmin - 10 || tV > Tmax + 10) {
       hover = null;
       render();
       info.innerHTML = '<span class="pd-hint">Hover to inspect \u00B7 snaps to boundaries and invariant points</span>';
       return;
     }
 
-    const snap = findSnap(data, mx, my, xS, yS);
+    const snap = findSnap(activeData, mx, my, xS, yS, toDisplay, fromDisplay);
     if (snap) {
       hover = { ...snap, rawX: mx, rawY: my };
     } else {
       const cx = Math.max(0, Math.min(1, xF));
       const ct = Math.max(Tmin, Math.min(Tmax, tV));
       hover = {
-        px: xS(cx), py: yS(ct), rawX: mx, rawY: my,
+        px: xS(toDisplay(cx)), py: yS(ct), rawX: mx, rawY: my,
         xVal: cx, T: ct, name: null, type: null
       };
     }

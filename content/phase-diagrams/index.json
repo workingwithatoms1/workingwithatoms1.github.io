@@ -1,5 +1,28 @@
 {
   "systems": [
-    { "els": ["Al", "Zn"], "file": "al-zn.json", "ref": "S. an Mey, Z. Metallkd. 84 (1993) 451-455" }
+    {
+      "els": [
+        "Al",
+        "Li"
+      ],
+      "file": "al-li.json",
+      "ref": "COST 507 (Ansara, Dinsdale & Rand, 1998)"
+    },
+    {
+      "els": [
+        "Al",
+        "Zn"
+      ],
+      "file": "al-zn.json",
+      "ref": "S. an Mey, Z. Metallkd. 84 (1993) 451-455"
+    },
+    {
+      "els": [
+        "Fe",
+        "C"
+      ],
+      "file": "fe-c.json",
+      "ref": "G\u00f6hring, Leineweber & Mittemeijer, CALPHAD 52 (2016) 38-46"
+    }
   ]
 }
