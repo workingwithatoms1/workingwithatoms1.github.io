@@ -144,11 +144,13 @@ function drawSmoothCurve(ctx, pts, xS, yS, closed, xTransform) {
  * @param {Object} data — the parsed JSON from compute_binary.py
  * @returns {{ destroy: Function }}
  */
-export function createPhaseDiagram(container, data) {
+export function createPhaseDiagram(container, data, flipped = false) {
   container.innerHTML = '';
 
-  // Parse system elements
-  const [el1, el2] = data.system.split('-');
+  // Parse system elements — flip if requested
+  const [jsonEl1, jsonEl2] = data.system.split('-');
+  const el1 = flipped ? jsonEl2 : jsonEl1;
+  const el2 = flipped ? jsonEl1 : jsonEl2;
 
   // Active dataset (supports stable/metastable toggle)
   // Default to metastable if available
@@ -167,14 +169,27 @@ export function createPhaseDiagram(container, data) {
     labels: data.labels,
   };
 
-  // Title
+  // Title with flip button
   const header = document.createElement('div');
   header.className = 'pd-header';
   header.innerHTML = `
-    <h2 class="pd-title">${el1}\u2013${el2} Binary Phase Diagram</h2>
+    <h2 class="pd-title">${el1}\u2013${el2} Binary Phase Diagram
+      <button class="pd-flip-btn" title="Swap axes">\u21CC</button>
+    </h2>
     <p class="pd-ref">${data.reference || ''}</p>
   `;
   container.appendChild(header);
+
+  let destroyFn = null;
+  header.querySelector('.pd-flip-btn').addEventListener('click', () => {
+    if (destroyFn) destroyFn();
+    const newRenderer = createPhaseDiagram(container, data, !flipped);
+    destroyFn = newRenderer.destroy;
+    // Update URL hash
+    const newEl1 = flipped ? jsonEl1 : jsonEl2;
+    const newEl2 = flipped ? jsonEl2 : jsonEl1;
+    history.replaceState(null, '', '#' + newEl1 + '-' + newEl2);
+  });
 
   // Stable/metastable toggle (only for Fe-C style diagrams)
   if (data.metastable) {
@@ -232,8 +247,6 @@ export function createPhaseDiagram(container, data) {
   container.appendChild(info);
 
   // Mol/Wt% toggle
-  const mA = ATOMIC_MASS[el1] || 1;
-  const mB = ATOMIC_MASS[el2] || 1;
   let useWt = false;
 
   const unitToggle = document.createElement('div');
@@ -390,13 +403,17 @@ export function createPhaseDiagram(container, data) {
     return formatPhaseName(raw);
   }
 
-  // Convert mole fraction to display value (mol or wt%)
+  // Convert mole fraction (of jsonEl2) to display value
+  // When flipped, x of el2 on screen = 1 - x of jsonEl2
   function toDisplay(x) {
-    return useWt ? molToWt(x, mA, mB) : x;
+    const xScreen = flipped ? 1 - x : x;
+    // mA/mB are for el1/el2 (display order), need masses for wt% conversion
+    return useWt ? molToWt(xScreen, ATOMIC_MASS[el1] || 1, ATOMIC_MASS[el2] || 1) : xScreen;
   }
-  // Convert display value back to mole fraction
+  // Convert display value back to mole fraction of jsonEl2
   function fromDisplay(d) {
-    return useWt ? wtToMol(d, mA, mB) : d;
+    const xScreen = useWt ? wtToMol(d, ATOMIC_MASS[el1] || 1, ATOMIC_MASS[el2] || 1) : d;
+    return flipped ? 1 - xScreen : xScreen;
   }
 
   // Determine T and X range from active data

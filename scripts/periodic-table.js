@@ -97,11 +97,10 @@ export function createPeriodicTable(container, availablePairs, onSelect) {
         }
 
         if (selected) {
-          // Second selection
+          // Second selection — pass in click order (first=left, second=right)
           const key = pairKey(selected, sym);
           if (availablePairs.has(key)) {
-            const [a, b] = key.split('-');
-            onSelect(a, b);
+            onSelect(selected, sym);
           }
           selected = null;
           render();

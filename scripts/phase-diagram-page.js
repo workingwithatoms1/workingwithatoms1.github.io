@@ -77,9 +77,15 @@ async function init() {
     const sys = fileMap[key];
     if (!sys) return;
 
-    // Update URL hash for sharing
+    // Determine if we need to flip (el1 should be on the left = x=0)
+    // The JSON has system "A-B" where A is at x=0. If el1 != A, flip.
+    const jsonEls = key.split('-'); // alphabetical
+    const flipped = el1 !== jsonEls[0];
+
+    // Update URL hash with click order for sharing
+    const hashKey = el1 + '-' + el2;
     if (!skipHistory) {
-      history.pushState({ system: key }, '', '#' + key);
+      history.pushState({ system: hashKey }, '', '#' + hashKey);
     }
 
     // Show loading state
@@ -97,7 +103,7 @@ async function init() {
       .then(r => r.json())
       .then(data => {
         diagramContainer.innerHTML = '';
-        currentRenderer = createPhaseDiagram(diagramContainer, data);
+        currentRenderer = createPhaseDiagram(diagramContainer, data, flipped);
         diagramContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       })
       .catch(() => {
@@ -107,11 +113,15 @@ async function init() {
 
   const pt = createPeriodicTable(ptContainer, availablePairs, onSelect);
 
-  // Load system from URL hash (e.g. #Al-Zn or #Fe-C)
+  // Load system from URL hash (e.g. #Al-Zn, #Zn-Al, #Fe-C)
   function loadFromHash() {
     const hash = window.location.hash.slice(1);
-    if (hash && availablePairs.has(hash)) {
-      const [a, b] = hash.split('-');
+    if (!hash) return;
+    const parts = hash.split('-');
+    if (parts.length !== 2) return;
+    const [a, b] = parts;
+    const key = [a, b].sort().join('-');
+    if (availablePairs.has(key)) {
       onSelect(a, b, true);
     }
   }
