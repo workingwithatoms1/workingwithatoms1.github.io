@@ -1,9 +1,7 @@
 /* ==========================================================================
    Sidenotes — Tufte-style margin notes
-   Collapsed by default, expand on click.
+   Dot in margin, expands on hover, stays open on click.
    ========================================================================== */
-
-/* --- Container: positioned in the right margin of the article card ------- */
 
 .sidenotes-container {
   position: absolute;
@@ -19,36 +17,35 @@
   position: absolute;
   width: 220px;
   cursor: pointer;
-  transition: all 0.2s ease;
 }
 
-/* --- Collapsed state: subtle marker -------------------------------------- */
+/* --- Collapsed: white dot ------------------------------------------------ */
 
 .sidenote-marker {
   display: flex;
   align-items: center;
   gap: 6px;
   padding: 4px 0;
-  opacity: 0.4;
-  transition: opacity 0.15s;
-}
-
-.sidenote:hover .sidenote-marker {
-  opacity: 0.8;
 }
 
 .sidenote-dot {
-  width: 6px;
-  height: 6px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
-  background: #2a2f7c;
+  background: rgba(255, 255, 255, 0.6);
   flex-shrink: 0;
+  transition: background 0.15s;
+}
+
+.sidenote:hover .sidenote-dot,
+.sidenote.hover .sidenote-dot {
+  background: #fff;
 }
 
 .sidenote-preview {
   font-family: 'DM Sans', sans-serif;
   font-size: 11px;
-  color: #3a3d5a;
+  color: rgba(255, 255, 255, 0.5);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -57,32 +54,41 @@
   transition: max-width 0.2s ease, opacity 0.2s ease;
 }
 
-.sidenote:hover .sidenote-preview {
+.sidenote:hover .sidenote-preview,
+.sidenote.hover .sidenote-preview {
   max-width: 200px;
   opacity: 1;
 }
 
-/* --- Expanded state: full comment ---------------------------------------- */
+/* --- Expanded: white card ------------------------------------------------ */
 
 .sidenote-expanded {
   display: none;
-  padding: 10px 0 10px 12px;
+  padding: 12px;
+  background: #fff;
   border-left: 2px solid #2a2f7c;
   font-family: 'DM Sans', sans-serif;
   font-size: 12px;
   line-height: 1.5;
   color: #3a3d5a;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
-.sidenote.open .sidenote-marker {
-  display: none;
-}
-
+/* Show on hover OR when pinned open */
+.sidenote:hover .sidenote-expanded,
+.sidenote.hover .sidenote-expanded,
 .sidenote.open .sidenote-expanded {
   display: block;
 }
 
-.sidenote.open {
+.sidenote:hover .sidenote-marker,
+.sidenote.hover .sidenote-marker,
+.sidenote.open .sidenote-marker {
+  display: none;
+}
+
+.sidenote.open,
+.sidenote:hover {
   z-index: 10;
 }
 
@@ -104,7 +110,7 @@
   margin-bottom: 6px;
 }
 
-/* --- Meta: author + votes ------------------------------------------------ */
+/* --- Meta ---------------------------------------------------------------- */
 
 .sidenote-meta {
   display: flex;
@@ -135,13 +141,8 @@
   transition: color 0.15s;
 }
 
-.sidenote-vote-btn:hover {
-  color: #2a2f7c;
-}
-
-.sidenote-vote-btn.voted {
-  color: #2a2f7c;
-}
+.sidenote-vote-btn:hover { color: #2a2f7c; }
+.sidenote-vote-btn.voted { color: #2a2f7c; }
 
 .sidenote-vote-count {
   font-size: 10px;
@@ -151,18 +152,21 @@
   text-align: center;
 }
 
-/* --- Anchor highlight on the article text -------------------------------- */
+/* --- Anchor: highlighted text in the article ----------------------------- */
 
 .sidenote-anchor {
-  border-bottom: 1px dotted rgba(42, 47, 124, 0.25);
+  border-bottom: 1px dotted rgba(77, 92, 242, 0.4);
   cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
 }
 
-.sidenote-anchor:hover {
-  background: rgba(42, 47, 124, 0.04);
+.sidenote-anchor:hover,
+.sidenote-anchor-hover {
+  background: rgba(77, 92, 242, 0.08);
+  border-bottom-color: rgba(77, 92, 242, 0.7);
 }
 
-/* --- Mobile: inline instead of margin ------------------------------------ */
+/* --- Mobile -------------------------------------------------------------- */
 
 @media (max-width: 1400px) {
   .sidenotes-container {
@@ -193,12 +197,6 @@
     margin-bottom: 8px;
   }
 
-  /* On mobile, show expanded by default */
-  .sidenote-marker {
-    display: none;
-  }
-
-  .sidenote-expanded {
-    display: block;
-  }
+  .sidenote-marker { display: none; }
+  .sidenote-expanded { display: block; }
 }

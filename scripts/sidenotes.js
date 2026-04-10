@@ -13,34 +13,28 @@ const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwBxJoFlK2UhUmp
 function findTextAnchor(container, selectedText) {
   if (!selectedText || selectedText.length < 5) return null;
 
-  // Try exact match first
+  const searchText = selectedText.substring(0, 60);
   const walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT);
   let node;
-  while ((node = walker.nextNode())) {
-    const idx = node.textContent.indexOf(selectedText.substring(0, 40));
-    if (idx !== -1) {
-      const range = document.createRange();
-      range.setStart(node, idx);
-      range.setEnd(node, Math.min(idx + selectedText.length, node.textContent.length));
-      const rect = range.getBoundingClientRect();
-      return {
-        top: rect.top + window.scrollY,
-        element: node.parentElement,
-      };
-    }
-  }
 
-  // Fuzzy: try first 20 chars
-  const snippet = selectedText.substring(0, 20);
-  const walker2 = document.createTreeWalker(container, NodeFilter.SHOW_TEXT);
-  while ((node = walker2.nextNode())) {
-    if (node.textContent.includes(snippet)) {
-      const rect = node.parentElement.getBoundingClientRect();
-      return {
-        top: rect.top + window.scrollY,
-        element: node.parentElement,
-      };
-    }
+  while ((node = walker.nextNode())) {
+    const idx = node.textContent.indexOf(searchText.substring(0, 40));
+    if (idx === -1) continue;
+
+    // Wrap the matched text in a span for precise highlighting
+    const range = document.createRange();
+    range.setStart(node, idx);
+    range.setEnd(node, Math.min(idx + selectedText.length, node.textContent.length));
+
+    const span = document.createElement('span');
+    span.className = 'sidenote-anchor';
+    range.surroundContents(span);
+
+    const rect = span.getBoundingClientRect();
+    return {
+      top: rect.top + window.scrollY,
+      span: span,
+    };
   }
 
   return null;
@@ -182,13 +176,32 @@ export async function renderSidenotes(articleSlug, articleBody) {
 
     if (anchor) {
       noteEl.style.top = anchor.top + 'px';
-      // Highlight the anchored text and link it to the sidenote
-      if (anchor.element) {
-        anchor.element.classList.add('sidenote-anchor');
-        anchor.element.addEventListener('click', () => {
-          // Close all others, open this one
+      // Link the anchor span to the sidenote
+      if (anchor.span) {
+        anchor.span.dataset.noteId = comment.id;
+        // Clicking anchor text opens the sidenote
+        anchor.span.addEventListener('click', () => {
           container.querySelectorAll('.sidenote.open').forEach(n => n.classList.remove('open'));
           noteEl.classList.add('open');
+          noteEl.classList.add('active');
+        });
+        // Hovering anchor text highlights the sidenote
+        anchor.span.addEventListener('mouseenter', () => {
+          noteEl.classList.add('hover');
+          anchor.span.classList.add('sidenote-anchor-hover');
+        });
+        anchor.span.addEventListener('mouseleave', () => {
+          noteEl.classList.remove('hover');
+          anchor.span.classList.remove('sidenote-anchor-hover');
+        });
+        // Hovering the sidenote highlights the anchor text
+        noteEl.addEventListener('mouseenter', () => {
+          anchor.span.classList.add('sidenote-anchor-hover');
+        });
+        noteEl.addEventListener('mouseleave', () => {
+          if (!noteEl.classList.contains('open')) {
+            anchor.span.classList.remove('sidenote-anchor-hover');
+          }
         });
       }
     }
