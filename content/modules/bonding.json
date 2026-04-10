@@ -98,8 +98,8 @@
         ],
         [
           "callout",
-          "The asymmetry that causes thermal expansion",
-          "The interatomic potential is not symmetric about $r_0$. The repulsive wall is steep; the attractive tail is gradual. As temperature increases, atoms vibrate with greater amplitude, but they can extend further into the shallow attractive side than they can compress into the steep repulsive side. The average position shifts to larger $r$. This is thermal expansion, and it is a direct consequence of the asymmetry of the potential curve."
+          "Why Hooke's law works",
+          "The interatomic potential is not symmetric about $r_0$: the repulsive wall is steep, the attractive tail is gradual. Yet materials obey Hooke's law (linear elasticity) up to the yield point. The reason is scale. Elastic strains in metals are typically 0.1 to 0.5%, displacing atoms by less than 0.01 \\AA from equilibrium. At that scale, any smooth curve looks parabolic. The asymmetry is real, but atoms never explore enough of it to notice before the material yields or fractures. Linear elasticity is the harmonic approximation, and it works because bonds are stiff."
         ],
         [
           "h3",
