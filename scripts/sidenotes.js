@@ -163,20 +163,27 @@ function handleVote(commentId) {
 export async function renderSidenotes(articleSlug, articleBody, bakedComments) {
   if (!articleBody) return;
 
-  // Create the sidenotes container — positioned to the right of the article card
+  // Remove old sidenotes container if it exists (handles page navigation)
   let container = document.querySelector('.sidenotes-container');
-  if (!container) {
-    container = document.createElement('div');
-    container.className = 'sidenotes-container';
+  if (container) container.remove();
 
-    // Contribute prompt at top of margin
-    const prompt = document.createElement('div');
-    prompt.className = 'sidenote-prompt';
-    prompt.innerHTML = '<strong>Highlight any text</strong> to suggest an improvement';
-    container.appendChild(prompt);
+  // Remove old anchor spans from previous article
+  document.querySelectorAll('.sidenote-anchor').forEach(el => {
+    const parent = el.parentNode;
+    while (el.firstChild) parent.insertBefore(el.firstChild, el);
+    parent.removeChild(el);
+  });
 
-    document.body.appendChild(container);
-  }
+  // Create fresh container
+  container = document.createElement('div');
+  container.className = 'sidenotes-container';
+
+  const prompt = document.createElement('div');
+  prompt.className = 'sidenote-prompt';
+  prompt.innerHTML = '<strong>Highlight any text</strong> to suggest an improvement';
+  container.appendChild(prompt);
+
+  document.body.appendChild(container);
 
   // Position container at the right edge of the article card
   function positionContainer() {
