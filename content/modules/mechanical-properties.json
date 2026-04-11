@@ -1528,6 +1528,56 @@
           "The contact radius grows as $P^{1/3}$, not $P^{1/2}$. Double the load and the contact radius increases by only 26%. This weak dependence means that contact stresses rise rapidly with load."
         ],
         [
+          "derivation",
+          "Hertzian contact radius $a = (3PR/4E^*)^{1/3}$",
+          [
+            [
+              "p",
+              "A rigid sphere of radius $R$ pressed a distance $\\delta$ into a flat elastic surface creates a circular contact of radius $a$, where $a^2 = R\\delta$ from the geometry (for $a \\ll R$)."
+            ],
+            [
+              "p",
+              "The pressure distribution must go to zero at the edge of the contact and satisfy elastic compatibility. Hertz showed the solution is an elliptical pressure distribution:"
+            ],
+            [
+              "eq",
+              "p(r) = p_0 \\sqrt{1 - (r/a)^2}"
+            ],
+            [
+              "p",
+              "The total load is the integral of pressure over the contact area:"
+            ],
+            [
+              "eq",
+              "P = \\int_0^a p(r) \\cdot 2\\pi r\\, dr = \\frac{2}{3}\\pi a^2 p_0"
+            ],
+            [
+              "p",
+              "The displacement at the centre of the contact, from elasticity theory (Boussinesq), is related to the pressure distribution by:"
+            ],
+            [
+              "eq",
+              "\\delta = \\frac{\\pi p_0 a}{2E^*}"
+            ],
+            [
+              "p",
+              "Substituting $\\delta = a^2/R$ gives $p_0 = 2E^* a / (\\pi R)$, and substituting into the load equation:"
+            ],
+            [
+              "eq",
+              "P = \\frac{2}{3}\\pi a^2 \\cdot \\frac{2E^* a}{\\pi R} = \\frac{4E^* a^3}{3R}"
+            ],
+            [
+              "p",
+              "Rearranging for $a$:"
+            ],
+            [
+              "eq",
+              "a = \\left(\\frac{3PR}{4E^*}\\right)^{1/3}"
+            ]
+          ]
+        ],
+        [
           "h3",
           "The stress field beneath a contact"
         ],
