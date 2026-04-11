@@ -1505,7 +1505,7 @@
         ],
         [
           "p",
-          "In 1882, Heinrich Hertz asked a deceptively simple question: what happens when two elastic spheres are pressed together? The answer is not obvious. Two flat surfaces in contact share the load over the entire area. Two curved surfaces touch at a point (or line), and the contact area grows with load. Hertz solved this for the elastic case and the result underpins everything from railway engineering to nanoindentation."
+          "In 1880, Heinrich Hertz was studying Newton's rings, the interference fringes formed when a curved glass lens is placed on a flat glass surface. He noticed that the fringes were elliptical, not circular, and that their shape changed with the force pressing the lens down. This led him to ask: what is the pressure distribution in the contact between two curved elastic bodies? The elliptical fringes gave him the clue; he guessed (correctly) that the pressure distribution was also elliptical. The resulting theory, published in 1882, was motivated by optics but found its greatest application in mechanical engineering, from railway bearings to hardness testing."
         ],
         [
           "p",
