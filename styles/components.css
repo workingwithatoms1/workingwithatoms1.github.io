@@ -75,8 +75,11 @@ nav.scrolled .nav-bg { opacity: 1; }
 
 .nav-links {
   display: flex;
+  align-items: center;
   gap: var(--space-l);
   list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .nav-links a {
