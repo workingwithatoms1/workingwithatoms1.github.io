@@ -21,7 +21,14 @@
     <ul class="nav-links">
       <li><a href="../../#curriculum">Learn</a></li>
       <li><a href="../../phase-diagrams/">Phase Diagrams</a></li>
-      <li><button class="nav-search" aria-label="Search" onclick="import('../../scripts/search.js').then(m=>m.openSearch())">/</button></li>
+      <li class="nav-search-wrapper">
+        <div class="nav-search-box">
+          <span class="nav-search-icon">⌕</span>
+          <input class="nav-search-input" type="text" placeholder="Search" autocomplete="off">
+          <kbd class="nav-search-kbd">/</kbd>
+        </div>
+        <div class="search-results"></div>
+      </li>
     </ul>
   </nav>
   <main></main>
@@ -33,6 +40,7 @@
     import { renderArticlePage } from '../../scripts/renderers/article-page.js';
     renderArticlePage('quantum-mechanics', 'perturbation-theory-approximations', '../../');
   </script>
-  <script>document.addEventListener('keydown',e=>{if(e.key==='/'&&e.target.tagName!=='INPUT'&&e.target.tagName!=='TEXTAREA'){e.preventDefault();import('../../scripts/search.js').then(m=>m.openSearch())}})</script>
+  <script type="module" src="../../scripts/search.js"></script>
+  <script>document.addEventListener('keydown',e=>{if(e.key==='/'&&e.target.tagName!=='INPUT'&&e.target.tagName!=='TEXTAREA'){e.preventDefault();var i=document.querySelector('.nav-search-input');if(i)i.focus()}})</script>
 </body>
 </html>

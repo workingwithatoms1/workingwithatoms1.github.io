@@ -240,7 +240,14 @@ const pageShell = (rootPath, initScript) => `<!DOCTYPE html>
     <ul class="nav-links">
       <li><a href="${rootPath}#curriculum">Learn</a></li>
       <li><a href="${rootPath}phase-diagrams/">Phase Diagrams</a></li>
-      <li><button class="nav-search" aria-label="Search" onclick="import('${rootPath}scripts/search.js').then(m=>m.openSearch())">/</button></li>
+      <li class="nav-search-wrapper">
+        <div class="nav-search-box">
+          <span class="nav-search-icon">\u2315</span>
+          <input class="nav-search-input" type="text" placeholder="Search" autocomplete="off">
+          <kbd class="nav-search-kbd">/</kbd>
+        </div>
+        <div class="search-results"></div>
+      </li>
     </ul>
   </nav>
   <main></main>
@@ -249,7 +256,8 @@ const pageShell = (rootPath, initScript) => `<!DOCTYPE html>
     <div><a href="${rootPath}about/" style="color:inherit;text-decoration:none;">About</a></div>
   </footer>
   <script type="module">${initScript}</script>
-  <script>document.addEventListener('keydown',e=>{if(e.key==='/'&&e.target.tagName!=='INPUT'&&e.target.tagName!=='TEXTAREA'){e.preventDefault();import('${rootPath}scripts/search.js').then(m=>m.openSearch())}})</script>
+  <script type="module" src="${rootPath}scripts/search.js"></script>
+  <script>document.addEventListener('keydown',e=>{if(e.key==='/'&&e.target.tagName!=='INPUT'&&e.target.tagName!=='TEXTAREA'){e.preventDefault();var i=document.querySelector('.nav-search-input');if(i)i.focus()}})</script>
 </body>
 </html>
 `;

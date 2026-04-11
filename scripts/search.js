@@ -1,31 +1,37 @@
 /* ==========================================================================
-   Site search — overlay with keyboard shortcut
-   Press / to open, Esc to close, type to search articles.
+   Site search — inline nav box with dropdown results
+   Press / to focus, Esc to blur, type to search articles.
    ========================================================================== */
 
 let searchIndex = null;
-let overlay = null;
 let input = null;
 let results = null;
+let box = null;
 
-function createOverlay() {
-  overlay = document.createElement('div');
-  overlay.className = 'search-overlay';
-  overlay.innerHTML = `
-    <div class="search-box">
-      <input class="search-input" type="text" placeholder="Search articles..." autocomplete="off">
-      <div class="search-results"></div>
-      <div class="search-hint">Press <kbd>Esc</kbd> to close</div>
-    </div>
-  `;
-  document.body.appendChild(overlay);
+function init() {
+  if (input) return; // already initialised
 
-  input = overlay.querySelector('.search-input');
-  results = overlay.querySelector('.search-results');
+  const wrapper = document.querySelector('.nav-search-wrapper');
+  if (!wrapper) return;
 
-  // Close on backdrop click
-  overlay.addEventListener('click', (e) => {
-    if (e.target === overlay) close();
+  box = wrapper.querySelector('.nav-search-box');
+  input = wrapper.querySelector('.nav-search-input');
+  results = wrapper.querySelector('.search-results');
+
+  if (!input || !results) return;
+
+  // Focus states
+  input.addEventListener('focus', () => {
+    box.classList.add('focused');
+    loadIndex();
+  });
+
+  input.addEventListener('blur', () => {
+    // Delay to allow click on results
+    setTimeout(() => {
+      box.classList.remove('focused');
+      results.classList.remove('open');
+    }, 200);
   });
 
   // Search on input
@@ -36,7 +42,9 @@ function createOverlay() {
   // Keyboard navigation
   input.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
-      close();
+      input.blur();
+      input.value = '';
+      results.classList.remove('open');
     } else if (e.key === 'ArrowDown') {
       e.preventDefault();
       const items = results.querySelectorAll('.search-result');
@@ -62,42 +70,30 @@ function createOverlay() {
     } else if (e.key === 'Enter') {
       const active = results.querySelector('.search-result.active');
       if (active) {
-        window.location.href = active.dataset.href;
-        close();
+        window.location.href = active.getAttribute('href');
       }
     }
   });
-}
 
-function open() {
-  if (!overlay) createOverlay();
-  overlay.classList.add('open');
-  input.value = '';
-  results.innerHTML = '';
-  input.focus();
-  loadIndex();
-}
-
-function close() {
-  if (overlay) overlay.classList.remove('open');
+  // Click on box focuses input
+  box.addEventListener('click', () => input.focus());
 }
 
 async function loadIndex() {
   if (searchIndex) return;
   try {
-    // Determine root path
     const depth = window.location.pathname.split('/').filter(Boolean).length;
     const root = depth === 0 ? './' : '../'.repeat(depth);
     const res = await fetch(root + 'content/search-index.json');
     searchIndex = await res.json();
   } catch (e) {
-    results.innerHTML = '<div class="search-empty">Could not load search index.</div>';
+    // silently fail
   }
 }
 
 function search(query) {
   if (!query || !searchIndex) {
-    results.innerHTML = '';
+    results.classList.remove('open');
     return;
   }
 
@@ -107,20 +103,14 @@ function search(query) {
   for (const entry of searchIndex) {
     let score = 0;
     const titleLower = entry.title.toLowerCase();
-    const textLower = entry.text;
 
     for (const term of terms) {
-      // Title match (highest weight)
       if (titleLower.includes(term)) score += 10;
-      // Exact title start
       if (titleLower.startsWith(term)) score += 5;
-      // Heading/description match
-      if (textLower.includes(term)) score += 3;
+      if (entry.text.includes(term)) score += 3;
     }
 
-    if (score > 0) {
-      scored.push({ entry, score });
-    }
+    if (score > 0) scored.push({ entry, score });
   }
 
   scored.sort((a, b) => b.score - a.score);
@@ -128,6 +118,7 @@ function search(query) {
 
   if (top.length === 0) {
     results.innerHTML = '<div class="search-empty">No results</div>';
+    results.classList.add('open');
     return;
   }
 
@@ -135,7 +126,7 @@ function search(query) {
     const e = s.entry;
     const href = `/${e.module}/${e.id}/`;
     return `
-      <a class="search-result${i === 0 ? ' active' : ''}" data-href="${href}" href="${href}">
+      <a class="search-result${i === 0 ? ' active' : ''}" href="${href}">
         <span class="search-result-number">${e.number}</span>
         <div class="search-result-body">
           <span class="search-result-title">${e.title}</span>
@@ -144,20 +135,18 @@ function search(query) {
       </a>
     `;
   }).join('');
+
+  results.classList.add('open');
 }
 
-// Global keyboard shortcut
-document.addEventListener('keydown', (e) => {
-  // Don't trigger if user is typing in an input/textarea
-  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
-  if (e.key === '/') {
-    e.preventDefault();
-    open();
-  }
-  if (e.key === 'Escape') {
-    close();
-  }
-});
+export function openSearch() {
+  init();
+  if (input) input.focus();
+}
 
-// Export for nav button
-export { open as openSearch };
+// Auto-init when DOM is ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
+}
