@@ -2,8 +2,11 @@ name: Bake comments
 
 on:
   schedule:
-    - cron: '*/30 * * * *'  # Every 30 minutes
-  workflow_dispatch: # Manual trigger
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
   bake:
@@ -13,7 +16,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
 
       - name: Bake comments into module JSONs
         run: node scripts/bake-comments.js
@@ -22,10 +25,11 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+          git pull --rebase origin main || true
           git add content/modules/*.json
           if git diff --staged --quiet; then
             echo "No comment changes to commit"
           else
             git commit -m "Bake community comments into module JSONs"
-            git push
+            git push || echo "Push failed (likely concurrent update), will retry next run"
           fi
