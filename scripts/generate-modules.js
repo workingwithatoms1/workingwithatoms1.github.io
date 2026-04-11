@@ -242,7 +242,6 @@ const pageShell = (rootPath, initScript) => `<!DOCTYPE html>
       <li><a href="${rootPath}phase-diagrams/">Phase Diagrams</a></li>
       <li class="nav-search-wrapper">
         <div class="nav-search-box">
-          <span class="nav-search-icon">\u2315</span>
           <input class="nav-search-input" type="text" placeholder="Search" autocomplete="off">
           <kbd class="nav-search-kbd">/</kbd>
         </div>

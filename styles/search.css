@@ -6,6 +6,11 @@
   position: relative;
   display: flex;
   align-items: center;
+  list-style: none;
+}
+
+.nav-search-icon {
+  display: none;
 }
 
 .nav-search-box {
@@ -90,6 +95,8 @@
   padding: 10px 16px;
   text-decoration: none;
   color: #1a1d3a;
+  text-transform: none;
+  letter-spacing: 0;
   transition: background 0.1s;
 }
 
@@ -102,7 +109,7 @@
   font-family: 'DM Sans', sans-serif;
   font-size: 11px;
   font-weight: 600;
-  color: #999;
+  color: #2a2f7c;
   min-width: 28px;
 }
 
@@ -116,12 +123,13 @@
   font-family: 'DM Sans', sans-serif;
   font-size: 13px;
   font-weight: 600;
+  color: #1a1d3a;
 }
 
 .search-result-module {
   font-family: 'DM Sans', sans-serif;
   font-size: 11px;
-  color: #999;
+  color: #666;
 }
 
 .search-empty {
