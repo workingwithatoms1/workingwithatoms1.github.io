@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../../favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="stylesheet" href="../../styles/tokens.css">
+  <link rel="stylesheet" href="../../styles/typography.css">
+  <link rel="stylesheet" href="../../styles/layout.css">
+  <link rel="stylesheet" href="../../styles/components.css">
+  <link rel="stylesheet" href="../../styles/sidenotes.css">
+</head>
+<body>
+  <canvas id="siteBgCanvas"></canvas>
+  <nav>
+    <canvas class="nav-bg" id="navCanvas"></canvas>
+    <a href="../../" class="logo">Working with atoms.</a>
+    <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    <ul class="nav-links">
+      <li><a href="../../#curriculum">Learn</a></li>
+      <li><a href="../../phase-diagrams/">Phase Diagrams</a></li>
+    </ul>
+  </nav>
+  <main></main>
+  <footer style="display:none">
+    <div class="footer-logo">Working with atoms.</div>
+    <div><a href="../../about/" style="color:inherit;text-decoration:none;">About</a></div>
+  </footer>
+  <script type="module">
+    import { renderArticlePage } from '../../scripts/renderers/article-page.js';
+    renderArticlePage('mechanical-properties', 'contact-mechanics', '../../');
+  </script>
+</body>
+</html>

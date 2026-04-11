@@ -1492,8 +1492,182 @@
       ]
     },
     {
-      "id": "hardness-indentation",
+      "id": "contact-mechanics",
       "number": "8.8",
+      "title": "Contact Mechanics",
+      "description": "What happens when two bodies touch: Hertzian contact, stress fields beneath indenters, and the transition from elastic to plastic.",
+      "readingTime": "12 min",
+      "intro": "Press two bodies together and the contact area, stress distribution, and deformation mode depend on geometry, load, and material properties. Contact mechanics connects elasticity theory to practical problems: hardness testing, bearing design, wear, and crack-tip contact. This article builds from Hertz's elastic solution to the onset of plasticity.",
+      "body": [
+        [
+          "h3",
+          "The problem Hertz solved"
+        ],
+        [
+          "p",
+          "In 1882, Heinrich Hertz asked a deceptively simple question: what happens when two elastic spheres are pressed together? The answer is not obvious. Two flat surfaces in contact share the load over the entire area. Two curved surfaces touch at a point (or line), and the contact area grows with load. Hertz solved this for the elastic case and the result underpins everything from railway engineering to nanoindentation."
+        ],
+        [
+          "p",
+          "Consider a rigid sphere of radius $R$ pressed into a flat elastic surface with load $P$. The contact area is a circle of radius $a$, and Hertz showed:"
+        ],
+        [
+          "eq",
+          "a = \\left(\\frac{3PR}{4E^*}\\right)^{1/3}"
+        ],
+        [
+          "p",
+          "where $E^*$ is the reduced modulus, defined by:"
+        ],
+        [
+          "eq",
+          "\\frac{1}{E^*} = \\frac{1-\\nu_1^2}{E_1} + \\frac{1-\\nu_2^2}{E_2}"
+        ],
+        [
+          "p",
+          "The contact radius grows as $P^{1/3}$, not $P^{1/2}$. Double the load and the contact radius increases by only 26%. This weak dependence means that contact stresses rise rapidly with load."
+        ],
+        [
+          "h3",
+          "The stress field beneath a contact"
+        ],
+        [
+          "p",
+          "The pressure distribution under a Hertzian contact is not uniform. It is elliptical, with a maximum at the centre:"
+        ],
+        [
+          "eq",
+          "p(r) = p_0 \\sqrt{1 - \\left(\\frac{r}{a}\\right)^2}, \\qquad p_0 = \\frac{3P}{2\\pi a^2}"
+        ],
+        [
+          "p",
+          "The mean pressure is $p_m = P/(\\pi a^2) = (2/3)\\,p_0$. But the most important stress is not at the surface. The maximum shear stress occurs beneath the contact at a depth of about $0.48a$, and its value is approximately $0.31\\,p_0$. This is where yielding first occurs."
+        ],
+        [
+          "p",
+          "The stress decays with distance from the contact. At a depth of $3a$, the stress has dropped to less than 10% of $p_0$. This defines the stressed volume: roughly a hemisphere of radius $3a$ beneath the contact. If this volume is smaller than the microstructural features you care about (a grain, a phase region), the contact probes local rather than bulk properties."
+        ],
+        [
+          "callout",
+          "Why the stress is highest below the surface",
+          "At the surface directly under the indenter, the material is in a state of compression in all three directions (triaxial stress). This hydrostatic component does not drive yielding (yield depends on deviatoric stress, not hydrostatic pressure). Below the surface, the constraint relaxes: the material is still compressed vertically but less so horizontally. The difference between principal stresses (the shear stress) peaks at $\\sim 0.48a$ depth. This is why subsurface cracking and yielding initiate below the contact, not at the surface."
+        ],
+        [
+          "h3",
+          "From elastic to plastic contact"
+        ],
+        [
+          "p",
+          "Hertz's solution assumes purely elastic deformation. Yielding begins when the maximum shear stress reaches the yield stress in shear, $\\tau_y = \\sigma_y / 2$ (Tresca) or $\\sigma_y / \\sqrt{3}$ (von Mises). This gives a critical mean pressure for first yield:"
+        ],
+        [
+          "eq",
+          "p_y \\approx 1.1\\,\\sigma_y"
+        ],
+        [
+          "p",
+          "At loads just above $p_y$, a small plastic zone forms beneath the surface, surrounded by elastic material that constrains it. This constraint elevates the pressure needed to cause further flow. As the load increases, the plastic zone grows until it reaches the surface. At this point, the contact is fully plastic and the mean pressure saturates at:"
+        ],
+        [
+          "eq",
+          "p_m \\approx 3\\,\\sigma_y = H"
+        ],
+        [
+          "p",
+          "This factor of 3 between yield stress and hardness is the constraint factor. It arises because the elastic material surrounding the plastic zone prevents free lateral flow, forcing the material to yield against a hydrostatic back-stress. The transition from first yield ($p_m \\approx 1.1\\sigma_y$) to full plasticity ($p_m \\approx 3\\sigma_y$) occurs over roughly a decade of load increase."
+        ],
+        [
+          "h3",
+          "The thought experiment: standing on the Earth"
+        ],
+        [
+          "p",
+          "Contact mechanics explains an everyday observation. Stand on the ground and your weight (say 700 N) acts through the soles of your shoes (contact area maybe 300 cm$^2$). The average pressure is about 23 kPa, far below any yield stress. The stress field penetrates a few centimetres into the soil. Nobody in Australia feels it."
+        ],
+        [
+          "p",
+          "Now press a stiletto heel (area $\\sim 1$ cm$^2$, same load) into the same surface. The pressure is 7 MPa, enough to indent soft ground. The stress is concentrated in a small volume directly beneath the heel. The same force, acting through a smaller area on a curved geometry, creates a completely different mechanical response. This is the essence of contact mechanics: geometry controls the stress field, and the stress field controls the material response."
+        ],
+        [
+          "h3",
+          "Two spheres: the general case"
+        ],
+        [
+          "p",
+          "For two elastic spheres of radii $R_1$ and $R_2$ pressed together, replace $R$ in the Hertz equation with the effective radius:"
+        ],
+        [
+          "eq",
+          "\\frac{1}{R} = \\frac{1}{R_1} + \\frac{1}{R_2}"
+        ],
+        [
+          "p",
+          "A flat surface has $R = \\infty$, recovering the sphere-on-flat case. Two equal spheres of radius $R_0$ give $R = R_0/2$. The displacement (approach of distant points) is:"
+        ],
+        [
+          "eq",
+          "\\delta = \\frac{a^2}{R} = \\left(\\frac{9P^2}{16R E^{*2}}\\right)^{1/3}"
+        ],
+        [
+          "p",
+          "The stiffness $dP/d\\delta$ increases with load (the contact gets stiffer as it grows), which is fundamentally different from a linear spring. This nonlinear compliance matters for vibration analysis of ball bearings, granular media, and any system where parts touch at curved surfaces."
+        ],
+        [
+          "h3",
+          "Practical implications"
+        ],
+        [
+          "p",
+          "Hertzian contact mechanics appears throughout materials engineering:"
+        ],
+        [
+          "ul",
+          [
+            "<strong>Hardness testing</strong>: the Brinell test is literally Hertz contact taken to full plasticity. The Hertz solution gives the elastic loading regime; beyond $p_y$, the expanding plastic zone model gives the hardness.",
+            "<strong>Bearings and gears</strong>: rolling contact fatigue initiates at the subsurface shear stress maximum. The depth of maximum shear (~$0.48a$) sets the critical inclusion size for bearing steels.",
+            "<strong>Nanoindentation</strong>: the Oliver-Pharr method uses the Hertzian unloading stiffness $S = 2E^*a$ to extract the modulus from the initial slope of the unloading curve.",
+            "<strong>Powder compaction</strong>: pressing metal or ceramic powder starts as Hertz contacts between particles, transitioning to plastic deformation as the contact pressures exceed $3\\sigma_y$.",
+            "<strong>Wear</strong>: Archard's wear law assumes asperity contacts follow Hertzian mechanics, with wear volume proportional to load and sliding distance."
+          ]
+        ],
+        [
+          "problem",
+          "A hardened steel ball bearing (radius 5 mm, $E = 210$ GPa, $\\nu = 0.3$) is pressed against a flat aluminium surface ($E = 70$ GPa, $\\nu = 0.33$, $\\sigma_y = 200$ MPa) with a force of 100 N. (a) Calculate the contact radius and maximum Hertzian pressure. (b) Will the aluminium yield? (c) If the load is increased until the contact is fully plastic, estimate the indent diameter.",
+          [
+            [
+              "p",
+              "(a) Reduced modulus: $1/E^* = (1-0.3^2)/210 + (1-0.33^2)/70 = 0.00433 + 0.01271 = 0.01704$, so $E^* = 58.7$ GPa. Contact radius: $a = (3 \\times 100 \\times 0.005 / (4 \\times 58.7 \\times 10^9))^{1/3} = (2.56 \\times 10^{-11})^{1/3} = 0.295$ mm. Maximum pressure: $p_0 = 3P/(2\\pi a^2) = 3 \\times 100 / (2\\pi \\times (2.95 \\times 10^{-4})^2) = 549$ MPa."
+            ],
+            [
+              "p",
+              "(b) Mean pressure $p_m = 2p_0/3 = 366$ MPa. First yield occurs at $p_m \\approx 1.1\\sigma_y = 220$ MPa. Since 366 > 220 MPa, the aluminium has yielded. The contact is in the elastic-plastic transition regime."
+            ],
+            [
+              "p",
+              "(c) At full plasticity, $p_m \\approx 3\\sigma_y = 600$ MPa. The required load for full plasticity: $P = p_m \\times \\pi a^2$. But $a$ also increases with load, so we use the hardness relation directly: $H \\approx 600$ MPa, and $d = \\sqrt{4P/(\\pi H)}$. For full plasticity the indent area is $A = P/H$, so at, say, 500 N: $A = 500/(600 \\times 10^6) = 8.3 \\times 10^{-7}$ m$^2$, giving $d = 2\\sqrt{A/\\pi} = 1.03$ mm."
+            ]
+          ]
+        ]
+      ],
+      "related": [
+        {
+          "title": "Elasticity & Elastic Moduli",
+          "url": "elasticity-elastic-moduli"
+        },
+        {
+          "title": "Hardness & Indentation",
+          "url": "hardness-indentation"
+        },
+        {
+          "title": "Fracture Mechanics",
+          "url": "fracture-mechanics-griffith-k-ic"
+        }
+      ],
+      "comments": []
+    },
+    {
+      "id": "hardness-indentation",
+      "number": "8.9",
       "title": "Hardness & Indentation",
       "description": "Quick, semi-destructive measures of mechanical properties from a simple indent.",
       "readingTime": "12 min",
@@ -1742,7 +1916,8 @@
           "selectedText": "Hardness testing is the most common mechanical test in industry. It is fast, nearly non-destructive and requires minimal specimen preparation. A hard indenter is pressed into the surface, and the size or depth of the impression reveals the material's resistance to plastic deformation.",
           "comment": "Maybe we proceed this page with one on contact mechanics; building from Hertz, historically contextualise it in railways and work on the thought experiment of two spheres in contact. The idea that the stress field is constrained. IE if you stand on the earths surface in England, the force isnt felt in australia - its disipated by a few cm under you.",
           "name": "Anonymous",
-          "votes": 0
+          "votes": 0,
+          "status": "integrated"
         },
         {
           "id": "36237d7c",
