@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="styles/typography.css">
   <link rel="stylesheet" href="styles/layout.css">
   <link rel="stylesheet" href="styles/components.css">
+  <link rel="stylesheet" href="styles/search.css">
 </head>
 <body>
 
@@ -25,6 +26,7 @@
     <ul class="nav-links">
       <li><a href="#curriculum">Learn</a></li>
       <li><a href="phase-diagrams/">Phase Diagrams</a></li>
+      <li><button class="nav-search" aria-label="Search" onclick="import('./scripts/search.js').then(m=>m.openSearch())">/</button></li>
     </ul>
   </nav>
 
@@ -252,5 +254,6 @@
   </footer>
 
   <script type="module" src="scripts/main.js"></script>
+  <script>document.addEventListener('keydown',e=>{if(e.key==='/'&&e.target.tagName!=='INPUT'&&e.target.tagName!=='TEXTAREA'){e.preventDefault();import('./scripts/search.js').then(m=>m.openSearch())}})</script>
 </body>
 </html>

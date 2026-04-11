@@ -229,6 +229,7 @@ const pageShell = (rootPath, initScript) => `<!DOCTYPE html>
   <link rel="stylesheet" href="${rootPath}styles/layout.css">
   <link rel="stylesheet" href="${rootPath}styles/components.css">
   <link rel="stylesheet" href="${rootPath}styles/sidenotes.css">
+  <link rel="stylesheet" href="${rootPath}styles/search.css">
 </head>
 <body>
   <canvas id="siteBgCanvas"></canvas>
@@ -239,6 +240,7 @@ const pageShell = (rootPath, initScript) => `<!DOCTYPE html>
     <ul class="nav-links">
       <li><a href="${rootPath}#curriculum">Learn</a></li>
       <li><a href="${rootPath}phase-diagrams/">Phase Diagrams</a></li>
+      <li><button class="nav-search" aria-label="Search" onclick="import('${rootPath}scripts/search.js').then(m=>m.openSearch())">/</button></li>
     </ul>
   </nav>
   <main></main>
@@ -247,6 +249,7 @@ const pageShell = (rootPath, initScript) => `<!DOCTYPE html>
     <div><a href="${rootPath}about/" style="color:inherit;text-decoration:none;">About</a></div>
   </footer>
   <script type="module">${initScript}</script>
+  <script>document.addEventListener('keydown',e=>{if(e.key==='/'&&e.target.tagName!=='INPUT'&&e.target.tagName!=='TEXTAREA'){e.preventDefault();import('${rootPath}scripts/search.js').then(m=>m.openSearch())}})</script>
 </body>
 </html>
 `;

@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="../../styles/layout.css">
   <link rel="stylesheet" href="../../styles/components.css">
   <link rel="stylesheet" href="../../styles/sidenotes.css">
+  <link rel="stylesheet" href="../../styles/search.css">
 </head>
 <body>
   <canvas id="siteBgCanvas"></canvas>
@@ -20,6 +21,7 @@
     <ul class="nav-links">
       <li><a href="../../#curriculum">Learn</a></li>
       <li><a href="../../phase-diagrams/">Phase Diagrams</a></li>
+      <li><button class="nav-search" aria-label="Search" onclick="import('../../scripts/search.js').then(m=>m.openSearch())">/</button></li>
     </ul>
   </nav>
   <main></main>
@@ -31,5 +33,6 @@
     import { renderArticlePage } from '../../scripts/renderers/article-page.js';
     renderArticlePage('ceramics', 'ceramic-processing', '../../');
   </script>
+  <script>document.addEventListener('keydown',e=>{if(e.key==='/'&&e.target.tagName!=='INPUT'&&e.target.tagName!=='TEXTAREA'){e.preventDefault();import('../../scripts/search.js').then(m=>m.openSearch())}})</script>
 </body>
 </html>
