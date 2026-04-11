@@ -1666,6 +1666,10 @@
           "In a thin film or a small grain, there may not be enough depth to reach the bulk regime. The measured hardness then reflects the size of the sampled volume, not just the material. This is not an artefact; it is real strengthening from the strain gradient. The same physics explains why fine-grained metals are harder (Hall-Petch) and why metallic nanopillars are stronger than bulk: confined volumes have higher GND densities."
         ],
         [
+          "p",
+          "The size effect works both ways. At shallow depths, GNDs inflate the measured hardness. But the small plastic zone is also an opportunity: indent within a single grain and you measure that grain's orientation-dependent hardness. Indent within a single phase in a multiphase alloy and you isolate that phase's mechanical response. This is microstructurally correlated nanoindentation. Combined with EBSD mapping (to know which grain orientation you are probing) or BSE imaging (to identify phases), it turns the indenter into a spatially resolved mechanical probe. The constraint: the plastic zone must fit inside the feature of interest. For a Berkovich indent, the plastic zone extends roughly 5 to 10 times the indent depth, so probing a 5 \u00b5m grain requires depths below about 500 nm."
+        ],
+        [
           "derivation",
           "The constraint factor: why $H \\approx 3\\sigma_y$.",
           [
@@ -1760,7 +1764,8 @@
           "selectedText": "probe volumes as small as 100 nm across, enabling measurement of individual grains, thin",
           "comment": "Have a section about microstructurally correlated indentation. E.g. probing orientations, different phases. And also big indents such that plastic zone covers wider zone.",
           "name": "Anonymous",
-          "votes": 0
+          "votes": 0,
+          "status": "integrated"
         },
         {
           "id": "714c980e",
