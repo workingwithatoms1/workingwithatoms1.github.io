@@ -17,62 +17,189 @@
       "readingTime": "12 min",
       "intro": "Before we can discuss what a material does under load, we need a precise language for force and deformation. Stress and strain provide that language. The choice between engineering and true definitions matters more than most textbooks admit.",
       "body": [
-        ["h3", "Force, stress and why we need both"],
-        ["p", "A steel cable and a steel wire can carry very different loads, but the steel is the same steel. Force alone does not characterise a material. Stress does. Stress is force per unit area, and it removes the geometry of the specimen from the picture, leaving only the material's response."],
-        ["p", "The SI unit of stress is the pascal (Pa = N/m$^2$). In practice, materials scientists work in megapascals (MPa) or gigapascals (GPa). The yield stress of pure annealed copper is about 70 MPa. For a high-strength steel it is 1000 MPa or more. The elastic modulus of diamond is 1220 GPa."],
-
-        ["h3", "Engineering stress and strain"],
-        ["p", "In a standard tensile test, a specimen of initial cross-sectional area $A_0$ and initial gauge length $L_0$ is pulled. The engineering stress $\\sigma_e$ and engineering strain $\\varepsilon_e$ are defined with respect to these original dimensions:"],
-        ["eq", "\\sigma_e = \\frac{F}{A_0}, \\qquad \\varepsilon_e = \\frac{L - L_0}{L_0} = \\frac{\\Delta L}{L_0}"],
-        ["p", "These definitions are convenient because $A_0$ and $L_0$ are measured once, before the test begins. Every subsequent force reading converts directly to a stress. The engineering stress-strain curve is what a tensile testing machine produces."],
-        ["p", "The curve for a typical low-carbon steel shows: (1) a linear elastic region with slope equal to Young's modulus $E$, (2) a yield point near 250 MPa where permanent deformation begins, (3) strain hardening as the stress rises to an ultimate tensile strength (UTS) near 400 MPa, (4) necking, where deformation localises into a narrow band, and (5) fracture."],
-
-        ["h3", "The problem with engineering stress"],
-        ["p", "Engineering stress divides by $A_0$, the original area. But as a specimen stretches, its cross-section shrinks. After necking, the local area may be half of $A_0$. The true force per unit area at the neck is much higher than $\\sigma_e$ suggests. The engineering stress-strain curve actually decreases after the UTS, which creates the false impression that the material is getting weaker. It is not. The material is still strain-hardening. The apparent drop is an artefact of dividing by the wrong area."],
-
-        ["h3", "True stress and true strain"],
-        ["p", "True stress and true strain use the instantaneous dimensions:"],
-        ["eq", "\\sigma_t = \\frac{F}{A}, \\qquad \\varepsilon_t = \\int_{L_0}^{L} \\frac{dL}{L} = \\ln\\frac{L}{L_0}"],
-        ["p", "True strain (also called logarithmic or Hencky strain) is the integral of infinitesimal extensions. It has a crucial advantage: true strains are additive. If you stretch a bar from length 1 to 2, then from 2 to 3, the total true strain is $\\ln 3$, which equals $\\ln 2 + \\ln(3/2)$. Engineering strains are not additive in this way."],
-        ["callout", "Conversion formulae", "Assuming uniform deformation and constant volume ($A_0 L_0 = AL$): $\\sigma_t = \\sigma_e(1 + \\varepsilon_e)$ and $\\varepsilon_t = \\ln(1 + \\varepsilon_e)$. These break down once necking begins, because deformation is no longer uniform."],
-        ["p", "After necking, the only way to obtain true stress is to measure the actual cross-sectional area, either by photographing the specimen or by using the Bridgman correction for the triaxial stress state that develops in the neck."],
-
-        ["h3", "The constant-volume assumption"],
-        ["derivation", "During plastic deformation, volume is conserved: $A_0 L_0 = A L$. This gives $A = A_0 L_0 / L = A_0 / (1 + \\varepsilon_e)$.", [
-          ["p", "Plastic deformation proceeds by the motion of dislocations, which shuffles atoms without changing the average interatomic spacing. The density of a metal barely changes during plastic straining (typically less than 0.1%), so the volume remains constant."],
-          ["p", "From $AL = A_0 L_0$:"],
-          ["eq", "A = \\frac{A_0 L_0}{L} = \\frac{A_0}{L/L_0} = \\frac{A_0}{1 + \\varepsilon_e}"],
-          ["p", "Therefore:"],
-          ["eq", "\\sigma_t = \\frac{F}{A} = \\frac{F}{A_0}(1 + \\varepsilon_e) = \\sigma_e(1 + \\varepsilon_e)"],
-          ["p", "This is not valid in the elastic regime, where volume changes by a small amount determined by Poisson's ratio. For metals with $\\nu \\approx 0.3$, the elastic volume change is small enough that the error is negligible at typical engineering strains."]
-        ]],
-
-        ["h3", "Why the distinction matters"],
-        ["p", "For small strains (below about 1%), the two definitions are nearly identical. For large plastic strains, they diverge significantly. A specimen at engineering strain 1.0 (doubled in length) has true strain $\\ln 2 = 0.693$. The engineering stress may be falling while the true stress is still rising."],
-        ["p", "Constitutive models for plastic deformation, such as the power-law hardening relation $\\sigma_t = K \\varepsilon_t^n$, are always written in true quantities. The Considere criterion for the onset of necking is $d\\sigma_t / d\\varepsilon_t = \\sigma_t$, which states that necking begins when the rate of strain hardening can no longer compensate for the reduction in cross-sectional area."],
-
-        ["h3", "The Considere criterion"],
-        ["p", "The maximum in the engineering stress-strain curve (the UTS) corresponds to the onset of diffuse necking. At this point, the load $F = \\sigma_t A$ reaches a maximum, so $dF = 0$:"],
-        ["eq", "dF = A\\,d\\sigma_t + \\sigma_t\\,dA = 0"],
-        ["p", "Using $dA/A = -d\\varepsilon_t$ (from constant volume), this gives:"],
-        ["eq", "\\frac{d\\sigma_t}{d\\varepsilon_t} = \\sigma_t"],
-        ["p", "For power-law hardening $\\sigma_t = K\\varepsilon_t^n$, necking begins at $\\varepsilon_t = n$. A material with $n = 0.2$ (typical of a low-carbon steel) necks at 20% true strain. Aluminium alloys with $n = 0.05$ neck much earlier, which is why they are harder to deep-draw."],
-
-        ["h3", "Other stress states"],
-        ["p", "Tension is one loading mode. Materials also experience compression, shear, bending and torsion. The general stress state at a point is described by a symmetric $3 \\times 3$ tensor with six independent components: three normal stresses ($\\sigma_{11}$, $\\sigma_{22}$, $\\sigma_{33}$) and three shear stresses ($\\tau_{12}$, $\\tau_{13}$, $\\tau_{23}$). We will need this tensor description when we discuss yield criteria in article 8.3."],
-
-        ["problem", "A cylindrical copper specimen ($A_0 = 50$ mm$^2$, $L_0 = 100$ mm) is pulled to a length of 130 mm with a force of 18 kN, assuming uniform deformation. Calculate the engineering stress and strain, the true stress and strain, and verify the conversion formulae.", [
-          ["p", "Engineering stress: $\\sigma_e = F/A_0 = 18000 / 50 = 360$ MPa."],
-          ["p", "Engineering strain: $\\varepsilon_e = (130 - 100)/100 = 0.30$."],
-          ["p", "True strain: $\\varepsilon_t = \\ln(1 + 0.30) = \\ln(1.30) = 0.262$."],
-          ["p", "True stress: $\\sigma_t = 360 \\times (1 + 0.30) = 468$ MPa."],
-          ["p", "Check: from constant volume, $A = 50/(1.30) = 38.46$ mm$^2$. True stress $= 18000/38.46 = 468$ MPa. Consistent."]
-        ]]
+        [
+          "h3",
+          "Force, stress and why we need both"
+        ],
+        [
+          "p",
+          "A steel cable and a steel wire can carry very different loads, but the steel is the same steel. Force alone does not characterise a material. Stress does. Stress is force per unit area, and it removes the geometry of the specimen from the picture, leaving only the material's response."
+        ],
+        [
+          "p",
+          "The SI unit of stress is the pascal (Pa = N/m$^2$). In practice, materials scientists work in megapascals (MPa) or gigapascals (GPa). The yield stress of pure annealed copper is about 70 MPa. For a high-strength steel it is 1000 MPa or more. The elastic modulus of diamond is 1220 GPa."
+        ],
+        [
+          "h3",
+          "Engineering stress and strain"
+        ],
+        [
+          "p",
+          "In a standard tensile test, a specimen of initial cross-sectional area $A_0$ and initial gauge length $L_0$ is pulled. The engineering stress $\\sigma_e$ and engineering strain $\\varepsilon_e$ are defined with respect to these original dimensions:"
+        ],
+        [
+          "eq",
+          "\\sigma_e = \\frac{F}{A_0}, \\qquad \\varepsilon_e = \\frac{L - L_0}{L_0} = \\frac{\\Delta L}{L_0}"
+        ],
+        [
+          "p",
+          "These definitions are convenient because $A_0$ and $L_0$ are measured once, before the test begins. Every subsequent force reading converts directly to a stress. The engineering stress-strain curve is what a tensile testing machine produces."
+        ],
+        [
+          "p",
+          "The curve for a typical low-carbon steel shows: (1) a linear elastic region with slope equal to Young's modulus $E$, (2) a yield point near 250 MPa where permanent deformation begins, (3) strain hardening as the stress rises to an ultimate tensile strength (UTS) near 400 MPa, (4) necking, where deformation localises into a narrow band, and (5) fracture."
+        ],
+        [
+          "h3",
+          "The problem with engineering stress"
+        ],
+        [
+          "p",
+          "Engineering stress divides by $A_0$, the original area. But as a specimen stretches, its cross-section shrinks. After necking, the local area may be half of $A_0$. The true force per unit area at the neck is much higher than $\\sigma_e$ suggests. The engineering stress-strain curve actually decreases after the UTS, which creates the false impression that the material is getting weaker. It is not. The material is still strain-hardening. The apparent drop is an artefact of dividing by the wrong area."
+        ],
+        [
+          "h3",
+          "True stress and true strain"
+        ],
+        [
+          "p",
+          "True stress and true strain use the instantaneous dimensions:"
+        ],
+        [
+          "eq",
+          "\\sigma_t = \\frac{F}{A}, \\qquad \\varepsilon_t = \\int_{L_0}^{L} \\frac{dL}{L} = \\ln\\frac{L}{L_0}"
+        ],
+        [
+          "p",
+          "True strain (also called logarithmic or Hencky strain) is the integral of infinitesimal extensions. It has a crucial advantage: true strains are additive. If you stretch a bar from length 1 to 2, then from 2 to 3, the total true strain is $\\ln 3$, which equals $\\ln 2 + \\ln(3/2)$. Engineering strains are not additive in this way."
+        ],
+        [
+          "callout",
+          "Conversion formulae",
+          "Assuming uniform deformation and constant volume ($A_0 L_0 = AL$): $\\sigma_t = \\sigma_e(1 + \\varepsilon_e)$ and $\\varepsilon_t = \\ln(1 + \\varepsilon_e)$. These break down once necking begins, because deformation is no longer uniform."
+        ],
+        [
+          "p",
+          "After necking, the only way to obtain true stress is to measure the actual cross-sectional area, either by photographing the specimen or by using the Bridgman correction for the triaxial stress state that develops in the neck."
+        ],
+        [
+          "h3",
+          "The constant-volume assumption"
+        ],
+        [
+          "derivation",
+          "During plastic deformation, volume is conserved: $A_0 L_0 = A L$. This gives $A = A_0 L_0 / L = A_0 / (1 + \\varepsilon_e)$.",
+          [
+            [
+              "p",
+              "Plastic deformation proceeds by the motion of dislocations, which shuffles atoms without changing the average interatomic spacing. The density of a metal barely changes during plastic straining (typically less than 0.1%), so the volume remains constant."
+            ],
+            [
+              "p",
+              "From $AL = A_0 L_0$:"
+            ],
+            [
+              "eq",
+              "A = \\frac{A_0 L_0}{L} = \\frac{A_0}{L/L_0} = \\frac{A_0}{1 + \\varepsilon_e}"
+            ],
+            [
+              "p",
+              "Therefore:"
+            ],
+            [
+              "eq",
+              "\\sigma_t = \\frac{F}{A} = \\frac{F}{A_0}(1 + \\varepsilon_e) = \\sigma_e(1 + \\varepsilon_e)"
+            ],
+            [
+              "p",
+              "This is not valid in the elastic regime, where volume changes by a small amount determined by Poisson's ratio. For metals with $\\nu \\approx 0.3$, the elastic volume change is small enough that the error is negligible at typical engineering strains."
+            ]
+          ]
+        ],
+        [
+          "h3",
+          "Why the distinction matters"
+        ],
+        [
+          "p",
+          "For small strains (below about 1%), the two definitions are nearly identical. For large plastic strains, they diverge significantly. A specimen at engineering strain 1.0 (doubled in length) has true strain $\\ln 2 = 0.693$. The engineering stress may be falling while the true stress is still rising."
+        ],
+        [
+          "p",
+          "Constitutive models for plastic deformation, such as the power-law hardening relation $\\sigma_t = K \\varepsilon_t^n$, are always written in true quantities. The Considere criterion for the onset of necking is $d\\sigma_t / d\\varepsilon_t = \\sigma_t$, which states that necking begins when the rate of strain hardening can no longer compensate for the reduction in cross-sectional area."
+        ],
+        [
+          "h3",
+          "The Considere criterion"
+        ],
+        [
+          "p",
+          "The maximum in the engineering stress-strain curve (the UTS) corresponds to the onset of diffuse necking. At this point, the load $F = \\sigma_t A$ reaches a maximum, so $dF = 0$:"
+        ],
+        [
+          "eq",
+          "dF = A\\,d\\sigma_t + \\sigma_t\\,dA = 0"
+        ],
+        [
+          "p",
+          "Using $dA/A = -d\\varepsilon_t$ (from constant volume), this gives:"
+        ],
+        [
+          "eq",
+          "\\frac{d\\sigma_t}{d\\varepsilon_t} = \\sigma_t"
+        ],
+        [
+          "p",
+          "For power-law hardening $\\sigma_t = K\\varepsilon_t^n$, necking begins at $\\varepsilon_t = n$. A material with $n = 0.2$ (typical of a low-carbon steel) necks at 20% true strain. Aluminium alloys with $n = 0.05$ neck much earlier, which is why they are harder to deep-draw."
+        ],
+        [
+          "h3",
+          "Other stress states"
+        ],
+        [
+          "p",
+          "Tension is one loading mode. Materials also experience compression, shear, bending and torsion. The general stress state at a point is described by a symmetric $3 \\times 3$ tensor with six independent components: three normal stresses ($\\sigma_{11}$, $\\sigma_{22}$, $\\sigma_{33}$) and three shear stresses ($\\tau_{12}$, $\\tau_{13}$, $\\tau_{23}$). We will need this tensor description when we discuss yield criteria in article 8.3."
+        ],
+        [
+          "problem",
+          "A cylindrical copper specimen ($A_0 = 50$ mm$^2$, $L_0 = 100$ mm) is pulled to a length of 130 mm with a force of 18 kN, assuming uniform deformation. Calculate the engineering stress and strain, the true stress and strain, and verify the conversion formulae.",
+          [
+            [
+              "p",
+              "Engineering stress: $\\sigma_e = F/A_0 = 18000 / 50 = 360$ MPa."
+            ],
+            [
+              "p",
+              "Engineering strain: $\\varepsilon_e = (130 - 100)/100 = 0.30$."
+            ],
+            [
+              "p",
+              "True strain: $\\varepsilon_t = \\ln(1 + 0.30) = \\ln(1.30) = 0.262$."
+            ],
+            [
+              "p",
+              "True stress: $\\sigma_t = 360 \\times (1 + 0.30) = 468$ MPa."
+            ],
+            [
+              "p",
+              "Check: from constant volume, $A = 50/(1.30) = 38.46$ mm$^2$. True stress $= 18000/38.46 = 468$ MPa. Consistent."
+            ]
+          ]
+        ]
       ],
       "related": [
-        { "title": "Elasticity & Elastic Moduli", "url": "elasticity-elastic-moduli" },
-        { "title": "Plastic Deformation & Slip", "url": "plastic-deformation-slip" },
-        { "title": "Bond Energy & Force Curves", "url": "../bonding/bond-energy-interatomic-spacing-force-curves" }
+        {
+          "title": "Elasticity & Elastic Moduli",
+          "url": "elasticity-elastic-moduli"
+        },
+        {
+          "title": "Plastic Deformation & Slip",
+          "url": "plastic-deformation-slip"
+        },
+        {
+          "title": "Bond Energy & Force Curves",
+          "url": "../bonding/bond-energy-interatomic-spacing-force-curves"
+        }
       ]
     },
     {
@@ -83,70 +210,206 @@
       "readingTime": "14 min",
       "intro": "Elastic deformation is reversible. Remove the load and the material returns to its original shape. The stiffness of a material is set by the curvature of its interatomic potential, which is why elastic moduli are nearly impossible to change by alloying or heat treatment.",
       "body": [
-        ["h3", "Hooke's law"],
-        ["p", "In the elastic regime, stress is proportional to strain:"],
-        ["eq", "\\sigma = E \\varepsilon"],
-        ["p", "The constant of proportionality $E$ is Young's modulus. It has units of stress (Pa) and represents the stiffness of the material. Some representative values at room temperature: steel 210 GPa, aluminium 70 GPa, copper 130 GPa, titanium 116 GPa, glass 70 GPa, polyethylene 1 GPa, rubber 0.01 GPa. These span five orders of magnitude. The differences trace back to bonding."],
-        ["p", "Young's modulus is not the only elastic constant. Under uniaxial tension, a bar gets longer but also gets thinner. The ratio of lateral contraction to axial extension is Poisson's ratio:"],
-        ["eq", "\\nu = -\\frac{\\varepsilon_{\\text{lateral}}}{\\varepsilon_{\\text{axial}}}"],
-        ["p", "For most metals, $\\nu$ is between 0.25 and 0.35 (steel: 0.29, aluminium: 0.33, copper: 0.34). Rubber approaches 0.50, the value for an incompressible material. Cork is close to 0, which is why it works as a bottle stopper: it compresses axially without expanding laterally."],
-
-        ["h3", "The elastic moduli"],
-        ["p", "An isotropic material has only two independent elastic constants. Any two suffice to derive all others. The four commonly used moduli are:"],
-        ["ul", [
-          "<strong>Young's modulus</strong> $E$: resistance to uniaxial tension or compression.",
-          "<strong>Shear modulus</strong> $G$ (or $\\mu$): resistance to shear. $G = E / [2(1+\\nu)]$.",
-          "<strong>Bulk modulus</strong> $K$: resistance to uniform compression. $K = E / [3(1-2\\nu)]$.",
-          "<strong>Poisson's ratio</strong> $\\nu$: lateral contraction per unit axial extension."
-        ]],
-        ["p", "For steel ($E = 210$ GPa, $\\nu = 0.29$): $G = 81$ GPa and $K = 167$ GPa. Note that $K > E > G$ is typical. Materials resist volumetric compression more than they resist tension, and they resist tension more than shear. This ordering makes physical sense: shearing atoms past each other is easier than forcing them closer together."],
-
-        ["h3", "Physical origin of elastic moduli"],
-        ["p", "The elastic modulus is determined by interatomic forces. Near the equilibrium spacing $r_0$, the potential energy $U(r)$ can be expanded as a Taylor series:"],
-        ["eq", "U(r) \\approx U(r_0) + \\frac{1}{2}\\left(\\frac{d^2 U}{dr^2}\\right)_{r_0}(r - r_0)^2 + \\cdots"],
-        ["p", "The first derivative vanishes at equilibrium. The second derivative is the spring constant of the bond. Young's modulus is proportional to this curvature divided by the equilibrium spacing:"],
-        ["eq", "E \\approx \\frac{1}{r_0}\\left(\\frac{d^2 U}{dr^2}\\right)_{r_0}"],
-        ["p", "Deep, narrow potential wells (strong, stiff bonds) give high moduli. Shallow, broad wells (weak bonds) give low moduli. Diamond has the deepest well (short, strong covalent C-C bonds) and the highest modulus. Metals have moderately deep wells. Polymers are soft because their elasticity comes from straightening tangled chains, not stretching bonds."],
-        ["callout", "Why alloying barely changes E", "Adding 0.8% carbon to iron raises the yield strength from 100 to 400 MPa but changes $E$ by less than 1%. Elastic moduli depend on the bond stiffness, which is set by the electronic structure of the atoms. Alloying, cold work, precipitation hardening and grain refinement all impede dislocation motion (plastic deformation) but barely affect the interatomic potential."],
-
-        ["h3", "Anisotropic elasticity"],
-        ["p", "Real crystals are not isotropic. A single crystal of copper has $E_{\\langle 111 \\rangle} = 191$ GPa along the $\\langle 111 \\rangle$ direction and $E_{\\langle 100 \\rangle} = 67$ GPa along $\\langle 100 \\rangle$, nearly a factor of three difference. Iron shows a similar anisotropy: 283 GPa along $\\langle 111 \\rangle$ versus 125 GPa along $\\langle 100 \\rangle$."],
-        ["p", "The full description of anisotropic elasticity uses the stiffness tensor $C_{ijkl}$, a fourth-rank tensor with up to 21 independent components (for triclinic symmetry). Cubic crystals have three independent constants: $C_{11}$, $C_{12}$ and $C_{44}$. The Zener anisotropy ratio $A = 2C_{44}/(C_{11} - C_{12})$ measures the departure from isotropy; $A = 1$ is isotropic. Copper has $A = 3.21$, iron has $A = 2.41$, tungsten has $A = 1.00$ (almost perfectly isotropic)."],
-        ["p", "Polycrystalline metals, with randomly oriented grains, average over all directions. The Voigt (upper) and Reuss (lower) bounds bracket the effective modulus; the Hill average (their arithmetic mean) is commonly used. For polycrystalline copper, the Hill average gives $E \\approx 130$ GPa, which falls between the single-crystal extremes of 67 and 191 GPa."],
-
-        ["h3", "Generalised Hooke's law"],
-        ["p", "In three dimensions, the stress and strain tensors are related by:"],
-        ["eq", "\\sigma_{ij} = C_{ijkl}\\,\\varepsilon_{kl}"],
-        ["p", "Using Voigt notation (replacing pairs of indices with single indices: $11 \\to 1$, $22 \\to 2$, $33 \\to 3$, $23 \\to 4$, $13 \\to 5$, $12 \\to 6$), this becomes a $6 \\times 6$ matrix equation. For a cubic crystal:"],
-        ["eq", "\\begin{pmatrix} \\sigma_1 \\\\ \\sigma_2 \\\\ \\sigma_3 \\\\ \\sigma_4 \\\\ \\sigma_5 \\\\ \\sigma_6 \\end{pmatrix} = \\begin{pmatrix} C_{11} & C_{12} & C_{12} & 0 & 0 & 0 \\\\ C_{12} & C_{11} & C_{12} & 0 & 0 & 0 \\\\ C_{12} & C_{12} & C_{11} & 0 & 0 & 0 \\\\ 0 & 0 & 0 & C_{44} & 0 & 0 \\\\ 0 & 0 & 0 & 0 & C_{44} & 0 \\\\ 0 & 0 & 0 & 0 & 0 & C_{44} \\end{pmatrix} \\begin{pmatrix} \\varepsilon_1 \\\\ \\varepsilon_2 \\\\ \\varepsilon_3 \\\\ \\varepsilon_4 \\\\ \\varepsilon_5 \\\\ \\varepsilon_6 \\end{pmatrix}"],
-
-        ["h3", "Temperature dependence"],
-        ["p", "Elastic moduli decrease with increasing temperature, typically by 3-5% per 100 K for metals. This is because thermal expansion increases the interatomic spacing, moving atoms away from the minimum of the potential well where the curvature is greatest. Steel at 500°C has $E \\approx 180$ GPa compared to 210 GPa at room temperature. Turbine blade alloys must maintain stiffness at 1000°C and above, which is one reason nickel-based superalloys (with their high melting points and strong bonding) dominate that application."],
-
-        ["h3", "Elastic strain energy"],
-        ["p", "The work done during elastic deformation is stored as strain energy. Per unit volume:"],
-        ["eq", "u = \\frac{1}{2}\\sigma\\varepsilon = \\frac{\\sigma^2}{2E} = \\frac{1}{2}E\\varepsilon^2"],
-        ["p", "This stored energy is recovered on unloading. It is also what drives elastic springback in sheet metal forming and what is released during fracture. A material with a high yield stress and low modulus stores the most elastic energy per unit volume, which is the basis for spring design. Spring steels ($\\sigma_y \\approx 1500$ MPa, $E = 210$ GPa) store about 5 MJ/m$^3$ at yield. Rubber ($\\sigma \\approx 5$ MPa, $E = 0.01$ GPa) stores about 1.25 MJ/m$^3$."],
-
-        ["derivation", "The resilience (maximum elastic energy per unit volume) is $u_R = \\sigma_y^2 / (2E)$.", [
-          ["p", "At the yield point, $\\sigma = \\sigma_y$ and $\\varepsilon = \\sigma_y / E$. The elastic strain energy density is:"],
-          ["eq", "u_R = \\frac{1}{2}\\sigma_y \\cdot \\frac{\\sigma_y}{E} = \\frac{\\sigma_y^2}{2E}"],
-          ["p", "This is the modulus of resilience. It favours materials with high strength and low stiffness. For spring steel ($\\sigma_y = 1500$ MPa, $E = 210$ GPa): $u_R = 1500^2 / (2 \\times 210000) = 5.36$ MJ/m$^3$. For titanium alloy Ti-6Al-4V ($\\sigma_y = 880$ MPa, $E = 114$ GPa): $u_R = 3.40$ MJ/m$^3$."]
-        ]],
-
-        ["problem", "A nickel single crystal is loaded in uniaxial tension along the $[100]$ direction. The elastic constants of nickel are $C_{11} = 250$ GPa, $C_{12} = 160$ GPa, $C_{44} = 118$ GPa. Calculate Young's modulus along $[100]$ and the Zener anisotropy ratio.", [
-          ["p", "For a cubic crystal loaded along $[100]$, $E_{100} = (C_{11} - C_{12})(C_{11} + 2C_{12}) / (C_{11} + C_{12})$."],
-          ["p", "Numerator: $(250 - 160)(250 + 320) = 90 \\times 570 = 51300$ GPa$^2$."],
-          ["p", "Denominator: $250 + 160 = 410$ GPa."],
-          ["eq", "E_{100} = \\frac{51300}{410} = 125 \\text{ GPa}"],
-          ["p", "Zener anisotropy ratio: $A = 2C_{44}/(C_{11} - C_{12}) = 2 \\times 118 / 90 = 2.62$."],
-          ["p", "Nickel is significantly anisotropic ($A = 2.62$, far from 1). Yet polycrystalline nickel has an isotropic $E \\approx 200$ GPa because random grain orientations average out the anisotropy."]
-        ]]
+        [
+          "h3",
+          "Hooke's law"
+        ],
+        [
+          "p",
+          "In the elastic regime, stress is proportional to strain:"
+        ],
+        [
+          "eq",
+          "\\sigma = E \\varepsilon"
+        ],
+        [
+          "p",
+          "The constant of proportionality $E$ is Young's modulus. It has units of stress (Pa) and represents the stiffness of the material. Some representative values at room temperature: steel 210 GPa, aluminium 70 GPa, copper 130 GPa, titanium 116 GPa, glass 70 GPa, polyethylene 1 GPa, rubber 0.01 GPa. These span five orders of magnitude. The differences trace back to bonding."
+        ],
+        [
+          "p",
+          "Young's modulus is not the only elastic constant. Under uniaxial tension, a bar gets longer but also gets thinner. The ratio of lateral contraction to axial extension is Poisson's ratio:"
+        ],
+        [
+          "eq",
+          "\\nu = -\\frac{\\varepsilon_{\\text{lateral}}}{\\varepsilon_{\\text{axial}}}"
+        ],
+        [
+          "p",
+          "For most metals, $\\nu$ is between 0.25 and 0.35 (steel: 0.29, aluminium: 0.33, copper: 0.34). Rubber approaches 0.50, the value for an incompressible material. Cork is close to 0, which is why it works as a bottle stopper: it compresses axially without expanding laterally."
+        ],
+        [
+          "h3",
+          "The elastic moduli"
+        ],
+        [
+          "p",
+          "An isotropic material has only two independent elastic constants. Any two suffice to derive all others. The four commonly used moduli are:"
+        ],
+        [
+          "ul",
+          [
+            "<strong>Young's modulus</strong> $E$: resistance to uniaxial tension or compression.",
+            "<strong>Shear modulus</strong> $G$ (or $\\mu$): resistance to shear. $G = E / [2(1+\\nu)]$.",
+            "<strong>Bulk modulus</strong> $K$: resistance to uniform compression. $K = E / [3(1-2\\nu)]$.",
+            "<strong>Poisson's ratio</strong> $\\nu$: lateral contraction per unit axial extension."
+          ]
+        ],
+        [
+          "p",
+          "For steel ($E = 210$ GPa, $\\nu = 0.29$): $G = 81$ GPa and $K = 167$ GPa. Note that $K > E > G$ is typical. Materials resist volumetric compression more than they resist tension, and they resist tension more than shear. This ordering makes physical sense: shearing atoms past each other is easier than forcing them closer together."
+        ],
+        [
+          "h3",
+          "Physical origin of elastic moduli"
+        ],
+        [
+          "p",
+          "The elastic modulus is determined by interatomic forces. Near the equilibrium spacing $r_0$, the potential energy $U(r)$ can be expanded as a Taylor series:"
+        ],
+        [
+          "eq",
+          "U(r) \\approx U(r_0) + \\frac{1}{2}\\left(\\frac{d^2 U}{dr^2}\\right)_{r_0}(r - r_0)^2 + \\cdots"
+        ],
+        [
+          "p",
+          "The first derivative vanishes at equilibrium. The second derivative is the spring constant of the bond. Young's modulus is proportional to this curvature divided by the equilibrium spacing:"
+        ],
+        [
+          "eq",
+          "E \\approx \\frac{1}{r_0}\\left(\\frac{d^2 U}{dr^2}\\right)_{r_0}"
+        ],
+        [
+          "p",
+          "Deep, narrow potential wells (strong, stiff bonds) give high moduli. Shallow, broad wells (weak bonds) give low moduli. Diamond has the deepest well (short, strong covalent C-C bonds) and the highest modulus. Metals have moderately deep wells. Polymers are soft because their elasticity comes from straightening tangled chains, not stretching bonds."
+        ],
+        [
+          "callout",
+          "Why alloying barely changes E",
+          "Adding 0.8% carbon to iron raises the yield strength from 100 to 400 MPa but changes $E$ by less than 1%. Elastic moduli depend on the bond stiffness, which is set by the electronic structure of the atoms. Alloying, cold work, precipitation hardening and grain refinement all impede dislocation motion (plastic deformation) but barely affect the interatomic potential."
+        ],
+        [
+          "h3",
+          "Anisotropic elasticity"
+        ],
+        [
+          "p",
+          "Real crystals are not isotropic. A single crystal of copper has $E_{\\langle 111 \\rangle} = 191$ GPa along the $\\langle 111 \\rangle$ direction and $E_{\\langle 100 \\rangle} = 67$ GPa along $\\langle 100 \\rangle$, nearly a factor of three difference. Iron shows a similar anisotropy: 283 GPa along $\\langle 111 \\rangle$ versus 125 GPa along $\\langle 100 \\rangle$."
+        ],
+        [
+          "p",
+          "The full description of anisotropic elasticity uses the stiffness tensor $C_{ijkl}$, a fourth-rank tensor with up to 21 independent components (for triclinic symmetry). Cubic crystals have three independent constants: $C_{11}$, $C_{12}$ and $C_{44}$. The Zener anisotropy ratio $A = 2C_{44}/(C_{11} - C_{12})$ measures the departure from isotropy; $A = 1$ is isotropic. Copper has $A = 3.21$, iron has $A = 2.41$, tungsten has $A = 1.00$ (almost perfectly isotropic)."
+        ],
+        [
+          "p",
+          "Polycrystalline metals, with randomly oriented grains, average over all directions. The Voigt (upper) and Reuss (lower) bounds bracket the effective modulus; the Hill average (their arithmetic mean) is commonly used. For polycrystalline copper, the Hill average gives $E \\approx 130$ GPa, which falls between the single-crystal extremes of 67 and 191 GPa."
+        ],
+        [
+          "h3",
+          "Generalised Hooke's law"
+        ],
+        [
+          "p",
+          "In three dimensions, the stress and strain tensors are related by:"
+        ],
+        [
+          "eq",
+          "\\sigma_{ij} = C_{ijkl}\\,\\varepsilon_{kl}"
+        ],
+        [
+          "p",
+          "Using Voigt notation (replacing pairs of indices with single indices: $11 \\to 1$, $22 \\to 2$, $33 \\to 3$, $23 \\to 4$, $13 \\to 5$, $12 \\to 6$), this becomes a $6 \\times 6$ matrix equation. For a cubic crystal:"
+        ],
+        [
+          "eq",
+          "\\begin{pmatrix} \\sigma_1 \\\\ \\sigma_2 \\\\ \\sigma_3 \\\\ \\sigma_4 \\\\ \\sigma_5 \\\\ \\sigma_6 \\end{pmatrix} = \\begin{pmatrix} C_{11} & C_{12} & C_{12} & 0 & 0 & 0 \\\\ C_{12} & C_{11} & C_{12} & 0 & 0 & 0 \\\\ C_{12} & C_{12} & C_{11} & 0 & 0 & 0 \\\\ 0 & 0 & 0 & C_{44} & 0 & 0 \\\\ 0 & 0 & 0 & 0 & C_{44} & 0 \\\\ 0 & 0 & 0 & 0 & 0 & C_{44} \\end{pmatrix} \\begin{pmatrix} \\varepsilon_1 \\\\ \\varepsilon_2 \\\\ \\varepsilon_3 \\\\ \\varepsilon_4 \\\\ \\varepsilon_5 \\\\ \\varepsilon_6 \\end{pmatrix}"
+        ],
+        [
+          "h3",
+          "Temperature dependence"
+        ],
+        [
+          "p",
+          "Elastic moduli decrease with increasing temperature, typically by 3-5% per 100 K for metals. This is because thermal expansion increases the interatomic spacing, moving atoms away from the minimum of the potential well where the curvature is greatest. Steel at 500\u00b0C has $E \\approx 180$ GPa compared to 210 GPa at room temperature. Turbine blade alloys must maintain stiffness at 1000\u00b0C and above, which is one reason nickel-based superalloys (with their high melting points and strong bonding) dominate that application."
+        ],
+        [
+          "h3",
+          "Elastic strain energy"
+        ],
+        [
+          "p",
+          "The work done during elastic deformation is stored as strain energy. Per unit volume:"
+        ],
+        [
+          "eq",
+          "u = \\frac{1}{2}\\sigma\\varepsilon = \\frac{\\sigma^2}{2E} = \\frac{1}{2}E\\varepsilon^2"
+        ],
+        [
+          "p",
+          "This stored energy is recovered on unloading. It is also what drives elastic springback in sheet metal forming and what is released during fracture. A material with a high yield stress and low modulus stores the most elastic energy per unit volume, which is the basis for spring design. Spring steels ($\\sigma_y \\approx 1500$ MPa, $E = 210$ GPa) store about 5 MJ/m$^3$ at yield. Rubber ($\\sigma \\approx 5$ MPa, $E = 0.01$ GPa) stores about 1.25 MJ/m$^3$."
+        ],
+        [
+          "derivation",
+          "The resilience (maximum elastic energy per unit volume) is $u_R = \\sigma_y^2 / (2E)$.",
+          [
+            [
+              "p",
+              "At the yield point, $\\sigma = \\sigma_y$ and $\\varepsilon = \\sigma_y / E$. The elastic strain energy density is:"
+            ],
+            [
+              "eq",
+              "u_R = \\frac{1}{2}\\sigma_y \\cdot \\frac{\\sigma_y}{E} = \\frac{\\sigma_y^2}{2E}"
+            ],
+            [
+              "p",
+              "This is the modulus of resilience. It favours materials with high strength and low stiffness. For spring steel ($\\sigma_y = 1500$ MPa, $E = 210$ GPa): $u_R = 1500^2 / (2 \\times 210000) = 5.36$ MJ/m$^3$. For titanium alloy Ti-6Al-4V ($\\sigma_y = 880$ MPa, $E = 114$ GPa): $u_R = 3.40$ MJ/m$^3$."
+            ]
+          ]
+        ],
+        [
+          "problem",
+          "A nickel single crystal is loaded in uniaxial tension along the $[100]$ direction. The elastic constants of nickel are $C_{11} = 250$ GPa, $C_{12} = 160$ GPa, $C_{44} = 118$ GPa. Calculate Young's modulus along $[100]$ and the Zener anisotropy ratio.",
+          [
+            [
+              "p",
+              "For a cubic crystal loaded along $[100]$, $E_{100} = (C_{11} - C_{12})(C_{11} + 2C_{12}) / (C_{11} + C_{12})$."
+            ],
+            [
+              "p",
+              "Numerator: $(250 - 160)(250 + 320) = 90 \\times 570 = 51300$ GPa$^2$."
+            ],
+            [
+              "p",
+              "Denominator: $250 + 160 = 410$ GPa."
+            ],
+            [
+              "eq",
+              "E_{100} = \\frac{51300}{410} = 125 \\text{ GPa}"
+            ],
+            [
+              "p",
+              "Zener anisotropy ratio: $A = 2C_{44}/(C_{11} - C_{12}) = 2 \\times 118 / 90 = 2.62$."
+            ],
+            [
+              "p",
+              "Nickel is significantly anisotropic ($A = 2.62$, far from 1). Yet polycrystalline nickel has an isotropic $E \\approx 200$ GPa because random grain orientations average out the anisotropy."
+            ]
+          ]
+        ]
       ],
       "related": [
-        { "title": "Stress & Strain", "url": "stress-strain-engineering-vs-true" },
-        { "title": "Bond Energy & Force Curves", "url": "../bonding/bond-energy-interatomic-spacing-force-curves" },
-        { "title": "Crystal Systems", "url": "../crystallography/crystal-systems" }
+        {
+          "title": "Stress & Strain",
+          "url": "stress-strain-engineering-vs-true"
+        },
+        {
+          "title": "Bond Energy & Force Curves",
+          "url": "../bonding/bond-energy-interatomic-spacing-force-curves"
+        },
+        {
+          "title": "Crystal Systems",
+          "url": "../crystallography/crystal-systems"
+        }
       ]
     },
     {
@@ -157,59 +420,205 @@
       "readingTime": "15 min",
       "intro": "Plastic deformation is permanent. Remove the load and the material does not return to its original shape. In crystalline metals, this happens by the motion of dislocations along specific crystallographic planes and directions. The geometry of slip governs ductility, formability and work hardening.",
       "body": [
-        ["h3", "The theoretical shear strength"],
-        ["p", "Imagine shearing one plane of atoms over another in a perfect crystal. The stress required to do this simultaneously across the entire plane is the theoretical shear strength. Frenkel estimated it in 1926 by modelling the shear stress as a sinusoidal function of displacement:"],
-        ["eq", "\\tau_{\\text{th}} \\approx \\frac{G}{2\\pi} \\approx \\frac{G}{10}"],
-        ["p", "For copper ($G = 48$ GPa), this predicts $\\tau_{\\text{th}} \\approx 5$ GPa. The measured yield stress of annealed copper in shear is about 40 MPa. The real crystal is weaker than the theoretical prediction by a factor of 100. This enormous discrepancy was the central puzzle of 20th-century metallurgy, resolved in 1934 by the independent proposals of Taylor, Orowan and Polanyi: crystals contain dislocations, and plastic deformation occurs by their motion."],
-
-        ["h3", "Dislocations and slip"],
-        ["p", "A dislocation is a line defect in the crystal lattice. An edge dislocation has an extra half-plane of atoms inserted above the slip plane. A screw dislocation has atoms arranged in a helical ramp around the dislocation line. Most real dislocations are mixed, with both edge and screw character."],
-        ["p", "When a shear stress acts on the slip plane, the dislocation moves. Each increment of dislocation motion displaces the crystal above the slip plane by one Burgers vector $\\mathbf{b}$ relative to the crystal below. The Burgers vector has magnitude equal to the nearest-neighbour distance, typically 2-3 &Aring; in metals. Because slip happens one atomic row at a time, the stress required is orders of magnitude less than the theoretical shear strength."],
-        ["callout", "The carpet analogy", "Moving a heavy carpet across a floor is hard if you try to slide the whole thing at once. It is easy if you make a ruck and push the ruck across. The ruck is the dislocation. The carpet moves one ruck-width at a time, and the force required is far less than for sliding the entire carpet."],
-
-        ["h3", "Slip systems"],
-        ["p", "Slip occurs on the most densely packed planes in the most densely packed directions. This minimises the magnitude of the Burgers vector and hence the energy of the dislocation. A slip system is a combination of a slip plane and a slip direction."],
-        ["p", "<strong>FCC metals</strong> (Cu, Al, Ni, Au): slip on $\\{111\\}$ planes in $\\langle 110 \\rangle$ directions. Four planes, three directions each: 12 slip systems. This abundance of slip systems is why FCC metals are ductile and easy to form."],
-        ["p", "<strong>BCC metals</strong> (Fe, W, Mo, Cr): slip on $\\{110\\}$, $\\{112\\}$ and $\\{123\\}$ planes, all in $\\langle 111 \\rangle$ directions. Up to 48 slip systems, but none of the planes is truly close-packed, so the critical resolved shear stress (CRSS) is higher and more temperature-dependent than in FCC."],
-        ["p", "<strong>HCP metals</strong> (Mg, Ti, Zn): slip primarily on the basal plane $(0001)$ in $\\langle 11\\bar{2}0 \\rangle$ directions, giving only 3 independent slip systems (basal slip alone provides only 2). The von Mises criterion requires 5 independent slip systems for arbitrary plastic deformation, so HCP metals are less ductile. Prismatic and pyramidal slip activate at higher stresses or temperatures."],
-
-        ["h3", "Schmid's law and the critical resolved shear stress"],
-        ["p", "A uniaxial stress $\\sigma$ does not act directly on a slip system. The resolved shear stress on a slip plane with normal at angle $\\phi$ to the tensile axis, in a slip direction at angle $\\lambda$ to the tensile axis, is:"],
-        ["eq", "\\tau_R = \\sigma \\cos\\phi \\cos\\lambda"],
-        ["p", "The product $\\cos\\phi \\cos\\lambda$ is the Schmid factor $m$. Its maximum value is 0.5, achieved when $\\phi = \\lambda = 45°$. Slip begins when $\\tau_R$ reaches the critical resolved shear stress $\\tau_{\\text{CRSS}}$:"],
-        ["eq", "\\sigma_y = \\frac{\\tau_{\\text{CRSS}}}{\\cos\\phi\\cos\\lambda} = \\frac{\\tau_{\\text{CRSS}}}{m}"],
-        ["p", "The CRSS is a material property (for a given temperature and purity). Some values at room temperature: copper 0.5-1.0 MPa, aluminium 0.8-1.5 MPa, iron 28 MPa, zinc (basal) 0.2 MPa. The low CRSS of zinc basal slip explains why zinc single crystals can be bent by hand along the basal plane."],
-
-        ["derivation", "Schmid's law: $\\tau_R = \\sigma \\cos\\phi \\cos\\lambda$.", [
-          ["p", "Consider a cylindrical single crystal of cross-sectional area $A$, loaded in tension with force $F$, so $\\sigma = F/A$."],
-          ["p", "The slip plane has area $A / \\cos\\phi$ (larger than $A$ because the plane is tilted). The component of force acting in the slip direction is $F \\cos\\lambda$."],
-          ["p", "The resolved shear stress is the force component in the slip direction divided by the area of the slip plane:"],
-          ["eq", "\\tau_R = \\frac{F\\cos\\lambda}{A / \\cos\\phi} = \\frac{F}{A}\\cos\\phi\\cos\\lambda = \\sigma\\cos\\phi\\cos\\lambda"]
-        ]],
-
-        ["h3", "Work hardening"],
-        ["p", "As plastic deformation proceeds, the material becomes harder. The dislocation density in annealed copper is about $10^{10}$ m$^{-2}$; after heavy cold work it rises to $10^{15}$-$10^{16}$ m$^{-2}$. These dislocations interact with each other, forming tangles and forests that impede further motion. The flow stress increases approximately as:"],
-        ["eq", "\\tau = \\tau_0 + \\alpha G b \\sqrt{\\rho}"],
-        ["p", "where $\\rho$ is the dislocation density, $b$ is the Burgers vector magnitude, $G$ is the shear modulus and $\\alpha \\approx 0.3$-$0.6$ is a constant. This is the Taylor hardening equation. Doubling the dislocation density increases the flow stress by $\\sqrt{2} \\approx 41\\%$."],
-
-        ["h3", "Yield criteria for polycrystals"],
-        ["p", "Real components experience multiaxial stress states. Two criteria are widely used to predict when yielding begins:"],
-        ["p", "<strong>Tresca criterion</strong>: yielding occurs when the maximum shear stress reaches $\\tau_{\\text{CRSS}}$, i.e. $(\\sigma_1 - \\sigma_3)/2 = k$ where $\\sigma_1 > \\sigma_2 > \\sigma_3$ are the principal stresses."],
-        ["p", "<strong>Von Mises criterion</strong>: yielding occurs when the distortion energy reaches a critical value:"],
-        ["eq", "(\\sigma_1 - \\sigma_2)^2 + (\\sigma_2 - \\sigma_3)^2 + (\\sigma_3 - \\sigma_1)^2 = 2\\sigma_y^2"],
-        ["p", "Von Mises fits experimental data for ductile metals more accurately than Tresca. The two criteria differ by at most 15% (they coincide for uniaxial tension and pure shear)."],
-
-        ["problem", "A copper single crystal is loaded in tension. The slip system with the highest Schmid factor has $\\phi = 39°$ and $\\lambda = 50°$. If $\\tau_{\\text{CRSS}} = 0.65$ MPa, what is the tensile yield stress?", [
-          ["p", "Schmid factor: $m = \\cos(39°)\\cos(50°) = 0.777 \\times 0.643 = 0.499$."],
-          ["eq", "\\sigma_y = \\frac{\\tau_{\\text{CRSS}}}{m} = \\frac{0.65}{0.499} = 1.30 \\text{ MPa}"],
-          ["p", "This is extremely low compared to polycrystalline copper (yield stress ~70 MPa for annealed, ~300 MPa for cold-worked). The huge difference comes from grain boundaries, dislocation tangles and other obstacles that polycrystals contain. Strengthening mechanisms are the subject of article 8.4."]
-        ]]
+        [
+          "h3",
+          "The theoretical shear strength"
+        ],
+        [
+          "p",
+          "Imagine shearing one plane of atoms over another in a perfect crystal. The stress required to do this simultaneously across the entire plane is the theoretical shear strength. Frenkel estimated it in 1926 by modelling the shear stress as a sinusoidal function of displacement:"
+        ],
+        [
+          "eq",
+          "\\tau_{\\text{th}} \\approx \\frac{G}{2\\pi} \\approx \\frac{G}{10}"
+        ],
+        [
+          "p",
+          "For copper ($G = 48$ GPa), this predicts $\\tau_{\\text{th}} \\approx 5$ GPa. The measured yield stress of annealed copper in shear is about 40 MPa. The real crystal is weaker than the theoretical prediction by a factor of 100. This enormous discrepancy was the central puzzle of 20th-century metallurgy, resolved in 1934 by the independent proposals of Taylor, Orowan and Polanyi: crystals contain dislocations, and plastic deformation occurs by their motion."
+        ],
+        [
+          "h3",
+          "Dislocations and slip"
+        ],
+        [
+          "p",
+          "A dislocation is a line defect in the crystal lattice. An edge dislocation has an extra half-plane of atoms inserted above the slip plane. A screw dislocation has atoms arranged in a helical ramp around the dislocation line. Most real dislocations are mixed, with both edge and screw character."
+        ],
+        [
+          "p",
+          "When a shear stress acts on the slip plane, the dislocation moves. Each increment of dislocation motion displaces the crystal above the slip plane by one Burgers vector $\\mathbf{b}$ relative to the crystal below. The Burgers vector has magnitude equal to the nearest-neighbour distance, typically 2-3 &Aring; in metals. Because slip happens one atomic row at a time, the stress required is orders of magnitude less than the theoretical shear strength."
+        ],
+        [
+          "callout",
+          "The carpet analogy",
+          "Moving a heavy carpet across a floor is hard if you try to slide the whole thing at once. It is easy if you make a ruck and push the ruck across. The ruck is the dislocation. The carpet moves one ruck-width at a time, and the force required is far less than for sliding the entire carpet."
+        ],
+        [
+          "h3",
+          "Slip systems"
+        ],
+        [
+          "p",
+          "Slip occurs on the most densely packed planes in the most densely packed directions. This minimises the magnitude of the Burgers vector and hence the energy of the dislocation. A slip system is a combination of a slip plane and a slip direction."
+        ],
+        [
+          "p",
+          "<strong>FCC metals</strong> (Cu, Al, Ni, Au): slip on $\\{111\\}$ planes in $\\langle 110 \\rangle$ directions. Four planes, three directions each: 12 slip systems. This abundance of slip systems is why FCC metals are ductile and easy to form."
+        ],
+        [
+          "p",
+          "<strong>BCC metals</strong> (Fe, W, Mo, Cr): slip on $\\{110\\}$, $\\{112\\}$ and $\\{123\\}$ planes, all in $\\langle 111 \\rangle$ directions. Up to 48 slip systems, but none of the planes is truly close-packed, so the critical resolved shear stress (CRSS) is higher and more temperature-dependent than in FCC."
+        ],
+        [
+          "p",
+          "<strong>HCP metals</strong> (Mg, Ti, Zn): the primary slip system is basal $(0001)\\langle 11\\bar{2}0 \\rangle$, which provides only 2 independent systems. The von Mises criterion requires 5 for arbitrary plastic deformation, so additional systems must activate. Which ones do depends on the c/a ratio. Titanium (c/a = 1.587, below ideal) favours prismatic slip, giving it 5 independent systems and good ductility. Magnesium (c/a = 1.624, near ideal) relies on basal slip at room temperature but can activate pyramidal $\\langle c+a \\rangle$ slip at moderate temperatures or through alloying, and recent alloy development has produced remarkably ductile Mg sheets. Zinc (c/a = 1.856, well above ideal) has strongly preferred basal slip and limited ductility. The blanket statement \"HCP metals are brittle\" is wrong; the c/a ratio and the relative critical resolved shear stresses of different slip systems determine the outcome."
+        ],
+        [
+          "h3",
+          "Schmid's law and the critical resolved shear stress"
+        ],
+        [
+          "p",
+          "A uniaxial stress $\\sigma$ does not act directly on a slip system. The resolved shear stress on a slip plane with normal at angle $\\phi$ to the tensile axis, in a slip direction at angle $\\lambda$ to the tensile axis, is:"
+        ],
+        [
+          "eq",
+          "\\tau_R = \\sigma \\cos\\phi \\cos\\lambda"
+        ],
+        [
+          "p",
+          "The product $\\cos\\phi \\cos\\lambda$ is the Schmid factor $m$. Its maximum value is 0.5, achieved when $\\phi = \\lambda = 45\u00b0$. Slip begins when $\\tau_R$ reaches the critical resolved shear stress $\\tau_{\\text{CRSS}}$:"
+        ],
+        [
+          "eq",
+          "\\sigma_y = \\frac{\\tau_{\\text{CRSS}}}{\\cos\\phi\\cos\\lambda} = \\frac{\\tau_{\\text{CRSS}}}{m}"
+        ],
+        [
+          "p",
+          "The CRSS is a material property (for a given temperature and purity). Some values at room temperature: copper 0.5-1.0 MPa, aluminium 0.8-1.5 MPa, iron 28 MPa, zinc (basal) 0.2 MPa. The low CRSS of zinc basal slip explains why zinc single crystals can be bent by hand along the basal plane."
+        ],
+        [
+          "derivation",
+          "Schmid's law: $\\tau_R = \\sigma \\cos\\phi \\cos\\lambda$.",
+          [
+            [
+              "p",
+              "Consider a cylindrical single crystal of cross-sectional area $A$, loaded in tension with force $F$, so $\\sigma = F/A$."
+            ],
+            [
+              "p",
+              "The slip plane has area $A / \\cos\\phi$ (larger than $A$ because the plane is tilted). The component of force acting in the slip direction is $F \\cos\\lambda$."
+            ],
+            [
+              "p",
+              "The resolved shear stress is the force component in the slip direction divided by the area of the slip plane:"
+            ],
+            [
+              "eq",
+              "\\tau_R = \\frac{F\\cos\\lambda}{A / \\cos\\phi} = \\frac{F}{A}\\cos\\phi\\cos\\lambda = \\sigma\\cos\\phi\\cos\\lambda"
+            ]
+          ]
+        ],
+        [
+          "h3",
+          "Work hardening"
+        ],
+        [
+          "p",
+          "As plastic deformation proceeds, the material becomes harder. The dislocation density in annealed copper is about $10^{10}$ m$^{-2}$; after heavy cold work it rises to $10^{15}$-$10^{16}$ m$^{-2}$. These dislocations interact with each other, forming tangles and forests that impede further motion. The flow stress increases approximately as:"
+        ],
+        [
+          "eq",
+          "\\tau = \\tau_0 + \\alpha G b \\sqrt{\\rho}"
+        ],
+        [
+          "p",
+          "where $\\rho$ is the dislocation density, $b$ is the Burgers vector magnitude, $G$ is the shear modulus and $\\alpha \\approx 0.3$-$0.6$ is a constant. This is the Taylor hardening equation. Doubling the dislocation density increases the flow stress by $\\sqrt{2} \\approx 41\\%$."
+        ],
+        [
+          "h3",
+          "Yield criteria for polycrystals"
+        ],
+        [
+          "p",
+          "Real components experience multiaxial stress states. Two criteria are widely used to predict when yielding begins:"
+        ],
+        [
+          "p",
+          "<strong>Tresca criterion</strong>: yielding occurs when the maximum shear stress reaches $\\tau_{\\text{CRSS}}$, i.e. $(\\sigma_1 - \\sigma_3)/2 = k$ where $\\sigma_1 > \\sigma_2 > \\sigma_3$ are the principal stresses."
+        ],
+        [
+          "p",
+          "<strong>Von Mises criterion</strong>: yielding occurs when the distortion energy reaches a critical value:"
+        ],
+        [
+          "eq",
+          "(\\sigma_1 - \\sigma_2)^2 + (\\sigma_2 - \\sigma_3)^2 + (\\sigma_3 - \\sigma_1)^2 = 2\\sigma_y^2"
+        ],
+        [
+          "p",
+          "Von Mises fits experimental data for ductile metals more accurately than Tresca. The two criteria differ by at most 15% (they coincide for uniaxial tension and pure shear)."
+        ],
+        [
+          "problem",
+          "A copper single crystal is loaded in tension. The slip system with the highest Schmid factor has $\\phi = 39\u00b0$ and $\\lambda = 50\u00b0$. If $\\tau_{\\text{CRSS}} = 0.65$ MPa, what is the tensile yield stress?",
+          [
+            [
+              "p",
+              "Schmid factor: $m = \\cos(39\u00b0)\\cos(50\u00b0) = 0.777 \\times 0.643 = 0.499$."
+            ],
+            [
+              "eq",
+              "\\sigma_y = \\frac{\\tau_{\\text{CRSS}}}{m} = \\frac{0.65}{0.499} = 1.30 \\text{ MPa}"
+            ],
+            [
+              "p",
+              "This is extremely low compared to polycrystalline copper (yield stress ~70 MPa for annealed, ~300 MPa for cold-worked). The huge difference comes from grain boundaries, dislocation tangles and other obstacles that polycrystals contain. Strengthening mechanisms are the subject of article 8.4."
+            ]
+          ]
+        ]
       ],
       "related": [
-        { "title": "Stress & Strain", "url": "stress-strain-engineering-vs-true" },
-        { "title": "Strengthening Mechanisms", "url": "strengthening-mechanisms" },
-        { "title": "Defects", "url": "../defects/" },
-        { "title": "Crystal Systems", "url": "../crystallography/crystal-systems" }
+        {
+          "title": "Stress & Strain",
+          "url": "stress-strain-engineering-vs-true"
+        },
+        {
+          "title": "Strengthening Mechanisms",
+          "url": "strengthening-mechanisms"
+        },
+        {
+          "title": "Defects",
+          "url": "../defects/"
+        },
+        {
+          "title": "Crystal Systems",
+          "url": "../crystallography/crystal-systems"
+        }
+      ],
+      "comments": [
+        {
+          "id": "3efd1dd3",
+          "selectedText": "independent slip systems for arbitrary plastic deformation, so HCP metals are less ductile",
+          "comment": "This isnt always true as magnesium can be extremely ductile due to prolonged stage II work hardening. It's a question of c/a ratios.",
+          "name": "Anonymous",
+          "votes": 0,
+          "status": "integrated"
+        },
+        {
+          "id": "5c25a08d",
+          "selectedText": "where \r\n\ud835\udf0c\r\n\u03c1 is the dislocation density, \r\n\ud835\udc4f\r\nb is the Burgers vector magnitude, \r\n\ud835\udc3a\r\nG is the shear modulus and \r\n\ud835\udefc\r\n\u2248\r\n0.3\r\n\u03b1\u22480.3-\r\n0.6\r\n0.6 is a constant. This is the Taylor hardening equation. Doubling the dislocation density increases the flow s",
+          "comment": "Can massively expand work hardening - maybe giving it its own page. DIfferent stages, single crystal vs polycrystal, necking etc. Comparing work hardening in BCC, FCC, HCP. All interesting stuff.",
+          "name": "Anonymous",
+          "votes": 0
+        },
+        {
+          "id": "e73887fa",
+          "selectedText": "Yield criteria for polycrystals",
+          "comment": "This probably needs its own page. A visualisation of yield surfaces for VM and Tresca would be helpful. \r\n\r\nPlus, why is it the deviotoric stress component that drives yield not the isostatic",
+          "name": "Anonymous",
+          "votes": 0
+        }
       ]
     },
     {
@@ -220,65 +629,205 @@
       "readingTime": "14 min",
       "intro": "Pure, annealed single crystals are soft. Engineering alloys are strong. The difference is obstacles to dislocation motion. Every strengthening mechanism works the same way: it puts something in the path of a moving dislocation. The four main strategies are grain refinement, solid solution hardening, precipitation hardening and work hardening.",
       "body": [
-        ["h3", "The common principle"],
-        ["p", "Strength in crystalline metals is controlled by dislocations. A material is strong when dislocations cannot move easily. Every strengthening mechanism introduces barriers that require extra stress to overcome. The increase in yield stress is the payoff; the usual cost is reduced ductility. Engineering design is always a trade-off between the two."],
-
-        ["h3", "1. Grain-size strengthening (Hall-Petch)"],
-        ["p", "Grain boundaries block dislocation motion. A dislocation approaching a grain boundary cannot simply cross into the next grain, because the slip planes change orientation. Stress must build up at the boundary until new dislocations are nucleated in the adjacent grain. Smaller grains mean more boundaries and higher strength."],
-        ["p", "The Hall-Petch relation (Hall 1951, Petch 1953):"],
-        ["eq", "\\sigma_y = \\sigma_0 + k_y d^{-1/2}"],
-        ["p", "where $\\sigma_0$ is the lattice friction stress, $k_y$ is the Hall-Petch slope and $d$ is the grain diameter. For low-carbon steel: $\\sigma_0 \\approx 70$ MPa, $k_y \\approx 0.74$ MPa$\\cdot$m$^{1/2}$. Reducing the grain size from 100 $\\mu$m to 1 $\\mu$m increases $\\sigma_y$ from about 300 to 810 MPa."],
-        ["p", "Grain refinement is the only strengthening mechanism that simultaneously increases strength and toughness. Finer grains make crack propagation harder because the crack must change direction at each grain boundary. This is why grain refinement is the preferred first option in structural steel design."],
-        ["callout", "Nanocrystalline breakdown", "Below about 20 nm grain size, the Hall-Petch relation breaks down. Grain boundary sliding and diffusion-based mechanisms take over. Some nanocrystalline metals show an inverse Hall-Petch effect: they get softer as grains shrink further. This crossover is an active area of research."],
-
-        ["h3", "2. Solid solution strengthening"],
-        ["p", "Foreign atoms dissolved in the lattice create local strain fields that interact with the strain field of a dislocation. Substitutional atoms that are larger than the host expand the lattice locally; those that are smaller contract it. Interstitial atoms (carbon in iron, for example) occupy sites between the host atoms and create tetragonal distortions."],
-        ["p", "The strengthening effect scales with the concentration $c$ and the size misfit $\\delta = |\\Delta r / r|$:"],
-        ["eq", "\\Delta\\sigma \\propto G \\delta^{3/2} c^{1/2}"],
-        ["p", "This is the Fleischer model for dilute solid solutions. Carbon in iron is exceptionally potent: 0.01 wt% C raises the yield strength by about 40 MPa. Manganese in iron is less effective: 1 wt% Mn adds about 30 MPa. The difference is partly misfit (C is interstitial, creating a larger distortion) and partly the interaction between the tetragonal strain field of interstitial C and the stress field of edge dislocations."],
-        ["p", "Solid solution strengthening is moderate, always-on (no heat treatment required) and roughly linear at low concentrations. It increases strength without dramatic loss of ductility, which is why virtually all engineering alloys contain some solid-solution elements."],
-
-        ["h3", "3. Precipitation hardening"],
-        ["p", "Small, hard particles dispersed through the matrix are the most powerful strengthening mechanism available. Yield strengths above 1500 MPa are routine in precipitation-hardened aluminium alloys, nickel superalloys and maraging steels."],
-        ["p", "A dislocation encountering a particle can either cut through it or bow around it. The transition between these regimes depends on particle size and coherency."],
-        ["p", "<strong>Cutting (small, coherent particles)</strong>: the dislocation shears the particle. The stress required depends on the particle's internal properties (coherency strain, order, stacking fault energy). For coherent precipitates, the strengthening increases with particle size: $\\Delta\\tau \\propto r^{1/2} f^{1/2}$, where $r$ is the particle radius and $f$ is the volume fraction."],
-        ["p", "<strong>Orowan bowing (large, incoherent particles)</strong>: the dislocation cannot cut the particle and instead bows between them, leaving a dislocation loop around each particle. The Orowan stress is:"],
-        ["eq", "\\Delta\\tau = \\frac{Gb}{L - 2r} \\approx \\frac{Gb}{L}"],
-        ["p", "where $L$ is the inter-particle spacing and $r$ is the particle radius. As particles grow (by over-ageing), $L$ increases and the strengthening decreases. For a fixed volume fraction $f$, the spacing is $L \\propto r / f^{1/2}$, so the Orowan stress decreases as $1/r$."],
-        ["p", "The optimum strength occurs at the crossover between cutting and bowing, corresponding to a critical particle size that depends on the system. For Al-Cu (GP zones to $\\theta'$), the peak hardness occurs at a particle radius of about 2-5 nm after ageing at 190°C. This is the T6 temper."],
-
-        ["derivation", "The Orowan bowing stress: $\\Delta\\tau = Gb/L$.", [
-          ["p", "A dislocation line of tension $T \\approx Gb^2/2$ (energy per unit length) bows between two pinning points separated by distance $L$. At maximum bowing, the dislocation forms a semicircle of radius $L/2$."],
-          ["p", "The force exerted on each pinning point by the line tension has a vertical component $2T \\sin\\theta$. At the critical angle $\\theta = 90°$ (semicircular bow-out), this is $2T = Gb^2$."],
-          ["p", "The applied stress must provide this force over the line length $L$: $\\tau b L = 2T = Gb^2$."],
-          ["eq", "\\tau = \\frac{Gb}{L}"],
-          ["p", "For Al with $G = 26$ GPa, $b = 0.286$ nm, and particles spaced $L = 50$ nm apart: $\\Delta\\tau = 26 \\times 10^9 \\times 0.286 \\times 10^{-9} / (50 \\times 10^{-9}) = 149$ MPa. This is a substantial contribution, and it can be controlled by heat treatment."]
-        ]],
-
-        ["h3", "4. Work hardening (strain hardening)"],
-        ["p", "Plastic deformation generates dislocations. The more dislocations there are, the more they impede each other. The Taylor hardening relation (introduced in article 8.3):"],
-        ["eq", "\\Delta\\sigma \\approx M \\alpha G b \\sqrt{\\rho}"],
-        ["p", "where $M \\approx 3.06$ is the Taylor factor for a random polycrystal, $\\alpha \\approx 0.3$, $G$ is the shear modulus, $b$ is the Burgers vector and $\\rho$ is the dislocation density."],
-        ["p", "Cold-rolled copper can reach yield strengths above 300 MPa, compared to 70 MPa when annealed. The cost is ductility: the uniform elongation drops from 50% to about 5%. Annealing (heating to recrystallisation temperature) removes the dislocations and restores ductility, but the strength goes with them."],
-
-        ["h3", "Combining mechanisms"],
-        ["p", "In practice, alloys use multiple strengthening mechanisms simultaneously. A structural steel might combine grain refinement (10 $\\mu$m grains), solid solution strengthening (Mn, Si), precipitation hardening (NbC particles) and some work hardening. The contributions are roughly additive for grain size and solid solution, but the interaction between precipitation and work hardening is more complex."],
-        ["p", "A rough superposition:"],
-        ["eq", "\\sigma_y \\approx \\sigma_0 + \\sigma_{\\text{SS}} + \\sigma_{\\text{ppt}} + k_y d^{-1/2} + M\\alpha Gb\\sqrt{\\rho}"],
-        ["p", "The goal of alloy design is to find the combination that meets both the strength and ductility (or toughness) requirements for the application."],
-
-        ["problem", "A microalloyed steel has grain size $d = 5$ $\\mu$m, Hall-Petch constants $\\sigma_0 = 70$ MPa and $k_y = 0.74$ MPa$\\cdot$m$^{1/2}$. It contains 1.5 wt% Mn contributing 45 MPa of solid-solution strengthening and NbC precipitates contributing 80 MPa. Estimate the yield stress.", [
-          ["p", "Hall-Petch contribution: $k_y d^{-1/2} = 0.74 \\times (5 \\times 10^{-6})^{-1/2} = 0.74 \\times 447 = 331$ MPa."],
-          ["p", "Total (adding all contributions):"],
-          ["eq", "\\sigma_y \\approx 70 + 45 + 80 + 331 = 526 \\text{ MPa}"],
-          ["p", "This is a realistic value for a HSLA (high-strength low-alloy) steel plate. Typical grades like S355 (355 MPa) to S500 (500 MPa) are designed using exactly this kind of superposition."]
-        ]]
+        [
+          "h3",
+          "The common principle"
+        ],
+        [
+          "p",
+          "Strength in crystalline metals is controlled by dislocations. A material is strong when dislocations cannot move easily. Every strengthening mechanism introduces barriers that require extra stress to overcome. The increase in yield stress is the payoff; the usual cost is reduced ductility. Engineering design is always a trade-off between the two."
+        ],
+        [
+          "h3",
+          "1. Grain-size strengthening (Hall-Petch)"
+        ],
+        [
+          "p",
+          "Grain boundaries block dislocation motion. A dislocation approaching a grain boundary cannot simply cross into the next grain, because the slip planes change orientation. Stress must build up at the boundary until new dislocations are nucleated in the adjacent grain. Smaller grains mean more boundaries and higher strength."
+        ],
+        [
+          "p",
+          "The Hall-Petch relation (Hall 1951, Petch 1953):"
+        ],
+        [
+          "eq",
+          "\\sigma_y = \\sigma_0 + k_y d^{-1/2}"
+        ],
+        [
+          "p",
+          "where $\\sigma_0$ is the lattice friction stress, $k_y$ is the Hall-Petch slope and $d$ is the grain diameter. For low-carbon steel: $\\sigma_0 \\approx 70$ MPa, $k_y \\approx 0.74$ MPa$\\cdot$m$^{1/2}$. Reducing the grain size from 100 $\\mu$m to 1 $\\mu$m increases $\\sigma_y$ from about 300 to 810 MPa."
+        ],
+        [
+          "p",
+          "Grain refinement is the only strengthening mechanism that simultaneously increases strength and toughness. Finer grains make crack propagation harder because the crack must change direction at each grain boundary. This is why grain refinement is the preferred first option in structural steel design."
+        ],
+        [
+          "callout",
+          "Nanocrystalline breakdown",
+          "Below about 20 nm grain size, the Hall-Petch relation breaks down. Grain boundary sliding and diffusion-based mechanisms take over. Some nanocrystalline metals show an inverse Hall-Petch effect: they get softer as grains shrink further. This crossover is an active area of research."
+        ],
+        [
+          "h3",
+          "2. Solid solution strengthening"
+        ],
+        [
+          "p",
+          "Foreign atoms dissolved in the lattice create local strain fields that interact with the strain field of a dislocation. Substitutional atoms that are larger than the host expand the lattice locally; those that are smaller contract it. Interstitial atoms (carbon in iron, for example) occupy sites between the host atoms and create tetragonal distortions."
+        ],
+        [
+          "p",
+          "The strengthening effect scales with the concentration $c$ and the size misfit $\\delta = |\\Delta r / r|$:"
+        ],
+        [
+          "eq",
+          "\\Delta\\sigma \\propto G \\delta^{3/2} c^{1/2}"
+        ],
+        [
+          "p",
+          "This is the Fleischer model for dilute solid solutions. Carbon in iron is exceptionally potent: 0.01 wt% C raises the yield strength by about 40 MPa. Manganese in iron is less effective: 1 wt% Mn adds about 30 MPa. The difference is partly misfit (C is interstitial, creating a larger distortion) and partly the interaction between the tetragonal strain field of interstitial C and the stress field of edge dislocations."
+        ],
+        [
+          "p",
+          "Solid solution strengthening is moderate, always-on (no heat treatment required) and roughly linear at low concentrations. It increases strength without dramatic loss of ductility, which is why virtually all engineering alloys contain some solid-solution elements."
+        ],
+        [
+          "h3",
+          "3. Precipitation hardening"
+        ],
+        [
+          "p",
+          "Small, hard particles dispersed through the matrix are the most powerful strengthening mechanism available. Yield strengths above 1500 MPa are routine in precipitation-hardened aluminium alloys, nickel superalloys and maraging steels."
+        ],
+        [
+          "p",
+          "A dislocation encountering a particle can either cut through it or bow around it. The transition between these regimes depends on particle size and coherency."
+        ],
+        [
+          "p",
+          "<strong>Cutting (small, coherent particles)</strong>: the dislocation shears the particle. The stress required depends on the particle's internal properties (coherency strain, order, stacking fault energy). For coherent precipitates, the strengthening increases with particle size: $\\Delta\\tau \\propto r^{1/2} f^{1/2}$, where $r$ is the particle radius and $f$ is the volume fraction."
+        ],
+        [
+          "p",
+          "<strong>Orowan bowing (large, incoherent particles)</strong>: the dislocation cannot cut the particle and instead bows between them, leaving a dislocation loop around each particle. The Orowan stress is:"
+        ],
+        [
+          "eq",
+          "\\Delta\\tau = \\frac{Gb}{L - 2r} \\approx \\frac{Gb}{L}"
+        ],
+        [
+          "p",
+          "where $L$ is the inter-particle spacing and $r$ is the particle radius. As particles grow (by over-ageing), $L$ increases and the strengthening decreases. For a fixed volume fraction $f$, the spacing is $L \\propto r / f^{1/2}$, so the Orowan stress decreases as $1/r$."
+        ],
+        [
+          "p",
+          "The optimum strength occurs at the crossover between cutting and bowing, corresponding to a critical particle size that depends on the system. For Al-Cu (GP zones to $\\theta'$), the peak hardness occurs at a particle radius of about 2-5 nm after ageing at 190\u00b0C. This is the T6 temper."
+        ],
+        [
+          "derivation",
+          "The Orowan bowing stress: $\\Delta\\tau = Gb/L$.",
+          [
+            [
+              "p",
+              "A dislocation line of tension $T \\approx Gb^2/2$ (energy per unit length) bows between two pinning points separated by distance $L$. At maximum bowing, the dislocation forms a semicircle of radius $L/2$."
+            ],
+            [
+              "p",
+              "The force exerted on each pinning point by the line tension has a vertical component $2T \\sin\\theta$. At the critical angle $\\theta = 90\u00b0$ (semicircular bow-out), this is $2T = Gb^2$."
+            ],
+            [
+              "p",
+              "The applied stress must provide this force over the line length $L$: $\\tau b L = 2T = Gb^2$."
+            ],
+            [
+              "eq",
+              "\\tau = \\frac{Gb}{L}"
+            ],
+            [
+              "p",
+              "For Al with $G = 26$ GPa, $b = 0.286$ nm, and particles spaced $L = 50$ nm apart: $\\Delta\\tau = 26 \\times 10^9 \\times 0.286 \\times 10^{-9} / (50 \\times 10^{-9}) = 149$ MPa. This is a substantial contribution, and it can be controlled by heat treatment."
+            ]
+          ]
+        ],
+        [
+          "h3",
+          "4. Work hardening (strain hardening)"
+        ],
+        [
+          "p",
+          "Plastic deformation generates dislocations. The more dislocations there are, the more they impede each other. The Taylor hardening relation (introduced in article 8.3):"
+        ],
+        [
+          "eq",
+          "\\Delta\\sigma \\approx M \\alpha G b \\sqrt{\\rho}"
+        ],
+        [
+          "p",
+          "where $M \\approx 3.06$ is the Taylor factor for a random polycrystal, $\\alpha \\approx 0.3$, $G$ is the shear modulus, $b$ is the Burgers vector and $\\rho$ is the dislocation density."
+        ],
+        [
+          "p",
+          "Cold-rolled copper can reach yield strengths above 300 MPa, compared to 70 MPa when annealed. The cost is ductility: the uniform elongation drops from 50% to about 5%. Annealing (heating to recrystallisation temperature) removes the dislocations and restores ductility, but the strength goes with them."
+        ],
+        [
+          "h3",
+          "Combining mechanisms"
+        ],
+        [
+          "p",
+          "In practice, alloys use multiple strengthening mechanisms simultaneously. A structural steel might combine grain refinement (10 $\\mu$m grains), solid solution strengthening (Mn, Si), precipitation hardening (NbC particles) and some work hardening. The contributions are roughly additive for grain size and solid solution, but the interaction between precipitation and work hardening is more complex."
+        ],
+        [
+          "p",
+          "A rough superposition:"
+        ],
+        [
+          "eq",
+          "\\sigma_y \\approx \\sigma_0 + \\sigma_{\\text{SS}} + \\sigma_{\\text{ppt}} + k_y d^{-1/2} + M\\alpha Gb\\sqrt{\\rho}"
+        ],
+        [
+          "p",
+          "The goal of alloy design is to find the combination that meets both the strength and ductility (or toughness) requirements for the application."
+        ],
+        [
+          "problem",
+          "A microalloyed steel has grain size $d = 5$ $\\mu$m, Hall-Petch constants $\\sigma_0 = 70$ MPa and $k_y = 0.74$ MPa$\\cdot$m$^{1/2}$. It contains 1.5 wt% Mn contributing 45 MPa of solid-solution strengthening and NbC precipitates contributing 80 MPa. Estimate the yield stress.",
+          [
+            [
+              "p",
+              "Hall-Petch contribution: $k_y d^{-1/2} = 0.74 \\times (5 \\times 10^{-6})^{-1/2} = 0.74 \\times 447 = 331$ MPa."
+            ],
+            [
+              "p",
+              "Total (adding all contributions):"
+            ],
+            [
+              "eq",
+              "\\sigma_y \\approx 70 + 45 + 80 + 331 = 526 \\text{ MPa}"
+            ],
+            [
+              "p",
+              "This is a realistic value for a HSLA (high-strength low-alloy) steel plate. Typical grades like S355 (355 MPa) to S500 (500 MPa) are designed using exactly this kind of superposition."
+            ]
+          ]
+        ]
       ],
       "related": [
-        { "title": "Plastic Deformation & Slip", "url": "plastic-deformation-slip" },
-        { "title": "Fracture Mechanics", "url": "fracture-mechanics-griffith-k-ic" },
-        { "title": "Defects", "url": "../defects/" },
-        { "title": "Phase Transformations", "url": "../phase-transformations/" }
+        {
+          "title": "Plastic Deformation & Slip",
+          "url": "plastic-deformation-slip"
+        },
+        {
+          "title": "Fracture Mechanics",
+          "url": "fracture-mechanics-griffith-k-ic"
+        },
+        {
+          "title": "Defects",
+          "url": "../defects/"
+        },
+        {
+          "title": "Phase Transformations",
+          "url": "../phase-transformations/"
+        }
       ]
     },
     {
@@ -289,64 +838,220 @@
       "readingTime": "15 min",
       "intro": "Materials do not fail because the average stress reaches some critical value. They fail because a crack, often invisible, concentrates stress to the point where atomic bonds break. Fracture mechanics quantifies this process and provides the tools to design against catastrophic failure.",
       "body": [
-        ["h3", "Stress concentration"],
-        ["p", "An elliptical hole in a plate loaded in tension concentrates the stress at its tip. Inglis (1913) showed that the maximum stress at the tip of an ellipse with semi-major axis $a$ (perpendicular to the load) and root radius $\\rho$ is:"],
-        ["eq", "\\sigma_{\\text{max}} = \\sigma\\left(1 + 2\\sqrt{\\frac{a}{\\rho}}\\right) \\approx 2\\sigma\\sqrt{\\frac{a}{\\rho}} \\quad \\text{for } a \\gg \\rho"],
-        ["p", "For a crack ($\\rho \\to 0$), the stress becomes infinite. This is physically impossible, so something else must happen. Either the material yields (blunting the crack tip) or the crack propagates. The question is: under what conditions does a crack grow?"],
-
-        ["h3", "The Griffith energy balance"],
-        ["p", "Griffith (1921) proposed that a crack extends when the energy released by stress relaxation exceeds the energy required to create new surface. For a through-thickness crack of half-length $a$ in a thin plate under stress $\\sigma$, the elastic energy released per unit thickness is:"],
-        ["eq", "U_{\\text{elastic}} = -\\frac{\\pi a^2 \\sigma^2}{E}"],
-        ["p", "The surface energy created (two new surfaces of length $a$, per unit thickness) is:"],
-        ["eq", "U_{\\text{surface}} = 2 \\times 2a\\gamma_s = 4a\\gamma_s"],
-        ["p", "where $\\gamma_s$ is the surface energy per unit area. The total energy change is:"],
-        ["eq", "\\Delta U = -\\frac{\\pi a^2 \\sigma^2}{E} + 4a\\gamma_s"],
-
-        ["derivation", "Griffith's fracture criterion: $\\sigma_f = \\sqrt{2E\\gamma_s / (\\pi a)}$.", [
-          ["p", "The crack grows when $d(\\Delta U)/da = 0$ (the energy passes through a maximum):"],
-          ["eq", "\\frac{d(\\Delta U)}{da} = -\\frac{2\\pi a \\sigma^2}{E} + 4\\gamma_s = 0"],
-          ["p", "Solving for $\\sigma$:"],
-          ["eq", "\\sigma_f = \\sqrt{\\frac{2E\\gamma_s}{\\pi a}}"],
-          ["p", "This is the Griffith equation for brittle fracture. For glass ($E = 70$ GPa, $\\gamma_s = 0.5$ J/m$^2$) with a 1 mm crack: $\\sigma_f = \\sqrt{2 \\times 70 \\times 10^9 \\times 0.5 / (\\pi \\times 0.001)} = 150$ MPa. This is broadly consistent with the strength of window glass with surface flaws."]
-        ]],
-
-        ["h3", "Beyond brittle materials: the Irwin modification"],
-        ["p", "Griffith's equation works for brittle materials like glass and ceramics. For metals, it predicts fracture stresses far too low, because it neglects the energy absorbed by plastic deformation at the crack tip. Irwin and Orowan modified the equation by replacing $\\gamma_s$ with an effective energy $\\gamma_s + \\gamma_p$, where $\\gamma_p$ is the plastic work per unit area of crack surface:"],
-        ["eq", "\\sigma_f = \\sqrt{\\frac{E G_c}{\\pi a}}"],
-        ["p", "where $G_c = 2(\\gamma_s + \\gamma_p)$ is the critical strain energy release rate (units: J/m$^2$). For metals, $\\gamma_p \\gg \\gamma_s$ (typically by a factor of $10^3$), so $G_c \\approx 2\\gamma_p$. Typical values: $G_c \\approx 1$ J/m$^2$ for glass, $\\approx 100$ J/m$^2$ for brittle polymers, $\\approx 10{,}000$-$100{,}000$ J/m$^2$ for structural steels."],
-
-        ["h3", "Stress intensity factor $K$"],
-        ["p", "Irwin (1957) introduced a more practical approach. Instead of tracking energies, he characterised the stress field near the crack tip. For any crack geometry, the near-tip stress field has the form:"],
-        ["eq", "\\sigma_{ij} = \\frac{K}{\\sqrt{2\\pi r}} f_{ij}(\\theta)"],
-        ["p", "where $r$ and $\\theta$ are polar coordinates from the crack tip, $f_{ij}$ is a dimensionless angular function, and $K$ is the stress intensity factor. $K$ depends on the applied stress, the crack length and the geometry:"],
-        ["eq", "K = Y\\sigma\\sqrt{\\pi a}"],
-        ["p", "where $Y$ is a dimensionless geometry factor ($Y = 1$ for a central crack in an infinite plate, $Y = 1.12$ for an edge crack). Fracture occurs when $K$ reaches the critical value $K_{IC}$, the plane-strain fracture toughness."],
-        ["callout", "Fracture toughness values", "Some $K_{IC}$ values at room temperature: alumina 3-5 MPa$\\sqrt{\\text{m}}$, soda-lime glass 0.7 MPa$\\sqrt{\\text{m}}$, aluminium 7075-T6 24 MPa$\\sqrt{\\text{m}}$, Ti-6Al-4V 55 MPa$\\sqrt{\\text{m}}$, structural steel (A36) 50-100 MPa$\\sqrt{\\text{m}}$. Higher $K_{IC}$ means the material tolerates larger cracks before failing."],
-
-        ["h3", "The three modes of fracture"],
-        ["p", "Crack-tip loading can be decomposed into three modes: Mode I (opening, tensile stress normal to the crack), Mode II (in-plane shear) and Mode III (out-of-plane shear, tearing). Mode I is most common in engineering structures and is the mode associated with $K_{IC}$."],
-
-        ["h3", "Relationship between $K$ and $G$"],
-        ["p", "The stress intensity factor and the strain energy release rate are related:"],
-        ["eq", "G = \\frac{K^2}{E'} \\quad \\text{where } E' = \\begin{cases} E & \\text{plane stress} \\\\ E/(1-\\nu^2) & \\text{plane strain} \\end{cases}"],
-        ["p", "At fracture, $G = G_c$ and $K = K_{IC}$, so $G_c = K_{IC}^2 / E'$. For structural steel ($K_{IC} = 60$ MPa$\\sqrt{\\text{m}}$, $E = 210$ GPa, $\\nu = 0.29$): $G_c = 60^2 / (210 \\times 10^3 / (1-0.29^2)) = 60^2 / 229000 \\approx 15{,}700$ J/m$^2$. Most of this energy goes into plastic deformation at the crack tip."],
-
-        ["h3", "Plane stress vs plane strain"],
-        ["p", "In thin sheets (plane stress), the plastic zone at the crack tip is large relative to the thickness, and the material appears tougher. In thick sections (plane strain), the plastic zone is constrained, triaxial tension develops, and the toughness is lower. $K_{IC}$ is the plane-strain value and represents the worst case. The minimum thickness for a valid plane-strain $K_{IC}$ test (per ASTM E399) is:"],
-        ["eq", "B \\geq 2.5 \\left(\\frac{K_{IC}}{\\sigma_y}\\right)^2"],
-        ["p", "For a steel with $K_{IC} = 60$ MPa$\\sqrt{\\text{m}}$ and $\\sigma_y = 500$ MPa: $B \\geq 2.5 \\times (60/500)^2 = 0.036$ m $= 36$ mm. This is a thick specimen, which is why valid $K_{IC}$ tests on tough steels require large test pieces."],
-
-        ["problem", "A large plate of aluminium alloy 2024-T3 ($K_{IC} = 37$ MPa$\\sqrt{\\text{m}}$, $\\sigma_y = 345$ MPa) contains a central through-thickness crack of total length $2a = 20$ mm. What is the fracture stress? Assume $Y = 1$ for a central crack in a wide plate.", [
-          ["p", "$a = 10$ mm $= 0.01$ m. Fracture when $K_I = K_{IC}$:"],
-          ["eq", "K_{IC} = \\sigma_f \\sqrt{\\pi a} \\quad \\Rightarrow \\quad \\sigma_f = \\frac{K_{IC}}{\\sqrt{\\pi a}} = \\frac{37}{\\sqrt{\\pi \\times 0.01}} = \\frac{37}{0.1773} = 209 \\text{ MPa}"],
-          ["p", "This is well below the yield stress (345 MPa), so the plate fractures before it yields. This is the regime of brittle or quasi-brittle fracture. The crack length is modest (10 mm half-length), yet it reduces the load-bearing capacity to 61% of the yield stress. This is why non-destructive inspection for cracks is essential in aircraft structures."]
-        ]]
+        [
+          "h3",
+          "Stress concentration"
+        ],
+        [
+          "p",
+          "An elliptical hole in a plate loaded in tension concentrates the stress at its tip. Inglis (1913) showed that the maximum stress at the tip of an ellipse with semi-major axis $a$ (perpendicular to the load) and root radius $\\rho$ is:"
+        ],
+        [
+          "eq",
+          "\\sigma_{\\text{max}} = \\sigma\\left(1 + 2\\sqrt{\\frac{a}{\\rho}}\\right) \\approx 2\\sigma\\sqrt{\\frac{a}{\\rho}} \\quad \\text{for } a \\gg \\rho"
+        ],
+        [
+          "p",
+          "For a crack ($\\rho \\to 0$), the stress becomes infinite. This is physically impossible, so something else must happen. Either the material yields (blunting the crack tip) or the crack propagates. The question is: under what conditions does a crack grow?"
+        ],
+        [
+          "h3",
+          "The Griffith energy balance"
+        ],
+        [
+          "p",
+          "Griffith (1921) proposed that a crack extends when the energy released by stress relaxation exceeds the energy required to create new surface. For a through-thickness crack of half-length $a$ in a thin plate under stress $\\sigma$, the elastic energy released per unit thickness is:"
+        ],
+        [
+          "eq",
+          "U_{\\text{elastic}} = -\\frac{\\pi a^2 \\sigma^2}{E}"
+        ],
+        [
+          "p",
+          "The surface energy created (two new surfaces of length $a$, per unit thickness) is:"
+        ],
+        [
+          "eq",
+          "U_{\\text{surface}} = 2 \\times 2a\\gamma_s = 4a\\gamma_s"
+        ],
+        [
+          "p",
+          "where $\\gamma_s$ is the surface energy per unit area. The total energy change is:"
+        ],
+        [
+          "eq",
+          "\\Delta U = -\\frac{\\pi a^2 \\sigma^2}{E} + 4a\\gamma_s"
+        ],
+        [
+          "derivation",
+          "Griffith's fracture criterion: $\\sigma_f = \\sqrt{2E\\gamma_s / (\\pi a)}$.",
+          [
+            [
+              "p",
+              "The crack grows when $d(\\Delta U)/da = 0$ (the energy passes through a maximum):"
+            ],
+            [
+              "eq",
+              "\\frac{d(\\Delta U)}{da} = -\\frac{2\\pi a \\sigma^2}{E} + 4\\gamma_s = 0"
+            ],
+            [
+              "p",
+              "Solving for $\\sigma$:"
+            ],
+            [
+              "eq",
+              "\\sigma_f = \\sqrt{\\frac{2E\\gamma_s}{\\pi a}}"
+            ],
+            [
+              "p",
+              "This is the Griffith equation for brittle fracture. For glass ($E = 70$ GPa, $\\gamma_s = 0.5$ J/m$^2$) with a 1 mm crack: $\\sigma_f = \\sqrt{2 \\times 70 \\times 10^9 \\times 0.5 / (\\pi \\times 0.001)} = 150$ MPa. This is broadly consistent with the strength of window glass with surface flaws."
+            ]
+          ]
+        ],
+        [
+          "h3",
+          "Beyond brittle materials: the Irwin modification"
+        ],
+        [
+          "p",
+          "Griffith's equation works for brittle materials like glass and ceramics. For metals, it predicts fracture stresses far too low, because it neglects the energy absorbed by plastic deformation at the crack tip. Irwin and Orowan modified the equation by replacing $\\gamma_s$ with an effective energy $\\gamma_s + \\gamma_p$, where $\\gamma_p$ is the plastic work per unit area of crack surface:"
+        ],
+        [
+          "eq",
+          "\\sigma_f = \\sqrt{\\frac{E G_c}{\\pi a}}"
+        ],
+        [
+          "p",
+          "where $G_c = 2(\\gamma_s + \\gamma_p)$ is the critical strain energy release rate (units: J/m$^2$). For metals, $\\gamma_p \\gg \\gamma_s$ (typically by a factor of $10^3$), so $G_c \\approx 2\\gamma_p$. Typical values: $G_c \\approx 1$ J/m$^2$ for glass, $\\approx 100$ J/m$^2$ for brittle polymers, $\\approx 10{,}000$-$100{,}000$ J/m$^2$ for structural steels."
+        ],
+        [
+          "h3",
+          "Stress intensity factor $K$"
+        ],
+        [
+          "p",
+          "Irwin (1957) introduced a more practical approach. Instead of tracking energies, he characterised the stress field near the crack tip. For any crack geometry, the near-tip stress field has the form:"
+        ],
+        [
+          "eq",
+          "\\sigma_{ij} = \\frac{K}{\\sqrt{2\\pi r}} f_{ij}(\\theta)"
+        ],
+        [
+          "p",
+          "where $r$ and $\\theta$ are polar coordinates from the crack tip, $f_{ij}$ is a dimensionless angular function, and $K$ is the stress intensity factor. $K$ depends on the applied stress, the crack length and the geometry:"
+        ],
+        [
+          "eq",
+          "K = Y\\sigma\\sqrt{\\pi a}"
+        ],
+        [
+          "p",
+          "where $Y$ is a dimensionless geometry factor ($Y = 1$ for a central crack in an infinite plate, $Y = 1.12$ for an edge crack). Fracture occurs when $K$ reaches the critical value $K_{IC}$, the plane-strain fracture toughness."
+        ],
+        [
+          "callout",
+          "Fracture toughness values",
+          "Some $K_{IC}$ values at room temperature: alumina 3-5 MPa$\\sqrt{\\text{m}}$, soda-lime glass 0.7 MPa$\\sqrt{\\text{m}}$, aluminium 7075-T6 24 MPa$\\sqrt{\\text{m}}$, Ti-6Al-4V 55 MPa$\\sqrt{\\text{m}}$, structural steel (A36) 50-100 MPa$\\sqrt{\\text{m}}$. Higher $K_{IC}$ means the material tolerates larger cracks before failing."
+        ],
+        [
+          "h3",
+          "The three modes of fracture"
+        ],
+        [
+          "p",
+          "Crack-tip loading can be decomposed into three modes: Mode I (opening, tensile stress normal to the crack), Mode II (in-plane shear) and Mode III (out-of-plane shear, tearing). Mode I is most common in engineering structures and is the mode associated with $K_{IC}$."
+        ],
+        [
+          "h3",
+          "Relationship between $K$ and $G$"
+        ],
+        [
+          "p",
+          "The stress intensity factor and the strain energy release rate are related:"
+        ],
+        [
+          "eq",
+          "G = \\frac{K^2}{E'} \\quad \\text{where } E' = \\begin{cases} E & \\text{plane stress} \\\\ E/(1-\\nu^2) & \\text{plane strain} \\end{cases}"
+        ],
+        [
+          "p",
+          "At fracture, $G = G_c$ and $K = K_{IC}$, so $G_c = K_{IC}^2 / E'$. For structural steel ($K_{IC} = 60$ MPa$\\sqrt{\\text{m}}$, $E = 210$ GPa, $\\nu = 0.29$): $G_c = 60^2 / (210 \\times 10^3 / (1-0.29^2)) = 60^2 / 229000 \\approx 15{,}700$ J/m$^2$. Most of this energy goes into plastic deformation at the crack tip."
+        ],
+        [
+          "h3",
+          "Plane stress vs plane strain"
+        ],
+        [
+          "p",
+          "In thin sheets (plane stress), the plastic zone at the crack tip is large relative to the thickness, and the material appears tougher. In thick sections (plane strain), the plastic zone is constrained, triaxial tension develops, and the toughness is lower. $K_{IC}$ is the plane-strain value and represents the worst case. The minimum thickness for a valid plane-strain $K_{IC}$ test (per ASTM E399) is:"
+        ],
+        [
+          "eq",
+          "B \\geq 2.5 \\left(\\frac{K_{IC}}{\\sigma_y}\\right)^2"
+        ],
+        [
+          "p",
+          "For a steel with $K_{IC} = 60$ MPa$\\sqrt{\\text{m}}$ and $\\sigma_y = 500$ MPa: $B \\geq 2.5 \\times (60/500)^2 = 0.036$ m $= 36$ mm. This is a thick specimen, which is why valid $K_{IC}$ tests on tough steels require large test pieces."
+        ],
+        [
+          "problem",
+          "A large plate of aluminium alloy 2024-T3 ($K_{IC} = 37$ MPa$\\sqrt{\\text{m}}$, $\\sigma_y = 345$ MPa) contains a central through-thickness crack of total length $2a = 20$ mm. What is the fracture stress? Assume $Y = 1$ for a central crack in a wide plate.",
+          [
+            [
+              "p",
+              "$a = 10$ mm $= 0.01$ m. Fracture when $K_I = K_{IC}$:"
+            ],
+            [
+              "eq",
+              "K_{IC} = \\sigma_f \\sqrt{\\pi a} \\quad \\Rightarrow \\quad \\sigma_f = \\frac{K_{IC}}{\\sqrt{\\pi a}} = \\frac{37}{\\sqrt{\\pi \\times 0.01}} = \\frac{37}{0.1773} = 209 \\text{ MPa}"
+            ],
+            [
+              "p",
+              "This is well below the yield stress (345 MPa), so the plate fractures before it yields. This is the regime of brittle or quasi-brittle fracture. The crack length is modest (10 mm half-length), yet it reduces the load-bearing capacity to 61% of the yield stress. This is why non-destructive inspection for cracks is essential in aircraft structures."
+            ]
+          ]
+        ]
       ],
       "related": [
-        { "title": "Fatigue", "url": "fatigue" },
-        { "title": "Stress & Strain", "url": "stress-strain-engineering-vs-true" },
-        { "title": "Strengthening Mechanisms", "url": "strengthening-mechanisms" },
-        { "title": "Elasticity & Elastic Moduli", "url": "elasticity-elastic-moduli" }
+        {
+          "title": "Fatigue",
+          "url": "fatigue"
+        },
+        {
+          "title": "Stress & Strain",
+          "url": "stress-strain-engineering-vs-true"
+        },
+        {
+          "title": "Strengthening Mechanisms",
+          "url": "strengthening-mechanisms"
+        },
+        {
+          "title": "Elasticity & Elastic Moduli",
+          "url": "elasticity-elastic-moduli"
+        }
+      ],
+      "comments": [
+        {
+          "id": "e69c4263",
+          "selectedText": "\ud835\udc4e\r\na in a thin plate under stress \r\n\ud835\udf0e\r\n\u03c3, the elastic energy released per unit thickness is:",
+          "comment": "Needs a schematic",
+          "name": "Anonymous",
+          "votes": 0
+        },
+        {
+          "id": "836e7fcc",
+          "selectedText": "root radius \r\n\ud835\udf0c\r\n\u03c1 is:",
+          "comment": "Can we derive this as an expandable card?\r\n\r\nCan we schematically show it? Maybe with load-line deflections.",
+          "name": "Anonymous",
+          "votes": 0
+        },
+        {
+          "id": "3ac7d37b",
+          "selectedText": "Griffith (1921)",
+          "comment": "Add some history for Griffith at Farnborough and the work on glass fibres.",
+          "name": "Anonymous",
+          "votes": 0
+        }
       ]
     },
     {
@@ -357,67 +1062,220 @@
       "readingTime": "14 min",
       "intro": "Most engineering failures are fatigue failures. A component that can carry a static load indefinitely may break after millions of cycles at half that load. Fatigue cracks initiate at stress concentrations, grow incrementally with each cycle, and propagate catastrophically when the remaining cross-section can no longer support the load.",
       "body": [
-        ["h3", "The nature of fatigue failure"],
-        ["p", "Fatigue is progressive damage under cyclic loading. It occurs in three stages: (1) crack initiation, usually at a surface or near a stress concentrator, (2) crack propagation, where the crack grows a small increment with each load cycle, and (3) final fracture, when the crack reaches a critical size and the remaining material fails by overload."],
-        ["p", "A fatigue fracture surface is distinctive. It shows beach marks (concentric ridges recording the crack front position at different times) and a relatively smooth propagation zone, followed by a rough overload zone. The propagation zone may cover 90% or more of the fracture surface, meaning the crack grew slowly and detectably for most of the component's life."],
-
-        ["h3", "S-N curves and the fatigue limit"],
-        ["p", "The most basic fatigue characterisation is the S-N curve (Wohler curve): applied stress amplitude $S$ versus number of cycles to failure $N$, plotted on a semi-log or log-log scale."],
-        ["p", "Ferrous metals and titanium alloys exhibit a fatigue limit (or endurance limit) $\\sigma_e$: a stress amplitude below which the material can endure an essentially infinite number of cycles ($>10^7$). For steels, a rough estimate is $\\sigma_e \\approx 0.4$-$0.5 \\times \\sigma_{\\text{UTS}}$. A steel with UTS $= 800$ MPa has a fatigue limit of roughly 350 MPa."],
-        ["p", "Aluminium, copper and most non-ferrous alloys do not show a true fatigue limit. The S-N curve continues to slope downward. For these materials, a fatigue strength at a specified life (typically $10^7$ or $10^8$ cycles) is quoted instead."],
-        ["callout", "Why a fatigue limit?", "The fatigue limit in steels is associated with interstitial carbon and nitrogen atoms pinning dislocations (strain ageing). Below the fatigue limit, dislocations cannot break free from their solute atmospheres to initiate persistent slip bands. This is why the fatigue limit correlates with the strain-ageing peak stress rather than with the static yield stress."],
-
-        ["h3", "Stress parameters"],
-        ["p", "Fatigue loading is characterised by:"],
-        ["ul", [
-          "Stress amplitude: $\\sigma_a = (\\sigma_{\\max} - \\sigma_{\\min})/2$",
-          "Mean stress: $\\sigma_m = (\\sigma_{\\max} + \\sigma_{\\min})/2$",
-          "Stress ratio: $R = \\sigma_{\\min}/\\sigma_{\\max}$",
-          "Fully reversed loading: $R = -1$ ($\\sigma_m = 0$)",
-          "Pulsating tension: $R = 0$ ($\\sigma_{\\min} = 0$)"
-        ]],
-        ["p", "A positive mean stress reduces fatigue life. The Goodman relation gives a modified safe amplitude:"],
-        ["eq", "\\frac{\\sigma_a}{\\sigma_e} + \\frac{\\sigma_m}{\\sigma_{\\text{UTS}}} = 1"],
-        ["p", "This is plotted as a straight line on axes of $\\sigma_a$ versus $\\sigma_m$. Any stress state below the line is safe (in principle). The Soderberg relation (replacing UTS with $\\sigma_y$) is more conservative."],
-
-        ["h3", "Crack propagation: Paris law"],
-        ["p", "Once a fatigue crack exists, its growth rate per cycle $da/dN$ depends on the stress intensity factor range $\\Delta K = K_{\\max} - K_{\\min}$. Paris and Erdogan (1963) showed that in the steady-state growth regime:"],
-        ["eq", "\\frac{da}{dN} = C(\\Delta K)^m"],
-        ["p", "where $C$ and $m$ are material constants. For structural steels, $m \\approx 3$ and $C \\approx 7 \\times 10^{-12}$ (with $da/dN$ in m/cycle and $\\Delta K$ in MPa$\\sqrt{\\text{m}}$). For aluminium alloys, $m \\approx 3$-$4$."],
-        ["p", "The Paris law applies in Region II (the linear portion of the $\\log(da/dN)$ vs $\\log(\\Delta K)$ curve). Below a threshold $\\Delta K_{\\text{th}}$ (Region I), cracks do not propagate. Above a critical $\\Delta K$ approaching $K_{IC}$ (Region III), growth accelerates rapidly and the crack becomes unstable."],
-
-        ["h3", "Fatigue life prediction"],
-        ["p", "Given the Paris law, the number of cycles to grow a crack from initial size $a_i$ to final (critical) size $a_f$ is obtained by integration:"],
-        ["eq", "N = \\int_{a_i}^{a_f} \\frac{da}{C(\\Delta K)^m} = \\int_{a_i}^{a_f} \\frac{da}{C(Y\\Delta\\sigma\\sqrt{\\pi a})^m}"],
-        ["p", "For constant $Y$ and $m \\neq 2$, this integrates to a closed form. The critical crack size $a_f$ is found from $K_{\\max} = K_{IC}$. The initial crack size $a_i$ is either the detection limit of your inspection method (typically 1-2 mm for visual, 0.2-0.5 mm for dye penetrant, 0.1 mm for ultrasonic) or the size of inherent manufacturing defects."],
-        ["p", "The life is dominated by the time spent at small crack sizes, because $da/dN$ increases rapidly with $a$. Doubling $a_i$ can halve the predicted life. This is why surface finish, weld quality and non-destructive testing are critical for fatigue-sensitive components."],
-
-        ["h3", "Factors affecting fatigue life"],
-        ["p", "Many factors modify the baseline S-N curve:"],
-        ["ul", [
-          "<strong>Surface finish</strong>: rough surfaces provide initiation sites. Polished specimens last longer than machined ones, which last longer than as-forged.",
-          "<strong>Surface treatments</strong>: shot peening introduces compressive residual stresses that oppose crack opening. Fatigue life can increase by a factor of 2-10.",
-          "<strong>Corrosion</strong>: corrosion fatigue eliminates the fatigue limit entirely. Even steels lose their endurance limit in corrosive environments.",
-          "<strong>Temperature</strong>: elevated temperature reduces fatigue strength. At high temperatures, creep-fatigue interaction becomes important.",
-          "<strong>Size effect</strong>: larger components have lower fatigue strengths because they contain a larger volume of material (and therefore more defects) under high stress."
-        ]],
-
-        ["problem", "A steel component contains an edge crack of initial length $a_i = 2$ mm. The fracture toughness is $K_{IC} = 80$ MPa$\\sqrt{\\text{m}}$, and the component is subjected to pulsating tension ($R = 0$) with $\\Delta\\sigma = 200$ MPa. The Paris law constants are $C = 7 \\times 10^{-12}$ m/cycle and $m = 3$. Assume $Y = 1.12$ for an edge crack. Estimate the critical crack size and the remaining fatigue life.", [
-          ["p", "Critical crack size from $K_{IC} = Y\\sigma_{\\max}\\sqrt{\\pi a_f}$. With $R = 0$, $\\sigma_{\\max} = \\Delta\\sigma = 200$ MPa:"],
-          ["eq", "a_f = \\frac{1}{\\pi}\\left(\\frac{K_{IC}}{Y\\sigma_{\\max}}\\right)^2 = \\frac{1}{\\pi}\\left(\\frac{80}{1.12 \\times 200}\\right)^2 = \\frac{1}{\\pi}(0.357)^2 = 0.0406 \\text{ m} = 40.6 \\text{ mm}"],
-          ["p", "For $m = 3$, $\\Delta K = Y\\Delta\\sigma\\sqrt{\\pi a}$, and the integral becomes:"],
-          ["eq", "N = \\int_{a_i}^{a_f} \\frac{da}{C(Y\\Delta\\sigma)^3 \\pi^{3/2} a^{3/2}} = \\frac{1}{C(Y\\Delta\\sigma)^3 \\pi^{3/2}} \\left[\\frac{-2}{\\sqrt{a}}\\right]_{a_i}^{a_f}"],
-          ["eq", "N = \\frac{2}{C(Y\\Delta\\sigma)^3 \\pi^{3/2}} \\left(\\frac{1}{\\sqrt{a_i}} - \\frac{1}{\\sqrt{a_f}}\\right)"],
-          ["p", "Substituting: $C(Y\\Delta\\sigma)^3\\pi^{3/2} = 7 \\times 10^{-12} \\times (1.12 \\times 200)^3 \\times 5.568 = 7 \\times 10^{-12} \\times 1.129 \\times 10^7 \\times 5.568 = 4.40 \\times 10^{-4}$."],
-          ["p", "$1/\\sqrt{0.002} - 1/\\sqrt{0.0406} = 22.36 - 4.96 = 17.40$ m$^{-1/2}$."],
-          ["eq", "N = \\frac{2 \\times 17.40}{4.40 \\times 10^{-4}} \\approx 79{,}100 \\text{ cycles}"],
-          ["p", "Note how the $1/\\sqrt{a_i}$ term dominates. If $a_i$ were 1 mm instead of 2 mm, the life would roughly double."]
-        ]]
+        [
+          "h3",
+          "The nature of fatigue failure"
+        ],
+        [
+          "p",
+          "Fatigue is progressive damage under cyclic loading. It occurs in three stages: (1) crack initiation, usually at a surface or near a stress concentrator, (2) crack propagation, where the crack grows a small increment with each load cycle, and (3) final fracture, when the crack reaches a critical size and the remaining material fails by overload."
+        ],
+        [
+          "p",
+          "A fatigue fracture surface is distinctive. It shows beach marks (concentric ridges recording the crack front position at different times) and a relatively smooth propagation zone, followed by a rough overload zone. The propagation zone may cover 90% or more of the fracture surface, meaning the crack grew slowly and detectably for most of the component's life."
+        ],
+        [
+          "h3",
+          "S-N curves and the fatigue limit"
+        ],
+        [
+          "p",
+          "The most basic fatigue characterisation is the S-N curve (Wohler curve): applied stress amplitude $S$ versus number of cycles to failure $N$, plotted on a semi-log or log-log scale."
+        ],
+        [
+          "p",
+          "Ferrous metals and titanium alloys exhibit a fatigue limit (or endurance limit) $\\sigma_e$: a stress amplitude below which the material can endure an essentially infinite number of cycles ($>10^7$). For steels, a rough estimate is $\\sigma_e \\approx 0.4$-$0.5 \\times \\sigma_{\\text{UTS}}$. A steel with UTS $= 800$ MPa has a fatigue limit of roughly 350 MPa."
+        ],
+        [
+          "p",
+          "Aluminium, copper and most non-ferrous alloys do not show a true fatigue limit. The S-N curve continues to slope downward. For these materials, a fatigue strength at a specified life (typically $10^7$ or $10^8$ cycles) is quoted instead."
+        ],
+        [
+          "callout",
+          "Why a fatigue limit?",
+          "The fatigue limit in steels is associated with interstitial carbon and nitrogen atoms pinning dislocations (strain ageing). Below the fatigue limit, dislocations cannot break free from their solute atmospheres to initiate persistent slip bands. This is why the fatigue limit correlates with the strain-ageing peak stress rather than with the static yield stress."
+        ],
+        [
+          "h3",
+          "Stress parameters"
+        ],
+        [
+          "p",
+          "Fatigue loading is characterised by:"
+        ],
+        [
+          "ul",
+          [
+            "Stress amplitude: $\\sigma_a = (\\sigma_{\\max} - \\sigma_{\\min})/2$",
+            "Mean stress: $\\sigma_m = (\\sigma_{\\max} + \\sigma_{\\min})/2$",
+            "Stress ratio: $R = \\sigma_{\\min}/\\sigma_{\\max}$",
+            "Fully reversed loading: $R = -1$ ($\\sigma_m = 0$)",
+            "Pulsating tension: $R = 0$ ($\\sigma_{\\min} = 0$)"
+          ]
+        ],
+        [
+          "p",
+          "A positive mean stress reduces fatigue life. The Goodman relation gives a modified safe amplitude:"
+        ],
+        [
+          "eq",
+          "\\frac{\\sigma_a}{\\sigma_e} + \\frac{\\sigma_m}{\\sigma_{\\text{UTS}}} = 1"
+        ],
+        [
+          "p",
+          "This is plotted as a straight line on axes of $\\sigma_a$ versus $\\sigma_m$. Any stress state below the line is safe (in principle). The Soderberg relation (replacing UTS with $\\sigma_y$) is more conservative."
+        ],
+        [
+          "h3",
+          "Crack propagation: Paris law"
+        ],
+        [
+          "p",
+          "Once a fatigue crack exists, its growth rate per cycle $da/dN$ depends on the stress intensity factor range $\\Delta K = K_{\\max} - K_{\\min}$. Paris and Erdogan (1963) showed that in the steady-state growth regime:"
+        ],
+        [
+          "eq",
+          "\\frac{da}{dN} = C(\\Delta K)^m"
+        ],
+        [
+          "p",
+          "where $C$ and $m$ are material constants. For structural steels, $m \\approx 3$ and $C \\approx 7 \\times 10^{-12}$ (with $da/dN$ in m/cycle and $\\Delta K$ in MPa$\\sqrt{\\text{m}}$). For aluminium alloys, $m \\approx 3$-$4$."
+        ],
+        [
+          "p",
+          "The Paris law applies in Region II (the linear portion of the $\\log(da/dN)$ vs $\\log(\\Delta K)$ curve). Below a threshold $\\Delta K_{\\text{th}}$ (Region I), cracks do not propagate. Above a critical $\\Delta K$ approaching $K_{IC}$ (Region III), growth accelerates rapidly and the crack becomes unstable."
+        ],
+        [
+          "h3",
+          "Fatigue life prediction"
+        ],
+        [
+          "p",
+          "Given the Paris law, the number of cycles to grow a crack from initial size $a_i$ to final (critical) size $a_f$ is obtained by integration:"
+        ],
+        [
+          "eq",
+          "N = \\int_{a_i}^{a_f} \\frac{da}{C(\\Delta K)^m} = \\int_{a_i}^{a_f} \\frac{da}{C(Y\\Delta\\sigma\\sqrt{\\pi a})^m}"
+        ],
+        [
+          "p",
+          "For constant $Y$ and $m \\neq 2$, this integrates to a closed form. The critical crack size $a_f$ is found from $K_{\\max} = K_{IC}$. The initial crack size $a_i$ is either the detection limit of your inspection method (typically 1-2 mm for visual, 0.2-0.5 mm for dye penetrant, 0.1 mm for ultrasonic) or the size of inherent manufacturing defects."
+        ],
+        [
+          "p",
+          "The life is dominated by the time spent at small crack sizes, because $da/dN$ increases rapidly with $a$. Doubling $a_i$ can halve the predicted life. This is why surface finish, weld quality and non-destructive testing are critical for fatigue-sensitive components."
+        ],
+        [
+          "h3",
+          "Factors affecting fatigue life"
+        ],
+        [
+          "p",
+          "Many factors modify the baseline S-N curve:"
+        ],
+        [
+          "ul",
+          [
+            "<strong>Surface finish</strong>: rough surfaces provide initiation sites. Polished specimens last longer than machined ones, which last longer than as-forged.",
+            "<strong>Surface treatments</strong>: shot peening introduces compressive residual stresses that oppose crack opening. Fatigue life can increase by a factor of 2-10.",
+            "<strong>Corrosion</strong>: corrosion fatigue eliminates the fatigue limit entirely. Even steels lose their endurance limit in corrosive environments.",
+            "<strong>Temperature</strong>: elevated temperature reduces fatigue strength. At high temperatures, creep-fatigue interaction becomes important.",
+            "<strong>Size effect</strong>: larger components have lower fatigue strengths because they contain a larger volume of material (and therefore more defects) under high stress."
+          ]
+        ],
+        [
+          "problem",
+          "A steel component contains an edge crack of initial length $a_i = 2$ mm. The fracture toughness is $K_{IC} = 80$ MPa$\\sqrt{\\text{m}}$, and the component is subjected to pulsating tension ($R = 0$) with $\\Delta\\sigma = 200$ MPa. The Paris law constants are $C = 7 \\times 10^{-12}$ m/cycle and $m = 3$. Assume $Y = 1.12$ for an edge crack. Estimate the critical crack size and the remaining fatigue life.",
+          [
+            [
+              "p",
+              "Critical crack size from $K_{IC} = Y\\sigma_{\\max}\\sqrt{\\pi a_f}$. With $R = 0$, $\\sigma_{\\max} = \\Delta\\sigma = 200$ MPa:"
+            ],
+            [
+              "eq",
+              "a_f = \\frac{1}{\\pi}\\left(\\frac{K_{IC}}{Y\\sigma_{\\max}}\\right)^2 = \\frac{1}{\\pi}\\left(\\frac{80}{1.12 \\times 200}\\right)^2 = \\frac{1}{\\pi}(0.357)^2 = 0.0406 \\text{ m} = 40.6 \\text{ mm}"
+            ],
+            [
+              "p",
+              "For $m = 3$, $\\Delta K = Y\\Delta\\sigma\\sqrt{\\pi a}$, and the integral becomes:"
+            ],
+            [
+              "eq",
+              "N = \\int_{a_i}^{a_f} \\frac{da}{C(Y\\Delta\\sigma)^3 \\pi^{3/2} a^{3/2}} = \\frac{1}{C(Y\\Delta\\sigma)^3 \\pi^{3/2}} \\left[\\frac{-2}{\\sqrt{a}}\\right]_{a_i}^{a_f}"
+            ],
+            [
+              "eq",
+              "N = \\frac{2}{C(Y\\Delta\\sigma)^3 \\pi^{3/2}} \\left(\\frac{1}{\\sqrt{a_i}} - \\frac{1}{\\sqrt{a_f}}\\right)"
+            ],
+            [
+              "p",
+              "Substituting: $C(Y\\Delta\\sigma)^3\\pi^{3/2} = 7 \\times 10^{-12} \\times (1.12 \\times 200)^3 \\times 5.568 = 7 \\times 10^{-12} \\times 1.129 \\times 10^7 \\times 5.568 = 4.40 \\times 10^{-4}$."
+            ],
+            [
+              "p",
+              "$1/\\sqrt{0.002} - 1/\\sqrt{0.0406} = 22.36 - 4.96 = 17.40$ m$^{-1/2}$."
+            ],
+            [
+              "eq",
+              "N = \\frac{2 \\times 17.40}{4.40 \\times 10^{-4}} \\approx 79{,}100 \\text{ cycles}"
+            ],
+            [
+              "p",
+              "Note how the $1/\\sqrt{a_i}$ term dominates. If $a_i$ were 1 mm instead of 2 mm, the life would roughly double."
+            ]
+          ]
+        ]
       ],
       "related": [
-        { "title": "Fracture Mechanics", "url": "fracture-mechanics-griffith-k-ic" },
-        { "title": "Stress & Strain", "url": "stress-strain-engineering-vs-true" },
-        { "title": "Creep & High-Temperature Behaviour", "url": "creep-high-temperature-behaviour" }
+        {
+          "title": "Fracture Mechanics",
+          "url": "fracture-mechanics-griffith-k-ic"
+        },
+        {
+          "title": "Stress & Strain",
+          "url": "stress-strain-engineering-vs-true"
+        },
+        {
+          "title": "Creep & High-Temperature Behaviour",
+          "url": "creep-high-temperature-behaviour"
+        }
+      ],
+      "comments": [
+        {
+          "id": "f75a9f44",
+          "selectedText": "more of the fracture surface, meaning the crack grew slowly and detectably for most of the component's life.",
+          "comment": "Needs a more detailed introduction on fatigue. The idea of many cycles below yield stress. Maybe some Liberty ships.",
+          "name": "Anonymous",
+          "votes": 0
+        },
+        {
+          "id": "3d13dc4a",
+          "selectedText": "Paris and Erdogan (1963) showed that in the steady-state growth regime:",
+          "comment": "This was published and dismissed at the time, but has proven correct.",
+          "name": "Anonymous",
+          "votes": 0
+        },
+        {
+          "id": "6c4a6429",
+          "selectedText": "fe is dominated by the time spent at small crack sizes, because \r\n\ud835\udc51\r\n\ud835\udc4e\r\n/\r\n\ud835\udc51\r\n\ud835\udc41\r\nda/dN increases rapidly with \r\n\ud835\udc4e\r\na. Doubling \r\n\ud835\udc4e\r\n\ud835\udc56\r\na \r\ni\r\n\u200b\r\n  can halve the predicted life. This is why surface finish, weld quality and non-destructive testing are critical for fatigue-sensitive components.",
+          "comment": "Add in a worked example - its typically one equation thats an integral for with a^m/2-1 or similar. Worth working through.",
+          "name": "Anonymous",
+          "votes": 0
+        },
+        {
+          "id": "ab4e2b7b",
+          "selectedText": "Factors affecting fatigue life\r\nMany factors modify the baseline S-N curve:\r\n\r\nSurface finish: rough surfaces provide initiation sites. Polished specimens last longer than machined ones",
+          "comment": "Should add a page on microstructural aspects of fatigue and fatigue mechanisms.  Theres some really elegant PSB micrographs, and explaining how that drives fatigue is interesting.",
+          "name": "Anonymous",
+          "votes": 0
+        },
+        {
+          "id": "6324ee8b",
+          "selectedText": "Corrosion: corrosion fatigue eliminates the fatigue limit entirely. Even steels lose their endurance limit in corrosive environments.",
+          "comment": "Corrosion fatigue needs its own page; its become a whole subject of study",
+          "name": "Anonymous",
+          "votes": 0
+        }
       ]
     },
     {
@@ -428,68 +1286,209 @@
       "readingTime": "14 min",
       "intro": "At high temperatures, materials deform slowly under constant load, even at stresses well below the yield stress. This is creep. It limits the operating temperature of turbine blades, nuclear reactor components, boiler tubes and any structure that must carry load for years at elevated temperature.",
       "body": [
-        ["h3", "When does creep matter?"],
-        ["p", "Creep becomes significant at temperatures above about $0.3$-$0.4\\,T_m$, where $T_m$ is the absolute melting temperature. For tungsten ($T_m = 3695$ K), creep is negligible at 1000°C. For lead ($T_m = 600$ K), creep occurs at room temperature. This is why lead roofing on old cathedrals slowly sags under its own weight."],
-        ["p", "The rule of thumb: if the service temperature exceeds roughly $0.4\\,T_m$, you must design for creep. For steels ($T_m \\approx 1800$ K), this means temperatures above about 450°C. For nickel superalloys ($T_m \\approx 1600$ K), above about 370°C, though they are specifically designed to resist creep up to 1100°C through precipitate and solid-solution strengthening."],
-
-        ["h3", "The creep curve"],
-        ["p", "A standard creep test applies a constant tensile load at constant temperature and records strain versus time. The curve shows three stages:"],
-        ["ol", [
-          "<strong>Primary creep</strong>: the strain rate decreases with time. The material work-hardens, and each increment of strain makes further deformation more difficult.",
-          "<strong>Secondary (steady-state) creep</strong>: the strain rate is constant. Work hardening is balanced by recovery (thermally activated annihilation of dislocations). This stage dominates the useful life of most components.",
-          "<strong>Tertiary creep</strong>: the strain rate accelerates. Internal damage accumulates (cavities nucleate on grain boundaries, necking begins) and the material fails by creep rupture."
-        ]],
-        ["p", "The steady-state creep rate $\\dot{\\varepsilon}_s$ is the key design parameter. It must be low enough that the total accumulated strain over the component life is acceptable. A turbine blade that creeps 1% over 10,000 hours may be acceptable; 5% may not be."],
-
-        ["h3", "Creep mechanisms"],
-        ["p", "Several mechanisms operate at different temperatures and stresses. The dominant mechanism depends on where you are on the deformation mechanism map (a plot of normalised stress $\\sigma/G$ versus homologous temperature $T/T_m$)."],
-        ["p", "<strong>Dislocation creep (power-law creep)</strong>: at moderate to high stresses and temperatures. Dislocations glide and climb (the climb requires diffusion, which provides the temperature dependence). The steady-state creep rate follows:"],
-        ["eq", "\\dot{\\varepsilon}_s = A \\sigma^n \\exp\\left(-\\frac{Q_c}{RT}\\right)"],
-        ["p", "where $A$ is a material constant, $n$ is the stress exponent (typically 3-8 for metals), $Q_c$ is the activation energy for creep (often close to that for self-diffusion), $R$ is the gas constant and $T$ is absolute temperature. For pure aluminium: $n \\approx 4.4$, $Q_c \\approx 142$ kJ/mol."],
-        ["p", "<strong>Diffusion creep</strong>: at low stresses and high temperatures. Atoms diffuse from grain boundaries under compression to those under tension, elongating the grain. Two sub-mechanisms:"],
-        ["ul", [
-          "<strong>Nabarro-Herring creep</strong>: diffusion through the grain interior (lattice diffusion). $\\dot{\\varepsilon} \\propto \\sigma / d^2$, where $d$ is the grain size. Dominant at very high temperatures.",
-          "<strong>Coble creep</strong>: diffusion along grain boundaries. $\\dot{\\varepsilon} \\propto \\sigma / d^3$. Dominant at somewhat lower temperatures where boundary diffusion is faster than lattice diffusion."
-        ]],
-        ["p", "Both diffusion creep mechanisms have $n = 1$ (linear in stress) and are more important in fine-grained materials (small $d$). This is the opposite of what you want for low-temperature strength (fine grains are stronger via Hall-Petch). Creep-resistant alloys therefore use large grains or single crystals."],
-        ["callout", "Single-crystal turbine blades", "Modern jet engine turbine blades are single crystals of nickel superalloy, eliminating grain boundaries entirely. This removes Coble creep and grain boundary sliding, allowing operation above 1000°C with blade lives exceeding 20,000 hours. The casting process (directional solidification followed by single-crystal selection) is one of the most impressive achievements in metallurgy."],
-
-        ["h3", "The Larson-Miller parameter"],
-        ["p", "Engineers need to predict creep rupture life from accelerated tests. The Larson-Miller parameter combines temperature and time into a single variable:"],
-        ["eq", "P_{LM} = T(C + \\log_{10} t_r)"],
-        ["p", "where $T$ is in kelvin, $t_r$ is the rupture time in hours, and $C$ is a constant (typically 20 for steels, though it varies with alloy). The key assumption is that $P_{LM}$ depends only on stress, not independently on $T$ and $t_r$."],
-        ["p", "This allows extrapolation: a short test at high temperature can predict the life at a lower temperature and longer time. For example, a test at 700°C for 100 hours ($P_{LM} = 973 \\times (20 + 2) = 21{,}400$) predicts similar behaviour at 600°C for $t_r$ where $873 \\times (20 + \\log_{10} t_r) = 21{,}400$, giving $t_r \\approx 19{,}000$ hours."],
-
-        ["h3", "Creep-resistant design"],
-        ["p", "Strategies for resisting creep:"],
-        ["ul", [
-          "<strong>Large grains or single crystals</strong>: reduce diffusion creep and grain boundary sliding.",
-          "<strong>Stable precipitates</strong>: impede dislocation climb. $\\gamma'$ (Ni$_3$Al) in nickel superalloys is effective because it is ordered, coherent and thermodynamically stable up to high temperatures.",
-          "<strong>Solid solution strengthening</strong>: refractory additions (W, Mo, Re) slow diffusion in nickel alloys.",
-          "<strong>High melting point</strong>: raises the homologous temperature threshold. Tungsten, molybdenum and niobium alloys are used where nickel alloys cannot survive."
-        ]],
-
-        ["derivation", "Activation energy from creep data: if $\\dot{\\varepsilon}_s$ is measured at two temperatures at the same stress, $Q_c = R \\ln(\\dot{\\varepsilon}_2 / \\dot{\\varepsilon}_1) / (1/T_1 - 1/T_2)$.", [
-          ["p", "From $\\dot{\\varepsilon}_s = A\\sigma^n \\exp(-Q_c/RT)$ at constant $\\sigma$:"],
-          ["eq", "\\frac{\\dot{\\varepsilon}_2}{\\dot{\\varepsilon}_1} = \\exp\\left[-\\frac{Q_c}{R}\\left(\\frac{1}{T_2} - \\frac{1}{T_1}\\right)\\right]"],
-          ["p", "Taking the natural log:"],
-          ["eq", "Q_c = \\frac{R\\ln(\\dot{\\varepsilon}_2/\\dot{\\varepsilon}_1)}{1/T_1 - 1/T_2}"],
-          ["p", "For aluminium tested at 200°C ($\\dot{\\varepsilon} = 2.5 \\times 10^{-8}$ s$^{-1}$) and 250°C ($\\dot{\\varepsilon} = 3.0 \\times 10^{-7}$ s$^{-1}$) at the same stress: $Q_c = 8.314 \\times \\ln(3.0 \\times 10^{-7}/2.5 \\times 10^{-8}) / (1/473 - 1/523) = 8.314 \\times 2.485 / (2.114 \\times 10^{-3} - 1.912 \\times 10^{-3}) = 20.66 / (2.02 \\times 10^{-4}) = 102$ kJ/mol. This is somewhat below the lattice self-diffusion energy of Al (142 kJ/mol), suggesting some contribution from pipe diffusion along dislocation cores."]
-        ]],
-
-        ["problem", "A nickel superalloy component must survive 50,000 hours at 850°C. An accelerated creep rupture test at 950°C at the same stress gives a rupture time of 1,200 hours. Using the Larson-Miller parameter with $C = 20$, check whether the 50,000-hour life at 850°C is achievable.", [
-          ["p", "At 950°C ($T = 1223$ K, $t_r = 1200$ h):"],
-          ["eq", "P_{LM} = 1223 \\times (20 + \\log_{10} 1200) = 1223 \\times (20 + 3.079) = 1223 \\times 23.079 = 28{,}226"],
-          ["p", "At 850°C ($T = 1123$ K), what rupture time gives the same $P_{LM}$?"],
-          ["eq", "28{,}226 = 1123 \\times (20 + \\log_{10} t_r) \\quad \\Rightarrow \\quad \\log_{10} t_r = \\frac{28{,}226}{1123} - 20 = 25.13 - 20 = 5.13"],
-          ["eq", "t_r = 10^{5.13} = 135{,}000 \\text{ hours}"],
-          ["p", "The predicted rupture time at 850°C is 135,000 hours, well above the 50,000-hour requirement. The component should survive with a safety factor of about 2.7 on time. However, the Larson-Miller method assumes the mechanism does not change between test and service conditions, and long extrapolations carry significant uncertainty."]
-        ]]
+        [
+          "h3",
+          "When does creep matter?"
+        ],
+        [
+          "p",
+          "Creep becomes significant at temperatures above about $0.3$-$0.4\\,T_m$, where $T_m$ is the absolute melting temperature. For tungsten ($T_m = 3695$ K), creep is negligible at 1000\u00b0C. For lead ($T_m = 600$ K), creep occurs at room temperature. This is why lead roofing on old cathedrals slowly sags under its own weight."
+        ],
+        [
+          "p",
+          "The rule of thumb: if the service temperature exceeds roughly $0.4\\,T_m$, you must design for creep. For steels ($T_m \\approx 1800$ K), this means temperatures above about 450\u00b0C. For nickel superalloys ($T_m \\approx 1600$ K), above about 370\u00b0C, though they are specifically designed to resist creep up to 1100\u00b0C through precipitate and solid-solution strengthening."
+        ],
+        [
+          "h3",
+          "The creep curve"
+        ],
+        [
+          "p",
+          "A standard creep test applies a constant tensile load at constant temperature and records strain versus time. The curve shows three stages:"
+        ],
+        [
+          "ol",
+          [
+            "<strong>Primary creep</strong>: the strain rate decreases with time. The material work-hardens, and each increment of strain makes further deformation more difficult.",
+            "<strong>Secondary (steady-state) creep</strong>: the strain rate is constant. Work hardening is balanced by recovery (thermally activated annihilation of dislocations). This stage dominates the useful life of most components.",
+            "<strong>Tertiary creep</strong>: the strain rate accelerates. Internal damage accumulates (cavities nucleate on grain boundaries, necking begins) and the material fails by creep rupture."
+          ]
+        ],
+        [
+          "p",
+          "The steady-state creep rate $\\dot{\\varepsilon}_s$ is the key design parameter. It must be low enough that the total accumulated strain over the component life is acceptable. A turbine blade that creeps 1% over 10,000 hours may be acceptable; 5% may not be."
+        ],
+        [
+          "h3",
+          "Creep mechanisms"
+        ],
+        [
+          "p",
+          "Several mechanisms operate at different temperatures and stresses. The dominant mechanism depends on where you are on the deformation mechanism map (a plot of normalised stress $\\sigma/G$ versus homologous temperature $T/T_m$)."
+        ],
+        [
+          "p",
+          "<strong>Dislocation creep (power-law creep)</strong>: at moderate to high stresses and temperatures. Dislocations glide and climb (the climb requires diffusion, which provides the temperature dependence). The steady-state creep rate follows:"
+        ],
+        [
+          "eq",
+          "\\dot{\\varepsilon}_s = A \\sigma^n \\exp\\left(-\\frac{Q_c}{RT}\\right)"
+        ],
+        [
+          "p",
+          "where $A$ is a material constant, $n$ is the stress exponent (typically 3-8 for metals), $Q_c$ is the activation energy for creep (often close to that for self-diffusion), $R$ is the gas constant and $T$ is absolute temperature. For pure aluminium: $n \\approx 4.4$, $Q_c \\approx 142$ kJ/mol."
+        ],
+        [
+          "p",
+          "<strong>Diffusion creep</strong>: at low stresses and high temperatures. Atoms diffuse from grain boundaries under compression to those under tension, elongating the grain. Two sub-mechanisms:"
+        ],
+        [
+          "ul",
+          [
+            "<strong>Nabarro-Herring creep</strong>: diffusion through the grain interior (lattice diffusion). $\\dot{\\varepsilon} \\propto \\sigma / d^2$, where $d$ is the grain size. Dominant at very high temperatures.",
+            "<strong>Coble creep</strong>: diffusion along grain boundaries. $\\dot{\\varepsilon} \\propto \\sigma / d^3$. Dominant at somewhat lower temperatures where boundary diffusion is faster than lattice diffusion."
+          ]
+        ],
+        [
+          "p",
+          "Both diffusion creep mechanisms have $n = 1$ (linear in stress) and are more important in fine-grained materials (small $d$). This is the opposite of what you want for low-temperature strength (fine grains are stronger via Hall-Petch). Creep-resistant alloys therefore use large grains or single crystals."
+        ],
+        [
+          "callout",
+          "Single-crystal turbine blades",
+          "Modern jet engine turbine blades are single crystals of nickel superalloy, which removes grain boundary sliding and Coble creep. But the single-crystal form alone is not what gives creep resistance. The key is the \u03b3/\u03b3' microstructure: roughly 70% by volume of ordered Ni\u2083Al precipitates (\u03b3') separated by narrow channels of disordered \u03b3 matrix. Dislocations cannot easily cut through the ordered \u03b3' (the antiphase boundary energy is too high), so they are confined to the narrow \u03b3 channels where they must climb around precipitates. This forced climb-assisted glide through constrained channels is what limits the creep rate. The casting process (directional solidification followed by single-crystal selection) and the alloy design (refractory additions like Re, Ru to slow diffusion in the channels) together allow operation above 1000\u00b0C with blade lives exceeding 20,000 hours."
+        ],
+        [
+          "h3",
+          "The Larson-Miller parameter"
+        ],
+        [
+          "p",
+          "Engineers need to predict creep rupture life from accelerated tests. The Larson-Miller parameter combines temperature and time into a single variable:"
+        ],
+        [
+          "eq",
+          "P_{LM} = T(C + \\log_{10} t_r)"
+        ],
+        [
+          "p",
+          "where $T$ is in kelvin, $t_r$ is the rupture time in hours, and $C$ is a constant (typically 20 for steels, though it varies with alloy). The key assumption is that $P_{LM}$ depends only on stress, not independently on $T$ and $t_r$."
+        ],
+        [
+          "p",
+          "This allows extrapolation: a short test at high temperature can predict the life at a lower temperature and longer time. For example, a test at 700\u00b0C for 100 hours ($P_{LM} = 973 \\times (20 + 2) = 21{,}400$) predicts similar behaviour at 600\u00b0C for $t_r$ where $873 \\times (20 + \\log_{10} t_r) = 21{,}400$, giving $t_r \\approx 19{,}000$ hours."
+        ],
+        [
+          "h3",
+          "Creep-resistant design"
+        ],
+        [
+          "p",
+          "Strategies for resisting creep:"
+        ],
+        [
+          "ul",
+          [
+            "<strong>Large grains or single crystals</strong>: reduce diffusion creep and grain boundary sliding.",
+            "<strong>Stable precipitates</strong>: impede dislocation climb. $\\gamma'$ (Ni$_3$Al) in nickel superalloys is effective because it is ordered, coherent and thermodynamically stable up to high temperatures.",
+            "<strong>Solid solution strengthening</strong>: refractory additions (W, Mo, Re) slow diffusion in nickel alloys.",
+            "<strong>High melting point</strong>: raises the homologous temperature threshold. Tungsten, molybdenum and niobium alloys are used where nickel alloys cannot survive."
+          ]
+        ],
+        [
+          "derivation",
+          "Activation energy from creep data: if $\\dot{\\varepsilon}_s$ is measured at two temperatures at the same stress, $Q_c = R \\ln(\\dot{\\varepsilon}_2 / \\dot{\\varepsilon}_1) / (1/T_1 - 1/T_2)$.",
+          [
+            [
+              "p",
+              "From $\\dot{\\varepsilon}_s = A\\sigma^n \\exp(-Q_c/RT)$ at constant $\\sigma$:"
+            ],
+            [
+              "eq",
+              "\\frac{\\dot{\\varepsilon}_2}{\\dot{\\varepsilon}_1} = \\exp\\left[-\\frac{Q_c}{R}\\left(\\frac{1}{T_2} - \\frac{1}{T_1}\\right)\\right]"
+            ],
+            [
+              "p",
+              "Taking the natural log:"
+            ],
+            [
+              "eq",
+              "Q_c = \\frac{R\\ln(\\dot{\\varepsilon}_2/\\dot{\\varepsilon}_1)}{1/T_1 - 1/T_2}"
+            ],
+            [
+              "p",
+              "For aluminium tested at 200\u00b0C ($\\dot{\\varepsilon} = 2.5 \\times 10^{-8}$ s$^{-1}$) and 250\u00b0C ($\\dot{\\varepsilon} = 3.0 \\times 10^{-7}$ s$^{-1}$) at the same stress: $Q_c = 8.314 \\times \\ln(3.0 \\times 10^{-7}/2.5 \\times 10^{-8}) / (1/473 - 1/523) = 8.314 \\times 2.485 / (2.114 \\times 10^{-3} - 1.912 \\times 10^{-3}) = 20.66 / (2.02 \\times 10^{-4}) = 102$ kJ/mol. This is somewhat below the lattice self-diffusion energy of Al (142 kJ/mol), suggesting some contribution from pipe diffusion along dislocation cores."
+            ]
+          ]
+        ],
+        [
+          "problem",
+          "A nickel superalloy component must survive 50,000 hours at 850\u00b0C. An accelerated creep rupture test at 950\u00b0C at the same stress gives a rupture time of 1,200 hours. Using the Larson-Miller parameter with $C = 20$, check whether the 50,000-hour life at 850\u00b0C is achievable.",
+          [
+            [
+              "p",
+              "At 950\u00b0C ($T = 1223$ K, $t_r = 1200$ h):"
+            ],
+            [
+              "eq",
+              "P_{LM} = 1223 \\times (20 + \\log_{10} 1200) = 1223 \\times (20 + 3.079) = 1223 \\times 23.079 = 28{,}226"
+            ],
+            [
+              "p",
+              "At 850\u00b0C ($T = 1123$ K), what rupture time gives the same $P_{LM}$?"
+            ],
+            [
+              "eq",
+              "28{,}226 = 1123 \\times (20 + \\log_{10} t_r) \\quad \\Rightarrow \\quad \\log_{10} t_r = \\frac{28{,}226}{1123} - 20 = 25.13 - 20 = 5.13"
+            ],
+            [
+              "eq",
+              "t_r = 10^{5.13} = 135{,}000 \\text{ hours}"
+            ],
+            [
+              "p",
+              "The predicted rupture time at 850\u00b0C is 135,000 hours, well above the 50,000-hour requirement. The component should survive with a safety factor of about 2.7 on time. However, the Larson-Miller method assumes the mechanism does not change between test and service conditions, and long extrapolations carry significant uncertainty."
+            ]
+          ]
+        ]
       ],
       "related": [
-        { "title": "Fatigue", "url": "fatigue" },
-        { "title": "Plastic Deformation & Slip", "url": "plastic-deformation-slip" },
-        { "title": "Diffusion", "url": "../diffusion/" }
+        {
+          "title": "Fatigue",
+          "url": "fatigue"
+        },
+        {
+          "title": "Plastic Deformation & Slip",
+          "url": "plastic-deformation-slip"
+        },
+        {
+          "title": "Diffusion",
+          "url": "../diffusion/"
+        }
+      ],
+      "comments": [
+        {
+          "id": "1f4f1eb6",
+          "selectedText": "p): at moderate to high stresses and temperatures. Dislocations glide and climb (the climb requires diffusi",
+          "comment": "The idea here is that dislocation motion can be both thermally and mechanically activated (PLC)",
+          "name": "Anonymous",
+          "votes": 0
+        },
+        {
+          "id": "75d8dae2",
+          "selectedText": "e turbine blades are single crystals of nickel superalloy, eliminating grain boundaries entirely. This removes Coble creep and grain boundary sliding, allowing",
+          "comment": "Its more that the duplex microstructure limits slip and forces narrow climb channels. Microstructure here would be useful.",
+          "name": "Anonymous",
+          "votes": 0,
+          "status": "integrated"
+        },
+        {
+          "id": "8c29eaf9",
+          "selectedText": "Creep-resistant design\r\nStrategies for resisting creep:\r\n\r\nLarge grains or single crystals: reduce diffusion creep and grain boundary sliding.",
+          "comment": "Worth showing the flipside; superplastic materials like Mg duplex alloys.",
+          "name": "Anonymous",
+          "votes": 0
+        }
       ]
     },
     {
@@ -500,70 +1499,247 @@
       "readingTime": "12 min",
       "intro": "Hardness testing is the most common mechanical test in industry. It is fast, nearly non-destructive and requires minimal specimen preparation. A hard indenter is pressed into the surface, and the size or depth of the impression reveals the material's resistance to plastic deformation.",
       "body": [
-        ["h3", "What hardness measures"],
-        ["p", "Hardness is a composite response rather than a fundamental property like Young's modulus or yield stress. It that depends on elastic modulus, yield strength, work hardening and friction between indenter and surface. Nonetheless, hardness correlates well with yield strength and UTS, and it is far easier to measure."],
-        ["p", "The basic idea is the same for all methods: press an indenter of known geometry into the surface with a known force, and measure the size of the resulting indent."],
-
-        ["h3", "Brinell hardness (HB)"],
-        ["p", "Brinell (1900) used a hardened steel (or tungsten carbide) sphere of diameter $D$ pressed with force $F$ into the surface. The Brinell hardness number is the load divided by the curved surface area of the impression:"],
-        ["eq", "\\text{HB} = \\frac{2F}{\\pi D \\left(D - \\sqrt{D^2 - d^2}\\right)}"],
-        ["p", "where $d$ is the diameter of the indent measured at the surface. Standard conditions: $D = 10$ mm ball, $F = 3000$ kgf for steels, $F = 500$ kgf for softer metals."],
-        ["p", "Some Brinell values: pure aluminium 15-20 HB, mild steel 120-140 HB, hardened tool steel 600-700 HB. The units of HB are formally kgf/mm$^2$, though the number is treated as dimensionless in practice."],
-
-        ["h3", "Vickers hardness (HV)"],
-        ["p", "Vickers uses a diamond pyramid indenter with a square base and an included angle of 136° between opposite faces. The hardness is:"],
-        ["eq", "\\text{HV} = \\frac{2F \\sin(136°/2)}{d^2} = \\frac{1.854 F}{d^2}"],
-        ["p", "where $F$ is the load (in kgf) and $d$ is the mean diagonal of the indent (in mm). The 136° angle was chosen so that Vickers numbers approximately equal Brinell numbers for the same material."],
-        ["p", "The Vickers test works at any load, from 1 kgf for macro-hardness down to 10 gf for micro-hardness. The micro-hardness version allows measurement of individual phases in a microstructure, thin coatings, or near a weld heat-affected zone."],
-
-        ["h3", "Rockwell hardness (HR)"],
-        ["p", "Rockwell measures depth of penetration rather than indent diameter, allowing direct readout on the machine. The test uses a minor pre-load (10 kgf) followed by a major load. Hardness is calculated from the additional depth of penetration under the major load."],
-        ["p", "Different scales use different indenters and loads:"],
-        ["ul", [
-          "<strong>HRC</strong>: diamond cone (120° Brale indenter), 150 kgf major load. Used for hardened steels. Range: 20-70 HRC. Hardened bearing steel: 58-64 HRC.",
-          "<strong>HRB</strong>: 1/16\" steel ball, 100 kgf. Used for softer steels and copper alloys. Range: 20-100 HRB. Mild steel: 70-85 HRB.",
-          "<strong>HRA</strong>: diamond cone, 60 kgf. Used for cemented carbides and very hard materials."
-        ]],
-        ["callout", "Converting between scales", "Conversion between hardness scales is empirical, not exact. ASTM E140 provides conversion tables. Approximate relationships for steels: $\\text{HV} \\approx \\text{HB}$ (up to about 400 HB). For HRC: $\\text{HV} \\approx 20.4 \\times \\text{HRC} - 489$ (very roughly, in the range 20-65 HRC). The Vickers scale is the most versatile and is preferred for research."],
-
-        ["h3", "Hardness and tensile strength"],
-        ["p", "For steels, there is a well-established empirical correlation:"],
-        ["eq", "\\sigma_{\\text{UTS}} \\text{ (MPa)} \\approx 3.45 \\times \\text{HB}"],
-        ["p", "This works because the stress state under an indenter (constrained compression with a constraint factor of about 3) relates systematically to the uniaxial flow stress. A mild steel at 150 HB has $\\sigma_{\\text{UTS}} \\approx 3.45 \\times 150 = 518$ MPa, which is correct to within about 10%."],
-        ["p", "The factor of 3.45 (approximately $\\pi$ for Vickers) is related to the constraint factor: the material beneath the indenter is surrounded by elastic material that prevents free lateral expansion. The mean pressure under the indenter is approximately $3\\sigma_y$ for a non-work-hardening material."],
-
-        ["h3", "Nanoindentation"],
-        ["p", "Modern nanoindentation (instrumented indentation) uses a sharp Berkovich indenter (three-sided pyramid) with continuously recorded force and displacement. This allows extraction of both hardness and elastic modulus from a single indent using the Oliver-Pharr method."],
-        ["p", "The contact stiffness $S$ at the onset of unloading is related to the reduced modulus $E_r$:"],
-        ["eq", "S = \\frac{dF}{dh} = \\frac{2}{\\sqrt{\\pi}} E_r \\sqrt{A}"],
-        ["p", "where $A$ is the projected contact area and $E_r$ is defined by:"],
-        ["eq", "\\frac{1}{E_r} = \\frac{1-\\nu_s^2}{E_s} + \\frac{1-\\nu_i^2}{E_i}"],
-        ["p", "with subscripts $s$ for specimen and $i$ for indenter. For a diamond indenter, $E_i = 1141$ GPa and $\\nu_i = 0.07$. The contact area $A$ is determined from the indent depth $h_c$ using a calibrated area function for the indenter tip geometry."],
-        ["p", "Nanoindentation can probe volumes as small as 100 nm across, enabling measurement of individual grains, thin films (even a few hundred nanometres thick) and the mechanical properties of biological tissues."],
-
-        ["h3", "The Mohs scale"],
-        ["p", "The oldest hardness scale (Mohs, 1812) ranks minerals by which can scratch which. Talc is 1, diamond is 10. The scale is ordinal, not linear: the jump from 9 (corundum) to 10 (diamond) in Vickers hardness is far larger than from 1 to 9. Mohs 1 (talc) $\\approx$ 1 HV; Mohs 9 (corundum) $\\approx$ 2000 HV; Mohs 10 (diamond) $\\approx$ 10,000 HV. The Mohs scale is still used in geology and mineralogy but is too coarse for engineering."],
-
-        ["derivation", "The constraint factor: why $H \\approx 3\\sigma_y$.", [
-          ["p", "An indenter pressing into an elastic-perfectly-plastic material creates a stress state analogous to the expansion of a spherical cavity. The Prandtl-Hill analysis for a rigid flat punch gives the mean pressure (hardness) as:"],
-          ["eq", "H = c \\cdot \\sigma_y"],
-          ["p", "where $c$ is the constraint factor. For a flat punch on a rigid-plastic material, $c = 2 + \\pi \\approx 5.14$ (plane strain) or $c \\approx 2.8$-$3.0$ (axisymmetric). For real materials with work hardening, the effective constraint factor is typically $c \\approx 2.8$-$3.0$."],
-          ["p", "The Tabor relation: $H \\approx 3\\sigma_{\\text{flow}}$, where $\\sigma_{\\text{flow}}$ is the flow stress at a representative strain of about 8-10% for a Vickers indenter. This is why hardness correlates with UTS (which occurs at moderate plastic strains) rather than initial yield stress."]
-        ]],
-
-        ["problem", "A Vickers hardness test on a steel sample uses a load of $F = 30$ kgf and produces an indent with mean diagonal $d = 0.42$ mm. Calculate the Vickers hardness, estimate the UTS, and estimate the yield stress (assume $\\sigma_y \\approx 0.85 \\times \\sigma_{\\text{UTS}}$ for this quenched and tempered steel).", [
-          ["p", "Vickers hardness:"],
-          ["eq", "\\text{HV} = \\frac{1.854 \\times 30}{0.42^2} = \\frac{55.62}{0.1764} = 315 \\text{ HV}"],
-          ["p", "Estimated UTS (using HV $\\approx$ HB for this range): $\\sigma_{\\text{UTS}} \\approx 3.45 \\times 315 = 1087$ MPa."],
-          ["p", "Estimated yield stress: $\\sigma_y \\approx 0.85 \\times 1087 = 924$ MPa."],
-          ["p", "A Vickers hardness of 315 is typical of a medium-carbon steel in the quenched and tempered condition. The UTS estimate of ~1090 MPa is consistent with, for example, AISI 4140 tempered at around 400°C."]
-        ]]
+        [
+          "h3",
+          "What hardness measures"
+        ],
+        [
+          "p",
+          "Hardness is a composite response rather than a fundamental property like Young's modulus or yield stress. It depends on elastic modulus, yield strength, work hardening, and friction between indenter and surface. The reason it works as a proxy for strength is that both hardness and yield stress are controlled by dislocation motion. If the indented volume is large enough to be representative of the bulk microstructure, and the indenter geometry is well defined, then the constraint factor relating hardness to yield stress is approximately constant ($H \\approx 3\\sigma_y$ for metals with moderate work hardening). This is why a quick Vickers indent can replace a tensile test for quality control."
+        ],
+        [
+          "p",
+          "The basic idea is the same for all methods: press an indenter of known geometry into the surface with a known force, and measure the size of the resulting indent."
+        ],
+        [
+          "h3",
+          "Brinell hardness (HB)"
+        ],
+        [
+          "p",
+          "Brinell (1900) used a hardened steel (or tungsten carbide) sphere of diameter $D$ pressed with force $F$ into the surface. The Brinell hardness number is the load divided by the curved surface area of the impression:"
+        ],
+        [
+          "eq",
+          "\\text{HB} = \\frac{2F}{\\pi D \\left(D - \\sqrt{D^2 - d^2}\\right)}"
+        ],
+        [
+          "p",
+          "where $d$ is the diameter of the indent measured at the surface. Standard conditions: $D = 10$ mm ball, $F = 3000$ kgf for steels, $F = 500$ kgf for softer metals."
+        ],
+        [
+          "p",
+          "Some Brinell values: pure aluminium 15-20 HB, mild steel 120-140 HB, hardened tool steel 600-700 HB. The units of HB are formally kgf/mm$^2$, though the number is treated as dimensionless in practice."
+        ],
+        [
+          "h3",
+          "Vickers hardness (HV)"
+        ],
+        [
+          "p",
+          "Vickers uses a diamond pyramid indenter with a square base and an included angle of 136\u00b0 between opposite faces. The hardness is:"
+        ],
+        [
+          "eq",
+          "\\text{HV} = \\frac{2F \\sin(136\u00b0/2)}{d^2} = \\frac{1.854 F}{d^2}"
+        ],
+        [
+          "p",
+          "where $F$ is the load (in kgf) and $d$ is the mean diagonal of the indent (in mm). The 136\u00b0 angle was chosen so that Vickers numbers approximately equal Brinell numbers for the same material."
+        ],
+        [
+          "p",
+          "The Vickers test works at any load, from 1 kgf for macro-hardness down to 10 gf for micro-hardness. The micro-hardness version allows measurement of individual phases in a microstructure, thin coatings, or near a weld heat-affected zone."
+        ],
+        [
+          "h3",
+          "Rockwell hardness (HR)"
+        ],
+        [
+          "p",
+          "Rockwell measures depth of penetration rather than indent diameter, allowing direct readout on the machine. The test uses a minor pre-load (10 kgf) followed by a major load. Hardness is calculated from the additional depth of penetration under the major load."
+        ],
+        [
+          "p",
+          "Different scales use different indenters and loads:"
+        ],
+        [
+          "ul",
+          [
+            "<strong>HRC</strong>: diamond cone (120\u00b0 Brale indenter), 150 kgf major load. Used for hardened steels. Range: 20-70 HRC. Hardened bearing steel: 58-64 HRC.",
+            "<strong>HRB</strong>: 1/16\" steel ball, 100 kgf. Used for softer steels and copper alloys. Range: 20-100 HRB. Mild steel: 70-85 HRB.",
+            "<strong>HRA</strong>: diamond cone, 60 kgf. Used for cemented carbides and very hard materials."
+          ]
+        ],
+        [
+          "callout",
+          "Converting between scales",
+          "Conversion between hardness scales is empirical, not exact. ASTM E140 provides conversion tables. Approximate relationships for steels: $\\text{HV} \\approx \\text{HB}$ (up to about 400 HB). For HRC: $\\text{HV} \\approx 20.4 \\times \\text{HRC} - 489$ (very roughly, in the range 20-65 HRC). The Vickers scale is the most versatile and is preferred for research."
+        ],
+        [
+          "h3",
+          "Hardness and tensile strength"
+        ],
+        [
+          "p",
+          "For steels, there is a well-established empirical correlation:"
+        ],
+        [
+          "eq",
+          "\\sigma_{\\text{UTS}} \\text{ (MPa)} \\approx 3.45 \\times \\text{HB}"
+        ],
+        [
+          "p",
+          "This works because the stress state under an indenter (constrained compression with a constraint factor of about 3) relates systematically to the uniaxial flow stress. A mild steel at 150 HB has $\\sigma_{\\text{UTS}} \\approx 3.45 \\times 150 = 518$ MPa, which is correct to within about 10%."
+        ],
+        [
+          "p",
+          "The factor of 3.45 (approximately $\\pi$ for Vickers) is related to the constraint factor: the material beneath the indenter is surrounded by elastic material that prevents free lateral expansion. The mean pressure under the indenter is approximately $3\\sigma_y$ for a non-work-hardening material."
+        ],
+        [
+          "h3",
+          "Nanoindentation"
+        ],
+        [
+          "p",
+          "Modern nanoindentation (instrumented indentation) uses a sharp Berkovich indenter (three-sided pyramid) with continuously recorded force and displacement. This allows extraction of both hardness and elastic modulus from a single indent using the Oliver-Pharr method."
+        ],
+        [
+          "p",
+          "The contact stiffness $S$ at the onset of unloading is related to the reduced modulus $E_r$:"
+        ],
+        [
+          "eq",
+          "S = \\frac{dF}{dh} = \\frac{2}{\\sqrt{\\pi}} E_r \\sqrt{A}"
+        ],
+        [
+          "p",
+          "where $A$ is the projected contact area and $E_r$ is defined by:"
+        ],
+        [
+          "eq",
+          "\\frac{1}{E_r} = \\frac{1-\\nu_s^2}{E_s} + \\frac{1-\\nu_i^2}{E_i}"
+        ],
+        [
+          "p",
+          "with subscripts $s$ for specimen and $i$ for indenter. For a diamond indenter, $E_i = 1141$ GPa and $\\nu_i = 0.07$. The contact area $A$ is determined from the indent depth $h_c$ using a calibrated area function for the indenter tip geometry."
+        ],
+        [
+          "p",
+          "Nanoindentation can probe volumes as small as 100 nm across, enabling measurement of individual grains, thin films (even a few hundred nanometres thick) and the mechanical properties of biological tissues."
+        ],
+        [
+          "h3",
+          "The Mohs scale"
+        ],
+        [
+          "p",
+          "The oldest hardness scale (Mohs, 1812) ranks minerals by which can scratch which. Talc is 1, diamond is 10. The scale is ordinal, not linear: the jump from 9 (corundum) to 10 (diamond) in Vickers hardness is far larger than from 1 to 9. Mohs 1 (talc) $\\approx$ 1 HV; Mohs 9 (corundum) $\\approx$ 2000 HV; Mohs 10 (diamond) $\\approx$ 10,000 HV. The Mohs scale is still used in geology and mineralogy but is too coarse for engineering."
+        ],
+        [
+          "derivation",
+          "The constraint factor: why $H \\approx 3\\sigma_y$.",
+          [
+            [
+              "p",
+              "An indenter pressing into an elastic-perfectly-plastic material creates a stress state analogous to the expansion of a spherical cavity. The Prandtl-Hill analysis for a rigid flat punch gives the mean pressure (hardness) as:"
+            ],
+            [
+              "eq",
+              "H = c \\cdot \\sigma_y"
+            ],
+            [
+              "p",
+              "where $c$ is the constraint factor. For a flat punch on a rigid-plastic material, $c = 2 + \\pi \\approx 5.14$ (plane strain) or $c \\approx 2.8$-$3.0$ (axisymmetric). For real materials with work hardening, the effective constraint factor is typically $c \\approx 2.8$-$3.0$."
+            ],
+            [
+              "p",
+              "The Tabor relation: $H \\approx 3\\sigma_{\\text{flow}}$, where $\\sigma_{\\text{flow}}$ is the flow stress at a representative strain of about 8-10% for a Vickers indenter. This is why hardness correlates with UTS (which occurs at moderate plastic strains) rather than initial yield stress."
+            ]
+          ]
+        ],
+        [
+          "problem",
+          "A Vickers hardness test on a steel sample uses a load of $F = 30$ kgf and produces an indent with mean diagonal $d = 0.42$ mm. Calculate the Vickers hardness, estimate the UTS, and estimate the yield stress (assume $\\sigma_y \\approx 0.85 \\times \\sigma_{\\text{UTS}}$ for this quenched and tempered steel).",
+          [
+            [
+              "p",
+              "Vickers hardness:"
+            ],
+            [
+              "eq",
+              "\\text{HV} = \\frac{1.854 \\times 30}{0.42^2} = \\frac{55.62}{0.1764} = 315 \\text{ HV}"
+            ],
+            [
+              "p",
+              "Estimated UTS (using HV $\\approx$ HB for this range): $\\sigma_{\\text{UTS}} \\approx 3.45 \\times 315 = 1087$ MPa."
+            ],
+            [
+              "p",
+              "Estimated yield stress: $\\sigma_y \\approx 0.85 \\times 1087 = 924$ MPa."
+            ],
+            [
+              "p",
+              "A Vickers hardness of 315 is typical of a medium-carbon steel in the quenched and tempered condition. The UTS estimate of ~1090 MPa is consistent with, for example, AISI 4140 tempered at around 400\u00b0C."
+            ]
+          ]
+        ]
       ],
       "related": [
-        { "title": "Stress & Strain", "url": "stress-strain-engineering-vs-true" },
-        { "title": "Elasticity & Elastic Moduli", "url": "elasticity-elastic-moduli" },
-        { "title": "Strengthening Mechanisms", "url": "strengthening-mechanisms" },
-        { "title": "Plastic Deformation & Slip", "url": "plastic-deformation-slip" }
+        {
+          "title": "Stress & Strain",
+          "url": "stress-strain-engineering-vs-true"
+        },
+        {
+          "title": "Elasticity & Elastic Moduli",
+          "url": "elasticity-elastic-moduli"
+        },
+        {
+          "title": "Strengthening Mechanisms",
+          "url": "strengthening-mechanisms"
+        },
+        {
+          "title": "Plastic Deformation & Slip",
+          "url": "plastic-deformation-slip"
+        }
+      ],
+      "comments": [
+        {
+          "id": "b307d795",
+          "selectedText": "Hardness testing is the most common mechanical test in industry. It is fast, nearly non-destructive and requires minimal specimen preparation. A hard indenter is pressed into the surface, and the size or depth of the impression reveals the material's resistance to plastic deformation.",
+          "comment": "Maybe we proceed this page with one on contact mechanics; building from Hertz, historically contextualise it in railways and work on the thought experiment of two spheres in contact. The idea that the stress field is constrained. IE if you stand on the earths surface in England, the force isnt felt in australia - its disipated by a few cm under you.",
+          "name": "Anonymous",
+          "votes": 0
+        },
+        {
+          "id": "36237d7c",
+          "selectedText": "l (1900) used a hardened steel (or tungsten carbide) sphere of diameter \r\n\ud835\udc37\r\nD pressed with force \r\n\ud835\udc39\r\nF into the surface. The Brinell hardness number is the load divided by the c",
+          "comment": "Put in some micrographs",
+          "name": "Anonymous",
+          "votes": 0
+        },
+        {
+          "id": "53be0aa8",
+          "selectedText": "e oldest hardness scale (Mohs, 1812) ranks minerals by which can scratch which. Talc is 1, diamond is 10. The scale is ordinal, not linear: the jump from 9 (corundum) to 10 (diamond) in Vicke",
+          "comment": "Move this to the top above Brinell",
+          "name": "Anonymous",
+          "votes": 0
+        },
+        {
+          "id": "d261cc99",
+          "selectedText": "probe volumes as small as 100 nm across, enabling measurement of individual grains, thin",
+          "comment": "Have a section about microstructurally correlated indentation. E.g. probing orientations, different phases. And also big indents such that plastic zone covers wider zone.",
+          "name": "Anonymous",
+          "votes": 0
+        },
+        {
+          "id": "714c980e",
+          "selectedText": "Nonetheless, hardness correlates well with yield strength and UTS, and it is far easier to measure.",
+          "comment": "The key point is that plasticity is determined by dislocation motion; so if the sampled volume is representative and the geometry is known, the property measurement is representative of the material.",
+          "name": "Anonymous",
+          "votes": 0,
+          "status": "integrated"
+        }
       ]
     }
   ]
