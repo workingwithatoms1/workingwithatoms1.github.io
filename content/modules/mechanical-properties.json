@@ -1505,7 +1505,36 @@
         ],
         [
           "p",
-          "Hardness is a composite response rather than a fundamental property like Young's modulus or yield stress. It depends on elastic modulus, yield strength, work hardening, and friction between indenter and surface. The reason it works as a proxy for strength is that both hardness and yield stress are controlled by dislocation motion. If the indented volume is large enough to be representative of the bulk microstructure, and the indenter geometry is well defined, then the constraint factor relating hardness to yield stress is approximately constant ($H \\approx 3\\sigma_y$ for metals with moderate work hardening). This is why a quick Vickers indent can replace a tensile test for quality control."
+          "Hardness works as a proxy for strength because both are controlled by dislocation motion. If the indented volume is large enough to be representative of the bulk microstructure, and the indenter geometry is well defined, the constraint factor relating hardness to yield stress is approximately constant ($H \\approx 3\\sigma_y$ for metals with moderate work hardening). This is why a quick Vickers indent can replace a tensile test for quality control."
+        ],
+        [
+          "h3",
+          "Indentation size effect"
+        ],
+        [
+          "p",
+          "Indent a metal at depths below about 1 \u00b5m and the measured hardness rises sharply. This is the indentation size effect (ISE), and it puzzled experimentalists for decades. The explanation, given by Nix and Gao (1998), is geometric. The indenter tip forces a volume of material to accommodate a shape change, and this shape change requires geometrically necessary dislocations (GNDs). The density of GNDs scales as $1/h$ (shallower indent, steeper strain gradient, more GNDs per unit volume). These add to the statistically stored dislocations (SSDs) already present in the material."
+        ],
+        [
+          "p",
+          "The Taylor hardening law gives flow stress proportional to $\\sqrt{\\rho}$, where $\\rho$ is the total dislocation density. Since $\\rho = \\rho_{\\text{SSD}} + \\rho_{\\text{GND}}$ and $\\rho_{\\text{GND}} \\propto 1/h$:"
+        ],
+        [
+          "eq",
+          "H = H_0 \\sqrt{1 + \\frac{h^*}{h}}"
+        ],
+        [
+          "p",
+          "where $H_0$ is the bulk (depth-independent) hardness and $h^*$ is a characteristic length that depends on the indenter geometry and the material's intrinsic dislocation density. For annealed copper, $h^* \\approx 0.5$ \u00b5m and $H_0 \\approx 0.8$ GPa. For cold-worked metals with high initial dislocation density, $h^*$ is smaller (the GND contribution is less significant relative to the existing SSDs)."
+        ],
+        [
+          "p",
+          "The practical consequence: nanoindentation data at shallow depths overestimates the bulk hardness. To extract a bulk-representative value, either indent deep enough that $h \\gg h^*$, or plot $H^2$ vs $1/h$ (which should be linear) and read $H_0^2$ from the intercept."
+        ],
+        [
+          "callout",
+          "Why this matters for thin films and small volumes",
+          "In a thin film or a small grain, there may not be enough depth to reach the bulk regime. The measured hardness then reflects the size of the sampled volume, not just the material. This is not an artefact; it is real strengthening from the strain gradient. The same physics explains why fine-grained metals are harder (Hall-Petch) and why metallic nanopillars are stronger than bulk: confined volumes have higher GND densities."
         ],
         [
           "p",
