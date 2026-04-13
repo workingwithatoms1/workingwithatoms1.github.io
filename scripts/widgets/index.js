@@ -34,6 +34,11 @@ const registry = {
   'hall-petch':              () => import('./hall-petch.js'),
   'creep-curve':             () => import('./creep-curve.js'),
   'sn-curve':                () => import('./sn-curve.js'),
+  'nernst-equation':         () => import('./nernst-equation.js'),
+  'rule-of-mixtures':        () => import('./rule-of-mixtures.js'),
+  'polymer-chain':           () => import('./polymer-chain.js'),
+  'paris-law':               () => import('./paris-law.js'),
+  'schmid-factor':           () => import('./schmid-factor.js'),
 };
 
 /**
