@@ -39,6 +39,16 @@ const registry = {
   'polymer-chain':           () => import('./polymer-chain.js'),
   'paris-law':               () => import('./paris-law.js'),
   'schmid-factor':           () => import('./schmid-factor.js'),
+  'kirkendall-effect':       () => import('./kirkendall-effect.js'),
+  'unit-cell':               () => import('./unit-cell.js'),
+  'miller-index':            () => import('./miller-index.js'),
+  'yield-surface':           () => import('./yield-surface.js'),
+  'resistivity-temperature': () => import('./resistivity-temperature.js'),
+  'clausius-clapeyron':      () => import('./clausius-clapeyron.js'),
+  'orowan-bowing':           () => import('./orowan-bowing.js'),
+  'bragg-diffraction':       () => import('./bragg-diffraction.js'),
+  'griffith-energy':         () => import('./griffith-energy.js'),
+  'maxwell-boltzmann':       () => import('./maxwell-boltzmann.js'),
 };
 
 /**

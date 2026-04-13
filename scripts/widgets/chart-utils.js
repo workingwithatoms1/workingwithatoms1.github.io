@@ -11,8 +11,8 @@ export const FILL_BLUE  = 'rgba(77, 92, 242, 0.12)';
 export const FILL_RED   = 'rgba(139, 34, 82, 0.10)';
 export const MAX_DPR = 2;
 
-export const LABEL_FONT  = '400 11px "DM Sans", sans-serif';
-export const TICK_FONT   = '400 10px "DM Sans", sans-serif';
+export const LABEL_FONT  = '500 13px "DM Sans", sans-serif';
+export const TICK_FONT   = '400 12px "DM Sans", sans-serif';
 export const TITLE_FONT  = '500 12px "DM Sans", sans-serif';
 export const VALUE_FONT  = '400 13px "Lora", serif';
 
@@ -49,7 +49,7 @@ export function scale(domainMin, domainMax, rangeMin, rangeMax) {
  * Draw axes with labels.
  */
 export function drawAxes(ctx, pad, w, h, xLabel, yLabel) {
-  ctx.strokeStyle = MUTED;
+  ctx.strokeStyle = DARK;
   ctx.lineWidth = 1;
   ctx.beginPath();
   ctx.moveTo(pad.l, pad.t);
@@ -58,13 +58,13 @@ export function drawAxes(ctx, pad, w, h, xLabel, yLabel) {
   ctx.stroke();
 
   ctx.font = LABEL_FONT;
-  ctx.fillStyle = MUTED;
+  ctx.fillStyle = DARK;
   ctx.textAlign = 'center';
   ctx.textBaseline = 'top';
   ctx.fillText(xLabel, pad.l + (w - pad.l - pad.r) / 2, h - pad.b + 32);
 
   ctx.save();
-  ctx.translate(14, pad.t + (h - pad.t - pad.b) / 2);
+  ctx.translate(2, pad.t + (h - pad.t - pad.b) / 2);
   ctx.rotate(-Math.PI / 2);
   ctx.textBaseline = 'top';
   ctx.fillText(yLabel, 0, 0);
