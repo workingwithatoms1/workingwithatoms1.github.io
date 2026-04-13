@@ -29,6 +29,11 @@ const registry = {
   'band-diagram':            () => import('./band-diagram.js'),
   'hysteresis-loop':         () => import('./hysteresis-loop.js'),
   'butler-volmer':           () => import('./butler-volmer.js'),
+  'stress-strain':           () => import('./stress-strain.js'),
+  'mohr-circle':             () => import('./mohr-circle.js'),
+  'hall-petch':              () => import('./hall-petch.js'),
+  'creep-curve':             () => import('./creep-curve.js'),
+  'sn-curve':                () => import('./sn-curve.js'),
 };
 
 /**
