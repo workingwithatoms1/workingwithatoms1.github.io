@@ -21,6 +21,14 @@ const registry = {
   'edge-dislocation':    () => import('./edge-dislocation.js'),
   'lennard-jones':       () => import('./lennard-jones.js'),
   'electronegativity-scale': () => import('./electronegativity-scale.js'),
+  'diffusion-profile':     () => import('./diffusion-profile.js'),
+  'avrami-curve':          () => import('./avrami-curve.js'),
+  'arrhenius-plot':          () => import('./arrhenius-plot.js'),
+  'density-of-states':       () => import('./density-of-states.js'),
+  'nucleation-barrier':      () => import('./nucleation-barrier.js'),
+  'band-diagram':            () => import('./band-diagram.js'),
+  'hysteresis-loop':         () => import('./hysteresis-loop.js'),
+  'butler-volmer':           () => import('./butler-volmer.js'),
 };
 
 /**

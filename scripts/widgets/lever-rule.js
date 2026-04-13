@@ -33,7 +33,7 @@ export function create(container) {
   let dragT = 1520, dragX = 0.5;
   let dragging = false;
 
-  const pad = { l: 52, r: 24, t: 24, b: 44 };
+  const pad = { l: 60, r: 24, t: 24, b: 50 };
   const Tmin = TmA - 80, Tmax = TmB + 80;
   let xS, yS, w, h;
 

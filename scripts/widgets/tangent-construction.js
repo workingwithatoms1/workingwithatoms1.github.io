@@ -24,7 +24,7 @@ export function create(container, config) {
   const slider = controls.querySelector('input');
   const valSpan = controls.querySelector('.widget-value');
 
-  const pad = { l: 52, r: 52, t: 24, b: 44 };
+  const pad = { l: 60, r: 52, t: 24, b: 50 };
 
   function Gmix(x) {
     if (x <= 0.001 || x >= 0.999) return 0;

@@ -28,7 +28,7 @@ export function create(container, config) {
   const valSpan = controls.querySelector('.widget-value');
   const phaseSpan = controls.querySelector('#wPhase');
 
-  const pad = { l: 52, r: 20, t: 24, b: 44 };
+  const pad = { l: 60, r: 20, t: 24, b: 50 };
 
   // G_solid(T) = 0 (reference), G_liquid(T) = dH - T*dS (relative to solid)
   // Both decrease with T but liquid has steeper slope

@@ -26,7 +26,7 @@ export function create(container) {
   const omVal = controls.querySelector('#wOmegaVal');
   const tVal = controls.querySelector('#wTVal');
 
-  const pad = { l: 56, r: 20, t: 24, b: 44 };
+  const pad = { l: 60, r: 20, t: 24, b: 50 };
 
   function render() {
     const { w, h } = C.setupCanvas(canvas, container);

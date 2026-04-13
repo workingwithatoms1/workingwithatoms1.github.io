@@ -56,7 +56,7 @@ export function create(container) {
   function render() {
     const { ctx: c, w, h } = C.setupCanvas(canvas, container, 0.55);
 
-    const pad = { l: 56, r: 20, t: 20, b: 44 };
+    const pad = { l: 60, r: 20, t: 20, b: 50 };
     const r0 = sigma * Math.pow(2, 1/6);
     const rMin = sigma * 0.88;
     const rMax = sigma * 2.8;

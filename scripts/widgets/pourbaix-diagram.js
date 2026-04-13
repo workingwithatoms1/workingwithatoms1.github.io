@@ -17,7 +17,7 @@ export function create(container) {
   const canvas = C.createWidgetShell(container, 0.6);
   const ctx = canvas.getContext('2d');
 
-  const pad = { l: 52, r: 20, t: 24, b: 44 };
+  const pad = { l: 60, r: 20, t: 24, b: 50 };
   let hoverX = -1, hoverY = -1;
 
   function render() {

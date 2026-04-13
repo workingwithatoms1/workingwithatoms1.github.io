@@ -61,7 +61,7 @@ export function drawAxes(ctx, pad, w, h, xLabel, yLabel) {
   ctx.fillStyle = MUTED;
   ctx.textAlign = 'center';
   ctx.textBaseline = 'top';
-  ctx.fillText(xLabel, pad.l + (w - pad.l - pad.r) / 2, h - pad.b + 18);
+  ctx.fillText(xLabel, pad.l + (w - pad.l - pad.r) / 2, h - pad.b + 32);
 
   ctx.save();
   ctx.translate(14, pad.t + (h - pad.t - pad.b) / 2);

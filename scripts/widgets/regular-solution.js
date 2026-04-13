@@ -42,7 +42,7 @@ export function create(container) {
   const Omega = 20000; // fixed Omega, vary T
   const Tc = Omega / (2 * R);
 
-  const pad = { l: 44, r: 12, t: 20, b: 36 };
+  const pad = { l: 60, r: 12, t: 20, b: 50 };
 
   function Gmix(x, T) {
     if (x <= 0.001 || x >= 0.999) return 0;

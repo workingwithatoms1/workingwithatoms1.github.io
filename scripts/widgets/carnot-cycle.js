@@ -88,7 +88,7 @@ export function create(container, config) {
     const cp = getCyclePoints(Th, Tc);
 
     // Plot area
-    const pad = { l: 52, r: 20, t: 20, b: 40 };
+    const pad = { l: 60, r: 20, t: 20, b: 50 };
     const pw = w - pad.l - pad.r;
     const ph = h - pad.t - pad.b;
 

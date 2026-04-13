@@ -28,7 +28,7 @@ export function create(container) {
 
   let selected = -1;
 
-  const pad = { l: 60, r: 120, t: 24, b: 44 };
+  const pad = { l: 60, r: 120, t: 24, b: 50 };
 
   function render() {
     const { w, h } = C.setupCanvas(canvas, container, 0.65);

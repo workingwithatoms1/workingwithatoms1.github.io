@@ -20,7 +20,7 @@ export function create(container) {
   const slider = controls.querySelector('input');
   const valSpan = controls.querySelector('.widget-value');
 
-  const pad = { l: 52, r: 20, t: 24, b: 44 };
+  const pad = { l: 60, r: 20, t: 24, b: 50 };
 
   function render() {
     const { w, h } = C.setupCanvas(canvas, container);
