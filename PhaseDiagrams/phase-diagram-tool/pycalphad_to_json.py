@@ -59,6 +59,10 @@ SYSTEM_DISPLAY = {
         'ALMG_GAMMA':   'γ',
         'ALMG_EPS':     'ε',
     },
+    'AL-SI': {
+        'FCC_A1':       'α',
+        'DIAMOND_A4':   '(Si)',
+    },
     'CU-ZN': {
         'FCC_A1':       'α',
         'BCC_B2':       'β',
@@ -81,11 +85,42 @@ def get_display_name(phase, system_key):
 
 # ── BinaryStrategy computation ──────────────────────────────────────────
 
-def compute(tdb_path, el1, el2, t_min=300, t_max=1400, t_step=3, x_step=0.005):
-    """Run BinaryStrategy and return strategy + database."""
+def find_melting_points(dbf, el1, el2):
+    """Find pure-element melting points by scanning for liquid stability."""
+    comps = [el1, el2, 'VA']
+    phases = list(dbf.phases.keys())
+    mps = []
+    for x_test in [0.001, 0.999]:
+        for T in range(400, 5000, 5):
+            eq = equilibrium(dbf, comps, phases,
+                             {v.N: 1, v.P: 101325, v.T: T, v.X(el2): [x_test]})
+            stable = set()
+            for vtx in range(eq.Phase.shape[-1]):
+                try:
+                    ph = str(eq.Phase.values.flat[vtx])
+                    np_val = eq.NP.values.flat[vtx]
+                    if ph and ph.strip() and not np.isnan(np_val) and np_val > 0.01:
+                        stable.add(ph.upper())
+                except (IndexError, ValueError):
+                    pass
+            if any('LIQUID' in p for p in stable):
+                mps.append(T)
+                break
+    return mps
+
+
+def compute(tdb_path, el1, el2, t_min=300, t_max=None, t_step=3, x_step=0.005):
+    """Run BinaryStrategy and return strategy + database + auto t_max."""
     dbf = Database(tdb_path)
     comps = [el1, el2, 'VA']
     phases = list(dbf.phases.keys())
+
+    # Auto-detect t_max from melting points if not specified
+    if t_max is None:
+        print(f"  Finding melting points...")
+        mps = find_melting_points(dbf, el1, el2)
+        t_max = max(mps) + 100 if mps else 1600
+        print(f"    Melting points: {mps} → t_max = {t_max} K")
 
     conds = {
         v.N: 1, v.P: 101325,
@@ -93,11 +128,11 @@ def compute(tdb_path, el1, el2, t_min=300, t_max=1400, t_step=3, x_step=0.005):
         v.X(el2): (0, 1, x_step),
     }
 
-    print(f"  Mapping {el1}-{el2} ({len(phases)} candidate phases)...")
+    print(f"  Mapping {el1}-{el2} ({len(phases)} candidate phases), T=[{t_min}, {t_max}] K...")
     strategy = BinaryStrategy(dbf, comps, phases=phases, conditions=conds)
     strategy.do_map()
 
-    return dbf, strategy, comps, phases
+    return dbf, strategy, comps, phases, t_max
 
 
 # ── Extract curves ──────────────────────────────────────────────────────
@@ -442,7 +477,8 @@ def main():
     parser.add_argument('el1', help='Element 1 (e.g. AL)')
     parser.add_argument('el2', help='Element 2 (e.g. CU)')
     parser.add_argument('--tmin', type=float, default=300)
-    parser.add_argument('--tmax', type=float, default=1400)
+    parser.add_argument('--tmax', type=float, default=None,
+                        help='Max temperature (K). Auto-detected from melting points if omitted.')
     parser.add_argument('--ref', default='COST 507 (Ansara, Dinsdale & Rand, 1998)')
     parser.add_argument('--output', '-o', required=True)
     args = parser.parse_args()
@@ -454,8 +490,8 @@ def main():
 
     print(f"Building {system} phase diagram...")
 
-    # 1. Compute
-    dbf, strategy, comps, all_phases = compute(
+    # 1. Compute (t_max auto-detected if not specified)
+    dbf, strategy, comps, all_phases, t_max = compute(
         args.tdb, el1, el2, args.tmin, args.tmax)
 
     # 2. Extract curves
@@ -467,13 +503,13 @@ def main():
     print("  Extracting invariants...")
     special_points, isotherms = extract_invariants(
         strategy, dbf, comps, all_phases, el2, system_key,
-        args.tmin, args.tmax)
+        args.tmin, t_max)
     print(f"    {len(special_points)} special points, {len(isotherms)} isotherms")
 
     # 4. Auto-label
     print("  Labelling phase regions...")
     labels = compute_labels(dbf, strategy, comps, all_phases, el2, system_key,
-                            args.tmin, args.tmax)
+                            args.tmin, t_max)
     print(f"    {len(labels)} labels:")
     for lab in sorted(labels, key=lambda l: l['x']):
         print(f"      {lab['text']:12s}  x={lab['x']:.3f}, T={lab['T']:.1f}")
