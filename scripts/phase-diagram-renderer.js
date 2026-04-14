@@ -8,7 +8,7 @@ import { setupCanvas, scale, BLUE, DARK, MUTED, LABEL_FONT, TICK_FONT, MAX_DPR }
 
 const CURVE_COLOR = '#1a1d3a';
 const CURVE_WIDTH = 1.8;
-const SNAP_PT = 28;
+const SNAP_PT = 14;
 
 // Atomic masses for mol↔wt% conversion
 const ATOMIC_MASS = {
@@ -29,7 +29,7 @@ function wtToMol(w, mA, mB) {
   if (w >= 1) return 1;
   return (w / mB) / (w / mB + (1 - w) / mA);
 }
-const SNAP_CURVE = 18;
+const SNAP_CURVE = 9;
 const MARKER_RED = '#8b2252';
 const MARKER_BLUE = BLUE;
 
@@ -306,19 +306,15 @@ export function createPhaseDiagram(container, data, flipped = false) {
       }
     }
 
-    // Single-phase region — identify from adjacent two-phase regions
-    // The phase is the one shared between the left and right bounding pairs
+    // Single-phase region — use curve name field to identify the phase
     if (leftCurve) {
-      const lp = leftCurve.id.replace(/_low.*|_high.*|_L$|_R$/, '');
-      // The "high" side of a pair → the right phase of that pair
       if (leftCurve.id.includes('_high') || leftCurve.id.includes('_R')) {
-        return formatPhaseName(lp.split('_').pop());
+        return formatPhaseName(leftCurve.name.replace(' boundary', ''));
       }
     }
     if (rightCurve) {
-      const rp = rightCurve.id.replace(/_low.*|_high.*|_L$|_R$/, '');
       if (rightCurve.id.includes('_low') || rightCurve.id.includes('_L')) {
-        return formatPhaseName(rp.split('_')[0]);
+        return formatPhaseName(rightCurve.name.replace(' boundary', ''));
       }
     }
 
