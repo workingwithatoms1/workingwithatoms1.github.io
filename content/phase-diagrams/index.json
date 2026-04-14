@@ -19,6 +19,22 @@
     {
       "els": [
         "Al",
+        "Cu"
+      ],
+      "file": "al-cu.json",
+      "ref": "COST 507 (Ansara, Dinsdale & Rand, 1998)"
+    },
+    {
+      "els": [
+        "Al",
+        "Si"
+      ],
+      "file": "al-si.json",
+      "ref": "Hallstedt et al. (2016), CALPHAD 53, 25-38"
+    },
+    {
+      "els": [
+        "Al",
         "Zn"
       ],
       "file": "al-zn.json",
