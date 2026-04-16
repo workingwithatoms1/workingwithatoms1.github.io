@@ -55,6 +55,38 @@
       ],
       "file": "ti-al.json",
       "ref": "Wang et al., CALPHAD 39 (2012) 31-38"
+    },
+    {
+      "els": [
+        "Cu",
+        "Si"
+      ],
+      "file": "cu-si.json",
+      "ref": "Hallstedt et al. (2016), CALPHAD 53, 25-38"
+    },
+    {
+      "els": [
+        "Ti",
+        "Nb"
+      ],
+      "file": "ti-nb.json",
+      "ref": "Hallstedt et al. (2017), CALPHAD 56, 185-195"
+    },
+    {
+      "els": [
+        "Ti",
+        "Mo"
+      ],
+      "file": "ti-mo.json",
+      "ref": "Hu et al. (2018), CALPHAD 62, 109-128"
+    },
+    {
+      "els": [
+        "Ni",
+        "Cr"
+      ],
+      "file": "ni-cr.json",
+      "ref": "Tang and Hallstedt (2016), CALPHAD 55, 260-269"
     }
   ]
 }

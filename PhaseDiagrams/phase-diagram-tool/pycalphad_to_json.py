@@ -64,11 +64,107 @@ SYSTEM_DISPLAY = {
         'DIAMOND_A4':   '(Si)',
     },
     'CU-ZN': {
-        'FCC_A1':       'α',
+        'LIQUID':       'Liquid',
+        'FCC':          'α',
         'BCC_B2':       'β',
-        'CUZN_GAMMA':   'γ',
+        'BCC':          "β'",
+        'GAMMA':        'γ',
+        'DELTA':        'δ',
+        'EPS':          'ε',
+        'HCP':          'η',
+    },
+    'CU-SI': {
+        'FCC_A1':       'α',
+        'DIAMOND_A4':   '(Si)',
+        'LIQUID':       'Liquid',
+        'CU3SI_LT':     'η',
+        'CU3SI_MT':     "η'",
+        'CU3SI_HT':     "η''",
+        'CU15SI4_D86':  'ε',
+        'CU33SI7_A13':  'γ',
+        'CU33SI7_HT':   'γ (HT)',
+        'GAMMA_D82':    'γ₁',
+        'GAMMA_D83':    'γ₂',
+    },
+    'FE-SI': {
+        'LIQUID':       'Liquid',
+        'BCC_A2':       'α (Fe)',
+        'BCC_B2':       'α (Fe)',
+        'D03_BCC':      'α (Fe₃Si)',
+        'DIS_BCC':      'α (dis)',
+        'FCC_A1':       'γ',
         'HCP_A3':       'ε',
-        'HCP_ZN':       'η',
+        'CBCC_A12':     '(Si)',
+        'CUB_A13':      '(Si)',
+        'DIAMOND_A4':   '(Si)',
+        'FE2SI':        'Fe₂Si',
+        'FE3SI7':       'Fe₃Si₇',
+        'FE5SI3':       'Fe₅Si₃',
+        'FESI':         'FeSi',
+        'FESI2':        'FeSi₂',
+    },
+    'NI-CR': {
+        'LIQUID':       'Liquid',
+        'FCC_A1':       'γ (Ni)',
+        'FCC_A1#2':     'γ (Ni)',
+        'BCC_A2':       'α (Cr)',
+        'CRNI2':        'CrNi₂',
+    },
+    'FE-CR': {
+        'LIQUID':       'Liquid',
+        'BCC_A2':       'α/δ (bcc)',
+        'BCC_A2#2':     'α/δ (bcc)',
+        'FCC_A1':       'γ (fcc)',
+        'SIGMA':        'σ',
+        'HIGH_SIGMA':   'σ (HT)',
+    },
+    'FE-NI': {
+        'LIQUID':       'Liquid',
+        'BCC_A2':       'α (bcc)',
+        'FCC_A1':       'γ (fcc)',
+        'FCC_A1#2':     'γ (fcc)',
+        'L12_FCC':      'FeNi₃',
+        'B2_BCC':       "α' (B2)",
+    },
+    'FE-MN': {
+        'LIQUID':       'Liquid',
+        'BCC_A2':       'α (bcc)',
+        'FCC_A1':       'γ (fcc)',
+        'CBCC_A12':     'α-Mn',
+        'CUB_A13':      'β-Mn',
+        'HCP_A3':       'ε (hcp)',
+    },
+    'TI-V': {
+        'LIQUID':       'Liquid',
+        'HCP_A3':       'α (hcp)',
+        'BCC_A2':       'β (bcc)',
+        'B2':           'β (bcc)',
+    },
+    'TI-NB': {
+        'LIQUID':       'Liquid',
+        'HCP_A3':       'α (hcp)',
+        'BCC_A2':       'β (bcc)',
+        'A2_BCC':       'β (bcc)',
+        'BCC_2SL':      'β (bcc)',
+        'BCC_4SL':      'β (bcc)',
+    },
+    'TI-MO': {
+        'LIQUID':       'Liquid',
+        'HCP_A3':       'α (hcp)',
+        'BCC_A2':       'β (bcc)',
+        'OMEGA':        'ω',
+    },
+    'CU-SN': {
+        'LIQUID':       'Liquid',
+        'FCC_A1':       'α',
+        'BCC_A2':       'β',
+        'DO3':          'β',
+        'BCT_A5':       '(Sn)',
+        'CU41SN11':     'δ',
+        'CU3SN':        'ε',
+        'HCU6SN5':      'η',
+        'LCU6SN5':      "η'",
+        'CU10SN3':      'ζ',
     },
 }
 
@@ -109,7 +205,7 @@ def find_melting_points(dbf, el1, el2):
     return mps
 
 
-def compute(tdb_path, el1, el2, t_min=300, t_max=None, t_step=3, x_step=0.005):
+def compute(tdb_path, el1, el2, t_min=250, t_max=None, t_step=3, x_step=0.005):
     """Run BinaryStrategy and return strategy + database + auto t_max."""
     dbf = Database(tdb_path)
     comps = [el1, el2, 'VA']
@@ -119,7 +215,12 @@ def compute(tdb_path, el1, el2, t_min=300, t_max=None, t_step=3, x_step=0.005):
     if t_max is None:
         print(f"  Finding melting points...")
         mps = find_melting_points(dbf, el1, el2)
-        t_max = max(mps) + 100 if mps else 1600
+        if not mps:
+            raise RuntimeError(
+                f"find_melting_points({el1},{el2}) returned empty. "
+                "TDB may have liquid instability or a multi-component parameter conflict. "
+                "Pass --tmax explicitly, or try a dedicated binary TDB.")
+        t_max = max(mps) + 100
         print(f"    Melting points: {mps} → t_max = {t_max} K")
 
     conds = {
@@ -375,29 +476,41 @@ def compute_labels(dbf, strategy, comps, phases, el2, system_key,
                 samples.append({'x': float(x_val), 'T': float(T_val),
                                 'phase': list(stable)[0]})
 
-    # ── Group by phase ──
+    # ── Group by DISPLAY name so multi-variant phases (e.g. BCC_A2, BCC_2SL
+    #    both displayed as "β (bcc)") merge into a single label region ──
     groups = defaultdict(list)
     for s in samples:
-        groups[s['phase']].append((s['x'], s['T']))
+        disp = get_display_name(s['phase'], system_key)
+        groups[disp].append((s['x'], s['T']))
 
-    # ── Split disconnected clusters (same phase, separate regions) ──
+    # ── Split disconnected clusters by (x, T) proximity ──
+    # A phase that appears in two disconnected regions (rare but possible,
+    # e.g. retrograde solubility or multiple solvus domes) should get two
+    # labels. Split when neighbouring samples differ by >0.08 in x AND
+    # >150 K in T, i.e. no reasonable continuous path between them.
     clusters = []
-    for phase, points in groups.items():
+    for disp, points in groups.items():
         pts = sorted(points, key=lambda p: p[0])
         current = [pts[0]]
         for i in range(1, len(pts)):
-            if pts[i][0] - pts[i - 1][0] > 0.08:
-                clusters.append((phase, current))
+            dx = pts[i][0] - pts[i - 1][0]
+            # Look across the current cluster for any T-neighbour within 150 K
+            t_near = any(abs(pts[i][1] - p[1]) < 150 for p in current[-20:])
+            if dx > 0.08 and not t_near:
+                clusters.append((disp, current))
                 current = []
             current.append(pts[i])
-        clusters.append((phase, current))
+        clusters.append((disp, current))
 
     # ── Recover phases the grid missed (line compounds) ──
-    found_phases = set(groups.keys())
+    found_displays = set(groups.keys())
     tieline_data = strategy.get_tieline_data(v.X(el2), v.T)
     all_mapped = set(strategy.get_all_phases()) - {''}
 
-    for phase in all_mapped - found_phases:
+    for phase in all_mapped:
+        disp = get_display_name(phase, system_key)
+        if disp in found_displays:
+            continue
         xs, ys = [], []
         for td in tieline_data:
             for spd in td.data:
@@ -408,17 +521,17 @@ def compute_labels(dbf, strategy, comps, phases, el2, system_key,
         if xs:
             cx = float(np.median(xs))
             cy = float(np.median(ys))
-            clusters.append((phase, [(cx, cy)]))
-            print(f"    Recovered: {phase} at x={cx:.3f}, T={cy:.0f}")
+            clusters.append((disp, [(cx, cy)]))
+            found_displays.add(disp)
+            print(f"    Recovered: {phase} → {disp} at x={cx:.3f}, T={cy:.0f}")
 
     # ── Place labels ──
     labels = []
-    for phase, points in clusters:
+    for display, points in clusters:
         pts = np.array(points)
         cx = float(np.mean(pts[:, 0]))
         cy = float(np.mean(pts[:, 1]))
         x_extent = float(pts[:, 0].max() - pts[:, 0].min())
-        display = get_display_name(phase, system_key)
 
         if x_extent >= MIN_WIDTH_INTERNAL:
             # Rule 1 — wide region: label at centroid
@@ -447,7 +560,8 @@ def compute_labels(dbf, strategy, comps, phases, el2, system_key,
 
 # ── Assemble JSON ───────────────────────────────────────────────────────
 
-def build_json(system, reference, curves, special_points, isotherms, labels):
+def build_json(system, reference, curves, special_points, isotherms, labels,
+               system_key):
     """Build the final JSON structure for the renderer."""
     # Strip internal 'phase' key from curves
     clean_curves = []
@@ -459,6 +573,13 @@ def build_json(system, reference, curves, special_points, isotherms, labels):
             'closed': c['closed'],
         })
 
+    # Emit a raw→display phase-name map so the hover pill matches the on-diagram
+    # labels (renderer reads it as data.phaseNames).
+    raw_phases = set()
+    for c in curves:
+        raw_phases.add(c['name'].replace(' boundary', ''))
+    phase_names = {raw: get_display_name(raw, system_key) for raw in sorted(raw_phases)}
+
     return {
         'system': system,
         'reference': reference,
@@ -466,6 +587,7 @@ def build_json(system, reference, curves, special_points, isotherms, labels):
         'curves': clean_curves,
         'isotherms': isotherms,
         'labels': labels,
+        'phaseNames': phase_names,
     }
 
 
@@ -476,7 +598,7 @@ def main():
     parser.add_argument('tdb', help='Path to TDB file')
     parser.add_argument('el1', help='Element 1 (e.g. AL)')
     parser.add_argument('el2', help='Element 2 (e.g. CU)')
-    parser.add_argument('--tmin', type=float, default=300)
+    parser.add_argument('--tmin', type=float, default=250)
     parser.add_argument('--tmax', type=float, default=None,
                         help='Max temperature (K). Auto-detected from melting points if omitted.')
     parser.add_argument('--ref', default='COST 507 (Ansara, Dinsdale & Rand, 1998)')
@@ -498,6 +620,11 @@ def main():
     print("  Extracting boundary curves...")
     curves = extract_curves(strategy, el2)
     print(f"    {len(curves)} boundary curves")
+    if not curves:
+        raise RuntimeError(
+            f"No boundary curves extracted for {system}. Equilibrium likely "
+            "returned no stable phases — check TDB compatibility (e.g. try "
+            "a dedicated binary TDB).")
 
     # 3. Extract invariants
     print("  Extracting invariants...")
@@ -515,7 +642,8 @@ def main():
         print(f"      {lab['text']:12s}  x={lab['x']:.3f}, T={lab['T']:.1f}")
 
     # 5. Build JSON
-    data = build_json(system, args.ref, curves, special_points, isotherms, labels)
+    data = build_json(system, args.ref, curves, special_points, isotherms, labels,
+                      system_key)
 
     with open(args.output, 'w') as f:
         json.dump(data, f, indent=2)

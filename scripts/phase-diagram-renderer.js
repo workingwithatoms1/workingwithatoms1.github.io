@@ -295,32 +295,53 @@ export function createPhaseDiagram(container, data, flipped = false) {
       leftCurve = crossings[crossings.length - 1];
     }
 
-    // Determine region from bounding curves
-    // If both curves share a phase pair prefix, it's a two-phase region
-    if (leftCurve && rightCurve) {
-      const lp = leftCurve.id.replace(/_low.*|_high.*|_L$|_R$/, '');
-      const rp = rightCurve.id.replace(/_low.*|_high.*|_L$|_R$/, '');
-      if (lp === rp) {
-        // Two-phase region — format the pair name nicely
-        return formatPairName(lp);
-      }
-    }
+    // Pair prefix: strip numeric duplicate suffix (_1, _2…) AND side (_low/_high)
+    // so segments of the same two-phase boundary share a prefix.
+    const prefixOf = id => id.replace(/(_\d+)?(_low|_high).*$|_L$|_R$/, '');
 
-    // Single-phase region — use curve name field to identify the phase
-    if (leftCurve) {
-      if (leftCurve.id.includes('_high') || leftCurve.id.includes('_R')) {
+    // Classify curve sides. Robust against the (rare) unsuffixed _edge case.
+    const isLow  = c => c && (c.id.includes('_low')  || c.id.endsWith('_L'));
+    const isHigh = c => c && (c.id.includes('_high') || c.id.endsWith('_R'));
+
+    if (leftCurve && rightCurve) {
+      // Between _low (left) and _high (right) of the same pair → two-phase
+      if (isLow(leftCurve) && isHigh(rightCurve) &&
+          prefixOf(leftCurve.id) === prefixOf(rightCurve.id)) {
+        return formatPairName(prefixOf(leftCurve.id));
+      }
+      // Between _high (left) and _low (right) → single-phase.
+      // Both curves name the same phase here; prefer leftCurve.
+      if (isHigh(leftCurve) && isLow(rightCurve)) {
         return formatPhaseName(leftCurve.name.replace(' boundary', ''));
       }
-    }
-    if (rightCurve) {
-      if (rightCurve.id.includes('_low') || rightCurve.id.includes('_L')) {
-        return formatPhaseName(rightCurve.name.replace(' boundary', ''));
+      // Two-phase with mismatched pair suffixes (segmented boundary):
+      // if the phases differ, still report as two-phase of those phases.
+      if (isLow(leftCurve) && isHigh(rightCurve)) {
+        const lph = leftCurve.name.replace(' boundary', '');
+        const rph = rightCurve.name.replace(' boundary', '');
+        if (lph !== rph) {
+          return formatPhaseName(lph) + ' + ' + formatPhaseName(rph);
+        }
+        return formatPhaseName(lph);
       }
     }
 
-    // Above all curves = liquid, below = check boundaries
-    if (crossings.length > 0 && x >= 0 && x <= 1) {
-      if (T > crossings[0].x) return 'Liquid';
+    // Left edge of diagram: only a rightCurve
+    if (!leftCurve && rightCurve && isLow(rightCurve)) {
+      return formatPhaseName(rightCurve.name.replace(' boundary', ''));
+    }
+    // Right edge of diagram: only a leftCurve
+    if (leftCurve && !rightCurve && isHigh(leftCurve)) {
+      return formatPhaseName(leftCurve.name.replace(' boundary', ''));
+    }
+
+    // No bounding curves at this T — we're above every curve → Liquid
+    if (crossings.length === 0) {
+      let tHi = -Infinity;
+      for (const c of activeData.curves) {
+        for (const p of c.pts) if (p[1] > tHi) tHi = p[1];
+      }
+      if (T > tHi) return 'Liquid';
     }
 
     return null;
@@ -364,7 +385,9 @@ export function createPhaseDiagram(container, data, flipped = false) {
     const pp = {};
     for (const c of activeData.curves) {
       if (c.closed) continue;
-      const prefix = c.id.replace(/_low.*|_high.*|_l$|_r$/, '');
+      // Strip numeric duplicate suffix AND side so all segments of the same
+      // two-phase boundary share a prefix.
+      const prefix = c.id.replace(/(_\d+)?(_low|_high).*$|_L$|_R$/, '');
       if (!pp[prefix]) pp[prefix] = [];
       const phaseName = c.name.replace(' boundary', '');
       if (!pp[prefix].includes(phaseName)) {
@@ -454,6 +477,17 @@ export function createPhaseDiagram(container, data, flipped = false) {
       for (let x = 0; x <= Xmax + 0.001; x += step) xTicks.push(Math.round(x * 100) / 100);
     }
 
+    // Adaptive y-axis tick step — target ~6–8 labels
+    const tStep = (() => {
+      const raw = (Tmax - Tmin) / 7;
+      const nice = [50, 100, 200, 250, 500, 1000];
+      for (const s of nice) if (s >= raw) return s;
+      return 2000;
+    })();
+    const tStart = Math.ceil(Tmin / tStep) * tStep;
+    const yTicks = [];
+    for (let t = tStart; t <= Tmax; t += tStep) yTicks.push(t);
+
     ctx.strokeStyle = 'rgba(0,0,0,0.05)';
     ctx.lineWidth = 0.6;
     for (const x of xTicks) {
@@ -462,11 +496,31 @@ export function createPhaseDiagram(container, data, flipped = false) {
       ctx.lineTo(xS(x), h - pad.b);
       ctx.stroke();
     }
-    for (let t = Tmin; t <= Tmax; t += 100) {
+    for (const t of yTicks) {
       ctx.beginPath();
       ctx.moveTo(pad.l, yS(t));
       ctx.lineTo(w - pad.r, yS(t));
       ctx.stroke();
+    }
+
+    // Room-temperature reference line at 298 K (25 °C)
+    const T_ROOM = 298;
+    if (T_ROOM >= Tmin && T_ROOM <= Tmax) {
+      ctx.save();
+      ctx.strokeStyle = 'rgba(0,0,0,0.35)';
+      ctx.lineWidth = 1;
+      ctx.setLineDash([4, 4]);
+      ctx.beginPath();
+      ctx.moveTo(pad.l, yS(T_ROOM));
+      ctx.lineTo(w - pad.r, yS(T_ROOM));
+      ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.font = '500 10px "DM Sans", sans-serif';
+      ctx.fillStyle = 'rgba(0,0,0,0.55)';
+      ctx.textAlign = 'left';
+      ctx.textBaseline = 'bottom';
+      ctx.fillText('25 \u00B0C', pad.l + 4, yS(T_ROOM) - 2);
+      ctx.restore();
     }
 
     // Curves
@@ -537,7 +591,7 @@ export function createPhaseDiagram(container, data, flipped = false) {
     ctx.fillStyle = DARK;
     ctx.textAlign = 'right';
     ctx.textBaseline = 'middle';
-    for (let t = Tmin; t <= Tmax; t += 100) {
+    for (const t of yTicks) {
       ctx.fillText(t.toString(), pad.l - 6, yS(t));
     }
     // Y axis title
@@ -556,9 +610,9 @@ export function createPhaseDiagram(container, data, flipped = false) {
     ctx.fillStyle = DARK;
     ctx.textAlign = 'left';
     ctx.textBaseline = 'middle';
-    const cMin = Math.ceil((Tmin - 273.15) / 100) * 100;
-    const cMax = Math.floor((Tmax - 273.15) / 100) * 100;
-    for (let tC = cMin; tC <= cMax; tC += 100) {
+    const cMin = Math.ceil((Tmin - 273.15) / tStep) * tStep;
+    const cMax = Math.floor((Tmax - 273.15) / tStep) * tStep;
+    for (let tC = cMin; tC <= cMax; tC += tStep) {
       const tK = tC + 273.15;
       if (tK >= Tmin && tK <= Tmax) {
         ctx.fillText(tC.toString(), w - pad.r + 6, yS(tK));
