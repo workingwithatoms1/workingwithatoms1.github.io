@@ -205,8 +205,17 @@ def find_melting_points(dbf, el1, el2):
     return mps
 
 
-def compute(tdb_path, el1, el2, t_min=250, t_max=None, t_step=3, x_step=0.005):
-    """Run BinaryStrategy and return strategy + database + auto t_max."""
+def compute(tdb_path, el1, el2, t_min=250, t_max=None, t_step=3, x_step=0.005,
+            split_halves=True):
+    """Run BinaryStrategy and return the database, strategy list, components,
+    phases, and auto-detected t_max.
+
+    When split_halves=True (default), runs two BinaryStrategy computations
+    on x∈[0, 0.5] and x∈[0.5, 1] separately. This prevents pycalphad from
+    merging both sides of a miscibility/two-phase region into one tangled
+    tieline (where a phase ends up with points on both sides of the other
+    phase). Each half produces a clean set of curves.
+    """
     dbf = Database(tdb_path)
     comps = [el1, el2, 'VA']
     phases = list(dbf.phases.keys())
@@ -223,22 +232,31 @@ def compute(tdb_path, el1, el2, t_min=250, t_max=None, t_step=3, x_step=0.005):
         t_max = max(mps) + 100
         print(f"    Melting points: {mps} → t_max = {t_max} K")
 
-    conds = {
-        v.N: 1, v.P: 101325,
-        v.T: (t_min, t_max, t_step),
-        v.X(el2): (0, 1, x_step),
-    }
+    if split_halves:
+        x_ranges = [('L', (0.0, 0.5)), ('R', (0.5, 1.0))]
+    else:
+        x_ranges = [('', (0.0, 1.0))]
 
-    print(f"  Mapping {el1}-{el2} ({len(phases)} candidate phases), T=[{t_min}, {t_max}] K...")
-    strategy = BinaryStrategy(dbf, comps, phases=phases, conditions=conds)
-    strategy.do_map()
+    strategies = []
+    for tag, (xlo, xhi) in x_ranges:
+        conds = {
+            v.N: 1, v.P: 101325,
+            v.T: (t_min, t_max, t_step),
+            v.X(el2): (xlo, xhi, x_step),
+        }
+        label = f" [{tag}-half, x∈({xlo}, {xhi})]" if tag else ""
+        print(f"  Mapping {el1}-{el2}{label} ({len(phases)} candidate phases), "
+              f"T=[{t_min}, {t_max}] K...")
+        s = BinaryStrategy(dbf, comps, phases=phases, conditions=conds)
+        s.do_map()
+        strategies.append((tag, s))
 
-    return dbf, strategy, comps, phases, t_max
+    return dbf, strategies, comps, phases, t_max
 
 
 # ── Extract curves ──────────────────────────────────────────────────────
 
-def extract_curves(strategy, el2):
+def extract_curves(strategy, el2, id_prefix=''):
     """
     Extract boundary curves as [[x, T], ...] arrays from tieline data.
 
@@ -254,8 +272,78 @@ def extract_curves(strategy, el2):
     x_var, y_var = v.X(el2), v.T
     tieline_data = strategy.get_tieline_data(x_var, y_var)
 
+    # Minimum x-extent for a curve to count as a real boundary. Tielines that
+    # collapse to x=[0,0] or x=[1,1] are pycalphad edge artifacts, not phase
+    # boundaries — they render as vertical streaks.
+    MIN_X_EXTENT = 0.001
+
+    def split_bimodal(pts, min_x_range=0.03):
+        """Split a phase's point list when it zig-zags between two branches
+        (e.g. α on either side of σ, or α on either side of a γ-loop).
+
+        Detection walks the points in T-sorted order and counts sign changes
+        in Δx — a systematic oscillation indicates two interleaved branches.
+        A smooth monotonic boundary gives ~0% sign changes; random noise
+        ~50%; a bimodal zig-zag sits comfortably above 15%.
+        """
+        if len(pts) < 6:
+            return [pts]
+
+        sorted_by_t = sorted(pts, key=lambda p: p[1])
+        # Count sign changes in Δx
+        sign_changes = 0
+        for i in range(2, len(sorted_by_t)):
+            dx1 = sorted_by_t[i - 1][0] - sorted_by_t[i - 2][0]
+            dx2 = sorted_by_t[i][0]     - sorted_by_t[i - 1][0]
+            if dx1 * dx2 < 0:
+                sign_changes += 1
+        if sign_changes < max(3, len(sorted_by_t) * 15 // 100):
+            return [pts]
+
+        # Split around the middle. Iteratively refine by re-centreing the
+        # threshold on the midpoint between the two cluster means.
+        threshold = (max(p[0] for p in pts) + min(p[0] for p in pts)) / 2
+        for _ in range(5):
+            left  = [p for p in pts if p[0] < threshold]
+            right = [p for p in pts if p[0] >= threshold]
+            if not left or not right:
+                return [pts]
+            m_l = sum(p[0] for p in left)  / len(left)
+            m_r = sum(p[0] for p in right) / len(right)
+            new_t = (m_l + m_r) / 2
+            if abs(new_t - threshold) < 1e-4:
+                break
+            threshold = new_t
+        if len(left) < 3 or len(right) < 3:
+            return [pts]
+        # Reject if the overall curve is too narrow to be a meaningful
+        # bimodal — a tight monotonic curve with numerical wiggle can
+        # trigger the sign-change detector but shouldn't split.
+        x_total = max(p[0] for p in pts) - min(p[0] for p in pts)
+        if x_total < min_x_range:
+            return [pts]
+        # Recurse: a curve with 3+ interleaved branches won't be fully
+        # resolved by one binary split.
+        out = []
+        for side in (left, right):
+            out.extend(split_bimodal(side, min_x_range))
+        for side in out:
+            side.sort(key=lambda p: p[1])
+        return out
+
     curves = []
     pair_counter = defaultdict(int)
+    # Dedupe signatures: pycalphad sometimes emits the same tieline segment
+    # multiple times. Two curve-pairs with identical (sorted) phase names and
+    # near-identical bounding boxes are duplicates.
+    seen_pair_sigs = set()
+
+    def sig(pts, phase):
+        xs = [p[0] for p in pts]
+        ts = [p[1] for p in pts]
+        return (phase,
+                round(min(xs), 2), round(max(xs), 2),
+                round(min(ts), -1), round(max(ts), -1))
 
     for td in tieline_data:
         # Each tieline has .data with one entry per phase on the boundary
@@ -270,17 +358,29 @@ def extract_curves(strategy, el2):
 
             pts = list(zip(xp[valid].tolist(), yp[valid].tolist()))
             pts = [[round(x, 5), round(t, 2)] for x, t in pts]
-            pts.sort(key=lambda p: p[1])
 
-            # Average composition to determine low/high side
-            avg_x = np.mean([p[0] for p in pts])
-            phase_curves.append({'phase': ph, 'pts': pts, 'avg_x': avg_x})
+            # Skip degenerate tielines pinned to x=0 or x=1 (edge artifacts)
+            xs = [p[0] for p in pts]
+            if max(xs) - min(xs) < MIN_X_EXTENT:
+                continue
+
+            # Split bimodal x-distributions (phase appearing on both sides of
+            # a two-phase region) into separate sub-curves
+            subs = split_bimodal(pts)
+            if len(subs) > 1:
+                print(f"    split {ph} n={len(pts)} → {[len(s) for s in subs]}")
+            for sub_pts in subs:
+                sub_pts.sort(key=lambda p: p[1])
+                sub_xs = [p[0] for p in sub_pts]
+                avg_x = float(np.mean(sub_xs))
+                phase_curves.append({'phase': ph, 'pts': sub_pts,
+                                     'avg_x': avg_x})
 
         if len(phase_curves) < 2:
             # Single-phase boundary (edge of diagram) — still include
             for pc in phase_curves:
                 curves.append({
-                    'id': f'{pc["phase"]}_edge',
+                    'id': f'{id_prefix}{pc["phase"]}_edge',
                     'name': f'{pc["phase"]} boundary',
                     'pts': pc['pts'],
                     'closed': None,
@@ -290,28 +390,41 @@ def extract_curves(strategy, el2):
         # Sort by average composition: lower x = _low, higher x = _high
         phase_curves.sort(key=lambda c: c['avg_x'])
 
-        # Build pair prefix from the two phase names (sorted alphabetically)
-        p1 = phase_curves[0]['phase']
-        p2 = phase_curves[1]['phase']
-        pair_key = '_'.join(sorted([p1, p2]))
-        count = pair_counter[pair_key]
-        pair_counter[pair_key] += 1
-        suffix = '' if count == 0 else f'_{count}'
+        # Emit N-1 adjacent-pair two-phase regions. For a normal two-phase
+        # region N=2 → one pair; for a bimodally-split phase (e.g. α on both
+        # sides of σ) N=3 → two pairs (α_left+σ, σ+α_right).
+        for k in range(len(phase_curves) - 1):
+            pc_lo = phase_curves[k]
+            pc_hi = phase_curves[k + 1]
+            # Skip same-phase adjacency (can occur if two independent
+            # bimodal splits land next to each other)
+            if pc_lo['phase'] == pc_hi['phase']:
+                continue
 
-        prefix = f'{pair_key}{suffix}'
+            pair_sig = (sig(pc_lo['pts'], pc_lo['phase']),
+                        sig(pc_hi['pts'], pc_hi['phase']))
+            if pair_sig in seen_pair_sigs:
+                continue
+            seen_pair_sigs.add(pair_sig)
 
-        curves.append({
-            'id': f'{prefix}_low',
-            'name': f'{phase_curves[0]["phase"]} boundary',
-            'pts': phase_curves[0]['pts'],
-            'closed': None,
-        })
-        curves.append({
-            'id': f'{prefix}_high',
-            'name': f'{phase_curves[1]["phase"]} boundary',
-            'pts': phase_curves[1]['pts'],
-            'closed': None,
-        })
+            pair_key = '_'.join(sorted([pc_lo['phase'], pc_hi['phase']]))
+            count = pair_counter[pair_key]
+            pair_counter[pair_key] += 1
+            suffix = '' if count == 0 else f'_{count}'
+            prefix = f'{pair_key}{suffix}'
+
+            curves.append({
+                'id': f'{id_prefix}{prefix}_low',
+                'name': f'{pc_lo["phase"]} boundary',
+                'pts': pc_lo['pts'],
+                'closed': None,
+            })
+            curves.append({
+                'id': f'{id_prefix}{prefix}_high',
+                'name': f'{pc_hi["phase"]} boundary',
+                'pts': pc_hi['pts'],
+                'closed': None,
+            })
 
     return curves
 
@@ -613,12 +726,15 @@ def main():
     print(f"Building {system} phase diagram...")
 
     # 1. Compute (t_max auto-detected if not specified)
-    dbf, strategy, comps, all_phases, t_max = compute(
+    dbf, strategies, comps, all_phases, t_max = compute(
         args.tdb, el1, el2, args.tmin, args.tmax)
 
-    # 2. Extract curves
+    # 2. Extract curves from each half separately and merge
     print("  Extracting boundary curves...")
-    curves = extract_curves(strategy, el2)
+    curves = []
+    for tag, strategy in strategies:
+        id_prefix = f"{tag}__" if tag else ""
+        curves.extend(extract_curves(strategy, el2, id_prefix=id_prefix))
     print(f"    {len(curves)} boundary curves")
     if not curves:
         raise RuntimeError(
@@ -626,17 +742,21 @@ def main():
             "returned no stable phases — check TDB compatibility (e.g. try "
             "a dedicated binary TDB).")
 
-    # 3. Extract invariants
+    # 3. Extract invariants from each half (each isotherm lives on its side)
     print("  Extracting invariants...")
-    special_points, isotherms = extract_invariants(
-        strategy, dbf, comps, all_phases, el2, system_key,
-        args.tmin, t_max)
+    special_points, isotherms = [], []
+    for _, strategy in strategies:
+        sp, iso = extract_invariants(strategy, dbf, comps, all_phases, el2,
+                                     system_key, args.tmin, t_max)
+        special_points.extend(sp)
+        isotherms.extend(iso)
     print(f"    {len(special_points)} special points, {len(isotherms)} isotherms")
 
-    # 4. Auto-label
+    # 4. Auto-label (grid-scan sweeps the full x range; strategy only used
+    # for recovering line compounds, so first half is sufficient)
     print("  Labelling phase regions...")
-    labels = compute_labels(dbf, strategy, comps, all_phases, el2, system_key,
-                            args.tmin, t_max)
+    labels = compute_labels(dbf, strategies[0][1], comps, all_phases, el2,
+                            system_key, args.tmin, t_max)
     print(f"    {len(labels)} labels:")
     for lab in sorted(labels, key=lambda l: l['x']):
         print(f"      {lab['text']:12s}  x={lab['x']:.3f}, T={lab['T']:.1f}")

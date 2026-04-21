@@ -87,6 +87,14 @@
       ],
       "file": "ni-cr.json",
       "ref": "Tang and Hallstedt (2016), CALPHAD 55, 260-269"
+    },
+    {
+      "els": [
+        "Ti",
+        "V"
+      ],
+      "file": "ti-v.json",
+      "ref": "Zou et al. (2019), CALPHAD 64, 78-91"
     }
   ]
 }
