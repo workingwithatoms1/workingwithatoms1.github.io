@@ -17,73 +17,201 @@
       "readingTime": "12 min",
       "intro": "There are precisely fourteen ways to arrange points in three-dimensional space such that every point sees an identical environment. These fourteen Bravais lattices, grouped into seven crystal systems, form the geometric foundation of all crystallography.",
       "body": [
-        ["h3", "What is a crystal?"],
-        ["p", "A crystal is any solid whose atoms occupy positions that repeat periodically in three dimensions. Strip away the chemistry and what remains is a lattice: an infinite array of geometrically identical points. Every physical crystal, from a grain of table salt to a turbine-blade superalloy, maps onto one of these lattices."],
-        ["p", "A lattice is defined by three translation vectors $\\mathbf{a}$, $\\mathbf{b}$ and $\\mathbf{c}$, and the angles between them: $\\alpha$ (between $\\mathbf{b}$ and $\\mathbf{c}$), $\\beta$ (between $\\mathbf{a}$ and $\\mathbf{c}$), and $\\gamma$ (between $\\mathbf{a}$ and $\\mathbf{b}$). Any lattice point can be reached from any other by an integer combination $n_1 \\mathbf{a} + n_2 \\mathbf{b} + n_3 \\mathbf{c}$. The parallelepiped spanned by $\\mathbf{a}$, $\\mathbf{b}$, $\\mathbf{c}$ is the unit cell."],
-        ["callout", "Lattice vs structure", "A lattice is an array of mathematical points. A crystal structure is a lattice plus a basis: the set of atoms associated with each lattice point. Diamond and FCC copper share the same lattice (face-centred cubic). They have very different structures because the basis is different: one carbon atom for diamond's sublattice arrangement versus one copper atom at each lattice point."],
-
-        ["h3", "The seven crystal systems"],
-        ["p", "The relationships between the six lattice parameters ($a$, $b$, $c$, $\\alpha$, $\\beta$, $\\gamma$) divide all possible lattices into seven crystal systems, from the most symmetric to the least:"],
-        ["p", "<strong>Cubic</strong>: $a = b = c$, $\\alpha = \\beta = \\gamma = 90°$. The highest symmetry. Iron (BCC at room temperature, FCC above 912°C), copper (FCC), and sodium chloride all crystallise in cubic lattices. The cube has 48 symmetry operations."],
-        ["p", "<strong>Tetragonal</strong>: $a = b \\neq c$, all angles 90°. A stretched or compressed cube. Tin (white tin, $\\beta$-Sn) and rutile (TiO$_2$) are tetragonal."],
-        ["p", "<strong>Orthorhombic</strong>: $a \\neq b \\neq c$, all angles 90°. Three unequal edges, all perpendicular. Cementite (Fe$_3$C) and olivine ((Mg,Fe)$_2$SiO$_4$) are orthorhombic."],
-        ["p", "<strong>Hexagonal</strong>: $a = b \\neq c$, $\\alpha = \\beta = 90°$, $\\gamma = 120°$. A 120° rhombus base with a perpendicular $c$ axis. Zinc, magnesium, titanium (at room temperature), and graphite are hexagonal."],
-        ["p", "<strong>Trigonal</strong> (rhombohedral): $a = b = c$, $\\alpha = \\beta = \\gamma \\neq 90°$. A cube stretched along its body diagonal. Calcite (CaCO$_3$) and $\\alpha$-quartz are trigonal."],
-        ["p", "<strong>Monoclinic</strong>: $a \\neq b \\neq c$, $\\alpha = \\gamma = 90°$, $\\beta \\neq 90°$. One angle departs from 90°. Gypsum (CaSO$_4 \\cdot$ 2H$_2$O) and many minerals are monoclinic."],
-        ["p", "<strong>Triclinic</strong>: $a \\neq b \\neq c$, $\\alpha \\neq \\beta \\neq \\gamma$. No constraints at all. The lowest symmetry. Some feldspars and certain organic crystals are triclinic."],
-
-        ["h3", "From seven systems to fourteen lattices"],
-        ["p", "Within each crystal system, there may be more than one way to place lattice points. Auguste Bravais showed in 1848 that when you allow lattice points not only at the corners of the unit cell but also at the centre of the cell body or the centres of its faces, you obtain exactly fourteen distinct lattices."],
-        ["p", "The four centering types are:"],
-        ["ul", [
-          "<strong>P</strong> (primitive): points at corners only. 1 lattice point per cell.",
-          "<strong>I</strong> (body-centred, from German <em>Innenzentriert</em>): an additional point at the cell centre. 2 points per cell.",
-          "<strong>F</strong> (face-centred): additional points at every face centre. 4 points per cell.",
-          "<strong>C</strong> (base-centred): additional points at the centres of one pair of opposite faces. 2 points per cell."
-        ]],
-        ["p", "Not every centering works in every crystal system. A face-centred tetragonal lattice, for example, can always be redescribed as a body-centred tetragonal lattice with a smaller, rotated cell. The fourteen that survive this redundancy test are the Bravais lattices."],
-        ["callout", "Counting lattice points", "When counting points per cell, corner points are shared between 8 cells (count 1/8 each), face points between 2 cells (count 1/2 each), and the body centre belongs entirely to one cell (count 1). For FCC: $8 \\times 1/8 + 6 \\times 1/2 = 4$ points per cell."],
-
-        ["h3", "Coordination and packing"],
-        ["p", "The coordination number of a lattice point is the number of nearest neighbours. In BCC, each point has 8 nearest neighbours at a distance of $a\\sqrt{3}/2$, where $a$ is the lattice parameter. In FCC, each point has 12 nearest neighbours at $a/\\sqrt{2}$. Simple cubic has 6 at distance $a$."],
-        ["p", "Packing efficiency is the fraction of space occupied when identical spheres are placed on every lattice point:"],
-        ["ul", [
-          "FCC and HCP: 74.05% (the theoretical maximum for equal spheres)",
-          "BCC: 68.02%",
-          "Simple cubic: 52.36%"
-        ]],
-        ["derivation", "The FCC packing fraction is $\\pi\\sqrt{2}/6 \\approx 0.7405$. The atoms touch along the face diagonal.", [
-          ["p", "In FCC, atoms touch along the face diagonal: $4r = a\\sqrt{2}$, so $r = a\\sqrt{2}/4$."],
-          ["p", "Volume of 4 atoms per cell: $4 \\times \\frac{4}{3}\\pi r^3 = 4 \\times \\frac{4}{3}\\pi \\left(\\frac{a\\sqrt{2}}{4}\\right)^3 = \\frac{\\pi a^3 \\sqrt{2}}{6}$"],
-          ["p", "Cell volume: $a^3$. Packing fraction:"],
-          ["eq", "\\text{APF} = \\frac{\\pi \\sqrt{2}}{6} \\approx 0.7405"]
-        ]],
-        ["p", "These packing differences have direct consequences for materials properties. FCC metals (Cu, Al, Au, Ni) tend to be ductile because close-packed planes provide many slip systems. BCC metals (Fe at room temperature, W, Mo) are strong but less ductile. HCP metals (Ti, Mg, Zn) often show anisotropic mechanical behaviour because there are fewer independent slip systems."],
-
-        ["h3", "Real lattice parameters"],
-        ["p", "Lattice parameters are measured by X-ray diffraction (article 3.4) and are known with extraordinary precision. Some values at room temperature:"],
-        ["ul", [
-          "Copper (FCC): $a = 3.615$ &Aring;",
-          "Aluminium (FCC): $a = 4.050$ &Aring;",
-          "Iron (BCC): $a = 2.867$ &Aring;",
-          "Titanium (HCP): $a = 2.951$ &Aring;, $c = 4.686$ &Aring;, $c/a = 1.588$",
-          "Silicon (diamond cubic): $a = 5.431$ &Aring;"
-        ]],
-        ["p", "The ideal $c/a$ ratio for HCP close packing is $\\sqrt{8/3} = 1.633$. Titanium's ratio (1.588) and zinc's (1.856) deviate significantly from ideal, which affects their slip behaviour and mechanical anisotropy."],
-        ["p", "Lattice parameters change with temperature (thermal expansion) and composition (Vegard's law for solid solutions). These changes are small (parts per thousand per 100 K for most metals) but measurable and important for thermal stress calculations and epitaxial growth."],
-
-        ["problem", "Iron transforms from BCC ($a = 2.867$ &Aring;) to FCC ($a = 3.647$ &Aring;) at 912°C. Calculate the packing fraction and density of each phase. The atomic mass of iron is 55.845 g/mol. Which phase is denser?", [
-          ["p", "BCC: 2 atoms per cell. Volume $= (2.867 \\times 10^{-8})^3 = 2.359 \\times 10^{-23}$ cm$^3$."],
-          ["eq", "\\rho_{\\text{BCC}} = \\frac{2 \\times 55.845}{6.022 \\times 10^{23} \\times 2.359 \\times 10^{-23}} = 7.874 \\text{ g/cm}^3"],
-          ["p", "FCC: 4 atoms per cell. Volume $= (3.647 \\times 10^{-8})^3 = 4.854 \\times 10^{-23}$ cm$^3$."],
-          ["eq", "\\rho_{\\text{FCC}} = \\frac{4 \\times 55.845}{6.022 \\times 10^{23} \\times 4.854 \\times 10^{-23}} = 7.637 \\text{ g/cm}^3"],
-          ["p", "BCC iron is actually denser than FCC iron, despite having a lower packing fraction (68% vs 74%). This is because the BCC lattice parameter is much smaller. Iron contracts on transforming from FCC to BCC. The volume change at the phase transition is about $+1\\%$ going from BCC to FCC, which matters for residual stresses during cooling."]
-        ]]
+        [
+          "h3",
+          "What is a crystal?"
+        ],
+        [
+          "p",
+          "A crystal is any solid whose atoms occupy positions that repeat periodically in three dimensions. Strip away the chemistry and what remains is a lattice: an infinite array of geometrically identical points. Every physical crystal, from a grain of table salt to a turbine-blade superalloy, maps onto one of these lattices."
+        ],
+        [
+          "p",
+          "A lattice is defined by three translation vectors $\\mathbf{a}$, $\\mathbf{b}$ and $\\mathbf{c}$, and the angles between them: $\\alpha$ (between $\\mathbf{b}$ and $\\mathbf{c}$), $\\beta$ (between $\\mathbf{a}$ and $\\mathbf{c}$), and $\\gamma$ (between $\\mathbf{a}$ and $\\mathbf{b}$). Any lattice point can be reached from any other by an integer combination $n_1 \\mathbf{a} + n_2 \\mathbf{b} + n_3 \\mathbf{c}$. The parallelepiped spanned by $\\mathbf{a}$, $\\mathbf{b}$, $\\mathbf{c}$ is the unit cell."
+        ],
+        [
+          "callout",
+          "Lattice vs structure",
+          "A lattice is an array of mathematical points. A crystal structure is a lattice plus a basis: the set of atoms associated with each lattice point. Diamond and FCC copper share the same lattice (face-centred cubic). They have very different structures because the basis is different: one carbon atom for diamond's sublattice arrangement versus one copper atom at each lattice point."
+        ],
+        [
+          "h3",
+          "The seven crystal systems"
+        ],
+        [
+          "p",
+          "The relationships between the six lattice parameters ($a$, $b$, $c$, $\\alpha$, $\\beta$, $\\gamma$) divide all possible lattices into seven crystal systems, from the most symmetric to the least:"
+        ],
+        [
+          "p",
+          "<strong>Cubic</strong>: $a = b = c$, $\\alpha = \\beta = \\gamma = 90°$. The highest symmetry. Iron (BCC at room temperature, FCC above 912°C), copper (FCC), and sodium chloride all crystallise in cubic lattices. The cube has 48 symmetry operations."
+        ],
+        [
+          "p",
+          "<strong>Tetragonal</strong>: $a = b \\neq c$, all angles 90°. A stretched or compressed cube. Tin (white tin, $\\beta$-Sn) and rutile (TiO$_2$) are tetragonal."
+        ],
+        [
+          "p",
+          "<strong>Orthorhombic</strong>: $a \\neq b \\neq c$, all angles 90°. Three unequal edges, all perpendicular. Cementite (Fe$_3$C) and olivine ((Mg,Fe)$_2$SiO$_4$) are orthorhombic."
+        ],
+        [
+          "p",
+          "<strong>Hexagonal</strong>: $a = b \\neq c$, $\\alpha = \\beta = 90°$, $\\gamma = 120°$. A 120° rhombus base with a perpendicular $c$ axis. Zinc, magnesium, titanium (at room temperature), and graphite are hexagonal."
+        ],
+        [
+          "p",
+          "<strong>Trigonal</strong> (rhombohedral): $a = b = c$, $\\alpha = \\beta = \\gamma \\neq 90°$. A cube stretched along its body diagonal. Calcite (CaCO$_3$) and $\\alpha$-quartz are trigonal."
+        ],
+        [
+          "p",
+          "<strong>Monoclinic</strong>: $a \\neq b \\neq c$, $\\alpha = \\gamma = 90°$, $\\beta \\neq 90°$. One angle departs from 90°. Gypsum (CaSO$_4 \\cdot$ 2H$_2$O) and many minerals are monoclinic."
+        ],
+        [
+          "p",
+          "<strong>Triclinic</strong>: $a \\neq b \\neq c$, $\\alpha \\neq \\beta \\neq \\gamma$. No constraints at all. The lowest symmetry. Some feldspars and certain organic crystals are triclinic."
+        ],
+        [
+          "h3",
+          "From seven systems to fourteen lattices"
+        ],
+        [
+          "p",
+          "Within each crystal system, there may be more than one way to place lattice points. Auguste Bravais showed in 1848 that when you allow lattice points not only at the corners of the unit cell but also at the centre of the cell body or the centres of its faces, you obtain exactly fourteen distinct lattices."
+        ],
+        [
+          "p",
+          "The four centering types are:"
+        ],
+        [
+          "ul",
+          [
+            "<strong>P</strong> (primitive): points at corners only. 1 lattice point per cell.",
+            "<strong>I</strong> (body-centred, from German <em>Innenzentriert</em>): an additional point at the cell centre. 2 points per cell.",
+            "<strong>F</strong> (face-centred): additional points at every face centre. 4 points per cell.",
+            "<strong>C</strong> (base-centred): additional points at the centres of one pair of opposite faces. 2 points per cell."
+          ]
+        ],
+        [
+          "p",
+          "Not every centering works in every crystal system. A face-centred tetragonal lattice, for example, can always be redescribed as a body-centred tetragonal lattice with a smaller, rotated cell. The fourteen that survive this redundancy test are the Bravais lattices."
+        ],
+        [
+          "callout",
+          "Counting lattice points",
+          "When counting points per cell, corner points are shared between 8 cells (count 1/8 each), face points between 2 cells (count 1/2 each), and the body centre belongs entirely to one cell (count 1). For FCC: $8 \\times 1/8 + 6 \\times 1/2 = 4$ points per cell."
+        ],
+        [
+          "h3",
+          "Coordination and packing"
+        ],
+        [
+          "p",
+          "The coordination number of a lattice point is the number of nearest neighbours. In BCC, each point has 8 nearest neighbours at a distance of $a\\sqrt{3}/2$, where $a$ is the lattice parameter. In FCC, each point has 12 nearest neighbours at $a/\\sqrt{2}$. Simple cubic has 6 at distance $a$."
+        ],
+        [
+          "p",
+          "Packing efficiency is the fraction of space occupied when identical spheres are placed on every lattice point:"
+        ],
+        [
+          "ul",
+          [
+            "FCC and HCP: 74.05% (the theoretical maximum for equal spheres)",
+            "BCC: 68.02%",
+            "Simple cubic: 52.36%"
+          ]
+        ],
+        [
+          "derivation",
+          "The FCC packing fraction is $\\pi\\sqrt{2}/6 \\approx 0.7405$. The atoms touch along the face diagonal.",
+          [
+            [
+              "p",
+              "In FCC, atoms touch along the face diagonal: $4r = a\\sqrt{2}$, so $r = a\\sqrt{2}/4$."
+            ],
+            [
+              "p",
+              "Volume of 4 atoms per cell: $4 \\times \\frac{4}{3}\\pi r^3 = 4 \\times \\frac{4}{3}\\pi \\left(\\frac{a\\sqrt{2}}{4}\\right)^3 = \\frac{\\pi a^3 \\sqrt{2}}{6}$"
+            ],
+            [
+              "p",
+              "Cell volume: $a^3$. Packing fraction:"
+            ],
+            [
+              "eq",
+              "\\text{APF} = \\frac{\\pi \\sqrt{2}}{6} \\approx 0.7405"
+            ]
+          ]
+        ],
+        [
+          "p",
+          "These packing differences have direct consequences for materials properties. FCC metals (Cu, Al, Au, Ni) tend to be ductile because close-packed planes provide many slip systems. BCC metals (Fe at room temperature, W, Mo) are strong but less ductile. HCP metals (Ti, Mg, Zn) often show anisotropic mechanical behaviour because there are fewer independent slip systems."
+        ],
+        [
+          "h3",
+          "Real lattice parameters"
+        ],
+        [
+          "p",
+          "Lattice parameters are measured by X-ray diffraction (article 3.4) and are known with extraordinary precision. Some values at room temperature:"
+        ],
+        [
+          "ul",
+          [
+            "Copper (FCC): $a = 3.615$ &Aring;",
+            "Aluminium (FCC): $a = 4.050$ &Aring;",
+            "Iron (BCC): $a = 2.867$ &Aring;",
+            "Titanium (HCP): $a = 2.951$ &Aring;, $c = 4.686$ &Aring;, $c/a = 1.588$",
+            "Silicon (diamond cubic): $a = 5.431$ &Aring;"
+          ]
+        ],
+        [
+          "p",
+          "The ideal $c/a$ ratio for HCP close packing is $\\sqrt{8/3} = 1.633$. Titanium's ratio (1.588) and zinc's (1.856) deviate significantly from ideal, which affects their slip behaviour and mechanical anisotropy."
+        ],
+        [
+          "p",
+          "Lattice parameters change with temperature (thermal expansion) and composition (Vegard's law for solid solutions). These changes are small (parts per thousand per 100 K for most metals) but measurable and important for thermal stress calculations and epitaxial growth."
+        ],
+        [
+          "problem",
+          "Iron transforms from BCC ($a = 2.867$ &Aring;) to FCC ($a = 3.647$ &Aring;) at 912°C. Calculate the packing fraction and density of each phase. The atomic mass of iron is 55.845 g/mol. Which phase is denser?",
+          [
+            [
+              "p",
+              "BCC: 2 atoms per cell. Volume $= (2.867 \\times 10^{-8})^3 = 2.359 \\times 10^{-23}$ cm$^3$."
+            ],
+            [
+              "eq",
+              "\\rho_{\\text{BCC}} = \\frac{2 \\times 55.845}{6.022 \\times 10^{23} \\times 2.359 \\times 10^{-23}} = 7.874 \\text{ g/cm}^3"
+            ],
+            [
+              "p",
+              "FCC: 4 atoms per cell. Volume $= (3.647 \\times 10^{-8})^3 = 4.854 \\times 10^{-23}$ cm$^3$."
+            ],
+            [
+              "eq",
+              "\\rho_{\\text{FCC}} = \\frac{4 \\times 55.845}{6.022 \\times 10^{23} \\times 4.854 \\times 10^{-23}} = 7.637 \\text{ g/cm}^3"
+            ],
+            [
+              "p",
+              "BCC iron is actually denser than FCC iron, despite having a lower packing fraction (68% vs 74%). This is because the BCC lattice parameter is much smaller. Iron contracts on transforming from FCC to BCC. The volume change at the phase transition is about $+1\\%$ going from BCC to FCC, which matters for residual stresses during cooling."
+            ]
+          ]
+        ]
       ],
       "related": [
-        { "title": "Miller Indices", "url": "miller-indices" },
-        { "title": "Point Groups & Space Groups", "url": "point-groups" },
-        { "title": "Defects", "url": "../defects/" }
+        {
+          "title": "Miller Indices",
+          "url": "miller-indices"
+        },
+        {
+          "title": "Point Groups & Space Groups",
+          "url": "point-groups"
+        },
+        {
+          "title": "Defects",
+          "url": "../defects/"
+        }
       ]
     },
     {
@@ -94,60 +222,177 @@
       "readingTime": "12 min",
       "intro": "Crystals are anisotropic: their properties depend on direction. To talk precisely about directions and planes inside a crystal, we need a notation system. Miller indices provide exactly that.",
       "body": [
-        ["h3", "Crystallographic directions"],
-        ["p", "A direction in a lattice is specified by the smallest set of integers $[uvw]$ such that the direction vector is $u\\mathbf{a} + v\\mathbf{b} + w\\mathbf{c}$. The notation uses square brackets. $[100]$ is the direction along $\\mathbf{a}$. $[111]$ is the body diagonal of a cubic cell. $[1\\bar{1}0]$ (where the bar means negative) runs diagonally across a face."],
-        ["p", "In cubic crystals, directions related by symmetry are grouped into a family, denoted with angle brackets: $\\langle 100 \\rangle$ includes $[100]$, $[010]$, $[001]$, $[\\bar{1}00]$, $[0\\bar{1}0]$, and $[00\\bar{1}]$. In a cubic system these are all equivalent by symmetry. In a tetragonal system, $[100]$ and $[010]$ are equivalent but $[001]$ is not (the $c$ axis is different)."],
-        ["callout", "Finding a direction", "To determine the Miller indices of a direction: (1) draw the vector from the origin to a lattice point, (2) express it in terms of the lattice vectors, (3) reduce to the smallest integers. A vector from $(0,0,0)$ to $(1/2, 1, 0)$ is $[120]$ after multiplying by 2."],
-
-        ["h3", "Miller indices for planes"],
-        ["p", "A plane in a lattice is specified by its Miller indices $(hkl)$, defined as follows:"],
-        ["ol", [
-          "Find the intercepts of the plane with the $\\mathbf{a}$, $\\mathbf{b}$, and $\\mathbf{c}$ axes, expressed in units of the lattice parameters.",
-          "Take the reciprocals of these intercepts.",
-          "Reduce to the smallest set of integers."
-        ]],
-        ["p", "A plane that intercepts the $a$ axis at 1, the $b$ axis at 1, and is parallel to the $c$ axis (intercept at $\\infty$) has reciprocals $(1, 1, 0)$ and Miller indices $(110)$. A plane that cuts all three axes at 1 is $(111)$. A plane parallel to $b$ and $c$ (intercept on $a$ at 1, intercepts at $\\infty$ on $b$ and $c$) is $(100)$."],
-        ["p", "Families of symmetry-related planes use curly brackets: $\\{100\\}$ in the cubic system includes $(100)$, $(010)$, $(001)$, $(\\bar{1}00)$, $(0\\bar{1}0)$, and $(00\\bar{1})$."],
-
-        ["h3", "Important planes in cubic crystals"],
-        ["p", "$\\{100\\}$ planes are the faces of the cube. In BCC metals, these are not close-packed. In FCC metals, $\\{100\\}$ has a packing density of $2/(a^2)$."],
-        ["p", "$\\{110\\}$ planes cut diagonally across two faces. In BCC metals, $\\{110\\}$ are the most densely packed planes and the primary slip planes."],
-        ["p", "$\\{111\\}$ planes are the close-packed planes in FCC. They have a packing density of $4/(a^2 \\sqrt{3})$, the highest of any plane in the FCC structure. Slip, twinning and stacking faults all occur on $\\{111\\}$ in FCC metals. There are four distinct $\\{111\\}$ planes, each containing three close-packed $\\langle 110 \\rangle$ directions, giving 12 slip systems. This is why FCC metals are so ductile."],
-
-        ["h3", "Interplanar spacing"],
-        ["p", "The perpendicular distance between adjacent parallel $(hkl)$ planes is the interplanar spacing $d_{hkl}$. For a cubic crystal:"],
-        ["eq", "d_{hkl} = \\frac{a}{\\sqrt{h^2 + k^2 + l^2}}"],
-        ["p", "For $(100)$: $d = a$. For $(110)$: $d = a/\\sqrt{2}$. For $(111)$: $d = a/\\sqrt{3}$. Higher-index planes are more closely spaced."],
-        ["p", "Interplanar spacing matters for two reasons. First, it determines diffraction: X-rays diffract from planes satisfying Bragg's law $n\\lambda = 2d \\sin\\theta$ (article 3.4). Second, slip tends to occur on planes with the largest $d$ spacing, because these are the most widely separated and therefore the easiest to shear past each other."],
-        ["derivation", "For a general orthorhombic crystal ($a \\neq b \\neq c$, all angles 90°):", [
-          ["eq", "\\frac{1}{d_{hkl}^2} = \\frac{h^2}{a^2} + \\frac{k^2}{b^2} + \\frac{l^2}{c^2}"],
-          ["p", "This reduces to the cubic formula when $a = b = c$. For hexagonal crystals, the expression is more complex because $\\gamma = 120°$:"],
-          ["eq", "\\frac{1}{d_{hkl}^2} = \\frac{4}{3}\\frac{h^2 + hk + k^2}{a^2} + \\frac{l^2}{c^2}"]
-        ]],
-
-        ["h3", "The hexagonal system and Miller-Bravais indices"],
-        ["p", "Hexagonal crystals have a problem with three-index Miller indices: symmetrically equivalent planes do not always look equivalent. The $(100)$ and $(010)$ planes are related by the 6-fold symmetry, but their indices do not make this obvious."],
-        ["p", "The fix is the four-index Miller-Bravais system $(hkil)$, where $i = -(h+k)$. The redundant fourth index makes symmetry relationships explicit. The plane $(10\\bar{1}0)$ and $(01\\bar{1}0)$ and $(\\bar{1}100)$ are all clearly related. Directions use $[uvtw]$ with $t = -(u+v)$."],
-        ["p", "The important planes in HCP are: the basal plane $(0001)$, the prismatic planes $\\{10\\bar{1}0\\}$, and the pyramidal planes $\\{10\\bar{1}1\\}$. In titanium, slip occurs primarily on prismatic planes at room temperature, with basal and pyramidal slip becoming active at higher temperatures. This limited slip is why titanium is harder to form than copper or aluminium."],
-
-        ["h3", "Zones and zone axes"],
-        ["p", "A set of planes that all contain a common direction is called a zone, and the common direction is the zone axis. If a plane $(hkl)$ belongs to the zone with axis $[uvw]$, then:"],
-        ["eq", "hu + kv + lw = 0"],
-        ["p", "This is the zone law (or Weiss zone law). It is used extensively in electron diffraction, where a diffraction pattern corresponds to the planes in a particular zone. Tilting the specimen changes the zone axis and therefore the set of visible diffraction spots."],
-
-        ["problem", "Calculate the interplanar spacing of the $(111)$ and $(200)$ planes in aluminium (FCC, $a = 4.050$ &Aring;). Which produces a diffraction peak at a lower angle for Cu K$\\alpha$ radiation ($\\lambda = 1.5418$ &Aring;)?", [
-          ["eq", "d_{111} = \\frac{4.050}{\\sqrt{1+1+1}} = \\frac{4.050}{1.732} = 2.338 \\text{ &Aring;}"],
-          ["eq", "d_{200} = \\frac{4.050}{\\sqrt{4+0+0}} = \\frac{4.050}{2} = 2.025 \\text{ &Aring;}"],
-          ["p", "From Bragg's law, $\\sin\\theta = \\lambda / (2d)$:"],
-          ["eq", "\\theta_{111} = \\arcsin\\frac{1.5418}{2 \\times 2.338} = \\arcsin(0.3297) = 19.25°"],
-          ["eq", "\\theta_{200} = \\arcsin\\frac{1.5418}{2 \\times 2.025} = \\arcsin(0.3806) = 22.39°"],
-          ["p", "$(111)$ diffracts at a lower angle ($2\\theta = 38.5°$) because it has the larger $d$ spacing. Note: in FCC, the $(100)$ reflection is systematically absent due to destructive interference from the face-centre atoms. The first allowed reflection is $(111)$, followed by $(200)$."]
-        ]]
+        [
+          "h3",
+          "Crystallographic directions"
+        ],
+        [
+          "p",
+          "A direction in a lattice is specified by the smallest set of integers $[uvw]$ such that the direction vector is $u\\mathbf{a} + v\\mathbf{b} + w\\mathbf{c}$. The notation uses square brackets. $[100]$ is the direction along $\\mathbf{a}$. $[111]$ is the body diagonal of a cubic cell. $[1\\bar{1}0]$ (where the bar means negative) runs diagonally across a face."
+        ],
+        [
+          "p",
+          "In cubic crystals, directions related by symmetry are grouped into a family, denoted with angle brackets: $\\langle 100 \\rangle$ includes $[100]$, $[010]$, $[001]$, $[\\bar{1}00]$, $[0\\bar{1}0]$, and $[00\\bar{1}]$. In a cubic system these are all equivalent by symmetry. In a tetragonal system, $[100]$ and $[010]$ are equivalent but $[001]$ is not (the $c$ axis is different)."
+        ],
+        [
+          "callout",
+          "Finding a direction",
+          "To determine the Miller indices of a direction: (1) draw the vector from the origin to a lattice point, (2) express it in terms of the lattice vectors, (3) reduce to the smallest integers. A vector from $(0,0,0)$ to $(1/2, 1, 0)$ is $[120]$ after multiplying by 2."
+        ],
+        [
+          "h3",
+          "Miller indices for planes"
+        ],
+        [
+          "p",
+          "A plane in a lattice is specified by its Miller indices $(hkl)$, defined as follows:"
+        ],
+        [
+          "ol",
+          [
+            "Find the intercepts of the plane with the $\\mathbf{a}$, $\\mathbf{b}$, and $\\mathbf{c}$ axes, expressed in units of the lattice parameters.",
+            "Take the reciprocals of these intercepts.",
+            "Reduce to the smallest set of integers."
+          ]
+        ],
+        [
+          "p",
+          "A plane that intercepts the $a$ axis at 1, the $b$ axis at 1, and is parallel to the $c$ axis (intercept at $\\infty$) has reciprocals $(1, 1, 0)$ and Miller indices $(110)$. A plane that cuts all three axes at 1 is $(111)$. A plane parallel to $b$ and $c$ (intercept on $a$ at 1, intercepts at $\\infty$ on $b$ and $c$) is $(100)$."
+        ],
+        [
+          "p",
+          "Families of symmetry-related planes use curly brackets: $\\{100\\}$ in the cubic system includes $(100)$, $(010)$, $(001)$, $(\\bar{1}00)$, $(0\\bar{1}0)$, and $(00\\bar{1})$."
+        ],
+        [
+          "h3",
+          "Important planes in cubic crystals"
+        ],
+        [
+          "p",
+          "$\\{100\\}$ planes are the faces of the cube. In BCC metals, these are not close-packed. In FCC metals, $\\{100\\}$ has a packing density of $2/(a^2)$."
+        ],
+        [
+          "p",
+          "$\\{110\\}$ planes cut diagonally across two faces. In BCC metals, $\\{110\\}$ are the most densely packed planes and the primary slip planes."
+        ],
+        [
+          "p",
+          "$\\{111\\}$ planes are the close-packed planes in FCC. They have a packing density of $4/(a^2 \\sqrt{3})$, the highest of any plane in the FCC structure. Slip, twinning and stacking faults all occur on $\\{111\\}$ in FCC metals. There are four distinct $\\{111\\}$ planes, each containing three close-packed $\\langle 110 \\rangle$ directions, giving 12 slip systems. This is why FCC metals are so ductile."
+        ],
+        [
+          "h3",
+          "Interplanar spacing"
+        ],
+        [
+          "p",
+          "The perpendicular distance between adjacent parallel $(hkl)$ planes is the interplanar spacing $d_{hkl}$. For a cubic crystal:"
+        ],
+        [
+          "eq",
+          "d_{hkl} = \\frac{a}{\\sqrt{h^2 + k^2 + l^2}}"
+        ],
+        [
+          "p",
+          "For $(100)$: $d = a$. For $(110)$: $d = a/\\sqrt{2}$. For $(111)$: $d = a/\\sqrt{3}$. Higher-index planes are more closely spaced."
+        ],
+        [
+          "p",
+          "Interplanar spacing matters for two reasons. First, it determines diffraction: X-rays diffract from planes satisfying Bragg's law $n\\lambda = 2d \\sin\\theta$ (article 3.4). Second, slip tends to occur on planes with the largest $d$ spacing, because these are the most widely separated and therefore the easiest to shear past each other."
+        ],
+        [
+          "derivation",
+          "For a general orthorhombic crystal ($a \\neq b \\neq c$, all angles 90°):",
+          [
+            [
+              "eq",
+              "\\frac{1}{d_{hkl}^2} = \\frac{h^2}{a^2} + \\frac{k^2}{b^2} + \\frac{l^2}{c^2}"
+            ],
+            [
+              "p",
+              "This reduces to the cubic formula when $a = b = c$. For hexagonal crystals, the expression is more complex because $\\gamma = 120°$:"
+            ],
+            [
+              "eq",
+              "\\frac{1}{d_{hkl}^2} = \\frac{4}{3}\\frac{h^2 + hk + k^2}{a^2} + \\frac{l^2}{c^2}"
+            ]
+          ]
+        ],
+        [
+          "h3",
+          "The hexagonal system and Miller-Bravais indices"
+        ],
+        [
+          "p",
+          "Hexagonal crystals have a problem with three-index Miller indices: symmetrically equivalent planes do not always look equivalent. The $(100)$ and $(010)$ planes are related by the 6-fold symmetry, but their indices do not make this obvious."
+        ],
+        [
+          "p",
+          "The fix is the four-index Miller-Bravais system $(hkil)$, where $i = -(h+k)$. The redundant fourth index makes symmetry relationships explicit. The plane $(10\\bar{1}0)$ and $(01\\bar{1}0)$ and $(\\bar{1}100)$ are all clearly related. Directions use $[uvtw]$ with $t = -(u+v)$."
+        ],
+        [
+          "p",
+          "The important planes in HCP are: the basal plane $(0001)$, the prismatic planes $\\{10\\bar{1}0\\}$, and the pyramidal planes $\\{10\\bar{1}1\\}$. In titanium, slip occurs primarily on prismatic planes at room temperature, with basal and pyramidal slip becoming active at higher temperatures. This limited slip is why titanium is harder to form than copper or aluminium."
+        ],
+        [
+          "h3",
+          "Zones and zone axes"
+        ],
+        [
+          "p",
+          "A set of planes that all contain a common direction is called a zone, and the common direction is the zone axis. If a plane $(hkl)$ belongs to the zone with axis $[uvw]$, then:"
+        ],
+        [
+          "eq",
+          "hu + kv + lw = 0"
+        ],
+        [
+          "p",
+          "This is the zone law (or Weiss zone law). It is used extensively in electron diffraction, where a diffraction pattern corresponds to the planes in a particular zone. Tilting the specimen changes the zone axis and therefore the set of visible diffraction spots."
+        ],
+        [
+          "problem",
+          "Calculate the interplanar spacing of the $(111)$ and $(200)$ planes in aluminium (FCC, $a = 4.050$ &Aring;). Which produces a diffraction peak at a lower angle for Cu K$\\alpha$ radiation ($\\lambda = 1.5418$ &Aring;)?",
+          [
+            [
+              "eq",
+              "d_{111} = \\frac{4.050}{\\sqrt{1+1+1}} = \\frac{4.050}{1.732} = 2.338 \\text{ &Aring;}"
+            ],
+            [
+              "eq",
+              "d_{200} = \\frac{4.050}{\\sqrt{4+0+0}} = \\frac{4.050}{2} = 2.025 \\text{ &Aring;}"
+            ],
+            [
+              "p",
+              "From Bragg's law, $\\sin\\theta = \\lambda / (2d)$:"
+            ],
+            [
+              "eq",
+              "\\theta_{111} = \\arcsin\\frac{1.5418}{2 \\times 2.338} = \\arcsin(0.3297) = 19.25°"
+            ],
+            [
+              "eq",
+              "\\theta_{200} = \\arcsin\\frac{1.5418}{2 \\times 2.025} = \\arcsin(0.3806) = 22.39°"
+            ],
+            [
+              "p",
+              "$(111)$ diffracts at a lower angle ($2\\theta = 38.5°$) because it has the larger $d$ spacing. Note: in FCC, the $(100)$ reflection is systematically absent due to destructive interference from the face-centre atoms. The first allowed reflection is $(111)$, followed by $(200)$."
+            ]
+          ]
+        ]
       ],
       "related": [
-        { "title": "Crystal Systems & Bravais Lattices", "url": "crystal-systems" },
-        { "title": "Reciprocal Lattice & Diffraction", "url": "reciprocal-lattice" },
-        { "title": "Defects", "url": "../defects/" }
+        {
+          "title": "Crystal Systems & Bravais Lattices",
+          "url": "crystal-systems"
+        },
+        {
+          "title": "Reciprocal Lattice & Diffraction",
+          "url": "reciprocal-lattice"
+        },
+        {
+          "title": "Defects",
+          "url": "../defects/"
+        }
       ]
     },
     {
@@ -158,59 +403,142 @@
       "readingTime": "12 min",
       "intro": "A crystal's symmetry determines its physical properties: which directions are equivalent, which tensor components are independent, whether it can be piezoelectric or ferroelectric. The classification of crystal symmetry is the job of point groups and space groups.",
       "body": [
-        ["h3", "Symmetry operations"],
-        ["p", "A symmetry operation is a transformation that leaves a crystal (or its lattice) looking identical. The possible operations are:"],
-        ["ul", [
-          "<strong>Rotation</strong> ($C_n$): rotation by $360°/n$ about an axis. Crystals permit $n = 1, 2, 3, 4, 6$ only. Five-fold and seven-fold rotations are incompatible with translational periodicity.",
-          "<strong>Reflection</strong> ($\\sigma$): mirror reflection through a plane.",
-          "<strong>Inversion</strong> ($i$): mapping every point $(x, y, z)$ to $(-x, -y, -z)$ through a centre of symmetry.",
-          "<strong>Rotoinversion</strong> ($\\bar{n}$): rotation by $360°/n$ followed by inversion. Includes $\\bar{1}$ (inversion alone), $\\bar{3}$, $\\bar{4}$, $\\bar{6}$."
-        ]],
-        ["p", "The restriction to $n = 1, 2, 3, 4, 6$ is not a convention. It is a mathematical theorem: only these rotational symmetries are compatible with a periodic lattice in three dimensions. A regular pentagon cannot tile a plane without gaps, and neither can a five-fold rotation axis exist in a crystal. (Quasicrystals, discovered by Shechtman in 1984, have five-fold diffraction symmetry but are not periodic.)"],
-
-        ["h3", "Point groups: the 32 crystal classes"],
-        ["p", "A point group is the set of all symmetry operations that leave at least one point of the crystal fixed (the origin). These are the rotations, reflections, and inversions, but not translations."],
-        ["p", "There are exactly 32 crystallographic point groups, distributed among the seven crystal systems. The cubic system has the most (5 point groups), the triclinic the fewest (2). Each point group defines a crystal class with specific symmetry constraints on physical properties."],
-        ["p", "Some important point groups:"],
-        ["ul", [
-          "$m\\bar{3}m$ (Oh): the full symmetry of a cube. FCC and BCC metals, NaCl, diamond. 48 operations.",
-          "$6/mmm$ (D6h): the full symmetry of a hexagonal prism. HCP metals. 24 operations.",
-          "$\\bar{4}3m$ (Td): tetrahedral symmetry. ZnS (sphalerite), GaAs. No inversion centre.",
-          "$4mm$ (C4v): tetragonal with a polar axis. BaTiO$_3$ (ferroelectric phase). Allows piezoelectricity."
-        ]],
-
-        ["h3", "Why symmetry matters for properties"],
-        ["p", "Symmetry constrains which physical properties a crystal can have. The key results, known as Neumann's principle:"],
-        ["p", "<strong>Piezoelectricity</strong> (stress produces voltage): requires the absence of an inversion centre. Of the 32 point groups, 21 lack inversion, and 20 of those are piezoelectric. Quartz ($\\alpha$-SiO$_2$, point group 32) is the classic example."],
-        ["p", "<strong>Pyroelectricity</strong> (temperature change produces voltage): requires a unique polar axis. 10 of the 32 point groups qualify."],
-        ["p", "<strong>Ferroelectricity</strong> (switchable spontaneous polarisation): a subset of pyroelectric crystals. BaTiO$_3$ (point group $4mm$ below 120°C) is the workhorse ferroelectric material."],
-        ["p", "Symmetry also determines the number of independent elastic constants. A cubic crystal has 3 ($C_{11}$, $C_{12}$, $C_{44}$). A hexagonal crystal has 5. A triclinic crystal has 21. The higher the symmetry, the fewer parameters you need to measure to fully describe the material's elastic response."],
-
-        ["h3", "Space groups: the 230 possibilities"],
-        ["p", "Point groups describe the rotational and reflective symmetry at a point. Space groups add translational symmetry elements: screw axes (rotation plus fractional translation) and glide planes (reflection plus fractional translation)."],
-        ["p", "There are exactly 230 space groups in three dimensions. Every crystal structure belongs to one of them. The space group encodes the full symmetry of the crystal, including the positions of all atoms in the unit cell."],
-        ["p", "Some common space groups in materials science:"],
-        ["ul", [
-          "$Fm\\bar{3}m$ (225): FCC metals (Cu, Al, Ni), NaCl. The most common space group for metallic elements.",
-          "$Im\\bar{3}m$ (229): BCC metals (Fe, W, Mo, Cr).",
-          "$Fd\\bar{3}m$ (227): diamond, silicon, germanium. Also the spinel structure (MgAl$_2$O$_4$).",
-          "$P6_3/mmc$ (194): HCP metals (Ti, Mg, Zn). The $6_3$ is a screw axis: 60° rotation plus half a $c$ translation.",
-          "$Pm\\bar{3}m$ (221): simple cubic perovskites (SrTiO$_3$ above its transition temperature)."
-        ]],
-        ["p", "Space groups are determined experimentally from the systematic absences in X-ray diffraction patterns (article 3.4). Certain reflections vanish because the screw axes or glide planes cause destructive interference at specific $(hkl)$ values. This is one of the main tools for crystal structure determination."],
-
-        ["h3", "The International Tables"],
-        ["p", "The International Tables for Crystallography (Volume A) list all 230 space groups with their symmetry elements, equivalent positions, and systematic absence conditions. They are the definitive reference for crystallography and are used daily by anyone solving or refining a crystal structure. Each space group entry tells you: the point group it belongs to, the crystal system, the positions where atoms can sit, and which diffraction spots should be present or absent."],
-
-        ["problem", "A crystal has a cubic unit cell with lattice parameter $a = 5.64$ &Aring;. X-ray diffraction shows that reflections are only present when $h$, $k$, and $l$ are all odd or all even. What is the Bravais lattice? If the systematic absences further show that for $h00$ reflections, only $h = 4n$ are present, what does this indicate?", [
-          ["p", "The condition 'all odd or all even' is the signature of a face-centred cubic (F) lattice. The face-centre atoms cause destructive interference for mixed indices."],
-          ["p", "The additional condition $h = 4n$ for $h00$ reflections indicates a $4_1$ or $4_3$ screw axis along $[100]$. Combined with the F lattice and cubic symmetry, this points to space group $Fd\\bar{3}m$ (no. 227). The lattice parameter of 5.64 &Aring; is consistent with diamond ($a = 5.43$ &Aring;) or silicon ($a = 5.43$ &Aring;). The slight difference suggests a compound like MgO ($a = 4.21$) does not fit, but $\\beta$-cristobalite (SiO$_2$, $a = 7.16$) also does not match. The structure is likely diamond or a diamond-cubic semiconductor."]
-        ]]
+        [
+          "h3",
+          "Symmetry operations"
+        ],
+        [
+          "p",
+          "A symmetry operation is a transformation that leaves a crystal (or its lattice) looking identical. The possible operations are:"
+        ],
+        [
+          "ul",
+          [
+            "<strong>Rotation</strong> ($C_n$): rotation by $360°/n$ about an axis. Crystals permit $n = 1, 2, 3, 4, 6$ only. Five-fold and seven-fold rotations are incompatible with translational periodicity.",
+            "<strong>Reflection</strong> ($\\sigma$): mirror reflection through a plane.",
+            "<strong>Inversion</strong> ($i$): mapping every point $(x, y, z)$ to $(-x, -y, -z)$ through a centre of symmetry.",
+            "<strong>Rotoinversion</strong> ($\\bar{n}$): rotation by $360°/n$ followed by inversion. Includes $\\bar{1}$ (inversion alone), $\\bar{3}$, $\\bar{4}$, $\\bar{6}$."
+          ]
+        ],
+        [
+          "p",
+          "The restriction to $n = 1, 2, 3, 4, 6$ is not a convention. It is a mathematical theorem: only these rotational symmetries are compatible with a periodic lattice in three dimensions. A regular pentagon cannot tile a plane without gaps, and neither can a five-fold rotation axis exist in a crystal. (Quasicrystals, discovered by Shechtman in 1984, have five-fold diffraction symmetry but are not periodic.)"
+        ],
+        [
+          "h3",
+          "Point groups: the 32 crystal classes"
+        ],
+        [
+          "p",
+          "A point group is the set of all symmetry operations that leave at least one point of the crystal fixed (the origin). These are the rotations, reflections, and inversions, but not translations."
+        ],
+        [
+          "p",
+          "There are exactly 32 crystallographic point groups, distributed among the seven crystal systems. The cubic system has the most (5 point groups), the triclinic the fewest (2). Each point group defines a crystal class with specific symmetry constraints on physical properties."
+        ],
+        [
+          "p",
+          "Some important point groups:"
+        ],
+        [
+          "ul",
+          [
+            "$m\\bar{3}m$ (Oh): the full symmetry of a cube. FCC and BCC metals, NaCl, diamond. 48 operations.",
+            "$6/mmm$ (D6h): the full symmetry of a hexagonal prism. HCP metals. 24 operations.",
+            "$\\bar{4}3m$ (Td): tetrahedral symmetry. ZnS (sphalerite), GaAs. No inversion centre.",
+            "$4mm$ (C4v): tetragonal with a polar axis. BaTiO$_3$ (ferroelectric phase). Allows piezoelectricity."
+          ]
+        ],
+        [
+          "h3",
+          "Why symmetry matters for properties"
+        ],
+        [
+          "p",
+          "Symmetry constrains which physical properties a crystal can have. The key results, known as Neumann's principle:"
+        ],
+        [
+          "p",
+          "<strong>Piezoelectricity</strong> (stress produces voltage): requires the absence of an inversion centre. Of the 32 point groups, 21 lack inversion, and 20 of those are piezoelectric. Quartz ($\\alpha$-SiO$_2$, point group 32) is the classic example."
+        ],
+        [
+          "p",
+          "<strong>Pyroelectricity</strong> (temperature change produces voltage): requires a unique polar axis. 10 of the 32 point groups qualify."
+        ],
+        [
+          "p",
+          "<strong>Ferroelectricity</strong> (switchable spontaneous polarisation): a subset of pyroelectric crystals. BaTiO$_3$ (point group $4mm$ below 120°C) is the workhorse ferroelectric material."
+        ],
+        [
+          "p",
+          "Symmetry also determines the number of independent elastic constants. A cubic crystal has 3 ($C_{11}$, $C_{12}$, $C_{44}$). A hexagonal crystal has 5. A triclinic crystal has 21. The higher the symmetry, the fewer parameters you need to measure to fully describe the material's elastic response."
+        ],
+        [
+          "h3",
+          "Space groups: the 230 possibilities"
+        ],
+        [
+          "p",
+          "Point groups describe the rotational and reflective symmetry at a point. Space groups add translational symmetry elements: screw axes (rotation plus fractional translation) and glide planes (reflection plus fractional translation)."
+        ],
+        [
+          "p",
+          "There are exactly 230 space groups in three dimensions. Every crystal structure belongs to one of them. The space group encodes the full symmetry of the crystal, including the positions of all atoms in the unit cell."
+        ],
+        [
+          "p",
+          "Some common space groups in materials science:"
+        ],
+        [
+          "ul",
+          [
+            "$Fm\\bar{3}m$ (225): FCC metals (Cu, Al, Ni), NaCl. The most common space group for metallic elements.",
+            "$Im\\bar{3}m$ (229): BCC metals (Fe, W, Mo, Cr).",
+            "$Fd\\bar{3}m$ (227): diamond, silicon, germanium. Also the spinel structure (MgAl$_2$O$_4$).",
+            "$P6_3/mmc$ (194): HCP metals (Ti, Mg, Zn). The $6_3$ is a screw axis: 60° rotation plus half a $c$ translation.",
+            "$Pm\\bar{3}m$ (221): simple cubic perovskites (SrTiO$_3$ above its transition temperature)."
+          ]
+        ],
+        [
+          "p",
+          "Space groups are determined experimentally from the systematic absences in X-ray diffraction patterns (article 3.4). Certain reflections vanish because the screw axes or glide planes cause destructive interference at specific $(hkl)$ values. This is one of the main tools for crystal structure determination."
+        ],
+        [
+          "h3",
+          "The International Tables"
+        ],
+        [
+          "p",
+          "The International Tables for Crystallography (Volume A) list all 230 space groups with their symmetry elements, equivalent positions, and systematic absence conditions. They are the definitive reference for crystallography and are used daily by anyone solving or refining a crystal structure. Each space group entry tells you: the point group it belongs to, the crystal system, the positions where atoms can sit, and which diffraction spots should be present or absent."
+        ],
+        [
+          "problem",
+          "A crystal has a cubic unit cell with lattice parameter $a = 5.64$ &Aring;. X-ray diffraction shows that reflections are only present when $h$, $k$, and $l$ are all odd or all even. What is the Bravais lattice? If the systematic absences further show that for $h00$ reflections, only $h = 4n$ are present, what does this indicate?",
+          [
+            [
+              "p",
+              "The condition 'all odd or all even' is the signature of a face-centred cubic (F) lattice. The face-centre atoms cause destructive interference for mixed indices."
+            ],
+            [
+              "p",
+              "The additional condition $h = 4n$ for $h00$ reflections indicates a $4_1$ or $4_3$ screw axis along $[100]$. Combined with the F lattice and cubic symmetry, this points to space group $Fd\\bar{3}m$ (no. 227). The lattice parameter of 5.64 &Aring; is consistent with diamond ($a = 5.43$ &Aring;) or silicon ($a = 5.43$ &Aring;). The slight difference suggests a compound like MgO ($a = 4.21$) does not fit, but $\\beta$-cristobalite (SiO$_2$, $a = 7.16$) also does not match. The structure is likely diamond or a diamond-cubic semiconductor."
+            ]
+          ]
+        ]
       ],
       "related": [
-        { "title": "Crystal Systems & Bravais Lattices", "url": "crystal-systems" },
-        { "title": "Reciprocal Lattice & Diffraction", "url": "reciprocal-lattice" },
-        { "title": "Mechanical Properties", "url": "../mechanical-properties/" }
+        {
+          "title": "Crystal Systems & Bravais Lattices",
+          "url": "crystal-systems"
+        },
+        {
+          "title": "Reciprocal Lattice & Diffraction",
+          "url": "reciprocal-lattice"
+        },
+        {
+          "title": "Mechanical Properties",
+          "url": "../mechanical-properties/"
+        }
       ]
     },
     {
@@ -221,70 +549,233 @@
       "readingTime": "14 min",
       "intro": "Every real-space lattice has a reciprocal lattice: a set of points in Fourier space that encodes all the information about periodicity and diffraction. Understanding reciprocal space is the key to reading diffraction patterns.",
       "body": [
-        ["h3", "Why reciprocal space?"],
-        ["p", "When X-rays, electrons, or neutrons scatter from a crystal, the diffraction pattern is not a direct image of the atomic positions. It is an image of the reciprocal lattice, weighted by the scattering power of the atoms. To interpret diffraction data, you need to understand the relationship between the real lattice and its reciprocal."],
-        ["p", "The physical reason is Fourier analysis. A crystal's electron density is periodic. The Fourier transform of a periodic function is a set of discrete frequencies. Those frequencies are the reciprocal lattice vectors, and they correspond to the positions of diffraction spots."],
-
-        ["h3", "Definition"],
-        ["p", "Given the real-space lattice vectors $\\mathbf{a}$, $\\mathbf{b}$, $\\mathbf{c}$, the reciprocal lattice vectors are:"],
-        ["eq", "\\mathbf{a}^* = \\frac{\\mathbf{b} \\times \\mathbf{c}}{\\mathbf{a} \\cdot (\\mathbf{b} \\times \\mathbf{c})}, \\quad \\mathbf{b}^* = \\frac{\\mathbf{c} \\times \\mathbf{a}}{\\mathbf{a} \\cdot (\\mathbf{b} \\times \\mathbf{c})}, \\quad \\mathbf{c}^* = \\frac{\\mathbf{a} \\times \\mathbf{b}}{\\mathbf{a} \\cdot (\\mathbf{b} \\times \\mathbf{c})}"],
-        ["p", "The denominator $\\mathbf{a} \\cdot (\\mathbf{b} \\times \\mathbf{c}) = V$ is the volume of the real-space unit cell. The reciprocal lattice vectors satisfy:"],
-        ["eq", "\\mathbf{a}_i \\cdot \\mathbf{a}_j^* = \\delta_{ij}"],
-        ["p", "where $\\delta_{ij}$ is 1 if $i = j$ and 0 otherwise. Each reciprocal vector is perpendicular to two of the real-space vectors and has magnitude inversely proportional to the corresponding real-space lattice parameter."],
-        ["p", "For a cubic crystal with parameter $a$: $\\mathbf{a}^* = \\hat{x}/a$, $\\mathbf{b}^* = \\hat{y}/a$, $\\mathbf{c}^* = \\hat{z}/a$. The reciprocal lattice is also cubic, with parameter $1/a$. The reciprocal of FCC is BCC, and vice versa. The reciprocal of HCP is a rotated HCP."],
-
-        ["h3", "Reciprocal lattice vectors and planes"],
-        ["p", "A general reciprocal lattice vector is:"],
-        ["eq", "\\mathbf{g}_{hkl} = h\\mathbf{a}^* + k\\mathbf{b}^* + l\\mathbf{c}^*"],
-        ["p", "This vector is perpendicular to the real-space $(hkl)$ planes, and its magnitude is the reciprocal of the interplanar spacing:"],
-        ["eq", "|\\mathbf{g}_{hkl}| = \\frac{1}{d_{hkl}}"],
-        ["p", "Each point in the reciprocal lattice corresponds to a set of real-space planes. The Miller indices $(hkl)$ are simultaneously the coordinates of a reciprocal lattice point and the label of a family of real-space planes. This dual role is the reason reciprocal space is so useful."],
-
-        ["h3", "Bragg's law"],
-        ["p", "When radiation of wavelength $\\lambda$ strikes a crystal, constructive interference produces a diffracted beam when:"],
-        ["eq", "n\\lambda = 2d_{hkl} \\sin\\theta"],
-        ["p", "where $\\theta$ is the angle between the incident beam and the diffracting planes, and $n$ is an integer. This is Bragg's law, and it is the fundamental equation of diffraction crystallography."],
-        ["p", "Bragg's law has a simple geometric interpretation: the path difference between rays reflected from adjacent planes must be an integer number of wavelengths. Setting $n = 1$ (first order) and using the Miller indices to specify the planes:"],
-        ["eq", "\\lambda = 2d_{hkl} \\sin\\theta"],
-        ["p", "Higher orders ($n = 2, 3, \\ldots$) can be folded into the indices: $n = 2$ reflection from $(100)$ is the same as $n = 1$ reflection from $(200)$."],
-
-        ["h3", "The Ewald sphere construction"],
-        ["p", "The Ewald sphere is a geometric construction in reciprocal space that determines which planes are in the diffraction condition at any instant."],
-        ["p", "Draw a sphere of radius $1/\\lambda$ centred on the crystal. The incident beam direction defines one radius. If a reciprocal lattice point lies on the surface of the sphere, the corresponding set of planes satisfies Bragg's law and a diffracted beam is produced."],
-        ["p", "For X-ray diffraction, $1/\\lambda$ is large compared to reciprocal lattice spacings (typical $\\lambda \\approx 1.5$ &Aring;, so $1/\\lambda \\approx 0.67$ &Aring;$^{-1}$, while $1/d$ for low-index planes is around 0.2 to 0.5 &Aring;$^{-1}$). The sphere is large and intersects relatively few points. This is why powder diffraction averages over all orientations: no single crystal orientation satisfies Bragg for many planes simultaneously."],
-        ["p", "For electron diffraction, $\\lambda$ is much smaller ($\\lambda \\approx 0.025$ &Aring; at 200 kV), so $1/\\lambda \\approx 40$ &Aring;$^{-1}$. The Ewald sphere is nearly flat compared to the reciprocal lattice spacing, and many points are simultaneously close to the sphere surface. This is why electron diffraction patterns show many spots at once, corresponding to a near-planar slice through the reciprocal lattice."],
-
-        ["h3", "Structure factor and systematic absences"],
-        ["p", "Not every reciprocal lattice point produces a visible diffraction spot. The intensity of the $(hkl)$ reflection depends on the structure factor:"],
-        ["eq", "F_{hkl} = \\sum_j f_j \\exp\\left[2\\pi i (hx_j + ky_j + lz_j)\\right]"],
-        ["p", "where the sum runs over all atoms $j$ in the unit cell, $f_j$ is the atomic scattering factor (roughly proportional to atomic number for X-rays), and $(x_j, y_j, z_j)$ are the fractional coordinates of atom $j$."],
-        ["p", "If $F_{hkl} = 0$, the reflection is systematically absent. This happens when the arrangement of atoms causes exact cancellation of the scattered waves. For a BCC lattice, reflections with $h + k + l =$ odd are absent. For FCC, reflections with mixed odd and even indices are absent. These rules are the fingerprints of the Bravais lattice type and are used to identify it from diffraction data."],
-        ["derivation", "For a BCC lattice with atoms at $(0,0,0)$ and $(1/2, 1/2, 1/2)$:", [
-          ["eq", "F_{hkl} = f\\left[1 + \\exp\\left(\\pi i(h+k+l)\\right)\\right]"],
-          ["p", "The exponential is $+1$ when $h+k+l$ is even and $-1$ when odd. So $F_{hkl} = 2f$ (present) if $h+k+l$ is even, and $F_{hkl} = 0$ (absent) if $h+k+l$ is odd."],
-          ["p", "For FCC with atoms at $(0,0,0)$, $(1/2,1/2,0)$, $(1/2,0,1/2)$, $(0,1/2,1/2)$:"],
-          ["eq", "F_{hkl} = f\\left[1 + e^{\\pi i(h+k)} + e^{\\pi i(h+l)} + e^{\\pi i(k+l)}\\right]"],
-          ["p", "This is $4f$ when $h,k,l$ are all even or all odd, and $0$ when they are mixed. The FCC selection rule: all indices must have the same parity."]
-        ]],
-
-        ["h3", "Powder diffraction"],
-        ["p", "A polycrystalline sample contains grains in all orientations. Bragg's law is satisfied simultaneously for all planes, and each $(hkl)$ reflection produces a cone of diffracted radiation at angle $2\\theta$. The pattern is a plot of intensity versus $2\\theta$, with peaks at the Bragg angles."],
-        ["p", "From a powder pattern, you can determine: the crystal system and lattice parameters (from peak positions), the Bravais lattice (from systematic absences), and the atomic positions (from peak intensities, via Rietveld refinement). Powder XRD is the single most common characterisation technique in materials science. It is quick, non-destructive, and can identify phases, measure strain, and track phase transformations in situ."],
-
-        ["problem", "A powder XRD pattern of a cubic material using Cu K$\\alpha$ radiation ($\\lambda = 1.5418$ &Aring;) shows its first two peaks at $2\\theta = 38.47°$ and $44.74°$. Determine the lattice parameter and the Bravais lattice type.", [
-          ["p", "From the peak positions: $\\theta_1 = 19.24°$, $\\theta_2 = 22.37°$."],
-          ["p", "Using Bragg's law: $d_1 = \\lambda/(2\\sin\\theta_1) = 1.5418/(2 \\times 0.3296) = 2.339$ &Aring;."],
-          ["p", "$d_2 = 1.5418/(2 \\times 0.3804) = 2.026$ &Aring;."],
-          ["p", "For a cubic system, $d_{hkl} = a/\\sqrt{h^2+k^2+l^2}$, so $h^2+k^2+l^2 = (a/d)^2$."],
-          ["p", "The ratio $d_1^2/d_2^2 = (2.339/2.026)^2 = 1.333 = 4/3$."],
-          ["p", "So $(h^2+k^2+l^2)_1 / (h^2+k^2+l^2)_2 = 3/4$. The first reflection has $h^2+k^2+l^2 = 3$ (i.e., $(111)$) and the second has 4 (i.e., $(200)$). This pattern (first reflection at $N=3$, not $N=1$ or $N=2$) is the signature of FCC."],
-          ["p", "$a = d_{111} \\times \\sqrt{3} = 2.339 \\times 1.732 = 4.051$ &Aring;. This is aluminium."]
-        ]]
+        [
+          "h3",
+          "Why reciprocal space?"
+        ],
+        [
+          "p",
+          "When X-rays, electrons, or neutrons scatter from a crystal, the diffraction pattern is not a direct image of the atomic positions. It is an image of the reciprocal lattice, weighted by the scattering power of the atoms. To interpret diffraction data, you need to understand the relationship between the real lattice and its reciprocal."
+        ],
+        [
+          "p",
+          "The physical reason is Fourier analysis. A crystal's electron density is periodic. The Fourier transform of a periodic function is a set of discrete frequencies. Those frequencies are the reciprocal lattice vectors, and they correspond to the positions of diffraction spots."
+        ],
+        [
+          "h3",
+          "Definition"
+        ],
+        [
+          "p",
+          "Given the real-space lattice vectors $\\mathbf{a}$, $\\mathbf{b}$, $\\mathbf{c}$, the reciprocal lattice vectors are:"
+        ],
+        [
+          "eq",
+          "\\mathbf{a}^* = \\frac{\\mathbf{b} \\times \\mathbf{c}}{\\mathbf{a} \\cdot (\\mathbf{b} \\times \\mathbf{c})}, \\quad \\mathbf{b}^* = \\frac{\\mathbf{c} \\times \\mathbf{a}}{\\mathbf{a} \\cdot (\\mathbf{b} \\times \\mathbf{c})}, \\quad \\mathbf{c}^* = \\frac{\\mathbf{a} \\times \\mathbf{b}}{\\mathbf{a} \\cdot (\\mathbf{b} \\times \\mathbf{c})}"
+        ],
+        [
+          "p",
+          "The denominator $\\mathbf{a} \\cdot (\\mathbf{b} \\times \\mathbf{c}) = V$ is the volume of the real-space unit cell. The reciprocal lattice vectors satisfy:"
+        ],
+        [
+          "eq",
+          "\\mathbf{a}_i \\cdot \\mathbf{a}_j^* = \\delta_{ij}"
+        ],
+        [
+          "p",
+          "where $\\delta_{ij}$ is 1 if $i = j$ and 0 otherwise. Each reciprocal vector is perpendicular to two of the real-space vectors and has magnitude inversely proportional to the corresponding real-space lattice parameter."
+        ],
+        [
+          "p",
+          "For a cubic crystal with parameter $a$: $\\mathbf{a}^* = \\hat{x}/a$, $\\mathbf{b}^* = \\hat{y}/a$, $\\mathbf{c}^* = \\hat{z}/a$. The reciprocal lattice is also cubic, with parameter $1/a$. The reciprocal of FCC is BCC, and vice versa. The reciprocal of HCP is a rotated HCP."
+        ],
+        [
+          "h3",
+          "Reciprocal lattice vectors and planes"
+        ],
+        [
+          "p",
+          "A general reciprocal lattice vector is:"
+        ],
+        [
+          "eq",
+          "\\mathbf{g}_{hkl} = h\\mathbf{a}^* + k\\mathbf{b}^* + l\\mathbf{c}^*"
+        ],
+        [
+          "p",
+          "This vector is perpendicular to the real-space $(hkl)$ planes, and its magnitude is the reciprocal of the interplanar spacing:"
+        ],
+        [
+          "eq",
+          "|\\mathbf{g}_{hkl}| = \\frac{1}{d_{hkl}}"
+        ],
+        [
+          "p",
+          "Each point in the reciprocal lattice corresponds to a set of real-space planes. The Miller indices $(hkl)$ are simultaneously the coordinates of a reciprocal lattice point and the label of a family of real-space planes. This dual role is the reason reciprocal space is so useful."
+        ],
+        [
+          "h3",
+          "Bragg's law"
+        ],
+        [
+          "p",
+          "When radiation of wavelength $\\lambda$ strikes a crystal, constructive interference produces a diffracted beam when:"
+        ],
+        [
+          "eq",
+          "n\\lambda = 2d_{hkl} \\sin\\theta"
+        ],
+        [
+          "p",
+          "where $\\theta$ is the angle between the incident beam and the diffracting planes, and $n$ is an integer. This is Bragg's law, and it is the fundamental equation of diffraction crystallography."
+        ],
+        [
+          "p",
+          "Bragg's law has a simple geometric interpretation: the path difference between rays reflected from adjacent planes must be an integer number of wavelengths. Setting $n = 1$ (first order) and using the Miller indices to specify the planes:"
+        ],
+        [
+          "eq",
+          "\\lambda = 2d_{hkl} \\sin\\theta"
+        ],
+        [
+          "p",
+          "Higher orders ($n = 2, 3, \\ldots$) can be folded into the indices: $n = 2$ reflection from $(100)$ is the same as $n = 1$ reflection from $(200)$."
+        ],
+        [
+          "h3",
+          "The Ewald sphere construction"
+        ],
+        [
+          "p",
+          "The Ewald sphere is a geometric construction in reciprocal space that determines which planes are in the diffraction condition at any instant."
+        ],
+        [
+          "p",
+          "Draw a sphere of radius $1/\\lambda$ centred on the crystal. The incident beam direction defines one radius. If a reciprocal lattice point lies on the surface of the sphere, the corresponding set of planes satisfies Bragg's law and a diffracted beam is produced."
+        ],
+        [
+          "p",
+          "For X-ray diffraction, $1/\\lambda$ is large compared to reciprocal lattice spacings (typical $\\lambda \\approx 1.5$ &Aring;, so $1/\\lambda \\approx 0.67$ &Aring;$^{-1}$, while $1/d$ for low-index planes is around 0.2 to 0.5 &Aring;$^{-1}$). The sphere is large and intersects relatively few points. This is why powder diffraction averages over all orientations: no single crystal orientation satisfies Bragg for many planes simultaneously."
+        ],
+        [
+          "p",
+          "For electron diffraction, $\\lambda$ is much smaller ($\\lambda \\approx 0.025$ &Aring; at 200 kV), so $1/\\lambda \\approx 40$ &Aring;$^{-1}$. The Ewald sphere is nearly flat compared to the reciprocal lattice spacing, and many points are simultaneously close to the sphere surface. This is why electron diffraction patterns show many spots at once, corresponding to a near-planar slice through the reciprocal lattice."
+        ],
+        [
+          "h3",
+          "Structure factor and systematic absences"
+        ],
+        [
+          "p",
+          "Not every reciprocal lattice point produces a visible diffraction spot. The intensity of the $(hkl)$ reflection depends on the structure factor:"
+        ],
+        [
+          "eq",
+          "F_{hkl} = \\sum_j f_j \\exp\\left[2\\pi i (hx_j + ky_j + lz_j)\\right]"
+        ],
+        [
+          "p",
+          "where the sum runs over all atoms $j$ in the unit cell, $f_j$ is the atomic scattering factor (roughly proportional to atomic number for X-rays), and $(x_j, y_j, z_j)$ are the fractional coordinates of atom $j$."
+        ],
+        [
+          "p",
+          "If $F_{hkl} = 0$, the reflection is systematically absent. This happens when the arrangement of atoms causes exact cancellation of the scattered waves. For a BCC lattice, reflections with $h + k + l =$ odd are absent. For FCC, reflections with mixed odd and even indices are absent. These rules are the fingerprints of the Bravais lattice type and are used to identify it from diffraction data."
+        ],
+        [
+          "derivation",
+          "For a BCC lattice with atoms at $(0,0,0)$ and $(1/2, 1/2, 1/2)$:",
+          [
+            [
+              "eq",
+              "F_{hkl} = f\\left[1 + \\exp\\left(\\pi i(h+k+l)\\right)\\right]"
+            ],
+            [
+              "p",
+              "The exponential is $+1$ when $h+k+l$ is even and $-1$ when odd. So $F_{hkl} = 2f$ (present) if $h+k+l$ is even, and $F_{hkl} = 0$ (absent) if $h+k+l$ is odd."
+            ],
+            [
+              "p",
+              "For FCC with atoms at $(0,0,0)$, $(1/2,1/2,0)$, $(1/2,0,1/2)$, $(0,1/2,1/2)$:"
+            ],
+            [
+              "eq",
+              "F_{hkl} = f\\left[1 + e^{\\pi i(h+k)} + e^{\\pi i(h+l)} + e^{\\pi i(k+l)}\\right]"
+            ],
+            [
+              "p",
+              "This is $4f$ when $h,k,l$ are all even or all odd, and $0$ when they are mixed. The FCC selection rule: all indices must have the same parity."
+            ]
+          ]
+        ],
+        [
+          "h3",
+          "Powder diffraction"
+        ],
+        [
+          "p",
+          "A polycrystalline sample contains grains in all orientations. Bragg's law is satisfied simultaneously for all planes, and each $(hkl)$ reflection produces a cone of diffracted radiation at angle $2\\theta$. The pattern is a plot of intensity versus $2\\theta$, with peaks at the Bragg angles."
+        ],
+        [
+          "p",
+          "From a powder pattern, you can determine: the crystal system and lattice parameters (from peak positions), the Bravais lattice (from systematic absences), and the atomic positions (from peak intensities, via Rietveld refinement). Powder XRD is the single most common characterisation technique in materials science. It is quick, non-destructive, and can identify phases, measure strain, and track phase transformations in situ."
+        ],
+        [
+          "problem",
+          "A powder XRD pattern of a cubic material using Cu K$\\alpha$ radiation ($\\lambda = 1.5418$ &Aring;) shows its first two peaks at $2\\theta = 38.47°$ and $44.74°$. Determine the lattice parameter and the Bravais lattice type.",
+          [
+            [
+              "p",
+              "From the peak positions: $\\theta_1 = 19.24°$, $\\theta_2 = 22.37°$."
+            ],
+            [
+              "p",
+              "Using Bragg's law: $d_1 = \\lambda/(2\\sin\\theta_1) = 1.5418/(2 \\times 0.3296) = 2.339$ &Aring;."
+            ],
+            [
+              "p",
+              "$d_2 = 1.5418/(2 \\times 0.3804) = 2.026$ &Aring;."
+            ],
+            [
+              "p",
+              "For a cubic system, $d_{hkl} = a/\\sqrt{h^2+k^2+l^2}$, so $h^2+k^2+l^2 = (a/d)^2$."
+            ],
+            [
+              "p",
+              "The ratio $d_1^2/d_2^2 = (2.339/2.026)^2 = 1.333 = 4/3$."
+            ],
+            [
+              "p",
+              "So $(h^2+k^2+l^2)_1 / (h^2+k^2+l^2)_2 = 3/4$. The first reflection has $h^2+k^2+l^2 = 3$ (i.e., $(111)$) and the second has 4 (i.e., $(200)$). This pattern (first reflection at $N=3$, not $N=1$ or $N=2$) is the signature of FCC."
+            ],
+            [
+              "p",
+              "$a = d_{111} \\times \\sqrt{3} = 2.339 \\times 1.732 = 4.051$ &Aring;. This is aluminium."
+            ]
+          ]
+        ]
       ],
       "related": [
-        { "title": "Miller Indices", "url": "miller-indices" },
-        { "title": "Point Groups & Space Groups", "url": "point-groups" },
-        { "title": "Characterisation Techniques", "url": "../characterisation/" }
+        {
+          "title": "Miller Indices",
+          "url": "miller-indices"
+        },
+        {
+          "title": "Point Groups & Space Groups",
+          "url": "point-groups"
+        },
+        {
+          "title": "Characterisation Techniques",
+          "url": "../characterisation/"
+        }
+      ],
+      "comments": [
+        {
+          "id": "e825c7fb",
+          "selectedText": "parameter",
+          "comment": "Magnitude of?",
+          "name": "Robin",
+          "votes": 0
+        }
       ]
     }
   ]

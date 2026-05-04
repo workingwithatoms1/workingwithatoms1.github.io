@@ -17,29 +17,100 @@
       "readingTime": "7 min",
       "intro": "Materials science is the study of how the structure of matter determines its properties, and how processing can be used to control that structure. It sits at the intersection of physics, chemistry and engineering.",
       "body": [
-        ["h3", "The question materials science answers"],
-        ["p", "Every engineered object is made of something. A turbine blade, a phone screen, a hip implant, a battery electrode. The material is not incidental to the design; it is the design. The turbine blade must survive 1300°C gas temperatures and centrifugal loads equivalent to hanging a double-decker bus from it. The phone screen must be transparent, hard enough to resist scratching by sand (quartz, hardness 7), and tough enough to survive a drop onto concrete. The hip implant must be biocompatible, corrosion-resistant, and fatigue-resistant for decades of cyclic loading."],
-        ["p", "Materials science is the discipline that explains why certain materials can do these things and others cannot. It connects the atomic-scale structure of matter (crystal lattices, defects, grain boundaries, polymer chains) to the macroscopic properties engineers need (strength, conductivity, toughness, corrosion resistance) through the processing routes that create those structures (casting, forging, heat treatment, thin film deposition)."],
-        ["h3", "A young discipline"],
-        ["p", "The name \"materials science\" dates only to the 1960s. Before that, metallurgy, ceramics, and polymer science were separate fields, each with its own traditions and terminology. The insight that unified them was that the same physical principles govern all classes of materials. Dislocations explain plastic deformation in metals, ceramics, and some polymers. Thermodynamics governs phase stability in all of them. Diffusion drives sintering in ceramics just as it drives precipitation hardening in aluminium alloys."],
-        ["p", "The pioneers came from diverse backgrounds. William Hume-Rothery was a chemist who developed the rules for solid solution formation. Egon Orowan, Michael Polanyi and Geoffrey Taylor independently proposed the dislocation in 1934 to explain why crystals are weaker than theoretical predictions. Paul Flory brought rigour to polymer science with his statistical mechanical treatment of chain molecules. Alan Cottrell connected dislocation theory to the practical metallurgy of steels."],
-        ["h3", "What makes it different from physics and chemistry"],
-        ["p", "A physicist studying copper might ask: what is the electronic band structure? A chemist might ask: what are the oxidation states and bonding? A materials scientist asks: why is copper ductile, why does it work-harden, why does adding 30% zinc make it stronger, and how should I process it to get the properties I need?"],
-        ["p", "The distinction is one of focus, not of rigour. Materials science uses the same physics and chemistry as its parent disciplines. But it is driven by a different question: not \"what is this?\" but \"what can I do with it, and how do I make it better?\""],
-        ["p", "This engineering orientation means that materials science is inherently practical. It connects fundamental knowledge (bonding, thermodynamics, kinetics) to real applications (lighter aircraft, more efficient solar cells, longer-lasting implants). The theory is only useful if it predicts something you can measure, and the measurement is only interesting if it tells you something about the material's performance."],
-        ["h3", "What this course covers"],
-        ["p", "This course builds the foundations of materials science from the atomic scale up. We start with bonding and crystal structure, then introduce defects (the imperfections that give materials most of their useful properties). Thermodynamics and kinetics tell us which structures are stable and how fast they form. We then cover mechanical, electronic, and chemical properties, the major material classes, and the characterisation and processing techniques used to study and make them."],
-        ["p", "By the end, you should be able to look at a material and understand, at least in outline, why it behaves the way it does, how its processing history created its current structure, and what you might change to improve its performance."],
-        ["problem", "A bicycle frame could be made from steel, aluminium, titanium, or carbon fibre reinforced polymer (CFRP). Each has different density, strength, stiffness, and cost. Without looking anything up, rank these four materials from highest to lowest density, and from highest to lowest stiffness (Young's modulus). Then check your answers against a data source.", [
-          ["p", "Density (highest to lowest): steel (~7.8 g/cm$^3$) > titanium (~4.5) > aluminium (~2.7) > CFRP (~1.6)."],
-          ["p", "Stiffness (highest to lowest): steel (~210 GPa) > CFRP (~70-150 GPa, depends on layup) > titanium (~115 GPa) > aluminium (~70 GPa)."],
-          ["p", "The interesting comparison is specific stiffness (stiffness/density). CFRP dominates: about 50-90 GPa/(g/cm$^3$). Steel and aluminium are almost identical at ~27 GPa/(g/cm$^3$). Titanium is intermediate at ~26. This is why CFRP frames are both light and stiff, and why aluminium frames must use larger-diameter tubes to compensate for their lower absolute stiffness."]
-        ]]
+        [
+          "h3",
+          "The question materials science answers"
+        ],
+        [
+          "p",
+          "Every engineered object is made of something. A turbine blade, a phone screen, a hip implant, a battery electrode. The material is not incidental to the design; it is the design. The turbine blade must survive 1300\u00b0C gas temperatures and centrifugal loads equivalent to hanging a double-decker bus from it. The phone screen must be transparent, hard enough to resist scratching by sand (quartz, hardness 7), and tough enough to survive a drop onto concrete. The hip implant must be biocompatible, corrosion-resistant, and fatigue-resistant for decades of cyclic loading."
+        ],
+        [
+          "p",
+          "Materials science is the discipline that explains why certain materials can do these things and others cannot. It connects the atomic-scale structure of matter (crystal lattices, defects, grain boundaries, polymer chains) to the macroscopic properties engineers need (strength, conductivity, toughness, corrosion resistance) through the processing routes that create those structures (casting, forging, heat treatment, thin film deposition)."
+        ],
+        [
+          "h3",
+          "A young discipline"
+        ],
+        [
+          "p",
+          "The name \"materials science\" dates only to the 1960s. Before that, metallurgy, ceramics, and polymer science were separate fields, each with its own traditions and terminology. The insight that unified them was that the same physical principles govern all classes of materials. Dislocations explain plastic deformation in metals, ceramics, and some polymers. Thermodynamics governs phase stability in all of them. Diffusion drives sintering in ceramics just as it drives precipitation hardening in aluminium alloys."
+        ],
+        [
+          "p",
+          "The pioneers came from diverse backgrounds. William Hume-Rothery was a chemist who developed the rules for solid solution formation. Egon Orowan, Michael Polanyi and Geoffrey Taylor independently proposed the dislocation in 1934 to explain why crystals are weaker than theoretical predictions. Paul Flory brought rigour to polymer science with his statistical mechanical treatment of chain molecules. Alan Cottrell connected dislocation theory to the practical metallurgy of steels."
+        ],
+        [
+          "h3",
+          "What makes it different from physics and chemistry"
+        ],
+        [
+          "p",
+          "A physicist studying copper might ask: what is the electronic band structure? A chemist might ask: what are the oxidation states and bonding? A materials scientist asks: why is copper ductile, why does it work-harden, why does adding 30% zinc make it stronger, and how should I process it to get the properties I need?"
+        ],
+        [
+          "p",
+          "The distinction is one of focus, not of rigour. Materials science uses the same physics and chemistry as its parent disciplines. But it is driven by a different question: not \"what is this?\" but \"what can I do with it, and how do I make it better?\""
+        ],
+        [
+          "p",
+          "This engineering orientation means that materials science is inherently practical. It connects fundamental knowledge (bonding, thermodynamics, kinetics) to real applications (lighter aircraft, more efficient solar cells, longer-lasting implants). The theory is only useful if it predicts something you can measure, and the measurement is only interesting if it tells you something about the material's performance."
+        ],
+        [
+          "h3",
+          "What this course covers"
+        ],
+        [
+          "p",
+          "This course builds the foundations of materials science from the atomic scale up. We start with bonding and crystal structure, then introduce defects (the imperfections that give materials most of their useful properties). Thermodynamics and kinetics tell us which structures are stable and how fast they form. We then cover mechanical, electronic, and chemical properties, the major material classes, and the characterisation and processing techniques used to study and make them."
+        ],
+        [
+          "p",
+          "By the end, you should be able to look at a material and understand, at least in outline, why it behaves the way it does, how its processing history created its current structure, and what you might change to improve its performance."
+        ],
+        [
+          "problem",
+          "A bicycle frame could be made from steel, aluminium, titanium, or carbon fibre reinforced polymer (CFRP). Each has different density, strength, stiffness, and cost. Without looking anything up, rank these four materials from highest to lowest density, and from highest to lowest stiffness (Young's modulus). Then check your answers against a data source.",
+          [
+            [
+              "p",
+              "Density (highest to lowest): steel (~7.8 g/cm$^3$) > titanium (~4.5) > aluminium (~2.7) > CFRP (~1.6)."
+            ],
+            [
+              "p",
+              "Stiffness (highest to lowest): steel (~210 GPa) > CFRP (~70-150 GPa, depends on layup) > titanium (~115 GPa) > aluminium (~70 GPa)."
+            ],
+            [
+              "p",
+              "The interesting comparison is specific stiffness (stiffness/density). CFRP dominates: about 50-90 GPa/(g/cm$^3$). Steel and aluminium are almost identical at ~27 GPa/(g/cm$^3$). Titanium is intermediate at ~26. This is why CFRP frames are both light and stiff, and why aluminium frames must use larger-diameter tubes to compensate for their lower absolute stiffness."
+            ]
+          ]
+        ]
       ],
       "related": [
-        { "title": "The Structure-Property Tetrahedron", "url": "the-structure-property-processing-performance-tetrahedron" },
-        { "title": "Classes of Materials", "url": "classes-of-materials" },
-        { "title": "Atomic Bonding & Structure", "url": "../bonding/" }
+        {
+          "title": "The Structure-Property Tetrahedron",
+          "url": "the-structure-property-processing-performance-tetrahedron"
+        },
+        {
+          "title": "Classes of Materials",
+          "url": "classes-of-materials"
+        },
+        {
+          "title": "Atomic Bonding & Structure",
+          "url": "../bonding/"
+        }
+      ],
+      "comments": [
+        {
+          "id": "c179eb5d",
+          "selectedText": "The question materials science answers",
+          "comment": "For me, the subtitle is written in white; making it more or less transparent with the background color.",
+          "name": "Juri",
+          "votes": 0,
+          "status": "integrated"
+        }
       ]
     },
     {
@@ -50,29 +121,91 @@
       "readingTime": "8 min",
       "intro": "Materials science is organised around four interconnected ideas: structure, properties, processing, and performance. Change any one and the others follow. This tetrahedron is the intellectual framework of the entire field.",
       "body": [
-        ["h3", "The four corners"],
-        ["p", "<strong>Structure</strong> is how a material is arranged, at every length scale. Atomic bonding and crystal structure at the angstrom scale. Defects at the nanometre to micrometre scale. Grain size, phase distribution, and porosity at the micrometre to millimetre scale. Fibre orientation and layer architecture at the millimetre to metre scale."],
-        ["p", "<strong>Properties</strong> are what a material does in response to a stimulus. Apply a stress and measure the strain: elastic modulus and yield strength. Apply a voltage and measure the current: electrical conductivity. Raise the temperature and measure when it melts: the melting point."],
-        ["p", "<strong>Processing</strong> is what you do to the material to create or change its structure. Casting, rolling, heat treatment, sintering, thin film deposition, additive manufacturing."],
-        ["p", "<strong>Performance</strong> is how the material behaves in service. A turbine blade's performance depends on its creep resistance, oxidation resistance, and fatigue life at operating temperature."],
-        ["h3", "The links"],
-        ["p", "Every corner connects to every other. Change the processing (quench a steel instead of slow-cooling it) and you change the structure (martensite instead of pearlite), which changes the properties (hard and brittle instead of tough and ductile), which changes the performance (a cutting tool instead of a structural beam)."],
-        ["p", "The tetrahedron works in reverse too. A performance requirement (the turbine blade must survive 1100°C for 10,000 hours) sets a property requirement (creep rate below a threshold), which constrains the structure (single-crystal with $\\gamma'$ precipitates at a specific volume fraction), which dictates the processing route (directional solidification from a seed crystal, followed by a multi-step heat treatment)."],
-        ["callout", "An example: aluminium alloys for aircraft", "The fuselage of a commercial aircraft requires high specific strength, fatigue resistance, and corrosion resistance. Aluminium alloy 2024-T3 meets these requirements. The composition (Al-4.4Cu-1.5Mg-0.6Mn) is chosen for its precipitation hardening response. The T3 temper (solution treated, cold worked, naturally aged) creates a specific distribution of Guinier-Preston zones and S' precipitates. Change the ageing temperature and you get T6 (peak hardness, lower ductility) or T8 (cold work before ageing, different precipitate distribution). Every link in the tetrahedron is active."],
-        ["h3", "Why this framework matters"],
-        ["p", "When a component fails in service, the investigation starts from performance (it broke) and works backward through properties (it was too brittle), structure (the grain size was wrong), and processing (the heat treatment was out of spec). When designing a new material, the reasoning goes forward. The tetrahedron ties it all together."],
-        ["problem", "A batch of steel bolts fails by brittle fracture at -20°C, despite passing quality control at room temperature. Using the structure-property-processing-performance framework, explain what might have gone wrong.", [
-          ["p", "<strong>Performance</strong>: brittle fracture at -20°C. This indicates a ductile-to-brittle transition temperature (DBTT) between -20°C and 20°C."],
-          ["p", "<strong>Properties</strong>: the DBTT is too high. In low-carbon steels, DBTT depends on grain size, carbon content, and impurity levels."],
-          ["p", "<strong>Structure</strong>: coarse grain size (increases DBTT), high phosphorus at grain boundaries (embrittlement), or the wrong phase (bainite vs tempered martensite)."],
-          ["p", "<strong>Processing</strong>: insufficient normalising could leave coarse grains. Slow cooling could give ferrite-pearlite instead of tempered martensite. Contamination during steelmaking could introduce phosphorus."],
-          ["p", "Investigation: Charpy impact tests at multiple temperatures. Metallographic examination. Chemical analysis for P, N, and other impurities."]
-        ]]
+        [
+          "h3",
+          "The four corners"
+        ],
+        [
+          "p",
+          "<strong>Structure</strong> is how a material is arranged, at every length scale. Atomic bonding and crystal structure at the angstrom scale. Defects at the nanometre to micrometre scale. Grain size, phase distribution, and porosity at the micrometre to millimetre scale. Fibre orientation and layer architecture at the millimetre to metre scale."
+        ],
+        [
+          "p",
+          "<strong>Properties</strong> are what a material does in response to a stimulus. Apply a stress and measure the strain: elastic modulus and yield strength. Apply a voltage and measure the current: electrical conductivity. Raise the temperature and measure when it melts: the melting point."
+        ],
+        [
+          "p",
+          "<strong>Processing</strong> is what you do to the material to create or change its structure. Casting, rolling, heat treatment, sintering, thin film deposition, additive manufacturing."
+        ],
+        [
+          "p",
+          "<strong>Performance</strong> is how the material behaves in service. A turbine blade's performance depends on its creep resistance, oxidation resistance, and fatigue life at operating temperature."
+        ],
+        [
+          "h3",
+          "The links"
+        ],
+        [
+          "p",
+          "Every corner connects to every other. Change the processing (quench a steel instead of slow-cooling it) and you change the structure (martensite instead of pearlite), which changes the properties (hard and brittle instead of tough and ductile), which changes the performance (a cutting tool instead of a structural beam)."
+        ],
+        [
+          "p",
+          "The tetrahedron works in reverse too. A performance requirement (the turbine blade must survive 1100\u00b0C for 10,000 hours) sets a property requirement (creep rate below a threshold), which constrains the structure (single-crystal with $\\gamma'$ precipitates at a specific volume fraction), which dictates the processing route (directional solidification from a seed crystal, followed by a multi-step heat treatment)."
+        ],
+        [
+          "callout",
+          "An example: aluminium alloys for aircraft",
+          "The fuselage of a commercial aircraft requires high specific strength, fatigue resistance, and corrosion resistance. Aluminium alloy 2024-T3 meets these requirements. The composition (Al-4.4Cu-1.5Mg-0.6Mn) is chosen for its precipitation hardening response. The T3 temper (solution treated, cold worked, naturally aged) creates a specific distribution of Guinier-Preston zones and S' precipitates. Change the ageing temperature and you get T6 (peak hardness, lower ductility) or T8 (cold work before ageing, different precipitate distribution). Every link in the tetrahedron is active."
+        ],
+        [
+          "h3",
+          "Why this framework matters"
+        ],
+        [
+          "p",
+          "When a component fails in service, the investigation starts from performance (it broke) and works backward through properties (it was too brittle), structure (the grain size was wrong), and processing (the heat treatment was out of spec). When designing a new material, the reasoning goes forward. The tetrahedron ties it all together."
+        ],
+        [
+          "problem",
+          "A batch of steel bolts fails by brittle fracture at -20\u00b0C, despite passing quality control at room temperature. Using the structure-property-processing-performance framework, explain what might have gone wrong.",
+          [
+            [
+              "p",
+              "<strong>Performance</strong>: brittle fracture at -20\u00b0C. This indicates a ductile-to-brittle transition temperature (DBTT) between -20\u00b0C and 20\u00b0C."
+            ],
+            [
+              "p",
+              "<strong>Properties</strong>: the DBTT is too high. In low-carbon steels, DBTT depends on grain size, carbon content, and impurity levels."
+            ],
+            [
+              "p",
+              "<strong>Structure</strong>: coarse grain size (increases DBTT), high phosphorus at grain boundaries (embrittlement), or the wrong phase (bainite vs tempered martensite)."
+            ],
+            [
+              "p",
+              "<strong>Processing</strong>: insufficient normalising could leave coarse grains. Slow cooling could give ferrite-pearlite instead of tempered martensite. Contamination during steelmaking could introduce phosphorus."
+            ],
+            [
+              "p",
+              "Investigation: Charpy impact tests at multiple temperatures. Metallographic examination. Chemical analysis for P, N, and other impurities."
+            ]
+          ]
+        ]
       ],
       "related": [
-        { "title": "What is Materials Science?", "url": "what-is-materials-science" },
-        { "title": "Length Scales", "url": "length-scales-in-materials" },
-        { "title": "Materials Selection", "url": "materials-selection-design-thinking" }
+        {
+          "title": "What is Materials Science?",
+          "url": "what-is-materials-science"
+        },
+        {
+          "title": "Length Scales",
+          "url": "length-scales-in-materials"
+        },
+        {
+          "title": "Materials Selection",
+          "url": "materials-selection-design-thinking"
+        }
       ]
     },
     {
@@ -83,29 +216,100 @@
       "readingTime": "7 min",
       "intro": "A single steel beam contains phenomena spanning from 0.1 nm (atomic bonding) to 10 m (the beam itself). Understanding which effects dominate at each scale is fundamental to materials science.",
       "body": [
-        ["h3", "The atomic scale (0.1-1 nm)"],
-        ["p", "At this scale, the identity of the atoms and the nature of their bonds determine everything. The electronic structure of iron (partially filled 3d orbitals, metallic bonding) is the reason it conducts electricity and can be magnetised. The directionality of covalent bonds in silicon (sp$^3$ hybridisation, tetrahedral coordination) is the reason it is a semiconductor with a band gap of 1.1 eV."],
-        ["p", "Crystal structure is determined here. Iron is BCC at room temperature, FCC between 912°C and 1394°C. Each structure has different mechanical properties, different diffusion rates, and different solubility for carbon. Steel heat treatment rests on these phase transitions."],
-        ["h3", "The defect scale (1-100 nm)"],
-        ["p", "Perfect crystals are almost never interesting. A vacancy enables diffusion. A dislocation enables plastic deformation. A solute atom changes the local electronic structure and can strengthen or embrittle the material."],
-        ["p", "Precipitates form at this scale. In age-hardened aluminium alloys, Guinier-Preston zones (copper-rich clusters a few atoms thick) form during low-temperature ageing and dramatically increase yield strength. The precipitates are 1-10 nm in size and spaced 10-50 nm apart."],
-        ["h3", "The microstructure scale (0.1-100 $\\mu$m)"],
-        ["p", "Grains are typically 1-100 $\\mu$m. Grain boundaries impede dislocation motion, so fine-grained materials are stronger (the Hall-Petch relationship). A typical structural steel has a grain size of 10-50 $\\mu$m."],
-        ["p", "Second phases become visible: pearlite lamellae in carbon steel (~0.2 $\\mu$m spacing), eutectic structures in cast alloys, spherulites in semicrystalline polymers, pores in sintered ceramics."],
-        ["h3", "The component scale (mm-m)"],
-        ["p", "Bulk properties (density, modulus, yield strength) are averages over the microstructure. They only apply if the component is large enough to contain a representative volume. When components are small (thin films, MEMS devices), the microstructure may contain only a few grains and bulk values may not apply."],
-        ["h3", "Bridging scales"],
-        ["p", "The central challenge: connecting scales. DFT predicts precipitate formation energies (atomic). Phase-field models predict microstructure evolution (micrometre). FEM calculates stress distributions (metre). Each handoff involves approximations. Getting them right is where the science lives."],
-        ["problem", "A copper wire has a grain size of 25 $\\mu$m. How many grains span the diameter of a 1 mm wire? Would you expect bulk property values to be reliable?", [
-          ["p", "Grains spanning diameter: $1000/25 = 40$."],
-          ["p", "Cross-sectional area: $\\pi(500)^2 \\approx 7.85 \\times 10^5$ $\\mu$m$^2$. Grains per cross-section: $\\approx 1250$."],
-          ["p", "In a 1 cm length: $1250 \\times 400 = 500{,}000$ grains. Half a million grains is more than enough. If the wire were 25 $\\mu$m diameter (one grain wide), it might be a single crystal and bulk values would not apply."]
-        ]]
+        [
+          "h3",
+          "The atomic scale (0.1-1 nm)"
+        ],
+        [
+          "p",
+          "At this scale, the identity of the atoms and the nature of their bonds determine everything. The electronic structure of iron (partially filled 3d orbitals, metallic bonding) is the reason it conducts electricity and can be magnetised. The directionality of covalent bonds in silicon (sp$^3$ hybridisation, tetrahedral coordination) is the reason it is a semiconductor with a band gap of 1.1 eV."
+        ],
+        [
+          "p",
+          "Crystal structure is determined here. Iron is BCC at room temperature, FCC between 912\u00b0C and 1394\u00b0C. Each structure has different mechanical properties, different diffusion rates, and different solubility for carbon. Steel heat treatment rests on these phase transitions."
+        ],
+        [
+          "h3",
+          "The defect scale (1-100 nm)"
+        ],
+        [
+          "p",
+          "Perfect crystals are almost never interesting. A vacancy enables diffusion. A dislocation enables plastic deformation. A solute atom changes the local electronic structure and can strengthen or embrittle the material."
+        ],
+        [
+          "p",
+          "Precipitates form at this scale. In age-hardened aluminium alloys, Guinier-Preston zones (copper-rich clusters a few atoms thick) form during low-temperature ageing and dramatically increase yield strength. The precipitates are 1-10 nm in size and spaced 10-50 nm apart."
+        ],
+        [
+          "h3",
+          "The microstructure scale (0.1-100 $\\mu$m)"
+        ],
+        [
+          "p",
+          "Grains are typically 1-100 $\\mu$m. Grain boundaries impede dislocation motion, so fine-grained materials are stronger (the Hall-Petch relationship). A typical structural steel has a grain size of 10-50 $\\mu$m."
+        ],
+        [
+          "p",
+          "Second phases become visible: pearlite lamellae in carbon steel (~0.2 $\\mu$m spacing), eutectic structures in cast alloys, spherulites in semicrystalline polymers, pores in sintered ceramics."
+        ],
+        [
+          "h3",
+          "The component scale (mm-m)"
+        ],
+        [
+          "p",
+          "Bulk properties (density, modulus, yield strength) are averages over the microstructure. They only apply if the component is large enough to contain a representative volume. When components are small (thin films, MEMS devices), the microstructure may contain only a few grains and bulk values may not apply."
+        ],
+        [
+          "h3",
+          "Bridging scales"
+        ],
+        [
+          "p",
+          "The central challenge: connecting scales. DFT predicts precipitate formation energies (atomic). Phase-field models predict microstructure evolution (micrometre). FEM calculates stress distributions (metre). Each handoff involves approximations. Getting them right is where the science lives."
+        ],
+        [
+          "problem",
+          "A copper wire has a grain size of 25 $\\mu$m. How many grains span the diameter of a 1 mm wire? Would you expect bulk property values to be reliable?",
+          [
+            [
+              "p",
+              "Grains spanning diameter: $1000/25 = 40$."
+            ],
+            [
+              "p",
+              "Cross-sectional area: $\\pi(500)^2 \\approx 7.85 \\times 10^5$ $\\mu$m$^2$. Grains per cross-section: $\\approx 1250$."
+            ],
+            [
+              "p",
+              "In a 1 cm length: $1250 \\times 400 = 500{,}000$ grains. Half a million grains is more than enough. If the wire were 25 $\\mu$m diameter (one grain wide), it might be a single crystal and bulk values would not apply."
+            ]
+          ]
+        ]
       ],
       "related": [
-        { "title": "The Structure-Property Tetrahedron", "url": "the-structure-property-processing-performance-tetrahedron" },
-        { "title": "Crystallography", "url": "../crystallography/" },
-        { "title": "Defects", "url": "../defects/" }
+        {
+          "title": "The Structure-Property Tetrahedron",
+          "url": "the-structure-property-processing-performance-tetrahedron"
+        },
+        {
+          "title": "Crystallography",
+          "url": "../crystallography/"
+        },
+        {
+          "title": "Defects",
+          "url": "../defects/"
+        }
+      ],
+      "comments": [
+        {
+          "id": "ffc1fb67",
+          "selectedText": "The atomic scale (0.1-1 nm)",
+          "comment": "This is formatted wrong; should be in navy and header format",
+          "name": "Juri",
+          "votes": 0,
+          "status": "integrated"
+        }
       ]
     },
     {
@@ -116,41 +320,127 @@
       "readingTime": "10 min",
       "intro": "The four classes of engineering materials differ in bonding, structure, and therefore properties. Understanding what gives each class its character is the first step toward choosing the right material for a job.",
       "body": [
-        ["h3", "Metals"],
-        ["p", "Metallic bonding: delocalised electrons shared among positive ion cores. Non-directional bonding produces close-packed structures and gives metals their defining characteristics."],
-        ["p", "Free electrons make metals excellent electrical and thermal conductors. Copper: $5.96 \\times 10^7$ S/m. Glass: $\\sim 10^{-12}$ S/m. That is a factor of $10^{19}$."],
-        ["p", "Non-directional bonding means dislocations move easily (especially in FCC with 12 slip systems), making metals ductile. Copper can be drawn into wire; aluminium rolled into 6 $\\mu$m foil."],
-        ["p", "Typical ranges: density 2-20 g/cm$^3$, Young's modulus 40-400 GPa, yield strength 30-2000 MPa, melting point 234 K (Hg) to 3695 K (W)."],
-        ["h3", "Ceramics"],
-        ["p", "Ionic and/or covalent bonds. Both strong and directional or electrostatically constrained. Hard, stiff, high melting point, but brittle."],
-        ["p", "Dislocation motion is difficult: in ionic crystals, moving a dislocation pushes like-charged ions past each other. With few mobile dislocations, ceramics cannot plastically deform and shatter when overstressed."],
-        ["p", "High melting points: Al$_2$O$_3$ at 2072°C, ZrO$_2$ at 2715°C, SiC sublimes above 2700°C. Invaluable as refractories and thermal barrier coatings."],
-        ["p", "Most are electrical insulators (exceptions: SiC and AlN have high thermal conductivity through phonons). Some are functional: piezoelectric (PZT), ferroelectric (BaTiO$_3$), superconducting (YBCO)."],
-        ["h3", "Polymers"],
-        ["p", "Long-chain molecules with covalent backbones and weak intermolecular forces (van der Waals, hydrogen bonds). Low melting points (100-350°C), low stiffness (0.1-10 GPa), low density (0.9-2.2 g/cm$^3$)."],
-        ["p", "Main advantage: processability at low temperatures and pressures. Cheap, light, corrosion-resistant. Polyethylene costs about $1/kg and resists most acids."],
-        ["p", "Mechanical behaviour is complex: viscoelastic (response depends on strain rate), with a glass transition temperature $T_g$ separating brittle from rubbery behaviour."],
-        ["h3", "Composites"],
-        ["p", "Two or more materials combined for properties neither has alone. Carbon fibre reinforced polymer (CFRP): specific stiffness ~5x steel, specific strength ~10x. Dominates aerospace, racing, and high-end bicycles."],
-        ["p", "Other composites: concrete (ceramic aggregate in cement, reinforced with steel), cermets (ceramic particles in metal, for cutting tools), MMCs (Al + SiC particles for brake discs)."],
-        ["callout", "Ashby charts", "Michael Ashby at Cambridge developed a systematic way to compare materials: plot one property against another on logarithmic axes. Each class occupies a distinct region. A stiffness-density chart immediately shows that CFRP reaches a region no single-phase material can. Ashby charts are the standard tool for materials selection."],
-        ["h3", "Emerging categories"],
-        ["ul", [
-          "<strong>Semiconductors</strong>: Si, GaAs, GaN. Small band gaps enabling electronics.",
-          "<strong>Biomaterials</strong>: Ti implants, hydroxyapatite coatings, biodegradable polymer scaffolds.",
-          "<strong>2D materials</strong>: Graphene, MoS$_2$, h-BN. Single-atom-thick with extraordinary properties."
-        ]],
-        ["problem", "A pressure vessel must contain gas at 300 bar, operate between -40°C and 200°C, and be as light as possible. Which class of material would you choose?", [
-          ["p", "Ceramics: ruled out by brittleness. Polymers: ruled out by temperature range and low strength."],
-          ["p", "Metal options: Al 2024-T6 ($\\sigma_y \\approx 470$ MPa, $\\rho = 2.78$), Ti-6Al-4V ($\\sigma_y \\approx 880$ MPa, $\\rho = 4.43$). Specific strength: Al 169, Ti 199 MPa/(g/cm$^3$)."],
-          ["p", "Composite: CFRP with high-$T_g$ epoxy. Specific strength >500 MPa/(g/cm$^3$). Lightest option but expensive and harder to inspect."],
-          ["p", "Cost-sensitive: aluminium. Weight-critical (aerospace): CFRP overwrapped on aluminium liner (type III/IV composite vessel, as used on hydrogen fuel cell vehicles)."]
-        ]]
+        [
+          "h3",
+          "Metals"
+        ],
+        [
+          "p",
+          "Metallic bonding: delocalised electrons shared among positive ion cores. Non-directional bonding produces close-packed structures and gives metals their defining characteristics."
+        ],
+        [
+          "p",
+          "Free electrons make metals excellent electrical and thermal conductors. Copper: $5.96 \\times 10^7$ S/m. Glass: $\\sim 10^{-12}$ S/m. That is a factor of $10^{19}$."
+        ],
+        [
+          "p",
+          "Non-directional bonding means dislocations move easily (especially in FCC with 12 slip systems), making metals ductile. Copper can be drawn into wire; aluminium rolled into 6 $\\mu$m foil."
+        ],
+        [
+          "p",
+          "Typical ranges: density 2-20 g/cm$^3$, Young's modulus 40-400 GPa, yield strength 30-2000 MPa, melting point 234 K (Hg) to 3695 K (W)."
+        ],
+        [
+          "h3",
+          "Ceramics"
+        ],
+        [
+          "p",
+          "Ionic and/or covalent bonds. Both strong and directional or electrostatically constrained. Hard, stiff, high melting point, but brittle."
+        ],
+        [
+          "p",
+          "Dislocation motion is difficult: in ionic crystals, moving a dislocation pushes like-charged ions past each other. With few mobile dislocations, ceramics cannot plastically deform and shatter when overstressed."
+        ],
+        [
+          "p",
+          "High melting points: Al$_2$O$_3$ at 2072\u00b0C, ZrO$_2$ at 2715\u00b0C, SiC sublimes above 2700\u00b0C. Invaluable as refractories and thermal barrier coatings."
+        ],
+        [
+          "p",
+          "Most are electrical insulators (exceptions: SiC and AlN have high thermal conductivity through phonons). Some are functional: piezoelectric (PZT), ferroelectric (BaTiO$_3$), superconducting (YBCO)."
+        ],
+        [
+          "h3",
+          "Polymers"
+        ],
+        [
+          "p",
+          "Long-chain molecules with covalent backbones and weak intermolecular forces (van der Waals, hydrogen bonds). Low melting points (100-350\u00b0C), low stiffness (0.1-10 GPa), low density (0.9-2.2 g/cm$^3$)."
+        ],
+        [
+          "p",
+          "Main advantage: processability at low temperatures and pressures. Cheap, light, corrosion-resistant. Polyethylene costs about $1/kg and resists most acids."
+        ],
+        [
+          "p",
+          "Mechanical behaviour is complex: viscoelastic (response depends on strain rate), with a glass transition temperature $T_g$ separating brittle from rubbery behaviour."
+        ],
+        [
+          "h3",
+          "Composites"
+        ],
+        [
+          "p",
+          "Two or more materials combined for properties neither has alone. Carbon fibre reinforced polymer (CFRP): specific stiffness ~5x steel, specific strength ~10x. Dominates aerospace, racing, and high-end bicycles."
+        ],
+        [
+          "p",
+          "Other composites: concrete (ceramic aggregate in cement, reinforced with steel), cermets (ceramic particles in metal, for cutting tools), MMCs (Al + SiC particles for brake discs)."
+        ],
+        [
+          "callout",
+          "Ashby charts",
+          "Michael Ashby at Cambridge developed a systematic way to compare materials: plot one property against another on logarithmic axes. Each class occupies a distinct region. A stiffness-density chart immediately shows that CFRP reaches a region no single-phase material can. Ashby charts are the standard tool for materials selection."
+        ],
+        [
+          "h3",
+          "Emerging categories"
+        ],
+        [
+          "ul",
+          [
+            "<strong>Semiconductors</strong>: Si, GaAs, GaN. Small band gaps enabling electronics.",
+            "<strong>Biomaterials</strong>: Ti implants, hydroxyapatite coatings, biodegradable polymer scaffolds.",
+            "<strong>2D materials</strong>: Graphene, MoS$_2$, h-BN. Single-atom-thick with extraordinary properties."
+          ]
+        ],
+        [
+          "problem",
+          "A pressure vessel must contain gas at 300 bar, operate between -40\u00b0C and 200\u00b0C, and be as light as possible. Which class of material would you choose?",
+          [
+            [
+              "p",
+              "Ceramics: ruled out by brittleness. Polymers: ruled out by temperature range and low strength."
+            ],
+            [
+              "p",
+              "Metal options: Al 2024-T6 ($\\sigma_y \\approx 470$ MPa, $\\rho = 2.78$), Ti-6Al-4V ($\\sigma_y \\approx 880$ MPa, $\\rho = 4.43$). Specific strength: Al 169, Ti 199 MPa/(g/cm$^3$)."
+            ],
+            [
+              "p",
+              "Composite: CFRP with high-$T_g$ epoxy. Specific strength >500 MPa/(g/cm$^3$). Lightest option but expensive and harder to inspect."
+            ],
+            [
+              "p",
+              "Cost-sensitive: aluminium. Weight-critical (aerospace): CFRP overwrapped on aluminium liner (type III/IV composite vessel, as used on hydrogen fuel cell vehicles)."
+            ]
+          ]
+        ]
       ],
       "related": [
-        { "title": "What is Materials Science?", "url": "what-is-materials-science" },
-        { "title": "Materials Selection", "url": "materials-selection-design-thinking" },
-        { "title": "Mechanical Properties", "url": "../mechanical-properties/" }
+        {
+          "title": "What is Materials Science?",
+          "url": "what-is-materials-science"
+        },
+        {
+          "title": "Materials Selection",
+          "url": "materials-selection-design-thinking"
+        },
+        {
+          "title": "Mechanical Properties",
+          "url": "../mechanical-properties/"
+        }
       ]
     },
     {
@@ -161,35 +451,112 @@
       "readingTime": "10 min",
       "intro": "Choosing a material is a constrained optimisation problem. You need a set of properties, subject to constraints on cost, weight, temperature, and manufacturability. The Ashby method provides a systematic framework.",
       "body": [
-        ["h3", "The selection problem"],
-        ["p", "There are roughly 160,000 engineering materials available. A designer cannot evaluate them all individually. The selection process must be systematic."],
-        ["p", "The starting point is function: what must the component do? A beam must support a bending load. A heat sink must conduct heat. A spring must store elastic energy. Each function translates into property requirements."],
-        ["p", "Properties alone are not enough. A titanium turbine blade is wonderful on paper but costs 100x more than steel. A diamond cutting tool is the hardest material but cannot machine steel (carbon dissolves in iron at high temperature). Selection always involves trade-offs."],
-        ["h3", "Performance indices"],
-        ["p", "A performance index is a combination of material properties that measures how well a material performs a specific function. For a lightweight stiff beam of length $L$, minimising mass at fixed stiffness gives:"],
-        ["eq", "M = \\frac{E^{1/3}}{\\rho}"],
-        ["derivation", "The index $E^{1/3}/\\rho$ for a light stiff beam comes from combining the stiffness constraint with the mass objective.", [
-          ["p", "For a beam of fixed length, rectangular cross-section ($b$ fixed, $h$ free):"],
-          ["p", "Stiffness: $S = CEbh^3/(12L^3)$, so $h = (12SL^3/(CEb))^{1/3}$."],
-          ["p", "Mass: $m = \\rho bhL \\propto \\rho / E^{1/3}$. To minimise mass, maximise $E^{1/3}/\\rho$."]
-        ]],
-        ["h3", "Ashby charts"],
-        ["p", "An Ashby chart plots one property against another on logarithmic axes. The most common: Young's modulus vs density. Metals occupy the upper right (stiff, dense). Polymers: lower left (compliant, light). Ceramics: upper middle. Composites bridge between them."],
-        ["p", "A performance index $E^{1/3}/\\rho = C$ plots as a straight line of slope 3 on log-log axes. Materials on this line are equally good. Moving the line upward identifies better materials. Wood and CFRP dominate the light-stiff-beam metric. Aluminium and steel are similar. Lead is terrible."],
-        ["h3", "Constraints and trade-offs"],
-        ["p", "Real problems have multiple constraints: temperature range, availability, joinability, cost. Each eliminates candidates. After constraints, the remaining materials are ranked by the performance index."],
-        ["p", "When two objectives conflict (minimise weight AND minimise cost), there is a Pareto front: materials where you cannot improve one without worsening the other. CFRP is lightest but 10x the cost of steel. The right choice depends on the application."],
-        ["problem", "Calculate $E^{1/3}/\\rho$ for steel (210 GPa, 7.8 g/cm$^3$), aluminium (70 GPa, 2.7), and CFRP (140 GPa, 1.6). Which is best for a light stiff panel?", [
-          ["p", "Steel: $210^{1/3}/7.8 = 5.94/7.8 = 0.76$"],
-          ["p", "Aluminium: $70^{1/3}/2.7 = 4.12/2.7 = 1.53$"],
-          ["p", "CFRP: $140^{1/3}/1.6 = 5.19/1.6 = 3.25$"],
-          ["p", "CFRP is best by 2x over aluminium and 4x over steel. This is why aircraft fuselages moved from aluminium (Boeing 767) to CFRP (Boeing 787)."]
-        ]]
+        [
+          "h3",
+          "The selection problem"
+        ],
+        [
+          "p",
+          "There are roughly 160,000 engineering materials available. A designer cannot evaluate them all individually. The selection process must be systematic."
+        ],
+        [
+          "p",
+          "The starting point is function: what must the component do? A beam must support a bending load. A heat sink must conduct heat. A spring must store elastic energy. Each function translates into property requirements."
+        ],
+        [
+          "p",
+          "Properties alone are not enough. A titanium turbine blade is wonderful on paper but costs 100x more than steel. A diamond cutting tool is the hardest material but cannot machine steel (carbon dissolves in iron at high temperature). Selection always involves trade-offs."
+        ],
+        [
+          "h3",
+          "Performance indices"
+        ],
+        [
+          "p",
+          "A performance index is a combination of material properties that measures how well a material performs a specific function. For a lightweight stiff beam of length $L$, minimising mass at fixed stiffness gives:"
+        ],
+        [
+          "eq",
+          "M = \\frac{E^{1/3}}{\\rho}"
+        ],
+        [
+          "derivation",
+          "The index $E^{1/3}/\\rho$ for a light stiff beam comes from combining the stiffness constraint with the mass objective.",
+          [
+            [
+              "p",
+              "For a beam of fixed length, rectangular cross-section ($b$ fixed, $h$ free):"
+            ],
+            [
+              "p",
+              "Stiffness: $S = CEbh^3/(12L^3)$, so $h = (12SL^3/(CEb))^{1/3}$."
+            ],
+            [
+              "p",
+              "Mass: $m = \\rho bhL \\propto \\rho / E^{1/3}$. To minimise mass, maximise $E^{1/3}/\\rho$."
+            ]
+          ]
+        ],
+        [
+          "h3",
+          "Ashby charts"
+        ],
+        [
+          "p",
+          "An Ashby chart plots one property against another on logarithmic axes. The most common: Young's modulus vs density. Metals occupy the upper right (stiff, dense). Polymers: lower left (compliant, light). Ceramics: upper middle. Composites bridge between them."
+        ],
+        [
+          "p",
+          "A performance index $E^{1/3}/\\rho = C$ plots as a straight line of slope 3 on log-log axes. Materials on this line are equally good. Moving the line upward identifies better materials. Wood and CFRP dominate the light-stiff-beam metric. Aluminium and steel are similar. Lead is terrible."
+        ],
+        [
+          "h3",
+          "Constraints and trade-offs"
+        ],
+        [
+          "p",
+          "Real problems have multiple constraints: temperature range, availability, joinability, cost. Each eliminates candidates. After constraints, the remaining materials are ranked by the performance index."
+        ],
+        [
+          "p",
+          "When two objectives conflict (minimise weight AND minimise cost), there is a Pareto front: materials where you cannot improve one without worsening the other. CFRP is lightest but 10x the cost of steel. The right choice depends on the application."
+        ],
+        [
+          "problem",
+          "Calculate $E^{1/3}/\\rho$ for steel (210 GPa, 7.8 g/cm$^3$), aluminium (70 GPa, 2.7), and CFRP (140 GPa, 1.6). Which is best for a light stiff panel?",
+          [
+            [
+              "p",
+              "Steel: $210^{1/3}/7.8 = 5.94/7.8 = 0.76$"
+            ],
+            [
+              "p",
+              "Aluminium: $70^{1/3}/2.7 = 4.12/2.7 = 1.53$"
+            ],
+            [
+              "p",
+              "CFRP: $140^{1/3}/1.6 = 5.19/1.6 = 3.25$"
+            ],
+            [
+              "p",
+              "CFRP is best by 2x over aluminium and 4x over steel. This is why aircraft fuselages moved from aluminium (Boeing 767) to CFRP (Boeing 787)."
+            ]
+          ]
+        ]
       ],
       "related": [
-        { "title": "Classes of Materials", "url": "classes-of-materials" },
-        { "title": "The Structure-Property Tetrahedron", "url": "the-structure-property-processing-performance-tetrahedron" },
-        { "title": "Mechanical Properties", "url": "../mechanical-properties/" }
+        {
+          "title": "Classes of Materials",
+          "url": "classes-of-materials"
+        },
+        {
+          "title": "The Structure-Property Tetrahedron",
+          "url": "the-structure-property-processing-performance-tetrahedron"
+        },
+        {
+          "title": "Mechanical Properties",
+          "url": "../mechanical-properties/"
+        }
       ]
     }
   ]
