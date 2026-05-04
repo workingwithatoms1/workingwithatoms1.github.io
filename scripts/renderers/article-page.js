@@ -194,7 +194,7 @@ function buildArticleContent(articleId) {
 
     html += `
       <p class="article-intro">${art.intro}</p>
-      <div class="article-body"
+      <div class="article-body">
         ${renderBody(mainBlocks)}
     `;
 
