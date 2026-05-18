@@ -753,54 +753,6 @@
         [
           "p",
           "HCP metals slip primarily on the basal plane (0001) in \u27e811$\\bar{2}$0\u27e9 directions, with prismatic and pyramidal systems activating at higher stresses. The stereographic projection for hexagonal crystals uses a different reference frame but the same Schmid factor analysis applies."
-        ],
-        [
-          "problem",
-          "An aluminium single crystal (FCC, $\\tau_{\\text{CRSS}}$ = 1.0 MPa) is loaded in tension along [124]. (a) Use the OILS rule to predict the active slip system. (b) Calculate the Schmid factor for that system. (c) What tensile stress is needed to initiate slip?",
-          [
-            [
-              "p",
-              "(a) OILS: highest index is 4 \u2192 cross out. Remaining: 1, 2. Interchange: (2, 1, \\_). Slip plane: (21$\\bar{1}$) \u2261 ($\\bar{1}\\bar{1}1$). Restore 4 for direction: [21$\\bar{4}$] \u2261 [$\\bar{1}0\\bar{1}$]. Active system: ($\\bar{1}\\bar{1}1$)[$\\bar{1}0\\bar{1}$]."
-            ],
-            [
-              "p",
-              "(b) Tensile axis $\\hat{g} = [1,2,4]/\\sqrt{21}$. Slip plane normal $\\hat{n} = [\\bar{1},\\bar{1},1]/\\sqrt{3}$. Slip direction $\\hat{d} = [\\bar{1},0,\\bar{1}]/\\sqrt{2}$."
-            ],
-            [
-              "p",
-              "$\\cos\\phi = |\\hat{g}\\cdot\\hat{n}| = |(-1-2+4)|/\\sqrt{21\\cdot3} = 1/\\sqrt{63} = 0.126$"
-            ],
-            [
-              "p",
-              "$\\cos\\lambda = |\\hat{g}\\cdot\\hat{d}| = |(-1+0-4)|/\\sqrt{21\\cdot2} = 5/\\sqrt{42} = 0.771$"
-            ],
-            [
-              "p",
-              "$m = 0.126 \\times 0.771 = 0.097$"
-            ],
-            [
-              "p",
-              "(c) $\\sigma_y = \\tau_{\\text{CRSS}}/m = 1.0/0.097 = 10.3$ MPa. This is a hard orientation \u2014 a crystal loaded along [111] would be even harder ($m = 0$), while one near [\\bar{1}49] gives $m \\approx 0.5$."
-            ]
-          ]
-        ],
-        [
-          "problem",
-          "Explain why a single crystal loaded exactly along [001] does not have a unique primary slip system. How many systems activate simultaneously, and what is the Schmid factor for each?",
-          [
-            [
-              "p",
-              "[001] sits at the corner of the standard triangle where multiple triangle boundaries meet. By symmetry, eight of the 12 slip systems have equal Schmid factor: the four {111} planes each contribute two <110> directions that make equal angles with [001]."
-            ],
-            [
-              "p",
-              "For each: $\\cos\\phi = 1/\\sqrt{3}$ (angle between [001] and any $\\langle111\\rangle$ normal), $\\cos\\lambda = 1/\\sqrt{2}$ (angle between [001] and the relevant $\\langle110\\rangle$ direction). So $m = 1/\\sqrt{6} = 0.408$."
-            ],
-            [
-              "p",
-              "All eight systems activate simultaneously. This is why [001]-oriented single crystals show very high initial work-hardening rates \u2014 the mutual interactions between eight active dislocation populations create a dense forest of obstacles immediately."
-            ]
-          ]
         ]
       ],
       "related": [
