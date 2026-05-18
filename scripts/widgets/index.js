@@ -49,6 +49,7 @@ const registry = {
   'bragg-diffraction':       () => import('./bragg-diffraction.js'),
   'griffith-energy':         () => import('./griffith-energy.js'),
   'maxwell-boltzmann':       () => import('./maxwell-boltzmann.js'),
+  'stereographic-projection': () => import('./stereographic-projection.js'),
 };
 
 /**

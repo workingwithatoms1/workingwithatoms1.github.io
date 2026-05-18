@@ -622,8 +622,209 @@
       ]
     },
     {
-      "id": "strengthening-mechanisms",
+      "id": "slip-in-single-crystals",
       "number": "8.4",
+      "title": "Slip in Single Crystals",
+      "description": "Schmid's law, the OILS rule, Diehl's rule, and stereographic projections for predicting which slip system activates in a loaded single crystal.",
+      "readingTime": "14 min",
+      "intro": "A polycrystal is an assembly of single crystals. To understand how a polycrystal deforms, you first need to understand how one grain deforms. When a single crystal is loaded in tension, slip occurs on the system with the highest resolved shear stress. Predicting which system that is \u2014 and what happens next \u2014 requires the stereographic projection, Schmid's law, and a few practical rules.",
+      "body": [
+        [
+          "h3",
+          "The 12 FCC slip systems"
+        ],
+        [
+          "p",
+          "FCC metals slip on {111} planes in <110> directions. There are four {111} planes and three <110> directions in each, giving 12 distinct slip systems. The table below lists them using the standard notation."
+        ],
+        [
+          "callout",
+          "The 12 FCC slip systems",
+          "(111): [$\\bar{1}$10], [10$\\bar{1}$], [0$\\bar{1}$1]\n($\\bar{1}$11): [110], [10$\\bar{1}$], [01$\\bar{1}$]\n(1$\\bar{1}$1): [$\\bar{1}$10], [101], [01$\\bar{1}$]\n(11$\\bar{1}$): [110], [101], [0$\\bar{1}$1]"
+        ],
+        [
+          "h3",
+          "Schmid\u2019s law"
+        ],
+        [
+          "p",
+          "When a single crystal is loaded uniaxially with stress $\\sigma$, the resolved shear stress on any slip system is"
+        ],
+        [
+          "eq",
+          "\\tau_R = \\sigma \\cos\\phi \\cos\\lambda"
+        ],
+        [
+          "p",
+          "where $\\phi$ is the angle between the tensile axis and the slip-plane normal, and $\\lambda$ is the angle between the tensile axis and the slip direction. The product $m = \\cos\\phi\\cos\\lambda$ is the Schmid factor. Slip begins when $\\tau_R$ reaches the critical resolved shear stress $\\tau_{\\text{CRSS}}$, a material property independent of orientation."
+        ],
+        [
+          "p",
+          "The maximum possible Schmid factor is 0.5, achieved when $\\phi = \\lambda = 45\u00b0$. In practice, the highest Schmid factor in an FCC crystal is $\\approx$0.408\u20130.490 depending on orientation."
+        ],
+        [
+          "widget",
+          "schmid-factor",
+          {}
+        ],
+        [
+          "h3",
+          "The stereographic projection"
+        ],
+        [
+          "p",
+          "The stereographic projection maps crystal directions onto a 2D plane. A direction $[hkl]$ with unit vector $\\hat{g} = (g_1, g_2, g_3)$ is projected from the south pole of the reference sphere onto the equatorial plane. The result is a point at"
+        ],
+        [
+          "eq",
+          "X = \\frac{g_1}{1 + g_3}, \\quad Y = \\frac{g_2}{1 + g_3}"
+        ],
+        [
+          "p",
+          "The full projection is a disc containing all crystal directions in the northern hemisphere. For cubic crystals, the 48-fold symmetry means every unique orientation appears within the standard stereographic triangle, bounded by [001], [011] and [111]. This triangle is the fundamental domain: any tensile axis can be represented as a point inside it."
+        ],
+        [
+          "h3",
+          "Diehl\u2019s rule"
+        ],
+        [
+          "p",
+          "Diehl showed that the standard triangle can be divided into regions, each corresponding to a different primary slip system. For the [001]\u2013[011]\u2013[111] triangle, the primary system is $(\\bar{1}11)[101]$ (commonly labelled B4 in Schmid\u2013Boas notation). Any tensile axis within this triangle activates B4 first because it has the highest Schmid factor there."
+        ],
+        [
+          "p",
+          "The other 23 equivalent triangles in the full projection each activate a different one of the 12 slip systems (some systems are primary in two triangles). This means the slip behaviour of any FCC single crystal can be read directly from the stereographic projection, once you know where the tensile axis sits."
+        ],
+        [
+          "p",
+          "The full [001] stereographic projection below shows all 24 equivalent triangles. The standard triangle [001]\u2013[011]\u2013[111] is highlighted in blue. Drag the tensile axis anywhere on the projection and watch how the Schmid factor and active slip system change. Notice how the active system switches as you cross triangle boundaries."
+        ],
+        [
+          "widget",
+          "stereographic-projection",
+          {}
+        ],
+        [
+          "h3",
+          "The OILS rule"
+        ],
+        [
+          "p",
+          "Given a tensile axis $[uvw]$ with all positive indices, there is a quick rule \u2014 OILS \u2014 to determine the active slip system without computing all 12 Schmid factors. It works by identifying the positions of the smallest and largest indices."
+        ],
+        [
+          "callout",
+          "OILS rule",
+          "O \u2014 Order the indices by magnitude. Find the position of the smallest and the position of the largest.\n\nI \u2014 The slip plane gets an Inverted sign (a bar) on the index in the position of the smallest component.\n\nL \u2014 The slip pLane is the {111} plane with that bar: e.g. if the smallest is in position 1, the plane is $(\\bar{1}11)$.\n\nS \u2014 The Slip direction is the $\\langle110\\rangle$ direction with non-zero components in the positions of the smallest and largest indices."
+        ],
+        [
+          "callout",
+          "OILS example: tensile axis [124]",
+          "The indices are 1, 2, 4.\n\nO \u2014 Smallest index: 1 (position 1). Largest index: 4 (position 3).\n\nI \u2014 Bar goes on position 1.\n\nL \u2014 Slip plane: $(\\bar{1}11)$.\n\nS \u2014 Non-zero in positions 1 and 3 \u2192 slip direction: $[101]$.\n\nActive system: $(\\bar{1}11)[101]$. Try it \u2014 type 124 into the projection above."
+        ],
+        [
+          "p",
+          "For a tensile axis not in the first octant, first apply cubic symmetry to bring all indices positive, apply OILS, then transform back. The projection widget handles this automatically."
+        ],
+        [
+          "h3",
+          "Lattice rotation during slip"
+        ],
+        [
+          "p",
+          "As slip proceeds, the crystal rotates. In tension, the tensile axis rotates toward the slip direction on the stereographic projection. This continues until the tensile axis reaches a symmetry boundary between two triangles \u2014 at which point a second slip system activates with equal Schmid factor. This is the onset of double slip (also called duplex or conjugate slip)."
+        ],
+        [
+          "p",
+          "The rotation path on the stereographic projection is a great circle arc from the initial orientation toward the slip direction. For the standard triangle, the tensile axis moves toward [$\\bar{1}01$] until it hits the [001]\u2013[111] boundary, where the conjugate system ($1\\bar{1}1$)[$\\bar{1}10$] (system A2) also reaches the CRSS."
+        ],
+        [
+          "p",
+          "During double slip, both systems operate simultaneously. The tensile axis now rotates along the [001]\u2013[111] boundary toward [$\\bar{1}12$], the stable end orientation. In compression, the axis rotates toward the slip-plane normal instead."
+        ],
+        [
+          "h3",
+          "BCC and HCP single crystals"
+        ],
+        [
+          "p",
+          "BCC metals slip on {110}, {112} and {123} planes, all in \u27e8111\u27e9 directions. For the {110}\u27e8111\u27e9 family, the stereographic projection above still applies with the roles of plane and direction reversed: the {110} planes project to the equatorial poles and the \u27e8111\u27e9 directions to the interior poles."
+        ],
+        [
+          "p",
+          "HCP metals slip primarily on the basal plane (0001) in \u27e811$\\bar{2}$0\u27e9 directions, with prismatic and pyramidal systems activating at higher stresses. The stereographic projection for hexagonal crystals uses a different reference frame but the same Schmid factor analysis applies."
+        ],
+        [
+          "problem",
+          "An aluminium single crystal (FCC, $\\tau_{\\text{CRSS}}$ = 1.0 MPa) is loaded in tension along [124]. (a) Use the OILS rule to predict the active slip system. (b) Calculate the Schmid factor for that system. (c) What tensile stress is needed to initiate slip?",
+          [
+            [
+              "p",
+              "(a) OILS: highest index is 4 \u2192 cross out. Remaining: 1, 2. Interchange: (2, 1, \\_). Slip plane: (21$\\bar{1}$) \u2261 ($\\bar{1}\\bar{1}1$). Restore 4 for direction: [21$\\bar{4}$] \u2261 [$\\bar{1}0\\bar{1}$]. Active system: ($\\bar{1}\\bar{1}1$)[$\\bar{1}0\\bar{1}$]."
+            ],
+            [
+              "p",
+              "(b) Tensile axis $\\hat{g} = [1,2,4]/\\sqrt{21}$. Slip plane normal $\\hat{n} = [\\bar{1},\\bar{1},1]/\\sqrt{3}$. Slip direction $\\hat{d} = [\\bar{1},0,\\bar{1}]/\\sqrt{2}$."
+            ],
+            [
+              "p",
+              "$\\cos\\phi = |\\hat{g}\\cdot\\hat{n}| = |(-1-2+4)|/\\sqrt{21\\cdot3} = 1/\\sqrt{63} = 0.126$"
+            ],
+            [
+              "p",
+              "$\\cos\\lambda = |\\hat{g}\\cdot\\hat{d}| = |(-1+0-4)|/\\sqrt{21\\cdot2} = 5/\\sqrt{42} = 0.771$"
+            ],
+            [
+              "p",
+              "$m = 0.126 \\times 0.771 = 0.097$"
+            ],
+            [
+              "p",
+              "(c) $\\sigma_y = \\tau_{\\text{CRSS}}/m = 1.0/0.097 = 10.3$ MPa. This is a hard orientation \u2014 a crystal loaded along [111] would be even harder ($m = 0$), while one near [\\bar{1}49] gives $m \\approx 0.5$."
+            ]
+          ]
+        ],
+        [
+          "problem",
+          "Explain why a single crystal loaded exactly along [001] does not have a unique primary slip system. How many systems activate simultaneously, and what is the Schmid factor for each?",
+          [
+            [
+              "p",
+              "[001] sits at the corner of the standard triangle where multiple triangle boundaries meet. By symmetry, eight of the 12 slip systems have equal Schmid factor: the four {111} planes each contribute two <110> directions that make equal angles with [001]."
+            ],
+            [
+              "p",
+              "For each: $\\cos\\phi = 1/\\sqrt{3}$ (angle between [001] and any $\\langle111\\rangle$ normal), $\\cos\\lambda = 1/\\sqrt{2}$ (angle between [001] and the relevant $\\langle110\\rangle$ direction). So $m = 1/\\sqrt{6} = 0.408$."
+            ],
+            [
+              "p",
+              "All eight systems activate simultaneously. This is why [001]-oriented single crystals show very high initial work-hardening rates \u2014 the mutual interactions between eight active dislocation populations create a dense forest of obstacles immediately."
+            ]
+          ]
+        ]
+      ],
+      "related": [
+        {
+          "title": "Plastic Deformation & Slip",
+          "url": "plastic-deformation-slip"
+        },
+        {
+          "title": "Strengthening Mechanisms",
+          "url": "strengthening-mechanisms"
+        },
+        {
+          "title": "Crystal Systems",
+          "url": "../crystallography/crystal-systems"
+        },
+        {
+          "title": "Miller Indices",
+          "url": "../crystallography/miller-indices"
+        }
+      ]
+    },
+    {
+      "id": "strengthening-mechanisms",
+      "number": "8.5",
       "title": "Strengthening Mechanisms",
       "description": "Four ways to make metals stronger: grain refinement, solid solution, precipitation and work hardening.",
       "readingTime": "14 min",
@@ -832,7 +1033,7 @@
     },
     {
       "id": "fracture-mechanics-griffith-k-ic",
-      "number": "8.5",
+      "number": "8.6",
       "title": "Fracture Mechanics (Griffith, $K_{IC}$)",
       "description": "When and why materials break: the energy balance of crack propagation and the stress intensity approach.",
       "readingTime": "15 min",
@@ -1056,7 +1257,7 @@
     },
     {
       "id": "fatigue",
-      "number": "8.6",
+      "number": "8.7",
       "title": "Fatigue",
       "description": "How repeated loading at stresses far below the yield stress can cause failure, and how to predict it.",
       "readingTime": "14 min",
@@ -1280,7 +1481,7 @@
     },
     {
       "id": "creep-high-temperature-behaviour",
-      "number": "8.7",
+      "number": "8.8",
       "title": "Creep & High-Temperature Behaviour",
       "description": "Time-dependent deformation under constant load at elevated temperature, and the mechanisms that control it.",
       "readingTime": "14 min",
@@ -1493,7 +1694,7 @@
     },
     {
       "id": "contact-mechanics",
-      "number": "8.8",
+      "number": "8.9",
       "title": "Contact Mechanics",
       "description": "What happens when two bodies touch: Hertzian contact, stress fields beneath indenters, and the transition from elastic to plastic.",
       "readingTime": "12 min",
@@ -1717,7 +1918,7 @@
     },
     {
       "id": "hardness-indentation",
-      "number": "8.9",
+      "number": "8.10",
       "title": "Hardness & Indentation",
       "description": "Quick, semi-destructive measures of mechanical properties from a simple indent.",
       "readingTime": "12 min",

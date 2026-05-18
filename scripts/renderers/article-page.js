@@ -37,7 +37,7 @@ function renderBody(blocks) {
         return `
           <div class="article-callout">
             <div class="callout-label">${block[1]}</div>
-            <p>${markInlineMath(block[2])}</p>
+            ${block[2].split('\n\n').map(p => `<p>${markInlineMath(p.trim())}</p>`).join('\n            ')}
           </div>`;
       case 'ul':
         return `<ul class="article-list">${block[1].map(li => `<li>${markInlineMath(li)}</li>`).join('')}</ul>`;
